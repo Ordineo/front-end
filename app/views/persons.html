@@ -29,6 +29,7 @@
                 <td>{{person.firstName}}</td>
                 <td>{{person.lastName}}</td>
                 <td>{{person.credentials.username}}</td>
+                <td></td>
             </tr>
             </tbody>
         </table>
@@ -82,17 +83,29 @@
     <div class="modal-body">
         <form>
             <label for="firstName">First Name</label>
-            <input id="firstName" class="input-large" ng-model="firstName"/>
+            <input id="firstName" class="input-large" ng-model="person.firstName"/>
             <label for="lastName">Last Name</label>
-            <input id="lastName" class="input-large" ng-model="lastName"/>
+            <input id="lastName" class="input-large" ng-model="person.lastName"/>
             <label for="username">Username</label>
-            <input id="username" class="input-large" ng-model="username"/>
+            <input id="username" class="input-large" ng-model="person.username"/>
             <label for="password">Password</label>
-            <input id="password" class="input-large" ng-model="password"/>
+            <input id="password" class="input-large" ng-model="person.password"/>
+           <label for="birthDate">Birthdate</label>
+                <input id="birthDate" type="date" ng-model="person.birthDate" class="input-large"/>
+            <label for="male"></label>
+                Male
+                <input id="male" ng-model="person.gender" type="radio" value="Male">
+
+            <label for="female" class="topcoat-radio-button">
+                Female
+                <input id="female" ng-model="person.gender" type="radio" value="Female">
+                <label for="enrolmentDate">Enrolmentdate</label>
+                <input id="enrolmentDate" type="date" ng-model="person.enrolmentDate" class="input-large"/>
+
         </form>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-primary" ng-click="ok(person)">OK</button>
         <button class="btn btn-warning" ng-click="$dismiss()">Cancel</button>
     </div>
 </script>

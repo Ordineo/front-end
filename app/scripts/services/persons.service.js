@@ -5,7 +5,7 @@ angular.module('empApp')
 
     var persons = [];
 
-    $http.get('http://localhost:9900/api/person-service/persons').success(function (data) {
+    $http.get('http://localhost:8080/api/persons').success(function (data) {
       data.forEach(function (person) {
         persons.push(person);
       });
@@ -17,7 +17,7 @@ angular.module('empApp')
       },
       update: function () {
         persons = [];
-        $http.get('http://localhost:9900/api/person-service/persons').success(function (data) {
+        $http.get('http://localhost:8080/api/persons').success(function (data) {
           data.forEach(function (person) {
             persons.push(person);
           });
