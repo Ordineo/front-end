@@ -1,0 +1,45 @@
+<!--
+<div ng-hide="logged">
+<form>
+    <label for="username">Username</label>
+    <input id="username" class="input-large" ng-model="login.username"/>
+    <label for="password">Password</label>
+    <input id="password" class="input-large" ng-model="login.password"/>
+</form>
+
+    <button class="btn btn-primary" ng-click="login(login)">Login</button>
+    </div>
+<div ng-show="logged">
+    <button class="btn btn-danger" ng-click="logout()">Logout</button>
+</div>
+
+<div ng-show="logged" class="alert alert-success" role="alert">{{errmsg}}</div>
+<div ng-show="invalid" class="alert alert-danger" role="alert">{{errmsg}}</div>
+-->
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+    <div ng-hide="logged">
+            <h1 class="text-center login-title">360 Tool</h1>
+            <div class="account-wall">
+
+                <form class="form-signin">
+                    <input type="text" class="form-control" placeholder="Username" ng-model="login.username" autofocus required>
+                    <input type="password" class="form-control" ng-model="login.password" placeholder="Password" required>
+                    <button class="btn btn-lg btn-primary btn-block" ng-click="login(login)">
+                        Log in</button>
+                    </form>
+            </div>
+            <a href="#/persons" class="text-center new-account">Create an account </a>
+    </div>
+            <div ng-show="logged">
+                <button class="btn btn-danger" ng-click="logout()">Logout</button>
+            </div>
+
+            <div ng-show="valid" class="alert alert-success" role="alert">{{errmsg}}</div>
+            <div ng-show="invalid" class="alert alert-danger" role="alert">{{errmsg}}</div>
+    </div>
+    </div>
+</div>
