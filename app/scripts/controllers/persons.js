@@ -67,7 +67,7 @@ angular.module('empApp')
           $scope.selectedPerson = data;
         });
 
-      }}}])
+      }}}]);
 
       /*$http.post(,{
         /* firstName: person.firstName,
@@ -105,24 +105,4 @@ angular.module('empApp')
 
 
 
-.factory('dataservice',['$http',function($http){
 
-
-
-  return{
-    getItem:function(url){
-      return $http.get(url);
-    },
-
-    postItem:function(method,url,postdata,headers){
-
-      return $http({
-        method:method,
-        url:url,
-        data:postdata,
-        headers:{'Content-Type':headers}
-      })
-    }
-  }
-
-}]);

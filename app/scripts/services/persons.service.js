@@ -25,4 +25,25 @@ angular.module('empApp')
         return persons;
       }
     };
-  });
+  })
+.factory('dataservice',['$http',function($http){
+
+
+
+  return{
+    getItem:function(url){
+      return $http.get(url);
+    },
+
+    postItem:function(method,url,postdata,headers){
+
+      return $http({
+        method:method,
+        url:url,
+        data:postdata,
+        headers:{'Content-Type':headers}
+      })
+    }
+  }
+
+}]);
