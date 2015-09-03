@@ -6,7 +6,7 @@ angular.module('empApp')
     var persons = [];
 
     $http.get('http://localhost:8080/api/persons').success(function (data) {
-      data.forEach(function (person) {
+      data._embedded.persons.forEach(function (person) {
         persons.push(person);
       });
     });
