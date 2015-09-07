@@ -1,0 +1,92 @@
+<style>
+    .css-form input.ng-invalid.ng-touched {
+
+        border: solid 1px #FA787E;
+    }
+
+    .css-form input.ng-valid.ng-touched {
+        border: solid 1px #78FA89;
+
+    }
+</style>
+
+
+<form class="form-horizontal, css-form"  novalidate >
+    <fieldset>
+        <div id="legend">
+            <legend class="">Register</legend>
+        </div>
+        <div class="control-group">
+            <label class="control-label"  for="username" >Username</label>
+            <div class="controls">
+                <input type="text" value="John" id="username" ng-model="person.username" placeholder="" class="input-xlarge" username>
+                <span ng-show="form.name.$pending.username">Checking if this name is available...</span>
+                <span ng-show="form.name.$error.username">This username is already taken!</span>
+
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password">Password</label>
+            <div class="controls">
+                <input type="password"  id="password" ng-model="person.password" placeholder="" class="input-xlarge" required>
+                <p class="help-block">Password should be at least 4 characters</p>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="firstName">First name</label>
+            <div class="controls">
+                <input type="text" id="firstName" ng-model="person.firstName" placeholder="" class="input-xlarge" required>
+
+            </div>
+        </div>
+        <div class="control-group">
+
+            <label class="control-label" for="lastName">Last name</label>
+            <div class="controls">
+                <input type="text" id="lastName" ng-model="person.lastName" placeholder="" class="input-xlarge" required>
+
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="male">Male</label>
+            <div class="controls">
+            <input id="male" class="controls" ng-model="person.gender" type="radio" value="Male">
+            </div>
+
+            <label for="female" class="control-label">Female</label>
+            <div class="controls">
+                <input id="female" ng-model="person.gender" type="radio" value="Female">
+            </div>
+
+        </div>
+
+        <div class="control-group">
+
+            <label for="enrolmentDate">Enrolmentdate</label>
+            <input id="enrolmentDate" type="date" ng-model="person.enrolmentDate" class="input-large"/>
+
+        </div>
+
+        <div class="control-group">
+            <label for="birthDate">Birthdate</label>
+            <input id="birthDate" type="date" ng-model="person.birthDate" class="input-large"/>
+        </div>
+
+
+       <!-- <div class="control-group">
+
+            <label class="control-label"  for="password_confirm">Password (Confirm)</label>
+            <div class="controls">
+                <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
+                <p class="help-block">Please confirm password</p>
+            </div>
+        </div>-->
+
+        <div class="control-group">
+            <!-- Button -->
+            <div class="controls">
+                <button class="btn btn-success" ng-click="ok(person)">Register</button>
+            </div>
+        </div>
+    </fieldset></form>

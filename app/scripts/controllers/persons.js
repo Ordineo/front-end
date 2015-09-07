@@ -8,7 +8,7 @@
  * Controller of the frontendApp
  */
 angular.module('empApp')
-  .controller('PersonsCtrl', ['$scope', '$modal', '$log', '$http', '$location', 'PersonFactory','dataservice', function ($scope, $modal, $log, $http, $location, PersonFactory,dataservice) {
+  .controller('PersonsCtrl', ['$scope', '$modal', '$log', '$http', '$location', 'PersonFactory','dataservice','$cookies', function ($scope, $modal, $log, $http, $location, PersonFactory,dataservice,$cookies) {
     $log.info('PersonsCtrl loaded');
 
     $scope.persons = PersonFactory.all();
@@ -58,8 +58,25 @@ angular.module('empApp')
 
       };
 
-      dataservice.postItem('POST','http://localhost:8080/api/persons/',formData,'application/json');
-      //dataservice.postItem('POST','http://localhost:8080/api/persons/login/pos',credentials,'application/json');
+      var handleSuccess = function (data, status) {
+
+
+        console.log(data);
+
+        $location.path('/login');
+
+        };
+
+      var handleError = function(data,status,headers){
+
+
+
+        console.log(document.cookie('name'));
+
+
+      };
+
+      dataservice.postItem('POST','http://localhost:8080/api/persons/',formData,'application/json').success(handleSuccess).error(handleError);
 
 
       $scope.selectPerson = function (person) {
@@ -69,38 +86,7 @@ angular.module('empApp')
 
       }}}]);
 
-      /*$http.post(,{
-        /* firstName: person.firstName,
-         lastName: person.lastName,
-         gender: person.gender,
-         enrolmentDate: [enrolmentDate.getFullYear(),enrolmentDate.getMonth()+1,enrolmentDate.getDate()],
-         birthDate:[birthDate.getFullYear(),birthDate.getMonth()+1,birthDate.getDate()],
-            credentials: credentials
 
-
-      }).success(function (data, status, headers) {
-        console.log('headers: ' + headers('location'));
-        $scope.persons = PersonFactory.update();
-        $scope.modal.close('User created');
-      });
-    };*/
-
-
-      /*$http.post('http://localhost:8080/api/persons/', {
-       firstName: person.firstName,
-        lastName: person.lastName,
-        gender: person.gender,
-        enrolmentDate: [enrolmentDate.getFullYear(),enrolmentDate.getMonth()+1,enrolmentDate.getDate()],
-        birthDate:[birthDate.getFullYear(),birthDate.getMonth()+1,birthDate.getDate()],
-            credentials: credentials
-
-
-      }).success(function (data, status, headers) {
-        console.log('headers: ' + headers('location'));
-        $scope.persons = PersonFactory.update();
-        $scope.modal.close('User created');
-      });
-    };*/
 
 
 
