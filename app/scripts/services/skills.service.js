@@ -6,7 +6,7 @@ angular.module('empApp')
     var getSkills = (function () {
       skills = [];
       $http.get('http://localhost:8081/api/skills').success(function (data) {
-        if(typeof myVar != 'undefined') {
+        if(data._embedded.skills !== undefined) {
           data._embedded.skills.forEach(function (skill) {
             skills.push(skill);
           });
