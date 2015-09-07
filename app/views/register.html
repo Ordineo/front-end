@@ -1,62 +1,130 @@
 <style>
-    .css-form input.ng-invalid.ng-touched {
 
-        border: solid 1px #FA787E;
+    input.ng-invalid {
+        border: 1px solid red;
+    }
+    input.ng-valid {
+        border: 1px solid green;
+    }
+    .error{
+        color:red;
+    }
+    .errmsg{
+        color:red;
     }
 
-    .css-form input.ng-valid.ng-touched {
-        border: solid 1px #78FA89;
 
-    }
 </style>
 
 
-<form class="form-horizontal, css-form"  novalidate >
+<form name="form"  class="form-horizontal, css-form"  novalidate >
     <fieldset>
         <div id="legend">
             <legend class="">Register</legend>
         </div>
         <div class="control-group">
-            <label class="control-label"  for="username" >Username</label>
+            <label class="control-label" for="username" >Username</label>
             <div class="controls">
-                <input type="text" value="John" id="username" ng-model="person.username" placeholder="" class="input-xlarge" username>
-                <span ng-show="form.name.$pending.username">Checking if this name is available...</span>
-                <span ng-show="form.name.$error.username">This username is already taken!</span>
-
+                <input autocomplete="off" name="username" ng-minlength="3" ng-maxlength="20" type="text" id="username" ng-model="person.username"  class="input-xlarge" required>
+            </div>
+            <div class="error"
+                 ng-show="form.username.$dirty && form.username.$invalid">
+                <small class="error"
+                       ng-show="form.username.$error.required">
+                    Your username is required.
+                </small>
+                <small class="error"
+                       ng-show="form.username.$error.minlength">
+                    Your username is required to be at least 3 characters
+                </small>
+                <small class="error"
+                       ng-show="form.username.$error.maxlength">
+                    Your username cannot be longer than 20 characters
+                </small>
             </div>
         </div>
+
+
+
+
+
         <div class="control-group">
             <label class="control-label" for="password">Password</label>
             <div class="controls">
-                <input type="password"  id="password" ng-model="person.password" placeholder="" class="input-xlarge" required>
-                <p class="help-block">Password should be at least 4 characters</p>
+                <input name="password" ng-minlength="6" ng-maxlength="18" type="password"  id="password" ng-model="person.password"  class="input-xlarge" required>
+
+            </div>
+            <div class="error"
+                 ng-show="form.password.$dirty && form.password.$invalid">
+                <small class="error"
+                       ng-show="form.password.$error.required">
+                    Your password is required.
+                </small>
+                <small class="error"
+                       ng-show="form.password.$error.minlength">
+                    Your password is required to be at least 6 characters
+                </small>
+                <small class="error"
+                       ng-show="form.password.$error.maxlength">
+                    Your password cannot be longer than 18 characters
+                </small>
             </div>
         </div>
 
         <div class="control-group">
             <label class="control-label" for="firstName">First name</label>
             <div class="controls">
-                <input type="text" id="firstName" ng-model="person.firstName" placeholder="" class="input-xlarge" required>
+                <input name="firstName" ng-minlength="2" ng-maxlength="20" type="text" id="firstName" ng-model="person.firstName" class="input-xlarge" required>
 
+            </div>
+            <div class="error"
+                 ng-show="form.firstName.$dirty && form.firstName.$invalid">
+                <small class="error"
+                       ng-show="form.firstName.$error.required">
+                    Your first name is required.
+                </small>
+                <small class="error"
+                       ng-show="form.firstName.$error.minlength">
+                    Your first name is required to be at least 2 characters
+                </small>
+                <small class="error"
+                       ng-show="form.firstName.$error.maxlength">
+                    Your first name cannot be longer than 20 characters
+                </small>
             </div>
         </div>
         <div class="control-group">
 
             <label class="control-label" for="lastName">Last name</label>
             <div class="controls">
-                <input type="text" id="lastName" ng-model="person.lastName" placeholder="" class="input-xlarge" required>
+                <input name="lastName" type="text" id="lastName" ng-model="person.lastName" class="input-xlarge" required>
 
+            </div>
+            <div class="error"
+                 ng-show="form.lastName.$dirty && form.lastName.$invalid">
+                <small class="error"
+                       ng-show="form.lastName.$error.required">
+                    Your last name is required.
+                </small>
+                <small class="error"
+                       ng-show="form.lastName.$error.minlength">
+                    Your last name is required to be at least 2 characters
+                </small>
+                <small class="error"
+                       ng-show="form.lastName.$error.maxlength">
+                    Your last name cannot be longer than 20 characters
+                </small>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="male">Male</label>
             <div class="controls">
-            <input id="male" class="controls" ng-model="person.gender" type="radio" value="Male">
+            <input id="male" class="controls" ng-model="person.gender" type="radio" value="Male" required>
             </div>
 
             <label for="female" class="control-label">Female</label>
             <div class="controls">
-                <input id="female" ng-model="person.gender" type="radio" value="Female">
+                <input id="female" ng-model="person.gender" type="radio" value="Female" required>
             </div>
 
         </div>
@@ -64,13 +132,13 @@
         <div class="control-group">
 
             <label for="enrolmentDate">Enrolmentdate</label>
-            <input id="enrolmentDate" type="date" ng-model="person.enrolmentDate" class="input-large"/>
+            <input id="enrolmentDate" type="date" ng-model="person.enrolmentDate" class="input-large" required/>
 
         </div>
 
         <div class="control-group">
             <label for="birthDate">Birthdate</label>
-            <input id="birthDate" type="date" ng-model="person.birthDate" class="input-large"/>
+            <input id="birthDate" type="date" ng-model="person.birthDate" class="input-large" required/>
         </div>
 
 
@@ -86,7 +154,8 @@
         <div class="control-group">
             <!-- Button -->
             <div class="controls">
-                <button class="btn btn-success" ng-click="ok(person)">Register</button>
+                <button  class="btn btn-success" ng-click="validate(person)">Register</button>
             </div>
+            <div class="errmsg">{{errmsg}}</div>
         </div>
     </fieldset></form>

@@ -27,41 +27,18 @@ angular.module('empApp')
         console.log('Modal dismissed');
       });
     };
-      /**
-       *     this.firstName = firstName;
-       this.lastName = lastName;
-       this.gender = gender;
-       this.enrolmentDate = enrolmentDate;
-       this.birthDate = birthDate;
-       */
-    $scope.ok = function (person) {
-      console.log('Adding person...');
+
+    $scope.validate = function (person) {
+      console.log('Validating person...');
 
 
 
-      var birthDate = new Date(person.birthDate);
-      var enrolmentDate = new Date(person.enrolmentDate);
-      var credentials = {
-        'username': person.username,
-        'password': person.password
 
-
-      };
-
-      var formData={
-        firstName: person.firstName,
-        lastName: person.lastName,
-        gender: person.gender,
-        enrolmentDate: [enrolmentDate.getFullYear(),enrolmentDate.getMonth()+1,enrolmentDate.getDate()],
-        birthDate:[birthDate.getFullYear(),birthDate.getMonth()+1,birthDate.getDate()],
-        credentials: credentials
-
-      };
 
       var handleSuccess = function (data, status) {
 
 
-        console.log(data);
+        console.log("Person created");
 
         $location.path('/login');
 
@@ -71,13 +48,36 @@ angular.module('empApp')
 
 
 
-        console.log(document.cookie('name'));
 
 
       };
 
-      dataservice.postItem('POST','http://localhost:8080/api/persons/',formData,'application/json').success(handleSuccess).error(handleError);
+      if($scope.form.$valid) {
 
+        var birthDate = new Date(person.birthDate);
+        var enrolmentDate = new Date(person.enrolmentDate);
+        var credentials = {
+          'username': person.username,
+          'password': person.password
+
+
+        };
+
+        var formData={
+          firstName: person.firstName,
+          lastName: person.lastName,
+          gender: person.gender,
+          enrolmentDate: [enrolmentDate.getFullYear(),enrolmentDate.getMonth()+1,enrolmentDate.getDate()],
+          birthDate:[birthDate.getFullYear(),birthDate.getMonth()+1,birthDate.getDate()],
+          credentials: credentials
+
+        };
+
+        dataservice.postItem('POST', 'http://localhost:8080/api/persons/', formData, 'application/json').success(handleSuccess);
+      }else{
+        $scope.errmsg = "Fill in valid data!";
+        console.log("Not valid");
+      }
 
       $scope.selectPerson = function (person) {
         $http.get(person._links.self.href).success(function (data) {
