@@ -63,6 +63,10 @@ angular
                 controller: 'SettingsCtrl'
             })
 
+            .when('/skills', {
+                templateUrl: 'views/skills.html',
+                controller: 'SkillsCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });
