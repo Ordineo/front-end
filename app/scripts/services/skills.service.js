@@ -6,9 +6,11 @@ angular.module('empApp')
     var getSkills = (function () {
       skills = [];
       $http.get('http://localhost:8081/api/skills').success(function (data) {
-        data._embedded.skills.forEach(function (skill) {
-          skills.push(skill);
-        });
+        if(typeof myVar != 'undefined') {
+          data._embedded.skills.forEach(function (skill) {
+            skills.push(skill);
+          });
+        }
       });
     })();
 
