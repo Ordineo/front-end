@@ -82,10 +82,20 @@
     </div>
     <div class="modal-body">
         <form>
-            <label for="firstName">First Name</label>
-            <input id="firstName" class="input-large" ng-model="person.firstName"/>
-            <label for="lastName">Last Name</label>
-            <input id="lastName" class="input-large" ng-model="person.lastName"/>
+          <div class="row">
+            <div class="col-md-6 col-xs-12">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input id="firstName" class="input-large form-control" ng-model="person.firstName"/>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" class="input-large form-control" ng-model="person.lastName"/>
+              </div>
+            </div>
+          </div>
             <label for="username">Username</label>
             <input id="username" class="input-large" ng-model="person.username"/>
             <label for="password">Password</label>

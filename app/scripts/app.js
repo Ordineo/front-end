@@ -58,6 +58,10 @@ angular
                 templateUrl: 'views/register.html',
                 controller: 'PersonsCtrl'
             })
+            .when('/settings', {
+                templateUrl: 'views/settings.html',
+                controller: 'SettingsCtrl'
+            })
 
             .otherwise({
                 redirectTo: '/'
