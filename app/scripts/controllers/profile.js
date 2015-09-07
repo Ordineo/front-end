@@ -21,13 +21,15 @@ angular.module('empApp')
 
 
 
-    $scope.settings = {
-      firstName: 'John',
-      lastName: 'Doe',
-      gender: 'Male',
-      enrolmentDate: Date.now(),
-      birthDate: Date.now() + 9999999
-    }
+    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem("username")).success(function (data) {
+      console.log("GOT IT" + data);
+      console.log(data);
 
-    $http.get
+      $scope.username = data.username;
+      $scope.firstName = data.firstName;
+      $scope.lastName = data.lastName;
+      $scope.gender = data.gender;
+      $scope.birthDate = data.birthDate;
+      $scope.enrolmentDate = data.enrolmentDate;
+    });
   });
