@@ -1,0 +1,45 @@
+<h1>Skills</h1>
+<hr>
+<h3>Filter</h3>
+<div class="row">
+    <div class="col-xs-6">
+        <input ng-model="search.name" type="text" class="form-control" id="nameSearch"
+               placeholder="Name">
+    </div>
+</div>
+<hr>
+<h3>List</h3>
+<div class="row">
+    <div class="col-lg-6">
+        <table class="table table-hover table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="skill in skills | filter:search">
+                <td>{{skill.name}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="pull-right">
+            <button type="button" class="btn btn-primary" ng-click="add()">Add</button>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="skillModalContent">
+  <div class="modal-header">
+    <h3 class="modal-title">Add a skill</h3>
+  </div>
+  <div class="modal-body">
+    <form>
+      <label for="name">Name</label>
+      <input id="name" class="input-large" ng-model="skill.name"/>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok(skill)">OK</button>
+    <button class="btn btn-warning" ng-click="$dismiss()">Cancel</button>
+  </div>
+</script>
