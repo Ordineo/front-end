@@ -11,22 +11,6 @@ angular.module('empApp')
   .controller('PersonsCtrl', ['$scope', '$modal', '$log', '$http', '$location', 'PersonFactory','dataservice','$cookies', function ($scope, $modal, $log, $http, $location, PersonFactory,dataservice,$cookies) {
     $log.info('PersonsCtrl loaded');
 
-    $scope.persons = PersonFactory.all();
-
-    $scope.add = function () {
-      $scope.modal = $modal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: 'userModalContent',
-        controller: 'PersonsCtrl',
-        size: 'lg',
-        scope: $scope
-      });
-      $scope.modal.result.then(function (message) {
-        console.log(message);
-      }, function () {
-        console.log('Modal dismissed');
-      });
-    };
 
     $scope.validate = function (person) {
       console.log('Validating person...');
@@ -39,6 +23,7 @@ angular.module('empApp')
 
 
         console.log("Person created");
+
 
         $location.path('/login');
 

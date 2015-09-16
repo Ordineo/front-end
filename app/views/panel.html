@@ -1,0 +1,13 @@
+<h1>Welcome Admin! Play with the controls of your likings!</h1>
+
+
+<h2>Add Users to my Unit!</h2>
+
+<form name="myForm">
+    <label > Persons: </label>
+    <select name="selectroles" ng-model="person.selected">
+        <option ng-repeat="person in persons" value="{{person.firstName}}">{{person.firstName}}</option>
+    </select>
+
+    <button class="btn btn-primary" ng-click="joinUnit(person.selected)">Join my Unit!</button>
+</form>

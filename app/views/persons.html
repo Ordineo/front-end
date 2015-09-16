@@ -33,9 +33,7 @@
             </tr>
             </tbody>
         </table>
-        <div class="pull-right">
-            <button type="button" class="btn btn-primary" ng-click="add()">Add</button>
-        </div>
+
     </div>
     <div class="col-lg-6" ng-show="selectedPerson">
         <div class="row">
@@ -76,46 +74,4 @@
         </div>
     </div>
 </div>
-<script type="text/ng-template" id="userModalContent">
-    <div class="modal-header">
-        <h3 class="modal-title">Add a person</h3>
-    </div>
-    <div class="modal-body">
-        <form>
-          <div class="row">
-            <div class="col-md-6 col-xs-12">
-              <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input id="firstName" class="input-large form-control" ng-model="person.firstName"/>
-              </div>
-            </div>
-            <div class="col-md-6 col-xs-12">
-              <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input id="lastName" class="input-large form-control" ng-model="person.lastName"/>
-              </div>
-            </div>
-          </div>
-            <label for="username">Username</label>
-            <input id="username" class="input-large" ng-model="person.username"/>
-            <label for="password">Password</label>
-            <input id="password" class="input-large" ng-model="person.password"/>
-           <label for="birthDate">Birthdate</label>
-                <input id="birthDate" type="date" ng-model="person.birthDate" class="input-large"/>
-            <label for="male"></label>
-                Male
-                <input id="male" ng-model="person.gender" type="radio" value="Male">
 
-            <label for="female" class="topcoat-radio-button">
-                Female
-                <input id="female" ng-model="person.gender" type="radio" value="Female">
-                <label for="enrolmentDate">Enrolmentdate</label>
-                <input id="enrolmentDate" type="date" ng-model="person.enrolmentDate" class="input-large"/>
-
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="ok(person)">OK</button>
-        <button class="btn btn-warning" ng-click="$dismiss()">Cancel</button>
-    </div>
-</script>

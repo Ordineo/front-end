@@ -1,10 +1,19 @@
 <style>
 
     input.ng-invalid {
-        border: 1px solid red;
+        outline: none;
+        border-color: red;
+        box-shadow: 0 0 5px red;
     }
     input.ng-valid {
-        border: 1px solid green;
+        outline: none;
+        border-color: green;
+        box-shadow: 0 0 5px green;
+    }
+    input:focus{
+        outline: none;
+        border-color: green;
+        box-shadow: 0 0 5px green;
     }
     .error{
         color:red;
@@ -12,6 +21,27 @@
     .errmsg{
         color:red;
     }
+
+    /*input[type=password]{
+        background:  linear-gradient(top, #efc688 0%,#fff2f2 100%);
+        border-radius: 3px;
+        border: none;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.2) inset, 0 -1px 0 rgba(0,0,0,0.05) inset;
+        transition: all 0.2s linear;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 13px;
+        color: #222222;
+        position: relative;
+        height: 36px;
+        width: 300px;
+        padding-left: 30px;
+
+
+
+    }
+    input:focus{
+        background-color:#a47e3c;
+    }*/
 
 
 </style>

@@ -1,5 +1,17 @@
 angular.module('empApp')
-    .controller('LoginCtrl', ['$scope', '$modal', '$log', '$http', '$location','dataservice', function ($scope, $modal, $log, $http, $location,dataservice) {
+    .controller('LoginCtrl', ['$scope', '$modal', '$log', '$http', '$location','dataservice','AuthenticateFactory','PersonFactory','$route',
+        function ($scope, $modal, $log, $http, $location,dataservice,AuthenticateFactory,PersonFactory,$route) {
+
+
+            if(AuthenticateFactory.isAuthorized()){
+                $scope.isLogged = true;
+                var role = window.sessionStorage.getItem("role");
+
+                if(role=='admin'){
+                    $scope.isAdmin =true;
+                }
+
+            }
 
         $scope.invalid =false;
           $scope.valid=false;
@@ -13,9 +25,10 @@ angular.module('empApp')
         $scope.logout = function(){
 
           window.sessionStorage.clear();
-            $scope.logged =false;
-            $scope.errmsg = "Successfully logged out!"
-
+            AuthenticateFactory.setAuthorized(false);
+            window.location.reload();
+            $route.reload();
+            $location.path('/login');
         };
 
         $scope.login =function(login){
@@ -26,43 +39,32 @@ angular.module('empApp')
 
 
             };
+            var handleSuccess = function (data, status,headers,config) {
+
+                console.log("Login successful");
+                AuthenticateFactory.setAuthorized(true);
+                window.sessionStorage.setItem("id",headers('Location'));
+
+
+                  if(AuthenticateFactory.isAuthorized()) {
+                      $route.reload();
+                      window.location.reload();
+                      $location.path('/roles');
+                  }
 
 
 
-            var handleSuccess = function (data, status) {
 
-
-                console.log(data);
-
-
-
-                if(data==true){
-                    console.log("Login successful");
-                    window.sessionStorage.setItem("username",login.username);
-                    $scope.errmsg ="Logged in!"
-                    $scope.logged = true;
-                    $scope.invalid =false;
-                    $scope.valid=true;
-
-
-                }else{
-
-                    console.log("data is false");
-                    $scope.errmsg ="Invalid Username/Password"
-                    $scope.invalid =true;
-
-                }
-                    /*window.sessionStorage.setItem("username",login.username);
-                    $location.path('/dashboard');
-
-                 else {
-
-                    $scope.err = "Invalid username/password";
-
-                }*/
             };
 
-            dataservice.postItem('POST','http://localhost:8080/api/persons/login/pos',credentials,'application/json').success(handleSuccess);
+
+            var handleError = function(data, status, headers){
+
+                $scope.errmsg = data.message;
+                $scope.invalid = true;
+
+            };
+            AuthenticateFactory.getLogin(credentials).success(handleSuccess).error(handleError);
 
 
         }

@@ -1,31 +1,152 @@
 'use strict';
 
 angular.module('empApp')
-  .factory('PersonFactory', function ($http) {
+  .factory('PersonFactory',PersonFactory);
 
-    var persons = [];
+PersonFactory.$inject = ['dataservice'];
 
-    $http.get('http://localhost:8080/api/persons').success(function (data) {
+
+
+function PersonFactory(dataservice) {
+
+  var persons = [];
+
+  var id = window.sessionStorage.getItem("id");
+  return {
+
+    getAll: getAll,
+    update : update,
+    initialise : initialise,
+    getId : getId,
+    getPerson: getPerson,
+    getSelectedPerson : getSelectedPerson
+
+  };
+
+
+  function getAll() {
+    return persons;
+  }
+
+  function getId(){
+    return id;
+  }
+
+  function getSelectedPerson(selected){
+    return dataservice.getItem('http://localhost:8080/api/persons/search/findByFirstName?name='+selected);
+  }
+
+  function initialise() {
+
+
+    dataservice.getItem('http://localhost:8080/api/persons').success(function (data) {
       data._embedded.persons.forEach(function (person) {
         persons.push(person);
       });
     });
+  }
+  function getPerson(){
+    return dataservice.getItem('http://localhost:8080/api/persons/'+id);
+  }
 
-    return {
-      all: function () {
-        return persons;
-      },
-      update: function () {
-        persons = [];
-        $http.get('http://localhost:8080/api/persons').success(function (data) {
-          data.forEach(function (person) {
-            persons.push(person);
+  function update() {
+    persons = [];
+    dataservice.getItem('http://localhost:8080/api/persons').success(function (data) {
+      data.forEach(function (person) {
+        persons.push(person);
+      });
+    });
+    return persons;
+  }
+
+}
+
+
+angular.module('empApp')
+.factory('RoleFactory',RoleFactory);
+
+RoleFactory.$inject =['dataservice','PersonFactory'];
+
+function RoleFactory(dataservice,PersonFactory) {
+  var applicationRoles = [];
+  var functionalRoles =[];
+  var allFunctionalRoles =[];
+  var allApplicationRoles = [];
+  var applicationRolesPerson = [];
+  var id = window.sessionStorage.getItem("id");
+  var applicationrole;
+
+  return{
+    initialise : initialise,
+    getAllFunctionalRoles : getAllFunctionalRoles,
+    updateFunctionalRoles :updateFunctionalRoles,
+    getApplicationRolesPerson : getApplicationRolesPerson,
+    getFunctionalRoles : getFunctionalRoles,
+    getAllApplicationRoles : getAllApplicationRoles
+
+
+
+  };
+
+function initialise() {
+
+
+  dataservice.getItem('http://localhost:8080/api/persons/'+id+'/roles/false').success(function (data) {
+    if(data._embedded.roleResources !== undefined) {
+      data._embedded.roleResources.forEach(function (role) {
+        applicationRolesPerson.push(role);
+      })}
+   // applicationrole = applicationRolesPerson[0].name;
+    //window.sessionStorage.setItem('role',applicationrole);
+  });
+  dataservice.getItem('http://localhost:8080/api/roles/search/findByIdAndIsFunctional?id='+id+'&functional=true').success(function (data) {
+    if(data._embedded.roles !== undefined) {
+      data._embedded.roles.forEach(function (role) {
+        functionalRoles.push(role);
+      })}
+  });
+  dataservice.getItem('http://localhost:8080/api/roles/search/isFunctional?functional=true').success(function (data) {
+    if(data._embedded.roles !== undefined) {
+      data._embedded.roles.forEach(function (role) {
+        allFunctionalRoles.push(role);
+
+      })}
+  });
+  dataservice.getItem('http://localhost:8080/api/roles/search/isFunctional?functional=false').success(function (data) {
+    if(data._embedded.roles !== undefined) {
+      data._embedded.roles.forEach(function (role) {
+        allApplicationRoles.push(role);
+
+      })}
+  });
+}
+
+  function getAllApplicationRoles(){
+    return allApplicationRoles;
+  }
+  function getAllFunctionalRoles(){
+          return allFunctionalRoles;
+        }
+  function getApplicationRolesPerson() {
+          return applicationRolesPerson;
+        }
+  function getFunctionalRoles(){
+          return functionalRoles;
+        }
+  function updateFunctionalRoles () {
+          functionalRoles = [];
+          dataservice.getItem('http://localhost:8080/api/roles/search/findByIdAndIsFunctional?id='+id+'&functional=true').success(function (data) {
+            data._embedded.roles.forEach(function (role) {
+              if(data._embedded.roles !== undefined) {
+              functionalRoles.push(role);
+            }});
           });
-        });
-        return persons;
+          return functionalRoles;
+        }
       }
-    };
-  })
+
+
+angular.module('empApp')
 .factory('dataservice',['$http',function($http){
 
 

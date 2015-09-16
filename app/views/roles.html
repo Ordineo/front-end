@@ -1,0 +1,22 @@
+
+
+
+
+<div id="legend">
+            <legend class="">Choose a side...</legend>
+        </div>
+
+
+
+<div>
+    <form name="myForm">
+        <label > Roles: </label>
+        <select name="selectroles" ng-model="role.selected">
+            <option ng-repeat="role in roles" value="{{role.name}}">{{role.name}}</option>
+        </select>
+
+        <button class="btn btn-primary" ng-click="addSelected(role.selected)">Choose!</button>
+    </form>
+    <hr>
+
+</div>

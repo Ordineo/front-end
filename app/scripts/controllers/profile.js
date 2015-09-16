@@ -8,20 +8,50 @@
  * Controller of the empApp
  */
 angular.module('empApp')
-  .controller('ProfileCtrl', function ($http, $scope, $log) {
-
-    $log.info('ProfileCtrl loaded');
-    $scope.errmsg = "hello";
-
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+    .controller('ProfileCtrl', ['$scope', '$modal', '$log', '$http', '$location','dataservice', function ($scope, $modal, $log, $http, $location,dataservice) {
 
 
+      $log.info('ProfileCtrl loaded');
 
-    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem("username")).success(function (data) {
+      var id =  window.sessionStorage.getItem("id");
+      if(!$scope.isAdmin) {
+        $scope.isAdmin = false;
+      }
+
+      $scope.makeAdmin = function(){
+
+        var formData = {
+          name:'admin',
+          isFunctional:false
+        };
+
+        var handleSuccess = function(data,status,headers){
+          console.log(data);
+
+          $scope.isAdmin = true;
+
+          //dataservice.postItem('POST','http://localhost:8080/api/persons/RoleToPerson/'+id,);
+
+          var handleGetRole = function(data,status,headers){
+
+            var dataForm = {
+              name:data.name,
+              isFunctional:data.functional
+            };
+
+            dataservice.postItem('POST','http://localhost:8080/api/persons/RoleToPerson/'+id,dataForm,'application/json');
+
+          };
+
+          dataservice.getItem(headers('Location')).success(handleGetRole);
+        };
+        dataservice.postItem('POST','http://localhost:8080/api/roles',formData,'application/json').success(handleSuccess);
+
+
+      };
+
+
+   $http.get('http://localhost:8080/api/persons/' + id).success(function (data) {
       console.log("GOT IT" + data);
       console.log(data);
 
@@ -32,4 +62,4 @@ angular.module('empApp')
       $scope.birthDate = data.birthDate;
       $scope.enrolmentDate = data.enrolmentDate;
     });
-  });
+  }]);
