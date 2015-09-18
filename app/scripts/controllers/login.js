@@ -1,6 +1,10 @@
 angular.module('empApp')
-    .controller('LoginCtrl', ['$scope', '$modal', '$log', '$http', '$location','dataservice','AuthenticateFactory','PersonFactory','$route',
-        function ($scope, $modal, $log, $http, $location,dataservice,AuthenticateFactory,PersonFactory,$route) {
+    .controller('LoginCtrl', LoginCtrl);
+
+
+LoginCtrl.$inject =['$scope', '$log', '$http', '$location','dataservice','AuthenticateFactory','PersonFactory','$route']
+
+function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactory,PersonFactory,$route) {
 
 
             if(AuthenticateFactory.isAuthorized()){
@@ -12,16 +16,6 @@ angular.module('empApp')
                 }
 
             }
-
-        $scope.invalid =false;
-          $scope.valid=false;
-
-        if(window.sessionStorage.getItem("username")==null) {
-            $scope.logged = false;
-        }else{
-            $scope.logged=true;
-        }
-
         $scope.logout = function(){
 
           window.sessionStorage.clear();
@@ -70,4 +64,4 @@ angular.module('empApp')
         }
 
 
-    }]);
+    };

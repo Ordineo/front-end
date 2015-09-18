@@ -8,7 +8,10 @@
  * Controller of the frontendApp
  */
 angular.module('empApp')
-  .controller('PersonsCtrl', ['$scope', '$modal', '$log', '$http', '$location', 'PersonFactory','dataservice','$cookies', function ($scope, $modal, $log, $http, $location, PersonFactory,dataservice,$cookies) {
+  .controller('PersonsCtrl',PersonsCtrl);
+PersonsCtrl.$inject =['$scope', '$log', '$http', '$location', 'PersonFactory','dataservice','$cookies'];
+
+function PersonsCtrl ($scope, $log, $http, $location, PersonFactory,dataservice,$cookies) {
     $log.info('PersonsCtrl loaded');
 
 
@@ -20,22 +23,10 @@ angular.module('empApp')
 
 
       var handleSuccess = function (data, status) {
-
-
         console.log("Person created");
 
-
         $location.path('/login');
-
         };
-
-      var handleError = function(data,status,headers){
-
-
-
-
-
-      };
 
       if($scope.form.$valid) {
 
@@ -69,7 +60,7 @@ angular.module('empApp')
           $scope.selectedPerson = data;
         });
 
-      }}}]);
+      }}}
 
 
 

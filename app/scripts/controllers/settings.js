@@ -8,7 +8,10 @@
  * Controller of the empApp
  */
 angular.module('empApp')
-  .controller('SettingsCtrl', function ($scope, $log, $modal) {
+  .controller('SettingsCtrl',SettingCtrl);
+SettingCtrl.$inject = ['$scope','$log','$modal'];
+
+function SettingCtrl ($scope, $log, $modal) {
     $log.info('SettingsCtrl loaded');
 
     $scope.modalPasswordReset = function() {
@@ -30,4 +33,4 @@ angular.module('empApp')
       };
     };
 
-  });
+  };

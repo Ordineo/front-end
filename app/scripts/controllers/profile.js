@@ -8,7 +8,11 @@
  * Controller of the empApp
  */
 angular.module('empApp')
-    .controller('ProfileCtrl', ['$scope', '$modal', '$log', '$http', '$location','dataservice', function ($scope, $modal, $log, $http, $location,dataservice) {
+    .controller('ProfileCtrl', ProfileCtrl);
+
+ProfileCtrl.$inject =['$scope', '$modal', '$log', '$http', '$location','dataservice'];
+
+function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice) {
 
 
       $log.info('ProfileCtrl loaded');
@@ -62,4 +66,4 @@ angular.module('empApp')
       $scope.birthDate = data.birthDate;
       $scope.enrolmentDate = data.enrolmentDate;
     });
-  }]);
+  }
