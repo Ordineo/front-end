@@ -7,13 +7,13 @@ PersonFactory.$inject = ['dataservice'];
 
 
 
-function PersonFactory(dataservice) {
+function PersonFactory(dataservice, $http) {
 
   var persons = [];
 
   var id = window.sessionStorage.getItem("id");
   return {
-
+    remove: remove,
     getAll: getAll,
     update : update,
     initialise : initialise,
@@ -23,8 +23,15 @@ function PersonFactory(dataservice) {
 
   };
 
+  function remove(href) {
+    dataservice.postItem('DELETE', href);
+  }
 
   function getAll() {
+    dataservice.getItem('http://localhost:8080/api/persons').success(function(data) {
+      persons = data;
+      console.log(data);
+    });
     return persons;
   }
 

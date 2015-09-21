@@ -29,7 +29,7 @@
                 <td>{{person.firstName}}</td>
                 <td>{{person.lastName}}</td>
                 <td>{{person.credentials.username}}</td>
-                <td></td>
+                <td ng-click="remove(person._links.self.href, $index)">Delete</td>
             </tr>
             </tbody>
         </table>

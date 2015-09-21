@@ -60,11 +60,13 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory,dataservice,
           $scope.selectedPerson = data;
         });
 
-      }}}
+      }
+    }
 
+  $scope.persons = PersonFactory.getAll();
 
-
-
-
-
-
+  $scope.remove = function(href, index) {
+    PersonFactory.remove(href);
+    $scope.persons.splice(index, 1);
+  };
+}
