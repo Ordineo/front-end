@@ -54,14 +54,13 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory,dataservice,
         $scope.errmsg = "Fill in valid data!";
         console.log("Not valid");
       }
-
-      $scope.selectPerson = function (person) {
-        $http.get(person._links.self.href).success(function (data) {
-          $scope.selectedPerson = data;
-        });
-
-      }
     }
+
+  $scope.selectPerson = function (person) {
+    $http.get(person._links.self.href).success(function (data) {
+      $scope.selectedPerson = data;
+    });
+  }
 
   $scope.persons = PersonFactory.getAll();
 
@@ -69,4 +68,17 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory,dataservice,
     PersonFactory.remove(href);
     $scope.persons.splice(index, 1);
   };
+
+  $scope.update = function() {
+    $.ajax({
+      type: 'PUT',
+      url: $scope.selectedPerson._links.self.href,
+      data: JSON.stringify($scope.selectedPerson),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      success: function() {
+        console.log("Success");
+      }
+    });
+  }
 }

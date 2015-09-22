@@ -33,7 +33,6 @@
             </tr>
             </tbody>
         </table>
-
     </div>
     <div class="col-lg-6" ng-show="selectedPerson">
         <div class="row">
@@ -57,6 +56,21 @@
                 <h4>Person Details</h4>
                 <hr>
                 <dl class="dl-horizontal">
+                    <dt>First Name</dt>
+                    <dd><input type="text" name="firstName" ng-model="selectedPerson.firstName"></dd>
+                    <dt>Last Name</dt>
+                    <dd><input type="text" name="lastName" ng-model="selectedPerson.lastName"></dd>
+                    <dt>Gender</dt>
+                    <dd><input type="text" name="gender" ng-model="selectedPerson.gender"></dd>
+                    <dt>Birth Date</dt>
+                    <dd><input type="text" name="birthDate" ng-model="selectedPerson.birthDate"></dd>
+                    <dt>Enrollment Date</dt>
+                    <dd><input type="text" name="enrolmentDate" ng-model="selectedPerson.enrolmentDate"></dd>
+
+                    <button ng-click="update()">Update</button>
+
+                    <hr>
+
                     <dt>Username</dt>
                     <dd>{{selectedPerson.credentials.username}}</dd>
                     <dt>Password Hash</dt>

@@ -59,7 +59,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice) {
       console.log("GOT IT" + data);
       console.log(data);
 
-      $scope.username = data.username;
+      $scope.username = data.credentials.username;
       $scope.firstName = data.firstName;
       $scope.lastName = data.lastName;
       $scope.gender = data.gender;

@@ -30,7 +30,6 @@ function PersonFactory(dataservice, $http) {
   function getAll() {
     dataservice.getItem('http://localhost:8080/api/persons').success(function(data) {
       persons = data;
-      console.log(data);
     });
     return persons;
   }

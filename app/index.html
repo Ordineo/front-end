@@ -47,7 +47,7 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li class="active"><a ng-if="isLogged" href="#/dashboard">Dashboard <span class="sr-only">(current)</span></a></li>
-                <li><a  ng-if="isLogged && isAdmin" href="#/persons">People</a></li>
+                <li><a ng-if="isLogged" href="#/persons">People</a></li><!-- && isAdmin -->
                 <li><a ng-if="isLogged" href="#/settings">Settings</a></li>
                 <li><a ng-if="isLogged" href="#/search">Search</a></li>
                 <li><a ng-if="!isLogged" href="#/login">Login</a></li>
@@ -55,7 +55,7 @@
                 <li><a ng-if="isLogged" href="#/skills">Skills</a></li>
                 <li><a ng-if="isLogged" href="#/profile">Profile</a></li>
                 <li><a ng-if="isLogged" href="#/roles">Roles</a></li>
-                <li><a ng-if="isLogged && isAdmin" href="#/panel">Admin panel</a> </li>
+                <li><a ng-if="isLogged" href="#/panel">Admin panel</a> </li><!-- && isAdmin -->
                 <li><button ng-if="isLogged" ng-click="logout()">Logout</button></li>
             </ul>
         </div>
