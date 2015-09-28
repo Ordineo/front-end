@@ -20,6 +20,7 @@ function RoleCtrl($scope,$log, dataservice,RoleFactory,$location) {
         $scope.getRoles = function() {
 
             $scope.roles= RoleFactory.getAllApplicationRoles();
+            $scope.allFunctionalRoles = RoleFactory.getAllFunctionalRoles();
 
 
         };

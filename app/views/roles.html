@@ -18,5 +18,19 @@
         <button class="btn btn-primary" ng-click="addSelected(role.selected)">Choose!</button>
     </form>
     <hr>
+</div>
 
+<div>
+  <table class="table table-hover table-striped table-bordered">
+    <thead>
+    <tr>
+      <th>Roles</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="functionalRole in allFunctionalRoles">
+      <td>{{functionalRole.name}}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>
