@@ -55,8 +55,25 @@
             <div class="col-md-9">
                 <h4>Person Details</h4>
                 <hr>
+                <div class="slide">
                 <dl class="dl-horizontal">
-                    <dt>First Name</dt>
+                  <dt>First Name</dt>
+                  <dd>{{selectedPerson.firstName}}</dd>
+                  <dt>Last Name</dt>
+                  <dd>{{selectedPerson.lastName}}</dd>
+                  <dt>Gender</dt>
+                  <dd>{{selectedPerson.gender}}</dd>
+                  <dt>Birth Date</dt>
+                  <dd>{{selectedPerson.birthDate}}</dd>
+                  <dt>Enrollment Date</dt>
+                  <dd>{{selectedPerson.enrolmentDate}}</dd>
+                </dl>
+                </div>
+              <h4>Update Details</h4>
+              <hr>
+              <div class="slide">
+              <dl class="dl-horizontal">
+                <dt>First Name</dt>
                     <dd><input type="text" name="firstName" ng-model="selectedPerson.firstName"></dd>
                     <dt>Last Name</dt>
                     <dd><input type="text" name="lastName" ng-model="selectedPerson.lastName"></dd>
@@ -64,9 +81,12 @@
                     <dd><input type="text" name="gender" ng-model="selectedPerson.gender"></dd>
 
                     <button ng-click="update()">Update</button>
-
-                    <hr>
-
+              </dl>
+              </div>
+              <h4>Other Info</h4>
+              <hr>
+              <div class="slide">
+                  <dl class="dl-horizontal">
                     <dt>Username</dt>
                     <dd>{{selectedPerson.credentials.username}}</dd>
                     <dt>Password Hash</dt>
@@ -80,6 +100,7 @@
                         </address>
                     </dd>
                 </dl>
+              </div>
             </div>
         </div>
     </div>

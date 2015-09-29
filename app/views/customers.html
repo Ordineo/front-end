@@ -1,0 +1,19 @@
+<h1>Customers</h1>
+<hr>
+<h3>List</h3>
+<table class="table table-hover table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="customer in customers">
+      <td>{{customer.name}}</td>
+      <td>{{customer.description}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<button ng-click="createCustomer()">Create</button>

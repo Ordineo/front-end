@@ -48,6 +48,7 @@
             <ul class="nav nav-sidebar">
                 <li class="active"><a ng-if="isLogged" href="#/dashboard">Dashboard <span class="sr-only">(current)</span></a></li>
                 <li><a ng-if="isLogged" href="#/persons">People</a></li><!-- && isAdmin -->
+                <li><a ng-if="isLogged" href="#/customers">Customers</a></li>
                 <li><a ng-if="isLogged" href="#/settings">Settings</a></li>
                 <li><a ng-if="isLogged" href="#/search">Search</a></li>
                 <li><a ng-if="!isLogged" href="#/login">Login</a></li>
@@ -99,6 +100,8 @@
 <script src="scripts/controllers/role.js"></script>
 <script src="scripts/services/authenticate.service.js"></script>
 <script src="scripts/controllers/panel.js"></script>
+<script src="scripts/services/customers.service.js"></script>
+<script src="scripts/controllers/customers.js"></script>
 
 <!-- endbuild -->
 </body>

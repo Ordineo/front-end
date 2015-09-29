@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('empApp')
     .controller('PanelCtrl',PanelCtrl);
 PanelCtrl.$inject=['$scope', '$log','dataservice','RoleFactory','$location','PersonFactory'];

@@ -1,17 +1,19 @@
+'use strict';
+
 angular.module('empApp')
     .controller('LoginCtrl', LoginCtrl);
 
 
-LoginCtrl.$inject =['$scope', '$log', '$http', '$location','dataservice','AuthenticateFactory','PersonFactory','$route']
+LoginCtrl.$inject =['$scope', '$log', '$http', '$location','dataservice','AuthenticateFactory','PersonFactory','$route'];
 
 function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactory,PersonFactory,$route) {
 
 
             if(AuthenticateFactory.isAuthorized()){
                 $scope.isLogged = true;
-                var role = window.sessionStorage.getItem("role");
+                var role = window.sessionStorage.getItem('role');
 
-                if(role=='admin'){
+                if(role==='admin'){
                     $scope.isAdmin =true;
                 }
 

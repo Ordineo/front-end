@@ -7,7 +7,7 @@ PersonFactory.$inject = ['dataservice'];
 
 
 
-function PersonFactory(dataservice, $http) {
+function PersonFactory(dataservice) {
 
   var persons = [];
 

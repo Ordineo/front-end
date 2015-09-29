@@ -82,6 +82,13 @@ angular
                     requiresLogin:true
                 }
             })
+            .when('/customers', {
+                templateUrl: 'views/customers.html',
+                controller: 'CustomersCtrl',
+                access:{
+                    requiresLogin:true
+                }
+            })
             .when('/login', {
                 templateUrl: 'views/login.html',
                 controller: 'LoginCtrl',
@@ -138,21 +145,21 @@ angular
         $rootScope.$on('$routeChangeStart', function (event, next) {
 
             if(next.access===undefined){
-                $location.path('/login')
+                $location.path('/login');
             }else {
                 var authorised = next.access.requiresLogin;
                 console.log(next.access.requiresLogin);
 
 
                 if (authorised && AuthenticateFactory.isAuthorized()) {
-                    console.log("passing through");
+                    console.log('passing through');
                     $location.path(next.templateurl);
                 } else {
                     $location.path(next.templateurl);
                 }
             }
 
-        })
+        });
 
     });
     /*.run(["Authenticate","AuthenticateFactory",function(AuthenticateFactory){

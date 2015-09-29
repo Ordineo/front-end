@@ -34,8 +34,8 @@ angular.module('empApp')
           url: url,
           data: postdata,
           headers: {'Content-Type': headers}
-        })
+        });
       }
-    }
+    };
 
   }]);

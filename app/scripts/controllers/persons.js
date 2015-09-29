@@ -7,13 +7,13 @@
  * # PersonsCtrl
  * Controller of the frontendApp
  */
+
 angular.module('empApp')
   .controller('PersonsCtrl',PersonsCtrl);
 PersonsCtrl.$inject =['$scope', '$log', '$http', '$location', 'PersonFactory','dataservice','$cookies'];
 
 function PersonsCtrl ($scope, $log, $http, $location, PersonFactory,dataservice,$cookies) {
-    $log.info('PersonsCtrl loaded');
-
+  $log.info('PersonsCtrl loaded');
 
     $scope.validate = function (person) {
       console.log('Validating person...');
@@ -77,7 +77,7 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory,dataservice,
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       success: function() {
-        console.log("Success");
+        console.log("Update success");
       }
     });
   }
