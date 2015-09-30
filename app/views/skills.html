@@ -2,31 +2,35 @@
 <hr>
 <h3>Filter</h3>
 <div class="row">
-    <div class="col-xs-6">
-        <input ng-model="search.name" type="text" class="form-control" id="nameSearch"
-               placeholder="Name">
-    </div>
+  <div class="col-xs-6">
+    <input ng-model="search.name" type="text" class="form-control" id="nameSearch"
+           placeholder="Name">
+  </div>
 </div>
 <hr>
 <h3>List</h3>
 <div class="row">
-    <div class="col-lg-6">
-        <table class="table table-hover table-striped table-bordered">
-            <thead>
-            <tr>
-                <th>Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="skill in skills | filter:search">
-                <td>{{skill.name}}</td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="pull-right">
-            <button type="button" class="btn btn-primary" ng-click="add()">Add</button>
-        </div>
+  <div class="col-lg-6">
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="skill in skills | filter:search">
+        <td>{{skill.name}}</td>
+        <td>{{skill.category}}</td>
+        <td ng-click="remove(skill._links.self.href)">Delete</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="pull-right">
+      <button type="button" class="btn btn-primary" ng-click="add()">Add</button>
     </div>
+  </div>
 </div>
 <script type="text/ng-template" id="skillModalContent">
   <div class="modal-header">
@@ -35,8 +39,13 @@
   <div class="modal-body">
     <form>
       <label for="name">Name</label>
-      <input id="name" class="input-large" ng-model="skill.name"/>
+      <input id="name" class="input-large" ng-model="skill.name" autofocus/>
+      <label for="skillCategory">Category</label>
+      <input id="skillCategory" class="input-large" ng-model="skill.skillCategory.name" autofocus/>
     </form>
+    <div ng-if="errorMessage">
+      <p class="alert alert-danger">{{ errorMessage }}</p>
+    </div>
   </div>
   <div class="modal-footer">
     <button class="btn btn-primary" ng-click="ok(skill)">OK</button>
