@@ -10,9 +10,9 @@
 
 angular.module('empApp')
   .controller('PersonsCtrl',PersonsCtrl);
-PersonsCtrl.$inject =['$scope', '$log', '$http', '$location', 'PersonFactory','dataservice','$cookies'];
+PersonsCtrl.$inject =['$scope', '$log', '$http', '$location', 'PersonFactory', 'RoleFactory', 'dataservice','$cookies'];
 
-function PersonsCtrl ($scope, $log, $http, $location, PersonFactory,dataservice,$cookies) {
+function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory, dataservice,$cookies) {
   $log.info('PersonsCtrl loaded');
 
     $scope.validate = function (person) {
@@ -54,13 +54,15 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory,dataservice,
         $scope.errmsg = "Fill in valid data!";
         console.log("Not valid");
       }
-    }
+    };
 
   $scope.selectPerson = function (person) {
     $http.get(person._links.self.href).success(function (data) {
       $scope.selectedPerson = data;
     });
-  }
+    $scope.selectedPersonsApplicationRoles = RoleFactory.getApplicationRolesPerson;
+    $scope.selectedPersonsFunctionalRoles = RoleFactory.getFunctionalRoles();
+  };
 
   $scope.persons = PersonFactory.getAll();
 
@@ -69,16 +71,25 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory,dataservice,
     $scope.persons.splice(index, 1);
   };
 
-  $scope.update = function() {
+  $scope.updatePerson = function(person) {
+    //PersonFactory.updatePerson(person);
+
     $.ajax({
       type: 'PUT',
-      url: $scope.selectedPerson._links.self.href,
-      data: JSON.stringify($scope.selectedPerson),
+      url: person._links.self.href,
+      data: JSON.stringify(person),
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       success: function() {
-        console.log("Update success");
+        console.log("PERSON UPDATED");
       }
     });
-  }
+  };
+
+  $scope.allFunctionalRoles = RoleFactory.getAllFunctionalRoles();
+  $scope.selectedRole = "";
+
+  $scope.addFunctionalRoleToPerson = function() {
+    PersonFactory.addFunctionalRoleToPerson($scope.selectedPerson._links.self.href + '/roles', $scope.selectedRole);
+  };
 }
