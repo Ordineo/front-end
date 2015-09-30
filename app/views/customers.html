@@ -1,6 +1,7 @@
 <h1>Customers</h1>
 <hr>
 <h3>List</h3>
+<p>Click a row to show a customers details.</p>
 <table class="table table-hover table-striped table-bordered">
   <thead>
     <tr>
@@ -9,11 +10,35 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="customer in customers">
+    <tr ng-repeat="customer in customers" ng-click="selectCustomer(customer)">
       <td>{{customer.name}}</td>
       <td>{{customer.description}}</td>
+      <td ng-click="deleteCustomer(customer._links.self.href, $index)">Delete</td>
     </tr>
   </tbody>
 </table>
 
+<div ng-show="selectedCustomer">
+  <h3>Customer details</h3>
+  <p>{{selectedCustomer.name}}</p>
+  <p>{{selectedCustomer.description}}</p>
+
+  <h3>Update a customer</h3>
+  <dl class="dl-horizontal">
+    <dt>Name</dt>
+    <dd><input type="text" name="updateCustomerName" ng-model="selectedCustomer.name"></dd>
+    <dt>Description</dt>
+    <dd><input type="text" name="updateCustomerDescription" ng-model="selectedCustomer.description"></dd>
+  </dl>
+  <button ng-click="updateCustomer(selectedCustomer)">Update</button>
+</div>
+
+
+<h3>Create a customer</h3>
+<dl class="dl-horizontal">
+  <dt>Name</dt>
+  <dd><input type="text" name="customerName" ng-model="customer.name"></dd>
+  <dt>Description</dt>
+  <dd><input type="text" name="customerDescription" ng-model="customer.description"></dd>
+</dl>
 <button ng-click="createCustomer()">Create</button>

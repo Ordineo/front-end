@@ -10,19 +10,36 @@ function CustomerFactory(dataservice) {
 
   return {
     getCustomers: getCustomers,
-    createCustomer: createCustomer
+    createCustomer: createCustomer,
+    updateCustomer: updateCustomer,
+    deleteCustomer: deleteCustomer
   };
 
   function getCustomers() {
     return dataservice.getItem(customersURL);
   }
 
-  function createCustomer() {
+  function createCustomer(name, description) {
     dataservice.postItem('POST', customersURL, JSON.stringify({
-      "name": 'Test customer',
-      "description": 'This is a testcustomer'
+      name: name,
+      description: description
     }), 'application/json').success(function() {
       console.log('CUSTOMER CREATED');
+    });
+  }
+
+  function updateCustomer(href, name, description) {
+    dataservice.postItem('PUT', href, {
+      name: name,
+      description: description
+    }, 'application/json').success(function() {
+      console.log('CUSTOMER UPDATED');
+    });
+  }
+
+  function deleteCustomer(href) {
+    dataservice.postItem('DELETE', href).success(function() {
+      console.log('CUSTOMER DELETED');
     });
   }
 }
