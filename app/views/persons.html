@@ -69,6 +69,13 @@
                   <dd>{{selectedPerson.enrolmentDate}}</dd>
                 </dl>
                 </div>
+              <p ng-repeat="selectedPersonsApplicationRole in selectedPersonsApplicationRoles">
+                Application role {{$index + 1}}: {{selectedPersonsApplicationRole.name}}
+              </p>
+              <p ng-repeat="selectedPersonsFunctionalRole in selectedPersonsFunctionalRoles">
+                Functional role {{$index + 1}}: {{selectedPersonsFunctionalRole.name}}
+              </p>
+
               <h4>Update Details</h4>
               <hr>
               <div class="slide">
@@ -80,9 +87,17 @@
                     <dt>Gender</dt>
                     <dd><input type="text" name="gender" ng-model="selectedPerson.gender"></dd>
 
-                    <button ng-click="update()">Update</button>
+                    <button ng-click="updatePerson(selectedPerson)">Update</button>
               </dl>
               </div>
+
+              <h4>Add Role to {{selectedPerson.firstName}} {{selectedPerson.lastName}}</h4>
+              <hr>
+              <select ng-model="selectedRole" name="selectRole" style="height: 100px;">
+                <option ng-repeat="functionalRole in allFunctionalRoles" value="{{functionalRole.name}}">{{functionalRole.name}}</option>
+              </select>
+              <button ng-click="addFunctionalRoleToPerson()">Add role</button>
+
               <h4>Other Info</h4>
               <hr>
               <div class="slide">

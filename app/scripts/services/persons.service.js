@@ -15,12 +15,12 @@ function PersonFactory(dataservice) {
   return {
     remove: remove,
     getAll: getAll,
-    update : update,
+    updatePerson : updatePerson,
     initialise : initialise,
     getId : getId,
     getPerson: getPerson,
-    getSelectedPerson : getSelectedPerson
-
+    getSelectedPerson : getSelectedPerson,
+    addFunctionalRoleToPerson: addFunctionalRoleToPerson
   };
 
   function remove(href) {
@@ -55,16 +55,24 @@ function PersonFactory(dataservice) {
     return dataservice.getItem('http://localhost:8080/api/persons/'+id);
   }
 
-  function update() {
-    persons = [];
-    dataservice.getItem('http://localhost:8080/api/persons').success(function (data) {
-      data.forEach(function (person) {
-        persons.push(person);
-      });
+  function updatePerson(person) {
+    dataservice.postItem('PUT', person._links.self.href, {
+      firstName: person.firstName,
+      lastName: person.lastName,
+      gender: person.gender
+    }, 'application/json').success(function() {
+      console.log('PERSON UPDATED');
     });
-    return persons;
   }
 
+  function addFunctionalRoleToPerson(href, selectedRole) {
+    dataservice.postItem('POST', href, {
+      name: selectedRole,
+      isFunctional: true
+    }, 'application/json').success(function() {
+      console.log('ROLES ASSIGNED');
+    });
+  }
 }
 
 
@@ -105,9 +113,9 @@ function initialise() {
    // applicationrole = applicationRolesPerson[0].name;
     //window.sessionStorage.setItem('role',applicationrole);
   });
-  dataservice.getItem('http://localhost:8080/api/roles/search/findByIdAndIsFunctional?id='+id+'&functional=true').success(function (data) {
-    if(data._embedded.roles !== undefined) {
-      data._embedded.roles.forEach(function (role) {
+  dataservice.getItem('http://localhost:8080/api/persons/' + id + '/roles/true').success(function (data) {
+    if(data._embedded.roleResources !== undefined) {
+      data._embedded.roleResources.forEach(function (role) {
         functionalRoles.push(role);
       })}
   });
