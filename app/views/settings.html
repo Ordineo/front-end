@@ -10,24 +10,40 @@
   <div class="modal-header">
     <h3 class="modal-title">Reset password</h3>
   </div>
+
   <div class="modal-body">
-    <form>
+    <div ng-show="passwordChanged" class="alert alert-success" role="alert">
+        Password successfully changed!
+    </div>
+    <div ng-show="passwordWrong" class="alert alert-danger" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      Current password is not correct!
+    </div>
+
+    <form name="formResetPassword">
       <div class="form-group">
-        <label for="oldPassword">Old password:</label>
-        <input type="password" id="oldPassword" placeholder="Old password" class="form-control"/>
+        <label for="oldPassword">Current password:</label>
+        <input type="password" id="oldPassword" ng-model="password.oldPassword" placeholder="Old password" class="form-control" required/>
       </div>
       <div class="form-group">
         <label for="newPassword">New password:</label>
-        <input type="password" id="newPassword" placeholder="New password" class="form-control"/>
+        <input type="password" id="newPassword" name="newPassword" ng-model="password.newPassword" ng-minlength="6" ng-maxlength="18" required placeholder="New password" class="form-control"/>
+        <p ng-show="formResetPassword.newPassword.$touched && formResetPassword.newPassword.$error.minlength">Your password is required to be at least 6 characters</p>
+        <p ng-show="formResetPassword.newPassword.$touched && formResetPassword.newPassword.$error.maxlength">Your password cannot be longer than 18 characters</p>
       </div>
       <div class="form-group">
         <label for="newPasswordConfirm">Confirm new password:</label>
-        <input type="password" id="newPasswordConfirm" placeholder="New password" class="form-control"/>
+        <input type="password" id="newPasswordConfirm" name="newPasswordConfirm" ng-model="password.newPasswordConfirm" required pw-check="newPassword" placeholder="Confirm new password" class="form-control" />
+        <p ng-show="formResetPassword.$error"> <span class="msg-error" ng-show="formResetPassword.newPasswordConfirm.$error.pwmatch">Passwords don't match.</span></p>
       </div>
     </form>
+
   </div>
+
   <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="resetPassword()">Save</button>
+    <button class="btn btn-primary" ng-click="resetPassword(password)" ng-disabled="formResetPassword.$invalid">Save</button>
     <button class="btn btn-warning" ng-click="cancelModal()">Cancel</button>
   </div>
 </script>
