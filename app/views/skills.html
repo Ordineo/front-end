@@ -20,35 +20,28 @@
       </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="skill in skills | filter:search">
+      <tr ng-repeat="skill in skills | filter:search"  ng-click="setSelected(skill)">
         <td>{{skill.name}}</td>
         <td>{{skill.category}}</td>
         <td ng-click="remove(skill._links.self.href)">Delete</td>
       </tr>
+      <tr>
+        <form name="addForm" >
+          <td>
+            <input ng-keyup="$event.keyCode == 13 ? add(skill) : null;" id="name" class="form-control" ng-model="skill.name" ng-change="isNameError = false" autofocus/>
+
+            <div class="alert alert-danger" role="alert" ng-if="isNameError || name.length==0">Enter a name</div>
+          </td>
+          <td>
+            <input ng-keyup="$event.keyCode == 13 ? add(skill) : null;" id="skillCategory" class="form-control" ng-model="skill.skillCategory.name" autofocus/>
+          </td>
+          <td>
+            <button type="button" id="skillSubmit" class="btn btn-default" ng-click="save(skill)">Add</button>
+          </td>
+        </form>
+      </tr>
       </tbody>
     </table>
-    <div class="pull-right">
-      <button type="button" class="btn btn-primary" ng-click="add()">Add</button>
-    </div>
   </div>
 </div>
-<script type="text/ng-template" id="skillModalContent">
-  <div class="modal-header">
-    <h3 class="modal-title">Add a skill</h3>
-  </div>
-  <div class="modal-body">
-    <form>
-      <label for="name">Name</label>
-      <input id="name" class="input-large" ng-model="skill.name" autofocus/>
-      <label for="skillCategory">Category</label>
-      <input id="skillCategory" class="input-large" ng-model="skill.skillCategory.name" autofocus/>
-    </form>
-    <div ng-if="errorMessage">
-      <p class="alert alert-danger">{{ errorMessage }}</p>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="ok(skill)">OK</button>
-    <button class="btn btn-warning" ng-click="$dismiss()">Cancel</button>
-  </div>
-</script>
+

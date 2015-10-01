@@ -2,54 +2,50 @@
 
 angular.module('empApp')
   .controller('SkillsCtrl', function ($scope, $modal, SkillFactory, DataService, $log) {
+    $scope.isNameError = false;
 
     $log.info('SkillsCtrl loaded');
     $scope.skills = SkillFactory.all();
 
-    $scope.add = function () {
-      var modalInstance = $modal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: 'skillModalContent',
-        controller: 'SkillsModalCtrl',
-        size: 'sm'
-      });
-
-      modalInstance.result.then(function (skill) {
-        console.log('Adding skill...');
-        SkillFactory.add(skill,updateList);
-
-      }, function () {
-        console.log('Modal dismissed');
-      });
+    $scope.remove = function (href) {
+      SkillFactory.remove(href, updateList);
     };
 
+    $scope.save = function (newSkill) {
 
-    $scope.remove = function (href) {
-      console.log('Removing skill...');
-      SkillFactory.remove(href, updateList);
+      if (!newSkill || newSkill.name.trim().length == 0) {
+        console.log(newSkill);
+        $scope.isNameError = true;
+
+      } else {
+        if (newSkill._links) {
+          SkillFactory.edit(newSkill, updateList);
+          buttonFlip("Add");
+
+        } else {
+          SkillFactory.add(newSkill, updateList);
+
+        }
+
+        $scope.skill = null;
+
+      }
+    };
+
+    function buttonFlip(state) {
+      var button = angular.element.find("#skillSubmit").pop();
+      button.innerText = state;
+      $scope.isNameError = false;
+
+    }
+
+    $scope.setSelected = function (skill) {
+      buttonFlip("Edit");
+      $scope.skill = skill;
     };
 
     function updateList() {
       $scope.skills = SkillFactory.all();
     }
-
-  }).controller('SkillsModalCtrl', function ($scope, $modalInstance, $log) {
-
-    $log.info('SkillsModalCtrl loaded');
-
-    $scope.errorMessage = null;
-
-    $scope.ok = function (skill) {
-      if (!skill || skill.name.trim().length == 0)
-        $scope.errorMessage = "Enter a name";
-      else {
-        $scope.errorMessage = null;
-        $modalInstance.close(skill);
-      }
-    };
-
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
-    };
 
   });

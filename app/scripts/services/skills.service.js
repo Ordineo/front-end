@@ -26,6 +26,17 @@ angular.module('empApp')
       DataService.postItem('DELETE', href, null, null, success);
     }
 
+    function edit(skill, success) {
+      DataService.postItem('POST', 'http://localhost:8081/api/skillCategories/', skill.skillCategory, 'application/json', function (data, config, headers) {
+        skill.skillCategory = headers('location');
+        DataService.postItem('PUT', skill._links.self.href, skill, 'application/json', function () {
+        });
+
+        success();
+
+      });
+    }
+
     function add(skill, success) {
       if (skill.skillCategory) {
         console.log(skill.skillCategory);
@@ -46,7 +57,8 @@ angular.module('empApp')
       },
       update: getSkills,
       remove: remove,
-      add: add
+      add: add,
+      edit: edit
 
     };
   }
