@@ -20,7 +20,10 @@ function PersonFactory(dataservice) {
     getId : getId,
     getPerson: getPerson,
     getSelectedPerson : getSelectedPerson,
-    addFunctionalRoleToPerson: addFunctionalRoleToPerson
+    addFunctionalRoleToPerson: addFunctionalRoleToPerson,
+    deleteFunctionalRoleFromPerson: deleteFunctionalRoleFromPerson,
+    getApplicationRolesFromPerson: getApplicationRolesFromPerson,
+    getFunctionalRolesFromPerson: getFunctionalRolesFromPerson
   };
 
   function remove(href) {
@@ -70,8 +73,20 @@ function PersonFactory(dataservice) {
       name: selectedRole,
       isFunctional: true
     }, 'application/json').success(function() {
-      console.log('ROLES ASSIGNED');
+      console.log('ROLE ASSIGNED');
     });
+  }
+
+  function deleteFunctionalRoleFromPerson(href) {
+    dataservice.postItem('DELETE', href);
+  }
+
+  function getApplicationRolesFromPerson(person) {
+    return dataservice.getItem(person._links.self.href + '/roles/false');
+  }
+
+  function getFunctionalRolesFromPerson(person) {
+    return dataservice.getItem(person._links.self.href + '/roles/true');
   }
 }
 

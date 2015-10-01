@@ -23,7 +23,7 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
 
 
       var handleSuccess = function (data, status) {
-        console.log("Person created");
+        console.log('Person created');
 
         $location.path('/login');
         };
@@ -51,17 +51,33 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
 
         dataservice.postItem('POST', 'http://localhost:8080/api/persons/', formData, 'application/json').success(handleSuccess);
       }else{
-        $scope.errmsg = "Fill in valid data!";
-        console.log("Not valid");
+        $scope.errmsg = 'Fill in valid data!';
+        console.log('Not valid');
       }
     };
 
+  $scope.selectedPersonsApplicationRoles = [];
+  $scope.selectedPersonsFunctionalRoles = [];
   $scope.selectPerson = function (person) {
     $http.get(person._links.self.href).success(function (data) {
       $scope.selectedPerson = data;
+
+      var handleSuccessApplicationRoles = function(data, status) {
+        for (var i = 0; i < data._embedded.roleResources.length; i++) {
+          $scope.selectedPersonsApplicationRoles.push(data._embedded.roleResources[i]);
+        }
+        console.log('APPLICATION ROLES FROM PERSON RETRIEVED');
+      };
+      var handleSuccessFunctionalRoles = function(data, status) {
+        for (var i = 0; i < data._embedded.roleResources.length; i++) {
+          $scope.selectedPersonsFunctionalRoles.push(data._embedded.roleResources[i]);
+        }
+        console.log('FUNCTIONAL ROLES FROM PERSON RETRIEVED');
+      };
+
+      //PersonFactory.getApplicationRolesFromPerson(data).success(handleSuccessApplicationRoles);
+      PersonFactory.getFunctionalRolesFromPerson(data).success(handleSuccessFunctionalRoles);
     });
-    $scope.selectedPersonsApplicationRoles = RoleFactory.getApplicationRolesPerson;
-    $scope.selectedPersonsFunctionalRoles = RoleFactory.getFunctionalRoles();
   };
 
   $scope.persons = PersonFactory.getAll();
@@ -81,15 +97,23 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       success: function() {
-        console.log("PERSON UPDATED");
+        console.log('PERSON UPDATED');
       }
     });
   };
 
   $scope.allFunctionalRoles = RoleFactory.getAllFunctionalRoles();
-  $scope.selectedRole = "";
+  $scope.selectedRole = '';
 
   $scope.addFunctionalRoleToPerson = function() {
+    console.log($scope.selectedRole);
     PersonFactory.addFunctionalRoleToPerson($scope.selectedPerson._links.self.href + '/roles', $scope.selectedRole);
+  };
+
+  $scope.deleteFunctionalRoleFromPerson = function(index, selectedPerson) {
+    window.alert('NOT IMPLEMENTED YET... :(');
+    /*var hrefDeleteRoleFromPerson = selectedPerson._links.self.href + '/roles/' + (index + 1);
+    console.log(hrefDeleteRoleFromPerson);
+    PersonFactory.deleteFunctionalRoleFromPerson(hrefDeleteRoleFromPerson);*/
   };
 }

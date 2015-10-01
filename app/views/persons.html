@@ -69,11 +69,14 @@
                   <dd>{{selectedPerson.enrolmentDate}}</dd>
                 </dl>
                 </div>
-              <p ng-repeat="selectedPersonsApplicationRole in selectedPersonsApplicationRoles">
-                Application role {{$index + 1}}: {{selectedPersonsApplicationRole.name}}
-              </p>
+
+              <h4>Role Details</h4>
+              <hr>
+              <!--<p ng-repeat="selectedPersonsApplicationRole in selectedPersonsApplicationRoles">
+                Application role {{$index + 1}}: {{selectedPersonsApplicationRole}}
+              </p>-->
               <p ng-repeat="selectedPersonsFunctionalRole in selectedPersonsFunctionalRoles">
-                Functional role {{$index + 1}}: {{selectedPersonsFunctionalRole.name}}
+                Functional role {{$index + 1}}: {{selectedPersonsFunctionalRole.name}} <button ng-click="deleteFunctionalRoleFromPerson($index, selectedPerson)">Delete role</button>
               </p>
 
               <h4>Update Details</h4>
@@ -93,7 +96,7 @@
 
               <h4>Add Role to {{selectedPerson.firstName}} {{selectedPerson.lastName}}</h4>
               <hr>
-              <select ng-model="selectedRole" name="selectRole" style="height: 100px;">
+              <select ng-model="selectedRole" name="selectRole">
                 <option ng-repeat="functionalRole in allFunctionalRoles" value="{{functionalRole.name}}">{{functionalRole.name}}</option>
               </select>
               <button ng-click="addFunctionalRoleToPerson()">Add role</button>
