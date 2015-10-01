@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('empApp')
-  .factory('SkillFactory', function ($http, DataService, $resource) {
+  .factory('SkillFactory', function (DataService, $resource) {
     var skills = [];
 
     function getSkills() {
@@ -11,16 +11,12 @@ angular.module('empApp')
         data = data.data._embedded.skills;
         if (data !== undefined) {
           data.forEach(function (skill) {
-            console.log(skill);
             if (skill._links.skillCategory) {
-
-              var SkillCategory = $resource(skill._links.skillCategory.href);
-              var v = SkillCategory.get().$promise.then(function (data) {
-                skill.category = data.name;
+              var t = DataService.getItem(skill._links.skillCategory.href, function (data) {
+                skill.category = data.data.name;
               });
+              skills.push(skill);
             }
-
-            skills.push(skill);
           });
         }
       });
@@ -30,13 +26,27 @@ angular.module('empApp')
       DataService.postItem('DELETE', href, null, null, success);
     }
 
+    function add(skill, success) {
+      if (skill.skillCategory) {
+        console.log(skill.skillCategory);
+        DataService.postItem('POST', 'http://localhost:8081/api/skillCategories/', skill.skillCategory, 'application/json', function (data, config, headers) {
+          skill.skillCategory = headers('location');
+          DataService.postItem('POST', 'http://localhost:8081/api/skills/', skill, 'application/json', success);
+
+        });
+      } else {
+        DataService.postItem('POST', 'http://localhost:8081/api/skills/', skill, 'application/json', success);
+      }
+    }
+
     return {
       all: function () {
         getSkills();
         return skills;
       },
       update: getSkills,
-      remove: remove
+      remove: remove,
+      add: add
 
     };
   }

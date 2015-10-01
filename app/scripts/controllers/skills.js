@@ -16,18 +16,7 @@ angular.module('empApp')
 
       modalInstance.result.then(function (skill) {
         console.log('Adding skill...');
-
-        if (skill.skillCategory) {
-          console.log(skill.skillCategory);
-          DataService.postItem('POST', 'http://localhost:8081/api/skillCategories/', skill.skillCategory, 'application/json', function (data,config,headers) {
-            skill.skillCategory = headers('location');
-            DataService.postItem('POST', 'http://localhost:8081/api/skills/', skill, 'application/json', updateList);
-
-          });
-        }else{
-          DataService.postItem('POST', 'http://localhost:8081/api/skills/', skill, 'application/json', updateList);
-        }
-
+        SkillFactory.add(skill,updateList);
 
       }, function () {
         console.log('Modal dismissed');
