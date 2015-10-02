@@ -20,20 +20,22 @@
       </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="skill in skills | filter:search"  ng-click="setSelected(skill)">
+      <tr ng-repeat="skill in skills | filter:search" ng-click="setSelected(skill)">
         <td>{{skill.name}}</td>
         <td>{{skill.category}}</td>
         <td ng-click="remove(skill._links.self.href)">Delete</td>
       </tr>
       <tr>
-        <form name="addForm" >
+        <form name="addForm">
           <td>
-            <input ng-keyup="$event.keyCode == 13 ? add(skill) : null;" id="name" class="form-control" ng-model="skill.name" ng-change="isNameError = false" autofocus/>
+            <input ng-keyup="$event.keyCode == 13 ? save(skill) : null;" id="name" class="form-control"
+                   ng-model="skill.name" ng-change="isNameError = false" autofocus/>
 
             <div class="alert alert-danger" role="alert" ng-if="isNameError || name.length==0">Enter a name</div>
           </td>
           <td>
-            <input ng-keyup="$event.keyCode == 13 ? add(skill) : null;" id="skillCategory" class="form-control" ng-model="skill.skillCategory.name" autofocus/>
+            <input ng-keyup="$event.keyCode == 13 ? save(skill) : null;" id="skillCategory" class="form-control"
+                   ng-model="skill.skillCategory.name" autofocus/>
           </td>
           <td>
             <button type="button" id="skillSubmit" class="btn btn-default" ng-click="save(skill)">Add</button>
