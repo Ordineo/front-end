@@ -144,7 +144,7 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
     PersonFactory.addCustomerToPerson($scope.selectedPerson, JSON.parse($scope.selectedCustomer));
   };
 
-  $scope.deleteCustomerFromPerson = function() {
-    window.alert('NOT IMPLEMENTED YET... :(');
+  $scope.deleteCustomerFromPerson = function(selectedPerson, selectedPersonsCustomer) {
+    PersonFactory.deleteCustomerFromPerson(selectedPerson, selectedPersonsCustomer);
   };
 }

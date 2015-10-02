@@ -25,7 +25,8 @@ function PersonFactory(dataservice) {
     getApplicationRolesFromPerson: getApplicationRolesFromPerson,
     getFunctionalRolesFromPerson: getFunctionalRolesFromPerson,
     addCustomerToPerson: addCustomerToPerson,
-    getCustomersFromPerson: getCustomersFromPerson
+    getCustomersFromPerson: getCustomersFromPerson,
+    deleteCustomerFromPerson: deleteCustomerFromPerson
   };
 
   function remove(href) {
@@ -116,6 +117,17 @@ function PersonFactory(dataservice) {
 
   function getCustomersFromPerson(person) {
     return dataservice.getItem(person._links.self.href + '/customers');
+  }
+
+  function deleteCustomerFromPerson(selectedPerson, selectedPersonsCustomer) {
+    var hrefSelectedPerson = selectedPerson._links.self.href;
+    var hrefSelectedPersonsCustomer = selectedPersonsCustomer._links.self.href;
+    var index = hrefSelectedPersonsCustomer.indexOf('/customers');
+    var substring = hrefSelectedPersonsCustomer.substring(index);
+    var href = hrefSelectedPerson.concat(substring);
+    dataservice.postItem('DELETE', href, null, 'application/json').success(function() {
+      console.log('CUSTOMER DELETED FROM PERSON');
+    });
   }
 }
 

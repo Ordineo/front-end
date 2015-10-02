@@ -82,7 +82,7 @@
               <h4>Customer Details</h4>
               <hr>
               <p ng-repeat="selectedPersonsCustomer in selectedPersonsCustomers">
-                Customer {{$index + 1}}: {{selectedPersonsCustomer.name}} ({{selectedPersonsCustomer.description}}) <button ng-click="deleteCustomerFromPerson()">Delete customer</button>
+                Customer {{$index + 1}}: {{selectedPersonsCustomer.name}} ({{selectedPersonsCustomer.description}}) <button ng-click="deleteCustomerFromPerson(selectedPerson, selectedPersonsCustomer)">Delete customer</button>
               </p>
 
               <h4>Update Details</h4>
