@@ -7,23 +7,28 @@ angular.module('empApp')
     $log.info('SkillsCtrl loaded');
     $scope.skills = SkillFactory.all();
 
+    $scope.skillCategories = function () {
+      return SkillFactory.getSkillCategories();
+    };
+
     $scope.remove = function (href) {
       SkillFactory.remove(href, updateList);
     };
 
-    $scope.save = function (newSkill) {
+    $scope.save = function (_skill) {
+      console.log(_skill);
 
-      if (!newSkill || newSkill.name.trim().length == 0) {
-        console.log(newSkill);
+      if (!_skill || _skill.name.trim().length == 0) {
+        console.log("Error in name: " + _skill);
         $scope.isNameError = true;
 
       } else {
-        if (newSkill._links) {
-          SkillFactory.edit(newSkill, updateList);
+        if (_skill._links) {
+          SkillFactory.edit(_skill, updateList);
           buttonFlip("Add");
 
         } else {
-          SkillFactory.add(newSkill, updateList);
+          SkillFactory.add(_skill, updateList);
 
         }
 

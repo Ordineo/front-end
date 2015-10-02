@@ -22,7 +22,7 @@
       <tbody>
       <tr ng-repeat="skill in skills | filter:search" ng-click="setSelected(skill)">
         <td>{{skill.name}}</td>
-        <td>{{skill.category}}</td>
+        <td>{{skill.category.name}}</td>
         <td ng-click="remove(skill._links.self.href)">Delete</td>
       </tr>
       <tr>
@@ -34,13 +34,14 @@
             <div class="alert alert-danger" role="alert" ng-if="isNameError || name.length==0">Enter a name</div>
           </td>
           <td>
-            <input ng-keyup="$event.keyCode == 13 ? save(skill) : null;" id="skillCategory" class="form-control"
-                   ng-model="skill.skillCategory.name" autofocus/>
+            <input id="skillCategory" class="form-control"
+                   ng-model="skill.category" typeahead-no-results="noResults" typeahead="category as category.name for category in skillCategories() | filter:$viewValue | limitTo:8"/>
           </td>
           <td>
             <button type="button" id="skillSubmit" class="btn btn-default" ng-click="save(skill)">Add</button>
           </td>
         </form>
+
       </tr>
       </tbody>
     </table>
