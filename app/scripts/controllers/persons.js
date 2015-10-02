@@ -61,6 +61,7 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
   $scope.selectPerson = function (person) {
     $http.get(person._links.self.href).success(function (data) {
       $scope.selectedPerson = data;
+      $scope.selectedPersonsFunctionalRoles = [];
 
       var handleSuccessApplicationRoles = function(data, status) {
         for (var i = 0; i < data._embedded.roleResources.length; i++) {
@@ -70,6 +71,7 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
       };
       var handleSuccessFunctionalRoles = function(data, status) {
         for (var i = 0; i < data._embedded.roleResources.length; i++) {
+          //console.log(data._embedded.roleResources.length);
           $scope.selectedPersonsFunctionalRoles.push(data._embedded.roleResources[i]);
         }
         console.log('FUNCTIONAL ROLES FROM PERSON RETRIEVED');
