@@ -78,6 +78,7 @@ function PersonFactory(dataservice) {
   }
 
   function deleteFunctionalRoleFromPerson(href) {
+    console.log(href);
     dataservice.postItem('DELETE', href);
   }
 

@@ -113,9 +113,7 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
   };
 
   $scope.deleteFunctionalRoleFromPerson = function(index, selectedPerson) {
-    window.alert('NOT IMPLEMENTED YET... :(');
-    /*var hrefDeleteRoleFromPerson = selectedPerson._links.self.href + '/roles/' + (index + 1);
-    console.log(hrefDeleteRoleFromPerson);
-    PersonFactory.deleteFunctionalRoleFromPerson(hrefDeleteRoleFromPerson);*/
+    var hrefDeleteRoleFromPerson = selectedPerson._links.self.href + '/roles/' + (index + 1);
+    PersonFactory.deleteFunctionalRoleFromPerson(hrefDeleteRoleFromPerson);
   };
 }
