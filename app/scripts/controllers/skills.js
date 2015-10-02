@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('empApp')
-  .controller('SkillsCtrl', function ($scope, $modal, SkillFactory, DataService, $log) {
+  .controller('SkillsCtrl', function ($scope, SkillFactory, DataService, $log) {
     $scope.isNameError = false;
 
     $log.info('SkillsCtrl loaded');
     $scope.skills = SkillFactory.all();
+
 
     $scope.skillCategories = function () {
       return SkillFactory.getSkillCategories();
@@ -59,3 +60,5 @@ angular.module('empApp')
     }
 
   });
+
+

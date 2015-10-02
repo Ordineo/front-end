@@ -82,6 +82,15 @@ angular.module('empApp')
 
     };
   }
+).factory('SkillCompetenceFactory', function (DataService, $resource) {
+
+    return {
+
+
+    };
+
+
+  }
 )
   .factory('DataService', function ($http) {
     return {

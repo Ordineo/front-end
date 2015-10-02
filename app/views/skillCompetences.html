@@ -1,0 +1,21 @@
+<h1>Skills</h1>
+<hr>
+<h3>Filter</h3>
+<div class="col-lg-6">
+  <table class="table table-hover table-striped table-bordered">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="skill in skills" ng-click="setSelected(skill)">
+      <td>{{skill.name}}</td>
+      <td>{{skill.category.name}}</td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+
