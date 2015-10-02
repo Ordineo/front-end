@@ -23,7 +23,9 @@ function PersonFactory(dataservice) {
     addFunctionalRoleToPerson: addFunctionalRoleToPerson,
     deleteFunctionalRoleFromPerson: deleteFunctionalRoleFromPerson,
     getApplicationRolesFromPerson: getApplicationRolesFromPerson,
-    getFunctionalRolesFromPerson: getFunctionalRolesFromPerson
+    getFunctionalRolesFromPerson: getFunctionalRolesFromPerson,
+    addCustomerToPerson: addCustomerToPerson,
+    getCustomersFromPerson: getCustomersFromPerson
   };
 
   function remove(href) {
@@ -73,13 +75,19 @@ function PersonFactory(dataservice) {
       name: selectedRole,
       isFunctional: true
     }, 'application/json').success(function() {
-      console.log('ROLE ASSIGNED');
+      console.log('ROLE ASSIGNED TO PERSON');
     });
   }
 
-  function deleteFunctionalRoleFromPerson(href) {
-    console.log(href);
-    dataservice.postItem('DELETE', href);
+  function deleteFunctionalRoleFromPerson(selectedPerson, selectedPersonsFunctionalRole) {
+    var hrefSelectedPerson = selectedPerson._links.self.href;
+    var hrefSelectedPersonsFunctionalRole = selectedPersonsFunctionalRole._links.self.href;
+    var index = hrefSelectedPersonsFunctionalRole.indexOf('/roles');
+    var substring = hrefSelectedPersonsFunctionalRole.substring(index);
+    var href = hrefSelectedPerson.concat(substring);
+    dataservice.postItem('DELETE', href, null, 'application/json').success(function() {
+      console.log('FUNCTIONAL ROLE DELETED FROM PERSON');
+    });
   }
 
   function getApplicationRolesFromPerson(person) {
@@ -88,6 +96,26 @@ function PersonFactory(dataservice) {
 
   function getFunctionalRolesFromPerson(person) {
     return dataservice.getItem(person._links.self.href + '/roles/true');
+  }
+
+  function addCustomerToPerson(selectedPerson, selectedCustomer) {
+    var href = '';
+    var hrefSelectedPerson = selectedPerson._links.self.href;
+    var hrefSelectedCustomer = selectedCustomer._links.self.href;
+    var index = hrefSelectedCustomer.indexOf('/customers');
+    var substring = hrefSelectedCustomer.substring(index);
+    href = hrefSelectedPerson.concat(substring);
+
+    dataservice.postItem('POST', href, {
+      name: selectedCustomer.name,
+      description: selectedCustomer.description
+    }, 'application/json').success(function() {
+      console.log('CUSTOMER ASSIGNED TO PERSON');
+    });
+  }
+
+  function getCustomersFromPerson(person) {
+    return dataservice.getItem(person._links.self.href + '/customers');
   }
 }
 

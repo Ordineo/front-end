@@ -47,8 +47,8 @@ function RoleCtrl($scope,$log, dataservice,RoleFactory,$location) {
             var id = window.sessionStorage.getItem('id');
             if(id!=null) {
 
-              dataservice.postItem('POST','http://localhost:8080/api/persons/' +id+'/roles',formData,'application/json').success(handleSucces);
-               // dataservice.postItem('DELETE','http://localhost:8080/api/persons/1/roles/4',null,'application/json');
+              //dataservice.postItem('POST','http://localhost:8080/api/persons/' +id+'/roles',formData,'application/json').success(handleSucces);
+              dataservice.postItem('DELETE','http://localhost:8080/api/persons/1/roles/4',null,'application/json');
 
             }
 

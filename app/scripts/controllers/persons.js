@@ -10,9 +10,9 @@
 
 angular.module('empApp')
   .controller('PersonsCtrl',PersonsCtrl);
-PersonsCtrl.$inject =['$scope', '$log', '$http', '$location', 'PersonFactory', 'RoleFactory', 'dataservice','$cookies'];
+PersonsCtrl.$inject =['$scope', '$log', '$http', '$location', 'PersonFactory', 'RoleFactory', 'CustomerFactory', 'dataservice','$cookies'];
 
-function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory, dataservice,$cookies) {
+function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory, CustomerFactory, dataservice,$cookies) {
   $log.info('PersonsCtrl loaded');
 
     $scope.validate = function (person) {
@@ -62,6 +62,8 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
     $http.get(person._links.self.href).success(function (data) {
       $scope.selectedPerson = data;
       $scope.selectedPersonsFunctionalRoles = [];
+      $scope.selectedPersonsCustomers = [];
+      $scope.allCustomers = [];
 
       var handleSuccessApplicationRoles = function(data, status) {
         for (var i = 0; i < data._embedded.roleResources.length; i++) {
@@ -69,6 +71,7 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
         }
         console.log('APPLICATION ROLES FROM PERSON RETRIEVED');
       };
+
       var handleSuccessFunctionalRoles = function(data, status) {
         for (var i = 0; i < data._embedded.roleResources.length; i++) {
           //console.log(data._embedded.roleResources.length);
@@ -77,8 +80,28 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
         console.log('FUNCTIONAL ROLES FROM PERSON RETRIEVED');
       };
 
+      var handleSuccessCustomers = function(data, status) {
+        for (var i = 0; i < data._embedded.customers.length; i++) {
+          $scope.allCustomers.push(data._embedded.customers[i]);
+        }
+        console.log('ALL CUSTOMERS RETRIEVED');
+      };
+
+      var handleSuccessCustomersFromPerson = function(data, status) {
+        for (var i = 0; i < data._embedded.customers.length; i++) {
+          $scope.selectedPersonsCustomers.push(data._embedded.customers[i]);
+        }
+        console.log('CUSTOMERS FROM PERSON RETRIEVED');
+      };
+
       //PersonFactory.getApplicationRolesFromPerson(data).success(handleSuccessApplicationRoles);
       PersonFactory.getFunctionalRolesFromPerson(data).success(handleSuccessFunctionalRoles);
+
+      //Retrieve all customers
+      CustomerFactory.getCustomers().success(handleSuccessCustomers);
+
+      //Retrieve customers from person
+      PersonFactory.getCustomersFromPerson(person).success(handleSuccessCustomersFromPerson);
     });
   };
 
@@ -112,8 +135,16 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
     PersonFactory.addFunctionalRoleToPerson($scope.selectedPerson._links.self.href + '/roles', $scope.selectedRole);
   };
 
-  $scope.deleteFunctionalRoleFromPerson = function(index, selectedPerson) {
-    var hrefDeleteRoleFromPerson = selectedPerson._links.self.href + '/roles/' + (index + 1);
-    PersonFactory.deleteFunctionalRoleFromPerson(hrefDeleteRoleFromPerson);
+  $scope.deleteFunctionalRoleFromPerson = function(selectedPerson, selectedPersonsFunctionalRole) {
+    PersonFactory.deleteFunctionalRoleFromPerson(selectedPerson, selectedPersonsFunctionalRole);
+  };
+
+  $scope.allCustomers = CustomerFactory.getCustomers();
+  $scope.addCustomerToPerson = function() {
+    PersonFactory.addCustomerToPerson($scope.selectedPerson, JSON.parse($scope.selectedCustomer));
+  };
+
+  $scope.deleteCustomerFromPerson = function() {
+    window.alert('NOT IMPLEMENTED YET... :(');
   };
 }

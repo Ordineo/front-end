@@ -76,7 +76,13 @@
                 Application role {{$index + 1}}: {{selectedPersonsApplicationRole}}
               </p>-->
               <p ng-repeat="selectedPersonsFunctionalRole in selectedPersonsFunctionalRoles">
-                Functional role {{$index + 1}}: {{selectedPersonsFunctionalRole.name}} <button ng-click="deleteFunctionalRoleFromPerson($index, selectedPerson)">Delete role</button>
+                Functional role {{$index + 1}}: {{selectedPersonsFunctionalRole.name}} <button ng-click="deleteFunctionalRoleFromPerson(selectedPerson, selectedPersonsFunctionalRole)">Delete role</button>
+              </p>
+
+              <h4>Customer Details</h4>
+              <hr>
+              <p ng-repeat="selectedPersonsCustomer in selectedPersonsCustomers">
+                Customer {{$index + 1}}: {{selectedPersonsCustomer.name}} ({{selectedPersonsCustomer.description}}) <button ng-click="deleteCustomerFromPerson()">Delete customer</button>
               </p>
 
               <h4>Update Details</h4>
@@ -100,6 +106,13 @@
                 <option ng-repeat="functionalRole in allFunctionalRoles" value="{{functionalRole.name}}">{{functionalRole.name}}</option>
               </select>
               <button ng-click="addFunctionalRoleToPerson()">Add role</button>
+
+              <h4>Add Customer to {{selectedPerson.firstName}} {{selectedPerson.lastName}}</h4>
+              <hr>
+              <select ng-model="selectedCustomer" name="selectCustomer">
+                <option ng-repeat="customer in allCustomers" value="{{customer}}">{{customer.name}}</option>
+              </select>
+              <button ng-click="addCustomerToPerson()">Add customer</button>
 
               <h4>Other Info</h4>
               <hr>
