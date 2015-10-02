@@ -45,8 +45,13 @@ angular.module('empApp')
     }
 
     $scope.setSelected = function (skill) {
-      buttonFlip("Edit");
-      $scope.skill = skill;
+      if (skill === $scope.skill) {
+        buttonFlip("Add");
+        $scope.skill = null;
+      } else {
+        buttonFlip("Edit");
+        $scope.skill = skill;
+      }
     };
 
     function updateList() {
