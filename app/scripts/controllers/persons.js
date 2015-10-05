@@ -67,6 +67,7 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
       $scope.selectedPersonsBums = [];
       $scope.selectedPersonsCLs = [];
       $scope.selectedPersonsPMs = [];
+      $scope.selectedPersonsCoaches = [];
 
       var handleSuccessApplicationRoles = function(data, status) {
         for (var i = 0; i < data._embedded.roleResources.length; i++) {
@@ -117,6 +118,13 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
         console.log('PRACTICE MANAGERS FROM PERSON RETRIEVED');
       };
 
+      var handleSuccessCoachesFromPerson = function(data, status) {
+        for (var i = 0; i < data._embedded.persons.length; i++) {
+          $scope.selectedPersonsCoaches.push(data._embedded.persons[i]);
+        }
+        console.log('COACHES FROM PERSON RETRIEVED');
+      };
+
       //PersonFactory.getApplicationRolesFromPerson(data).success(handleSuccessApplicationRoles);
       PersonFactory.getFunctionalRolesFromPerson(data).success(handleSuccessFunctionalRoles);
 
@@ -134,6 +142,10 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
 
       //Retrieve practice managers from person
       PersonFactory.getPracticeManagersFromPerson(person).success(handleSuccessPracticeManagersFromPerson);
+
+      //Retrieve coaches from person
+      PersonFactory.getCoachesFromPerson(person).success(handleSuccessCoachesFromPerson);
+
       console.log(person);
     });
   };
@@ -192,4 +204,8 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
   $scope.addPracticeManagerToPerson = function(person) {
     PersonFactory.addPracticeManagerToPerson(person);
   };
+
+  $scope.addCoachToPerson = function(person) {
+    PersonFactory.addCoachToPerson(person);
+  }
 }

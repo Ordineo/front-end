@@ -55,6 +55,8 @@ function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice, PersonF
       };
 
 
+  // v NEEDS REFACTORING v
+
    $http.get('http://localhost:8080/api/persons/' + id).success(function (data) {
       $scope.username = data.credentials.username;
       $scope.firstName = data.firstName;
@@ -100,5 +102,17 @@ function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice, PersonF
     };
     //Retrieve users from practice manager
     PersonFactory.getUsersFromPracticeManager().success(handleSuccessUsersFromPracticeManager);
+  }
+
+  if ($scope.isCoach === true) {
+    $scope.myUsers = [];
+    var handleSuccessUsersFromCoach = function(data, status) {
+      for (var i = 0; i < data._embedded.persons.length; i++) {
+        $scope.myUsers.push(data._embedded.persons[i]);
+      }
+      console.log('MY USERS RETRIEVED');
+    };
+    //Retrieve users from practice manager
+    PersonFactory.getUsersFromCoach().success(handleSuccessUsersFromCoach);
   }
 }

@@ -117,5 +117,15 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
       }
       console.log('isPM: ' + $scope.isPM);
     });
+
+    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
+      $scope.isCoach = false;
+      for (var i = 0; i < data._embedded.roles.length; i++) {
+        if (data._embedded.roles[i].name === 'Coach') {
+          $scope.isCoach = true;
+        }
+      }
+      console.log('isCoach: ' + $scope.isCoach);
+    });
   }
 }

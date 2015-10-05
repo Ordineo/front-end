@@ -35,7 +35,10 @@ function PersonFactory(dataservice) {
     getCompetenceLeadersFromPerson: getCompetenceLeadersFromPerson,
     addPracticeManagerToPerson: addPracticeManagerToPerson,
     getUsersFromPracticeManager: getUsersFromPracticeManager,
-    getPracticeManagersFromPerson: getPracticeManagersFromPerson
+    getPracticeManagersFromPerson: getPracticeManagersFromPerson,
+    addCoachToPerson: addCoachToPerson,
+    getUsersFromCoach: getUsersFromCoach,
+    getCoachesFromPerson: getCoachesFromPerson
   };
 
   function remove(href) {
@@ -108,6 +111,7 @@ function PersonFactory(dataservice) {
     return dataservice.getItem(person._links.self.href + '/roles/true');
   }
 
+  //Person's Customers
   function addCustomerToPerson(selectedPerson, selectedCustomer) {
     var href = '';
     var hrefSelectedPerson = selectedPerson._links.self.href;
@@ -139,6 +143,7 @@ function PersonFactory(dataservice) {
     });
   }
 
+  //BUMs
   function addBumToPerson(person) {
     dataservice.postItem('POST', person._links.self.href.concat('/businessUnitManagers/' + id), null, 'application/json').success(function() {
       console.log('PERSON ASSIGNED TO ME (BUM)');
@@ -153,6 +158,7 @@ function PersonFactory(dataservice) {
     return dataservice.getItem(person._links.self.href + '/businessUnitManagers');
   }
 
+  //Competence Leaders
   function addCompetenceLeaderToPerson(person) {
     dataservice.postItem('POST', person._links.self.href.concat('/competenceLeaders/' + id), null, 'application/json').success(function() {
       console.log('PERSON ASSIGNED TO ME (CL)')
@@ -167,6 +173,7 @@ function PersonFactory(dataservice) {
     return dataservice.getItem(person._links.self.href + '/competenceLeaders');
   }
 
+  //Practice Managers
   function addPracticeManagerToPerson(person) {
     dataservice.postItem('POST', person._links.self.href.concat('/practiceManagers/' + id), null, 'application/json').success(function() {
       console.log('PERSON ASSIGNED TO ME (PM)')
@@ -179,6 +186,21 @@ function PersonFactory(dataservice) {
 
   function getPracticeManagersFromPerson(person) {
     return dataservice.getItem(person._links.self.href + '/practiceManagers');
+  }
+
+  //Coaches
+  function addCoachToPerson(person) {
+    dataservice.postItem('POST', person._links.self.href.concat('/coaches/' + id), null, 'application/json').success(function() {
+      console.log('PERSON ASSIGNED TO ME (COACH)')
+    });
+  }
+
+  function getUsersFromCoach() {
+    return dataservice.getItem('http://localhost:8080/api/persons/search/findByCoachesId?id=' + id);
+  }
+
+  function getCoachesFromPerson(person) {
+    return dataservice.getItem(person._links.self.href + '/coaches');
   }
 }
 
