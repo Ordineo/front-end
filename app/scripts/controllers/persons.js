@@ -65,6 +65,7 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
       $scope.selectedPersonsCustomers = [];
       $scope.allCustomers = [];
       $scope.selectedPersonsBums = [];
+      $scope.selectedPersonsCLs = [];
 
       var handleSuccessApplicationRoles = function(data, status) {
         for (var i = 0; i < data._embedded.roleResources.length; i++) {
@@ -101,6 +102,13 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
         console.log('BUMS FROM PERSON RETRIEVED');
       };
 
+      var handleSuccessCompetenceLeadersFromPerson = function(data, status) {
+        for (var i = 0; i < data._embedded.persons.length; i++) {
+          $scope.selectedPersonsCLs.push(data._embedded.persons[i]);
+        }
+        console.log('COMPETENCE LEADERS FROM PERSON RETRIEVED');
+      };
+
       //PersonFactory.getApplicationRolesFromPerson(data).success(handleSuccessApplicationRoles);
       PersonFactory.getFunctionalRolesFromPerson(data).success(handleSuccessFunctionalRoles);
 
@@ -112,6 +120,9 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
 
       //Retrieve bums from person
       PersonFactory.getBumsFromPerson(person).success(handleSuccessBumsFromPerson);
+
+      //Retrieve competence leaders from person
+      PersonFactory.getCompetenceLeadersFromPerson(person).success(handleSuccessCompetenceLeadersFromPerson);
       console.log(person);
     });
   };
@@ -161,5 +172,9 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
 
   $scope.addBumToPerson = function(person) {
     PersonFactory.addBumToPerson(person);
-  }
+  };
+
+  $scope.addCompetenceLeaderToPerson = function(person) {
+    PersonFactory.addCompetenceLeaderToPerson(person);
+  };
 }

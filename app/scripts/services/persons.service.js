@@ -29,7 +29,10 @@ function PersonFactory(dataservice) {
     deleteCustomerFromPerson: deleteCustomerFromPerson,
     addBumToPerson: addBumToPerson,
     getUsersFromPerson: getUsersFromPerson,
-    getBumsFromPerson: getBumsFromPerson
+    getBumsFromPerson: getBumsFromPerson,
+    addCompetenceLeaderToPerson: addCompetenceLeaderToPerson,
+    getUsersFromCompetenceLeader: getUsersFromCompetenceLeader,
+    getCompetenceLeadersFromPerson: getCompetenceLeadersFromPerson
   };
 
   function remove(href) {
@@ -145,6 +148,20 @@ function PersonFactory(dataservice) {
 
   function getBumsFromPerson(person) {
     return dataservice.getItem(person._links.self.href + '/businessUnitManagers');
+  }
+
+  function addCompetenceLeaderToPerson(person) {
+    dataservice.postItem('POST', person._links.self.href.concat('/competenceLeaders/' + id), null, 'application/json').success(function() {
+      console.log('PERSON ASSIGNED TO ME (CL)')
+    });
+  }
+
+  function getUsersFromCompetenceLeader() {
+    return dataservice.getItem('http://localhost:8080/api/persons/search/findByCompetenceLeadersId?id=' + id);
+  }
+
+  function getCompetenceLeadersFromPerson(person) {
+    return dataservice.getItem(person._links.self.href + '/competenceLeaders');
   }
 }
 

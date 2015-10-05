@@ -77,4 +77,16 @@ function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice, PersonF
     //Retrieve users from person
     PersonFactory.getUsersFromPerson().success(handleSuccessUsersFromPerson);
   }
+
+  if ($scope.isCL === true) {
+    $scope.myUsers = [];
+    var handleSuccessUsersFromCompetenceLeader = function(data, status) {
+      for (var i = 0; i < data._embedded.persons.length; i++) {
+        $scope.myUsers.push(data._embedded.persons[i]);
+      }
+      console.log('MY USERS RETRIEVED');
+    }
+    //Retrieve users from competence leader
+    PersonFactory.getUsersFromCompetenceLeader().success(handleSuccessUsersFromCompetenceLeader);
+  }
 }

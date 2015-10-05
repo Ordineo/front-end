@@ -63,7 +63,9 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
             AuthenticateFactory.getLogin(credentials).success(handleSuccess).error(handleError);
 
 
-        }
+        };
+
+  //v NEEDS REFACTORING v
 
   $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
     $scope.isBum = false;
@@ -74,4 +76,14 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
     }
     console.log('isBum: ' + $scope.isBum);
   });
-};
+
+  $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
+    $scope.isCL = false;
+    for (var i = 0; i < data._embedded.roles.length; i++) {
+      if (data._embedded.roles[i].name === 'Competence Leader') {
+        $scope.isCL = true;
+      }
+    }
+    console.log('isCL: ' + $scope.isCL);
+  });
+}
