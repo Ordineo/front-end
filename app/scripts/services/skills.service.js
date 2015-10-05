@@ -98,7 +98,6 @@ angular.module('empApp')
     function add(skillCompetence, success) {
       DataService.postItem('POST', 'http://localhost:8081/api/skillCompetences/', skillCompetence, 'application/json', success, function () {
         var level = skillCompetence.competenceLevel;
-        console.log(skillCompetence);
         var skillId = skillCompetence.skill.split("/").pop();
         DataService.getItem('http://localhost:8081/api/skillCompetences/search/findSkillCompetenceBySkillId?skillId=' + skillId, function (data) {
           var sc = data.data._embedded.skillCompetences.pop();
@@ -115,17 +114,14 @@ angular.module('empApp')
       skillCompetences = [];
       var personId = window.sessionStorage.getItem("id");
       DataService.getItem('http://localhost:8081/api/skillCompetences/search/findSkillCompetenceByPerson?personId=' + personId, function (response) {
-        console.log(response);
         var _skillCompetences = response.data._embedded.skillCompetences;
         if (_skillCompetences !== undefined) {
           _skillCompetences.forEach(function (skillCompetence) {
             var t = DataService.getItem(skillCompetence._links.skill.href, function (data) {
-              console.log(skillCompetence);
               skillCompetence.skill = data.data;
             });
             skillCompetences.push(skillCompetence);
           });
-          console.log(skillCompetences);
         }
       });
     }
