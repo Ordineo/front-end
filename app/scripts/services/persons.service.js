@@ -32,7 +32,10 @@ function PersonFactory(dataservice) {
     getBumsFromPerson: getBumsFromPerson,
     addCompetenceLeaderToPerson: addCompetenceLeaderToPerson,
     getUsersFromCompetenceLeader: getUsersFromCompetenceLeader,
-    getCompetenceLeadersFromPerson: getCompetenceLeadersFromPerson
+    getCompetenceLeadersFromPerson: getCompetenceLeadersFromPerson,
+    addPracticeManagerToPerson: addPracticeManagerToPerson,
+    getUsersFromPracticeManager: getUsersFromPracticeManager,
+    getPracticeManagersFromPerson: getPracticeManagersFromPerson
   };
 
   function remove(href) {
@@ -162,6 +165,20 @@ function PersonFactory(dataservice) {
 
   function getCompetenceLeadersFromPerson(person) {
     return dataservice.getItem(person._links.self.href + '/competenceLeaders');
+  }
+
+  function addPracticeManagerToPerson(person) {
+    dataservice.postItem('POST', person._links.self.href.concat('/practiceManagers/' + id), null, 'application/json').success(function() {
+      console.log('PERSON ASSIGNED TO ME (PM)')
+    });
+  }
+
+  function getUsersFromPracticeManager() {
+    return dataservice.getItem('http://localhost:8080/api/persons/search/findByPracticeManagersId?id=' + id);
+  }
+
+  function getPracticeManagersFromPerson(person) {
+    return dataservice.getItem(person._links.self.href + '/practiceManagers');
   }
 }
 

@@ -101,39 +101,50 @@
                 </p>
               </div>
 
-              <h4>Update Details</h4>
-              <hr>
-              <div class="slide">
-              <dl class="dl-horizontal">
-                <dt>First Name</dt>
-                    <dd><input type="text" name="firstName" ng-model="selectedPerson.firstName"></dd>
-                    <dt>Last Name</dt>
-                    <dd><input type="text" name="lastName" ng-model="selectedPerson.lastName"></dd>
-                    <dt>Gender</dt>
-                    <dd><input type="text" name="gender" ng-model="selectedPerson.gender"></dd>
-
-                    <button ng-click="updatePerson(selectedPerson)">Update</button>
-              </dl>
+              <div>
+                <h4>PM's from person</h4>
+                <hr>
+                <p ng-repeat="selectedPersonsPM in selectedPersonsPMs">
+                  PM {{$index + 1}}: {{selectedPersonsPM.firstName}} {{selectedPersonsPM.lastName}} from {{selectedPersonsPM.unit}}
+                </p>
               </div>
 
-              <h4>Assign Role to {{selectedPerson.firstName}} {{selectedPerson.lastName}}</h4>
-              <hr>
-              <select ng-model="selectedRole" name="selectRole">
-                <option ng-repeat="functionalRole in allFunctionalRoles" value="{{functionalRole.name}}">{{functionalRole.name}}</option>
-              </select>
-              <button ng-click="addFunctionalRoleToPerson()">Assign role</button>
+              <div ng-if="isAdmin">
+                <h4>Update Details</h4>
+                <hr>
+                <dl class="dl-horizontal">
+                  <dt>First Name</dt>
+                  <dd><input type="text" name="firstName" ng-model="selectedPerson.firstName"></dd>
+                  <dt>Last Name</dt>
+                  <dd><input type="text" name="lastName" ng-model="selectedPerson.lastName"></dd>
+                  <dt>Gender</dt>
+                  <dd><input type="text" name="gender" ng-model="selectedPerson.gender"></dd>
+                  <button ng-click="updatePerson(selectedPerson)">Update</button>
+                </dl>
+              </div>
 
-              <h4>Assign Customer to {{selectedPerson.firstName}} {{selectedPerson.lastName}}</h4>
-              <hr>
-              <select ng-model="selectedCustomer" name="selectCustomer">
-                <option ng-repeat="customer in allCustomers" value="{{customer}}">{{customer.name}}</option>
-              </select>
-              <button ng-click="addCustomerToPerson()">Assign customer</button>
+              <div ng-if="isAdmin || isHero">
+                <h4>Assign Role to {{selectedPerson.firstName}} {{selectedPerson.lastName}}</h4>
+                <hr>
+                <select ng-model="selectedRole" name="selectRole">
+                  <option ng-repeat="functionalRole in allFunctionalRoles" value="{{functionalRole.name}}">{{functionalRole.name}}</option>
+                </select>
+                <button ng-click="addFunctionalRoleToPerson()">Assign role</button>
+              </div>
+
+              <div ng-if="isAdmin || isHero">
+                <h4>Assign Customer to {{selectedPerson.firstName}} {{selectedPerson.lastName}}</h4>
+                <hr>
+                <select ng-model="selectedCustomer" name="selectCustomer">
+                  <option ng-repeat="customer in allCustomers" value="{{customer}}">{{customer.name}}</option>
+                </select>
+                <button ng-click="addCustomerToPerson()">Assign customer</button>
+              </div>
 
               <div ng-if="isBum">
-                <h4>Assign this employee to me (bum)</h4>
+                <h4>Assign this employee to me (BUM)</h4>
                 <hr>
-                <button ng-click="addBumToPerson(selectedPerson)">Assign this employee to me (bum)</button>
+                <button ng-click="addBumToPerson(selectedPerson)">Assign this employee to me (BUM)</button>
               </div>
 
               <div ng-if="isCL">
@@ -142,26 +153,12 @@
                 <button ng-click="addCompetenceLeaderToPerson(selectedPerson)">Assign this employee to me (CL)</button>
               </div>
 
-              <h4>Other Info</h4>
-              <hr>
-              <div class="slide">
-                  <dl class="dl-horizontal">
-                    <dt>Username</dt>
-                    <dd>{{selectedPerson.credentials.username}}</dd>
-                    <dt>Password Hash</dt>
-                    <dd>{{selectedPerson.credentials.password}}</dd>
-                    <dt>Address</dt>
-                    <dd>
-                        <address>
-                            795 Folsom Ave, Suite 600<br>
-                            San Francisco, CA 94107<br>
-                            <abbr title="Phone">P:</abbr> (123) 456-7890
-                        </address>
-                    </dd>
-                </dl>
+              <div ng-if="isPM">
+                <h4>Assign this employee to me (practice manager)</h4>
+                <hr>
+                <button ng-click="addPracticeManagerToPerson(selectedPerson)">Assign this employee to me (PM)</button>
               </div>
             </div>
         </div>
     </div>
 </div>
-

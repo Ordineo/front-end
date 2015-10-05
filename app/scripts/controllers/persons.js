@@ -66,6 +66,7 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
       $scope.allCustomers = [];
       $scope.selectedPersonsBums = [];
       $scope.selectedPersonsCLs = [];
+      $scope.selectedPersonsPMs = [];
 
       var handleSuccessApplicationRoles = function(data, status) {
         for (var i = 0; i < data._embedded.roleResources.length; i++) {
@@ -109,6 +110,13 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
         console.log('COMPETENCE LEADERS FROM PERSON RETRIEVED');
       };
 
+      var handleSuccessPracticeManagersFromPerson = function(data, status) {
+        for (var i = 0; i < data._embedded.persons.length; i++) {
+          $scope.selectedPersonsPMs.push(data._embedded.persons[i]);
+        }
+        console.log('PRACTICE MANAGERS FROM PERSON RETRIEVED');
+      };
+
       //PersonFactory.getApplicationRolesFromPerson(data).success(handleSuccessApplicationRoles);
       PersonFactory.getFunctionalRolesFromPerson(data).success(handleSuccessFunctionalRoles);
 
@@ -123,6 +131,9 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
 
       //Retrieve competence leaders from person
       PersonFactory.getCompetenceLeadersFromPerson(person).success(handleSuccessCompetenceLeadersFromPerson);
+
+      //Retrieve practice managers from person
+      PersonFactory.getPracticeManagersFromPerson(person).success(handleSuccessPracticeManagersFromPerson);
       console.log(person);
     });
   };
@@ -176,5 +187,9 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
 
   $scope.addCompetenceLeaderToPerson = function(person) {
     PersonFactory.addCompetenceLeaderToPerson(person);
+  };
+
+  $scope.addPracticeManagerToPerson = function(person) {
+    PersonFactory.addPracticeManagerToPerson(person);
   };
 }

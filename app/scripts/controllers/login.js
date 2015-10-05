@@ -67,23 +67,55 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
 
   //v NEEDS REFACTORING v
 
-  $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
-    $scope.isBum = false;
-    for (var i = 0; i < data._embedded.roles.length; i++) {
-      if (data._embedded.roles[i].name === 'Bum') {
-        $scope.isBum = true;
+  if($scope.isLogged === true) {
+    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
+      $scope.isAdmin = false;
+      for (var i = 0; i < data._embedded.roles.length; i++) {
+        if (data._embedded.roles[i].name === 'admin') {
+          $scope.isAdmin = true;
+        }
       }
-    }
-    console.log('isBum: ' + $scope.isBum);
-  });
+      console.log('isAdmin: ' + $scope.isAdmin);
+    });
 
-  $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
-    $scope.isCL = false;
-    for (var i = 0; i < data._embedded.roles.length; i++) {
-      if (data._embedded.roles[i].name === 'Competence Leader') {
-        $scope.isCL = true;
+    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
+      $scope.isHero = false;
+      for (var i = 0; i < data._embedded.roles.length; i++) {
+        if (data._embedded.roles[i].name === 'hero') {
+          $scope.isHero = true;
+        }
       }
-    }
-    console.log('isCL: ' + $scope.isCL);
-  });
+      console.log('isHero: ' + $scope.isHero);
+    });
+
+    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
+      $scope.isBum = false;
+      for (var i = 0; i < data._embedded.roles.length; i++) {
+        if (data._embedded.roles[i].name === 'Bum') {
+          $scope.isBum = true;
+        }
+      }
+      console.log('isBum: ' + $scope.isBum);
+    });
+
+    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
+      $scope.isCL = false;
+      for (var i = 0; i < data._embedded.roles.length; i++) {
+        if (data._embedded.roles[i].name === 'Competence Leader') {
+          $scope.isCL = true;
+        }
+      }
+      console.log('isCL: ' + $scope.isCL);
+    });
+
+    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
+      $scope.isPM = false;
+      for (var i = 0; i < data._embedded.roles.length; i++) {
+        if (data._embedded.roles[i].name === 'Practice Manager') {
+          $scope.isPM = true;
+        }
+      }
+      console.log('isPM: ' + $scope.isPM);
+    });
+  }
 }

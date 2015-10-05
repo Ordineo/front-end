@@ -85,8 +85,20 @@ function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice, PersonF
         $scope.myUsers.push(data._embedded.persons[i]);
       }
       console.log('MY USERS RETRIEVED');
-    }
+    };
     //Retrieve users from competence leader
     PersonFactory.getUsersFromCompetenceLeader().success(handleSuccessUsersFromCompetenceLeader);
+  }
+
+  if ($scope.isPM === true) {
+    $scope.myUsers = [];
+    var handleSuccessUsersFromPracticeManager = function(data, status) {
+      for (var i = 0; i < data._embedded.persons.length; i++) {
+        $scope.myUsers.push(data._embedded.persons[i]);
+      }
+      console.log('MY USERS RETRIEVED');
+    };
+    //Retrieve users from practice manager
+    PersonFactory.getUsersFromPracticeManager().success(handleSuccessUsersFromPracticeManager);
   }
 }
