@@ -10,9 +10,9 @@
 angular.module('empApp')
     .controller('ProfileCtrl', ProfileCtrl);
 
-ProfileCtrl.$inject =['$scope', '$modal', '$log', '$http', '$location','dataservice'];
+ProfileCtrl.$inject =['$scope', '$modal', '$log', '$http', '$location','dataservice', 'PersonFactory'];
 
-function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice) {
+function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice, PersonFactory) {
 
 
       $log.info('ProfileCtrl loaded');
@@ -56,14 +56,25 @@ function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice) {
 
 
    $http.get('http://localhost:8080/api/persons/' + id).success(function (data) {
-      console.log("GOT IT" + data);
-      console.log(data);
-
       $scope.username = data.credentials.username;
       $scope.firstName = data.firstName;
       $scope.lastName = data.lastName;
       $scope.gender = data.gender;
       $scope.birthDate = data.birthDate;
       $scope.enrolmentDate = data.enrolmentDate;
-    });
+     console.log('PROFILE DETAILS RETRIEVED');
+   });
+
+  if ($scope.isBum === true) {
+    $scope.myUsers = [];
+    var handleSuccessUsersFromPerson = function(data, status) {
+      for (var i = 0; i < data._embedded.persons.length; i++) {
+        $scope.myUsers.push(data._embedded.persons[i]);
+      }
+      console.log('MY USERS RETRIEVED');
+    };
+
+    //Retrieve users from person
+    PersonFactory.getUsersFromPerson().success(handleSuccessUsersFromPerson);
   }
+}

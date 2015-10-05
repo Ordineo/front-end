@@ -65,5 +65,13 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
 
         }
 
-
-    };
+  $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
+    $scope.isBum = false;
+    for (var i = 0; i < data._embedded.roles.length; i++) {
+      if (data._embedded.roles[i].name === 'Bum') {
+        $scope.isBum = true;
+      }
+    }
+    console.log('isBum: ' + $scope.isBum);
+  });
+};

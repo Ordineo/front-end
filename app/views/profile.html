@@ -5,3 +5,11 @@
 <p>Geboortedatum: {{birthDate}}</p>
 <p>Inschrijvingsdatum: {{enrolmentDate}}</p>
 <button ng-hide="isAdmin" ng-click="makeAdmin()">Upgrade to Admin!</button>
+
+<div ng-if="isBum">
+  <h4>My users</h4>
+  <hr>
+  <p ng-repeat="myUser in myUsers">
+    User {{$index + 1}}: {{myUser.firstName}} {{myUser.lastName}} from {{myUser.unit}}
+  </p>
+</div>

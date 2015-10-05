@@ -26,7 +26,10 @@ function PersonFactory(dataservice) {
     getFunctionalRolesFromPerson: getFunctionalRolesFromPerson,
     addCustomerToPerson: addCustomerToPerson,
     getCustomersFromPerson: getCustomersFromPerson,
-    deleteCustomerFromPerson: deleteCustomerFromPerson
+    deleteCustomerFromPerson: deleteCustomerFromPerson,
+    addBumToPerson: addBumToPerson,
+    getUsersFromPerson: getUsersFromPerson,
+    getBumsFromPerson: getBumsFromPerson
   };
 
   function remove(href) {
@@ -128,6 +131,20 @@ function PersonFactory(dataservice) {
     dataservice.postItem('DELETE', href, null, 'application/json').success(function() {
       console.log('CUSTOMER DELETED FROM PERSON');
     });
+  }
+
+  function addBumToPerson(person) {
+    dataservice.postItem('POST', person._links.self.href.concat('/businessUnitManagers/' + id), null, 'application/json').success(function() {
+      console.log('PERSON ASSIGNED TO ME (BUM)');
+    });
+  }
+
+  function getUsersFromPerson() {
+    return dataservice.getItem('http://localhost:8080/api/persons/search/findByBusinessUnitManagersId?id=' + id);
+  }
+
+  function getBumsFromPerson(person) {
+    return dataservice.getItem(person._links.self.href + '/businessUnitManagers');
   }
 }
 

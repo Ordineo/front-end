@@ -64,6 +64,7 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
       $scope.selectedPersonsFunctionalRoles = [];
       $scope.selectedPersonsCustomers = [];
       $scope.allCustomers = [];
+      $scope.selectedPersonsBums = [];
 
       var handleSuccessApplicationRoles = function(data, status) {
         for (var i = 0; i < data._embedded.roleResources.length; i++) {
@@ -74,7 +75,6 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
 
       var handleSuccessFunctionalRoles = function(data, status) {
         for (var i = 0; i < data._embedded.roleResources.length; i++) {
-          //console.log(data._embedded.roleResources.length);
           $scope.selectedPersonsFunctionalRoles.push(data._embedded.roleResources[i]);
         }
         console.log('FUNCTIONAL ROLES FROM PERSON RETRIEVED');
@@ -94,6 +94,13 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
         console.log('CUSTOMERS FROM PERSON RETRIEVED');
       };
 
+      var handleSuccessBumsFromPerson = function(data, status) {
+        for (var i = 0; i < data._embedded.persons.length; i++) {
+          $scope.selectedPersonsBums.push(data._embedded.persons[i]);
+        }
+        console.log('BUMS FROM PERSON RETRIEVED');
+      };
+
       //PersonFactory.getApplicationRolesFromPerson(data).success(handleSuccessApplicationRoles);
       PersonFactory.getFunctionalRolesFromPerson(data).success(handleSuccessFunctionalRoles);
 
@@ -102,6 +109,10 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
 
       //Retrieve customers from person
       PersonFactory.getCustomersFromPerson(person).success(handleSuccessCustomersFromPerson);
+
+      //Retrieve bums from person
+      PersonFactory.getBumsFromPerson(person).success(handleSuccessBumsFromPerson);
+      console.log(person);
     });
   };
 
@@ -147,4 +158,8 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
   $scope.deleteCustomerFromPerson = function(selectedPerson, selectedPersonsCustomer) {
     PersonFactory.deleteCustomerFromPerson(selectedPerson, selectedPersonsCustomer);
   };
+
+  $scope.addBumToPerson = function(person) {
+    PersonFactory.addBumToPerson(person);
+  }
 }
