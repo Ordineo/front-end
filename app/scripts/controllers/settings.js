@@ -14,10 +14,10 @@ SettingCtrl.$inject = ['$scope','$log','$modal', '$timeout', 'dataservice'];
 function SettingCtrl ($scope, $log, $modal, $timeout, dataservice) {
     $log.info('SettingsCtrl loaded');
 
-    $scope.modalPasswordReset = function() {
+    $scope.modalPasswordChange = function() {
       $scope.modal = $modal.open({
         animation: false,
-        templateUrl: 'passwordResetModalContent',
+        templateUrl: 'passwordChangeModalContent',
         controller: 'SettingsCtrl',
         size: 'sm',
         scope: $scope
@@ -33,7 +33,7 @@ function SettingCtrl ($scope, $log, $modal, $timeout, dataservice) {
       };
     };
 
-  $scope.resetPassword = function(password) {
+  $scope.changePassword = function(password) {
 
     var id = window.sessionStorage.getItem("id");
     var userData  = {
