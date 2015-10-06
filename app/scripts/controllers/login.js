@@ -1,131 +1,103 @@
 'use strict';
 
-angular.module('empApp')
-    .controller('LoginCtrl', LoginCtrl);
-
+angular.module('empApp').controller('LoginCtrl', LoginCtrl);
 
 LoginCtrl.$inject =['$scope', '$log', '$http', '$location','dataservice','AuthenticateFactory','PersonFactory','$route'];
 
 function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactory,PersonFactory,$route) {
 
+  if(AuthenticateFactory.isAuthorized()){
+    $scope.isLogged = true;
+    checkRoles();
+  }
 
-            if(AuthenticateFactory.isAuthorized()){
-                $scope.isLogged = true;
-                var role = window.sessionStorage.getItem('role');
+  $scope.logout = function(){
+    window.sessionStorage.clear();
+    AuthenticateFactory.setAuthorized(false);
+    window.location.reload();
+    $route.reload();
+    $location.path('/login');
+  };
 
-                if(role==='admin'){
-                    $scope.isAdmin =true;
-                }
+  $scope.login = function(login){
+    var credentials = {
+      'username': login.username,
+      'password': login.password
+    };
+    var handleSuccess = function (data, status,headers,config) {
+      console.log("Login successful");
+      AuthenticateFactory.setAuthorized(true);
+      window.sessionStorage.setItem("id",headers('Location'));
+      if(AuthenticateFactory.isAuthorized()) {
+        $route.reload();
+        window.location.reload();
+        $location.path('/roles');
+      }
+    };
+    var handleError = function(data, status, headers){
+      $scope.errmsg = data.message;
+      $scope.invalid = true;
+    };
+    AuthenticateFactory.getLogin(credentials).success(handleSuccess).error(handleError);
+  };
 
-            }
-        $scope.logout = function(){
+  //Check roles when logged in
+  function checkRoles() {
+    //Application roles
+    var admin = 'admin';
+    var hero = 'hero';
+    var user = 'user';
+    //Functional roles
+    var bum = 'Bum';
+    var competenceLeader = 'Competence Leader';
+    var practiceManager = 'Practice Manager';
+    var coach = 'Coach';
+    var consultant = 'Consultant';
+    var seniorConsultant = 'Senior Consultant';
+    //Scopes application roles
+    $scope.isAdmin = false;
+    $scope.isHero = false;
+    $scope.isUser = false;
+    //Scopes functional roles
+    $scope.isBum = false;
+    $scope.isCompetenceLeader = false;
+    $scope.isPracticeManager = false;
+    $scope.isCoach = false;
+    $scope.isConsultant = false;
+    $scope.isSeniorConsultant = false;
 
-          window.sessionStorage.clear();
-            AuthenticateFactory.setAuthorized(false);
-            window.location.reload();
-            $route.reload();
-            $location.path('/login');
-        };
-
-        $scope.login =function(login){
-
-            var credentials = {
-                'username': login.username,
-                'password': login.password
-
-
-            };
-            var handleSuccess = function (data, status,headers,config) {
-
-                console.log("Login successful");
-                AuthenticateFactory.setAuthorized(true);
-                window.sessionStorage.setItem("id",headers('Location'));
-
-
-                  if(AuthenticateFactory.isAuthorized()) {
-                      $route.reload();
-                      window.location.reload();
-                      $location.path('/roles');
-                  }
-
-
-
-
-            };
-
-
-            var handleError = function(data, status, headers){
-
-                $scope.errmsg = data.message;
-                $scope.invalid = true;
-
-            };
-            AuthenticateFactory.getLogin(credentials).success(handleSuccess).error(handleError);
-
-
-        };
-
-  //v NEEDS REFACTORING v
-
-  if($scope.isLogged === true) {
-    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
-      $scope.isAdmin = false;
+    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function(data) {
       for (var i = 0; i < data._embedded.roles.length; i++) {
-        if (data._embedded.roles[i].name === 'admin') {
-          $scope.isAdmin = true;
+        switch (data._embedded.roles[i].name) {
+          case admin:
+                $scope.isAdmin = true;
+                break;
+          case hero:
+                $scope.isHero = true;
+                break;
+          case user:
+                $scope.isUser = true;
+                break;
+          case bum:
+                $scope.isBum = true;
+                break;
+          case competenceLeader:
+                $scope.isCompetenceLeader = true;
+                break;
+          case practiceManager:
+                $scope.isPracticeManager = true;
+                break;
+          case coach:
+                $scope.isCoach = true;
+                break;
+          case consultant:
+                $scope.isConsultant = true;
+                break;
+          case seniorConsultant:
+                $scope.isSeniorConsultant = true;
+                break;
         }
       }
-      console.log('isAdmin: ' + $scope.isAdmin);
-    });
-
-    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
-      $scope.isHero = false;
-      for (var i = 0; i < data._embedded.roles.length; i++) {
-        if (data._embedded.roles[i].name === 'hero') {
-          $scope.isHero = true;
-        }
-      }
-      console.log('isHero: ' + $scope.isHero);
-    });
-
-    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
-      $scope.isBum = false;
-      for (var i = 0; i < data._embedded.roles.length; i++) {
-        if (data._embedded.roles[i].name === 'Bum') {
-          $scope.isBum = true;
-        }
-      }
-      console.log('isBum: ' + $scope.isBum);
-    });
-
-    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
-      $scope.isCL = false;
-      for (var i = 0; i < data._embedded.roles.length; i++) {
-        if (data._embedded.roles[i].name === 'Competence Leader') {
-          $scope.isCL = true;
-        }
-      }
-      console.log('isCL: ' + $scope.isCL);
-    });
-
-    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
-      $scope.isPM = false;
-      for (var i = 0; i < data._embedded.roles.length; i++) {
-        if (data._embedded.roles[i].name === 'Practice Manager') {
-          $scope.isPM = true;
-        }
-      }
-      console.log('isPM: ' + $scope.isPM);
-    });
-
-    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
-      $scope.isCoach = false;
-      for (var i = 0; i < data._embedded.roles.length; i++) {
-        if (data._embedded.roles[i].name === 'Coach') {
-          $scope.isCoach = true;
-        }
-      }
-      console.log('isCoach: ' + $scope.isCoach);
     });
   }
 }

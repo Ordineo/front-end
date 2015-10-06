@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('empApp')
-  .factory('PersonFactory',PersonFactory);
+  .factory('PersonFactory', PersonFactory);
 
 PersonFactory.$inject = ['dataservice'];
-
 
 
 function PersonFactory(dataservice) {
@@ -15,11 +14,11 @@ function PersonFactory(dataservice) {
   return {
     remove: remove,
     getAll: getAll,
-    updatePerson : updatePerson,
-    initialise : initialise,
-    getId : getId,
+    updatePerson: updatePerson,
+    initialise: initialise,
+    getId: getId,
     getPerson: getPerson,
-    getSelectedPerson : getSelectedPerson,
+    getSelectedPerson: getSelectedPerson,
     addFunctionalRoleToPerson: addFunctionalRoleToPerson,
     deleteFunctionalRoleFromPerson: deleteFunctionalRoleFromPerson,
     getApplicationRolesFromPerson: getApplicationRolesFromPerson,
@@ -46,18 +45,18 @@ function PersonFactory(dataservice) {
   }
 
   function getAll() {
-    dataservice.getItem('http://localhost:8080/api/persons').success(function(data) {
+    dataservice.getItem('http://localhost:8080/api/persons').success(function (data) {
       persons = data;
     });
     return persons;
   }
 
-  function getId(){
+  function getId() {
     return id;
   }
 
-  function getSelectedPerson(selected){
-    return dataservice.getItem('http://localhost:8080/api/persons/search/findByFirstName?name='+selected);
+  function getSelectedPerson(selected) {
+    return dataservice.getItem('http://localhost:8080/api/persons/search/findByFirstName?name=' + selected);
   }
 
   function initialise() {
@@ -69,8 +68,9 @@ function PersonFactory(dataservice) {
       });
     });
   }
-  function getPerson(){
-    return dataservice.getItem('http://localhost:8080/api/persons/'+id);
+
+  function getPerson() {
+    return dataservice.getItem('http://localhost:8080/api/persons/' + id);
   }
 
   function updatePerson(person) {
@@ -78,7 +78,7 @@ function PersonFactory(dataservice) {
       firstName: person.firstName,
       lastName: person.lastName,
       gender: person.gender
-    }, 'application/json').success(function() {
+    }, 'application/json').success(function () {
       console.log('PERSON UPDATED');
     });
   }
@@ -87,7 +87,7 @@ function PersonFactory(dataservice) {
     dataservice.postItem('POST', href, {
       name: selectedRole,
       isFunctional: true
-    }, 'application/json').success(function() {
+    }, 'application/json').success(function () {
       console.log('ROLE ASSIGNED TO PERSON');
     });
   }
@@ -98,7 +98,7 @@ function PersonFactory(dataservice) {
     var index = hrefSelectedPersonsFunctionalRole.indexOf('/roles');
     var substring = hrefSelectedPersonsFunctionalRole.substring(index);
     var href = hrefSelectedPerson.concat(substring);
-    dataservice.postItem('DELETE', href, null, 'application/json').success(function() {
+    dataservice.postItem('DELETE', href, null, 'application/json').success(function () {
       console.log('FUNCTIONAL ROLE DELETED FROM PERSON');
     });
   }
@@ -123,7 +123,7 @@ function PersonFactory(dataservice) {
     dataservice.postItem('POST', href, {
       name: selectedCustomer.name,
       description: selectedCustomer.description
-    }, 'application/json').success(function() {
+    }, 'application/json').success(function () {
       console.log('CUSTOMER ASSIGNED TO PERSON');
     });
   }
@@ -138,14 +138,14 @@ function PersonFactory(dataservice) {
     var index = hrefSelectedPersonsCustomer.indexOf('/customers');
     var substring = hrefSelectedPersonsCustomer.substring(index);
     var href = hrefSelectedPerson.concat(substring);
-    dataservice.postItem('DELETE', href, null, 'application/json').success(function() {
+    dataservice.postItem('DELETE', href, null, 'application/json').success(function () {
       console.log('CUSTOMER DELETED FROM PERSON');
     });
   }
 
   //BUMs
   function addBumToPerson(person) {
-    dataservice.postItem('POST', person._links.self.href.concat('/businessUnitManagers/' + id), null, 'application/json').success(function() {
+    dataservice.postItem('POST', person._links.self.href.concat('/businessUnitManagers/' + id), null, 'application/json').success(function () {
       console.log('PERSON ASSIGNED TO ME (BUM)');
     });
   }
@@ -160,7 +160,7 @@ function PersonFactory(dataservice) {
 
   //Competence Leaders
   function addCompetenceLeaderToPerson(person) {
-    dataservice.postItem('POST', person._links.self.href.concat('/competenceLeaders/' + id), null, 'application/json').success(function() {
+    dataservice.postItem('POST', person._links.self.href.concat('/competenceLeaders/' + id), null, 'application/json').success(function () {
       console.log('PERSON ASSIGNED TO ME (CL)')
     });
   }
@@ -175,7 +175,7 @@ function PersonFactory(dataservice) {
 
   //Practice Managers
   function addPracticeManagerToPerson(person) {
-    dataservice.postItem('POST', person._links.self.href.concat('/practiceManagers/' + id), null, 'application/json').success(function() {
+    dataservice.postItem('POST', person._links.self.href.concat('/practiceManagers/' + id), null, 'application/json').success(function () {
       console.log('PERSON ASSIGNED TO ME (PM)')
     });
   }
@@ -190,7 +190,7 @@ function PersonFactory(dataservice) {
 
   //Coaches
   function addCoachToPerson(person) {
-    dataservice.postItem('POST', person._links.self.href.concat('/coaches/' + id), null, 'application/json').success(function() {
+    dataservice.postItem('POST', person._links.self.href.concat('/coaches/' + id), null, 'application/json').success(function () {
       console.log('PERSON ASSIGNED TO ME (COACH)')
     });
   }
@@ -206,142 +206,149 @@ function PersonFactory(dataservice) {
 
 
 angular.module('empApp')
-.factory('RoleFactory',RoleFactory);
+  .factory('RoleFactory', RoleFactory);
 
-RoleFactory.$inject =['dataservice','PersonFactory'];
+RoleFactory.$inject = ['dataservice', 'PersonFactory'];
 
-function RoleFactory(dataservice,PersonFactory) {
+function RoleFactory(dataservice, PersonFactory) {
   var applicationRoles = [];
-  var functionalRoles =[];
-  var allFunctionalRoles =[];
+  var functionalRoles = [];
+  var allFunctionalRoles = [];
   var allApplicationRoles = [];
   var applicationRolesPerson = [];
   var id = window.sessionStorage.getItem("id");
   var applicationrole;
 
-  return{
-    initialise : initialise,
-    getAllFunctionalRoles : getAllFunctionalRoles,
-    updateFunctionalRoles :updateFunctionalRoles,
-    getApplicationRolesPerson : getApplicationRolesPerson,
-    getFunctionalRoles : getFunctionalRoles,
-    getAllApplicationRoles : getAllApplicationRoles
-
+  return {
+    initialise: initialise,
+    getAllFunctionalRoles: getAllFunctionalRoles,
+    updateFunctionalRoles: updateFunctionalRoles,
+    getApplicationRolesPerson: getApplicationRolesPerson,
+    getFunctionalRoles: getFunctionalRoles,
+    getAllApplicationRoles: getAllApplicationRoles
 
 
   };
 
-function initialise() {
+  function initialise() {
 
 
-  dataservice.getItem('http://localhost:8080/api/persons/'+id+'/roles/false').success(function (data) {
-    if(data._embedded.roleResources !== undefined) {
-      data._embedded.roleResources.forEach(function (role) {
-        applicationRolesPerson.push(role);
-      })}
-   // applicationrole = applicationRolesPerson[0].name;
-    //window.sessionStorage.setItem('role',applicationrole);
-  });
-  dataservice.getItem('http://localhost:8080/api/persons/' + id + '/roles/true').success(function (data) {
-    if(data._embedded.roleResources !== undefined) {
-      data._embedded.roleResources.forEach(function (role) {
-        functionalRoles.push(role);
-      })}
-  });
-  dataservice.getItem('http://localhost:8080/api/roles/search/isFunctional?functional=true').success(function (data) {
-    if(data._embedded.roles !== undefined) {
-      data._embedded.roles.forEach(function (role) {
-        allFunctionalRoles.push(role);
+    dataservice.getItem('http://localhost:8080/api/persons/' + id + '/roles/false').success(function (data) {
+      if (data._embedded.roleResources !== undefined) {
+        data._embedded.roleResources.forEach(function (role) {
+          applicationRolesPerson.push(role);
+        })
+      }
+      // applicationrole = applicationRolesPerson[0].name;
+      //window.sessionStorage.setItem('role',applicationrole);
+    });
+    dataservice.getItem('http://localhost:8080/api/persons/' + id + '/roles/true').success(function (data) {
+      if (data._embedded.roleResources !== undefined) {
+        data._embedded.roleResources.forEach(function (role) {
+          functionalRoles.push(role);
+        })
+      }
+    });
+    dataservice.getItem('http://localhost:8080/api/roles/search/isFunctional?functional=true').success(function (data) {
+      if (data._embedded.roles !== undefined) {
+        data._embedded.roles.forEach(function (role) {
+          allFunctionalRoles.push(role);
 
-      })}
-  });
-  dataservice.getItem('http://localhost:8080/api/roles/search/isFunctional?functional=false').success(function (data) {
-    if(data._embedded.roles !== undefined) {
-      data._embedded.roles.forEach(function (role) {
-        allApplicationRoles.push(role);
+        })
+      }
+    });
+    dataservice.getItem('http://localhost:8080/api/roles/search/isFunctional?functional=false').success(function (data) {
+      if (data._embedded.roles !== undefined) {
+        data._embedded.roles.forEach(function (role) {
+          allApplicationRoles.push(role);
 
-      })}
-  });
-}
+        })
+      }
+    });
+  }
 
-  function getAllApplicationRoles(){
+  function getAllApplicationRoles() {
     return allApplicationRoles;
   }
-  function getAllFunctionalRoles(){
-          return allFunctionalRoles;
-        }
+
+  function getAllFunctionalRoles() {
+    return allFunctionalRoles;
+  }
+
   function getApplicationRolesPerson() {
-          return applicationRolesPerson;
+    return applicationRolesPerson;
+  }
+
+  function getFunctionalRoles() {
+    return functionalRoles;
+  }
+
+  function updateFunctionalRoles() {
+    functionalRoles = [];
+    dataservice.getItem('http://localhost:8080/api/roles/search/findByIdAndIsFunctional?id=' + id + '&functional=true').success(function (data) {
+      data._embedded.roles.forEach(function (role) {
+        if (data._embedded.roles !== undefined) {
+          functionalRoles.push(role);
         }
-  function getFunctionalRoles(){
-          return functionalRoles;
-        }
-  function updateFunctionalRoles () {
-          functionalRoles = [];
-          dataservice.getItem('http://localhost:8080/api/roles/search/findByIdAndIsFunctional?id='+id+'&functional=true').success(function (data) {
-            data._embedded.roles.forEach(function (role) {
-              if(data._embedded.roles !== undefined) {
-              functionalRoles.push(role);
-            }});
-          });
-          return functionalRoles;
-        }
-      }
+      });
+    });
+    return functionalRoles;
+  }
+}
 
 
 angular.module('empApp')
-.factory('dataservice',['$http',function($http){
+  .factory('dataservice', ['$http', function ($http) {
 
 
+    return {
+      getItem: function (url) {
+        return $http.get(url);
+      },
 
-  return{
-    getItem:function(url){
-      return $http.get(url);
-    },
+      postItem: function (method, url, postdata, headers) {
 
-    postItem:function(method,url,postdata,headers){
-
-      return $http({
-        method:method,
-        url:url,
-        data:postdata,
-        headers:{'Content-Type':headers}
-      })
+        return $http({
+          method: method,
+          url: url,
+          data: postdata,
+          headers: {'Content-Type': headers}
+        })
+      }
     }
-  }
 
-}])
-.directive('username', function($q, $timeout) {
-  return {
-    require: 'ngModel',
-    link: function(scope, elm, attrs, ctrl) {
-      var usernames = ['Jim', 'John', 'Jill', 'Jackie'];
+  }])
+  .directive('username', function ($q, $timeout) {
+    return {
+      require: 'ngModel',
+      link: function (scope, elm, attrs, ctrl) {
+        var usernames = ['Jim', 'John', 'Jill', 'Jackie'];
 
-      ctrl.$asyncValidators.username = function(modelValue, viewValue) {
+        ctrl.$asyncValidators.username = function (modelValue, viewValue) {
 
-        if (ctrl.$isEmpty(modelValue)) {
-          // consider empty model valid
-          return $q.when();
-        }
-
-        var def = $q.defer();
-
-        $timeout(function() {
-          // Mock a delayed response
-          if (usernames.indexOf(modelValue) === -1) {
-            // The username is available
-            def.resolve();
-          } else {
-            def.reject();
+          if (ctrl.$isEmpty(modelValue)) {
+            // consider empty model valid
+            return $q.when();
           }
 
-        }, 2000);
+          var def = $q.defer();
 
-        return def.promise;
-      };
-    }
-  };
-})
+          $timeout(function () {
+            // Mock a delayed response
+            if (usernames.indexOf(modelValue) === -1) {
+              // The username is available
+              def.resolve();
+            } else {
+              def.reject();
+            }
+
+          }, 2000);
+
+          return def.promise;
+        };
+      }
+    };
+  })
   .directive('pwCheck', [function () {
     return {
       require: 'ngModel',
@@ -349,7 +356,7 @@ angular.module('empApp')
         var firstPassword = '#' + attrs.pwCheck;
         elem.add(firstPassword).on('keyup', function () {
           scope.$apply(function () {
-            var v = elem.val()===$(firstPassword).val();
+            var v = elem.val() === $(firstPassword).val();
             ctrl.$setValidity('pwmatch', v);
           });
         });

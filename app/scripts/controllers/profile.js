@@ -80,7 +80,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice, PersonF
     PersonFactory.getUsersFromPerson().success(handleSuccessUsersFromPerson);
   }
 
-  if ($scope.isCL === true) {
+  if ($scope.isCompetenceLeader === true) {
     $scope.myUsers = [];
     var handleSuccessUsersFromCompetenceLeader = function(data, status) {
       for (var i = 0; i < data._embedded.persons.length; i++) {
@@ -92,7 +92,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice, PersonF
     PersonFactory.getUsersFromCompetenceLeader().success(handleSuccessUsersFromCompetenceLeader);
   }
 
-  if ($scope.isPM === true) {
+  if ($scope.isPracticeManager === true) {
     $scope.myUsers = [];
     var handleSuccessUsersFromPracticeManager = function(data, status) {
       for (var i = 0; i < data._embedded.persons.length; i++) {
