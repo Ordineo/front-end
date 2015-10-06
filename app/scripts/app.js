@@ -18,7 +18,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'restangular'
     //'ngRoleAuth'
   ])
   .config(['$httpProvider', function ($httpProvider) {
@@ -33,6 +34,7 @@ angular
 
   }
   ])
+ 
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -130,7 +132,13 @@ angular
         controller: 'RoleCtrl',
         access: {
           requiresLogin: true
+        },
+        resolve: {
+          roles: function (RoleService) {
+            return RoleService.getAll();
+          }
         }
+
 
 
         // authorized: 'user'
@@ -167,38 +175,3 @@ angular
     });
 
   });
-/*.run(["Authenticate","AuthenticateFactory",function(AuthenticateFactory){
-
-
-
- /*     var roles = [];
- var role ="user";
- authService.getRole = function(){
-
-
- var handleIt = function(data,status){
-
-
-
- data._embedded.roles.forEach(function (role) {
- roles.push(role);
- });
-
- role= roles[0].name;
-
-
- };
- var id =window.sessionStorage.getItem('id');
-
- if( id!=null) {
-
- dataService.getItem('http://localhost:8080/api/roles/search/findByIdAndIsFunctional?id='+id+'&functional=false').success(handleIt);
- }
- return role;
-
-
- }
-
-
- }])*/
-

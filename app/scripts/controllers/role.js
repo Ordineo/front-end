@@ -9,76 +9,39 @@
  */
 angular.module('empApp')
     .controller('RoleCtrl',RoleCtrl);
-        RoleCtrl.$inject=['$scope', '$log','dataservice','RoleFactory','$location'];
+RoleCtrl.$inject = ['$scope', '$log', 'dataservice', 'RoleService', '$location', 'Restangular', 'roles'];
 
-function RoleCtrl($scope,$log, dataservice,RoleFactory,$location) {
-
-
-
-        $log.info('RoleCtrl loaded');
-
-        $scope.getRoles = function() {
-
-            $scope.roles= RoleFactory.getAllApplicationRoles();
-            $scope.allFunctionalRoles = RoleFactory.getAllFunctionalRoles();
+function RoleCtrl($scope, $log, dataservice, RoleService, $location, Restangular, roles) {
 
 
-        };
-
-        $scope.addSelected = function(selected){
-          console.log("adding"+ selected);
+  $scope.roles = roles;
 
 
-            var formData = {
-                name: selected,
-                isFunctional:false
+  $scope.deleteRole = function (href) {
 
-            };
+    var parts = [];
+    console.log(href);
+    parts = href.split("/", 6);
 
-            var handleSucces = function(data,status){
-                window.sessionStorage.setItem('role',selected);
-              /*  window.location.reload();
-                $location.path('/dashboard');
-*/
+    console.log(parts[5]);
 
-            };
+    RoleService.deleteRole(parts[5]);
 
 
-            var id = window.sessionStorage.getItem('id');
-            if(id!=null) {
+  };
 
-              //dataservice.postItem('POST','http://localhost:8080/api/persons/' +id+'/roles',formData,'application/json').success(handleSucces);
-              dataservice.postItem('DELETE','http://localhost:8080/api/persons/1/roles/4',null,'application/json');
+  /*var roles = Restangular.all('roles');
 
-            }
+   roles.getList().then(function (roles) {
 
-        };
+   $scope.roles = roles;
+   });*/
 
-        $scope.getRoles();
-         $scope.addRole = function (role) {
-            var handleRole=function(data,status){
-                console.log("hey you got some");
-             $scope.roles=   RoleFactory.updateFunctionalRoles();
-
-            };
-
-         //   dataservice.getItem('http://localhost:8080/api/roles/name/'+role.name).success(handleRole);
-
-            var formData = {
-                name: role.name,
-                functional:true
-
-            };
-
-            dataservice.postItem('POST', 'http://localhost:8080/api/roles/', formData, 'application/json').success(handleRole);
+  $log.info('RoleCtrl loaded');
+  $log.info();
 
 
-
-
-
-
-        }}
-
+}
 
 
 
