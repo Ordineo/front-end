@@ -2,15 +2,15 @@ angular.module('empApp')
   .controller('SkillCompetencesCtrl', function ($scope, SkillFactory, SkillCompetenceFactory, PersonFactory, $log) {
     $log.info('SkillCompetencesCtrl loaded');
 
+    var personId = window.sessionStorage.getItem("id");
     updateList();
 
     $scope.save = function (skillCompetence) {
       console.log('Adding Skill Competence to current user');
       skillCompetence.skill = skillCompetence.skill._links.self.href;
-      skillCompetence.person = window.sessionStorage.getItem("id");
+      skillCompetence.person = personId;
       SkillCompetenceFactory.add(skillCompetence, updateList);
       $scope.skillCompetence = null;
-
 
     };
 
@@ -24,13 +24,13 @@ angular.module('empApp')
     });
 
 
-    PersonFactory.getPerson().success(function (data) {
+    PersonFactory.getPersonById(personId).success(function (data) {
       $scope.person = data;
     });
 
 
     function updateList() {
-      $scope.skillCompetences = SkillCompetenceFactory.all();
+      $scope.skillCompetences = SkillCompetenceFactory.getSkillCompetenceForPersonId(personId);
     }
 
   }

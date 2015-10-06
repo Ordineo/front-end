@@ -110,9 +110,8 @@ angular.module('empApp')
 
     var skillCompetences = [];
 
-    function getSkillCompetencesWithSkill() {
+    function getSkillCompetenceForPersonId(personId) {
       skillCompetences = [];
-      var personId = window.sessionStorage.getItem("id");
       DataService.getItem('http://localhost:8081/api/skillCompetences/search/findSkillCompetenceByPerson?personId=' + personId, function (response) {
         var _skillCompetences = response.data._embedded.skillCompetences;
         if (_skillCompetences !== undefined) {
@@ -128,16 +127,14 @@ angular.module('empApp')
 
 
     return {
-      all: function () {
-        getSkillCompetencesWithSkill();
+      getSkillCompetenceForPersonId: function (id) {
+        getSkillCompetenceForPersonId(id);
 
         return skillCompetences;
       },
       remove: remove,
       add: add
     };
-
-
   }
 )
   .factory('DataService', function ($http) {
