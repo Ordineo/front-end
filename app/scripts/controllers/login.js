@@ -63,7 +63,6 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
 
   //Check my roles
   function checkMyRoles() {
-    //Functional roles
     var bum = 'Bum';
     var resourceManager = 'Resource Manager';
     var competenceLeader = 'Competence Leader';
@@ -71,49 +70,37 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
     var coach = 'Coach';
     var consultant = 'Consultant';
     var seniorConsultant = 'Senior Consultant';
-    //Scopes application roles
-    $scope.isAdmin = false;
-    $scope.isHero = false;
-    $scope.isUser = false;
-    //Scopes functional roles
-    $scope.isBum = false;
-    $scope.isResourceManager = false;
-    $scope.isCompetenceLeader = false;
-    $scope.isPracticeManager = false;
-    $scope.isCoach = false;
-    $scope.isConsultant = false;
-    $scope.isSeniorConsultant = false;
 
     $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function(data) {
       for (var i = 0; i < data._embedded.roles.length; i++) {
         switch (data._embedded.roles[i].name) {
           case bum:
-                $scope.isBum = true;
-                $scope.isAdmin = true;
+                window.sessionStorage.setItem('reviewer', bum);
+                window.sessionStorage.setItem('admin', true);
                 break;
           case resourceManager:
-                $scope.isResourceManager = true;
-                $scope.isAdmin = true;
+                window.sessionStorage.setItem('reviewer', resourceManager);
+                window.sessionStorage.setItem('admin', true);
                 break;
           case competenceLeader:
-                $scope.isCompetenceLeader = true;
-                $scope.isHero = true;
+                window.sessionStorage.setItem('reviewer', competenceLeader);
+                window.sessionStorage.setItem('hero', true);
                 break;
           case practiceManager:
-                $scope.isPracticeManager = true;
-                $scope.isHero = true;
+                window.sessionStorage.setItem('reviewer', practiceManager);
+                window.sessionStorage.setItem('hero', true);
                 break;
           case coach:
-                $scope.isCoach = true;
-                $scope.isHero = true;
+                window.sessionStorage.setItem('reviewer', coach);
+                window.sessionStorage.setItem('hero', true);
                 break;
           case consultant:
-                $scope.isConsultant = true;
-                $scope.isUser = true;
+                window.sessionStorage.setItem('reviewer', consultant);
+                window.sessionStorage.setItem('user', true);
                 break;
           case seniorConsultant:
-                $scope.isSeniorConsultant = true;
-                $scope.isUser = true;
+                window.sessionStorage.setItem('reviewer', seniorConsultant);
+                window.sessionStorage.setItem('user', true);
                 break;
         }
       }
