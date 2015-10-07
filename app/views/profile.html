@@ -29,6 +29,12 @@
     <hr>
   </div>
   <div>
+    <h4>Update details</h4>
+    <hr>
+    <p>NOT IMPLEMENTED YET</p>
+    <hr>
+  </div>
+  <div>
     <h4>Roles</h4>
     <hr>
     <dl class="dl-horizontal">
@@ -86,13 +92,29 @@
     </dl>
     <hr>
   </div>
+  <div ng-if="hasDescendants">
+    <h4>My descendants</h4>
+    <hr>
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="myDescendant in myDescendants">
+          <td>{{myDescendant.firstName}}</td>
+          <td>{{myDescendant.lastName}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+  </div>
   <div>
     <h4>Skill competences</h4>
     <hr>
-    <dl class="dl-horizontal">
-      <dt></dt>
-      <dd></dd>
-    </dl>
+    <p>NOT READY TO IMPLEMENT YET</p>
   </div>
 
   <div>
@@ -102,14 +124,6 @@
     <hr>
   </div>
 </div>
-
-<!--<div ng-show="isBum || isCompetenceLeader || isPracticeManager || isCoach">
-  <h4>My descendants</h4>
-  <hr>
-  <p ng-repeat="myUser in myUsers">
-    User {{$index + 1}}: {{myUser.firstName}} {{myUser.lastName}} from {{myUser.unit}}
-  </p>
-</div>-->
 
 <!--
 _links (get stuff):

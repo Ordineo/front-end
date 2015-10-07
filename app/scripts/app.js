@@ -147,6 +147,9 @@ angular
           },
           avroles: function (RoleService) {
             return RoleService.getFunctionalRoles();
+          },
+          persons: function (PersonFactory) {
+            return PersonFactory.getPersonsOfReviewer();
           }
         }
 

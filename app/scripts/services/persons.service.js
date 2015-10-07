@@ -3,10 +3,10 @@
 angular.module('empApp')
   .factory('PersonFactory', PersonFactory);
 
-PersonFactory.$inject = ['dataservice'];
+PersonFactory.$inject = ['dataservice', 'PersonRestangular'];
 
 
-function PersonFactory(dataservice) {
+function PersonFactory(dataservice, PersonRestangular) {
 
   var persons = [];
 
@@ -38,11 +38,30 @@ function PersonFactory(dataservice) {
     getPracticeManagersFromPerson: getPracticeManagersFromPerson,
     addCoachToPerson: addCoachToPerson,
     getUsersFromCoach: getUsersFromCoach,
-    getCoachesFromPerson: getCoachesFromPerson
+    getCoachesFromPerson: getCoachesFromPerson,
+    getPersonsOfReviewer: getPersonsOfReviewer,
   };
 
   function remove(href) {
     dataservice.postItem('DELETE', href);
+  }
+
+  function getPersonsOfReviewer() {
+    var reviewer = window.sessionStorage.getItem('reviewer');
+
+    switch (reviewer) {
+      case 'Bum':
+        return PersonRestangular.one('persons', 'search').getList('findByBusinessUnitManagersId', {'id': id});
+      case 'Resource Manager':
+        return PersonRestangular.one('persons', 'search').getList('findByResourceManagersId', {'id': id});
+      case 'Competence Leader':
+        return PersonRestangular.one('persons', 'search').getList('findByCompetenceLeadersId', {'id': id});
+      case 'Practice Manager':
+        return PersonRestangular.one('persons', 'search').getList('findByPracticeManagersId', {'id': id});
+      case 'Coach':
+        return PersonRestangular.one('persons', 'search').getList('findByCoachesId', {'id': id});
+    }
+
   }
 
   function getAll() {
@@ -69,8 +88,9 @@ function PersonFactory(dataservice) {
       });
     });
   }
-  function getPerson(){
-    return getPersonById(id);
+
+  function getPerson(href) {
+    return PersonRestangular.one(href);
   }
 
   function getPersonById(id){

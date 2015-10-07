@@ -22,11 +22,10 @@
 
           <td>
             <input id="skill" class="form-control"
-                   ng-model="skillCompetence.skill" typeahead-no-results="noResults" typeahead-editable="false"
+                   ng-model="skillCompetence.skill" typeahead-no-results="noResults"
                    typeahead="skill as skill.name for skill in skills | filter:$viewValue | limitTo:8"
                    placeholder="Skill"/>
-
-
+            <div ng-if="!skillCompetence.skill._links && skillCompetence.skill" class="alert alert-danger">Select a skill from the list.</div>
           </td>
           <td>
 

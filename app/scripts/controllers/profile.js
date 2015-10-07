@@ -54,64 +54,36 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
 
   };
 
-  // v NEEDS REFACTORING v
+  //--------
+  //My users
+  //--------
 
-  if ($scope.isBum === true) {
-    $scope.myUsers = [];
-    var handleSuccessUsersFromPerson = function (data, status) {
-      for (var i = 0; i < data._embedded.persons.length; i++) {
-        $scope.myUsers.push(data._embedded.persons[i]);
-      }
-      console.log('MY USERS RETRIEVED');
-    };
+  var reviewer = window.sessionStorage.getItem('reviewer');
 
-    //Retrieve users from person
-    PersonFactory.getUsersFromPerson().success(handleSuccessUsersFromPerson);
+  switch (reviewer) {
+    case 'Bum':
+    case 'Resource Manager':
+    case 'Competence Leader':
+    case 'Practice Manager':
+    case 'Coach':
+          $scope.hasDescendants = true;
+          $scope.myDescendants = [];
+
+          var handleSuccessMyDescendants = function(data, status) {
+            for (var i = 0; i < data.length; i++) {
+              $scope.myDescendants.push(data[i]);
+            }
+          };
+          PersonFactory.getPersonsOfReviewer().then(handleSuccessMyDescendants);
+
+          break;
   }
-
-  if ($scope.isCompetenceLeader === true) {
-    $scope.myUsers = [];
-    var handleSuccessUsersFromCompetenceLeader = function (data, status) {
-      for (var i = 0; i < data._embedded.persons.length; i++) {
-        $scope.myUsers.push(data._embedded.persons[i]);
-      }
-      console.log('MY USERS RETRIEVED');
-    };
-    //Retrieve users from competence leader
-    PersonFactory.getUsersFromCompetenceLeader().success(handleSuccessUsersFromCompetenceLeader);
-  }
-
-  if ($scope.isPracticeManager === true) {
-    $scope.myUsers = [];
-    var handleSuccessUsersFromPracticeManager = function (data, status) {
-      for (var i = 0; i < data._embedded.persons.length; i++) {
-        $scope.myUsers.push(data._embedded.persons[i]);
-      }
-      console.log('MY USERS RETRIEVED');
-    };
-    //Retrieve users from practice manager
-    PersonFactory.getUsersFromPracticeManager().success(handleSuccessUsersFromPracticeManager);
-  }
-
-  if ($scope.isCoach === true) {
-    $scope.myUsers = [];
-    var handleSuccessUsersFromCoach = function (data, status) {
-      for (var i = 0; i < data._embedded.persons.length; i++) {
-        $scope.myUsers.push(data._embedded.persons[i]);
-      }
-      console.log('MY USERS RETRIEVED');
-    };
-    //Retrieve users from practice manager
-    PersonFactory.getUsersFromCoach().success(handleSuccessUsersFromCoach);
-  }
-
-  //^ NEEDS REFACTORING ^
 
   //-----------------
   //Skill competences
   //-----------------
 
-  
+  //NOT READY TO IMPLEMENT YET
 
   //-----------
   //Credentials
