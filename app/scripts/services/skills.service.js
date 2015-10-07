@@ -47,8 +47,8 @@ angular.module('empApp')
           DataService.postItem(method.method, method.url, skill, 'application/json', success);
 
         } else {
-          DataService.postItem('POST', 'http://localhost:8081/api/skillCategories/', {name: skill.category}, 'application/json', function (data, config, headers) {
-            skill.skillCategory = headers('location');
+          DataService.postItem('POST', 'http://localhost:8081/api/skillCategories/', {name: skill.category}, 'application/json', function (data) {
+            skill.skillCategory = data.headers('location');
             DataService.postItem(method.method, method.url, skill, 'application/json', success);
           });
 
