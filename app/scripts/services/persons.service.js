@@ -3,10 +3,10 @@
 angular.module('empApp')
   .factory('PersonFactory', PersonFactory);
 
-PersonFactory.$inject = ['dataservice'];
+PersonFactory.$inject = ['dataservice', 'PersonRestangular'];
 
 
-function PersonFactory(dataservice) {
+function PersonFactory(dataservice, PersonRestangular) {
 
   var persons = [];
 
@@ -38,11 +38,24 @@ function PersonFactory(dataservice) {
     getPracticeManagersFromPerson: getPracticeManagersFromPerson,
     addCoachToPerson: addCoachToPerson,
     getUsersFromCoach: getUsersFromCoach,
-    getCoachesFromPerson: getCoachesFromPerson
+    getCoachesFromPerson: getCoachesFromPerson,
+    getPersonsOfReviewer: getPersonsOfReviewer
   };
 
   function remove(href) {
     dataservice.postItem('DELETE', href);
+  }
+
+  function getPersonsOfReviewer() {
+    var reviewer = window.sessionStorage.getItem('reviewer');
+
+    switch (reviewer) {
+      case 'Bum':
+
+        return PersonRestangular.one('persons', 'search').getList('findByBusinessUnitManagersId', {'id': id});
+
+    }
+
   }
 
   function getAll() {

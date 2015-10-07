@@ -5,18 +5,29 @@
 
 <p ng-repeat="role in roles">
   Functional role {{$index + 1}}: {{role.name}}
-  <button ng-click="deleteRole(role._links.self.href)">Delete role</button>
+  <md-button ng-click="deleteRole(role._links.self.href)">Delete role</md-button>
 </p>
 
 
 <div>
     <hr>
-  <md-button>heyhey</md-button>
 </div>
 
-<md-select class="browser-default" ng-model="selectedRole" material-select watch>
-  <option ng-repeat="role in avroles">{{role.name}}</option>
+
+<h5>Pick a person to add roles to.</h5>
+<div>
+  <md-select class="" ng-model="selectedPerson" material-select watch>
+    <md-option ng-repeat="person in persons">{{person.firstName}}</md-option>
+  </md-select>
+</div>
+
+
+<div ng-if="selected">
+  <md-select class="" ng-model="selectedRole" material-select watch>
+    <md-option ng-repeat="role in avroles">{{role.name}}</md-option>
 </md-select>
+</div>
+
 <div>
   <table class="table table-hover table-striped table-bordered">
     <thead>

@@ -9,9 +9,9 @@
  */
 angular.module('empApp')
     .controller('RoleCtrl',RoleCtrl);
-RoleCtrl.$inject = ['$scope', '$log', 'dataservice', 'RoleService', '$location', 'Restangular', 'roles', 'avroles'];
+RoleCtrl.$inject = ['$scope', '$log', 'dataservice', 'RoleService', '$location', 'Restangular', 'roles', 'avroles', 'persons'];
 
-function RoleCtrl($scope, $log, dataservice, RoleService, $location, Restangular, roles, avroles) {
+function RoleCtrl($scope, $log, dataservice, RoleService, $location, Restangular, roles, avroles, persons) {
 
 
   console.log(roles);
@@ -22,6 +22,9 @@ function RoleCtrl($scope, $log, dataservice, RoleService, $location, Restangular
     $scope.roles = roles;
   }
 
+  $scope.persons = persons;
+
+  console.log(persons);
 
   $scope.avroles = avroles;
   $scope.deleteRole = function (href) {
