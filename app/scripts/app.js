@@ -19,7 +19,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap',
-    'restangular'
+    'restangular',
+    'ngMaterial'
     //'ngRoleAuth'
   ])
   .config(['$httpProvider', function ($httpProvider) {
@@ -34,7 +35,7 @@ angular
 
   }
   ])
- 
+
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -134,8 +135,18 @@ angular
           requiresLogin: true
         },
         resolve: {
-          roles: function (RoleService) {
-            return RoleService.getAll();
+          roles: function (RoleService, $location) {
+
+            return RoleService.getAll().then(function (data) {
+              return data;
+            }, function (response) {
+
+              return response.status;
+            });
+
+          },
+          avroles: function (RoleService) {
+            return RoleService.getFunctionalRoles();
           }
         }
 

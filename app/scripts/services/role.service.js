@@ -1,9 +1,9 @@
 angular.module('empApp')
   .factory('RoleService', RoleService);
 
-RoleService.$inject = ['dataservice', 'RoleRestangular'];
+RoleService.$inject = ['dataservice', 'RoleRestangular', 'PersonRestangular'];
 
-function RoleService(dataservice, RoleRestangular) {
+function RoleService(dataservice, RoleRestangular, PersonRestangular) {
   var applicationRoles = [];
   var functionalRoles = [];
   var allFunctionalRoles = [];
@@ -11,6 +11,7 @@ function RoleService(dataservice, RoleRestangular) {
   var applicationRolesPerson = [];
   var id = window.sessionStorage.getItem("id");
   var applicationrole;
+
 
 
   return {
@@ -26,30 +27,7 @@ function RoleService(dataservice, RoleRestangular) {
 
   function initialise() {
 
-    dataservice.getItem('http://localhost:8080/api/persons/' + id + '/roles/false').success(function (data) {
-      if (data._embedded.roleResources !== undefined) {
-        data._embedded.roleResources.forEach(function (role) {
-          applicationRolesPerson.push(role);
-        })
-      }
-      // applicationrole = applicationRolesPerson[0].name;
-      //window.sessionStorage.setItem('role',applicationrole);
-    });
-    dataservice.getItem('http://localhost:8080/api/persons/' + id + '/roles/true').success(function (data) {
-      if (data._embedded.roleResources !== undefined) {
-        data._embedded.roleResources.forEach(function (role) {
-          functionalRoles.push(role);
-        })
-      }
-    });
-    dataservice.getItem('http://localhost:8080/api/roles/search/isFunctional?functional=true').success(function (data) {
-      if (data._embedded.roles !== undefined) {
-        data._embedded.roles.forEach(function (role) {
-          allFunctionalRoles.push(role);
 
-        })
-      }
-    });
   }
 
   function findOne(id) {
@@ -59,21 +37,23 @@ function RoleService(dataservice, RoleRestangular) {
   function getAll() {
 
 
-    return RoleRestangular.one('persons', id).getList('roles');
+    return PersonRestangular.one('persons', id).one('roles', true).getList();
 
 
   }
+
 
   function deleteRole(roleId) {
 
 
-    return RoleRestangular.one('persons', id).one('roles', roleId).remove();
+    return PersonRestangular.one('persons', id).one('roles', roleId).remove();
 
 
   }
 
+
   function getFunctionalRoles() {
-    return functionalRoles;
+    return RoleRestangular.one('roles', 'search').getList('isFunctional', {'functional': true});
   }
 
   function updateFunctionalRoles() {
@@ -103,6 +83,9 @@ angular.module('empApp')
         if (operation === "getList") {
           // .. and handle the data and meta data
           extractedData = data._embedded.roles;
+          if (extractedData == null) {
+            return true;
+          }
         } else {
           extractedData = data._embedded.roles;
         }

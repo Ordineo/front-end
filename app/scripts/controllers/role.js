@@ -9,14 +9,21 @@
  */
 angular.module('empApp')
     .controller('RoleCtrl',RoleCtrl);
-RoleCtrl.$inject = ['$scope', '$log', 'dataservice', 'RoleService', '$location', 'Restangular', 'roles'];
+RoleCtrl.$inject = ['$scope', '$log', 'dataservice', 'RoleService', '$location', 'Restangular', 'roles', 'avroles'];
 
-function RoleCtrl($scope, $log, dataservice, RoleService, $location, Restangular, roles) {
-
-
-  $scope.roles = roles;
+function RoleCtrl($scope, $log, dataservice, RoleService, $location, Restangular, roles, avroles) {
 
 
+  console.log(roles);
+
+  if (roles == 404) {
+    $scope.message = "You have no roles yet! Add some roles to your collection!"
+  } else {
+    $scope.roles = roles;
+  }
+
+
+  $scope.avroles = avroles;
   $scope.deleteRole = function (href) {
 
     var parts = [];

@@ -209,3 +209,30 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
     PersonFactory.addCoachToPerson(person);
   }
 }
+angular.module('empApp')
+  .factory('PersonRestangular', function (Restangular) {
+    return Restangular.withConfig(function (RestangularConfigurer) {
+      RestangularConfigurer.setBaseUrl('http://localhost:8080/api/');
+
+      RestangularConfigurer.setRestangularFields({
+        selfLink: 'self.link'
+      });
+
+      RestangularConfigurer.addResponseInterceptor(function (data, operation, what, url, response, deferred) {
+        var extractedData;
+        // .. to look for getList operations
+        if (operation === "getList") {
+          // .. and handle the data and meta data
+          extractedData = data._embedded.roleResources;
+
+          if (extractedData == null) {
+            extractedData = data._embedded.persons;
+          }
+        } else {
+          extractedData = data._embedded.roles;
+        }
+        return extractedData;
+      });
+
+    });
+  });

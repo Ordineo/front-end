@@ -1,8 +1,8 @@
 <h4>Role Details</h4>
-<hr>
-<!--<p ng-repeat="selectedPersonsApplicationRole in selectedPersonsApplicationRoles">
-  Application role {{$index + 1}}: {{selectedPersonsApplicationRole}}
-</p>-->
+<h5>{{message}}</h5>
+
+
+
 <p ng-repeat="role in roles">
   Functional role {{$index + 1}}: {{role.name}}
   <button ng-click="deleteRole(role._links.self.href)">Delete role</button>
@@ -11,8 +11,12 @@
 
 <div>
     <hr>
+  <md-button>heyhey</md-button>
 </div>
 
+<md-select class="browser-default" ng-model="selectedRole" material-select watch>
+  <option ng-repeat="role in avroles">{{role.name}}</option>
+</md-select>
 <div>
   <table class="table table-hover table-striped table-bordered">
     <thead>
