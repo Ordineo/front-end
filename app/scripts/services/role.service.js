@@ -51,7 +51,6 @@ function RoleService(dataservice, RoleRestangular, PersonRestangular) {
 
   }
 
-
   function getFunctionalRoles() {
     return RoleRestangular.one('roles', 'search').getList('isFunctional', {'functional': true});
   }

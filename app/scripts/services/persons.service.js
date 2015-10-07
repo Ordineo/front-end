@@ -39,7 +39,7 @@ function PersonFactory(dataservice, PersonRestangular) {
     addCoachToPerson: addCoachToPerson,
     getUsersFromCoach: getUsersFromCoach,
     getCoachesFromPerson: getCoachesFromPerson,
-    getPersonsOfReviewer: getPersonsOfReviewer
+    getPersonsOfReviewer: getPersonsOfReviewer,
   };
 
   function remove(href) {
@@ -51,9 +51,15 @@ function PersonFactory(dataservice, PersonRestangular) {
 
     switch (reviewer) {
       case 'Bum':
-
         return PersonRestangular.one('persons', 'search').getList('findByBusinessUnitManagersId', {'id': id});
-
+      case 'Resource Manager':
+        return PersonRestangular.one('persons', 'search').getList('findByResourceManagersId', {'id': id});
+      case 'Competence Leader':
+        return PersonRestangular.one('persons', 'search').getList('findByCompetenceLeadersId', {'id': id});
+      case 'Practice Manager':
+        return PersonRestangular.one('persons', 'search').getList('findByPracticeManagersId', {'id': id});
+      case 'Coach':
+        return PersonRestangular.one('persons', 'search').getList('findByCoachesId', {'id': id});
     }
 
   }
@@ -82,8 +88,9 @@ function PersonFactory(dataservice, PersonRestangular) {
       });
     });
   }
-  function getPerson(){
-    return getPersonById(id);
+
+  function getPerson(href) {
+    return PersonRestangular.one(href);
   }
 
   function getPersonById(id){

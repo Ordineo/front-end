@@ -14,15 +14,19 @@
 </div>
 
 
-<h5>Pick a person to add roles to.</h5>
-<div>
-  <md-select class="" ng-model="selectedPerson" material-select watch>
-    <md-option ng-repeat="person in persons">{{person.firstName}}</md-option>
+<h5>Pick a person in your unit to add roles to.</h5>
+<div ng-hide="selected">
+  <md-select class="" ng-change="selectPerson(person._links.self.href)" ng-model="selectedPerson"
+             material-select watch>
+    <md-option ng-repeat="person in persons">
+      {{person.firstName}}
+    </md-option>
   </md-select>
 </div>
 
 
 <div ng-if="selected">
+  <h6>{{namePerson}}</h6>
   <md-select class="" ng-model="selectedRole" material-select watch>
     <md-option ng-repeat="role in avroles">{{role.name}}</md-option>
 </md-select>
