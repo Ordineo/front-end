@@ -45,30 +45,48 @@ angular
           requiresLogin: false
 
         }
-
       })
       .when('/dashboard', {
         templateUrl: 'views/dashboard.html',
         controller: 'DashboardCtrl',
         access: {
           requiresLogin: true
-
         }
-
-      }).when('/panel', {
-        templateUrl: 'views/panel.html',
-        controller: 'PanelCtrl',
-        access: {
-          requiresLogin: true
-
-        }
-
       })
       .when('/profile', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl',
         access: {
           requiresLogin: true
+        },
+        resolve: {
+
+
+
+          /*roles: function (RoleService, $location) {
+
+            return RoleService.getAll().then(function (data) {
+              return data;
+            }, function (response) {
+
+              return response.status;
+            });
+
+          },
+          avroles: function (RoleService) {
+            return RoleService.getFunctionalRoles();
+          },
+          persons: function (PersonFactory) {
+            return PersonFactory.getPersonsOfReviewer();
+          }*/
+        }
+      })
+      .when('/panel', {
+        templateUrl: 'views/panel.html',
+        controller: 'PanelCtrl',
+        access: {
+          requiresLogin: true
+
         }
       })
       .when('/search', {
