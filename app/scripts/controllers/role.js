@@ -35,16 +35,71 @@ function RoleCtrl($scope, $log, dataservice, RoleService, $location, Restangular
 
     console.log(parts[5]);
 
-    RoleService.deleteRole(parts[5]);
+    RoleService.deleteRole(window.sessionStorage.getItem('id'), parts[5]);
+
+
+  };
+
+  $scope.addRole = function () {
+
+    var roleId = splitLink($scope.rolling._links.self.href);
+
+    RoleService.addRoleToPerson($scope.personId, roleId).then(function (data) {
+      RoleService.findRolesForOther($scope.personId).then(function (data) {
+        $scope.otherRoles = data;
+      })
+
+
+    });
+
+  };
+
+  var splitLink = function (href) {
+
+    var parts = [];
+    var link = href;
+    parts = link.split("/", 6);
+
+    return parts[5];
+
+
+  };
+  $scope.selectRole = function () {
+
+    $scope.roleSelected = true;
+  };
+
+  $scope.removeRoleOfOther = function (href) {
+
+    var roleId = splitLink(href);
+
+    RoleService.deleteRole($scope.personId, roleId).then(function (data) {
+      RoleService.findRolesForOther($scope.personId).then(function (data) {
+        $scope.otherRoles = data;
+      })
+    });
 
 
   };
 
   $scope.selectPerson = function () {
 
-    console.log("kuku");
+    $scope.namePerson = $scope.selectedItem.firstName;
 
-    // $scope.namePerson = PersonFactory.getPerson(href);
+
+    var parts = [];
+    var href = $scope.selectedItem._links.self.href;
+    console.log();
+    parts = href.split("/", 6);
+
+    $scope.personId = parts[5];
+    console.log(parts[5]);
+
+
+    RoleService.findRolesForOther(parts[5]).then(function (data) {
+      $scope.selected = true;
+      $scope.otherRoles = data;
+    });
 
 
   };

@@ -2,10 +2,9 @@
 <h5>{{message}}</h5>
 
 
-
 <p ng-repeat="role in roles">
   Functional role {{$index + 1}}: {{role.name}}
-  <md-button ng-click="deleteRole(role._links.self.href)">Delete role</md-button>
+  <button class="btn btn-primary" ng-click="deleteRole(role._links.self.href)">Delete role</button>
 </p>
 
 
@@ -15,34 +14,50 @@
 
 
 <h5>Pick a person in your unit to add roles to.</h5>
-<div ng-hide="selected">
-  <md-select class="" ng-change="selectPerson(person._links.self.href)" ng-model="selectedPerson"
-             material-select watch>
-    <md-option ng-repeat="person in persons">
-      {{person.firstName}}
-    </md-option>
-  </md-select>
-</div>
-
-
-<div ng-if="selected">
-  <h6>{{namePerson}}</h6>
-  <md-select class="" ng-model="selectedRole" material-select watch>
-    <md-option ng-repeat="role in avroles">{{role.name}}</md-option>
-</md-select>
-</div>
-
 <div>
+
+
+  <p>selected item is : {{selectedItem.firstName}}</p>
+
+  <p> link to selected item is : {{selectedItem._links.self.href}} </p>
+  <select class="" ng-change="selectPerson()" ng-model="selectedItem"
+          ng-options="person.firstName for person in persons">
+  </select>
+
+
+</div>
+
+
+<div ng-show="selected">
+  <h6>Select a role</h6>
+
+  <p>selected item is : {{rolling.name}}</p>
+
+  <p>link to selected item is : {{rolling._links.self.href}} </p>
+
+  <select class="" ng-change="selectRole()" ng-model="rolling"
+          ng-options="role.name for role in avroles">
+  </select>
+  <button ng-click="addRole(rolling)">Add
+  </button>
+
+
+  <div>
   <table class="table table-hover table-striped table-bordered">
     <thead>
     <tr>
-      <th>Roles</th>
+      <th>{{selectedItem.firstName}} 's roles</th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="functionalRole in allFunctionalRoles">
-      <td>{{functionalRole.name}}</td>
+    <tr ng-repeat="otherRole in otherRoles">
+      <td>{{otherRole.name}}</td>
+      <td>
+        <button ng-click="removeRoleOfOther(otherRole._links.self.href)">remove</button>
+      </td>
     </tr>
+
     </tbody>
   </table>
+</div>
 </div>

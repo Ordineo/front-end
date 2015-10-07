@@ -258,7 +258,7 @@ angular.module('empApp')
             extractedData = data._embedded.persons;
           }
         } else {
-          extractedData = data._embedded.roles;
+          extractedData = null;
         }
         return extractedData;
       });

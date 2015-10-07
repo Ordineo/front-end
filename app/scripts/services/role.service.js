@@ -19,7 +19,9 @@ function RoleService(dataservice, RoleRestangular, PersonRestangular) {
     updateFunctionalRoles: updateFunctionalRoles,
     getFunctionalRoles: getFunctionalRoles,
     getAll: getAll,
-    deleteRole: deleteRole
+    deleteRole: deleteRole,
+    findRolesForOther: findRolesForOther,
+    addRoleToPerson: addRoleToPerson
 
 
   };
@@ -30,8 +32,18 @@ function RoleService(dataservice, RoleRestangular, PersonRestangular) {
 
   }
 
-  function findOne(id) {
+  function addRoleToPerson(personId, role) {
 
+
+    return PersonRestangular.one('persons', personId).all('roles').one(role).post();
+
+
+  }
+
+  function findRolesForOther(personId) {
+
+
+    return PersonRestangular.one('persons', personId).one('roles', true).getList();
   }
 
   function getAll() {
@@ -43,10 +55,10 @@ function RoleService(dataservice, RoleRestangular, PersonRestangular) {
   }
 
 
-  function deleteRole(roleId) {
+  function deleteRole(personId, roleId) {
 
 
-    return PersonRestangular.one('persons', id).one('roles', roleId).remove();
+    return PersonRestangular.one('persons', personId).one('roles', roleId).remove();
 
 
   }
