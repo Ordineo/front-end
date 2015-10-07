@@ -8,7 +8,6 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
 
   if(AuthenticateFactory.isAuthorized()){
     $scope.isLogged = true;
-    getMyProfile();
     checkMyRoles();
   }
 
@@ -41,25 +40,6 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
     };
     AuthenticateFactory.getLogin(credentials).success(handleSuccess).error(handleError);
   };
-
-  //Get my profile
-  function getMyProfile() {
-    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id')).success(function (data) {
-      console.log(data);
-      $scope.myProfile = {
-        active: data.active,
-        photo: data.photo,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        gender: data.gender,
-        birthDate: data.birthDate,
-        address: data.address,
-        unit: data.unit,
-        enrollmentDate: data.enrolmentDate,
-        contactInformation: data.contactInformation
-      };
-    });
-  }
 
   //Check my roles
   function checkMyRoles() {

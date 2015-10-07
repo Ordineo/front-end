@@ -9,9 +9,18 @@ PersonFactory.$inject = ['dataservice', 'PersonRestangular'];
 function PersonFactory(dataservice, PersonRestangular) {
 
   var persons = [];
-
+  var href = 'http://localhost:8080';
   var id = window.sessionStorage.getItem("id");
   return {
+    getMyDetails: getMyDetails,
+    getMyApplicationRoles: getMyApplicationRoles,
+    getMyFunctionalRoles: getMyFunctionalRoles,
+    getMyCustomers: getMyCustomers,
+    getMyBusinessUnitManagers: getMyBusinessUnitManagers,
+    getMyCompetenceLeaders: getMyCompetenceLeaders,
+    getMyPracticeManagers: getMyPracticeManagers,
+    getMyCoaches: getMyCoaches,
+
     remove: remove,
     getAll: getAll,
     updatePerson: updatePerson,
@@ -39,8 +48,48 @@ function PersonFactory(dataservice, PersonRestangular) {
     addCoachToPerson: addCoachToPerson,
     getUsersFromCoach: getUsersFromCoach,
     getCoachesFromPerson: getCoachesFromPerson,
-    getPersonsOfReviewer: getPersonsOfReviewer,
+    getPersonsOfReviewer: getPersonsOfReviewer
   };
+
+  //----------
+  //My profile
+  //----------
+
+  function getMyDetails() {
+    return dataservice.getItem(href + '/api/persons/' + id);
+  }
+
+  function getMyApplicationRoles() {
+    return dataservice.getItem(href + '/api/persons/' + id + '/roles/false');
+  }
+
+  function getMyFunctionalRoles() {
+    return dataservice.getItem(href + '/api/persons/' + id + '/roles/true');
+  }
+
+  function getMyCustomers() {
+    return dataservice.getItem(href + '/api/persons/' + id + '/customers');
+  }
+
+  function getMyBusinessUnitManagers() {
+    return dataservice.getItem(href + '/api/persons/' + id + '/businessUnitManagers');
+  }
+
+  function getMyCompetenceLeaders() {
+    return dataservice.getItem(href + '/api/persons/' + id + '/competenceLeaders');
+  }
+
+  function getMyPracticeManagers() {
+    return dataservice.getItem(href + '/api/persons/' + id + '/practiceManagers');
+  }
+
+  function getMyCoaches() {
+    return dataservice.getItem(href + '/api/persons/' + id + '/coaches');
+  }
+
+  //
+  //
+  //
 
   function remove(href) {
     dataservice.postItem('DELETE', href);

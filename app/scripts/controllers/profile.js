@@ -13,66 +13,142 @@ angular.module('empApp')
 ProfileCtrl.$inject = ['$scope', '$modal', '$log', '$http', '$location', 'dataservice', 'PersonFactory', 'SkillFactory', 'SkillCompetenceFactory'];
 
 function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, PersonFactory, SkillFactory, SkillCompetenceFactory) {
-
-
   $log.info('ProfileCtrl loaded');
 
-  var id = window.sessionStorage.getItem("id");
-  if (!$scope.isAdmin) {
-    $scope.isAdmin = false;
-  }
-
-  $scope.makeAdmin = function () {
-
-    var formData = {
-      name: 'admin',
-      isFunctional: false
-    };
-
-    var handleSuccess = function (data, status, headers) {
-      console.log(data);
-
-      $scope.isAdmin = true;
-
-      //dataservice.postItem('POST','http://localhost:8080/api/persons/RoleToPerson/'+id,);
-
-      var handleGetRole = function (data, status, headers) {
-
-        var dataForm = {
-          name: data.name,
-          isFunctional: data.functional
-        };
-
-        dataservice.postItem('POST', 'http://localhost:8080/api/persons/RoleToPerson/' + id, dataForm, 'application/json');
-
-      };
-
-      dataservice.getItem(headers('Location')).success(handleGetRole);
-    };
-    dataservice.postItem('POST', 'http://localhost:8080/api/roles', formData, 'application/json').success(handleSuccess);
-
-
-  };
-
-  //--------
-  //My users
-  //--------
-
   var reviewer = window.sessionStorage.getItem('reviewer');
+  var bum = 'Bum';
+  var resourceManager = 'Resource Manager';
+  var competenceLeader = 'Competence Leader';
+  var practiceManager = 'Practice Manager';
+  var coach = 'Coach';
+  var consultant = 'Consultant';
+  var seniorConsultant = 'Senior Consultant';
+
+  //----------
+  //Details
+  //----------
+
+  var handleSuccessMyDetails = function(data, status) {
+    $scope.myProfile = data;
+    console.log(data);
+  };
+  PersonFactory.getMyDetails().success(handleSuccessMyDetails);
+
+  //-----
+  //Roles
+  //-----
+
+  var handleSuccessMyApplicationRoles = function(data, status) {
+    $scope.myApplicationRoles = data._embedded.roleResources;
+  };
+  var handleSuccessMyFunctionalRoles = function(data, status) {
+    $scope.myFunctionalRoles = data._embedded.roleResources;
+  };
+  PersonFactory.getMyApplicationRoles().success(handleSuccessMyApplicationRoles);
+  PersonFactory.getMyFunctionalRoles().success(handleSuccessMyFunctionalRoles);
+
+  //---------
+  //Customers
+  //---------
 
   switch (reviewer) {
-    case 'Bum':
-    case 'Resource Manager':
-    case 'Competence Leader':
-    case 'Practice Manager':
-    case 'Coach':
+    case consultant:
+    case seniorConsultant:
+          $scope.hasCustomers = true;
+
+          var handleSuccessMyCustomers = function(data, status) {
+            $scope.myCustomers = data._embedded.customers;
+          };
+          PersonFactory.getMyCustomers().success(handleSuccessMyCustomers);
+
+          break;
+  }
+
+  //----------------------
+  //Business unit managers
+  //----------------------
+
+  switch (reviewer) {
+    case competenceLeader:
+    case practiceManager:
+    case coach:
+    case consultant:
+    case seniorConsultant:
+          $scope.hasBusinessUnitManagers = true;
+
+          var handleSuccessMyBusinessUnitManagers = function(data, status) {
+            $scope.myBusinessUnitManagers = data._embedded.persons;
+          };
+          PersonFactory.getMyBusinessUnitManagers().success(handleSuccessMyBusinessUnitManagers);
+
+          break;
+  }
+
+  //------------------
+  //Competence leaders
+  //------------------
+
+  switch (reviewer) {
+    case consultant:
+    case seniorConsultant:
+          $scope.hasCompetenceLeaders = true;
+
+          var handleSuccessMyCompetenceLeaders = function(data, status) {
+            $scope.myCompetenceLeaders = data._embedded.persons;
+          };
+          PersonFactory.getMyCompetenceLeaders().success(handleSuccessMyCompetenceLeaders);
+
+          break;
+  }
+
+  //-----------------
+  //Practice managers
+  //-----------------
+
+  switch (reviewer) {
+    case consultant:
+    case seniorConsultant:
+          $scope.hasPracticeManagers = true;
+
+          var handleSuccessMyPracticeManagers = function(data, status) {
+            $scope.myPracticeManagers = data._embedded.persons;
+          };
+          PersonFactory.getMyPracticeManagers().success(handleSuccessMyPracticeManagers);
+
+          break;
+  }
+
+  //-------
+  //Coaches
+  //-------
+
+  switch (reviewer) {
+    case consultant:
+    case seniorConsultant:
+      $scope.hasCoaches = true;
+
+      var handleSuccessMyCoaches = function(data, status) {
+        $scope.myCoaches = data._embedded.persons;
+      };
+      PersonFactory.getMyCoaches().success(handleSuccessMyCoaches);
+
+      break;
+  }
+
+  //-----------
+  //Descendants
+  //-----------
+
+  switch (reviewer) {
+    case bum:
+    case resourceManager:
+    case competenceLeader:
+    case practiceManager:
+    case coach:
           $scope.hasDescendants = true;
-          $scope.myDescendants = [];
 
           var handleSuccessMyDescendants = function(data, status) {
-            for (var i = 0; i < data.length; i++) {
-              $scope.myDescendants.push(data[i]);
-            }
+            $scope.myDescendants = data;
           };
           PersonFactory.getPersonsOfReviewer().then(handleSuccessMyDescendants);
 
@@ -83,13 +159,13 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
   //Skill competences
   //-----------------
 
-  //NOT READY TO IMPLEMENT YET
+  //Code here
 
   //-----------
   //Credentials
   //-----------
 
   $scope.modifyMyCredentials = function() {
-    window.alert('Oops, Looks like we didn\'t find any implementation yet!');
+    window.alert('Oops, looks like we didn\'t find any implementation yet!');
   };
 }

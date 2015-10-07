@@ -3,12 +3,11 @@
   <hr>
   <div>
     <h4>Details</h4>
-    <hr>
     <dl class="dl-horizontal">
       <dt>Active</dt>
       <dd><input type="checkbox" ng-model="myProfile.active" disabled/></dd>
       <dt>Photo</dt>
-      <dd><img src="https://s3.amazonaws.com/codecademy-blog/assets/f3a16fb6.jpg" alt="Profile picture"></dd>
+      <dd><img ng-src="{{myProfile.photo}}" alt="Profile photo"/></dd>
       <dt>First name</dt>
       <dd>{{myProfile.firstName}}</dd>
       <dt>Last name</dt>
@@ -29,72 +28,125 @@
     <hr>
   </div>
   <div>
-    <h4>Update details</h4>
-    <hr>
-    <p>NOT IMPLEMENTED YET</p>
-    <hr>
-  </div>
-  <div>
     <h4>Roles</h4>
-    <hr>
-    <dl class="dl-horizontal">
-      <dt>Application roles</dt>
-      <dd></dd>
-      <dd></dd>
-      <dt>Functional roles</dt>
-      <dd></dd>
-      <dd></dd>
-    </dl>
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Application roles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="myApplicationRole in myApplicationRoles">
+          <td>{{myApplicationRole.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Functional roles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="myFunctionalRole in myFunctionalRoles">
+          <td>{{myFunctionalRole.name}}</td>
+        </tr>
+      </tbody>
+    </table>
     <hr>
   </div>
   <div>
     <h4>Customers</h4>
-    <hr>
-    <dl class="dl-horizontal">
-      <dt></dt>
-      <dd></dd>
-    </dl>
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="myCustomer in myCustomers">
+          <td>{{myCustomer.name}}</td>
+          <td>{{myCustomer.description}}</td>
+        </tr>
+      </tbody>
+    </table>
     <hr>
   </div>
-  <div>
+  <div ng-if="hasBusinessUnitManagers">
     <h4>Business unit managers</h4>
-    <hr>
-    <dl class="dl-horizontal">
-      <dt></dt>
-      <dd></dd>
-    </dl>
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="myBusinessUnitManager in myBusinessUnitManagers">
+          <td>{{myBusinessUnitManager.firstName}}</td>
+          <td>{{myBusinessUnitManager.lastName}}</td>
+        </tr>
+      </tbody>
+    </table>
     <hr>
   </div>
-  <div>
+  <div ng-if="hasCompetenceLeaders">
     <h4>Competence leaders</h4>
-    <hr>
-    <dl class="dl-horizontal">
-      <dt></dt>
-      <dd></dd>
-    </dl>
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="myCompetenceLeader in myCompetenceLeaders">
+          <td>{{myCompetenceLeader.firstName}}</td>
+          <td>{{myCompetenceLeader.lastName}}</td>
+        </tr>
+      </tbody>
+    </table>
     <hr>
   </div>
-  <div>
+  <div ng-if="hasPracticeManagers">
     <h4>Practice managers</h4>
-    <hr>
-    <dl class="dl-horizontal">
-      <dt></dt>
-      <dd></dd>
-    </dl>
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="myPracticeManager in myPracticeManagers">
+          <td>{{myPracticeManager.firstName}}</td>
+          <td>{{myPracticeManager.lastName}}</td>
+        </tr>
+      </tbody>
+    </table>
     <hr>
   </div>
   <div>
     <h4>Coaches</h4>
-    <hr>
-    <dl class="dl-horizontal">
-      <dt></dt>
-      <dd></dd>
-    </dl>
+    <table class="table table-hover table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="myCoach in myCoaches">
+          <td>{{myCoach.firstName}}</td>
+          <td>{{myCoach.lastName}}</td>
+        </tr>
+      </tbody>
+    </table>
     <hr>
   </div>
   <div ng-if="hasDescendants">
-    <h4>My descendants</h4>
-    <hr>
+    <h4>Descendants</h4>
     <table class="table table-hover table-striped table-bordered">
       <thead>
         <tr>
@@ -113,26 +165,12 @@
   </div>
   <div>
     <h4>Skill competences</h4>
+    <p>Oops, looks like we didn't find any implementation yet!</p>
     <hr>
-    <p>NOT READY TO IMPLEMENT YET</p>
   </div>
-
   <div>
     <h4>Credentials</h4>
-    <hr>
     <button ng-click="modifyMyCredentials()">Modify</button>
     <hr>
   </div>
 </div>
-
-<!--
-_links (get stuff):
-
-bussinessUnitManagers
-coaches
-competenceLeaders
-customers
-practiceManagers
-roles
-self: href
--->
