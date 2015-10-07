@@ -49,7 +49,7 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
 
         };
 
-        dataservice.postItem('POST', 'http://localhost:8080/api/persons/', formData, 'application/json').success(handleSuccess);
+        dataservice.postItem('POST', 'http://localhost:9900/api/persons/', formData, 'application/json').success(handleSuccess);
       }else{
         $scope.errmsg = 'Fill in valid data!';
         console.log('Not valid');
@@ -74,13 +74,13 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
           isFunctional: data.functional
         };
 
-        dataservice.postItem('POST', 'http://localhost:8080/api/persons/RoleToPerson/' + id, dataForm, 'application/json');
+        dataservice.postItem('POST', 'http://localhost:9900/api/persons/RoleToPerson/' + id, dataForm, 'application/json');
 
       };
 
       dataservice.getItem(headers('Location')).success(handleGetRole);
     };
-    dataservice.postItem('POST', 'http://localhost:8080/api/roles', formData, 'application/json').success(handleSuccess);
+    dataservice.postItem('POST', 'http://localhost:9900/api/roles', formData, 'application/json').success(handleSuccess);
 
 
   };
@@ -241,7 +241,7 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
 angular.module('empApp')
   .factory('PersonRestangular', function (Restangular) {
     return Restangular.withConfig(function (RestangularConfigurer) {
-      RestangularConfigurer.setBaseUrl('http://localhost:8080/api/');
+      RestangularConfigurer.setBaseUrl('http://localhost:9900/api/');
 
       RestangularConfigurer.setRestangularFields({
         selfLink: 'self.link'

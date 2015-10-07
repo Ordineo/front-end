@@ -6,7 +6,7 @@ CustomerFactory.$inject = ['dataservice'];
 
 function CustomerFactory(dataservice) {
   var customers = [];
-  var customersURL = 'http://localhost:8080/api/customers';
+  var customersURL = 'http://localhost:9900/api/customers';
 
   return {
     getCustomers: getCustomers,

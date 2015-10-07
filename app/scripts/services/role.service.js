@@ -69,7 +69,7 @@ function RoleService(dataservice, RoleRestangular, PersonRestangular) {
 
   function updateFunctionalRoles() {
     functionalRoles = [];
-    dataservice.getItem('http://localhost:8080/api/roles/search/findByIdAndIsFunctional?id=' + id + '&functional=true').success(function (data) {
+    dataservice.getItem('http://localhost:9900/api/roles/search/findByIdAndIsFunctional?id=' + id + '&functional=true').success(function (data) {
       data._embedded.roles.forEach(function (role) {
         if (data._embedded.roles !== undefined) {
           functionalRoles.push(role);
@@ -82,7 +82,7 @@ function RoleService(dataservice, RoleRestangular, PersonRestangular) {
 angular.module('empApp')
   .factory('RoleRestangular', function (Restangular) {
     return Restangular.withConfig(function (RestangularConfigurer) {
-      RestangularConfigurer.setBaseUrl('http://localhost:8080/api/');
+      RestangularConfigurer.setBaseUrl('http://localhost:9900/api/');
 
       RestangularConfigurer.setRestangularFields({
         selfLink: 'self.link'

@@ -18,7 +18,7 @@ $scope.getPersons();
 
         PersonFactory.getPerson(selected)
 
-        // dataservice.postItem('POST','http://localhost:8080/api/persons/2/bums/1',null,'application/json');
+        // dataservice.postItem('POST','http://localhost:9900/api/persons/2/bums/1',null,'application/json');
 
     }
 

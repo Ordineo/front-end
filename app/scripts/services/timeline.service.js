@@ -6,7 +6,7 @@ angular.module('empApp')
     var id = window.sessionStorage.getItem("id");
     var myTimeline = [];
 
-    dataservice.getItem('http://localhost:8082/api/timelines/person/' + id).success(function(data) {
+    dataservice.getItem('http://localhost:9900/api/timelines/person/' + id).success(function(data) {
       data._embedded.objectiveResources.forEach(function(event) {
         myTimeline.push(event);
       })

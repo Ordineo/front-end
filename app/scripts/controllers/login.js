@@ -51,7 +51,7 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
     var consultant = 'Consultant';
     var seniorConsultant = 'Senior Consultant';
 
-    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function(data) {
+    $http.get('http://localhost:9900/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function(data) {
       for (var i = 0; i < data._embedded.roles.length; i++) {
         switch (data._embedded.roles[i].name) {
           case bum:

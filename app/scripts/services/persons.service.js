@@ -9,7 +9,7 @@ PersonFactory.$inject = ['dataservice', 'PersonRestangular'];
 function PersonFactory(dataservice, PersonRestangular) {
 
   var persons = [];
-  var href = 'http://localhost:8080';
+  var href = 'http://localhost:9900';
   var id = window.sessionStorage.getItem("id");
   return {
     getMyDetails: getMyDetails,
@@ -114,7 +114,7 @@ function PersonFactory(dataservice, PersonRestangular) {
   }
 
   function getAll() {
-    dataservice.getItem('http://localhost:8080/api/persons').success(function(data) {
+    dataservice.getItem('http://localhost:9900/api/persons').success(function(data) {
       persons = data;
     });
     return persons;
@@ -125,13 +125,13 @@ function PersonFactory(dataservice, PersonRestangular) {
   }
 
   function getSelectedPerson(selected){
-    return dataservice.getItem('http://localhost:8080/api/persons/search/findByFirstName?name='+selected);
+    return dataservice.getItem('http://localhost:9900/api/persons/search/findByFirstName?name='+selected);
   }
 
   function initialise() {
 
 
-    dataservice.getItem('http://localhost:8080/api/persons').success(function (data) {
+    dataservice.getItem('http://localhost:9900/api/persons').success(function (data) {
       data._embedded.persons.forEach(function (person) {
         persons.push(person);
       });
@@ -143,7 +143,7 @@ function PersonFactory(dataservice, PersonRestangular) {
   }
 
   function getPersonById(id){
-    return dataservice.getItem('http://localhost:8080/api/persons/'+id);
+    return dataservice.getItem('http://localhost:9900/api/persons/'+id);
   }
 
   function updatePerson(person) {
@@ -224,7 +224,7 @@ function PersonFactory(dataservice, PersonRestangular) {
   }
 
   function getUsersFromPerson() {
-    return dataservice.getItem('http://localhost:8080/api/persons/search/findByBusinessUnitManagersId?id=' + id);
+    return dataservice.getItem('http://localhost:9900/api/persons/search/findByBusinessUnitManagersId?id=' + id);
   }
 
   function getBumsFromPerson(person) {
@@ -239,7 +239,7 @@ function PersonFactory(dataservice, PersonRestangular) {
   }
 
   function getUsersFromCompetenceLeader() {
-    return dataservice.getItem('http://localhost:8080/api/persons/search/findByCompetenceLeadersId?id=' + id);
+    return dataservice.getItem('http://localhost:9900/api/persons/search/findByCompetenceLeadersId?id=' + id);
   }
 
   function getCompetenceLeadersFromPerson(person) {
@@ -254,7 +254,7 @@ function PersonFactory(dataservice, PersonRestangular) {
   }
 
   function getUsersFromPracticeManager() {
-    return dataservice.getItem('http://localhost:8080/api/persons/search/findByPracticeManagersId?id=' + id);
+    return dataservice.getItem('http://localhost:9900/api/persons/search/findByPracticeManagersId?id=' + id);
   }
 
   function getPracticeManagersFromPerson(person) {
@@ -269,7 +269,7 @@ function PersonFactory(dataservice, PersonRestangular) {
   }
 
   function getUsersFromCoach() {
-    return dataservice.getItem('http://localhost:8080/api/persons/search/findByCoachesId?id=' + id);
+    return dataservice.getItem('http://localhost:9900/api/persons/search/findByCoachesId?id=' + id);
   }
 
   function getCoachesFromPerson(person) {
@@ -307,7 +307,7 @@ function RoleFactory(dataservice,PersonFactory) {
 function initialise() {
 
 
-  dataservice.getItem('http://localhost:8080/api/persons/'+id+'/roles/false').success(function (data) {
+  dataservice.getItem('http://localhost:9900/api/persons/'+id+'/roles/false').success(function (data) {
     if(data._embedded.roleResources !== undefined) {
       data._embedded.roleResources.forEach(function (role) {
         applicationRolesPerson.push(role);
@@ -315,20 +315,20 @@ function initialise() {
    // applicationrole = applicationRolesPerson[0].name;
     //window.sessionStorage.setItem('role',applicationrole);
   });
-  dataservice.getItem('http://localhost:8080/api/persons/' + id + '/roles/true').success(function (data) {
+  dataservice.getItem('http://localhost:9900/api/persons/' + id + '/roles/true').success(function (data) {
     if(data._embedded.roleResources !== undefined) {
       data._embedded.roleResources.forEach(function (role) {
         functionalRoles.push(role);
       })}
   });
-  dataservice.getItem('http://localhost:8080/api/roles/search/isFunctional?functional=true').success(function (data) {
+  dataservice.getItem('http://localhost:9900/api/roles/search/isFunctional?functional=true').success(function (data) {
     if(data._embedded.roles !== undefined) {
       data._embedded.roles.forEach(function (role) {
         allFunctionalRoles.push(role);
 
       })}
   });
-  dataservice.getItem('http://localhost:8080/api/roles/search/isFunctional?functional=false').success(function (data) {
+  dataservice.getItem('http://localhost:9900/api/roles/search/isFunctional?functional=false').success(function (data) {
     if(data._embedded.roles !== undefined) {
       data._embedded.roles.forEach(function (role) {
         allApplicationRoles.push(role);
@@ -351,7 +351,7 @@ function initialise() {
         }
   function updateFunctionalRoles () {
           functionalRoles = [];
-          dataservice.getItem('http://localhost:8080/api/roles/search/findByIdAndIsFunctional?id='+id+'&functional=true').success(function (data) {
+          dataservice.getItem('http://localhost:9900/api/roles/search/findByIdAndIsFunctional?id='+id+'&functional=true').success(function (data) {
             data._embedded.roles.forEach(function (role) {
               if(data._embedded.roles !== undefined) {
               functionalRoles.push(role);

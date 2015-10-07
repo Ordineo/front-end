@@ -57,7 +57,7 @@ function SettingCtrl ($scope, $log, $modal, $timeout, dataservice) {
       $scope.passwordWrong = true;
     }
 
-    dataservice.postItem('POST', 'http://localhost:8080/api/persons/' + id + '/settings/resetPassword', userData, 'application/json').success(handleSuccess).error(handleError);
+    dataservice.postItem('POST', 'http://localhost:9900/api/persons/' + id + '/settings/resetPassword', userData, 'application/json').success(handleSuccess).error(handleError);
   }
 
   };

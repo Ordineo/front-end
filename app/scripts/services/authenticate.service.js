@@ -48,7 +48,7 @@ function AuthenticateFactory(dataservice, PersonFactory, RoleFactory) {
       role = roles[0].name;
 
     };
-    dataservice.getItem('http://localhost:8080/api/roles/search/findByIdAndIsFunctional?id=' + PersonFactory.getId() + '&functional=false').success(handleIt);
+    dataservice.getItem('http://localhost:9900/api/roles/search/findByIdAndIsFunctional?id=' + PersonFactory.getId() + '&functional=false').success(handleIt);
     return role;
 
   }
@@ -56,7 +56,7 @@ function AuthenticateFactory(dataservice, PersonFactory, RoleFactory) {
 
   function getLogin(secret) {
 
-    return dataservice.postItem('POST', 'http://localhost:8080/api/persons/login', secret, 'application/json');
+    return dataservice.postItem('POST', 'http://localhost:9900/api/persons/login', secret, 'application/json');
 
 
   }

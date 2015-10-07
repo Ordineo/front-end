@@ -7,7 +7,7 @@ angular.module('empApp')
     function getSkillsWithCategory() {
       skills = [];
 
-      DataService.getItem('http://localhost:8081/api/skills', function (response) {
+      DataService.getItem('http://localhost:9900/api/skills', function (response) {
         var _skills = response.data._embedded.skills;
         if (_skills !== undefined) {
           _skills.forEach(function (skill) {
@@ -23,13 +23,13 @@ angular.module('empApp')
 
 
     function getWithoutCategories(success) {
-      DataService.getItem('http://localhost:8081/api/skills', success);
+      DataService.getItem('http://localhost:9900/api/skills', success);
     }
 
     var skillCategories = [];
 
     function getSkillCategories() {
-      DataService.getItem('http://localhost:8081/api/skillCategories', function (response) {
+      DataService.getItem('http://localhost:9900/api/skillCategories', function (response) {
         skillCategories = response.data._embedded.skillCategories;
       })
     }
@@ -47,7 +47,7 @@ angular.module('empApp')
           DataService.postItem(method.method, method.url, skill, 'application/json', success);
 
         } else {
-          DataService.postItem('POST', 'http://localhost:8081/api/skillCategories/', {name: skill.category}, 'application/json', function (data) {
+          DataService.postItem('POST', 'http://localhost:9900/api/skillCategories/', {name: skill.category}, 'application/json', function (data) {
             skill.skillCategory = data.headers('location');
             DataService.postItem(method.method, method.url, skill, 'application/json', success);
           });
@@ -67,7 +67,7 @@ angular.module('empApp')
     }
 
     function add(skill, success) {
-      save(skill, success, {method: 'POST', url: 'http://localhost:8081/api/skills/'});
+      save(skill, success, {method: 'POST', url: 'http://localhost:9900/api/skills/'});
 
     }
 
@@ -96,10 +96,10 @@ angular.module('empApp')
     }
 
     function add(skillCompetence, success) {
-      DataService.postItem('POST', 'http://localhost:8081/api/skillCompetences/', skillCompetence, 'application/json', success, function () {
+      DataService.postItem('POST', 'http://localhost:9900/api/skillCompetences/', skillCompetence, 'application/json', success, function () {
         var level = skillCompetence.competenceLevel;
         var skillId = skillCompetence.skill.split("/").pop();
-        DataService.getItem('http://localhost:8081/api/skillCompetences/search/findSkillCompetenceBySkillId?skillId=' + skillId, function (data) {
+        DataService.getItem('http://localhost:9900/api/skillCompetences/search/findSkillCompetenceBySkillId?skillId=' + skillId, function (data) {
           var sc = data.data._embedded.skillCompetences.pop();
           sc.competenceLevel = level;
 
@@ -112,7 +112,7 @@ angular.module('empApp')
 
     function getSkillCompetenceForPersonId(personId) {
       skillCompetences = [];
-      DataService.getItem('http://localhost:8081/api/skillCompetences/search/findSkillCompetenceByPerson?personId=' + personId, function (response) {
+      DataService.getItem('http://localhost:9900/api/skillCompetences/search/findSkillCompetenceByPerson?personId=' + personId, function (response) {
         var _skillCompetences = response.data._embedded.skillCompetences;
         if (_skillCompetences !== undefined) {
           _skillCompetences.forEach(function (skillCompetence) {
