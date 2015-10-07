@@ -1,22 +1,19 @@
 'use strict';
 
 angular.module('empApp')
-.factory('Timeline', function() {
-    
-    var timelineItemAmount = 30;
-    var timelineItems = [];
-    for (timelineItemAmount; timelineItemAmount > 0; timelineItemAmount--) {
-        timelineItems.push({
-            title: 'Timeline item ' + timelineItemAmount,
-            description: 'This is the description of timeline item ' + timelineItemAmount,
-            date: new Date()
-        });
-    }
-    
-    // Some fake testing data
+.factory('Timeline', ['dataservice', function(dataservice) {
+
+    var id = window.sessionStorage.getItem("id");
+    var myTimeline = [];
+
+    dataservice.getItem('http://localhost:8082/api/timelines/person/' + id).success(function(data) {
+      data._embedded.objectiveResources.forEach(function(event) {
+        myTimeline.push(event);
+      })
+    });
+
     return {
-        all: function() {
-            return timelineItems;
-        }
+      myTimeline: myTimeline
     };
-});
+
+}]);

@@ -9,8 +9,10 @@
  */
 angular.module('empApp')
     .controller('DashboardCtrl', function ($scope, $log, Timeline) {
-    
+
     $log.info('DashboardCtrl loaded');
-    
-    $scope.timelineItems = Timeline.all();
+
+    //$scope.timelineItems = Timeline.all();
+
+    $scope.myTimelineItems = Timeline.myTimeline;
   });
