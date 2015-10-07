@@ -8,7 +8,8 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
 
   if(AuthenticateFactory.isAuthorized()){
     $scope.isLogged = true;
-    checkRoles();
+    getMyProfile();
+    checkMyRoles();
   }
 
   $scope.logout = function(){
@@ -41,14 +42,30 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
     AuthenticateFactory.getLogin(credentials).success(handleSuccess).error(handleError);
   };
 
-  //Check roles when logged in
-  function checkRoles() {
-    //Application roles
-    var admin = 'admin';
-    var hero = 'hero';
-    var user = 'user';
+  //Get my profile
+  function getMyProfile() {
+    $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id')).success(function (data) {
+      console.log(data);
+      $scope.myProfile = {
+        active: data.active,
+        photo: data.photo,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        gender: data.gender,
+        birthDate: data.birthDate,
+        address: data.address,
+        unit: data.unit,
+        enrollmentDate: data.enrolmentDate,
+        contactInformation: data.contactInformation
+      };
+    });
+  }
+
+  //Check my roles
+  function checkMyRoles() {
     //Functional roles
     var bum = 'Bum';
+    var resourceManager = 'Resource Manager';
     var competenceLeader = 'Competence Leader';
     var practiceManager = 'Practice Manager';
     var coach = 'Coach';
@@ -60,6 +77,7 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
     $scope.isUser = false;
     //Scopes functional roles
     $scope.isBum = false;
+    $scope.isResourceManager = false;
     $scope.isCompetenceLeader = false;
     $scope.isPracticeManager = false;
     $scope.isCoach = false;
@@ -69,32 +87,33 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
     $http.get('http://localhost:8080/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function(data) {
       for (var i = 0; i < data._embedded.roles.length; i++) {
         switch (data._embedded.roles[i].name) {
-          case admin:
-                $scope.isAdmin = true;
-                break;
-          case hero:
-                $scope.isHero = true;
-                break;
-          case user:
-                $scope.isUser = true;
-                break;
           case bum:
                 $scope.isBum = true;
+                $scope.isAdmin = true;
+                break;
+          case resourceManager:
+                $scope.isResourceManager = true;
+                $scope.isAdmin = true;
                 break;
           case competenceLeader:
                 $scope.isCompetenceLeader = true;
+                $scope.isHero = true;
                 break;
           case practiceManager:
                 $scope.isPracticeManager = true;
+                $scope.isHero = true;
                 break;
           case coach:
                 $scope.isCoach = true;
+                $scope.isHero = true;
                 break;
           case consultant:
                 $scope.isConsultant = true;
+                $scope.isUser = true;
                 break;
           case seniorConsultant:
                 $scope.isSeniorConsultant = true;
+                $scope.isUser = true;
                 break;
         }
       }

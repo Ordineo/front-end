@@ -8,68 +8,57 @@
  * Controller of the empApp
  */
 angular.module('empApp')
-    .controller('ProfileCtrl', ProfileCtrl);
+  .controller('ProfileCtrl', ProfileCtrl);
 
-ProfileCtrl.$inject =['$scope', '$modal', '$log', '$http', '$location','dataservice', 'PersonFactory'];
+ProfileCtrl.$inject = ['$scope', '$modal', '$log', '$http', '$location', 'dataservice', 'PersonFactory', 'SkillFactory', 'SkillCompetenceFactory'];
 
-function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice, PersonFactory) {
+function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, PersonFactory, SkillFactory, SkillCompetenceFactory) {
 
 
-      $log.info('ProfileCtrl loaded');
+  $log.info('ProfileCtrl loaded');
 
-      var id =  window.sessionStorage.getItem("id");
-      if(!$scope.isAdmin) {
-        $scope.isAdmin = false;
-      }
+  var id = window.sessionStorage.getItem("id");
+  if (!$scope.isAdmin) {
+    $scope.isAdmin = false;
+  }
 
-      $scope.makeAdmin = function(){
+  $scope.makeAdmin = function () {
 
-        var formData = {
-          name:'admin',
-          isFunctional:false
+    var formData = {
+      name: 'admin',
+      isFunctional: false
+    };
+
+    var handleSuccess = function (data, status, headers) {
+      console.log(data);
+
+      $scope.isAdmin = true;
+
+      //dataservice.postItem('POST','http://localhost:8080/api/persons/RoleToPerson/'+id,);
+
+      var handleGetRole = function (data, status, headers) {
+
+        var dataForm = {
+          name: data.name,
+          isFunctional: data.functional
         };
 
-        var handleSuccess = function(data,status,headers){
-          console.log(data);
-
-          $scope.isAdmin = true;
-
-          //dataservice.postItem('POST','http://localhost:8080/api/persons/RoleToPerson/'+id,);
-
-          var handleGetRole = function(data,status,headers){
-
-            var dataForm = {
-              name:data.name,
-              isFunctional:data.functional
-            };
-
-            dataservice.postItem('POST','http://localhost:8080/api/persons/RoleToPerson/'+id,dataForm,'application/json');
-
-          };
-
-          dataservice.getItem(headers('Location')).success(handleGetRole);
-        };
-        dataservice.postItem('POST','http://localhost:8080/api/roles',formData,'application/json').success(handleSuccess);
-
+        dataservice.postItem('POST', 'http://localhost:8080/api/persons/RoleToPerson/' + id, dataForm, 'application/json');
 
       };
 
+      dataservice.getItem(headers('Location')).success(handleGetRole);
+    };
+    dataservice.postItem('POST', 'http://localhost:8080/api/roles', formData, 'application/json').success(handleSuccess);
+
+
+  };
 
   // v NEEDS REFACTORING v
 
-   $http.get('http://localhost:8080/api/persons/' + id).success(function (data) {
-      $scope.username = data.credentials.username;
-      $scope.firstName = data.firstName;
-      $scope.lastName = data.lastName;
-      $scope.gender = data.gender;
-      $scope.birthDate = data.birthDate;
-      $scope.enrolmentDate = data.enrolmentDate;
-     console.log('PROFILE DETAILS RETRIEVED');
-   });
-
   if ($scope.isBum === true) {
     $scope.myUsers = [];
-    var handleSuccessUsersFromPerson = function(data, status) {
+    var handleSuccessUsersFromPerson = function (data, status) {
       for (var i = 0; i < data._embedded.persons.length; i++) {
         $scope.myUsers.push(data._embedded.persons[i]);
       }
@@ -82,7 +71,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice, PersonF
 
   if ($scope.isCompetenceLeader === true) {
     $scope.myUsers = [];
-    var handleSuccessUsersFromCompetenceLeader = function(data, status) {
+    var handleSuccessUsersFromCompetenceLeader = function (data, status) {
       for (var i = 0; i < data._embedded.persons.length; i++) {
         $scope.myUsers.push(data._embedded.persons[i]);
       }
@@ -94,7 +83,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice, PersonF
 
   if ($scope.isPracticeManager === true) {
     $scope.myUsers = [];
-    var handleSuccessUsersFromPracticeManager = function(data, status) {
+    var handleSuccessUsersFromPracticeManager = function (data, status) {
       for (var i = 0; i < data._embedded.persons.length; i++) {
         $scope.myUsers.push(data._embedded.persons[i]);
       }
@@ -106,7 +95,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice, PersonF
 
   if ($scope.isCoach === true) {
     $scope.myUsers = [];
-    var handleSuccessUsersFromCoach = function(data, status) {
+    var handleSuccessUsersFromCoach = function (data, status) {
       for (var i = 0; i < data._embedded.persons.length; i++) {
         $scope.myUsers.push(data._embedded.persons[i]);
       }
@@ -115,4 +104,44 @@ function ProfileCtrl($scope, $modal, $log, $http, $location,dataservice, PersonF
     //Retrieve users from practice manager
     PersonFactory.getUsersFromCoach().success(handleSuccessUsersFromCoach);
   }
+
+  //^ NEEDS REFACTORING ^
+
+  //-----------------
+  //Skill competences
+  //-----------------
+
+  updateList();
+
+  $scope.save = function (skillCompetence) {
+    console.log('Adding Skill Competence to current user');
+    skillCompetence.skill = skillCompetence.skill._links.self.href;
+    skillCompetence.person = window.sessionStorage.getItem("id");
+    SkillCompetenceFactory.add(skillCompetence, updateList);
+    $scope.skillCompetence = null;
+  };
+
+  $scope.remove = function (href) {
+    SkillCompetenceFactory.remove(href, updateList);
+  };
+
+  SkillFactory.getSkills(function (response) {
+    $scope.skills = response.data._embedded.skills;
+  });
+
+  PersonFactory.getPerson().success(function (data) {
+    $scope.person = data;
+  });
+
+  function updateList() {
+    $scope.skillCompetences = SkillCompetenceFactory.all();
+  }
+
+  //-----------
+  //Credentials
+  //-----------
+
+  $scope.modifyMyCredentials = function() {
+    window.alert('Oops, Looks like we didn\'t find any implementation yet!');
+  };
 }
