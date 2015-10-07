@@ -111,7 +111,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
   //Skill competences
   //-----------------
 
-  
+
 
   //-----------
   //Credentials
