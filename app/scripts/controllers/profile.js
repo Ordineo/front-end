@@ -55,6 +55,9 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
   };
 
   // v NEEDS REFACTORING v
+  console.log('needs refactoring');
+  console.log($scope.isBum);
+
 
   if ($scope.isBum === true) {
     $scope.myUsers = [];
@@ -63,6 +66,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
         $scope.myUsers.push(data._embedded.persons[i]);
       }
       console.log('MY USERS RETRIEVED');
+      console.log($scope.myUsers);
     };
 
     //Retrieve users from person
@@ -111,7 +115,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
   //Skill competences
   //-----------------
 
-
+  //NOT READY TO IMPLEMENT YET
 
   //-----------
   //Credentials
