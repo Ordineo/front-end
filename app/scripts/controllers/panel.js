@@ -2,14 +2,28 @@
 
 angular.module('empApp')
     .controller('PanelCtrl',PanelCtrl);
-PanelCtrl.$inject = ['$scope', 'PersonFactory', 'persons'];
+PanelCtrl.$inject = ['$scope', 'PersonFactory', 'persons', '$filter', 'person'];
 
-function PanelCtrl($scope, PersonFactory, persons) {
+function PanelCtrl($scope, PersonFactory, persons, $filter, person) {
+
+  var peeps = [];
+  var persona = person;
+
+  console.log(persona);
+
+  console.log($scope.person);
+
+  persons.forEach(function (person) {
+    if (person.unit == persona.unit && person.firstName != persona.firstName && person.lastName != persona.lastName) {
+      peeps.push(person);
+    }
+  });
 
 
-  $scope.persons = persons;
+  $scope.persons = peeps;
 
-    $scope.joinUnit = function(selected){
+
+  $scope.joinUnit = function (selected) {
 
 
 
@@ -17,6 +31,9 @@ function PanelCtrl($scope, PersonFactory, persons) {
 
     }
 
+  $scope.toggleSearch = function (element) {
+    $scope.showSearch = !$scope.showSearch;
+  };
 
 
 }

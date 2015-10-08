@@ -143,8 +143,8 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     return PersonRestangular.one(href);
   }
 
-  function getPersonById(id){
-    return dataservice.getItem('http://localhost:9900/api/persons/'+id);
+  function getPersonById() {
+    return PersonRestangular.one('persons', id);
   }
 
   function updatePerson(person) {

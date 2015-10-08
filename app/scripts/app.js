@@ -20,7 +20,9 @@ angular
     'ngTouch',
     'ui.bootstrap',
     'restangular',
-    'ngMaterial'
+    'ngMaterial',
+    'md.data.table',
+    'ngMdIcons'
     //'ngRoleAuth'
   ])
   .config(['$httpProvider', function ($httpProvider) {
@@ -78,6 +80,9 @@ angular
         resolve: {
           persons: function (PersonFactory) {
             return PersonFactory.getAll();
+          },
+          person: function (PersonFactory) {
+            return PersonFactory.getMyDetails();
           }
         }
       })
