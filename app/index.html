@@ -54,7 +54,7 @@
         <li class="active"><a ng-if="isLogged" href="#/dashboard">Dashboard <span class="sr-only">(current)</span></a></li>
         <li><a ng-if="isLogged" href="#/profile">Profile</a></li>
         <li><a ng-if="isLogged" href="#/skillCompetences">Skill Competence</a></li>
-        <li ng-if="isLogged">
+        <li ng-if="isLogged && isAdmin">
 
           <md-fab-speed-dial md-open="false" md-direction="down"
                              ng-class="md-fling">

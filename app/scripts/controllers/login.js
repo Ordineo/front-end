@@ -65,10 +65,12 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
           case bum:
                 window.sessionStorage.setItem('reviewer', bum);
                 window.sessionStorage.setItem('admin', true);
+            $scope.isAdmin = true;
                 break;
           case resourceManager:
                 window.sessionStorage.setItem('reviewer', resourceManager);
                 window.sessionStorage.setItem('admin', true);
+            $scope.isAdmin = true;
                 break;
           case competenceLeader:
                 window.sessionStorage.setItem('reviewer', competenceLeader);

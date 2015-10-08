@@ -78,6 +78,8 @@ function RoleCtrl($scope, $log, RoleService, roles, avroles, persons) {
     RoleService.findRolesForOther($scope.personId).then(function (data) {
       $scope.selected = true;
       $scope.otherRoles = data;
+    }, function (response) {
+      $scope.selected = true;
     });
   };
 

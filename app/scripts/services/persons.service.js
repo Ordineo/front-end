@@ -218,10 +218,13 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
   }
 
   //BUMs
-  function addBumToPerson(person) {
-    dataservice.postItem('POST', person._links.self.href.concat('/businessUnitManagers/' + id), null, 'application/json').success(function() {
+  function addBumToPerson(personId) {
+
+    return PersonRestangular.one('persons', personId).one('businessUnitManagers', id).post();
+
+    /*dataservice.postItem('POST', person._links.self.href.concat('/businessUnitManagers/' + id), null, 'application/json').success(function() {
       console.log('PERSON ASSIGNED TO ME (BUM)');
-    });
+     });*/
   }
 
   function getUsersFromPerson() {
