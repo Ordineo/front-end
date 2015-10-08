@@ -49,19 +49,15 @@
   <div class="row" ng-controller="LoginCtrl">
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
+        <li><a ng-if="!isLogged" href="#/register">Register</a></li>
+        <li><a ng-if="!isLogged" href="#/login">Login</a></li>
         <li class="active"><a ng-if="isLogged" href="#/dashboard">Dashboard <span class="sr-only">(current)</span></a></li>
         <li><a ng-if="isLogged" href="#/profile">Profile</a></li>
-        <li><a ng-if="isLogged" href="#/persons">People</a></li>
-        <!-- && isAdmin -->
+        <li><a ng-if="isLogged" href="#/panel">Admin panel</a></li>
+        <li><a ng-if="isLogged" href="#/roles">Roles</a></li>
         <li><a ng-if="isLogged" href="#/customers">Customers</a></li>
-        <li><a ng-if="isLogged" href="#/settings">Settings</a></li>
-        <li><a ng-if="isLogged" href="#/search">Search</a></li>
-        <li><a ng-if="!isLogged" href="#/login">Login</a></li>
-        <li><a ng-if="!isLogged" href="#/register">Register</a></li>
         <li><a ng-if="isLogged" href="#/skills">Skills</a></li>
         <li><a ng-if="isLogged" href="#/skillCompetences">Skill Competence</a></li>
-        <li><a ng-if="isLogged" href="#/roles">Roles</a></li>
-        <li><a ng-if="isLogged" href="#/panel">Admin panel</a></li>
         <!-- && isAdmin -->
         <li>
           <button ng-if="isLogged" ng-click="logout()">Logout</button>
@@ -101,7 +97,6 @@
 <script src="scripts/controllers/dashboard.js"></script>
 <script src="scripts/controllers/profile.js"></script>
 <script src="scripts/controllers/persons.js"></script>
-<script src="scripts/controllers/search.js"></script>
 <script src="scripts/services/timeline.service.js"></script>
 <script src="scripts/services/persons.service.js"></script>
 <script src="scripts/controllers/login.js"></script>

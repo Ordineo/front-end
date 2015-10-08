@@ -86,20 +86,6 @@ angular
           }
         }
       })
-      .when('/search', {
-        templateUrl: 'views/search.html',
-        controller: 'SearchCtrl',
-        access: {
-          requiresLogin: true
-        }
-      })
-      .when('/persons', {
-        templateUrl: 'views/persons.html',
-        controller: 'PersonsCtrl',
-        access: {
-          requiresLogin: true
-        }
-      })
       .when('/customers', {
         templateUrl: 'views/customers.html',
         controller: 'CustomersCtrl',

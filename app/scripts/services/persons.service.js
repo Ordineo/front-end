@@ -19,7 +19,6 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     getMyCompetenceLeaders: getMyCompetenceLeaders,
     getMyPracticeManagers: getMyPracticeManagers,
     getMyCoaches: getMyCoaches,
-
     getAll: getAll,
     remove: remove,
     updatePerson: updatePerson,
@@ -28,6 +27,8 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     getPerson: getPerson,
     getSelectedPerson: getSelectedPerson,
     getPersonById: getPersonById,
+    getPersonsOfReviewer: getPersonsOfReviewer,
+
     addFunctionalRoleToPerson: addFunctionalRoleToPerson,
     deleteFunctionalRoleFromPerson: deleteFunctionalRoleFromPerson,
     getApplicationRolesFromPerson: getApplicationRolesFromPerson,
@@ -46,8 +47,7 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     getPracticeManagersFromPerson: getPracticeManagersFromPerson,
     addCoachToPerson: addCoachToPerson,
     getUsersFromCoach: getUsersFromCoach,
-    getCoachesFromPerson: getCoachesFromPerson,
-    getPersonsOfReviewer: getPersonsOfReviewer
+    getCoachesFromPerson: getCoachesFromPerson
   };
 
   //----------
