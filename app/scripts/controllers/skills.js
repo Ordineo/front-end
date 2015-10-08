@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('empApp')
-  .controller('SkillsCtrl', function ($scope, SkillFactory, DataService, $log) {
+  .controller('SkillsCtrl', function ($scope, SkillFactory, $log) {
     $scope.isNameError = false;
 
     $log.info('SkillsCtrl loaded');
@@ -19,14 +19,14 @@ angular.module('empApp')
     $scope.save = function (_skill) {
       console.log(_skill);
 
-      if (!_skill || _skill.name.trim().length == 0) {
-        console.log("Error in name: " + _skill);
+      if (!_skill || _skill.name.trim().length === 0) {
+        console.log('Error in name: ' + _skill);
         $scope.isNameError = true;
 
       } else {
         if (_skill._links) {
           SkillFactory.edit(_skill, updateList);
-          buttonFlip("Add");
+          buttonFlip('Add');
 
         } else {
           SkillFactory.add(_skill, updateList);
@@ -39,7 +39,7 @@ angular.module('empApp')
     };
 
     function buttonFlip(state) {
-      var button = angular.element.find("#skillSubmit").pop();
+      var button = angular.element.find('#skillSubmit').pop();
       button.innerText = state;
       $scope.isNameError = false;
 
@@ -47,10 +47,10 @@ angular.module('empApp')
 
     $scope.setSelected = function (skill) {
       if (skill === $scope.skill) {
-        buttonFlip("Add");
+        buttonFlip('Add');
         $scope.skill = null;
       } else {
-        buttonFlip("Edit");
+        buttonFlip('Edit');
         $scope.skill = skill;
       }
     };
