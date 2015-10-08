@@ -23,7 +23,7 @@ angular.module('empApp')
       $scope.skills = response.data._embedded.skills;
     });
 
-    PersonFactory.getPersonById(personId).success(function (data) {
+    PersonFactory.getPersonById().then(function (data) {
       $scope.person = data;
     });
 

@@ -28,7 +28,7 @@ function PersonsCtrl($scope, $log, $http, $location, PersonFactory, CustomerFact
         $location.path('/login');
         };
 
-      if($scope.form.$valid) {
+
 
         var birthDate = new Date(person.birthDate);
         var enrolmentDate = new Date(person.enrolmentDate);
@@ -42,7 +42,7 @@ function PersonsCtrl($scope, $log, $http, $location, PersonFactory, CustomerFact
         var formData={
           firstName: person.firstName,
           lastName: person.lastName,
-          gender: person.gender,
+          gender: 'Male',
           enrolmentDate: [enrolmentDate.getFullYear(),enrolmentDate.getMonth()+1,enrolmentDate.getDate()],
           birthDate:[birthDate.getFullYear(),birthDate.getMonth()+1,birthDate.getDate()],
           credentials: credentials
@@ -50,10 +50,10 @@ function PersonsCtrl($scope, $log, $http, $location, PersonFactory, CustomerFact
         };
 
         dataservice.postItem('POST', 'http://localhost:9900/api/persons/', formData, 'application/json').success(handleSuccess);
-      }else{
-        $scope.errmsg = 'Fill in valid data!';
+
+      /*$scope.errmsg = 'Fill in valid data!';
         console.log('Not valid');
-      }
+       */
     };
 
   $scope.makeAdmin = function () {

@@ -15,27 +15,22 @@ function RoleService(RoleRestangular, PersonRestangular) {
   };
 
   function addRoleToPerson(personId, role) {
-
     return PersonRestangular.one('persons', personId).all('roles').one(role).post();
   }
 
   function findRolesForOther(personId) {
-
     return PersonRestangular.one('persons', personId).one('roles', true).getList();
   }
 
   function getAll() {
-
     return PersonRestangular.one('persons', id).one('roles', true).getList();
   }
 
   function deleteRole(personId, roleId) {
-
     return PersonRestangular.one('persons', personId).one('roles', roleId).remove();
   }
 
   function getFunctionalRoles() {
-
     return RoleRestangular.one('roles', 'search').getList('isFunctional', {'functional': true});
   }
 
@@ -51,9 +46,7 @@ angular.module('empApp')
 
       RestangularConfigurer.addResponseInterceptor(function (data, operation, what, url, response, deferred) {
         var extractedData;
-        // .. to look for getList operations
         if (operation === "getList") {
-          // .. and handle the data and meta data
           extractedData = data._embedded.roles;
           if (extractedData == null) {
             return true;

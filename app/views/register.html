@@ -1,191 +1,43 @@
 <style>
 
-    input.ng-invalid {
-        outline: none;
-        border-color: red;
-        box-shadow: 0 0 5px red;
-    }
-    input.ng-valid {
-        outline: none;
-        border-color: green;
-        box-shadow: 0 0 5px green;
-    }
-    input:focus{
-        outline: none;
-        border-color: green;
-        box-shadow: 0 0 5px green;
-    }
-    .error{
-        color:red;
-    }
-    .errmsg{
-        color:red;
-    }
-
-    /*input[type=password]{
-        background:  linear-gradient(top, #efc688 0%,#fff2f2 100%);
-        border-radius: 3px;
-        border: none;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.2) inset, 0 -1px 0 rgba(0,0,0,0.05) inset;
-        transition: all 0.2s linear;
-        font-family: "Helvetica Neue", sans-serif;
-        font-size: 13px;
-        color: #222222;
-        position: relative;
-        height: 36px;
-        width: 300px;
-        padding-left: 30px;
-
-
-
-    }
-    input:focus{
-        background-color:#a47e3c;
-    }*/
-
 
 </style>
 
+<md-content layout-padding>
+  <form name="userForm">
+    <div layout layout-sm="column">
+      <md-input-container style="width:70%">
+        <label>Company</label>
+        <input value="Ordina" disabled>
+      </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+      <md-input-container flex>
+        <label>First name</label>
+        <input ng-model="person.firstName">
+      </md-input-container>
+      <md-input-container flex>
+        <label>Last Name</label>
+        <input ng-model="person.lastName">
+      </md-input-container>
+    </div>
+    <md-input-container flex>
+      <label>Username</label>
+      <input ng-model="person.username">
+    </md-input-container>
+    <md-input-container flex>
+      <label>Password</label>
+      <input type="password" ng-model="person.password">
+    </md-input-container>
+    <div layout layout-sm="column">
+      <md-datepicker ng-model="person.enrolmentDate" md-placeholder="Enter enrolment"></md-datepicker>
 
-<form name="form"  class="form-horizontal, css-form"  novalidate >
-    <fieldset>
-        <div id="legend">
-            <legend class="">Register</legend>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="username" >Username</label>
-            <div class="controls">
-                <input autocomplete="off" name="username" ng-minlength="3" ng-maxlength="20" type="text" id="username" ng-model="person.username"  class="input-xlarge" required>
-            </div>
-            <div class="error"
-                 ng-show="form.username.$dirty && form.username.$invalid">
-                <small class="error"
-                       ng-show="form.username.$error.required">
-                    Your username is required.
-                </small>
-                <small class="error"
-                       ng-show="form.username.$error.minlength">
-                    Your username is required to be at least 3 characters
-                </small>
-                <small class="error"
-                       ng-show="form.username.$error.maxlength">
-                    Your username cannot be longer than 20 characters
-                </small>
-            </div>
-        </div>
-
-
-
-
-
-        <div class="control-group">
-            <label class="control-label" for="password">Password</label>
-            <div class="controls">
-                <input name="password" ng-minlength="6" ng-maxlength="18" type="password"  id="password" ng-model="person.password"  class="input-xlarge" required>
-
-            </div>
-            <div class="error"
-                 ng-show="form.password.$dirty && form.password.$invalid">
-                <small class="error"
-                       ng-show="form.password.$error.required">
-                    Your password is required.
-                </small>
-                <small class="error"
-                       ng-show="form.password.$error.minlength">
-                    Your password is required to be at least 6 characters
-                </small>
-                <small class="error"
-                       ng-show="form.password.$error.maxlength">
-                    Your password cannot be longer than 18 characters
-                </small>
-            </div>
-        </div>
-
-        <div class="control-group">
-            <label class="control-label" for="firstName">First name</label>
-            <div class="controls">
-                <input name="firstName" ng-minlength="2" ng-maxlength="20" type="text" id="firstName" ng-model="person.firstName" class="input-xlarge" required>
-
-            </div>
-            <div class="error"
-                 ng-show="form.firstName.$dirty && form.firstName.$invalid">
-                <small class="error"
-                       ng-show="form.firstName.$error.required">
-                    Your first name is required.
-                </small>
-                <small class="error"
-                       ng-show="form.firstName.$error.minlength">
-                    Your first name is required to be at least 2 characters
-                </small>
-                <small class="error"
-                       ng-show="form.firstName.$error.maxlength">
-                    Your first name cannot be longer than 20 characters
-                </small>
-            </div>
-        </div>
-        <div class="control-group">
-
-            <label class="control-label" for="lastName">Last name</label>
-            <div class="controls">
-                <input name="lastName" type="text" id="lastName" ng-model="person.lastName" class="input-xlarge" required>
-
-            </div>
-            <div class="error"
-                 ng-show="form.lastName.$dirty && form.lastName.$invalid">
-                <small class="error"
-                       ng-show="form.lastName.$error.required">
-                    Your last name is required.
-                </small>
-                <small class="error"
-                       ng-show="form.lastName.$error.minlength">
-                    Your last name is required to be at least 2 characters
-                </small>
-                <small class="error"
-                       ng-show="form.lastName.$error.maxlength">
-                    Your last name cannot be longer than 20 characters
-                </small>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="male">Male</label>
-            <div class="controls">
-            <input id="male" class="controls" ng-model="person.gender" type="radio" value="Male" required>
-            </div>
-
-            <label for="female" class="control-label">Female</label>
-            <div class="controls">
-                <input id="female" ng-model="person.gender" type="radio" value="Female" required>
-            </div>
-
-        </div>
-
-        <div class="control-group">
-
-            <label for="enrolmentDate">Enrolmentdate</label>
-            <input id="enrolmentDate" type="date" ng-model="person.enrolmentDate" class="input-large" required/>
-
-        </div>
-
-        <div class="control-group">
-            <label for="birthDate">Birthdate</label>
-            <input id="birthDate" type="date" ng-model="person.birthDate" class="input-large" required/>
-        </div>
+      <md-datepicker ng-model="person.birthDate" md-placeholder="Enter birthdate"></md-datepicker>
 
 
-       <!-- <div class="control-group">
+    </div>
+    <md-button class="md-raised md-accent" ng-click="validate(person)">Register</md-button>
 
-            <label class="control-label"  for="password_confirm">Password (Confirm)</label>
-            <div class="controls">
-                <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
-                <p class="help-block">Please confirm password</p>
-            </div>
-        </div>-->
 
-        <div class="control-group">
-            <!-- Button -->
-            <div class="controls">
-                <button  class="btn btn-success" ng-click="validate(person)">Register</button>
-            </div>
-            <div class="errmsg">{{errmsg}}</div>
-        </div>
-    </fieldset></form>
+  </form>
+</md-content>

@@ -144,7 +144,7 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
   }
 
   function getPersonById() {
-    return PersonRestangular.one('persons', id);
+    return PersonRestangular.one('persons', id).get();
   }
 
   function updatePerson(person) {
@@ -219,12 +219,7 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
 
   //BUMs
   function addBumToPerson(personId) {
-
     return PersonRestangular.one('persons', personId).one('businessUnitManagers', id).post();
-
-    /*dataservice.postItem('POST', person._links.self.href.concat('/businessUnitManagers/' + id), null, 'application/json').success(function() {
-      console.log('PERSON ASSIGNED TO ME (BUM)');
-     });*/
   }
 
   function getUsersFromPerson() {
