@@ -111,14 +111,6 @@ angular
           requiresLogin: false
         }
       })
-      .when('/settings', {
-        templateUrl: 'views/settings.html',
-        controller: 'SettingsCtrl',
-        access: {
-          requiresLogin: true
-        }
-      })
-
       .when('/skills', {
         templateUrl: 'views/skills.html',
         controller: 'SkillsCtrl',

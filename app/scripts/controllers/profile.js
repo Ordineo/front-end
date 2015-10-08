@@ -136,7 +136,48 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
   //Credentials
   //-----------
 
-  $scope.modifyMyCredentials = function() {
-    window.alert('Oops, looks like we didn\'t find any implementation yet!');
+  $scope.modalPasswordChange = function() {
+    $scope.modal = $modal.open({
+      animation: false,
+      templateUrl: 'passwordChangeModalContent',
+      controller: 'SettingsCtrl',
+      size: 'sm',
+      scope: $scope
+    });
+    $scope.modal.result.then(function (message) {
+      $log.info(message);
+    }, function() {
+      $log.info('Modal dismissed');
+    });
+
+    $scope.cancelModal = function()  {
+      $scope.modal.dismiss('cancel');
+    };
   };
+
+  $scope.changePassword = function(password) {
+    var id = window.sessionStorage.getItem("id");
+    var userData  = {
+      'oldPassword' : password.oldPassword,
+      'newPassword' : password.newPassword
+    };
+
+    $scope.passwordChanged = false;
+    $scope.passwordWrong = false;
+
+    var handleSuccess = function(data) {
+      $log.info("Password changed");
+      $scope.passwordChanged = true;
+
+      $timeout(function() {
+        $scope.modal.close();
+      }, 1500);
+    };
+    var handleError = function() {
+      $log.info("Current password not correct");
+      $scope.passwordWrong = true;
+    };
+
+    dataservice.postItem('POST', 'http://localhost:9900/api/persons/' + id + '/settings/resetPassword', userData, 'application/json').success(handleSuccess).error(handleError);
+  }
 }
