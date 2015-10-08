@@ -10,9 +10,9 @@
 
 angular.module('empApp')
   .controller('PersonsCtrl',PersonsCtrl);
-PersonsCtrl.$inject =['$scope', '$log', '$http', '$location', 'PersonFactory', 'RoleFactory', 'CustomerFactory', 'dataservice','$cookies'];
+PersonsCtrl.$inject = ['$scope', '$log', '$http', '$location', 'PersonFactory', 'CustomerFactory', 'dataservice', '$cookies'];
 
-function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory, CustomerFactory, dataservice,$cookies) {
+function PersonsCtrl($scope, $log, $http, $location, PersonFactory, CustomerFactory, dataservice, $cookies) {
   $log.info('PersonsCtrl loaded');
 
     $scope.validate = function (person) {
@@ -201,7 +201,6 @@ function PersonsCtrl ($scope, $log, $http, $location, PersonFactory, RoleFactory
     });
   };
 
-  $scope.allFunctionalRoles = RoleFactory.getAllFunctionalRoles();
   $scope.selectedRole = '';
 
   $scope.addFunctionalRoleToPerson = function() {

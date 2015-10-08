@@ -153,8 +153,7 @@ angular
           requiresLogin: true
         },
         resolve: {
-          roles: function (RoleService, $location) {
-
+          roles: function (RoleService) {
             return RoleService.getAll().then(function (data) {
               return data;
             }, function (response) {
@@ -164,10 +163,18 @@ angular
 
           },
           avroles: function (RoleService) {
-            return RoleService.getFunctionalRoles();
+            return RoleService.getFunctionalRoles().then(function (data) {
+              return data;
+            }, function (response) {
+              return response.status;
+            });
           },
           persons: function (PersonFactory) {
-            return PersonFactory.getPersonsOfReviewer();
+            return PersonFactory.getPersonsOfReviewer().then(function (data) {
+              return data;
+            }, function (response) {
+              return response.status;
+            });
           }
         }
 

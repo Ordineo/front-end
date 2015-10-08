@@ -9,61 +9,51 @@
  */
 angular.module('empApp')
     .controller('RoleCtrl',RoleCtrl);
-RoleCtrl.$inject = ['$scope', '$log', 'dataservice', 'RoleService', '$location', 'Restangular', 'roles', 'avroles', 'persons', 'PersonFactory'];
+RoleCtrl.$inject = ['$scope', '$log', 'RoleService', 'roles', 'avroles', 'persons'];
 
-function RoleCtrl($scope, $log, dataservice, RoleService, $location, Restangular, roles, avroles, persons, PersonFactory) {
-
-
-  console.log(roles);
+function RoleCtrl($scope, $log, RoleService, roles, avroles, persons) {
+  $log.info('RoleCtrl loaded');
 
   if (roles == 404) {
     $scope.message = "You have no roles yet! Add some roles to your collection!"
   } else {
     $scope.roles = roles;
   }
+  if (persons == 404) {
+    $scope.msg = "You have no persons under you!";
+  } else {
+    $scope.persons = persons;
+  }
 
-  $scope.persons = persons;
+  if (avroles == 404) {
+    $scope.msgroles = "Can't find any available roles";
+  } else {
+    $scope.avroles = avroles;
+  }
 
-  console.log(persons);
 
-  $scope.avroles = avroles;
   $scope.deleteRole = function (href) {
 
-    var parts = [];
-    console.log(href);
-    parts = href.split("/", 6);
-
-    console.log(parts[5]);
-
-    RoleService.deleteRole(window.sessionStorage.getItem('id'), parts[5]);
-
-
+    var roleId = splitLink(href);
+    RoleService.deleteRole(window.sessionStorage.getItem('id'), roleId);
   };
 
   $scope.addRole = function () {
 
     var roleId = splitLink($scope.rolling._links.self.href);
-
     RoleService.addRoleToPerson($scope.personId, roleId).then(function (data) {
       RoleService.findRolesForOther($scope.personId).then(function (data) {
         $scope.otherRoles = data;
       })
-
-
     });
-
   };
 
   var splitLink = function (href) {
-
     var parts = [];
-    var link = href;
-    parts = link.split("/", 6);
-
+    parts = href.split("/", 6);
     return parts[5];
-
-
   };
+
   $scope.selectRole = function () {
 
     $scope.roleSelected = true;
@@ -72,7 +62,6 @@ function RoleCtrl($scope, $log, dataservice, RoleService, $location, Restangular
   $scope.removeRoleOfOther = function (href) {
 
     var roleId = splitLink(href);
-
     RoleService.deleteRole($scope.personId, roleId).then(function (data) {
       RoleService.findRolesForOther($scope.personId).then(function (data) {
         $scope.otherRoles = data;
@@ -85,34 +74,12 @@ function RoleCtrl($scope, $log, dataservice, RoleService, $location, Restangular
   $scope.selectPerson = function () {
 
     $scope.namePerson = $scope.selectedItem.firstName;
-
-
-    var parts = [];
-    var href = $scope.selectedItem._links.self.href;
-    console.log();
-    parts = href.split("/", 6);
-
-    $scope.personId = parts[5];
-    console.log(parts[5]);
-
-
-    RoleService.findRolesForOther(parts[5]).then(function (data) {
+    $scope.personId = splitLink($scope.selectedItem._links.self.href);
+    RoleService.findRolesForOther($scope.personId).then(function (data) {
       $scope.selected = true;
       $scope.otherRoles = data;
     });
-
-
   };
-
-  /*var roles = Restangular.all('roles');
-
-   roles.getList().then(function (roles) {
-
-   $scope.roles = roles;
-   });*/
-
-  $log.info('RoleCtrl loaded');
-  $log.info();
 
 
 }

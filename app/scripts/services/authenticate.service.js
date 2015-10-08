@@ -4,10 +4,10 @@
 angular.module('empApp')
   .factory('AuthenticateFactory', AuthenticateFactory);
 
-AuthenticateFactory.$inject = ['dataservice', 'PersonFactory', 'RoleFactory'];
+AuthenticateFactory.$inject = ['dataservice', 'PersonFactory'];
 
 
-function AuthenticateFactory(dataservice, PersonFactory, RoleFactory) {
+function AuthenticateFactory(dataservice, PersonFactory) {
 
   var logged;
   var role;
@@ -23,10 +23,8 @@ function AuthenticateFactory(dataservice, PersonFactory, RoleFactory) {
     if (id != null) {
       setAuthorized(true);
       PersonFactory.initialise(id);
-      RoleFactory.initialise(id);
 
     }
-
 
   }
 
@@ -38,7 +36,7 @@ function AuthenticateFactory(dataservice, PersonFactory, RoleFactory) {
     return logged;
   }
 
-  function getRole() {
+  /*function getRole() {
 
     var handleIt = function (data, status) {
       data._embedded.roles.forEach(function (role) {
@@ -51,7 +49,7 @@ function AuthenticateFactory(dataservice, PersonFactory, RoleFactory) {
     dataservice.getItem('http://localhost:9900/api/roles/search/findByIdAndIsFunctional?id=' + PersonFactory.getId() + '&functional=false').success(handleIt);
     return role;
 
-  }
+   }*/
 
 
   function getLogin(secret) {
