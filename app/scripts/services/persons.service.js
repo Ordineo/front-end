@@ -3,10 +3,10 @@
 angular.module('empApp')
   .factory('PersonFactory', PersonFactory);
 
-PersonFactory.$inject = ['dataservice', 'PersonRestangular'];
+PersonFactory.$inject = ['dataservice', 'PersonRestangular', '$location'];
 
 
-function PersonFactory(dataservice, PersonRestangular) {
+function PersonFactory(dataservice, PersonRestangular, $location) {
 
   var persons = [];
   var href = 'http://localhost:9900';
@@ -20,8 +20,8 @@ function PersonFactory(dataservice, PersonRestangular) {
     getMyPracticeManagers: getMyPracticeManagers,
     getMyCoaches: getMyCoaches,
 
-    remove: remove,
     getAll: getAll,
+    remove: remove,
     updatePerson: updatePerson,
     initialise: initialise,
     getId: getId,
@@ -105,15 +105,20 @@ function PersonFactory(dataservice, PersonRestangular) {
         return PersonRestangular.one('persons', 'search').getList('findByPracticeManagersId', {'id': id});
       case 'Coach':
         return PersonRestangular.one('persons', 'search').getList('findByCoachesId', {'id': id});
+      default:
+        $location.path('/profile')
     }
 
   }
 
   function getAll() {
-    dataservice.getItem('http://localhost:9900/api/persons').success(function(data) {
+    /* dataservice.getItem('http://localhost:9900/api/persons').success(function(data) {
       persons = data;
     });
     return persons;
+     */
+    return PersonRestangular.all('persons').getList();
+
   }
 
   function getId(){

@@ -74,6 +74,11 @@ angular
         access: {
           requiresLogin: true
 
+        },
+        resolve: {
+          persons: function (PersonFactory) {
+            return PersonFactory.getAll();
+          }
         }
       })
       .when('/search', {

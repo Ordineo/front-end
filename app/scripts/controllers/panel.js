@@ -2,21 +2,16 @@
 
 angular.module('empApp')
     .controller('PanelCtrl',PanelCtrl);
-PanelCtrl.$inject=['$scope', '$log','dataservice','RoleFactory','$location','PersonFactory'];
+PanelCtrl.$inject = ['$scope', 'PersonFactory', 'persons'];
 
-function PanelCtrl($scope,$log, dataservice,RoleFactory,$location,PersonFactory) {
+function PanelCtrl($scope, PersonFactory, persons) {
 
 
-    $scope.getPersons = function(){
-        $scope.persons = PersonFactory.getAll();
-        console.log($scope.persons[0]);
-    };
-$scope.getPersons();
+  $scope.persons = persons;
 
     $scope.joinUnit = function(selected){
 
 
-        PersonFactory.getPerson(selected)
 
         // dataservice.postItem('POST','http://localhost:9900/api/persons/2/bums/1',null,'application/json');
 

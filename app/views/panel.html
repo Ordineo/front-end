@@ -3,11 +3,9 @@
 
 <h2>Add Users to my Unit!</h2>
 
-<form name="myForm">
-    <label > Persons: </label>
-    <select name="selectroles" ng-model="person.selected">
-        <option ng-repeat="person in persons" value="{{person.firstName}}">{{person.firstName}}</option>
-    </select>
 
-    <button class="btn btn-primary" ng-click="joinUnit(person.selected)">Join my Unit!</button>
-</form>
+<md-select placeholder=" Pick person
+  " ng-change="selectPerson()" ng-model="selectedItem" md-on-open="persons"
+           style="width: 200px;">
+  <md-option ng-value="person" ng-repeat="person in persons">{{person.firstName}} {{person.lastName}}</md-option>
+</md-select>
