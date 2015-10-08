@@ -29,8 +29,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
   //----------
 
   var handleSuccessMyDetails = function(data, status) {
-    $scope.myProfile = data;
-    console.log(data);
+    $scope.myDetails = data;
   };
   PersonFactory.getMyDetails().success(handleSuccessMyDetails);
 
