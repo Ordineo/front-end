@@ -17,7 +17,9 @@
       <dt>Birth date</dt>
       <dd>{{myDetails.birthDate}}</dd>
       <dt>Address</dt>
-      <dd>{{myDetails.address}}</dd>
+      <dd>{{myDetails.address.street}} {{myDetails.address.streetNumber}}</dd>
+      <dd>{{myDetails.address.zipCode}} {{myDetails.address.city}}</dd>
+      <dd>{{myDetails.address.province}} {{myDetails.address.country}}</dd>
       <dt>Unit</dt>
       <dd>{{myDetails.unit}}</dd>
       <dt>Enrollment date</dt>
@@ -25,6 +27,7 @@
       <dt>Contact information</dt>
       <dd>{{myDetails.contactInformation}}</dd>
     </dl>
+    <button ng-click="addAddress()">Add address</button>
     <hr>
   </div>
   <div>
