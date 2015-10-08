@@ -53,11 +53,38 @@
         <li><a ng-if="!isLogged" href="#/login">Login</a></li>
         <li class="active"><a ng-if="isLogged" href="#/dashboard">Dashboard <span class="sr-only">(current)</span></a></li>
         <li><a ng-if="isLogged" href="#/profile">Profile</a></li>
-        <li><a ng-if="isLogged" href="#/panel">Admin panel</a></li>
-        <li><a ng-if="isLogged" href="#/roles">Roles</a></li>
-        <li><a ng-if="isLogged" href="#/customers">Customers</a></li>
-        <li><a ng-if="isLogged" href="#/skills">Skills</a></li>
         <li><a ng-if="isLogged" href="#/skillCompetences">Skill Competence</a></li>
+        <li ng-if="isLogged">
+
+          <md-fab-speed-dial md-open="false" md-direction="right"
+                             ng-class="md-fling">
+            <md-fab-trigger>
+              <md-button aria-label="menu" class="md-raised md-warn">Admin
+              </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+              <md-button aria-label="Persons" href="#/panel" class="md-fab md-raised md-mini">
+
+                <ng-md-icon icon="group"></ng-md-icon>
+              </md-button>
+              <md-button aria-label="Skills" href="#/skills" class="md-fab md-raised md-mini">
+
+                <ng-md-icon icon="school"></ng-md-icon>
+              </md-button>
+              <md-button aria-label="Customers" href="#/customers" class="md-fab md-raised md-mini">
+
+
+                <ng-md-icon icon="business"></ng-md-icon>
+              </md-button>
+              <md-button aria-label="Roles" href="#/roles" class="md-fab md-raised md-mini">
+
+
+                <ng-md-icon icon="verified_user" class="md-fab md-raised md-mini"></ng-md-icon>
+              </md-button>
+            </md-fab-actions>
+          </md-fab-speed-dial>
+
+        </li>
         <!-- && isAdmin -->
         <li>
           <button ng-if="isLogged" ng-click="logout()">Logout</button>

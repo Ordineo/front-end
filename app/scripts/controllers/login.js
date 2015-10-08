@@ -40,7 +40,15 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
     };
     AuthenticateFactory.getLogin(credentials).success(handleSuccess).error(handleError);
   };
-
+  $scope.$watch('isOpen', function (isOpen) {
+    if (isOpen) {
+      $timeout(function () {
+        $scope.tooltipVisible = self.isOpen;
+      }, 600);
+    } else {
+      $scope.tooltipVisible = self.isOpen;
+    }
+  });
   //Check my roles
   function checkMyRoles() {
     var bum = 'Bum';
