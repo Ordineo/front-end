@@ -10,9 +10,9 @@
 angular.module('empApp')
   .controller('ProfileCtrl', ProfileCtrl);
 
-ProfileCtrl.$inject = ['$scope', '$modal', '$log', '$http', '$location', 'dataservice', 'PersonFactory', 'SkillFactory', 'SkillCompetenceFactory'];
+ProfileCtrl.$inject = ['$scope', '$modal', '$log', '$http', '$location', 'dataservice', 'PersonFactory', 'SkillFactory', 'SkillCompetenceFactory', 'myDetails', 'myFunctionalRoles'];
 
-function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, PersonFactory, SkillFactory, SkillCompetenceFactory) {
+function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, PersonFactory, SkillFactory, SkillCompetenceFactory, myDetails, myFunctionalRoles) {
   $log.info('ProfileCtrl loaded');
 
   var reviewer = window.sessionStorage.getItem('reviewer');
@@ -28,23 +28,13 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
   //Details
   //----------
 
-  var handleSuccessMyDetails = function(data, status) {
-    $scope.myDetails = data;
-  };
-  PersonFactory.getMyDetails().success(handleSuccessMyDetails);
+  $scope.myDetails = myDetails;
 
   //-----
   //Roles
   //-----
 
-  var handleSuccessMyApplicationRoles = function(data, status) {
-    $scope.myApplicationRoles = data._embedded.roleResources;
-  };
-  var handleSuccessMyFunctionalRoles = function(data, status) {
-    $scope.myFunctionalRoles = data._embedded.roleResources;
-  };
-  PersonFactory.getMyApplicationRoles().success(handleSuccessMyApplicationRoles);
-  PersonFactory.getMyFunctionalRoles().success(handleSuccessMyFunctionalRoles);
+  $scope.myFunctionalRoles = myFunctionalRoles.data._embedded.roleResources;
 
   //---------
   //Customers
@@ -54,12 +44,9 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case consultant:
     case seniorConsultant:
           $scope.hasCustomers = true;
-
-          var handleSuccessMyCustomers = function(data, status) {
+          PersonFactory.getMyCustomers().success(function(data, status) {
             $scope.myCustomers = data._embedded.customers;
-          };
-          PersonFactory.getMyCustomers().success(handleSuccessMyCustomers);
-
+          });
           break;
   }
 
@@ -74,12 +61,9 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case consultant:
     case seniorConsultant:
           $scope.hasBusinessUnitManagers = true;
-
-          var handleSuccessMyBusinessUnitManagers = function(data, status) {
+          PersonFactory.getMyBusinessUnitManagers().success(function(data, status) {
             $scope.myBusinessUnitManagers = data._embedded.persons;
-          };
-          PersonFactory.getMyBusinessUnitManagers().success(handleSuccessMyBusinessUnitManagers);
-
+          });
           break;
   }
 
@@ -91,12 +75,9 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case consultant:
     case seniorConsultant:
           $scope.hasCompetenceLeaders = true;
-
-          var handleSuccessMyCompetenceLeaders = function(data, status) {
+          PersonFactory.getMyCompetenceLeaders().success(function(data, status) {
             $scope.myCompetenceLeaders = data._embedded.persons;
-          };
-          PersonFactory.getMyCompetenceLeaders().success(handleSuccessMyCompetenceLeaders);
-
+          });
           break;
   }
 
@@ -108,12 +89,9 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case consultant:
     case seniorConsultant:
           $scope.hasPracticeManagers = true;
-
-          var handleSuccessMyPracticeManagers = function(data, status) {
+          PersonFactory.getMyPracticeManagers().success(function(data, status) {
             $scope.myPracticeManagers = data._embedded.persons;
-          };
-          PersonFactory.getMyPracticeManagers().success(handleSuccessMyPracticeManagers);
-
+          });
           break;
   }
 
@@ -124,14 +102,11 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
   switch (reviewer) {
     case consultant:
     case seniorConsultant:
-      $scope.hasCoaches = true;
-
-      var handleSuccessMyCoaches = function(data, status) {
-        $scope.myCoaches = data._embedded.persons;
-      };
-      PersonFactory.getMyCoaches().success(handleSuccessMyCoaches);
-
-      break;
+          $scope.hasCoaches = true;
+          PersonFactory.getMyCoaches().success(function(data, status) {
+            $scope.myCoaches = data._embedded.persons;
+          });
+          break;
   }
 
   //-----------
@@ -145,12 +120,9 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case practiceManager:
     case coach:
           $scope.hasDescendants = true;
-
-          var handleSuccessMyDescendants = function(data, status) {
+          PersonFactory.getPersonsOfReviewer().then(function(data, status) {
             $scope.myDescendants = data;
-          };
-          PersonFactory.getPersonsOfReviewer().then(handleSuccessMyDescendants);
-
+          });
           break;
   }
 

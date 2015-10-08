@@ -60,25 +60,12 @@ angular
           requiresLogin: true
         },
         resolve: {
-
-
-
-          /*roles: function (RoleService, $location) {
-
-            return RoleService.getAll().then(function (data) {
-              return data;
-            }, function (response) {
-
-              return response.status;
-            });
-
+          myDetails: function (PersonFactory) {
+            return PersonFactory.getMyDetails();
           },
-          avroles: function (RoleService) {
-            return RoleService.getFunctionalRoles();
-          },
-          persons: function (PersonFactory) {
-            return PersonFactory.getPersonsOfReviewer();
-          }*/
+          myFunctionalRoles: function(PersonFactory) {
+            return PersonFactory.getMyFunctionalRoles();
+          }
         }
       })
       .when('/panel', {

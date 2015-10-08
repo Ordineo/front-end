@@ -13,7 +13,6 @@ function PersonFactory(dataservice, PersonRestangular) {
   var id = window.sessionStorage.getItem("id");
   return {
     getMyDetails: getMyDetails,
-    getMyApplicationRoles: getMyApplicationRoles,
     getMyFunctionalRoles: getMyFunctionalRoles,
     getMyCustomers: getMyCustomers,
     getMyBusinessUnitManagers: getMyBusinessUnitManagers,
@@ -56,11 +55,8 @@ function PersonFactory(dataservice, PersonRestangular) {
   //----------
 
   function getMyDetails() {
-    return dataservice.getItem(href + '/api/persons/' + id);
-  }
-
-  function getMyApplicationRoles() {
-    return dataservice.getItem(href + '/api/persons/' + id + '/roles/false');
+    //return dataservice.getItem(href + '/api/persons/' + id);
+    return PersonRestangular.one('persons', id).get();
   }
 
   function getMyFunctionalRoles() {
