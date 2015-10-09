@@ -48,37 +48,30 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
   //----------
 
   function getMyDetails() {
-    //return dataservice.getItem(href + '/api/persons/' + id);
     return PersonRestangular.one('persons', id).get();
   }
 
   function getMyFunctionalRoles() {
-    //return dataservice.getItem(href + '/api/persons/' + id + '/roles/true');
     return PersonRestangular.one('persons', id).one('roles', true).getList();
   }
 
   function getMyCustomers() {
-    //return dataservice.getItem(href + '/api/persons/' + id + '/customers');
     return PersonRestangular.one('persons', id).all('customers').getList();
   }
 
   function getMyBusinessUnitManagers() {
-    //return dataservice.getItem(href + '/api/persons/' + id + '/businessUnitManagers');
     return PersonRestangular.one('persons', id).all('businessUnitManagers').getList();
   }
 
   function getMyCompetenceLeaders() {
-    //return dataservice.getItem(href + '/api/persons/' + id + '/competenceLeaders');
     return PersonRestangular.one('persons', id).all('competenceLeaders').getList();
   }
 
   function getMyPracticeManagers() {
-    //return dataservice.getItem(href + '/api/persons/' + id + '/practiceManagers');
     return PersonRestangular.one('persons', id).all('practiceManagers').getList();
   }
 
   function getMyCoaches() {
-    //return dataservice.getItem(href + '/api/persons/' + id + '/coaches');
     return PersonRestangular.one('persons', id).all('coaches').getList();
   }
 
