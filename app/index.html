@@ -54,7 +54,7 @@
         <li class="active"><a ng-if="isLogged" href="#/dashboard">Dashboard <span class="sr-only">(current)</span></a></li>
         <li><a ng-if="isLogged" href="#/profile">Profile</a></li>
         <li><a ng-if="isLogged" href="#/skillCompetences">Skill Competence</a></li>
-        <li ng-if="isLogged && isAdmin">
+        <li ng-if="isLogged">
 
           <md-fab-speed-dial md-open="false" md-direction="down"
                              ng-class="md-fling">
@@ -63,7 +63,11 @@
               </md-button>
             </md-fab-trigger>
             <md-fab-actions>
-              <md-button aria-label="Persons" href="#/panel" class="md-fab md-raised md-mini">
+              <md-button ng-if="isAdmin" aria-label="Persons" href="#/panel" class="md-fab md-raised md-mini">
+
+                <ng-md-icon icon="group"></ng-md-icon>
+              </md-button>
+              <md-button ng-if="isHero" aria-label="Persons" href="#/persons" class="md-fab md-raised md-mini">
 
                 <ng-md-icon icon="group"></ng-md-icon>
               </md-button>
@@ -136,6 +140,7 @@
 <script src="scripts/controllers/panel.js"></script>
 <script src="scripts/services/customers.service.js"></script>
 <script src="scripts/controllers/customers.js"></script>
+<script src="scripts/controllers/management.js"></script>
 <script src="/bower_components/lodash/lodash.js"></script>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/restangular/1.3.1/restangular.js"></script>
 <script type="text/javascript"

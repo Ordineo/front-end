@@ -8,6 +8,7 @@ function PanelCtrl($scope, PersonFactory, persons, $filter, person) {
 
   var peeps = [];
   var persona = person;
+  var reviewer = window.sessionStorage.getItem('reviewer');
 
   console.log(persona);
 
@@ -16,9 +17,25 @@ function PanelCtrl($scope, PersonFactory, persons, $filter, person) {
   var filterPersons = function (list) {
 
     list.forEach(function (person) {
-      if (person.unit != persona.unit && person.firstName != persona.firstName && person.lastName != persona.lastName) {
-      peeps.push(person);
-    }
+      switch (reviewer) {
+        case 'Bum':
+        case 'Resource Manager':
+          if (person.unit !== persona.unit && person.firstName != persona.firstName && person.lastName != persona.lastName) {
+            peeps.push(person);
+          }
+          break;
+        case 'Competence Leader':
+        case 'Practice Manager':
+        case 'Coach':
+          if (person.unit === persona.unit && person.firstName != persona.firstName && person.lastName != persona.lastName) {
+            peeps.push(person);
+          }
+          break;
+        default:
+          $location.path('/profile')
+      }
+
+
   });
 
   $scope.persons = peeps;
@@ -42,7 +59,7 @@ function PanelCtrl($scope, PersonFactory, persons, $filter, person) {
     var personId = splitLink(selected);
 
 
-    PersonFactory.addBumToPerson(personId).then(function (data) {
+    PersonFactory.addPersonToReviewer(personId).then(function (data) {
       PersonFactory.getAll().then(function (data) {
         filterPersons(data);
       })

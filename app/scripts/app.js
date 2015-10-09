@@ -53,6 +53,30 @@ angular
 
         }
       })
+      .when('/persons', {
+        templateUrl: 'views/persons.html',
+        controller: 'ManagementCtrl',
+        access: {
+          requiresLogin: true
+        },
+        resolve: {
+          persons: function (PersonFactory) {
+            return PersonFactory.getPersonsOfReviewer().then(function (data) {
+                if (data != null) {
+                  return data;
+                }
+              },
+              function (response) {
+                return response;
+              });
+          },
+          person: function (PersonFactory) {
+            return PersonFactory.getMyDetails();
+          }
+        }
+
+
+      })
       .when('/dashboard', {
         templateUrl: 'views/dashboard.html',
         controller: 'DashboardCtrl',

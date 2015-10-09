@@ -18,25 +18,17 @@ function PersonsCtrl($scope, $log, $http, $location, PersonFactory, CustomerFact
     $scope.validate = function (person) {
       console.log('Validating person...');
 
-
-
-
-
       var handleSuccess = function (data, status) {
         console.log('Person created');
-
         $location.path('/login');
         };
 
-
-
+      if ($scope.registerForm.$valid) {
         var birthDate = new Date(person.birthDate);
         var enrolmentDate = new Date(person.enrolmentDate);
         var credentials = {
           'username': person.username,
           'password': person.password
-
-
         };
 
         var formData={
@@ -50,10 +42,10 @@ function PersonsCtrl($scope, $log, $http, $location, PersonFactory, CustomerFact
         };
 
         dataservice.postItem('POST', 'http://localhost:9900/api/persons/', formData, 'application/json').success(handleSuccess);
-
-      /*$scope.errmsg = 'Fill in valid data!';
+      } else {
+        $scope.errmsg = 'Fill in valid data!';
         console.log('Not valid');
-       */
+      }
     };
 
   $scope.makeAdmin = function () {

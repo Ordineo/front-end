@@ -75,14 +75,17 @@ function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactor
           case competenceLeader:
                 window.sessionStorage.setItem('reviewer', competenceLeader);
                 window.sessionStorage.setItem('hero', true);
+            $scope.isHero = true;
                 break;
           case practiceManager:
                 window.sessionStorage.setItem('reviewer', practiceManager);
                 window.sessionStorage.setItem('hero', true);
+            $scope.isHero = true;
                 break;
           case coach:
                 window.sessionStorage.setItem('reviewer', coach);
                 window.sessionStorage.setItem('hero', true);
+            $scope.isHero = true;
                 break;
           case consultant:
                 window.sessionStorage.setItem('reviewer', consultant);

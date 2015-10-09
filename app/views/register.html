@@ -2,7 +2,7 @@
 
 
 </style>
-
+<form name="registerForm">
 <md-content layout-padding>
   <form name="userForm">
     <div layout layout-sm="column">
@@ -14,25 +14,58 @@
     <div layout layout-sm="column">
       <md-input-container flex>
         <label>First name</label>
-        <input ng-model="person.firstName">
+        <input ng-model="person.firstName" md-maxlength="20" md-minlength="2" name="firstName" required>
+
+        <div ng-messages="registerForm.firstName.$error">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="md-maxlength">The name has to be less than 20 characters long.</div>
+        </div>
       </md-input-container>
       <md-input-container flex>
         <label>Last Name</label>
-        <input ng-model="person.lastName">
+        <input ng-model="person.lastName" required name="lastName" md-maxlength="25" md-minlength="2">
+
+        <div ng-messages="registerForm.lastName.$error">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="md-maxlength">The last name has to be less than 25 characters long.</div>
+          <div ng-message="md-minlength">The last name has to be minimum 2 characters long.</div>
+        </div>
       </md-input-container>
     </div>
     <md-input-container flex>
       <label>Username</label>
-      <input ng-model="person.username">
+      <input ng-model="person.username" required md-minlenght="2" md-maxlength="10" name="username">
+
+      <div ng-messages="registerForm.username.$error">
+        <div ng-message="required">This is required.</div>
+        <div ng-message="md-maxlength">Username has to be less than 10 characters long.</div>
+        <div ng-message="md-minlength">Username has to be minimum 2 characters long.</div>
+      </div>
     </md-input-container>
     <md-input-container flex>
       <label>Password</label>
-      <input type="password" ng-model="person.password">
+      <input type="password" ng-model="person.password" name="password" required md-min-length="6" md-maxlength="18">
+
+      <div ng-messages="registerForm.password.$error">
+        <div ng-message="required">This is required.</div>
+        <div ng-message="md-maxlength">Password to be less than 18 characters long.</div>
+        <div ng-message="md-minlength">Password has to be minimum 6 characters long.</div>
+      </div>
     </md-input-container>
     <div layout layout-sm="column">
-      <md-datepicker ng-model="person.enrolmentDate" md-placeholder="Enter enrolment"></md-datepicker>
+      <md-datepicker ng-model="person.enrolmentDate" md-placeholder="Enter enrolment" name="enrolmentDate"
+                     required></md-datepicker>
 
-      <md-datepicker ng-model="person.birthDate" md-placeholder="Enter birthdate"></md-datepicker>
+      <div ng-messages="registerForm.enrolmentDate.$error">
+        <div ng-message="required">This is required.</div>
+      </div>
+
+      <md-datepicker ng-model="person.birthDate" name="birthDate" md-placeholder="Enter birthdate"
+                     required></md-datepicker>
+
+      <div ng-messages="registerForm.birthDate.$error">
+        <div ng-message="required">This is required.</div>
+      </div>
 
 
     </div>
@@ -41,3 +74,4 @@
 
   </form>
 </md-content>
+</form>

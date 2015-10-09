@@ -29,6 +29,7 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     getPersonById: getPersonById,
     getPersonsOfReviewer: getPersonsOfReviewer,
 
+    addPersonToReviewer: addPersonToReviewer,
     addFunctionalRoleToPerson: addFunctionalRoleToPerson,
     deleteFunctionalRoleFromPerson: deleteFunctionalRoleFromPerson,
     getApplicationRolesFromPerson: getApplicationRolesFromPerson,
@@ -36,17 +37,9 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     addCustomerToPerson: addCustomerToPerson,
     getCustomersFromPerson: getCustomersFromPerson,
     deleteCustomerFromPerson: deleteCustomerFromPerson,
-    addBumToPerson: addBumToPerson,
     getUsersFromPerson: getUsersFromPerson,
-    getBumsFromPerson: getBumsFromPerson,
-    addCompetenceLeaderToPerson: addCompetenceLeaderToPerson,
-    getUsersFromCompetenceLeader: getUsersFromCompetenceLeader,
     getCompetenceLeadersFromPerson: getCompetenceLeadersFromPerson,
-    addPracticeManagerToPerson: addPracticeManagerToPerson,
-    getUsersFromPracticeManager: getUsersFromPracticeManager,
     getPracticeManagersFromPerson: getPracticeManagersFromPerson,
-    addCoachToPerson: addCoachToPerson,
-    getUsersFromCoach: getUsersFromCoach,
     getCoachesFromPerson: getCoachesFromPerson
   };
 
@@ -91,14 +84,32 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     dataservice.postItem('DELETE', href);
   }
 
+  function addPersonToReviewer(personId) {
+    var reviewer = window.sessionStorage.getItem('reviewer');
+
+    switch (reviewer) {
+      case 'Bum':
+      case 'Resource Manager':
+        return PersonRestangular.one('persons', personId).one('businessUnitManagers', id).post();
+      case 'Competence Leader':
+        return PersonRestangular.one('persons', personId).one('competenceLeaders', id).post();
+      case 'Practice Manager':
+        return PersonRestangular.one('persons', personId).one('practiceManagers', id).post();
+      case 'Coach':
+        return PersonRestangular.one('persons', personId).one('coaches', id).post();
+      default:
+        $location.path('/profile')
+    }
+
+  }
+
   function getPersonsOfReviewer() {
     var reviewer = window.sessionStorage.getItem('reviewer');
 
     switch (reviewer) {
       case 'Bum':
-        return PersonRestangular.one('persons', 'search').getList('findByBusinessUnitManagersId', {'id': id});
       case 'Resource Manager':
-        return PersonRestangular.one('persons', 'search').getList('findByResourceManagersId', {'id': id});
+        return PersonRestangular.one('persons', 'search').getList('findByBusinessUnitManagersId', {'id': id});
       case 'Competence Leader':
         return PersonRestangular.one('persons', 'search').getList('findByCompetenceLeadersId', {'id': id});
       case 'Practice Manager':
@@ -112,11 +123,6 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
   }
 
   function getAll() {
-    /* dataservice.getItem('http://localhost:9900/api/persons').success(function(data) {
-      persons = data;
-    });
-    return persons;
-     */
     return PersonRestangular.all('persons').getList();
 
   }
@@ -217,59 +223,20 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     });
   }
 
-  //BUMs
-  function addBumToPerson(personId) {
-    return PersonRestangular.one('persons', personId).one('businessUnitManagers', id).post();
-  }
-
   function getUsersFromPerson() {
     return dataservice.getItem('http://localhost:9900/api/persons/search/findByBusinessUnitManagersId?id=' + id);
   }
 
-  function getBumsFromPerson(person) {
-    return dataservice.getItem(person._links.self.href + '/businessUnitManagers');
-  }
-
-  //Competence Leaders
-  function addCompetenceLeaderToPerson(person) {
-    dataservice.postItem('POST', person._links.self.href.concat('/competenceLeaders/' + id), null, 'application/json').success(function() {
-      console.log('PERSON ASSIGNED TO ME (CL)')
-    });
-  }
-
-  function getUsersFromCompetenceLeader() {
-    return dataservice.getItem('http://localhost:9900/api/persons/search/findByCompetenceLeadersId?id=' + id);
-  }
 
   function getCompetenceLeadersFromPerson(person) {
     return dataservice.getItem(person._links.self.href + '/competenceLeaders');
   }
 
-  //Practice Managers
-  function addPracticeManagerToPerson(person) {
-    dataservice.postItem('POST', person._links.self.href.concat('/practiceManagers/' + id), null, 'application/json').success(function() {
-      console.log('PERSON ASSIGNED TO ME (PM)')
-    });
-  }
-
-  function getUsersFromPracticeManager() {
-    return dataservice.getItem('http://localhost:9900/api/persons/search/findByPracticeManagersId?id=' + id);
-  }
 
   function getPracticeManagersFromPerson(person) {
     return dataservice.getItem(person._links.self.href + '/practiceManagers');
   }
 
-  //Coaches
-  function addCoachToPerson(person) {
-    dataservice.postItem('POST', person._links.self.href.concat('/coaches/' + id), null, 'application/json').success(function() {
-      console.log('PERSON ASSIGNED TO ME (COACH)')
-    });
-  }
-
-  function getUsersFromCoach() {
-    return dataservice.getItem('http://localhost:9900/api/persons/search/findByCoachesId?id=' + id);
-  }
 
   function getCoachesFromPerson(person) {
     return dataservice.getItem(person._links.self.href + '/coaches');
