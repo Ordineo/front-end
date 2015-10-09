@@ -143,13 +143,6 @@ angular
           requiresLogin: true
         }
       })
-      .when('/skillCompetences', {
-        templateUrl: 'views/skillCompetences.html',
-        controller: 'SkillCompetencesCtrl',
-        access: {
-          requiresLogin: true
-        }
-      })
       .when('/roles', {
         templateUrl: 'views/roles.html',
         controller: 'RoleCtrl',
