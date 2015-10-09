@@ -46,7 +46,6 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
           $scope.hasCustomers = true;
           PersonFactory.getMyCustomers().then(function(data, status) {
             $scope.myCustomers = data;
-            console.log(data);
           });
           break;
   }
@@ -62,8 +61,8 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case consultant:
     case seniorConsultant:
           $scope.hasBusinessUnitManagers = true;
-          PersonFactory.getMyBusinessUnitManagers().success(function(data, status) {
-            $scope.myBusinessUnitManagers = data._embedded.persons;
+          PersonFactory.getMyBusinessUnitManagers().then(function(data, status) {
+            $scope.myBusinessUnitManagers = data;
           });
           break;
   }
@@ -76,8 +75,8 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case consultant:
     case seniorConsultant:
           $scope.hasCompetenceLeaders = true;
-          PersonFactory.getMyCompetenceLeaders().success(function(data, status) {
-            $scope.myCompetenceLeaders = data._embedded.persons;
+          PersonFactory.getMyCompetenceLeaders().then(function(data, status) {
+            $scope.myCompetenceLeaders = data;
           });
           break;
   }
@@ -90,8 +89,8 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case consultant:
     case seniorConsultant:
           $scope.hasPracticeManagers = true;
-          PersonFactory.getMyPracticeManagers().success(function(data, status) {
-            $scope.myPracticeManagers = data._embedded.persons;
+          PersonFactory.getMyPracticeManagers().then(function(data, status) {
+            $scope.myPracticeManagers = data;
           });
           break;
   }
@@ -104,8 +103,8 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case consultant:
     case seniorConsultant:
           $scope.hasCoaches = true;
-          PersonFactory.getMyCoaches().success(function(data, status) {
-            $scope.myCoaches = data._embedded.persons;
+          PersonFactory.getMyCoaches().then(function(data, status) {
+            $scope.myCoaches = data;
           });
           break;
   }

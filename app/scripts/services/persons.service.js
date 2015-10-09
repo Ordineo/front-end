@@ -63,19 +63,23 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
   }
 
   function getMyBusinessUnitManagers() {
-    return dataservice.getItem(href + '/api/persons/' + id + '/businessUnitManagers');
+    //return dataservice.getItem(href + '/api/persons/' + id + '/businessUnitManagers');
+    return PersonRestangular.one('persons', id).all('businessUnitManagers').getList();
   }
 
   function getMyCompetenceLeaders() {
-    return dataservice.getItem(href + '/api/persons/' + id + '/competenceLeaders');
+    //return dataservice.getItem(href + '/api/persons/' + id + '/competenceLeaders');
+    return PersonRestangular.one('persons', id).all('competenceLeaders').getList();
   }
 
   function getMyPracticeManagers() {
-    return dataservice.getItem(href + '/api/persons/' + id + '/practiceManagers');
+    //return dataservice.getItem(href + '/api/persons/' + id + '/practiceManagers');
+    return PersonRestangular.one('persons', id).all('practiceManagers').getList();
   }
 
   function getMyCoaches() {
-    return dataservice.getItem(href + '/api/persons/' + id + '/coaches');
+    //return dataservice.getItem(href + '/api/persons/' + id + '/coaches');
+    return PersonRestangular.one('persons', id).all('coaches').getList();
   }
 
   //
