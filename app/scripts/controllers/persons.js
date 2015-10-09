@@ -239,20 +239,46 @@ angular.module('empApp')
       });
 
       RestangularConfigurer.addResponseInterceptor(function (data, operation, what, url, response, deferred) {
+        var extractedDataList = [];
         var extractedData;
         // .. to look for getList operations
         if (operation === "getList") {
+
+          console.log();
+          if (Object.keys(data._embedded).length === 0) {
+            return extractedDataList;
+          } else {
+            extractedData = data._embedded.roleResources;
+            if (extractedData == null) {
+              extractedData = data._embedded.persons;
+              if(extractedData==null){
+                extractedData= data._embedded.customers;
+              }
+            }
+          }
+        } else {
+          extractedData = data;
+        }
+        return extractedData;
+      })
+    })
+  });
+
+
           // .. and handle the data and meta data
-          extractedData = data._embedded.roleResources;
+/*          extractedData = data._embedded.roleResources;
 
           if (extractedData == null) {
             extractedData = data._embedded.persons;
+ if (extractedData == null) {
+
+ }
           }
         } else {
           extractedData = data;
         }
         return extractedData;
       });
-
     });
   });
+ */

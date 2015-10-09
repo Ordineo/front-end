@@ -74,12 +74,12 @@
 
                 <ng-md-icon icon="school"></ng-md-icon>
               </md-button>
-              <md-button aria-label="Customers" href="#/customers" class="md-fab md-raised md-mini">
+              <md-button ng-if="isAdmin" aria-label="Customers" href="#/customers" class="md-fab md-raised md-mini">
 
 
                 <ng-md-icon icon="business"></ng-md-icon>
               </md-button>
-              <md-button aria-label="Roles" href="#/roles" class="md-fab md-raised md-mini">
+              <md-button ng-if="isAdmin" aria-label="Roles" href="#/roles" class="md-fab md-raised md-mini">
 
 
                 <ng-md-icon icon="verified_user" class="md-fab md-raised md-mini"></ng-md-icon>
