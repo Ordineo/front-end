@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('empApp')
   .factory('RoleService', RoleService);
 
