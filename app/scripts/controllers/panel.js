@@ -7,12 +7,16 @@ PanelCtrl.$inject = ['$scope', 'PersonFactory', 'persons', '$filter', 'person'];
 function PanelCtrl($scope, PersonFactory, persons, $filter, person) {
 
   var peeps = [];
+  var myPeeps = [];
   var persona = person;
+  var myPersons = [];
   var reviewer = window.sessionStorage.getItem('reviewer');
 
   console.log(persona);
+  PersonFactory.getPersonsOfReviewer().then(function (data) {
+    myPersons = data;
+  });
 
-  console.log($scope.person);
 
   var filterPersons = function (list) {
 

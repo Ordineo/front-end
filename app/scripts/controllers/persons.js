@@ -263,22 +263,3 @@ angular.module('empApp')
       })
     })
   });
-
-
-          // .. and handle the data and meta data
-/*          extractedData = data._embedded.roleResources;
-
-          if (extractedData == null) {
-            extractedData = data._embedded.persons;
- if (extractedData == null) {
-
- }
-          }
-        } else {
-          extractedData = data;
-        }
-        return extractedData;
-      });
-    });
-  });
- */
