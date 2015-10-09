@@ -34,7 +34,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
   //Roles
   //-----
 
-  $scope.myFunctionalRoles = myFunctionalRoles.data._embedded.roleResources;
+  $scope.myFunctionalRoles = myFunctionalRoles;
 
   //---------
   //Customers
@@ -44,8 +44,9 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case consultant:
     case seniorConsultant:
           $scope.hasCustomers = true;
-          PersonFactory.getMyCustomers().success(function(data, status) {
-            $scope.myCustomers = data._embedded.customers;
+          PersonFactory.getMyCustomers().then(function(data, status) {
+            $scope.myCustomers = data;
+            console.log(data);
           });
           break;
   }

@@ -53,11 +53,13 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
   }
 
   function getMyFunctionalRoles() {
-    return dataservice.getItem(href + '/api/persons/' + id + '/roles/true');
+    //return dataservice.getItem(href + '/api/persons/' + id + '/roles/true');
+    return PersonRestangular.one('persons', id).one('roles', true).getList();
   }
 
   function getMyCustomers() {
-    return dataservice.getItem(href + '/api/persons/' + id + '/customers');
+    //return dataservice.getItem(href + '/api/persons/' + id + '/customers');
+    return PersonRestangular.one('persons', id).all('customers').getList();
   }
 
   function getMyBusinessUnitManagers() {
