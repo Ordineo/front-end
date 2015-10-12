@@ -1,26 +1,32 @@
-'use strict';
+(function () {
+  'use strict';
 
 angular.module('empApp')
     .controller('PanelCtrl',PanelCtrl);
-PanelCtrl.$inject = ['$scope', 'PersonFactory', 'persons', '$filter', 'person'];
+  PanelCtrl.$inject = ['$scope', 'PersonFactory', 'persons', 'person', 'myPersons'];
 
-function PanelCtrl($scope, PersonFactory, persons, $filter, person) {
+  function PanelCtrl($scope, PersonFactory, persons,person, myPersons) {
 
   var peeps = [];
-  var myPeeps = [];
   var persona = person;
-  var myPersons = [];
-  var reviewer = window.sessionStorage.getItem('reviewer');
 
-  console.log(persona);
+    $scope.thePersons = [];
+
+  var reviewer = window.sessionStorage.getItem('reviewer');
   PersonFactory.getPersonsOfReviewer().then(function (data) {
-    myPersons = data;
+    $scope.thePersons = data;
   });
 
+    var filterPersons = function (list, secList) {
+      list.forEach(function (persono) {
+        secList.forEach(function (persa) {
+          if (persono.firstName === persa.firstName && persono.lastName === persa.lastName) {
+            list = _.without(list, persono);
+          }
+        })
+      });
 
-  var filterPersons = function (list) {
-
-    list.forEach(function (person) {
+      list.forEach(function (person) {
       switch (reviewer) {
         case 'Bum':
         case 'Resource Manager':
@@ -38,45 +44,28 @@ function PanelCtrl($scope, PersonFactory, persons, $filter, person) {
         default:
           $location.path('/profile')
       }
-
-
-  });
-
-  $scope.persons = peeps;
+      });
+      $scope.persons = peeps;
   };
 
-  filterPersons(persons);
+    filterPersons(persons, myPersons);
 
   var splitLink = function (href) {
-    var parts = [];
-    parts = href.split("/", 6);
+   var parts = href.split("/", 6);
     return parts[5];
   };
 
-
-
-
-
-
   $scope.joinUnit = function (selected) {
-
     var personId = splitLink(selected);
-
-
     PersonFactory.addPersonToReviewer(personId).then(function (data) {
       PersonFactory.getAll().then(function (data) {
-        filterPersons(data);
+        filterPersons(data, myPersons);
       })
     });
-
-
-        // dataservice.postItem('POST','http://localhost:9900/api/persons/2/bums/1',null,'application/json');
-
   };
 
   $scope.toggleSearch = function (element) {
     $scope.showSearch = !$scope.showSearch;
   };
-
-
 }
+})();

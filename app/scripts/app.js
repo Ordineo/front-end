@@ -107,6 +107,9 @@ angular
 
         },
         resolve: {
+          myPersons: function (PersonFactory) {
+            return PersonFactory.getPersonsOfReviewer();
+          },
           persons: function (PersonFactory) {
             return PersonFactory.getAll();
           },
