@@ -5,17 +5,24 @@ describe('Controller: SkillsCtrl', function () {
   // load the controller's module
   beforeEach(module('empApp'));
 
-  var $scope, $controller, SkillsCtrl, skillData, SkillFactory;
+  var $scope, $controller, SkillsCtrl, skillData, SkillFactory, $q;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($rootScope, _$controller_, _SkillFactory_) {
+  beforeEach(inject(function ($rootScope, _$controller_, _$q_, _SkillFactory_) {
     $scope = $rootScope.$new();
     $controller = _$controller_;
+    $q = _$q_;
     SkillFactory = _SkillFactory_;
   }));
 
   function givenSkillData() {
-    skillData = {title: 'test', content: 'This is some dummy content'};
+    skillData = {skills: 'This is some dummy content'};
+  }
+
+  function givenSpyOnAboutService() {
+    var deferred = $q.defer();
+    deferred.resolve(skillData);
+    spyOn(SkillFactory, 'all').and.returnValue(deferred.promise);
   }
 
 
@@ -28,10 +35,11 @@ describe('Controller: SkillsCtrl', function () {
 
   it("contains something", function () {
     givenSkillData();
+    givenSpyOnAboutService();
     whenControllerInitialized();
 
 
-    var s = scope.skills;
+    var s = $scope.skills;
     expect(s).toBeDefined();
   })
 
