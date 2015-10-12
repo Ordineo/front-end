@@ -189,9 +189,11 @@ angular
   .run(function ($rootScope, $location, AuthenticateFactory) {
     var id = window.sessionStorage.getItem('id');
     console.log(id);
-
-    AuthenticateFactory.initialise(id);
-
+    if (id === null) {
+      $location.path('/login');
+    } else {
+      AuthenticateFactory.initialise(id);
+    }
 
     // Redirect to '/' if the role is not 'not_confirmed'
     $rootScope.$on('$routeChangeStart', function (event, next) {

@@ -1,102 +1,111 @@
-'use strict';
+(function () {
 
-angular.module('empApp').controller('LoginCtrl', LoginCtrl);
+  'use strict';
 
-LoginCtrl.$inject =['$scope', '$log', '$http', '$location','dataservice','AuthenticateFactory','PersonFactory','$route'];
+  angular.module('empApp').controller('LoginCtrl', LoginCtrl);
 
-function LoginCtrl($scope, $log, $http, $location,dataservice,AuthenticateFactory,PersonFactory,$route) {
+  LoginCtrl.$inject = ['$scope', '$http', '$location', 'AuthenticateFactory', '$route'];
 
-  if(AuthenticateFactory.isAuthorized()){
-    $scope.isLogged = true;
-    checkMyRoles();
-  }
+  function LoginCtrl($scope, $http, $location, AuthenticateFactory, $route) {
 
-  $scope.logout = function(){
-    window.sessionStorage.clear();
-    AuthenticateFactory.setAuthorized(false);
-    window.location.reload();
-    $route.reload();
-    $location.path('/login');
-  };
-
-  $scope.login = function(login){
-    var credentials = {
-      'username': login.username,
-      'password': login.password
-    };
-    var handleSuccess = function (data, status,headers,config) {
-      console.log("Login successful");
-      AuthenticateFactory.setAuthorized(true);
-      window.sessionStorage.setItem("id",headers('Location'));
-      if(AuthenticateFactory.isAuthorized()) {
-        $route.reload();
-        window.location.reload();
-        $location.path('/roles');
-      }
-    };
-    var handleError = function(data, status, headers){
-      $scope.errmsg = data.message;
-      $scope.invalid = true;
-    };
-    AuthenticateFactory.getLogin(credentials).success(handleSuccess).error(handleError);
-  };
-  $scope.$watch('isOpen', function (isOpen) {
-    if (isOpen) {
-      $timeout(function () {
-        $scope.tooltipVisible = self.isOpen;
-      }, 600);
-    } else {
-      $scope.tooltipVisible = self.isOpen;
+    if (AuthenticateFactory.isAuthorized()) {
+      $scope.isLogged = true;
+      checkMyRoles();
     }
-  });
-  //Check my roles
-  function checkMyRoles() {
-    var bum = 'Bum';
-    var resourceManager = 'Resource Manager';
-    var competenceLeader = 'Competence Leader';
-    var practiceManager = 'Practice Manager';
-    var coach = 'Coach';
-    var consultant = 'Consultant';
-    var seniorConsultant = 'Senior Consultant';
+    $scope.logout = function () {
+      window.sessionStorage.clear();
+      AuthenticateFactory.setAuthorized(false);
+      window.location.reload();
+      $route.reload();
+      $location.path('/login');
+    };
 
-    $http.get('http://localhost:9900/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function(data) {
-      for (var i = 0; i < data._embedded.roles.length; i++) {
-        switch (data._embedded.roles[i].name) {
-          case bum:
-                window.sessionStorage.setItem('reviewer', bum);
-                window.sessionStorage.setItem('admin', true);
-            $scope.isAdmin = true;
-                break;
-          case resourceManager:
-                window.sessionStorage.setItem('reviewer', resourceManager);
-                window.sessionStorage.setItem('admin', true);
-            $scope.isAdmin = true;
-                break;
-          case competenceLeader:
-                window.sessionStorage.setItem('reviewer', competenceLeader);
-                window.sessionStorage.setItem('hero', true);
-            $scope.isHero = true;
-                break;
-          case practiceManager:
-                window.sessionStorage.setItem('reviewer', practiceManager);
-                window.sessionStorage.setItem('hero', true);
-            $scope.isHero = true;
-                break;
-          case coach:
-                window.sessionStorage.setItem('reviewer', coach);
-                window.sessionStorage.setItem('hero', true);
-            $scope.isHero = true;
-                break;
-          case consultant:
-                window.sessionStorage.setItem('reviewer', consultant);
-                window.sessionStorage.setItem('user', true);
-                break;
-          case seniorConsultant:
-                window.sessionStorage.setItem('reviewer', seniorConsultant);
-                window.sessionStorage.setItem('user', true);
-                break;
+    $scope.login = function (login) {
+      var credentials = {
+        'username': login.username,
+        'password': login.password
+      };
+      var handleSuccess = function (data, status, headers, config) {
+
+        if (headers('Location') === null) {
+          $scope.invalid = true;
+          $scope.errmsg = "Server is not responding, please come back later";
         }
+        else {
+          console.log("Login successful");
+          AuthenticateFactory.setAuthorized(true);
+          window.sessionStorage.setItem("id", headers('Location'));
+          if (AuthenticateFactory.isAuthorized()) {
+            $route.reload();
+            window.location.reload();
+            $location.path('/roles');
+          }
+        }
+      };
+      var handleError = function (data, status, headers) {
+        $scope.errmsg = data.message;
+        $scope.invalid = true;
+      };
+      AuthenticateFactory.getLogin(credentials).success(handleSuccess).error(handleError);
+    };
+    $scope.$watch('isOpen', function (isOpen) {
+      if (isOpen) {
+        $timeout(function () {
+          $scope.tooltipVisible = self.isOpen;
+        }, 600);
+      } else {
+        $scope.tooltipVisible = self.isOpen;
       }
     });
+    //Check my roles
+    function checkMyRoles() {
+      var bum = 'Bum';
+      var resourceManager = 'Resource Manager';
+      var competenceLeader = 'Competence Leader';
+      var practiceManager = 'Practice Manager';
+      var coach = 'Coach';
+      var consultant = 'Consultant';
+      var seniorConsultant = 'Senior Consultant';
+
+      $http.get('http://localhost:9900/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
+        for (var i = 0; i < data._embedded.roles.length; i++) {
+          switch (data._embedded.roles[i].name) {
+            case bum:
+              window.sessionStorage.setItem('reviewer', bum);
+              window.sessionStorage.setItem('admin', true);
+              $scope.isAdmin = true;
+              break;
+            case resourceManager:
+              window.sessionStorage.setItem('reviewer', resourceManager);
+              window.sessionStorage.setItem('admin', true);
+              $scope.isAdmin = true;
+              break;
+            case competenceLeader:
+              window.sessionStorage.setItem('reviewer', competenceLeader);
+              window.sessionStorage.setItem('hero', true);
+              $scope.isHero = true;
+              break;
+            case practiceManager:
+              window.sessionStorage.setItem('reviewer', practiceManager);
+              window.sessionStorage.setItem('hero', true);
+              $scope.isHero = true;
+              break;
+            case coach:
+              window.sessionStorage.setItem('reviewer', coach);
+              window.sessionStorage.setItem('hero', true);
+              $scope.isHero = true;
+              break;
+            case consultant:
+              window.sessionStorage.setItem('reviewer', consultant);
+              window.sessionStorage.setItem('user', true);
+              break;
+            case seniorConsultant:
+              window.sessionStorage.setItem('reviewer', seniorConsultant);
+              window.sessionStorage.setItem('user', true);
+              break;
+          }
+        }
+      });
+    }
   }
-}
+})();
