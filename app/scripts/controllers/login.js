@@ -20,10 +20,10 @@
       $location.path('/login');
     };
 
-    $scope.login = function (login) {
+    $scope.loginCredentials = function () {
       var credentials = {
-        'username': login.username,
-        'password': login.password
+        'username': $scope.userData.username,
+        'password': $scope.userData.password
       };
       var handleSuccess = function (data, status, headers, config) {
 

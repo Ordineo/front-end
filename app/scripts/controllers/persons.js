@@ -48,35 +48,6 @@ function PersonsCtrl($scope, $log, $http, $location, PersonFactory, CustomerFact
       }
     };
 
-  $scope.makeAdmin = function () {
-    var formData = {
-      name: 'admin',
-      isFunctional: false
-    };
-
-    var handleSuccess = function (data, status, headers) {
-      console.log(data);
-
-      $scope.isAdmin = true;
-
-      var handleGetRole = function (data, status, headers) {
-
-        var dataForm = {
-          name: data.name,
-          isFunctional: data.functional
-        };
-
-        dataservice.postItem('POST', 'http://localhost:9900/api/persons/RoleToPerson/' + id, dataForm, 'application/json');
-
-      };
-
-      dataservice.getItem(headers('Location')).success(handleGetRole);
-    };
-    dataservice.postItem('POST', 'http://localhost:9900/api/roles', formData, 'application/json').success(handleSuccess);
-
-
-  };
-
   $scope.selectedPersonsApplicationRoles = [];
   $scope.selectedPersonsFunctionalRoles = [];
   $scope.selectPerson = function (person) {
