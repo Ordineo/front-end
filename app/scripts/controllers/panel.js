@@ -49,10 +49,10 @@
             $location.path('/profile')
         }
       });
-      $scope.persons = peeps;
+      return peeps;
     };
 
-    filterPersons(persons, myPersons);
+    $scope.persons = filterPersons(persons, myPersons);
 
     var splitLink = function (href) {
       var parts = href.split("/", 6);
@@ -63,7 +63,12 @@
       var personId = splitLink(selected);
       PersonFactory.addPersonToReviewer(personId).then(function (data) {
         PersonFactory.getAll().then(function (data) {
-          filterPersons(data, myPersons);
+          persons = data;
+          PersonFactory.getPersonsOfReviewer().then(function (data) {
+            myPersons = data;
+            peeps = [];
+            $scope.persons = filterPersons(persons, myPersons);
+          });
         })
       });
     };
