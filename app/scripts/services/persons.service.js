@@ -28,23 +28,15 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     getSelectedPerson: getSelectedPerson,
     getPersonById: getPersonById,
     getPersonsOfReviewer: getPersonsOfReviewer,
-
     addPersonToReviewer: addPersonToReviewer,
     addFunctionalRoleToPerson: addFunctionalRoleToPerson,
     deleteFunctionalRoleFromPerson: deleteFunctionalRoleFromPerson,
-    getApplicationRolesFromPerson: getApplicationRolesFromPerson,
-    getFunctionalRolesFromPerson: getFunctionalRolesFromPerson,
     addCustomerToPerson: addCustomerToPerson,
-    getCustomersFromPerson: getCustomersFromPerson,
-    deleteCustomerFromPerson: deleteCustomerFromPerson,
-    getUsersFromPerson: getUsersFromPerson,
-    getCompetenceLeadersFromPerson: getCompetenceLeadersFromPerson,
-    getPracticeManagersFromPerson: getPracticeManagersFromPerson,
-    getCoachesFromPerson: getCoachesFromPerson
+    deleteCustomerFromPerson: deleteCustomerFromPerson
   };
 
   //----------
-  //My profile
+  //Profile
   //----------
 
   function getMyDetails() {
@@ -182,14 +174,6 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     });
   }
 
-  function getApplicationRolesFromPerson(person) {
-    return dataservice.getItem(person._links.self.href + '/roles/false');
-  }
-
-  function getFunctionalRolesFromPerson(person) {
-    return dataservice.getItem(person._links.self.href + '/roles/true');
-  }
-
   //Person's Customers
   function addCustomerToPerson(selectedPerson, selectedCustomer) {
     var href = '';
@@ -207,10 +191,6 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     });
   }
 
-  function getCustomersFromPerson(person) {
-    return dataservice.getItem(person._links.self.href + '/customers');
-  }
-
   function deleteCustomerFromPerson(selectedPerson, selectedPersonsCustomer) {
     var hrefSelectedPerson = selectedPerson._links.self.href;
     var hrefSelectedPersonsCustomer = selectedPersonsCustomer._links.self.href;
@@ -220,25 +200,6 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     dataservice.postItem('DELETE', href, null, 'application/json').success(function() {
       console.log('CUSTOMER DELETED FROM PERSON');
     });
-  }
-
-  function getUsersFromPerson() {
-    return dataservice.getItem('http://localhost:9900/api/persons/search/findByBusinessUnitManagersId?id=' + id);
-  }
-
-
-  function getCompetenceLeadersFromPerson(person) {
-    return dataservice.getItem(person._links.self.href + '/competenceLeaders');
-  }
-
-
-  function getPracticeManagersFromPerson(person) {
-    return dataservice.getItem(person._links.self.href + '/practiceManagers');
-  }
-
-
-  function getCoachesFromPerson(person) {
-    return dataservice.getItem(person._links.self.href + '/coaches');
   }
 }
 

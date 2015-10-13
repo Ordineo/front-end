@@ -48,97 +48,22 @@ function PersonsCtrl($scope, $log, $http, $location, PersonFactory, CustomerFact
       }
     };
 
-  $scope.selectedPersonsApplicationRoles = [];
-  $scope.selectedPersonsFunctionalRoles = [];
   $scope.selectPerson = function (person) {
     $http.get(person._links.self.href).success(function (data) {
       $scope.selectedPerson = data;
       $scope.selectedPersonsFunctionalRoles = [];
       $scope.selectedPersonsCustomers = [];
-      $scope.allCustomers = [];
       $scope.selectedPersonsBums = [];
       $scope.selectedPersonsCLs = [];
       $scope.selectedPersonsPMs = [];
       $scope.selectedPersonsCoaches = [];
+      $scope.allCustomers = [];
 
-      var handleSuccessApplicationRoles = function(data, status) {
-        for (var i = 0; i < data._embedded.roleResources.length; i++) {
-          $scope.selectedPersonsApplicationRoles.push(data._embedded.roleResources[i]);
-        }
-        console.log('APPLICATION ROLES FROM PERSON RETRIEVED');
-      };
-
-      var handleSuccessFunctionalRoles = function(data, status) {
-        for (var i = 0; i < data._embedded.roleResources.length; i++) {
-          $scope.selectedPersonsFunctionalRoles.push(data._embedded.roleResources[i]);
-        }
-        console.log('FUNCTIONAL ROLES FROM PERSON RETRIEVED');
-      };
-
-      var handleSuccessCustomers = function(data, status) {
+      CustomerFactory.getCustomers().success(function(data, status) {
         for (var i = 0; i < data._embedded.customers.length; i++) {
           $scope.allCustomers.push(data._embedded.customers[i]);
         }
-        console.log('ALL CUSTOMERS RETRIEVED');
-      };
-
-      var handleSuccessCustomersFromPerson = function(data, status) {
-        for (var i = 0; i < data._embedded.customers.length; i++) {
-          $scope.selectedPersonsCustomers.push(data._embedded.customers[i]);
-        }
-        console.log('CUSTOMERS FROM PERSON RETRIEVED');
-      };
-
-      var handleSuccessBumsFromPerson = function(data, status) {
-        for (var i = 0; i < data._embedded.persons.length; i++) {
-          $scope.selectedPersonsBums.push(data._embedded.persons[i]);
-        }
-        console.log('BUMS FROM PERSON RETRIEVED');
-      };
-
-      var handleSuccessCompetenceLeadersFromPerson = function(data, status) {
-        for (var i = 0; i < data._embedded.persons.length; i++) {
-          $scope.selectedPersonsCLs.push(data._embedded.persons[i]);
-        }
-        console.log('COMPETENCE LEADERS FROM PERSON RETRIEVED');
-      };
-
-      var handleSuccessPracticeManagersFromPerson = function(data, status) {
-        for (var i = 0; i < data._embedded.persons.length; i++) {
-          $scope.selectedPersonsPMs.push(data._embedded.persons[i]);
-        }
-        console.log('PRACTICE MANAGERS FROM PERSON RETRIEVED');
-      };
-
-      var handleSuccessCoachesFromPerson = function(data, status) {
-        for (var i = 0; i < data._embedded.persons.length; i++) {
-          $scope.selectedPersonsCoaches.push(data._embedded.persons[i]);
-        }
-        console.log('COACHES FROM PERSON RETRIEVED');
-      };
-
-      //PersonFactory.getApplicationRolesFromPerson(data).success(handleSuccessApplicationRoles);
-      PersonFactory.getFunctionalRolesFromPerson(data).success(handleSuccessFunctionalRoles);
-
-      //Retrieve all customers
-      CustomerFactory.getCustomers().success(handleSuccessCustomers);
-
-      //Retrieve customers from person
-      PersonFactory.getCustomersFromPerson(person).success(handleSuccessCustomersFromPerson);
-
-      //Retrieve bums from person
-      PersonFactory.getBumsFromPerson(person).success(handleSuccessBumsFromPerson);
-
-      //Retrieve competence leaders from person
-      PersonFactory.getCompetenceLeadersFromPerson(person).success(handleSuccessCompetenceLeadersFromPerson);
-
-      //Retrieve practice managers from person
-      PersonFactory.getPracticeManagersFromPerson(person).success(handleSuccessPracticeManagersFromPerson);
-
-      //Retrieve coaches from person
-      PersonFactory.getCoachesFromPerson(person).success(handleSuccessCoachesFromPerson);
-
-      console.log(person);
+      });
     });
   };
 
