@@ -96,7 +96,8 @@
           templateUrl: 'views/register.html',
           controller: 'PersonsCtrl',
           access: {
-            requiresLogin: false
+            requiresLogin: false,
+            isRegister: true
           }
         })
         .when('/skills', {
@@ -151,7 +152,11 @@
           if (requiresLogin && AuthenticateFactory.isAuthorized()) {
             $location.path(next.templateurl);
           } else {
-            $location.path('/login');
+            if (next.access.isRegister) {
+              $location.path('/register');
+            } else {
+              $location.path('/login');
+            }
           }
         }
       });
