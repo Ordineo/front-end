@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name empApp.controller:CustomersCtrl
+ * @name oraj360.controller:CustomersCtrl
  * @description
  * # CustomersCtrl
  * Controller of the frontendApp
  */
 
-angular.module('empApp').controller('CustomersCtrl', CustomersCtrl);
+angular.module('oraj360').controller('CustomersCtrl', CustomersCtrl);
 
 CustomersCtrl.$inject =['$scope', '$log', '$http', 'CustomerFactory', 'dataservice'];
 

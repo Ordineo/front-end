@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('empApp')
+angular.module('oraj360')
   .factory('SkillFactory', function (DataService, $resource) {
     var skills = [];
 

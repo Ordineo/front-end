@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name empApp.controller:ProfileCtrl
+ * @name oraj360.controller:ProfileCtrl
  * @description
  * # ProfileCtrl
- * Controller of the empApp
+ * Controller of the oraj360
  */
-angular.module('empApp')
+angular.module('oraj360')
   .controller('ProfileCtrl', ProfileCtrl);
 
 ProfileCtrl.$inject = ['$scope', '$modal', '$log', '$http', '$location', 'dataservice', 'PersonFactory', 'SkillFactory', 'SkillCompetenceFactory'];

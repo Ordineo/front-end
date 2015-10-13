@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name empApp
+ * @name oraj360
  * @description
- * # empApp
+ * # oraj360
  *
  * Main module of the application.
  */
 angular
-  .module('empApp', [
+  .module('oraj360', [
     'ngAnimate',
     'ngAria',
     'ngCookies',

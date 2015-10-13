@@ -3,7 +3,7 @@
   'use strict';
 
 
-  angular.module('empApp')
+  angular.module('oraj360')
     .controller('SearchCtrl', SearchCtrl);
 
   SearchCtrl.$inject = ['$scope', '$log', 'PersonFactory', 'SkillFactory', 'SkillCompetenceFactory', '$routeParams'];

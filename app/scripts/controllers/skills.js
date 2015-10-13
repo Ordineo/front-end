@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('empApp')
+angular.module('oraj360')
   .controller('SkillsCtrl', function ($scope, SkillFactory, $log) {
     $scope.isNameError = false;
 

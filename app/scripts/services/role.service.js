@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('empApp')
+angular.module('oraj360')
   .factory('RoleService', RoleService);
 
 RoleService.$inject = ['RoleRestangular', 'PersonRestangular'];
@@ -37,7 +37,7 @@ function RoleService(RoleRestangular, PersonRestangular) {
   }
 
 }
-angular.module('empApp')
+angular.module('oraj360')
   .factory('RoleRestangular', function (Restangular) {
     return Restangular.withConfig(function (RestangularConfigurer) {
       RestangularConfigurer.setBaseUrl('http://localhost:9900/api/');

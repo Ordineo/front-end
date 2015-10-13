@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name empApp.controller:DashboardCtrl
+ * @name oraj360.controller:DashboardCtrl
  * @description
  * # DashboardCtrl
- * Controller of the empApp
+ * Controller of the oraj360
  */
-angular.module('empApp')
+angular.module('oraj360')
     .controller('DashboardCtrl', function ($scope, $log, Timeline) {
 
     $log.info('DashboardCtrl loaded');

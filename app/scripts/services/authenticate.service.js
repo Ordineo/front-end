@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('empApp')
+angular.module('oraj360')
   .factory('AuthenticateFactory', AuthenticateFactory);
 
 AuthenticateFactory.$inject = ['dataservice', 'PersonFactory'];

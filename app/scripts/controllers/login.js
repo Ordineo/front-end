@@ -2,7 +2,7 @@
 
   'use strict';
 
-  angular.module('empApp').controller('LoginCtrl', LoginCtrl);
+  angular.module('oraj360').controller('LoginCtrl', LoginCtrl);
 
   LoginCtrl.$inject = ['$scope', '$http', '$location', 'AuthenticateFactory', '$route'];
 

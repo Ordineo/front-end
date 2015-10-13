@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name empApp.controller:PersonsCtrl
+ * @name oraj360.controller:PersonsCtrl
  * @description
  * # PersonsCtrl
  * Controller of the frontendApp
  */
-angular.module('empApp')
+angular.module('oraj360')
     .controller('RoleCtrl',RoleCtrl);
 RoleCtrl.$inject = ['$scope', '$log', 'RoleService', 'roles', 'avroles', 'persons'];
 

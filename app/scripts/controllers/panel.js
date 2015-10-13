@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('empApp')
+  angular.module('oraj360')
     .controller('PanelCtrl', PanelCtrl);
   PanelCtrl.$inject = ['$scope', 'PersonFactory', 'persons', 'person', 'myPersons', '$location'];
 

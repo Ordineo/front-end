@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('empApp')
+angular.module('oraj360')
   .factory('PersonFactory', PersonFactory);
 
 PersonFactory.$inject = ['dataservice', 'PersonRestangular', '$location'];
@@ -240,7 +240,7 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
 }
 
 
-angular.module('empApp')
+angular.module('oraj360')
 .factory('dataservice',['$http',function($http){
 
 

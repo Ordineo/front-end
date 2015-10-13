@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name empApp.controller:PersonsCtrl
+ * @name oraj360.controller:PersonsCtrl
  * @description
  * # PersonsCtrl
  * Controller of the frontendApp
  */
 
-angular.module('empApp')
+angular.module('oraj360')
   .controller('PersonsCtrl',PersonsCtrl);
 PersonsCtrl.$inject = ['$scope', '$log', '$http', '$location', 'PersonFactory', 'CustomerFactory', 'dataservice', '$cookies'];
 
@@ -125,7 +125,7 @@ function PersonsCtrl($scope, $log, $http, $location, PersonFactory, CustomerFact
     PersonFactory.addCoachToPerson(person);
   }
 }
-angular.module('empApp')
+angular.module('oraj360')
   .factory('PersonRestangular', function (Restangular) {
     return Restangular.withConfig(function (RestangularConfigurer) {
       RestangularConfigurer.setBaseUrl('http://localhost:9900/api/');

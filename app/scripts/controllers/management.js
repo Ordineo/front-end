@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('empApp')
+angular.module('oraj360')
   .controller('ManagementCtrl', ManagementCtrl);
 ManagementCtrl.$inject = ['$scope', 'PersonFactory', '$filter', 'persons', 'person'];
 

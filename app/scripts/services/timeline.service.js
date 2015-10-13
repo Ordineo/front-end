@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('empApp')
+angular.module('oraj360')
 .factory('Timeline', ['dataservice', function(dataservice) {
 
     var id = window.sessionStorage.getItem("id");
