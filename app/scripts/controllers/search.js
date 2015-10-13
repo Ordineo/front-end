@@ -21,6 +21,11 @@
 
     PersonFactory.getPersonById(id).then(function (data) {
       $scope.person = data;
+      PersonFactory.getMyCoaches(data).then(function (data) {
+        $scope.coaches = data;
+        PersonFactory.getMyBusinessUnitManagers($scope.person)
+
+      })
     })
 
   }
