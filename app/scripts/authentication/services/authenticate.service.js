@@ -20,17 +20,19 @@ function AuthenticateFactory(dataservice, PersonFactory) {
   function initialise(id) {
     if (id != null) {
       setAuthorized(true);
-      PersonFactory.initialise(id);
 
     }
 
   }
+
   function setAuthorized(logging) {
     logged = logging;
   }
+
   function isAuthorized() {
     return logged;
   }
+
   function getLogin(secret) {
     return dataservice.postItem('POST', 'http://localhost:9900/api/persons/login', secret, 'application/json');
   }
