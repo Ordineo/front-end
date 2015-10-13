@@ -3,9 +3,9 @@
 
   angular.module('empApp')
     .controller('PanelCtrl', PanelCtrl);
-  PanelCtrl.$inject = ['$scope', 'PersonFactory', 'persons', 'person', 'myPersons'];
+  PanelCtrl.$inject = ['$scope', 'PersonFactory', 'persons', 'person', 'myPersons', '$location'];
 
-  function PanelCtrl($scope, PersonFactory, persons, person, myPersons) {
+  function PanelCtrl($scope, PersonFactory, persons, person, myPersons, $location) {
 
     var peeps = [];
     var persona = person;
@@ -13,9 +13,24 @@
     $scope.thePersons = [];
 
     var reviewer = window.sessionStorage.getItem('reviewer');
+
+    var splitLink = function (href) {
+      var parts = href.split("/", 6);
+      return parts[5];
+    };
+
     PersonFactory.getPersonsOfReviewer().then(function (data) {
       $scope.thePersons = data;
     });
+
+    $scope.goToProfile = function (href) {
+
+      var parts = splitLink(href);
+
+
+      $location.path('/search/' + parts);
+
+    };
 
     var filterPersons = function (list, secList) {
       list.forEach(function (persono) {
@@ -54,10 +69,6 @@
 
     $scope.persons = filterPersons(persons, myPersons);
 
-    var splitLink = function (href) {
-      var parts = href.split("/", 6);
-      return parts[5];
-    };
 
     $scope.joinUnit = function (selected) {
       var personId = splitLink(selected);

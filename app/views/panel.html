@@ -51,7 +51,7 @@
       <td>{{person.lastName}}</td>
       <td>{{person.unit}}</td>
       <td>
-        <md-button class="md-icon-button md-accent">
+        <md-button class="md-icon-button md-accent" ng-click="goToProfile(person._links.self.href)">
           <ng-md-icon icon="send"></ng-md-icon>
         </md-button>
       </td>

@@ -53,6 +53,13 @@ angular
 
         }
       })
+      .when(("/search/:otherId"), {
+        templateUrl: 'views/search.html',
+        controller: 'SearchCtrl',
+        access: {
+          requiresLogin: true
+        }
+      })
       .when('/persons', {
         templateUrl: 'views/persons.html',
         controller: 'ManagementCtrl',
