@@ -10,9 +10,9 @@
 angular.module('empApp')
   .controller('ProfileCtrl', ProfileCtrl);
 
-ProfileCtrl.$inject = ['$scope', '$modal', '$log', '$http', '$location', 'dataservice', 'PersonFactory', 'SkillFactory', 'SkillCompetenceFactory', 'myDetails', 'myFunctionalRoles'];
+ProfileCtrl.$inject = ['$scope', '$modal', '$log', '$http', '$location', 'dataservice', 'PersonFactory', 'SkillFactory', 'SkillCompetenceFactory'];
 
-function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, PersonFactory, SkillFactory, SkillCompetenceFactory, myDetails, myFunctionalRoles) {
+function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, PersonFactory, SkillFactory, SkillCompetenceFactory) {
   $log.info('ProfileCtrl loaded');
 
   var reviewer = window.sessionStorage.getItem('reviewer');
@@ -28,13 +28,17 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
   //Details
   //----------
 
-  $scope.myDetails = myDetails;
+  PersonFactory.getMyDetails(null).then(function(data, status) {
+    $scope.myDetails = data;
+  });
 
   //-----
   //Roles
   //-----
 
-  $scope.myFunctionalRoles = myFunctionalRoles;
+  PersonFactory.getMyFunctionalRoles(null).then(function(data, status) {
+    $scope.myFunctionalRoles = data;
+  });
 
   //---------
   //Customers
@@ -44,7 +48,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case consultant:
     case seniorConsultant:
           $scope.hasCustomers = true;
-          PersonFactory.getMyCustomers().then(function(data, status) {
+          PersonFactory.getMyCustomers(null).then(function(data, status) {
             $scope.myCustomers = data;
           });
           break;
@@ -61,7 +65,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case consultant:
     case seniorConsultant:
           $scope.hasBusinessUnitManagers = true;
-          PersonFactory.getMyBusinessUnitManagers().then(function(data, status) {
+          PersonFactory.getMyBusinessUnitManagers(null).then(function(data, status) {
             $scope.myBusinessUnitManagers = data;
           });
           break;
@@ -75,7 +79,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case consultant:
     case seniorConsultant:
           $scope.hasCompetenceLeaders = true;
-          PersonFactory.getMyCompetenceLeaders().then(function(data, status) {
+          PersonFactory.getMyCompetenceLeaders(null).then(function(data, status) {
             $scope.myCompetenceLeaders = data;
           });
           break;
@@ -89,7 +93,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case consultant:
     case seniorConsultant:
           $scope.hasPracticeManagers = true;
-          PersonFactory.getMyPracticeManagers().then(function(data, status) {
+          PersonFactory.getMyPracticeManagers(null).then(function(data, status) {
             $scope.myPracticeManagers = data;
           });
           break;
@@ -103,7 +107,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     case consultant:
     case seniorConsultant:
           $scope.hasCoaches = true;
-          PersonFactory.getMyCoaches().then(function(data, status) {
+          PersonFactory.getMyCoaches(null).then(function(data, status) {
             $scope.myCoaches = data;
           });
           break;

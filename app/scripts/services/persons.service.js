@@ -10,7 +10,7 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
 
   var persons = [];
   var href = 'http://localhost:9900';
-  var id = window.sessionStorage.getItem("id");
+  var myId = window.sessionStorage.getItem("id");
   return {
     getMyDetails: getMyDetails,
     getMyFunctionalRoles: getMyFunctionalRoles,
@@ -39,32 +39,68 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
   //Profile
   //----------
 
-  function getMyDetails() {
-    return PersonRestangular.one('persons', id).get();
+  function searchForPersonId(person) {
+    var value = '/persons/';
+    var index = person._links.self.href.indexOf(value);
+    return person._links.self.href.substring(index + value.length);
   }
 
-  function getMyFunctionalRoles() {
-    return PersonRestangular.one('persons', id).one('roles', true).getList();
+  //Rename function names? (functions can now get data for every person)
+
+  function getMyDetails(person) {
+    if (person === null) {
+      return PersonRestangular.one('persons', myId).get();
+    } else {
+      return PersonRestangular.one('persons', searchForPersonId(person)).get();
+    }
   }
 
-  function getMyCustomers() {
-    return PersonRestangular.one('persons', id).all('customers').getList();
+  function getMyFunctionalRoles(person) {
+    if (person === null) {
+      return PersonRestangular.one('persons', myId).one('roles', true).getList();
+    } else {
+      return PersonRestangular.one('persons', searchForPersonId(person)).one('roles', true).getList();
+    }
   }
 
-  function getMyBusinessUnitManagers() {
-    return PersonRestangular.one('persons', id).all('businessUnitManagers').getList();
+  function getMyCustomers(person) {
+    if (person === null) {
+      return PersonRestangular.one('persons', myId).all('customers').getList();
+    } else {
+      return PersonRestangular.one('persons', searchForPersonId(person)).all('customers').getList();
+    }
   }
 
-  function getMyCompetenceLeaders() {
-    return PersonRestangular.one('persons', id).all('competenceLeaders').getList();
+  function getMyBusinessUnitManagers(person) {
+    if (person === null) {
+      return PersonRestangular.one('persons', myId).all('businessUnitManagers').getList();
+    } else {
+      return PersonRestangular.one('persons', searchForPersonId(person)).all('businessUnitManagers').getList();
+    }
   }
 
-  function getMyPracticeManagers() {
-    return PersonRestangular.one('persons', id).all('practiceManagers').getList();
+  function getMyCompetenceLeaders(person) {
+    if (person === null) {
+      return PersonRestangular.one('persons', myId).all('competenceLeaders').getList();
+    } else {
+      return PersonRestangular.one('persons', searchForPersonId(person)).all('competenceLeaders').getList();
+    }
   }
 
-  function getMyCoaches() {
-    return PersonRestangular.one('persons', id).all('coaches').getList();
+  function getMyPracticeManagers(person) {
+    if (person === null) {
+      return PersonRestangular.one('persons', myId).all('practiceManagers').getList();
+    } else {
+      return PersonRestangular.one('persons', searchForPersonId(person)).all('practiceManagers').getList();
+    }
+  }
+
+  function getMyCoaches(person) {
+    if (person === null) {
+      return PersonRestangular.one('persons', myId).all('coaches').getList();
+    } else {
+      return PersonRestangular.one('persons', searchForPersonId(person)).all('coaches').getList();
+    }
   }
 
   //
@@ -81,13 +117,13 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     switch (reviewer) {
       case 'Bum':
       case 'Resource Manager':
-        return PersonRestangular.one('persons', personId).one('businessUnitManagers', id).post();
+        return PersonRestangular.one('persons', personId).one('businessUnitManagers', myId).post();
       case 'Competence Leader':
-        return PersonRestangular.one('persons', personId).one('competenceLeaders', id).post();
+        return PersonRestangular.one('persons', personId).one('competenceLeaders', myId).post();
       case 'Practice Manager':
-        return PersonRestangular.one('persons', personId).one('practiceManagers', id).post();
+        return PersonRestangular.one('persons', personId).one('practiceManagers', myId).post();
       case 'Coach':
-        return PersonRestangular.one('persons', personId).one('coaches', id).post();
+        return PersonRestangular.one('persons', personId).one('coaches', myId).post();
       default:
         $location.path('/profile')
     }
@@ -100,13 +136,13 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     switch (reviewer) {
       case 'Bum':
       case 'Resource Manager':
-        return PersonRestangular.one('persons', 'search').getList('findByBusinessUnitManagersId', {'id': id});
+        return PersonRestangular.one('persons', 'search').getList('findByBusinessUnitManagersId', {'id': myId});
       case 'Competence Leader':
-        return PersonRestangular.one('persons', 'search').getList('findByCompetenceLeadersId', {'id': id});
+        return PersonRestangular.one('persons', 'search').getList('findByCompetenceLeadersId', {'id': myId});
       case 'Practice Manager':
-        return PersonRestangular.one('persons', 'search').getList('findByPracticeManagersId', {'id': id});
+        return PersonRestangular.one('persons', 'search').getList('findByPracticeManagersId', {'id': myId});
       case 'Coach':
-        return PersonRestangular.one('persons', 'search').getList('findByCoachesId', {'id': id});
+        return PersonRestangular.one('persons', 'search').getList('findByCoachesId', {'id': myId});
       default:
         $location.path('/profile')
     }
@@ -141,7 +177,7 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
   }
 
   function getPersonById() {
-    return PersonRestangular.one('persons', id).get();
+    return PersonRestangular.one('persons', myId).get();
   }
 
   function updatePerson(person) {

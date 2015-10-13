@@ -91,12 +91,7 @@ angular
           requiresLogin: true
         },
         resolve: {
-          myDetails: function (PersonFactory) {
-            return PersonFactory.getMyDetails();
-          },
-          myFunctionalRoles: function(PersonFactory) {
-            return PersonFactory.getMyFunctionalRoles();
-          }
+          //Code here
         }
       })
       .when('/panel', {
