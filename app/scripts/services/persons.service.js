@@ -176,8 +176,8 @@ function PersonFactory(dataservice, PersonRestangular, $location) {
     return PersonRestangular.one(href);
   }
 
-  function getPersonById() {
-    return PersonRestangular.one('persons', myId).get();
+  function getPersonById(personId) {
+    return PersonRestangular.one('persons', personId).get();
   }
 
   function updatePerson(person) {
