@@ -13,11 +13,11 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-  <link rel="stylesheet" href="bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.css" />
-  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-  <link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.min.css" />
-  <link rel="stylesheet" href="bower_components/angular-material-icons/angular-material-icons.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.css"/>
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
+  <link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.min.css"/>
+  <link rel="stylesheet" href="bower_components/angular-material-icons/angular-material-icons.css"/>
   <!-- endbower -->
   <!-- build:css(.tmp) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css"/>
@@ -26,6 +26,113 @@
 </head>
 
 <body ng-app="oraj360">
+<style>
+  #header {
+    height: 300px;
+    background: url('http://lorempixel.com/1920/500') center;
+  }
+
+  #header-logo {
+    float: left;
+  }
+
+  #header-logo img {
+    float: left;
+    height: 40px;
+    margin: 20px 0 20px 20px;
+  }
+
+  #header-menu {
+    float: right;
+  }
+
+  #header-menu #menu-icon {
+    width: 36px;
+    height: 36px;
+    margin: 10px;
+    border-radius: 20px;
+    border: 2px solid white;
+    background-position: center;
+  }
+
+  #header-menu #menu-dropdown {
+    fill:white;
+    margin-left: 40px;
+  }
+
+  #header-details {
+    text-transform: uppercase;
+    border-bottom: 1px solid ghostwhite;
+  }
+
+  #header-details div {
+    width: 166px;
+    height: 166px;
+    border: 2px solid white;
+    border-radius: 85px;
+    margin: -85px 20px 10px 20px;
+    background-position:center;
+  }
+
+  #header-details header {
+    margin: 0px 20px;
+  }
+
+  #header-details header h1 {
+    margin-bottom: 0;
+  }
+</style>
+
+<md-content ng-controller="ProfileCtrl">
+  <div id="header">
+    <div id="header-logo">
+      <img src="images/ordina-logo.png" alt="logo ordina"/>
+    </div>
+
+    <div id="header-menu" layout="row">
+      <md-menu md-offset="0 68">
+        <md-button ng-click="$mdOpenMenu()" id="menu-button">
+          <div id="menu-icon" style="background-image:url('http://lorempixel.com/100/100/');">
+            <ng-md-icon id="menu-dropdown" icon="expand_more"></ng-md-icon>
+          </div>
+
+        </md-button>
+        <md-menu-content width="4">
+          <md-menu-item>
+            <md-button>
+              <div layout="row">
+                <p flex>Timeline</p>
+              </div>
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button>
+              <div layout="row">
+                <p flex>Profile</p>
+              </div>
+            </md-button>
+          </md-menu-item>
+          <md-menu-divider></md-menu-divider>
+          <md-menu-item>
+            <md-button>
+              <div layout="row">
+                <p flex>Logout</p>
+              </div>
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </div>
+  </div>
+  <div id="header-details" layout="row">
+    <div hide-sm style="background-image:url('http://lorempixel.com/300/300/');"></div>
+    <header>
+      <h1 class="md-title">{{myDetails.firstName}} {{myDetails.lastName}}</h1>
+
+      <p class="md-subhead">{{myDetails.unit}}</p>
+    </header>
+  </div>
+</md-content>
 
 <div class="container">
   <div ng-view=""></div>
@@ -92,3 +199,4 @@
 <!-- endbuild -->
 </body>
 </html>
+
