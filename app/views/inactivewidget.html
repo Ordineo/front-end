@@ -1,0 +1,35 @@
+<div class="inactivelist" style="width:50%;">
+  <md-data-table-toolbar>
+    <h2 class="md-title">INACTIVE CONSULTANTS</h2>
+  </md-data-table-toolbar>
+
+  <md-data-table-container style="border: 1px solid #CDCCCB; width:80%;">
+    <table md-data-table md-progress="deferred">
+      <thead md-order="unit" md-trigger="" style="background-color:#CDCCCB; color:white;">
+      <tr>
+        <th style="color:white;font-size:20px;" name="CONSULTANT"></th>
+        <th style="color:white;font-size:20px;" name="TIME"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr md-auto-select ng-repeat="person in persons">
+        <td style="padding: 20px 20px 20px 20px;"><p style="float:left;"><img
+          ng-src="http://lorempixel.com/50/50/people?"
+          class="md-avatar md-circle"
+          style="border-radius: 50%;padding-top:5px;"/>
+        </p>
+
+          <p style="padding: 18px 100px 5px 70px; font-family: Arial; font-size:16px; color:#E98321">
+            {{person.firstName}}
+            {{person.lastName}}</p>
+        </td>
+        <td style="color:#CDCCCB"><p>2 hours</p></td>
+
+      </tr>
+
+      </tbody>
+    </table>
+    <md-button class="md-raised" style="color:#E98321;border: 1px solid #E98321; margin-left:38%;">Show more
+    </md-button>
+  </md-data-table-container>
+</div>

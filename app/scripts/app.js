@@ -93,11 +93,14 @@
         })
         .when('/register', {
           templateUrl: 'views/register.html',
-          controller: 'PersonsCtrl',
+          controller: 'RegisterCtrl',
           access: {
             requiresLogin: false,
             isRegister: true
           }
+        })
+        .when('/unit', {
+          templateUrl: 'views/unit.html'
         })
         .when('/skills', {
           templateUrl: 'views/skills.html',
@@ -114,7 +117,6 @@
 
                 return response.status;
               });
-
             },
             avroles: function (RoleService) {
               return RoleService.getFunctionalRoles().then(function (data) {
