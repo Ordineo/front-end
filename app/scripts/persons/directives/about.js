@@ -1,10 +1,12 @@
-angular.module('oraj360').directive('aLittleAboutMe', aLittleAboutMe);
+angular.module('oraj360')
+  .directive('aLittleAboutMe', aLittleAboutMe);
 
 function aLittleAboutMe() {
   var directive = {
     link: link,
     templateUrl: 'views/alittleaboutme.html',
-    restrict: 'EA'
+    restrict: 'E',
+    controller: 'ProfileCtrl'
   };
   return directive;
 

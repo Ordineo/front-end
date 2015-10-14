@@ -3,8 +3,12 @@
     width: 35%;
   }
 
-  .details {
+  .myDetails ng-md-icon {
+    float: left;
+  }
 
+  .myDetails p {
+    margin-left: 35px;
   }
 </style>
 
@@ -12,29 +16,54 @@
   <h4>
     A LITTLE ABOUT ME
   </h4>
+
   <p>
     Lester is a highly motivated person with strong interest in IT.
     During his education, he specialized in web technologies such as html/css, javascript, PHP and ASP.NET.
     As a developer, he is passionately engaged and combines his technical skills with clear communication between
     everyone he interacts with.
   </p>
+
   <p>
     Together with his day job as a Microsoft software consultant, Lester is also an active member of Ordina Competence
     Centers about ALM, web and soft skills.
   </p>
-  <div class="details">
-    <md-icon md-font-icon="icon-home"></md-icon>
-  </div>
-  <div class="details">
 
+  <div class="myDetails">
+    <ng-md-icon icon="home" size="24"></ng-md-icon>
+    <p>
+      <!--{{myDetails.address.street}} {{myDetails.address.streetNumber}}<br/>
+      {{myDetails.address.zipCode}} {{myDetails.address.city}}, {{myDetails.address.country}}-->
+      Oudenaardsesteenweg 407<br/>
+      9420 Mere, Belgium
+    </p>
   </div>
-  <div class="details">
-
+  <div class="myDetails">
+    <ng-md-icon icon="share" size="24"></ng-md-icon>
+    <p>
+      @ellesso (Twitter)<br/>
+      lester.lievens (Skype)<br/>
+      lester.lievens@telenet.be (Windows Live Messenger)<br/>
+      lievens.lester@gmail.com (Google Talk)<br/>
+    </p>
   </div>
-  <div class="details">
-
+  <div class="myDetails">
+    <ng-md-icon icon="language" size="24"></ng-md-icon>
+    <p>
+      http://lesterlievens.be
+    </p>
   </div>
-  <div class="details">
-
+  <div class="myDetails">
+    <ng-md-icon icon="cake" size="24"></ng-md-icon>
+    <p>
+      {{myDetails.birthDate | date:'longDate'}}
+      <!--July 24, 1989-->
+    </p>
+  </div>
+  <div class="myDetails">
+    <ng-md-icon icon="account_child" size="24"></ng-md-icon>
+    <p>
+      1 Child
+    </p>
   </div>
 </div>
