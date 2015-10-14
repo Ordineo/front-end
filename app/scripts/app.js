@@ -146,7 +146,7 @@
       }
       $rootScope.$on('$routeChangeStart', function (event, next) {
         if (next.access === undefined) {
-          $location.path('/login');
+          $location.path(next.templateurl);
         } else {
           var requiresLogin = next.access.requiresLogin;
           if (requiresLogin && AuthenticateFactory.isAuthorized()) {
