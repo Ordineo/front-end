@@ -29,11 +29,10 @@
     .config(function ($routeProvider) {
       $routeProvider
         .when('/', {
-          templateUrl: 'views/login.html',
-          controller: 'LoginCtrl',
-          access: {
-            requiresLogin: false
-          }
+          templateUrl: 'views/about.html'
+        })
+        .when('/about', {
+          templateUrl: 'views/about.html'
         })
         .when(("/search/:otherId"), {
           templateUrl: 'views/search.html',
@@ -136,8 +135,8 @@
         .otherwise({
           redirectTo: '/'
         });
-    })
-    .run(function ($rootScope, $location, AuthenticateFactory) {
+    });
+  /* .run(function ($rootScope, $location, AuthenticateFactory) {
       var id = window.sessionStorage.getItem('id');
       if (id === null) {
         $location.path('/login');
@@ -161,5 +160,5 @@
         }
       });
 
-    });
+   });*/
 })();
