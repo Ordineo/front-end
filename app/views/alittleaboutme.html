@@ -44,52 +44,45 @@
   </h4>
 
   <p>
-    Lester is a highly motivated person with strong interest in IT.
-    During his education, he specialized in web technologies such as html/css, javascript, PHP and ASP.NET.
-    As a developer, he is passionately engaged and combines his technical skills with clear communication between
-    everyone he interacts with.
+    {{aLittleAboutMe.intro1}}
   </p>
 
   <p>
-    Together with his day job as a Microsoft software consultant, Lester is also an active member of Ordina Competence
-    Centers about ALM, web and soft skills.
+    {{aLittleAboutMe.intro2}}
   </p>
 
   <div class="myDetails">
     <ng-md-icon icon="home" size="24"></ng-md-icon>
     <p>
-      <!--{{myDetails.address.street}} {{myDetails.address.streetNumber}}<br/>
-      {{myDetails.address.zipCode}} {{myDetails.address.city}}, {{myDetails.address.country}}-->
-      Oudenaardsesteenweg 407<br/>
-      9420 Mere, Belgium
+      {{aLittleAboutMe.address.street}} {{aLittleAboutMe.address.streetNumber}}<br/>
+      {{aLittleAboutMe.address.zipCode}} {{aLittleAboutMe.address.city}}, {{aLittleAboutMe.address.country}}
     </p>
   </div>
   <div class="myDetails">
     <ng-md-icon icon="share" size="24"></ng-md-icon>
     <p>
-      @ellesso (Twitter)<br/>
-      lester.lievens (Skype)<br/>
-      lester.lievens@telenet.be (Windows Live Messenger)<br/>
-      lievens.lester@gmail.com (Google Talk)<br/>
+      {{aLittleAboutMe.contactInformation.twitter}} (Twitter)<br/>
+      {{aLittleAboutMe.contactInformation.skype}} (Skype)<br/>
+      {{aLittleAboutMe.contactInformation.windowsLiveMessenger}} (Windows Live Messenger)<br/>
+      {{aLittleAboutMe.contactInformation.googleTalk}} (Google Talk)<br/>
     </p>
   </div>
   <div class="myDetails">
     <ng-md-icon icon="language" size="24"></ng-md-icon>
     <p>
-      http://lesterlievens.be
+      {{aLittleAboutMe.website}}
     </p>
   </div>
   <div class="myDetails">
     <ng-md-icon icon="cake" size="24"></ng-md-icon>
     <p>
-      {{myDetails.birthDate | date:'longDate'}}
-      <!--July 24, 1989-->
+      {{aLittleAboutMe.birthDate | date:'longDate'}}
     </p>
   </div>
   <div class="myDetails">
     <ng-md-icon icon="account_child" size="24"></ng-md-icon>
     <p>
-      1 Child
+      {{aLittleAboutMe.children}} <span ng-if="aLittleAboutMe.children === 1">Child</span><span ng-if="aLittleAboutMe.children > 1">Children</span>
     </p>
   </div>
 </div>

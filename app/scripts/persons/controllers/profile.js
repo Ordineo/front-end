@@ -15,6 +15,35 @@ ProfileCtrl.$inject = ['$scope', '$modal', '$log', '$http', '$location', 'datase
 function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, PersonFactory, SkillFactory, SkillCompetenceFactory) {
   $log.info('ProfileCtrl loaded');
 
+  //----------
+  //Dummy code
+  //----------
+
+  $scope.aLittleAboutMe = {
+    intro1: 'Lester is a highly motivated person with strong interest in IT. During his education, he specialized in web technologies such as html/css, javascript, PHP and ASP.NET. As a developer, he is passionately engaged and combines his technical skills with clear communication between everyone he interacts with.',
+    intro2: 'Together with his day job as a Microsoft software consultant, Lester is also an active member of Ordina Competence Centers about ALM, web and soft skills.',
+    address: {
+      street: 'Oudenaardsesteenweg',
+      streetNumber: 407,
+      zipCode: '9420',
+      city: 'Mere',
+      country: 'Belgium'
+    },
+    contactInformation: {
+      twitter: '@ellesso',
+      skype: 'lester.lievens',
+      windowsLiveMessenger: 'lester.lievens@telenet.be',
+      googleTalk: 'lievens.lester@gmail.com'
+    },
+    website: 'http://lesterlievens.be',
+    birthDate: '1989-07-24',
+    children: 1
+  };
+
+  //----
+  //Vars
+  //----
+
   var reviewer = window.sessionStorage.getItem('reviewer');
   var bum = 'Bum';
   var resourceManager = 'Resource Manager';
