@@ -1,0 +1,41 @@
+<div>
+  <h4>Skill competences</h4>
+  <div class="row">
+    <div class="col-lg-6">
+      <table class="table table-hover table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Competence Level</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="skillCompetence in skillCompetences | filter:search" ng-click="setSelected(skill)">
+          <td>{{skillCompetence.skill.name}}</td>
+          <td>{{skillCompetence.competenceLevel}}</td>
+          <td ng-click="remove(skillCompetence._links.self.href)">Delete</td>
+        </tr>
+        <tr>
+          <form name="addForm">
+            <td>
+              <input id="skill" class="form-control"
+                     ng-model="skillCompetence.skill" typeahead-no-results="noResults"
+                     typeahead="skill as skill.name for skill in skills | filter:$viewValue | limitTo:8"
+                     placeholder="Skill"/>
+              <div ng-if="!skillCompetence.skill._links && skillCompetence.skill" class="alert alert-danger">Select a skill from the list.</div>
+            </td>
+            <td>
+              <input name="competenceLevel" ng-model="skillCompetence.competenceLevel" placeholder="Competence Level"
+                     id="competenceLevel" class="form-control" type="number">
+            </td>
+            <td>
+              <button class="btn btn-default" ng-click="save(skillCompetence)">Add</button>
+            </td>
+          </form>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+</div>

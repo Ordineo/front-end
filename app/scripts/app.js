@@ -102,10 +102,6 @@
         .when('/unit', {
           templateUrl: 'views/unit.html'
         })
-        .when('/skills', {
-          templateUrl: 'views/skills.html',
-          controller: 'SkillsCtrl'
-        })
         .when('/roles', {
           templateUrl: 'views/roles.html',
           controller: 'RoleCtrl',
