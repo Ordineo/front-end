@@ -1,0 +1,61 @@
+<style>
+  #dailyRoute {
+    width: 100%;
+  }
+
+  #map {
+    background-color: #CCC;
+    height: 0;
+    padding-bottom: 65%;
+    position: relative;
+    width: 100%;
+  }
+
+  .inlineArrow {
+    font-size: 20px;
+    position: relative;
+    top: 2px;
+  }
+
+  /* Extra small devices (phones, less than 768px) */
+  /* No media query since this is the default in Bootstrap */
+
+  /* Small devices (tablets, 768px and up) */
+  @media (min-width: 768px) {
+
+  }
+
+  /* Medium devices (desktops, 992px and up) */
+  @media (min-width: 992px) {
+    #dailyRoute {
+      width: 35%;
+    }
+  }
+
+  /* Large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {
+
+  }
+</style>
+
+<div id="dailyRoute" style="border: solid 1px black;">
+  <h4>DAILY ROUTE</h4>
+
+  <p>
+    Erpe-mere <span class="inlineArrow">&#x279c;</span> Antwerpen
+  </p>
+
+  <p>
+    <b>Working at:</b><br/>
+    Digipolis Antwerpen<br/>
+    Generaal Armstrongweg 1<br/>
+    2020 Antwerpen<br/>
+  </p>
+
+  <p>
+    <b>On-site:</b> 8:00 - 17:00<br/>
+    <b>Travelling by car:</b> 71km - &plusmn; 50 min
+  </p>
+
+  <div id="map"></div>
+</div>
