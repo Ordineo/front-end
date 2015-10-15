@@ -1,88 +1,113 @@
 <style>
   #certificates {
-    width: 65%;
+    margin-bottom: 30px;
+    width: 100%;
   }
 
   .certificatesContainer {
-    width: 80%;
-    margin-top: 10px;
-    overflow-x: auto;
+    display: inline-block;
   }
 
-  .certificateItem {
-    color: #797478;
-    font: 10px/1.5 Verdana, Helvetica, sans-serif;
+  .certificatesItem {
+    float: left;
+    height: 150px;
     padding: 5px;
     text-align: center;
-    width: 16.666%;
+    width: 33.333%;
   }
 
-  .certificateItem img {
-    width: 80px;
-    height: 80px;
+  .certificatesItem img {
     border: solid 5px #E98321;
     border-radius: 40px;
+    height: 80px;
+    width: 80px;
   }
 
-  .certificateItem p {
+  .certificatesItem p {
+    color: #797478;
+    font: 9px/1.5 Verdana, Helvetica, sans-serif;
+    margin-right: auto;
+    margin-left: auto;
     margin-top: 5px;
-    /*text-align: center;*/
     text-transform: uppercase;
+    width: 80px;
+  }
+
+  /* Extra small devices (phones, less than 768px) */
+  /* No media query since this is the default in Bootstrap */
+
+  /* Small devices (tablets, 768px and up) */
+  @media (min-width: 768px) {
+    .certificatesItem {
+      width: 16.666%;
+    }
+  }
+
+  /* Medium devices (desktops, 992px and up) */
+  @media (min-width: 992px) {
+    #certificates {
+      width: 65%;
+    }
+  }
+
+  /* Large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {
+
   }
 </style>
 
 <div id="certificates">
   <h4>CERTIFICATES</h4>
-  <div class="certificatesContainer" layout="row">
-    <div class="certificateItem">
+  <div class="certificatesContainer">
+    <div class="certificatesItem">
       <img ng-src="http://lorempixel.com/80/80/" alt="Certificate"/>
       <p>
         Prince2 Foundation
       </p>
     </div>
-    <div class="certificateItem">
+    <div class="certificatesItem">
       <img ng-src="http://lorempixel.com/80/80/" alt="Certificate"/>
       <p>
         Programming in HTML5, JavaScript, CSS3
       </p>
     </div>
-    <div class="certificateItem">
+    <div class="certificatesItem">
       <img ng-src="http://lorempixel.com/80/80/" alt="Certificate"/>
       <p>
         Developing ASP.NET MVC web applications
       </p>
     </div>
-    <div class="certificateItem">
+    <div class="certificatesItem">
       <img ng-src="http://lorempixel.com/80/80/" alt="Certificate"/>
       <p>
         Prince2 Foundation
       </p>
     </div>
-    <div class="certificateItem">
+    <div class="certificatesItem">
       <img ng-src="http://lorempixel.com/80/80/" alt="Certificate"/>
       <p>
         Programming in HTML5, JavaScript, CSS3
       </p>
     </div>
-    <div class="certificateItem">
+    <div class="certificatesItem">
       <img ng-src="http://lorempixel.com/80/80/" alt="Certificate"/>
       <p>
         Developing ASP.NET MVC web applications
       </p>
     </div>
-    <div class="certificateItem">
+    <div class="certificatesItem">
       <img ng-src="http://lorempixel.com/80/80/" alt="Certificate"/>
       <p>
         Prince2 Foundation
       </p>
     </div>
-    <div class="certificateItem">
+    <div class="certificatesItem">
       <img ng-src="http://lorempixel.com/80/80/" alt="Certificate"/>
       <p>
         Programming in HTML5, JavaScript, CSS3
       </p>
     </div>
-    <div class="certificateItem">
+    <div class="certificatesItem">
       <img ng-src="http://lorempixel.com/80/80/" alt="Certificate"/>
       <p>
         Developing ASP.NET MVC web applications
