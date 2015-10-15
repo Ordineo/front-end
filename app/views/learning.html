@@ -1,0 +1,116 @@
+<!--<div ng-repeat="item in myTimelineItems">-->
+<!--<p>{{item.description}}</p>-->
+<!--</div>-->
+
+
+<style>
+
+  .bar {
+    height: 4px;
+    background: #eee;
+    width: 100%;
+    position: relative;
+    top: 13px;
+    left: 0;
+  }
+
+  .timeline {
+    white-space: nowrap;
+    overflow-x: scroll;
+    padding: 30px 0 10px 0;
+    position: relative;
+  }
+
+  .timeline-item {
+    display: inline-block;
+    vertical-align: top;
+    background: white;
+    font-size: 12px;
+    text-align: center;
+    position: relative;
+    border: 1px solid ghostwhite;
+    min-width: 250px;
+    max-width: 500px;
+    margin: 0px 10px;
+  }
+
+  .timeline-item:after {
+    content: '';
+    display: block;
+    background: #eee;
+    width: 21px;
+    height: 21px;
+    border-radius: 14px;
+    border: 3px solid darkgrey;
+    position: absolute;
+    left: 50%;
+    top: -30px;
+    margin-left: -10px;
+  }
+
+  .timeline-item:before {
+    content: '';
+    display: block;
+    background: darkgrey;
+    width: 3px;
+    height: 20px;
+    position: absolute;
+    left: 50%;
+    top: -20px;
+    margin-left: -1px;
+  }
+
+  .timeline-item h4 {
+    color: #fff;
+    background-color: darkorange;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin: 0;
+    padding: 10px;
+    padding-bottom: 25px;
+  }
+
+  .timeline .item-icon {
+    width: 46px;
+    height: 46px;
+    border: 2px solid ghostwhite;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    background: white;
+    margin: 0 auto;
+    margin-top: -20px;
+  }
+
+  .timeline .item-icon ng-md-icon {
+    background: white;
+    fill: black;
+    margin: 8px;
+  }
+</style>
+
+<div ng-if="!myTimelineItems.length">No timeline yet</div>
+<div ng-if="myTimelineItems.length">
+  <div class="bar"></div>
+  <div class="timeline">
+    <div class="timeline-item" ng-repeat="item in myTimelineItems">
+      <h4>{{item.description}}</h4>
+
+      <div ng-switch="item.type">
+        <div ng-switch-when="Competence" class="item-icon">
+          <ng-md-icon icon="school" style=""></ng-md-icon>
+        </div>
+        <div ng-switch-when="Personal" class="item-icon">
+          <ng-md-icon icon="person" style=""></ng-md-icon>
+        </div>
+        <p>Target date: {{item.targetDate}}</p>
+
+        <p>End date: {{item.endDate}}</p>
+
+        <p>Length: {{item.length}}</p>
+      </div>
+
+    </div>
+  </div>
+</div>
