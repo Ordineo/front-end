@@ -135,7 +135,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
       departure: $scope.aLittleAboutMe.address.city,
       arrival: 'Antwerpen'
     },
-    customer: {
+    workplace: {
       name: 'Digipolis Antwerpen',
       address: {
         street: 'Generaal Armstrongweg',

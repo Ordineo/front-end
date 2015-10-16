@@ -49,7 +49,7 @@
     </p>
   </div>
 
-  <div id="interestsContainer" ng-if="interests !== null || interests.length !== 0">
+  <div id="interestsContainer" ng-if="interests !== null && interests.length !== 0">
     <div class="interestsItem" ng-repeat="interest in interests">
       {{interest.description}}
     </div>

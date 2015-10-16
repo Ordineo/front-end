@@ -39,15 +39,13 @@
 </style>
 
 <div id="aLittleAboutMe" style="border: solid 1px black;">
-  <h4>
-    A LITTLE ABOUT ME
-  </h4>
+  <h4>A LITTLE ABOUT ME</h4>
 
-  <p ng-if="aLittleAboutMe.intro !== null">
+  <p ng-if="aLittleAboutMe.intro !== null && aLittleAboutMe.intro !== ''">
     {{aLittleAboutMe.intro}}
   </p>
 
-  <p ng-if="aLittleAboutMe.jobs !== null">
+  <p ng-if="aLittleAboutMe.jobs !== null && aLittleAboutMe.jobs !== ''">
     {{aLittleAboutMe.jobs}}
   </p>
 
@@ -58,16 +56,16 @@
       {{aLittleAboutMe.address.zipCode}} {{aLittleAboutMe.address.city}}, {{aLittleAboutMe.address.country}}
     </p>
   </div>
-  <div class="myDetails" ng-if="aLittleAboutMe.contactInformation !== null">
+  <div class="myDetails" ng-if="aLittleAboutMe.contactInformation !== null && Object.keys(aLittleAboutMe.contactInformation).length !== 0">
     <ng-md-icon icon="share" size="24"></ng-md-icon>
     <p>
-      <span ng-if="aLittleAboutMe.contactInformation.twitter !== null">{{aLittleAboutMe.contactInformation.twitter}} (Twitter)<br/></span>
-      <span ng-if="aLittleAboutMe.contactInformation.skype !== null">{{aLittleAboutMe.contactInformation.skype}} (Skype)<br/></span>
-      <span ng-if="aLittleAboutMe.contactInformation.windowsLiveMessenger !== null">{{aLittleAboutMe.contactInformation.windowsLiveMessenger}} (Windows Live Messenger)<br/></span>
-      <span ng-if="aLittleAboutMe.contactInformation.googleTalk !== null">{{aLittleAboutMe.contactInformation.googleTalk}} (Google Talk)<br/></span>
+      <span ng-if="aLittleAboutMe.contactInformation.twitter !== null && aLittleAboutMe.contactInformation.twitter !== ''">{{aLittleAboutMe.contactInformation.twitter}} (Twitter)<br/></span>
+      <span ng-if="aLittleAboutMe.contactInformation.skype !== null && aLittleAboutMe.contactInformation.skype !== ''">{{aLittleAboutMe.contactInformation.skype}} (Skype)<br/></span>
+      <span ng-if="aLittleAboutMe.contactInformation.windowsLiveMessenger !== null && aLittleAboutMe.contactInformation.windowsLiveMessenger !== ''">{{aLittleAboutMe.contactInformation.windowsLiveMessenger}} (Windows Live Messenger)<br/></span>
+      <span ng-if="aLittleAboutMe.contactInformation.googleTalk !== null && aLittleAboutMe.contactInformation.googleTalk !== ''">{{aLittleAboutMe.contactInformation.googleTalk}} (Google Talk)<br/></span>
     </p>
   </div>
-  <div class="myDetails" ng-if="aLittleAboutMe.website !== null">
+  <div class="myDetails" ng-if="aLittleAboutMe.website !== null && aLittleAboutMe.website !== ''">
     <ng-md-icon icon="language" size="24"></ng-md-icon>
     <p>
       {{aLittleAboutMe.website}}

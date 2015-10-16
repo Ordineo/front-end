@@ -47,14 +47,14 @@
 
   <p>
     <b>Working at:</b><br/>
-    {{dailyRoute.customer.name}}<br/>
-    {{dailyRoute.customer.address.street}} {{dailyRoute.customer.address.streetNumber}},<br/>
-    {{dailyRoute.customer.address.zipCode}} {{dailyRoute.customer.address.city}}<br/>
+    {{dailyRoute.workplace.name}}<br/>
+    {{dailyRoute.workplace.address.street}} {{dailyRoute.workplace.address.streetNumber}},<br/>
+    {{dailyRoute.workplace.address.zipCode}} {{dailyRoute.workplace.address.city}}<br/>
   </p>
 
   <p>
     <b>On-site:</b> {{dailyRoute.workingHours.begin.hours}}:<span ng-if="dailyRoute.workingHours.begin.minutes < 10">0</span>{{dailyRoute.workingHours.begin.minutes}} - {{dailyRoute.workingHours.end.hours}}:<span ng-if="dailyRoute.workingHours.end.minutes < 10">0</span>{{dailyRoute.workingHours.end.minutes}}<br/>
-    <b>Travelling by car:</b> {{dailyRoute.travel.distance}} km - &plusmn; <span ng-if="dailyRoute.travel.duration.hours !== null || dailyRoute.travel.duration.hours !== 0">{{dailyRoute.travel.duration.hours}} h </span>{{dailyRoute.travel.duration.minutes}} min
+    <b>Travelling by car:</b> {{dailyRoute.travel.distance}} km - &plusmn; <span ng-if="dailyRoute.travel.duration.hours !== null && dailyRoute.travel.duration.hours !== 0">{{dailyRoute.travel.duration.hours}} h </span>{{dailyRoute.travel.duration.minutes}} min
   </p>
 
   <div id="map"></div>
