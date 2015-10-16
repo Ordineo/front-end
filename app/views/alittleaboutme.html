@@ -43,12 +43,12 @@
     A LITTLE ABOUT ME
   </h4>
 
-  <p>
-    {{aLittleAboutMe.intro1}}
+  <p ng-if="aLittleAboutMe.intro !== null">
+    {{aLittleAboutMe.intro}}
   </p>
 
-  <p>
-    {{aLittleAboutMe.intro2}}
+  <p ng-if="aLittleAboutMe.jobs !== null">
+    {{aLittleAboutMe.jobs}}
   </p>
 
   <div class="myDetails">
@@ -58,16 +58,16 @@
       {{aLittleAboutMe.address.zipCode}} {{aLittleAboutMe.address.city}}, {{aLittleAboutMe.address.country}}
     </p>
   </div>
-  <div class="myDetails">
+  <div class="myDetails" ng-if="aLittleAboutMe.contactInformation !== null">
     <ng-md-icon icon="share" size="24"></ng-md-icon>
     <p>
-      {{aLittleAboutMe.contactInformation.twitter}} (Twitter)<br/>
-      {{aLittleAboutMe.contactInformation.skype}} (Skype)<br/>
-      {{aLittleAboutMe.contactInformation.windowsLiveMessenger}} (Windows Live Messenger)<br/>
-      {{aLittleAboutMe.contactInformation.googleTalk}} (Google Talk)<br/>
+      <span ng-if="aLittleAboutMe.contactInformation.twitter !== null">{{aLittleAboutMe.contactInformation.twitter}} (Twitter)<br/></span>
+      <span ng-if="aLittleAboutMe.contactInformation.skype !== null">{{aLittleAboutMe.contactInformation.skype}} (Skype)<br/></span>
+      <span ng-if="aLittleAboutMe.contactInformation.windowsLiveMessenger !== null">{{aLittleAboutMe.contactInformation.windowsLiveMessenger}} (Windows Live Messenger)<br/></span>
+      <span ng-if="aLittleAboutMe.contactInformation.googleTalk !== null">{{aLittleAboutMe.contactInformation.googleTalk}} (Google Talk)<br/></span>
     </p>
   </div>
-  <div class="myDetails">
+  <div class="myDetails" ng-if="aLittleAboutMe.website !== null">
     <ng-md-icon icon="language" size="24"></ng-md-icon>
     <p>
       {{aLittleAboutMe.website}}
@@ -79,10 +79,10 @@
       {{aLittleAboutMe.birthDate | date:'longDate'}}
     </p>
   </div>
-  <div class="myDetails">
+  <div class="myDetails" ng-if="aLittleAboutMe.children !== null">
     <ng-md-icon icon="account_child" size="24"></ng-md-icon>
     <p>
-      {{aLittleAboutMe.children}} <span ng-if="aLittleAboutMe.children === 1">Child</span><span ng-if="aLittleAboutMe.children > 1">Children</span>
+      {{aLittleAboutMe.children}} <span ng-if="aLittleAboutMe.children === 1">Child</span><span ng-if="aLittleAboutMe.children !== 1">Children</span>
     </p>
   </div>
 </div>

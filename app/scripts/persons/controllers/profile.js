@@ -20,8 +20,8 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
   //----------
 
   $scope.aLittleAboutMe = {
-    intro1: 'Lester is a highly motivated person with strong interest in IT. During his education, he specialized in web technologies such as html/css, javascript, PHP and ASP.NET. As a developer, he is passionately engaged and combines his technical skills with clear communication between everyone he interacts with.',
-    intro2: 'Together with his day job as a Microsoft software consultant, Lester is also an active member of Ordina Competence Centers about ALM, web and soft skills.',
+    intro: 'Lester is a highly motivated person with strong interest in IT. During his education, he specialized in web technologies such as html/css, javascript, PHP and ASP.NET. As a developer, he is passionately engaged and combines his technical skills with clear communication between everyone he interacts with.',
+    jobs: 'Together with his day job as a Microsoft software consultant, Lester is also an active member of Ordina Competence Centers about ALM, web and soft skills.',
     address: {
       street: 'Oudenaardsesteenweg',
       streetNumber: 407,
