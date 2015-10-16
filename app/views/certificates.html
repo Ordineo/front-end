@@ -62,11 +62,11 @@
 
   <div ng-if="certificates === null || certificates.length === 0">
     <p>
-      There are no certificates achieved yet.
+      There are no certificates yet.
     </p>
   </div>
 
-  <div id="certificatesContainer" ng-if="certificates !== null">
+  <div id="certificatesContainer" ng-if="certificates !== null || certificates.length !== 0">
     <div class="certificatesItem" ng-repeat="certificate in certificates">
       <img ng-src="{{certificate.image}}" alt="Certificate"/>
 
