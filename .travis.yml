@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "0.12"
+sudo: false
+install:
+  - npm install
+  - bower install
+  - grunt build
+deploy:
+  edge: true
+  provider: cloudfoundry
+  api: https://api.run.pivotal.io
+  username: andreas.evers@ordina.be
+  password:
+    secure: "OJZ9akmw70nn+1cmJwQ30YWQED1guFc/q6VAhxyAWpy9irPKhC/UIvcssg5FON+ZVAaXZ5aIpsPSEdDoQthklCWb25KQraSTsMgSbADmHP6EYRKZSSl3gFYLCtZgAX37JwWM+JuXIBctJQVLgfLwEaP7Rgff4tXvMwjWckw/FIpCQxHqQrI2Pn6N7+TTs9DLD2var+rcn3X5wYbdA8BvKcLX1fn2kOGGfcuH2QYd3UXYcONDKnkt3QthvaJCzK/7E8iLK8Nf4QlEa7OFgDCRi61jDb+JCBIcIS2WfuCUJBoydDIRx6vTMnBZsVKqHnVR9paekP7cizCUxpyd6+/4knH3YidXa+LzqKWalDQSn/C9h81FAwE1w+RbBv/Tl9ZneXTHCTIFvV5sBGISdchj9nVQZ2lMHzckfZtc0Kx5gpC0EAWmKDOePPEBSJtkMQoA6gY1K2Q5G6p/36BEdqHhxvpxT+HTY6aFjBtcvggA8c1c9w1P2wozRGVxN2iT7NETFzsg4haf86hiPkslcnBIhmPLSRlpBCrkWUQekllacdEnuTp4tOP8CpGzE2TmmjKKKHGpbt74JNcn6mYnm5M1b7ySSduZB2g9ZYCyfDpy5m6/vaUcTOg+k/KC7FGZBOIJye4DEDzSMK9tfMBEhTh22s6iODwpXxKta4DDseqeeFg="
+  organization: OrdinaBelgiumNV
+  space: development
+  on:
+    repo: oraj-360/front-end
+    branch: master
