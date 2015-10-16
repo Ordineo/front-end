@@ -42,7 +42,7 @@
   <h4>DAILY ROUTE</h4>
 
   <p>
-    Erpe-mere <span class="inlineArrow">&#x279c;</span> Antwerpen
+    {{dailyRoute.route.departure}} <span class="inlineArrow">&#x279c;</span> {{dailyRoute.route.arrival}}
   </p>
 
   <p>
@@ -54,7 +54,18 @@
 
   <p>
     <b>On-site:</b> {{dailyRoute.workingHours.begin.hours}}:<span ng-if="dailyRoute.workingHours.begin.minutes < 10">0</span>{{dailyRoute.workingHours.begin.minutes}} - {{dailyRoute.workingHours.end.hours}}:<span ng-if="dailyRoute.workingHours.end.minutes < 10">0</span>{{dailyRoute.workingHours.end.minutes}}<br/>
-    <b>Travelling by car:</b> {{dailyRoute.travel.distance}} km - &plusmn; <span ng-if="dailyRoute.travel.duration.hours !== null && dailyRoute.travel.duration.hours !== 0">{{dailyRoute.travel.duration.hours}} h </span>{{dailyRoute.travel.duration.minutes}} min
+    <span ng-if="dailyRoute.travel.car.isUsing === true">
+      <b>Travelling by car:</b> {{dailyRoute.travel.car.distance}} km - &plusmn; <span ng-if="dailyRoute.travel.car.duration.hours !== null && dailyRoute.travel.car.duration.hours !== 0">{{dailyRoute.travel.car.duration.hours}} h </span>{{dailyRoute.travel.car.duration.minutes}} min<br/>
+    </span>
+    <span ng-if="dailyRoute.travel.publicTransport.isUsing === true">
+      <b>Travelling by public transport:</b> &plusmn; <span ng-if="dailyRoute.travel.publicTransport.duration.hours !== null && dailyRoute.travel.publicTransport.duration.hours !== 0">{{dailyRoute.travel.publicTransport.duration.hours}} h </span>{{dailyRoute.travel.publicTransport.duration.minutes}} min<br/>
+    </span>
+    <span ng-if="dailyRoute.travel.bicycle.isUsing === true">
+      <b>Travelling by bicycle:</b> {{dailyRoute.travel.bicycle.distance}} km - &plusmn; <span ng-if="dailyRoute.travel.bicycle.duration.hours !== null && dailyRoute.travel.bicycle.duration.hours !== 0">{{dailyRoute.travel.bicycle.duration.hours}} h </span>{{dailyRoute.travel.bicycle.duration.minutes}} min<br/>
+    </span>
+    <span ng-if="dailyRoute.travel.foot.isUsing === true">
+      <b>Travelling by foot:</b> {{dailyRoute.travel.foot.distance}} km - &plusmn; <span ng-if="dailyRoute.travel.foot.duration.hours !== null && dailyRoute.travel.foot.duration.hours !== 0">{{dailyRoute.travel.foot.duration.hours}} h </span>{{dailyRoute.travel.foot.duration.minutes}} min<br/>
+    </span>
   </p>
 
   <div id="map"></div>

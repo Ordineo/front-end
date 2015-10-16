@@ -155,10 +155,36 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
       }
     },
     travel: {
-      distance: 71,
-      duration: {
-        hours: 0,
-        minutes: 50
+      car: {
+        isUsing: true,
+        distance: 71,
+        duration: {
+          hours: 0,
+          minutes: 50
+        }
+      },
+      publicTransport: {
+        isUsing: false,
+        duration: {
+          hours: 2,
+          minutes: 5
+        }
+      },
+      bicycle: {
+        isUsing: false,
+        distance: 56,
+        duration: {
+          hours: 2,
+          minutes: 55
+        }
+      },
+      foot: {
+        isUsing: false,
+        distance: 51,
+        duration: {
+          hours: 10,
+          minutes: 21
+        }
       }
     }
   };
