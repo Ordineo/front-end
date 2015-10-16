@@ -79,6 +79,57 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     }
   ];
 
+  $scope.interests = [
+    {
+      description: 'Microsoft'
+    },
+    {
+      description: '.NET'
+    },
+    {
+      description: 'Sales'
+    },
+    {
+      description: 'MVC'
+    },
+    {
+      description: 'Fishing'
+    },
+    {
+      description: 'CSS'
+    },
+    {
+      description: 'Soccer'
+    },
+    {
+      description: 'HTML5'
+    },
+    {
+      description: 'Java'
+    },
+    {
+      description: 'jQuery'
+    },
+    {
+      description: 'SQL'
+    },
+    {
+      description: 'Matlab'
+    },
+    {
+      description: 'Marketing'
+    },
+    {
+      description: 'Eclipse'
+    },
+    {
+      description: 'Agile'
+    },
+    {
+      description: 'SOAPUI'
+    }
+  ];
+
   //----
   //Vars
   //----
