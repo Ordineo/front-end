@@ -130,6 +130,39 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     }
   ];
 
+  $scope.dailyRoute = {
+    route: {
+      departure: $scope.aLittleAboutMe.address.city,
+      arrival: 'Antwerpen'
+    },
+    customer: {
+      name: 'Digipolis Antwerpen',
+      address: {
+        street: 'Generaal Armstrongweg',
+        streetNumber: 1,
+        zipCode: '2020',
+        city: 'Antwerpen'
+      }
+    },
+    workingHours: {
+      begin: {
+        hours: 8,
+        minutes: 0
+      },
+      end: {
+        hours: 17,
+        minutes: 0
+      }
+    },
+    travel: {
+      distance: 71,
+      duration: {
+        hours: 0,
+        minutes: 50
+      }
+    }
+  };
+
   //----
   //Vars
   //----

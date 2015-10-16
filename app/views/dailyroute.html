@@ -47,14 +47,14 @@
 
   <p>
     <b>Working at:</b><br/>
-    Digipolis Antwerpen<br/>
-    Generaal Armstrongweg 1<br/>
-    2020 Antwerpen<br/>
+    {{dailyRoute.customer.name}}<br/>
+    {{dailyRoute.customer.address.street}} {{dailyRoute.customer.address.streetNumber}},<br/>
+    {{dailyRoute.customer.address.zipCode}} {{dailyRoute.customer.address.city}}<br/>
   </p>
 
   <p>
-    <b>On-site:</b> 8:00 - 17:00<br/>
-    <b>Travelling by car:</b> 71km - &plusmn; 50 min
+    <b>On-site:</b> {{dailyRoute.workingHours.begin.hours}}:<span ng-if="dailyRoute.workingHours.begin.minutes < 10">0</span>{{dailyRoute.workingHours.begin.minutes}} - {{dailyRoute.workingHours.end.hours}}:<span ng-if="dailyRoute.workingHours.end.minutes < 10">0</span>{{dailyRoute.workingHours.end.minutes}}<br/>
+    <b>Travelling by car:</b> {{dailyRoute.travel.distance}} km - &plusmn; <span ng-if="dailyRoute.travel.duration.hours !== null || dailyRoute.travel.duration.hours !== 0">{{dailyRoute.travel.duration.hours}} h </span>{{dailyRoute.travel.duration.minutes}} min
   </p>
 
   <div id="map"></div>
