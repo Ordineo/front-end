@@ -16,7 +16,7 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
   $log.info('ProfileCtrl loaded');
 
   //----------
-  //Dummy code
+  //Dummy data
   //----------
 
   $scope.aLittleAboutMe = {
@@ -39,6 +39,45 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
     birthDate: '1989-07-24',
     children: 1
   };
+
+  $scope.certificates = [
+    {
+      description: 'Prince2 Foundation',
+      image: 'http://lorempixel.com/80/80/'
+    },
+    {
+      description: 'Programming in HTML5, JavaScript, CSS3',
+      image: 'http://lorempixel.com/80/80/'
+    },
+    {
+      description: 'Developing ASP.NET MVC Web Applications',
+      image: 'http://lorempixel.com/80/80/'
+    },
+    {
+      description: 'Prince2 Foundation',
+      image: 'http://lorempixel.com/80/80/'
+    },
+    {
+      description: 'Programming in HTML5, JavaScript, CSS3',
+      image: 'http://lorempixel.com/80/80/'
+    },
+    {
+      description: 'Developing ASP.NET MVC Web Applications',
+      image: 'http://lorempixel.com/80/80/'
+    },
+    {
+      description: 'Prince2 Foundation',
+      image: 'http://lorempixel.com/80/80/'
+    },
+    {
+      description: 'Programming in HTML5, JavaScript, CSS3',
+      image: 'http://lorempixel.com/80/80/'
+    },
+    {
+      description: 'Developing ASP.NET MVC Web Applications',
+      image: 'http://lorempixel.com/80/80/'
+    }
+  ];
 
   //----
   //Vars
