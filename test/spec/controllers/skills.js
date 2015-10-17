@@ -3,7 +3,7 @@
 describe('Controller: SkillsCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('empApp'));
+  beforeEach(module('oraj360'));
 
   var $scope, $controller, SkillsCtrl, skillData, SkillFactory, $q;
 
