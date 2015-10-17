@@ -1,10 +1,10 @@
 ---
-memory: 256M
+memory: 64M
 instances: 1
 applications:
 - name: frontend-oraj360
   path: dist/
-  buildpack: https://github.com/cgfrost/nodejs-cf-buildpack
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
   timeout: 120
   domain: oraj360.cfapps.io
   no-hostname: true

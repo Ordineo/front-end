@@ -9,6 +9,8 @@ install:
 - npm install
 - bower install
 - grunt build
+before_deploy:
+- touch dist/Staticfile
 deploy:
   edge: true
   provider: cloudfoundry
