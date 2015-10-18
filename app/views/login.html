@@ -1,29 +1,46 @@
+
 <div class="container">
 
-    <div class="row">
-        <div class="col-sm-6 col-md-4 col-md-offset-4">
-    <div ng-hide="logged">
-            <h1 class="text-center login-title">360 Tool</h1>
-            <div class="account-wall">
 
-                <form class="form-signin">
-                  <input type="text" class="form-control" placeholder="Username" ng-model="userData.username" autofocus
-                         required>
-                  <input type="password" class="form-control" ng-model="userData.password" placeholder="Password"
-                         required>
-                  <button class="btn btn-lg btn-primary btn-block" ng-click="loginCredentials()">
-                        Log in</button>
-                    </form>
-            </div>
+  <div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4">
+      <h1 class="text-center login-title">360 Tool</h1>
+
+      <div>
+        <form class="form-signin">
+          <md-content>
+            <md-input-container flex>
+              <label>Username</label>
+              <input ng-model="userData.username" required md-minlenght="2" md-maxlength="10" name="username">
+
+              <div ng-messages="registerForm.username.$error">
+                <div ng-message="required">This is required.</div>
+                <div ng-message="md-maxlength">Username has to be less than 10 characters long.</div>
+                <div ng-message="md-minlength">Username has to be minimum 2 characters long.</div>
+              </div>
+            </md-input-container>
+            <md-input-container flex>
+              <label>Password</label>
+              <input type="password" ng-model="userData.password" name="password" required md-min-length="6"
+                     md-maxlength="18">
+
+              <div ng-messages="registerForm.password.$error">
+                <div ng-message="required">This is required.</div>
+                <div ng-message="md-maxlength">Password to be less than 18 characters long.</div>
+                <div ng-message="md-minlength">Password has to be minimum 6 characters long.</div>
+              </div>
+            </md-input-container>
+            <md-button style="width: 90%" class="md-raised md-primary" ng-click="loginCredentials()">Login</md-button>
+
             <a href="#/register" class="text-center new-account">Create an account </a>
-    </div>
-            <div ng-show="logged">
-                <button class="btn btn-danger" ng-click="logout()">Logout</button>
-            </div>
-
-
-          <div ng-show="valid" class="alert alert-success" role="alert">{{errmsg}}</div>
             <div ng-show="invalid" class="alert alert-danger" role="alert">{{errmsg}}</div>
+          </md-content>
+        </form>
+      </div>
     </div>
-    </div>
+  </div>
+
 </div>
+
+
+

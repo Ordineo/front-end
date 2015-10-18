@@ -8,7 +8,7 @@ AuthenticateFactory.$inject = ['dataservice', 'PersonFactory'];
 
 
 function AuthenticateFactory(dataservice, PersonFactory) {
-
+  var id = window.sessionStorage.getItem('id');
   var logged;
   return {
     getLogin: getLogin,
@@ -24,6 +24,7 @@ function AuthenticateFactory(dataservice, PersonFactory) {
     }
 
   }
+
 
   function setAuthorized(logging) {
     logged = logging;

@@ -6,11 +6,13 @@ angular.module('oraj360')
 RoleService.$inject = ['RoleRestangular', 'PersonRestangular'];
 
 function RoleService(RoleRestangular, PersonRestangular) {
+
   var id = window.sessionStorage.getItem("id");
 
   return {
     getFunctionalRoles: getFunctionalRoles,
-    getAll: getAll,
+    getApplicationRoleOfPerson: getApplicationRoleOfPerson,
+    getFunctionalRolesOfPerson: getFunctionalRolesOfPerson,
     deleteRole: deleteRole,
     findRolesForOther: findRolesForOther,
     addRoleToPerson: addRoleToPerson
@@ -24,7 +26,11 @@ function RoleService(RoleRestangular, PersonRestangular) {
     return PersonRestangular.one('persons', personId).one('roles', true).getList();
   }
 
-  function getAll() {
+  function getApplicationRoleOfPerson(personId) {
+    return PersonRestangular.one('persons', personId).one('roles', false).getList();
+  }
+
+  function getFunctionalRolesOfPerson() {
     return PersonRestangular.one('persons', id).one('roles', true).getList();
   }
 

@@ -4,13 +4,18 @@
 
   angular.module('oraj360').controller('LoginCtrl', LoginCtrl);
 
-  LoginCtrl.$inject = ['$scope', '$http', '$location', 'AuthenticateFactory', '$route'];
+  LoginCtrl.$inject = ['$scope', '$log', '$http', '$location', 'AuthenticateFactory', '$route', 'RoleService'];
 
-  function LoginCtrl($scope, $http, $location, AuthenticateFactory, $route) {
+  function LoginCtrl($scope, $log, $http, $location, AuthenticateFactory, $route, RoleService) {
 
-    if (AuthenticateFactory.isAuthorized()) {
+
+    $log.info('LoginCtrl loaded');
+    if (window.sessionStorage.getItem('logged')) {
+      console.log('ejehe');
       $scope.isLogged = true;
-      checkMyRoles();
+      $location.path('/about');
+
+
     }
     $scope.logout = function () {
       window.sessionStorage.clear();
@@ -34,11 +39,17 @@
         else {
           console.log("Login successful");
           AuthenticateFactory.setAuthorized(true);
-          window.sessionStorage.setItem("id", headers('Location'));
+          window.sessionStorage.setItem('id', headers('Location'));
           if (AuthenticateFactory.isAuthorized()) {
-            $route.reload();
-            window.location.reload();
-            $location.path('/roles');
+            window.sessionStorage.setItem('logged', true);
+            var id = window.sessionStorage.getItem('id');
+            checkMyRoles(id);
+            setTimeout(function () {
+              window.location.reload();
+
+            }, 1000)
+
+
           }
         }
       };
@@ -49,55 +60,25 @@
       AuthenticateFactory.getLogin(credentials).success(handleSuccess).error(handleError);
     };
 
-    //Check my roles
-    function checkMyRoles() {
-      var bum = 'Bum';
-      var resourceManager = 'Resource Manager';
-      var competenceLeader = 'Competence Leader';
-      var practiceManager = 'Practice Manager';
-      var coach = 'Coach';
-      var consultant = 'Consultant';
-      var seniorConsultant = 'Senior Consultant';
-
-      $http.get('http://localhost:9900/api/persons/' + window.sessionStorage.getItem('id') + '/roles').success(function (data) {
-        for (var i = 0; i < data._embedded.roles.length; i++) {
-          switch (data._embedded.roles[i].name) {
-            case bum:
-              window.sessionStorage.setItem('reviewer', bum);
-              window.sessionStorage.setItem('admin', true);
-              $scope.isAdmin = true;
+    function checkMyRoles(personId) {
+      RoleService.getApplicationRoleOfPerson(personId).then(function (data) {
+        data.forEach(function (role) {
+          switch (role.name) {
+            case 'admin':
+              window.sessionStorage.setItem('role', 'admin');
               break;
-            case resourceManager:
-              window.sessionStorage.setItem('reviewer', resourceManager);
-              window.sessionStorage.setItem('admin', true);
-              $scope.isAdmin = true;
+            case 'hero':
+              window.sessionStorage.setItem('role', 'hero');
               break;
-            case competenceLeader:
-              window.sessionStorage.setItem('reviewer', competenceLeader);
-              window.sessionStorage.setItem('hero', true);
-              $scope.isHero = true;
-              break;
-            case practiceManager:
-              window.sessionStorage.setItem('reviewer', practiceManager);
-              window.sessionStorage.setItem('hero', true);
-              $scope.isHero = true;
-              break;
-            case coach:
-              window.sessionStorage.setItem('reviewer', coach);
-              window.sessionStorage.setItem('hero', true);
-              $scope.isHero = true;
-              break;
-            case consultant:
-              window.sessionStorage.setItem('reviewer', consultant);
-              window.sessionStorage.setItem('user', true);
-              break;
-            case seniorConsultant:
-              window.sessionStorage.setItem('reviewer', seniorConsultant);
-              window.sessionStorage.setItem('user', true);
-              break;
+            case 'user':
+              window.sessionStorage.setItem('role', 'user');
           }
-        }
+        })
+      }, function (response) {
+        console.log(response.status);
+
       });
+
     }
   }
 })();

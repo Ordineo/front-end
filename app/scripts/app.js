@@ -29,7 +29,7 @@
     .config(function ($routeProvider) {
       $routeProvider
         .when('/', {
-          templateUrl: 'views/about.html'
+          templateUrl: 'views/login.html'
         })
         .when('/about', {
           templateUrl: 'views/about.html'
@@ -122,7 +122,7 @@
               });
             },
             persons: function (PersonFactory) {
-              return PersonFactory.getPersonsOfReviewer().then(function (data) {
+              return PersonFactory.getPersonsOfReviewer(null).then(function (data) {
                 return data;
               }, function (response) {
                 return response.status;

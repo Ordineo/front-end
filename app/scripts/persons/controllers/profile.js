@@ -14,6 +14,7 @@ ProfileCtrl.$inject = ['$scope', '$modal', '$log', '$http', '$location', 'datase
 
 function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, PersonFactory, SkillFactory, SkillCompetenceFactory) {
   $log.info('ProfileCtrl loaded');
+  var reviewer = null;
 
   //----------
   //Dummy data
@@ -194,6 +195,13 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
   //----
 
   var reviewer = window.sessionStorage.getItem('reviewer');
+  if (window.sessionStorage.getItem('logged')) {
+    console.log('auaauau');
+    $scope.isLogged = true;
+  }
+
+  var id = window.sessionStorage.getItem('id');
+  var role = window.sessionStorage.getItem('role');
   var bum = 'Bum';
   var resourceManager = 'Resource Manager';
   var competenceLeader = 'Competence Leader';
@@ -206,154 +214,189 @@ function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, Person
   //Details
   //----------
 
-  PersonFactory.getMyDetails(null).then(function(data, status) {
+  PersonFactory.getMyDetails(id).then(function (data, status) {
     $scope.myDetails = data;
+  }, function (response) {
+    $location.path('login');
   });
 
   //-----
   //Roles
   //-----
+  /*
+   PersonFactory.getMyFunctionalRoles(null).then(function(data, status) {
+   $scope.myFunctionalRoles = data;
+   });
 
-  PersonFactory.getMyFunctionalRoles(null).then(function(data, status) {
-    $scope.myFunctionalRoles = data;
-  });
+   //---------
+   //Customers
+   //---------
 
-  //---------
-  //Customers
-  //---------
+   switch (reviewer) {
+   case consultant:
+   case seniorConsultant:
+   $scope.hasCustomers = true;
+   PersonFactory.getMyCustomers(null).then(function(data, status) {
+   $scope.myCustomers = data;
+   });
+   break;
+   }
 
-  switch (reviewer) {
-    case consultant:
-    case seniorConsultant:
-          $scope.hasCustomers = true;
-          PersonFactory.getMyCustomers(null).then(function(data, status) {
-            $scope.myCustomers = data;
-          });
-          break;
-  }
+   //----------------------
+   //Business unit managers
+   //----------------------
 
-  //----------------------
-  //Business unit managers
-  //----------------------
+   switch (reviewer) {
+   case competenceLeader:
+   case practiceManager:
+   case coach:
+   case consultant:
+   case seniorConsultant:
+   $scope.hasBusinessUnitManagers = true;
+   PersonFactory.getMyBusinessUnitManagers(null).then(function(data, status) {
+   $scope.myBusinessUnitManagers = data;
+   });
+   break;
+   }
 
-  switch (reviewer) {
-    case competenceLeader:
-    case practiceManager:
-    case coach:
-    case consultant:
-    case seniorConsultant:
-          $scope.hasBusinessUnitManagers = true;
-          PersonFactory.getMyBusinessUnitManagers(null).then(function(data, status) {
-            $scope.myBusinessUnitManagers = data;
-          });
-          break;
-  }
+   //------------------
+   //Competence leaders
+   //------------------
 
-  //------------------
-  //Competence leaders
-  //------------------
+   switch (reviewer) {
+   case consultant:
+   case seniorConsultant:
+   $scope.hasCompetenceLeaders = true;
+   PersonFactory.getMyCompetenceLeaders(null).then(function(data, status) {
+   $scope.myCompetenceLeaders = data;
+   });
+   break;
+   }
 
-  switch (reviewer) {
-    case consultant:
-    case seniorConsultant:
-          $scope.hasCompetenceLeaders = true;
-          PersonFactory.getMyCompetenceLeaders(null).then(function(data, status) {
-            $scope.myCompetenceLeaders = data;
-          });
-          break;
-  }
+   //-----------------
+   //Practice managers
+   //-----------------
 
-  //-----------------
-  //Practice managers
-  //-----------------
+   switch (reviewer) {
+   case consultant:
+   case seniorConsultant:
+   $scope.hasPracticeManagers = true;
+   PersonFactory.getMyPracticeManagers(null).then(function(data, status) {
+   $scope.myPracticeManagers = data;
+   });
+   break;
+   }
 
-  switch (reviewer) {
-    case consultant:
-    case seniorConsultant:
-          $scope.hasPracticeManagers = true;
-          PersonFactory.getMyPracticeManagers(null).then(function(data, status) {
-            $scope.myPracticeManagers = data;
-          });
-          break;
-  }
+   //-------
+   //Coaches
+   //-------
 
-  //-------
-  //Coaches
-  //-------
+   switch (reviewer) {
+   case consultant:
+   case seniorConsultant:
+   $scope.hasCoaches = true;
+   PersonFactory.getMyCoaches(null).then(function(data, status) {
+   $scope.myCoaches = data;
+   });
+   break;
+   }
 
-  switch (reviewer) {
-    case consultant:
-    case seniorConsultant:
-          $scope.hasCoaches = true;
-          PersonFactory.getMyCoaches(null).then(function(data, status) {
-            $scope.myCoaches = data;
-          });
-          break;
-  }
+   //-----------
+   //Descendants
+   //-----------
 
-  //-----------
-  //Descendants
-  //-----------
+   switch (reviewer) {
+   case bum:
+   case resourceManager:
+   case competenceLeader:
+   case practiceManager:
+   case coach:
+   $scope.hasDescendants = true;
+   PersonFactory.getPersonsOfReviewer().then(function(data, status) {
+   $scope.myDescendants = data;
+   });
+   break;
+   }
 
-  switch (reviewer) {
-    case bum:
-    case resourceManager:
-    case competenceLeader:
-    case practiceManager:
-    case coach:
-          $scope.hasDescendants = true;
-          PersonFactory.getPersonsOfReviewer().then(function(data, status) {
-            $scope.myDescendants = data;
-          });
-          break;
-  }
+   //-----------------
+   //Skill competences
+   //-----------------
 
-  //-----------
-  //Credentials
-  //-----------
+   var personId = window.sessionStorage.getItem('id');
+   updateList();
 
-  $scope.modalPasswordChange = function() {
-    $scope.modal = $modal.open({
-      animation: false,
-      templateUrl: 'passwordChangeModalContent',
-      controller: 'SettingsCtrl',
-      size: 'sm',
-      scope: $scope
-    });
-    $scope.modal.result.then(function (message) {
-      $log.info(message);
-    }, function() {
-      $log.info('Modal dismissed');
-    });
+   $scope.save = function (skillCompetence) {
+   console.log('Adding Skill Competence to current user');
+   skillCompetence.skill = skillCompetence.skill._links.self.href;
+   skillCompetence.person = personId;
+   SkillCompetenceFactory.add(skillCompetence, updateList);
+   $scope.skillCompetence = null;
+   };
 
-    $scope.cancelModal = function()  {
-      $scope.modal.dismiss('cancel');
-    };
-  };
+   $scope.remove = function (href) {
+   SkillCompetenceFactory.remove(href, updateList);
+   };
 
-  $scope.changePassword = function(password) {
-    var id = window.sessionStorage.getItem("id");
-    var userData  = {
-      'oldPassword' : password.oldPassword,
-      'newPassword' : password.newPassword
-    };
+   SkillFactory.getSkills(function (response) {
+   $scope.skills = response.data._embedded.skills;
+   });
 
-    $scope.passwordChanged = false;
-    $scope.passwordWrong = false;
+   PersonFactory.getPersonById().then(function (data) {
+   $scope.person = data;
+   });
 
-    var handleSuccess = function(data) {
-      $log.info("Password changed");
-      $scope.passwordChanged = true;
+   function updateList() {
+   $scope.skillCompetences = SkillCompetenceFactory.getSkillCompetenceForPersonId(personId);
+   }
 
-      $timeout(function() {
-        $scope.modal.close();
-      }, 1500);
-    };
-    var handleError = function() {
-      $log.info("Current password not correct");
-      $scope.passwordWrong = true;
-    };
+   //-----------
+   //Credentials
+   //-----------
 
-    dataservice.postItem('POST', 'http://localhost:9900/api/persons/' + id + '/settings/resetPassword', userData, 'application/json').success(handleSuccess).error(handleError);
-  }
+   $scope.modalPasswordChange = function() {
+   $scope.modal = $modal.open({
+   animation: false,
+   templateUrl: 'passwordChangeModalContent',
+   controller: 'SettingsCtrl',
+   size: 'sm',
+   scope: $scope
+   });
+   $scope.modal.result.then(function (message) {
+   $log.info(message);
+   }, function() {
+   $log.info('Modal dismissed');
+   });
+
+   $scope.cancelModal = function()  {
+   $scope.modal.dismiss('cancel');
+   };
+   };
+
+   $scope.changePassword = function(password) {
+   var id = window.sessionStorage.getItem("id");
+   var userData  = {
+   'oldPassword' : password.oldPassword,
+   'newPassword' : password.newPassword
+   };
+
+   $scope.passwordChanged = false;
+   $scope.passwordWrong = false;
+
+   var handleSuccess = function(data) {
+   $log.info("Password changed");
+   $scope.passwordChanged = true;
+
+   $timeout(function() {
+   $scope.modal.close();
+   }, 1500);
+   };
+   var handleError = function() {
+   $log.info("Current password not correct");
+   $scope.passwordWrong = true;
+   };
+
+   dataservice.postItem('POST', 'http://localhost:9900/api/persons/' + id + '/settings/resetPassword', userData, 'application/json').success(handleSuccess).error(handleError);
+   }
+   }
+   */
 }

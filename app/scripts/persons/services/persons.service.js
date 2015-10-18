@@ -32,12 +32,8 @@
       return person._links.self.href.substring(index + value.length);
     }
 
-    function getMyDetails(person) {
-      if (person === null) {
-        return PersonRestangular.one('persons', myId).get();
-      } else {
-        return PersonRestangular.one('persons', searchForPersonId(person)).get();
-      }
+    function getMyDetails(personId) {
+      return PersonRestangular.one('persons', personId).get();
     }
 
     function getMyFunctionalRoles(person) {
