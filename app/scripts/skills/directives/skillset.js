@@ -1,8 +1,8 @@
 angular.module('oraj360')
-  .directive('skillset', skillset)
+  .directive('skillcompetence', skillcompetence)
 
 
-function skillset() {
+function skillcompetence() {
   var directive = {
     link: link,
     templateUrl: 'views/skillCompetences.html',
