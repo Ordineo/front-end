@@ -4,15 +4,33 @@
 
   angular.module('oraj360')
     .controller('RegisterCtrl', RegisterCtrl);
-  RegisterCtrl.$inject = ['$scope', '$location', 'PersonFactory', 'dataservice'];
+  RegisterCtrl.$inject = ['$scope', '$location', 'PersonFactory', 'dataservice', '$mdDialog', '$timeout'];
 
-  function RegisterCtrl($scope, $location, PersonFactory, dataservice) {
+  function RegisterCtrl($scope, $location, PersonFactory, dataservice, $mdDialog, $timeout) {
+
+
+    function showDialog() {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title('Successfully registered')
+          .content('You are successfully registered, you will be redirected to the login page.')
+          .ariaLabel('Alert successfully registered')
+          .ok('Got it!')
+      );
+    }
+
     $scope.validate = function (person) {
       console.log('Validating person...');
       var handleSuccess = function (data, status) {
         console.log('Person created');
+
+        showDialog();
         $location.path('/login');
+
       };
+
       if ($scope.registerForm.$valid) {
         var birthDate = new Date(person.birthDate);
         var enrolmentDate = new Date(person.enrolmentDate);
