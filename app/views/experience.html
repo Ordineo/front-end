@@ -1,0 +1,182 @@
+<style>
+  .experiences-bar {
+    background: lightgray;
+    width: 3px;
+    height: 100%;
+    max-height: 325px;
+    margin-left: 19px;
+    position: absolute;
+  }
+
+  .experiences-shadow-top {
+    background: linear-gradient(white, transparent);
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    z-index: 100;
+  }
+
+  .experiences {
+    overflow-y: scroll;
+    max-height: 325px;
+    padding-top: 35px;
+    padding-bottom: 25px;
+  }
+
+  .experiences .md-button.md-fab.md-mini-mini {
+    line-height: 25px;
+    width: 25px;
+    height: 25px;
+    background-color:orange;
+  }
+
+  .experience-item-point {
+    z-index:10;
+    margin: auto 8px;
+    width: 25px;
+    min-width:25px;
+    height: 25px;
+    background:orange;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    /*box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);*/
+  }
+
+  .experience-item h5 {
+    margin: 5px 0;
+  }
+
+  .experience-item-date {
+    color: darkgrey;
+    fill: darkgrey;
+  }
+
+  .experience-item-customer-img {
+    background-image: url('http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:45px;
+    margin:auto;
+  }
+
+  .orange-color {
+    color: orange;
+  }
+
+  .experiences .md-button {
+    min-height: 25px;
+  }
+</style>
+
+<div layout-padding>
+  <h4 class="md-title">Experience</h4>
+
+  <div class="experiences-bar"></div>
+
+  <div class="experiences-shadow-top"></div>
+  <div class="experiences" layout="column">
+
+    <div class="experience-item" layout>
+      <div class="experience-item-point"></div>
+      <div flex="grow">
+        <md-card>
+          <div layout layout-padding>
+            <div flex="grow">
+              <div class="experience-item-date">
+                <ng-md-icon icon="schedule" size="20"></ng-md-icon>
+                <span>Today</span>
+              </div>
+              <h5>CRS medewerker - <span class="orange-color">.NET Software Engineer &#64; Digipolis</span>
+              </h5>
+            </div>
+            <div flex="20" class="experience-item-customer-img" hide-sm>
+            </div>
+          </div>
+        </md-card>
+      </div>
+    </div>
+
+    <div class="experience-item" layout>
+      <div class="experience-item-point"></div>
+      <div flex="grow">
+        <md-card>
+          <div layout layout-padding>
+            <div flex="grow">
+              <div class="experience-item-date">
+                <ng-md-icon icon="schedule" size="20"></ng-md-icon>
+                <span>11/2014 - 8/2015</span>
+              </div>
+              <h5>Digitale handtekencomponent - <span class="orange-color">.NET Software Engineer &#64; Digipolis</span>
+              </h5>
+            </div>
+            <div flex="20" class="experience-item-customer-img" hide-sm>
+            </div>
+          </div>
+        </md-card>
+      </div>
+    </div>
+
+    <div class="experience-item" layout>
+      <div class="experience-item-point"></div>
+      <div flex="grow">
+        <md-card>
+          <div layout layout-padding>
+            <div flex="grow">
+              <div class="experience-item-date">
+                <ng-md-icon icon="schedule" size="20"></ng-md-icon>
+                <span>2/2014 - 11/2014</span>
+              </div>
+              <h5>Handtekenmap - <span class="orange-color">.NET Software Engineer &#64; Digipolis</span>
+              </h5>
+            </div>
+            <div flex="20" class="experience-item-customer-img" hide-sm>
+            </div>
+          </div>
+        </md-card>
+      </div>
+    </div>
+
+    <div class="experience-item" layout>
+      <div class="experience-item-point"></div>
+      <div flex="grow">
+        <md-card>
+          <div layout layout-padding>
+            <div flex="grow">
+              <div class="experience-item-date">
+                <ng-md-icon icon="schedule" size="20"></ng-md-icon>
+                <span>5/2013 - 2/2014</span>
+              </div>
+              <h5>Markten en foren - <span class="orange-color">.NET Software Engineer &#64; Digipolis</span>
+              </h5>
+            </div>
+            <div flex="20" class="experience-item-customer-img" hide-sm>
+            </div>
+          </div>
+        </md-card>
+      </div>
+    </div>
+
+    <div class="experience-item" layout>
+      <div class="experience-item-point"></div>
+      <div flex="grow">
+        <md-card>
+          <div layout layout-padding>
+            <div flex="grow">
+              <div class="experience-item-date">
+                <ng-md-icon icon="schedule" size="20"></ng-md-icon>
+                <span>8/2012 - 5/2013</span>
+              </div>
+              <h5>Brondata groen - <span class="orange-color">.NET Software Engineer &#64; Digipolis</span>
+              </h5>
+            </div>
+            <div flex="20" class="experience-item-customer-img" hide-sm>
+            </div>
+          </div>
+        </md-card>
+      </div>
+    </div>
+
+  </div>
+</div>
