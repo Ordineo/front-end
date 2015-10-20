@@ -29,7 +29,8 @@
 <style>
   #header {
     height: 300px;
-    background: url('http://lorempixel.com/1920/500') center;
+    background: url('images/header.jpeg') center center;
+    background-size:cover;
   }
 
   #header-logo {
@@ -113,8 +114,8 @@
             </md-button>
           </md-menu-item>
           <md-menu-divider></md-menu-divider>
-          <md-menu-item>
-            <md-button>
+          <md-menu-item ng-controller="LoginCtrl">
+            <md-button ng-click="logout()">
               <div layout="row">
                 <p flex>Logout</p>
               </div>
