@@ -1,0 +1,202 @@
+<style>
+  .activities-bar {
+    background: orange;
+    width: 2px;
+    height: 100%;
+    max-height: 325px;
+    margin-left: 24px;
+    position: absolute;
+  }
+
+  .activities {
+    overflow-y: scroll;
+    max-height: 325px;
+    padding-top: 15px;
+    /*padding-bottom: 25px;*/
+  }
+
+  .activity-item-point {
+    z-index: 10;
+    margin: auto 8px;
+    width: 35px;
+    min-width: 35px;
+    height: 35px;
+    background: white;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+  }
+
+  .activity-item-point ng-md-icon {
+    margin: 2px;
+    width: 31px;
+    height: 31px;
+  }
+
+  .activity-item h5 {
+    margin: 5px 0;
+  }
+
+  .activity-item-date {
+    color: darkgrey;
+    fill: darkgrey;
+    margin: 3px 0;
+  }
+
+  .orange-color {
+    color: orange;
+  }
+
+  md-chips .md-chips {
+    float: right;
+    box-shadow: none !important;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding-bottom: 5px;
+  }
+
+  .md-chips .md-chip {
+    margin: 0 2px;
+    background: orange;
+    color: white;
+    height: 28px;
+    line-height: 28px;
+  }
+
+  .worked-with .md-fab.md-mini {
+    background-size:cover;
+  }
+</style>
+
+<div layout-padding>
+  <h4 class="md-title">Activity</h4>
+
+  <div layout-gt-md="row" layout="column">
+    <div flex="70">
+      <div class="activities-bar"></div>
+
+      <div class="activities" layout="column">
+
+        <div class="activity-item" layout>
+          <div class="activity-item-point">
+            <ng-md-icon icon="school" style="fill:orange" size="31"></ng-md-icon>
+          </div>
+          <div flex="grow">
+            <md-card>
+              <div layout="column" layout-padding>
+                <div layout>
+                  <div flex="30" flex-sm="100" class="activity-item-date">
+                    <ng-md-icon icon="schedule" size="20"></ng-md-icon>
+                    <span>2 hours ago</span>
+                  </div>
+                  <div flex="grow" hide-sm>
+                    <md-chips>
+                      <md-chip>SEO</md-chip>
+                      <md-chip>Soft skills</md-chip>
+                      <md-chip>Learn</md-chip>
+                    </md-chips>
+                  </div>
+                </div>
+                <h5><span class="orange-color">{{myDetails.firstName}}</span> completed <span
+                  class="orange-color">"Google Analytics"</span>
+                </h5>
+              </div>
+            </md-card>
+          </div>
+        </div>
+
+        <div class="activity-item" layout>
+          <div class="activity-item-point">
+            <ng-md-icon icon="wallet_membership" style="fill:orange" size="31"></ng-md-icon>
+          </div>
+          <div flex="grow">
+            <md-card>
+              <div layout="column" layout-padding>
+                <div layout>
+                  <div flex="30" flex-sm="100" class="activity-item-date">
+                    <ng-md-icon icon="schedule" size="20"></ng-md-icon>
+                    <span>5 hours ago</span>
+                  </div>
+                  <div flex="grow" hide-sm>
+                    <md-chips>
+                      <md-chip>Certificates</md-chip>
+                      <md-chip>Web apps</md-chip>
+                      <md-chip>.NET</md-chip>
+                    </md-chips>
+                  </div>
+                </div>
+                <h5><span class="orange-color">{{myDetails.firstName}}</span> has a new certificate: <span class="orange-color">"Developing ASP.net MVC WEB Applications"</span>
+                </h5>
+              </div>
+            </md-card>
+          </div>
+        </div>
+
+        <div class="activity-item" layout>
+          <div class="activity-item-point">
+            <ng-md-icon icon="desktop_windows" style="fill:orange" size="31"></ng-md-icon>
+          </div>
+          <div flex="grow">
+            <md-card>
+              <div layout="column" layout-padding>
+                <div layout>
+                  <div flex="30" flex-sm="100" class="activity-item-date">
+                    <ng-md-icon icon="schedule" size="20"></ng-md-icon>
+                    <span>2 days ago</span>
+                  </div>
+                  <div flex="grow" hide-sm>
+                    <md-chips>
+                      <md-chip>Win store apps</md-chip>
+                      <md-chip>Design</md-chip>
+                      <!--<md-chip>E-learn</md-chip>-->
+                      <md-chip>Photoshop</md-chip>
+                    </md-chips>
+                  </div>
+                </div>
+                <h5><span class="orange-color">{{myDetails.firstName}}</span> created a new tutorial about <span class="orange-color">"Windows store app design"</span>
+                </h5>
+              </div>
+            </md-card>
+          </div>
+        </div>
+
+        <div class="activity-item" layout>
+          <div class="activity-item-point">
+            <ng-md-icon icon="chat" style="fill:orange" size="31"></ng-md-icon>
+          </div>
+          <div flex="grow">
+            <md-card>
+              <div layout="column" layout-padding>
+                <div layout>
+                  <div flex="30" flex-sm="100" class="activity-item-date">
+                    <ng-md-icon icon="schedule" size="20"></ng-md-icon>
+                    <span>5 days ago</span>
+                  </div>
+                  <div flex="grow" hide-sm>
+                    <md-chips>
+                      <md-chip>Front-end</md-chip>
+                    </md-chips>
+                  </div>
+                </div>
+                <h5><span class="orange-color">{{myDetails.firstName}}</span> replied on: <span class="orange-color">"Smashing Book #5: Real Life Responsive Web Design"</span>
+                </h5>
+              </div>
+            </md-card>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div flex="grow" class="worked-with" layout-padding>
+      <h6 class="md-subhead">Worked with {{myDetails.firstName}}</h6>
+      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
+      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
+      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
+      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
+      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
+      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
+      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
+      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
+    </div>
+  </div>
+</div>
