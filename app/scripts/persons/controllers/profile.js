@@ -10,15 +10,75 @@
 angular.module('oraj360')
   .controller('ProfileCtrl', ProfileCtrl);
 
-ProfileCtrl.$inject = ['$scope', '$modal', '$log', '$http', '$location', 'dataservice', 'PersonFactory', 'SkillFactory', 'SkillCompetenceFactory'];
+ProfileCtrl.$inject = ['$scope', '$window', '$modal', '$log', '$http', '$location', 'dataservice', 'PersonFactory', 'SkillFactory', 'SkillCompetenceFactory'];
 
-function ProfileCtrl($scope, $modal, $log, $http, $location, dataservice, PersonFactory, SkillFactory, SkillCompetenceFactory) {
+function ProfileCtrl($scope, $window, $modal, $log, $http, $location, dataservice, PersonFactory, SkillFactory, SkillCompetenceFactory) {
   $log.info('ProfileCtrl loaded');
   var reviewer = null;
 
   //----------
   //Dummy data
   //----------
+
+  $scope.skillset = [
+    {
+      description: 'HTML5',
+      points: 35
+    },
+    {
+      description: '.NET 3.5',
+      points: 11
+    },
+    {
+      description: 'SCRUM',
+      points: 4
+    },
+    {
+      description: 'Google analytics',
+      points: 22
+    },
+    {
+      description: 'CSS3',
+      points: 29
+    },
+    {
+      description: 'jQuery',
+      points: 22
+    },
+    {
+      description: 'Presentations',
+      points: 2
+    },
+    {
+      description: 'HTML5',
+      points: 35
+    },
+    {
+      description: '.NET 3.5',
+      points: 11
+    },
+    {
+      description: 'SCRUM',
+      points: 4
+    },
+    {
+      description: 'Google analytics',
+      points: 22
+    },
+    {
+      description: 'CSS3',
+      points: 29
+    },
+    {
+      description: 'jQuery',
+      points: 22
+    },
+    {
+      description: 'Presentations',
+      points: 2
+    }
+  ];
+  $window.skillset = $scope.skillset;
 
   $scope.aLittleAboutMe = {
     intro: 'Lester is a highly motivated person with strong interest in IT. During his education, he specialized in web technologies such as html/css, javascript, PHP and ASP.NET. As a developer, he is passionately engaged and combines his technical skills with clear communication between everyone he interacts with.',
