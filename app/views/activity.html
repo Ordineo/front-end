@@ -1,17 +1,18 @@
 <style>
   .activities-bar {
-    background: orange;
+    background: darkorange;
     width: 2px;
     height: 100%;
-    max-height: 325px;
+    /*max-height: 325px;*/
     margin-left: 24px;
     position: absolute;
   }
 
   .activities {
     overflow-y: scroll;
-    max-height: 325px;
-    padding-top: 15px;
+    /*max-height: 325px;*/
+    /*padding-top: 15px;*/
+    position: relative;
   }
 
   .activity-item-point {
@@ -32,6 +33,10 @@
     height: 31px;
   }
 
+  .activity-item {
+    transition: .5s;
+  }
+
   .activity-item h5 {
     margin: 5px 0;
   }
@@ -43,7 +48,7 @@
   }
 
   .orange-color {
-    color: orange;
+    color: darkorange;
   }
 
   md-chips .md-chips {
@@ -56,14 +61,14 @@
 
   .md-chips .md-chip {
     margin: 0 2px;
-    background: orange;
+    background: darkorange;
     color: white;
     height: 28px;
     line-height: 28px;
   }
 
   .worked-with .md-fab.md-mini {
-    background-size:cover;
+    background-size: cover;
   }
 </style>
 
@@ -72,13 +77,17 @@
 
   <div layout-gt-md="row" layout="column">
     <div flex="70">
-      <div class="activities-bar"></div>
 
-      <div class="activities" layout="column">
+      <div class="activities" ng-init="limit=3" layout="column">
+        <div class="activities-bar"></div>
 
-        <div class="activity-item" layout>
-          <div class="activity-item-point">
-            <ng-md-icon icon="school" style="fill:orange" size="31"></ng-md-icon>
+        <div class="activity-item" layout ng-repeat="activity in activities | limitTo:limit as result">
+          <div class="activity-item-point" ng-switch="activity.action">
+            <ng-md-icon ng-switch-when="course" icon="school" style="fill:darkorange" size="31"></ng-md-icon>
+            <ng-md-icon ng-switch-when="certificate" icon="wallet_membership" style="fill:darkorange"
+                        size="31"></ng-md-icon>
+            <ng-md-icon ng-switch-when="tutorial" icon="desktop_windows" style="fill:darkorange" size="31"></ng-md-icon>
+            <ng-md-icon ng-switch-when="chat" icon="chat" style="fill:darkorange" size="31"></ng-md-icon>
           </div>
           <div flex="grow">
             <md-card>
@@ -86,116 +95,122 @@
                 <div layout>
                   <div flex="30" flex-sm="100" class="activity-item-date">
                     <ng-md-icon icon="schedule" size="20"></ng-md-icon>
-                    <span>2 hours ago</span>
+                    <!--<span>{{activity.time}}</span>-->
+                    <!--<span ng-if="(today | date:'yyyy-MM-dd') == activity.date">Today</span>-->
+                    <!--<span ng-if="(today | date:'yyyy-MM-dd') != activity.date" ng-init="daysBetween = calculateDaysBetween(activity.date)">{{daysBetween}} day<span ng-show="daysBetween > 1">s</span> ago</span>-->
+                    <span>{{calculateDaysBetween(activity.date)}}</span>
                   </div>
                   <div flex="grow" hide-sm>
-                    <md-chips>
-                      <md-chip>SEO</md-chip>
-                      <md-chip>Soft skills</md-chip>
-                      <md-chip>Learn</md-chip>
+                    <md-chips ng-repeat="item in activity.tags">
+                      <md-chip>{{item.tag}}</md-chip>
+                      <!--<md-chip>SEO</md-chip>-->
+                      <!--<md-chip>Soft skills</md-chip>-->
+                      <!--<md-chip>Learn</md-chip>-->
                     </md-chips>
                   </div>
                 </div>
-                <h5><span class="orange-color">{{myDetails.firstName}}</span> completed <span
-                  class="orange-color">"Google Analytics"</span>
+                <h5>
+                  <span class="orange-color">{{myDetails.firstName}}</span>
+                  <span ng-switch="activity.action">
+                    <span ng-switch-when="course"> completed </span>
+                    <span ng-switch-when="certificate"> has a new certificate: </span>
+                    <span ng-switch-when="tutorial"> created a new tutorial: </span>
+                    <span ng-switch-when="chat"> replied on: </span>
+                  </span>
+                  <span class="orange-color">"{{activity.subject}}"</span>
                 </h5>
               </div>
             </md-card>
           </div>
         </div>
 
-        <div class="activity-item" layout>
-          <div class="activity-item-point">
-            <ng-md-icon icon="wallet_membership" style="fill:orange" size="31"></ng-md-icon>
-          </div>
-          <div flex="grow">
-            <md-card>
-              <div layout="column" layout-padding>
-                <div layout>
-                  <div flex="30" flex-sm="100" class="activity-item-date">
-                    <ng-md-icon icon="schedule" size="20"></ng-md-icon>
-                    <span>5 hours ago</span>
-                  </div>
-                  <div flex="grow" hide-sm>
-                    <md-chips>
-                      <md-chip>Certificates</md-chip>
-                      <md-chip>Web apps</md-chip>
-                      <md-chip>.NET</md-chip>
-                    </md-chips>
-                  </div>
-                </div>
-                <h5><span class="orange-color">{{myDetails.firstName}}</span> has a new certificate: <span class="orange-color">"Developing ASP.net MVC WEB Applications"</span>
-                </h5>
-              </div>
-            </md-card>
-          </div>
-        </div>
+        <!--<div class="activity-item" layout>-->
+        <!--<div class="activity-item-point">-->
+        <!--<ng-md-icon icon="wallet_membership" style="fill:orange" size="31"></ng-md-icon>-->
+        <!--</div>-->
+        <!--<div flex="grow">-->
+        <!--<md-card>-->
+        <!--<div layout="column" layout-padding>-->
+        <!--<div layout>-->
+        <!--<div flex="30" flex-sm="100" class="activity-item-date">-->
+        <!--<ng-md-icon icon="schedule" size="20"></ng-md-icon>-->
+        <!--<span>5 hours ago</span>-->
+        <!--</div>-->
+        <!--<div flex="grow" hide-sm>-->
+        <!--<md-chips>-->
+        <!--<md-chip>Certificates</md-chip>-->
+        <!--<md-chip>Web apps</md-chip>-->
+        <!--<md-chip>.NET</md-chip>-->
+        <!--</md-chips>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<h5><span class="orange-color">{{myDetails.firstName}}</span> has a new certificate: <span class="orange-color">"Developing ASP.net MVC WEB Applications"</span>-->
+        <!--</h5>-->
+        <!--</div>-->
+        <!--</md-card>-->
+        <!--</div>-->
+        <!--</div>-->
 
-        <div class="activity-item" layout>
-          <div class="activity-item-point">
-            <ng-md-icon icon="desktop_windows" style="fill:orange" size="31"></ng-md-icon>
-          </div>
-          <div flex="grow">
-            <md-card>
-              <div layout="column" layout-padding>
-                <div layout>
-                  <div flex="30" flex-sm="100" class="activity-item-date">
-                    <ng-md-icon icon="schedule" size="20"></ng-md-icon>
-                    <span>2 days ago</span>
-                  </div>
-                  <div flex="grow" hide-sm>
-                    <md-chips>
-                      <md-chip>Win store apps</md-chip>
-                      <md-chip>Design</md-chip>
-                      <!--<md-chip>E-learn</md-chip>-->
-                      <md-chip>Photoshop</md-chip>
-                    </md-chips>
-                  </div>
-                </div>
-                <h5><span class="orange-color">{{myDetails.firstName}}</span> created a new tutorial about <span class="orange-color">"Windows store app design"</span>
-                </h5>
-              </div>
-            </md-card>
-          </div>
-        </div>
+        <!--<div class="activity-item" layout>-->
+        <!--<div class="activity-item-point">-->
+        <!--<ng-md-icon icon="desktop_windows" style="fill:orange" size="31"></ng-md-icon>-->
+        <!--</div>-->
+        <!--<div flex="grow">-->
+        <!--<md-card>-->
+        <!--<div layout="column" layout-padding>-->
+        <!--<div layout>-->
+        <!--<div flex="30" flex-sm="100" class="activity-item-date">-->
+        <!--<ng-md-icon icon="schedule" size="20"></ng-md-icon>-->
+        <!--<span>2 days ago</span>-->
+        <!--</div>-->
+        <!--<div flex="grow" hide-sm>-->
+        <!--<md-chips>-->
+        <!--<md-chip>Win store apps</md-chip>-->
+        <!--<md-chip>Design</md-chip>-->
+        <!--&lt;!&ndash;<md-chip>E-learn</md-chip>&ndash;&gt;-->
+        <!--<md-chip>Photoshop</md-chip>-->
+        <!--</md-chips>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<h5><span class="orange-color">{{myDetails.firstName}}</span> created a new tutorial about <span class="orange-color">"Windows store app design"</span>-->
+        <!--</h5>-->
+        <!--</div>-->
+        <!--</md-card>-->
+        <!--</div>-->
+        <!--</div>-->
 
-        <div class="activity-item" layout>
-          <div class="activity-item-point">
-            <ng-md-icon icon="chat" style="fill:orange" size="31"></ng-md-icon>
-          </div>
-          <div flex="grow">
-            <md-card>
-              <div layout="column" layout-padding>
-                <div layout>
-                  <div flex="30" flex-sm="100" class="activity-item-date">
-                    <ng-md-icon icon="schedule" size="20"></ng-md-icon>
-                    <span>5 days ago</span>
-                  </div>
-                  <div flex="grow" hide-sm>
-                    <md-chips>
-                      <md-chip>Front-end</md-chip>
-                    </md-chips>
-                  </div>
-                </div>
-                <h5><span class="orange-color">{{myDetails.firstName}}</span> replied on: <span class="orange-color">"Smashing Book #5: Real Life Responsive Web Design"</span>
-                </h5>
-              </div>
-            </md-card>
-          </div>
-        </div>
+        <!--<div class="activity-item" layout>-->
+        <!--<div class="activity-item-point">-->
+        <!--<ng-md-icon icon="chat" style="fill:orange" size="31"></ng-md-icon>-->
+        <!--</div>-->
+        <!--<div flex="grow">-->
+        <!--<md-card>-->
+        <!--<div layout="column" layout-padding>-->
+        <!--<div layout>-->
+        <!--<div flex="30" flex-sm="100" class="activity-item-date">-->
+        <!--<ng-md-icon icon="schedule" size="20"></ng-md-icon>-->
+        <!--<span>5 days ago</span>-->
+        <!--</div>-->
+        <!--<div flex="grow" hide-sm>-->
+        <!--<md-chips>-->
+        <!--<md-chip>Front-end</md-chip>-->
+        <!--</md-chips>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<h5><span class="orange-color">{{myDetails.firstName}}</span> replied on: <span class="orange-color">"Smashing Book #5: Real Life Responsive Web Design"</span>-->
+        <!--</h5>-->
+        <!--</div>-->
+        <!--</md-card>-->
+        <!--</div>-->
+        <!--</div>-->
 
       </div>
+
+      <md-button layout layout-align="center center" ng-show="result.length < activities.length" ng-click="limit = limit + 1">Show more</md-button>
     </div>
     <div flex="grow" class="worked-with" layout-padding>
       <h6 class="md-subhead">Worked with {{myDetails.firstName}}</h6>
-      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
-      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
-      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
-      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
-      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
-      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
-      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
-      <md-button class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
+      <md-button ng-repeat="item in [1,2,3,4,5,6]" class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
     </div>
   </div>
 </div>
