@@ -1,0 +1,113 @@
+<style>
+  #endorsements {
+    color: #575B5D;
+    width: 100%;
+  }
+
+  h4 {
+    text-transform: uppercase;
+  }
+
+  #endorsements #list {
+    position: relative;
+  }
+
+  #endorsements .endorsement {
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 100%;
+  }
+
+  #endorsements .info {
+    float: left;
+    /*background-color: transparent;*/
+    display: inline-block;
+    width: 50%;
+  }
+
+  #endorsements .counter {
+    background-color: #E98321;
+    color: white;
+    display: table-cell;
+    float: left;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    width: 25px;
+  }
+
+  #endorsements .description {
+    background-color: #F1F1F1;
+    float: left;
+    font-size: 12px;
+    height: 25px;
+    line-height: 25px;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+
+  #endorsements .persons {
+    direction: rtl;
+    height: 29px;
+    overflow-y: hidden;
+    white-space: nowrap; /* important */
+    max-width: 50%;
+    position: relative;
+  }
+
+  #endorsements .persons > img {
+    border: solid 1px white;
+    border-radius: 13px;
+    box-shadow: 0px 0px 2px #575B5D;
+    float: right;
+    margin: 3px 1px 3px 1px;
+  }
+
+  #endorsements .line {
+    border-bottom: solid 1px #F1F1F1;
+    height: 14px;
+    width: 100%
+  }
+
+  /* Extra small devices (phones, less than 768px) */
+  /* No media query since this is the default in Bootstrap */
+
+  /* Small devices (tablets, 768px and up) */
+  @media (min-width: 768px) {
+
+  }
+
+  /* Medium devices (desktops, 992px and up) */
+  @media (min-width: 992px) {
+    #endorsements {
+      width: 35%;
+    }
+  }
+
+  /* Large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {
+
+  }
+</style>
+
+<div id="endorsements" style="border: solid 1px black;">
+  <h4>Endorsements</h4>
+
+  <div id="list">
+    <div class="endorsement" ng-repeat="endorsement in endorsements">
+      <div class="info">
+        <div class="counter">
+          <strong>{{endorsement.counter}}</strong>
+        </div>
+        <div class="description">
+          {{endorsement.description}}
+        </div>
+        <div class="line"></div>
+      </div>
+      <div class="persons" style="float: right;"><!-- float: right; does not work in class init -->
+        <img ng-repeat="person in endorsement.persons" ng-src="{{person.image}}"/>
+      </div>
+      <div class="line"></div>
+    </div>
+  </div>
+</div>

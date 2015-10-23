@@ -250,6 +250,350 @@ function ProfileCtrl($scope, $window, $modal, $log, $http, $location, dataservic
     }
   };
 
+  //Last new person images must be pushed in front of array 'persons'
+  $scope.endorsements = [
+    {
+      description: 'Inspiring',
+      counter: 16,
+      persons: [
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        }
+      ]
+    },
+    {
+      description: 'Accessible',
+      counter: 15,
+      persons: [
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        }
+      ]
+    },
+    {
+      description: 'Active',
+      counter: 13,
+      persons: [
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        }
+      ]
+    },
+    {
+      description: 'Action-Oriented',
+      counter: 12,
+      persons: [
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        }
+      ]
+    },
+    {
+      description: 'Smart',
+      counter: 11,
+      persons: [
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        }
+      ]
+    },
+    {
+      description: 'Confident',
+      counter: 9,
+      persons: [
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        }
+      ]
+    },
+    {
+      description: 'Brings a smile',
+      counter: 8,
+      persons: [
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        }
+      ]
+    },
+    {
+      description: 'Entrepreneurial',
+      counter: 6,
+      persons: [
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        }
+      ]
+    },
+    {
+      description: 'CSS',
+      counter: 5,
+      persons: [
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        },
+        {
+          image: 'http://lorempixel.com/20/20/'
+        }
+      ]
+    }
+  ];
+  $window.endorsements = $scope.endorsements;
+
   //----
   //Vars
   //----
