@@ -15,7 +15,8 @@
       'restangular',
       'ngMaterial',
       'md.data.table',
-      'ngMdIcons'
+      'ngMdIcons',
+      'ngMap'
     ])
     .config(['$httpProvider', function ($httpProvider) {
       $httpProvider.defaults.headers.common = {};
