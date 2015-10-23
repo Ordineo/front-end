@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 describe('Controller: SkillsCtrl', function () {
 
@@ -44,4 +44,4 @@ describe('Controller: SkillsCtrl', function () {
   })
 
 });
-
+ */
