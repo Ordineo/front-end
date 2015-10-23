@@ -418,7 +418,7 @@ module.exports = function (grunt) {
         }, {
           expand: true,
           cwd: '.',
-          src: 'bower_components/*',
+          src: 'bower_components/**',
           dest: '<%= yeoman.dist %>'
         }]
       },
