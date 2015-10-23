@@ -10,9 +10,9 @@
 angular.module('oraj360')
   .controller('ProfileCtrl', ProfileCtrl);
 
-ProfileCtrl.$inject = ['$scope', '$window', '$modal', '$log', '$http', '$location', 'dataservice', 'PersonFactory', 'SkillFactory', 'SkillCompetenceFactory'];
+ProfileCtrl.$inject = ['$scope', '$window', '$modal', '$log', '$http', '$location', 'dataservice', 'PersonFactory', 'SkillFactory', 'SkillCompetenceFactory', '$mdDialog'];
 
-function ProfileCtrl($scope, $window, $modal, $log, $http, $location, dataservice, PersonFactory, SkillFactory, SkillCompetenceFactory) {
+function ProfileCtrl($scope, $window, $modal, $log, $http, $location, dataservice, PersonFactory, SkillFactory, SkillCompetenceFactory, $mdDialog) {
   $log.info('ProfileCtrl loaded');
   var reviewer = null;
 
@@ -213,39 +213,6 @@ function ProfileCtrl($scope, $window, $modal, $log, $http, $location, dataservic
       end: {
         hours: 17,
         minutes: 0
-      }
-    },
-    travel: {
-      car: {
-        isUsing: true,
-        distance: 71,
-        duration: {
-          hours: 0,
-          minutes: 50
-        }
-      },
-      publicTransport: {
-        isUsing: false,
-        duration: {
-          hours: 2,
-          minutes: 5
-        }
-      },
-      bicycle: {
-        isUsing: false,
-        distance: 56,
-        duration: {
-          hours: 2,
-          minutes: 55
-        }
-      },
-      foot: {
-        isUsing: false,
-        distance: 51,
-        duration: {
-          hours: 10,
-          minutes: 21
-        }
       }
     }
   };
@@ -803,4 +770,16 @@ function ProfileCtrl($scope, $window, $modal, $log, $http, $location, dataservic
    }
    }
    */
+
+  $scope.state = false;
+  $scope.onChange = function(cbState) {
+    if (cbState == false) {
+      $scope.mapAddress = $scope.address;
+    }
+    $scope.state = cbState;
+  };
+  $scope.initPlaces = function(address) {
+    $scope.mapAddress = address;
+    $scope.address = address;
+  }
 }

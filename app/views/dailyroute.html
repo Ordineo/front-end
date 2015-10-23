@@ -1,72 +1,45 @@
 <style>
-  #dailyRoute {
-    width: 100%;
+  md-switch {
+    margin: 15px 0;
   }
 
-  #map {
-    background-color: #CCC;
-    height: 0;
-    padding-bottom: 65%;
-    position: relative;
-    width: 100%;
+  md-switch.md-default-theme.md-checked, md-switch.md-checked .md-thumb {
+    background-color: white;
   }
 
-  .inlineArrow {
-    font-size: 20px;
-    position: relative;
-    top: 2px;
-  }
-
-  /* Extra small devices (phones, less than 768px) */
-  /* No media query since this is the default in Bootstrap */
-
-  /* Small devices (tablets, 768px and up) */
-  @media (min-width: 768px) {
-
-  }
-
-  /* Medium devices (desktops, 992px and up) */
-  @media (min-width: 992px) {
-    #dailyRoute {
-      width: 35%;
-    }
-  }
-
-  /* Large devices (large desktops, 1200px and up) */
-  @media (min-width: 1200px) {
-
+  md-switch.md-default-theme.md-checked, md-switch.md-checked .md-bar {
+    background-color:darkorange;
   }
 </style>
 
-<div id="dailyRoute" style="border: solid 1px black;">
-  <h4>DAILY ROUTE</h4>
+<div layout-padding ng-init="initPlaces(dailyRoute.route.arrival);">
+  <h4 class="md-title">Daily route</h4>
 
-  <p>
-    {{dailyRoute.route.departure}} <span class="inlineArrow">&#x279c;</span> {{dailyRoute.route.arrival}}
-  </p>
-
-  <p>
-    <b>Working at:</b><br/>
-    {{dailyRoute.workplace.name}}<br/>
-    {{dailyRoute.workplace.address.street}} {{dailyRoute.workplace.address.streetNumber}},<br/>
-    {{dailyRoute.workplace.address.zipCode}} {{dailyRoute.workplace.address.city}}<br/>
-  </p>
-
-  <p>
-    <b>On-site:</b> {{dailyRoute.workingHours.begin.hours}}:<span ng-if="dailyRoute.workingHours.begin.minutes < 10">0</span>{{dailyRoute.workingHours.begin.minutes}} - {{dailyRoute.workingHours.end.hours}}:<span ng-if="dailyRoute.workingHours.end.minutes < 10">0</span>{{dailyRoute.workingHours.end.minutes}}<br/>
-    <span ng-if="dailyRoute.travel.car.isUsing === true">
-      <b>Travelling by car:</b> {{dailyRoute.travel.car.distance}} km - &plusmn; <span ng-if="dailyRoute.travel.car.duration.hours !== null && dailyRoute.travel.car.duration.hours !== 0">{{dailyRoute.travel.car.duration.hours}} h </span>{{dailyRoute.travel.car.duration.minutes}} min<br/>
-    </span>
-    <span ng-if="dailyRoute.travel.publicTransport.isUsing === true">
-      <b>Travelling by public transport:</b> &plusmn; <span ng-if="dailyRoute.travel.publicTransport.duration.hours !== null && dailyRoute.travel.publicTransport.duration.hours !== 0">{{dailyRoute.travel.publicTransport.duration.hours}} h </span>{{dailyRoute.travel.publicTransport.duration.minutes}} min<br/>
-    </span>
-    <span ng-if="dailyRoute.travel.bicycle.isUsing === true">
-      <b>Travelling by bicycle:</b> {{dailyRoute.travel.bicycle.distance}} km - &plusmn; <span ng-if="dailyRoute.travel.bicycle.duration.hours !== null && dailyRoute.travel.bicycle.duration.hours !== 0">{{dailyRoute.travel.bicycle.duration.hours}} h </span>{{dailyRoute.travel.bicycle.duration.minutes}} min<br/>
-    </span>
-    <span ng-if="dailyRoute.travel.foot.isUsing === true">
-      <b>Travelling by foot:</b> {{dailyRoute.travel.foot.distance}} km - &plusmn; <span ng-if="dailyRoute.travel.foot.duration.hours !== null && dailyRoute.travel.foot.duration.hours !== 0">{{dailyRoute.travel.foot.duration.hours}} h </span>{{dailyRoute.travel.foot.duration.minutes}} min<br/>
-    </span>
-  </p>
-
-  <div id="map"></div>
+  <md-switch ng-model="state" md-no-ink aria-label="Switch 6" ng-change="onChange(state)">
+    Custom destination
+  </md-switch>
+  <div layout="column" style="margin:20px 0;" ng-show="!state">
+    <span>{{aLittleAboutMe.address.city}} &#10140; {{dailyRoute.route.arrival}}</span>
+    <br/>
+    <span><b>Working at:</b></span>
+    <span>{{dailyRoute.workplace.name}}</span>
+    <span>{{dailyRoute.workplace.address.street + ' ' + dailyRoute.workplace.address.streetNumber}}</span>
+    <span>{{dailyRoute.workplace.address.zipCode}} {{dailyRoute.workplace.address.city}}</span>
+    <br/>
+    <span><b>On-site:</b> 8:00 - 17:00</span>
+    <span><b>Travelling by car:</b> {{map.directionsRenderers[0].directions.routes[0].legs[0].distance["text"]}} - {{map.directionsRenderers[0].directions.routes[0].legs[0].duration["text"]}}</span>
+  </div>
+  <div layout="column" style="margin:20px 0;" ng-show="state">
+    <input places-auto-complete types="['geocode','establishment']" ng-model="mapAddress" placeholder="Destination"/>
+    <br/>
+    <span><b>Travelling by car:</b> {{map.directionsRenderers[0].directions.routes[0].legs[0].distance["text"]}} - {{map.directionsRenderers[0].directions.routes[0].legs[0].duration["text"]}}</span>
+  </div>
+  <map zoom="4" style="width:100%;height:300px">
+    <directions
+      draggable="false"
+      travel-mode="DRIVING"
+      origin="{{aLittleAboutMe.address.street + ' ' + alittleAboutMe.address.city}}"
+      destination="{{mapAddress}}">
+    </directions>
+  </map>
 </div>
