@@ -237,7 +237,7 @@ module.exports = function (grunt) {
 //        }
 //      }
 //    },
-      
+
     sass: {
         options: {
             includePaths: [
@@ -444,7 +444,7 @@ module.exports = function (grunt) {
 //        'svgmin'
 //      ]
 //    },
-      
+
     concurrent: {
       server: [
         'sass:server',

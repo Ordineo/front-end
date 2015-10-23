@@ -15,12 +15,17 @@ function SkillFactory(SkillRestangular) {
     getSkillCategories: getSkillCategories,
     update: getSkillsWithCategory,
     getSkill: getSkill,
+    all: all,
     remove: remove,
     add: add,
     edit: edit
 
   };
 
+  function all() {
+    var skillData = {skills: 'This is some dummy content'};
+    return skillData;
+  }
   function getSkillsWithCategory() {
     return skills.one('search').getList('findBySkillCategoryNotNull');
   }
