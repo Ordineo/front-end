@@ -19,17 +19,6 @@
                 <div ng-message="md-minlength">Username has to be minimum 2 characters long.</div>
               </div>
             </md-input-container>
-            <md-input-container flex>
-              <label>Password</label>
-              <input type="password" ng-model="userData.password" name="password" required md-min-length="6"
-                     md-maxlength="18">
-
-              <div ng-messages="registerForm.password.$error">
-                <div ng-message="required">This is required.</div>
-                <div ng-message="md-maxlength">Password to be less than 18 characters long.</div>
-                <div ng-message="md-minlength">Password has to be minimum 6 characters long.</div>
-              </div>
-            </md-input-container>
             <md-button style="width: 90%" class="md-raised md-primary" ng-click="loginCredentials()">Login</md-button>
 
             <a href="#/register" class="text-center new-account">Create an account </a>

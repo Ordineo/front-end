@@ -8,6 +8,8 @@ RoleService.$inject = ['RoleRestangular', 'PersonRestangular'];
 function RoleService(RoleRestangular, PersonRestangular) {
 
   var id = window.sessionStorage.getItem("id");
+  var persons = PersonRestangular.all('persons');
+  var roles = RoleRestangular.all('roles');
 
   return {
     getFunctionalRoles: getFunctionalRoles,
@@ -19,27 +21,27 @@ function RoleService(RoleRestangular, PersonRestangular) {
   };
 
   function addRoleToPerson(personId, role) {
-    return PersonRestangular.one('persons', personId).all('roles').one(role).post();
+    return persons.one(personId).all('roles').one(role).post();
   }
 
   function findRolesForOther(personId) {
-    return PersonRestangular.one('persons', personId).one('roles', true).getList();
+    return persons.one(personId).one('roles', true).getList();
   }
 
   function getApplicationRoleOfPerson(personId) {
-    return PersonRestangular.one('persons', personId).one('roles', false).getList();
+    return persons.one(personId).one('roles', false).getList();
   }
 
   function getFunctionalRolesOfPerson() {
-    return PersonRestangular.one('persons', id).one('roles', true).getList();
+    return persons.one(id).one('roles', true).getList();
   }
 
   function deleteRole(personId, roleId) {
-    return PersonRestangular.one('persons', personId).one('roles', roleId).remove();
+    return persons.one(personId).one('roles', roleId).remove();
   }
 
   function getFunctionalRoles() {
-    return RoleRestangular.one('roles', 'search').getList('isFunctional', {'functional': true});
+    return roles.one('search').getList('isFunctional', {'functional': true});
   }
 
 }
@@ -47,6 +49,7 @@ angular.module('oraj360')
   .factory('RoleRestangular', function (Restangular) {
     return Restangular.withConfig(function (RestangularConfigurer) {
       RestangularConfigurer.setBaseUrl('http://localhost:9900/api/');
+      RestangularConfigurer.setDefaultHeaders({'Content-Type': 'application/json'});
 
       RestangularConfigurer.setRestangularFields({
         selfLink: 'self.link'

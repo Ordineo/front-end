@@ -23,7 +23,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="skill in skills | filter:search" ng-click="setSelected(skill)">
+      <tr ng-repeat="skill in skills" ng-click="setSelected(skill)">
         <td>{{skill.name}}</td>
         <td>{{skill.category.name}}</td>
         <td ng-click="remove(skill._links.self.href)">Delete</td>

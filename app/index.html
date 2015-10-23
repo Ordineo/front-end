@@ -85,7 +85,8 @@
 </style>
 
 <md-content ng-cloak ng-controller="ProfileCtrl">
-  <div ng-if="isLogged" id="header">
+  <div ng-if="isLogged">
+    <div id="header">
     <div id="header-logo">
       <img src="images/ordina-logo.png" alt="logo ordina"/>
     </div>
@@ -125,13 +126,14 @@
       </md-menu>
     </div>
   </div>
-  <div ng-if="isLogged" id="header-details" layout="row">
+    <div id="header-details" layout="row">
     <div hide-sm style="background-image:url('http://lorempixel.com/300/300/');"></div>
     <header>
       <h1 class="md-title">{{myDetails.firstName}} {{myDetails.lastName}}</h1>
 
       <p class="md-subhead">{{myDetails.unit}}</p>
     </header>
+  </div>
   </div>
 </md-content>
 

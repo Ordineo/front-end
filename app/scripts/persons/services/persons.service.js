@@ -7,168 +7,60 @@
   PersonFactory.$inject = ['dataservice', 'PersonRestangular', '$location'];
 
   function PersonFactory(dataservice, PersonRestangular, $location) {
-    var persons = [];
+    var persons = PersonRestangular.all('persons');
     var myId = window.sessionStorage.getItem("id");
     return {
       getMyDetails: getMyDetails,
-      getMyFunctionalRoles: getMyFunctionalRoles,
-      getMyCustomers: getMyCustomers,
-      getMyBusinessUnitManagers: getMyBusinessUnitManagers,
-      getMyCompetenceLeaders: getMyCompetenceLeaders,
-      getMyPracticeManagers: getMyPracticeManagers,
-      getMyCoaches: getMyCoaches,
       getAll: getAll,
       remove: remove,
       updatePerson: updatePerson,
-      getPersonById: getPersonById,
-      getPersonsOfReviewer: getPersonsOfReviewer,
       addPersonToReviewer: addPersonToReviewer,
       addCustomerToPerson: addCustomerToPerson,
       deleteCustomerFromPerson: deleteCustomerFromPerson
     };
-    function searchForPersonId(person) {
-      var value = '/persons/';
-      var index = person._links.self.href.indexOf(value);
-      return person._links.self.href.substring(index + value.length);
-    }
 
     function getMyDetails(personId) {
-      return PersonRestangular.one('persons', personId).get();
-    }
-
-    function getMyFunctionalRoles(person) {
-      if (person === null) {
-        return PersonRestangular.one('persons', myId).one('roles', true).getList();
-      } else {
-        return PersonRestangular.one('persons', searchForPersonId(person)).one('roles', true).getList();
-      }
-    }
-
-    function getMyCustomers(person) {
-      if (person === null) {
-        return PersonRestangular.one('persons', myId).all('customers').getList();
-      } else {
-        return PersonRestangular.one('persons', searchForPersonId(person)).all('customers').getList();
-      }
-    }
-
-    function getMyBusinessUnitManagers(person) {
-      if (person === null) {
-        return PersonRestangular.one('persons', myId).all('businessUnitManagers').getList();
-      } else {
-        return PersonRestangular.one('persons', searchForPersonId(person)).all('businessUnitManagers').getList();
-      }
-    }
-
-    function getMyCompetenceLeaders(person) {
-      if (person === null) {
-        return PersonRestangular.one('persons', myId).all('competenceLeaders').getList();
-      } else {
-        return PersonRestangular.one('persons', searchForPersonId(person)).all('competenceLeaders').getList();
-      }
-    }
-
-    function getMyPracticeManagers(person) {
-      if (person === null) {
-        return PersonRestangular.one('persons', myId).all('practiceManagers').getList();
-      } else {
-        return PersonRestangular.one('persons', searchForPersonId(person)).all('practiceManagers').getList();
-      }
-    }
-
-    function getMyCoaches(person) {
-      if (person === null) {
-        return PersonRestangular.one('persons', myId).all('coaches').getList();
-      } else {
-        return PersonRestangular.one('persons', searchForPersonId(person)).all('coaches').getList();
-      }
+      return persons.one(personId).get();
     }
 
     function remove(href) {
-      dataservice.postItem('DELETE', href);
+      persons.one(href).remove();
     }
 
-    function addPersonToReviewer(personId) {
-      var reviewer = window.sessionStorage.getItem('reviewer');
-
+    function addPersonToReviewer(personId, reviewer) {
       switch (reviewer) {
         case 'Bum':
         case 'Resource Manager':
-          return PersonRestangular.one('persons', personId).one('businessUnitManagers', myId).post();
+          persons.one(personId).one('businessUnitManager', myId).post();
+          break;
         case 'Competence Leader':
-          return PersonRestangular.one('persons', personId).one('competenceLeaders', myId).post();
+          persons.one(personId).one('competenceLeader', myId).post();
+          break;
         case 'Practice Manager':
-          return PersonRestangular.one('persons', personId).one('practiceManagers', myId).post();
+          persons.one(personId).one('practiceManager', myId).post();
+          break;
         case 'Coach':
-          return PersonRestangular.one('persons', personId).one('coaches', myId).post();
-        default:
-          $location.path('/profile')
-      }
-
-    }
-
-    function getPersonsOfReviewer() {
-      var reviewer = window.sessionStorage.getItem('reviewer');
-      switch (reviewer) {
-        case 'Bum':
-        case 'Resource Manager':
-          return PersonRestangular.one('persons', 'search').getList('findByBusinessUnitManagersId', {'id': myId});
-        case 'Competence Leader':
-          return PersonRestangular.one('persons', 'search').getList('findByCompetenceLeadersId', {'id': myId});
-        case 'Practice Manager':
-          return PersonRestangular.one('persons', 'search').getList('findByPracticeManagersId', {'id': myId});
-        case 'Coach':
-          return PersonRestangular.one('persons', 'search').getList('findByCoachesId', {'id': myId});
+          persons.one(personId).one('coach', myId).post();
+          break;
         default:
           $location.path('/profile')
       }
     }
 
     function getAll() {
-      return PersonRestangular.all('persons').getList();
-
-    }
-
-    function getPersonById(personId) {
-      return PersonRestangular.one('persons', personId).get();
+      return persons.getList();
     }
 
     function updatePerson(person) {
-      dataservice.postItem('PUT', person._links.self.href, {
-        firstName: person.firstName,
-        lastName: person.lastName,
-        gender: person.gender
-      }, 'application/json').success(function () {
-        console.log('PERSON UPDATED');
-      });
+      persons.put(person);
     }
 
-    //Person's Customers
     function addCustomerToPerson(selectedPerson, selectedCustomer) {
-      var href = '';
-      var hrefSelectedPerson = selectedPerson._links.self.href;
-      var hrefSelectedCustomer = selectedCustomer._links.self.href;
-      var index = hrefSelectedCustomer.indexOf('/customers');
-      var substring = hrefSelectedCustomer.substring(index);
-      href = hrefSelectedPerson.concat(substring);
-
-      dataservice.postItem('POST', href, {
-        name: selectedCustomer.name,
-        description: selectedCustomer.description
-      }, 'application/json').success(function () {
-        console.log('CUSTOMER ASSIGNED TO PERSON');
-      });
+      persons.one(selectedPerson.username).one('customers', selectedCustomer.name).post();
     }
 
     function deleteCustomerFromPerson(selectedPerson, selectedPersonsCustomer) {
-      var hrefSelectedPerson = selectedPerson._links.self.href;
-      var hrefSelectedPersonsCustomer = selectedPersonsCustomer._links.self.href;
-      var index = hrefSelectedPersonsCustomer.indexOf('/customers');
-      var substring = hrefSelectedPersonsCustomer.substring(index);
-      var href = hrefSelectedPerson.concat(substring);
-      dataservice.postItem('DELETE', href, null, 'application/json').success(function () {
-        console.log('CUSTOMER DELETED FROM PERSON');
-      });
+      persons.one(selectedPerson.username).one('customers', selectedPersonsCustomer.name).remove();
     }
   }
 
@@ -176,6 +68,7 @@
     .factory('PersonRestangular', function (Restangular) {
       return Restangular.withConfig(function (RestangularConfigurer) {
         RestangularConfigurer.setBaseUrl('http://localhost:9900/api/');
+        RestangularConfigurer.setDefaultHeaders({'Content-Type': 'application/json'});
         RestangularConfigurer.setRestangularFields({
           selfLink: 'self.link'
         });

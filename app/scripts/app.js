@@ -43,16 +43,6 @@
           templateUrl: 'views/persons.html',
           controller: 'ManagementCtrl',
           resolve: {
-            persons: function (PersonFactory) {
-              return PersonFactory.getPersonsOfReviewer().then(function (data) {
-                  if (data != null) {
-                    return data;
-                  }
-                },
-                function (response) {
-                  return response;
-                });
-            },
             person: function (PersonFactory) {
               return PersonFactory.getMyDetails();
             }
@@ -70,9 +60,6 @@
           templateUrl: 'views/panel.html',
           controller: 'PanelCtrl',
           resolve: {
-            myPersons: function (PersonFactory) {
-              return PersonFactory.getPersonsOfReviewer();
-            },
             persons: function (PersonFactory) {
               return PersonFactory.getAll();
             },
@@ -121,16 +108,10 @@
               }, function (response) {
                 return response.status;
               });
-            },
-            persons: function (PersonFactory) {
-              return PersonFactory.getPersonsOfReviewer(null).then(function (data) {
-                return data;
-              }, function (response) {
-                return response.status;
-              });
             }
           }
-        })
+        }
+      )
         .otherwise({
           redirectTo: '/'
         });

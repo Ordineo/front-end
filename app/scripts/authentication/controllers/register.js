@@ -34,17 +34,15 @@
       if ($scope.registerForm.$valid) {
         var birthDate = new Date(person.birthDate);
         var enrolmentDate = new Date(person.enrolmentDate);
-        var credentials = {
-          'username': person.username,
-          'password': person.password
-        };
+
         var formData = {
           firstName: person.firstName,
           lastName: person.lastName,
+          username: person.username,
           gender: 'Male',
           enrolmentDate: [enrolmentDate.getFullYear(), enrolmentDate.getMonth() + 1, enrolmentDate.getDate()],
-          birthDate: [birthDate.getFullYear(), birthDate.getMonth() + 1, birthDate.getDate()],
-          credentials: credentials
+          birthDate: [birthDate.getFullYear(), birthDate.getMonth() + 1, birthDate.getDate()]
+
         };
         dataservice.postItem('POST', 'http://localhost:9900/api/persons/', formData, 'application/json').success(handleSuccess);
       } else {

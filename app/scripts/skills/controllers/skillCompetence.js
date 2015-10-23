@@ -1,7 +1,7 @@
 angular.module('oraj360')
   .controller('SkillCompetenceCtrl', SkillCompetenceCtrl);
 
-var SkillCompetenceCtrl = function ($scope, SkillFactory, SkillCompetenceFactory, PersonFactory, $log) {
+function SkillCompetenceCtrl($scope, SkillFactory, SkillCompetenceFactory, PersonFactory, $log) {
   $log.info('SkillCompetenceCtrl loaded');
 
   var personId = window.sessionStorage.getItem('id');
@@ -19,17 +19,19 @@ var SkillCompetenceCtrl = function ($scope, SkillFactory, SkillCompetenceFactory
     SkillCompetenceFactory.remove(href, updateList);
   };
 
-  SkillFactory.getSkills(function (response) {
-    $scope.skills = response.data._embedded.skills;
+  SkillFactory.getSkills().then(function (data) {
+    $scope.skills = data;
   });
 
-  PersonFactory.getPersonById().then(function (data) {
+  PersonFactory.getMyDetails(personId).then(function (data) {
     $scope.person = data;
   });
 
   function updateList() {
-    $scope.skillCompetences = SkillCompetenceFactory.getSkillCompetenceForPersonId(personId);
+    SkillCompetenceFactory.getSkillCompetenceForPerson(personId).then(function (data) {
+      $scope.skillCompetences = data;
+    });
   }
 
 
-};
+}

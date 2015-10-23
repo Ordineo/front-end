@@ -1,139 +1,161 @@
 'use strict';
 
 angular.module('oraj360')
-  .factory('SkillFactory', function (DataService, $resource) {
-    var skills = [];
+  .factory('SkillFactory', SkillFactory);
 
-    function getSkillsWithCategory() {
-      skills = [];
+SkillFactory.$inject = ['SkillRestangular'];
 
-      DataService.getItem('http://localhost:9900/api/skills', function (response) {
-        var _skills = response.data._embedded.skills;
-        if (_skills !== undefined) {
-          _skills.forEach(function (skill) {
-            var t = DataService.getItem(skill._links.skillCategory.href, function (data) {
-              skill.category = data.data;
-            });
-            skills.push(skill);
-          });
-          console.log(skills);
-        }
-      });
-    }
+function SkillFactory(SkillRestangular) {
 
-    function getWithoutCategories(success) {
-      DataService.getItem('http://localhost:9900/api/skills', success);
-    }
+  var skills = SkillRestangular.all('skills');
 
-    var skillCategories = [];
+  return {
+    getSkillsWithCategory: getSkillsWithCategory,
+    getSkills: getSkills,
+    getSkillCategories: getSkillCategories,
+    update: getSkillsWithCategory,
+    getSkill: getSkill,
+    remove: remove,
+    add: add,
+    edit: edit
 
-    function getSkillCategories() {
-      DataService.getItem('http://localhost:9900/api/skillCategories', function (response) {
-        skillCategories = response.data._embedded.skillCategories;
-      })
-    }
+  };
 
-    function remove(href, success) {
-      DataService.postItem('DELETE', href, null, null, success);
-    }
-
-    function save(skill, success, method) {
-      console.log(method);
-      if (skill.category) {
-
-        if (skill.category._links) {
-          skill.skillCategory = skill.category._links.self.href;
-          DataService.postItem(method.method, method.url, skill, 'application/json', success);
-
-        } else {
-          DataService.postItem('POST', 'http://localhost:9900/api/skillCategories/', {name: skill.category}, 'application/json', function (data) {
-            skill.skillCategory = data.headers('location');
-            DataService.postItem(method.method, method.url, skill, 'application/json', success);
-          });
-
-        }
-      }
-      else {
-        skill.skillCategory = null;
-        DataService.postItem(method.method, method.url, skill, 'application/json', success);
-      }
-    }
-
-    function edit(skill, success) {
-      save(skill, success, {method: 'PUT', url: skill._links.self.href});
-
-    }
-
-    function add(skill, success) {
-      save(skill, success, {method: 'POST', url: 'http://localhost:9900/api/skills/'});
-
-    }
-
-    return {
-      all: function () {
-        getSkillsWithCategory();
-        return skills;
-      },
-      getSkills: getWithoutCategories,
-      update: getSkillsWithCategory,
-      remove: remove,
-      add: add,
-      edit: edit,
-      getSkillCategories: function () {
-        getSkillCategories();
-        return skillCategories;
-      }
-
-    };
+  function getSkillsWithCategory() {
+    return skills.one('search').getList('findBySkillCategoryNotNull');
   }
-).
-  factory('SkillCompetenceFactory', function (DataService, $resource) {
 
-    function remove(href, success) {
-      DataService.postItem('DELETE', href, null, null, success);
-    }
+  function getSkill(href) {
+    return SkillRestangular.one(href).get();
+  }
 
-    function add(skillCompetence, success) {
-      DataService.postItem('POST', 'http://localhost:9900/api/skillCompetences/', skillCompetence, 'application/json', success, function () {
-        var level = skillCompetence.competenceLevel;
-        var skillId = skillCompetence.skill.split('/').pop();
-        DataService.getItem('http://localhost:9900/api/skillCompetences/search/findSkillCompetenceBySkillId?skillId=' + skillId, function (data) {
-          var sc = data.data._embedded.skillCompetences.pop();
-          sc.competenceLevel = level;
+  function getSkills() {
+    return skills.getList();
+  }
 
-          DataService.postItem('PUT', sc._links.self.href, sc, 'application/json', success);
+  function getSkillCategories() {
+    return SkillRestangular.all('skillCategories').getList();
+  }
+
+  function remove(href) {
+    return skills.one(href).remove();
+  }
+
+  function save(skill) {
+    if (skill.category) {
+      if (skill.category._links) {
+        skill.skillCategory = skill.category._links.self.href;
+        skills.post(skill);
+
+      } else {
+        SkillRestangular.one('skillCategories').post({name: skill.category}).then(function (data) {
+          skill.skillCategory = data.headers('location');
+          skills.post(skill);
         });
-      });
+      }
     }
-
-    var skillCompetences = [];
-
-    function getSkillCompetenceForPersonId(personId) {
-      skillCompetences = [];
-      DataService.getItem('http://localhost:9900/api/skillCompetences/search/findSkillCompetenceByPerson?personId=' + personId, function (response) {
-        var _skillCompetences = response.data._embedded.skillCompetences;
-        if (_skillCompetences !== undefined) {
-          _skillCompetences.forEach(function (skillCompetence) {
-            DataService.getItem(skillCompetence._links.skill.href, function (data) {
-              skillCompetence.skill = data.data;
-            });
-            skillCompetences.push(skillCompetence);
-          });
-        }
-      });
+    else {
+      skill.skillCategory = null;
+      skills.post(skill);
     }
-
-    return {
-      getSkillCompetenceForPersonId: function (id) {
-        getSkillCompetenceForPersonId(id);
-
-        return skillCompetences;
-      },
-      remove: remove,
-      add: add
-    };
   }
-)
+
+  function edit(skill) {
+    save(skill);
+  }
+
+  function add(skill) {
+    save(skill);
+  }
+
+}
+
+
+angular.module('oraj360')
+  .factory('SkillCompetenceFactory', SkillCompetenceFactory);
+
+SkillCompetenceFactory.$inject = ['SkillCompetenceRestangular'];
+
+function SkillCompetenceFactory(SkillCompetenceRestangular) {
+
+  var skillCompetences = SkillCompetenceRestangular.all('skillCompetences');
+
+  return {
+    getSkillCompetenceForPerson: getSkillCompetenceForPerson,
+    remove: remove,
+    add: add
+  };
+
+
+  function remove(href) {
+    return skillCompetences.one(href).remove();
+  }
+
+  function add(skillCompetence) {
+    return skillCompetences.post(skillCompetence);
+  }
+
+  function getSkillCompetenceForPerson(personId) {
+    return skillCompetences.one('search').getList('findSkillCompetenceByPerson', {'username': personId});
+  }
+
+
+}
+angular.module('oraj360')
+  .factory('SkillRestangular', function (Restangular) {
+    return Restangular.withConfig(function (RestangularConfigurer) {
+      RestangularConfigurer.setBaseUrl('http://localhost:9900/api/');
+      RestangularConfigurer.setDefaultHeaders({'Content-Type': 'application/json'});
+      RestangularConfigurer.setRestangularFields({
+        selfLink: 'self.link'
+      });
+      RestangularConfigurer.addResponseInterceptor(function (data, operation, what, url, response, deferred) {
+        var extractedDataList = [];
+        var extractedData;
+        if (operation === "getList") {
+          if (Object.keys(data._embedded).length === 0) {
+            return extractedDataList;
+          } else {
+            extractedData = data._embedded.skills;
+          }
+        } else {
+          extractedData = data;
+        }
+        return extractedData;
+      })
+    })
+  });
+angular.module('oraj360')
+  .factory('SkillCompetenceRestangular', function (Restangular) {
+    return Restangular.withConfig(function (RestangularConfigurer) {
+        RestangularConfigurer.setBaseUrl('http://localhost:9900/api/');
+        RestangularConfigurer.setDefaultHeaders({'Content-Type': 'application/json'});
+        RestangularConfigurer.setRestangularFields({
+          selfLink: 'self.link'
+        });
+        RestangularConfigurer.addResponseInterceptor(function (data, operation, what, url, response, deferred) {
+            var extractedDataList = [];
+            var extractedData;
+            if (operation === "getList") {
+              if (data._embedded === undefined || data._embedded === null) {
+                return extractedDataList;
+              } else {
+                if (Object.keys(data._embedded).length === 0) {
+                  return extractedDataList;
+                } else {
+                  extractedData = data._embedded.skillCompetences;
+                }
+              }
+            }
+            else {
+              extractedData = data;
+            }
+            return extractedData;
+          }
+        )
+      }
+    )
+  })
   .factory('DataService', function ($http) {
     return {
       getItem: function (url, success) {
