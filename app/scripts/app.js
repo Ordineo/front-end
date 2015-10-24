@@ -30,7 +30,11 @@
     .config(function ($routeProvider) {
       $routeProvider
         .when('/', {
-          templateUrl: 'views/login.html'
+          templateUrl: 'views/login.html',
+          controller: 'LoginCtrl',
+          access: {
+            requiresLogin: false
+          }
         })
         .when('/about', {
           templateUrl: 'views/about.html'
