@@ -575,6 +575,42 @@ function ProfileCtrl($scope, $log, $window, $location, PersonFactory) {
   ];
   $window.endorsements = $scope.endorsements;
 
+  $scope.personsWorkedWith = [
+    {
+      image: 'http://lorempixel.com/50/50/'
+    },
+    {
+      image: 'http://lorempixel.com/50/50/'
+    },
+    {
+      image: 'http://lorempixel.com/50/50/'
+    },
+    {
+      image: 'http://lorempixel.com/50/50/'
+    },
+    {
+      image: 'http://lorempixel.com/50/50/'
+    },
+    {
+      image: 'http://lorempixel.com/50/50/'
+    },
+    {
+      image: 'http://lorempixel.com/50/50/'
+    },
+    {
+      image: 'http://lorempixel.com/50/50/'
+    },
+    {
+      image: 'http://lorempixel.com/50/50/'
+    },
+    {
+      image: 'http://lorempixel.com/50/50/'
+    },
+    {
+      image: 'http://lorempixel.com/50/50/'
+    }
+  ];
+
   //----
   //Vars
   //----
