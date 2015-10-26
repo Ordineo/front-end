@@ -30,21 +30,17 @@
     .config(function ($routeProvider) {
       $routeProvider
         .when('/', {
-          templateUrl: 'views/login.html',
-          controller: 'LoginCtrl',
-          access: {
-            requiresLogin: false
-          }
+          redirectTo: '/login'
         })
         .when('/about', {
-          templateUrl: 'views/about.html'
+          templateUrl: 'app/persons/about.html'
         })
         .when(('/search/:otherId'), {
-          templateUrl: 'views/search.html',
+          templateUrl: 'app/persons/search.html',
           controller: 'SearchCtrl'
         })
         .when('/persons', {
-          templateUrl: 'views/persons.html',
+          templateUrl: 'app/persons/persons.html',
           controller: 'ManagementCtrl',
           resolve: {
             person: function (PersonFactory) {
@@ -53,15 +49,15 @@
           }
         })
         .when('/dashboard', {
-          templateUrl: 'views/dashboard.html',
+          templateUrl: 'app/persons/dashboard.html',
           controller: 'DashboardCtrl'
         })
         .when('/profile', {
-          templateUrl: 'views/profile.html',
+          templateUrl: 'app/persons/profile.html',
           controller: 'ProfileCtrl'
         })
         .when('/panel', {
-          templateUrl: 'views/panel.html',
+          templateUrl: 'app/persons/panel.html',
           controller: 'PanelCtrl',
           resolve: {
             persons: function (PersonFactory) {
@@ -73,18 +69,18 @@
           }
         })
         .when('/customers', {
-          templateUrl: 'views/customers.html',
+          templateUrl: 'app/persons/customers.html',
           controller: 'CustomersCtrl'
         })
         .when('/login', {
-          templateUrl: 'views/login.html',
+          templateUrl: 'app/authentication/login.html',
           controller: 'LoginCtrl',
           access: {
             requiresLogin: false
           }
         })
         .when('/register', {
-          templateUrl: 'views/register.html',
+          templateUrl: 'app/authentication/register.html',
           controller: 'RegisterCtrl',
           access: {
             requiresLogin: false,
@@ -92,10 +88,10 @@
           }
         })
         .when('/unit', {
-          templateUrl: 'views/unit.html'
+          templateUrl: 'app/persons/unit.html'
         })
         .when('/roles', {
-          templateUrl: 'views/roles.html',
+          templateUrl: 'app/persons/roles.html',
           controller: 'RoleCtrl',
           resolve: {
             roles: function (RoleService) {
