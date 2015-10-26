@@ -11,7 +11,7 @@
 
     $log.info('LoginCtrl loaded');
     if (window.sessionStorage.getItem('logged')) {
-      $location.path('/about');
+      //$location.path('/about');
     }
     $scope.logout = function () {
       window.sessionStorage.clear();
@@ -31,7 +31,7 @@
           window.sessionStorage.setItem('logged', true);
           var id = window.sessionStorage.getItem('id');
           //   checkMyRoles(id);
-          window.location.reload();
+         // window.location.reload();
         }
       }, 1000)
 
