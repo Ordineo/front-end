@@ -5,7 +5,8 @@ angular.module('oraj360')
   .directive('dailyRoute', dailyRoute)
   .directive('skillset', skillset)
   .directive('endorsements', endorsements)
-  .directive('workedWithPerson', workedWithPerson);
+  .directive('workedWithPerson', workedWithPerson)
+  .directive('interestingPeople', interestingPeople);
 
 function aLittleAboutMe() {
   var directive = {
@@ -90,6 +91,19 @@ function workedWithPerson() {
   var directive = {
     link: link,
     templateUrl: 'views/workedwithperson.html',
+    restrict: 'EA'
+  };
+  return directive;
+
+  function link(scope, element, attrs) {
+    /* */
+  }
+}
+
+function interestingPeople() {
+  var directive = {
+    link: link,
+    templateUrl: 'views/interestingpeople.html',
     restrict: 'EA'
   };
   return directive;
