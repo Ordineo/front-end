@@ -107,15 +107,49 @@
         },
 
         connection: function () {
-          var handleSuccess = function (data) {
+          var reader;
+
+          function checkFileAPI() {
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+              reader = new FileReader();
+              return true;
+            } else {
+              alert('The File APIs are not fully supported by your browser. Fallback required.');
+              return false;
+            }
+          }
+
+          /**
+           * read text input
+           */
+          function readText(filePath) {
+            console.log(filePath);
+            var output = "";
+            if (filePath.files && filePath.files[0]) {
+              reader.onload = function (e) {
+                output = e.target.result;
+                console.log(output);
+              };//end onload()
+              reader.readAsText(filePath.files[0]);
+            }//end if html5 filelist su
+
+          }
+
+          checkFileAPI();
+          console.log(readText('connection.properties'));
+
+
+        },
+
+        /* var handleSuccess = function (data) {
             if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
               window.sessionStorage.setItem('url', data.local);
             } else {
               window.sessionStorage.setItem('url', data.cloud);
             }
           };
-          $http.get('connection.properties').success(handleSuccess);
-        },
+         $http.get('connection.properties').success(handleSuccess);*/
+
         postItem: function (method, url, postdata, headers) {
 
           return $http({

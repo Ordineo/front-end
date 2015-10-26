@@ -11,7 +11,7 @@
 
     $log.info('LoginCtrl loaded');
     if (window.sessionStorage.getItem('logged')) {
-      //$location.path('/about');
+      $location.path('/about');
     }
     $scope.logout = function () {
       window.sessionStorage.clear();
@@ -24,14 +24,14 @@
     $scope.loginCredentials = function () {
       AuthenticateFactory.setAuthorized(true);
       window.sessionStorage.setItem('id', $scope.userData.username);
-      dataservice.connection();
+      window.sessionStorage.setItem('url', 'http://localhost:9900/api/');
 
       $timeout(function () {
         if (AuthenticateFactory.isAuthorized()) {
           window.sessionStorage.setItem('logged', true);
           var id = window.sessionStorage.getItem('id');
           //   checkMyRoles(id);
-         // window.location.reload();
+          window.location.reload();
         }
       }, 1000)
 
