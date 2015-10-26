@@ -4,9 +4,9 @@
 
   angular.module('oraj360').controller('LoginCtrl', LoginCtrl);
 
-  LoginCtrl.$inject = ['$scope', '$log', '$http', '$location', 'AuthenticateFactory', '$route', 'RoleService', 'dataservice'];
+  LoginCtrl.$inject = ['$scope', '$log', '$http', '$location', 'AuthenticateFactory', '$route', 'RoleService', 'dataservice', '$timeout'];
 
-  function LoginCtrl($scope, $log, $http, $location, AuthenticateFactory, $route, RoleService, dataservice) {
+  function LoginCtrl($scope, $log, $http, $location, AuthenticateFactory, $route, RoleService, dataservice, $timeout) {
 
 
     $log.info('LoginCtrl loaded');
@@ -26,12 +26,15 @@
       window.sessionStorage.setItem('id', $scope.userData.username);
       dataservice.connection();
 
-      if (AuthenticateFactory.isAuthorized()) {
-        window.sessionStorage.setItem('logged', true);
-        var id = window.sessionStorage.getItem('id');
-        //   checkMyRoles(id);
-        window.location.reload();
-      }
+      $timeout(function () {
+        if (AuthenticateFactory.isAuthorized()) {
+          window.sessionStorage.setItem('logged', true);
+          var id = window.sessionStorage.getItem('id');
+          //   checkMyRoles(id);
+          window.location.reload();
+        }
+      }, 1000)
+
     };
 
 

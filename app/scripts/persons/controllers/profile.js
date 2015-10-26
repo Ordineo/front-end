@@ -17,10 +17,11 @@ function ProfileCtrl($scope, $log, $window, $location, PersonFactory) {
   $log.info('ProfileCtrl loaded');
   var reviewer = null;
 
-  var id = window.sessionStorage.getItem('id');
-  var role = window.sessionStorage.getItem('role');
 
   if (window.sessionStorage.getItem('logged')) {
+    var id = window.sessionStorage.getItem('id');
+    var role = window.sessionStorage.getItem('role');
+
     $scope.isLogged = true;
     PersonFactory.getMyDetails(id).then(function (data, status) {
       $scope.myDetails = data;

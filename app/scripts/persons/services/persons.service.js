@@ -70,7 +70,9 @@
   angular.module('oraj360')
     .factory('PersonRestangular', function (Restangular) {
       return Restangular.withConfig(function (RestangularConfigurer) {
+        if (window.sessionStorage.getItem('logged')) {
         RestangularConfigurer.setBaseUrl(window.sessionStorage.getItem('url'));
+        }
         RestangularConfigurer.setDefaultHeaders({'Content-Type': 'application/json'});
         RestangularConfigurer.setRestangularFields({
           selfLink: 'self.link'
