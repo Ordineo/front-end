@@ -39,7 +39,7 @@
         .when('/about', {
           templateUrl: 'views/about.html'
         })
-        .when(("/search/:otherId"), {
+        .when(('/search/:otherId'), {
           templateUrl: 'views/search.html',
           controller: 'SearchCtrl'
         })
@@ -119,11 +119,5 @@
         .otherwise({
           redirectTo: '/'
         });
-    })
-    .
-    run(function ($rootScope, dataservice) {
-      dataservice.connection();
-
-
     });
 })();

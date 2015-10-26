@@ -4,9 +4,9 @@
 
   angular.module('oraj360').controller('LoginCtrl', LoginCtrl);
 
-  LoginCtrl.$inject = ['$scope', '$log', '$http', '$location', 'AuthenticateFactory', '$route', 'RoleService'];
+  LoginCtrl.$inject = ['$scope', '$log', '$http', '$location', 'AuthenticateFactory', '$route', 'RoleService', 'dataservice'];
 
-  function LoginCtrl($scope, $log, $http, $location, AuthenticateFactory, $route, RoleService) {
+  function LoginCtrl($scope, $log, $http, $location, AuthenticateFactory, $route, RoleService, dataservice) {
 
 
     $log.info('LoginCtrl loaded');
@@ -24,6 +24,8 @@
     $scope.loginCredentials = function () {
       AuthenticateFactory.setAuthorized(true);
       window.sessionStorage.setItem('id', $scope.userData.username);
+      dataservice.connection();
+
       if (AuthenticateFactory.isAuthorized()) {
         window.sessionStorage.setItem('logged', true);
         var id = window.sessionStorage.getItem('id');

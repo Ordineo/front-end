@@ -2,6 +2,7 @@
 
 describe('Controller: SkillsCtrl', function () {
 
+  window.sessionStorage.setItem('url', 'http://localhost:9900/api/');
   // load the controller's module
   beforeEach(module('oraj360'));
 
