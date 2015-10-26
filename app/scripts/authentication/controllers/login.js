@@ -27,7 +27,7 @@
       if (AuthenticateFactory.isAuthorized()) {
         window.sessionStorage.setItem('logged', true);
         var id = window.sessionStorage.getItem('id');
-        checkMyRoles(id);
+        //   checkMyRoles(id);
         window.location.reload();
       }
     };

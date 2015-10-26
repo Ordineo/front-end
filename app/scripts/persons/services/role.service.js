@@ -48,7 +48,7 @@ function RoleService(RoleRestangular, PersonRestangular) {
 angular.module('oraj360')
   .factory('RoleRestangular', function (Restangular) {
     return Restangular.withConfig(function (RestangularConfigurer) {
-      RestangularConfigurer.setBaseUrl('http://localhost:9900/api/');
+      RestangularConfigurer.setBaseUrl(window.sessionStorage.getItem('url'));
       RestangularConfigurer.setDefaultHeaders({'Content-Type': 'application/json'});
 
       RestangularConfigurer.setRestangularFields({

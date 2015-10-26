@@ -119,30 +119,11 @@
         .otherwise({
           redirectTo: '/'
         });
-    });
-  /* .run(function ($rootScope, $location, AuthenticateFactory) {
-      var id = window.sessionStorage.getItem('id');
-      if (id === null) {
-        $location.path('/login');
-      } else {
-        AuthenticateFactory.initialise(id);
-      }
-      $rootScope.$on('$routeChangeStart', function (event, next) {
-        if (next.access === undefined) {
-          $location.path(next.templateurl);
-        } else {
-          var requiresLogin = next.access.requiresLogin;
-          if (requiresLogin && AuthenticateFactory.isAuthorized()) {
-            $location.path(next.templateurl);
-          } else {
-            if (next.access.isRegister) {
-              $location.path('/register');
-            } else {
-              $location.path('/login');
-            }
-          }
-        }
-      });
+    })
+    .
+    run(function ($rootScope, dataservice) {
+      dataservice.connection();
 
-   });*/
+
+    });
 })();

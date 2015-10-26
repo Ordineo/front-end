@@ -4,10 +4,13 @@
   angular.module('oraj360')
     .factory('PersonFactory', PersonFactory);
 
-  PersonFactory.$inject = ['dataservice', 'PersonRestangular', '$location'];
+  PersonFactory.$inject = ['dataservice', 'PersonRestangular', '$location', '$timeout'];
 
-  function PersonFactory(dataservice, PersonRestangular, $location) {
+  function PersonFactory(dataservice, PersonRestangular, $location, $timeout) {
+
     var persons = PersonRestangular.all('persons');
+
+
     var myId = window.sessionStorage.getItem("id");
     return {
       getMyDetails: getMyDetails,
@@ -67,7 +70,7 @@
   angular.module('oraj360')
     .factory('PersonRestangular', function (Restangular) {
       return Restangular.withConfig(function (RestangularConfigurer) {
-        RestangularConfigurer.setBaseUrl('http://localhost:9900/api/');
+        RestangularConfigurer.setBaseUrl(window.sessionStorage.getItem('url'));
         RestangularConfigurer.setDefaultHeaders({'Content-Type': 'application/json'});
         RestangularConfigurer.setRestangularFields({
           selfLink: 'self.link'
@@ -101,6 +104,16 @@
           return $http.get(url);
         },
 
+        connection: function () {
+          var handleSuccess = function (data) {
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+              window.sessionStorage.setItem('url', data.local);
+            } else {
+              window.sessionStorage.setItem('url', data.cloud);
+            }
+          };
+          $http.get('connection.properties').success(handleSuccess);
+        },
         postItem: function (method, url, postdata, headers) {
 
           return $http({
