@@ -109,7 +109,7 @@ function SkillCompetenceFactory(SkillCompetenceRestangular) {
 angular.module('oraj360')
   .factory('SkillRestangular', function (Restangular) {
     return Restangular.withConfig(function (RestangularConfigurer) {
-      RestangularConfigurer.setBaseUrl('http://localhost:9900/api/');
+      RestangularConfigurer.setBaseUrl(window.sessionStorage.getItem('url'));
       RestangularConfigurer.setDefaultHeaders({'Content-Type': 'application/json'});
       RestangularConfigurer.setRestangularFields({
         selfLink: 'self.link'
