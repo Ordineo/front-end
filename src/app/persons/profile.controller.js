@@ -662,5 +662,10 @@ function ProfileCtrl($scope, $log, $window, $location, PersonFactory) {
   $scope.initPlaces = function (address) {
     $scope.mapAddress = address;
     $scope.address = address;
+    $scope.transport = 'DRIVING';
+  }
+
+  $scope.changeTransport = function(transportMode) {
+    $scope.transport = transportMode;
   }
 }
