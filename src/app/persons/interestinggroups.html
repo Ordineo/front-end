@@ -1,0 +1,102 @@
+<style>
+  #interestingGroups {
+    width: 100%;
+  }
+
+  #interestingGroups #list {
+    color: #E98321;
+  }
+
+  #interestingGroups .item {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  #interestingGroups .item > img {
+    border: solid 1px #9A9A9A;
+    border-radius: 26px;
+    float: left;
+  }
+
+  #interestingGroups .item > div {
+    display: inline-block;
+    margin: 0px 10px 0px 10px;
+  }
+
+  #interestingGroups .item p {
+    margin-bottom: 0px;
+  }
+
+  #interestingGroups .item > button {
+    float: right;
+  }
+
+  #interestingGroups button {
+    color: #E98321;
+  }
+
+  .usageInfo {
+    color: #9A9A9A;
+  }
+
+  .usageInfo > .usageInfoItem {
+    display: inline-block;
+    margin: 5px;
+  }
+
+  button {
+    background-color: transparent;
+    border: solid 2px #E98321;
+    padding: 5px 8px 5px 8px;
+    text-transform: uppercase;
+  }
+
+  ng-md-icon {
+
+  }
+
+  /* Extra small devices (phones, less than 768px) */
+  /* No media query since this is the default in Bootstrap */
+
+  /* Small devices (tablets, 768px and up) */
+  @media (min-width: 768px) {
+
+  }
+
+  /* Medium devices (desktops, 992px and up) */
+  @media (min-width: 992px) {
+    #interestingGroups {
+      width: 35%;
+    }
+  }
+
+  /* Large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {
+
+  }
+</style>
+
+<div id="interestingGroups" style="border: solid 1px black;">
+  <h4>Interesting Groups</h4>
+
+  <div id="list">
+    <div class="item" ng-repeat="interestingGroup in interestingGroups">
+      <img ng-src="{{interestingGroup.image}}"/>
+      <div>
+        <p><strong>{{interestingGroup.description}}</strong></p>
+        <div class="usageInfo">
+          <div class="usageInfoItem">
+            <ng-md-icon icon="person" size="24"></ng-md-icon>
+            <strong>{{interestingGroup.members}}</strong>
+          </div>
+          <div class="usageInfoItem">
+            <ng-md-icon icon="messenger" size="24"></ng-md-icon>
+            <strong>{{interestingGroup.messages}}</strong>
+          </div>
+        </div>
+      </div>
+      <button style="display: table-cell; vertical-align: middle"><strong>Join</strong></button>
+    </div>
+  </div>
+  <button><strong>Create Group</strong></button>
+</div>

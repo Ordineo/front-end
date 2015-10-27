@@ -647,6 +647,27 @@ function ProfileCtrl($scope, $log, $window, $location, PersonFactory) {
     }
   ];
 
+  $scope.interestingGroups = [
+    {
+      description: 'Angular JS',
+      image: 'http://lorempixel.com/50/50/',
+      members: 20,
+      messages: 200
+    },
+    {
+      description: 'Internet of things',
+      image: 'http://lorempixel.com/50/50/',
+      members: 20,
+      messages: 200
+    },
+    {
+      description: 'Marketing Strategy',
+      image: 'http://lorempixel.com/50/50/',
+      members: 19,
+      messages: 12
+    }
+  ];
+
   //----
   //Vars
   //----
