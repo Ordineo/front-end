@@ -11,7 +11,7 @@ angular.module('oraj360')
 function aLittleAboutMe() {
   var directive = {
     link: link,
-    templateUrl: 'views/alittleaboutme.html',
+    templateUrl: 'app/persons/alittleaboutme.html',
     restrict: 'EA',
     controller: 'ProfileCtrl'
   };
@@ -25,7 +25,7 @@ function aLittleAboutMe() {
 function certificates() {
   var directive = {
     link: link,
-    templateUrl: 'views/certificates.html',
+    templateUrl: 'app/persons/certificates.html',
     restrict: 'EA'
   };
   return directive;
@@ -38,7 +38,7 @@ function certificates() {
 function interests() {
   var directive = {
     link: link,
-    templateUrl: 'views/interests.html',
+    templateUrl: 'app/persons/interests.html',
     restrict: 'EA'
   };
   return directive;
@@ -51,7 +51,7 @@ function interests() {
 function dailyRoute() {
   var directive = {
     link: link,
-    templateUrl: 'views/dailyroute.html',
+    templateUrl: 'app/persons/dailyroute.html',
     restrict: 'EA'
   };
   return directive;
@@ -64,7 +64,7 @@ function dailyRoute() {
 function skillset() {
   var directive = {
     link: link,
-    templateUrl: 'views/skillset.html',
+    templateUrl: 'app/skills/skillset.html',
     restrict: 'EA'
   };
   return directive;
@@ -77,7 +77,7 @@ function skillset() {
 function endorsements() {
   var directive = {
     link: link,
-    templateUrl: 'views/endorsements.html',
+    templateUrl: 'app/persons/endorsements.html',
     restrict: 'EA'
   };
   return directive;
@@ -90,7 +90,7 @@ function endorsements() {
 function workedWithPerson() {
   var directive = {
     link: link,
-    templateUrl: 'views/workedwithperson.html',
+    templateUrl: 'app/persons/workedwithperson.html',
     restrict: 'EA'
   };
   return directive;
@@ -103,7 +103,7 @@ function workedWithPerson() {
 function interestingPeople() {
   var directive = {
     link: link,
-    templateUrl: 'views/interestingpeople.html',
+    templateUrl: 'app/persons/interestingpeople.html',
     restrict: 'EA'
   };
   return directive;

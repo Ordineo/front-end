@@ -4,7 +4,7 @@ angular.module('oraj360')
 function experience() {
   var directive = {
     link: link,
-    templateUrl: 'views/experience.html',
+    templateUrl: 'app/persons/experience.html',
     restrict: 'E',
     controller: 'DashboardCtrl'
   };

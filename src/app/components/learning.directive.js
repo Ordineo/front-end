@@ -4,7 +4,7 @@ angular.module('oraj360')
 function learning() {
   var directive = {
     link: link,
-    templateUrl: 'views/learning.html',
+    templateUrl: 'app/timeline/learning.html',
     restrict: 'E',
     controller: 'DashboardCtrl'
   };

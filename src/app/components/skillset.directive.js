@@ -5,7 +5,7 @@ angular.module('oraj360')
 function skillcompetence() {
   var directive = {
     link: link,
-    templateUrl: 'views/skillCompetences.html',
+    templateUrl: 'app/skills/skillCompetences.html',
     controller: SkillCompetenceCtrl,
     restrict: 'EA'
   };
