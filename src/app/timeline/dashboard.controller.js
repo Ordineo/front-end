@@ -18,83 +18,42 @@ angular.module('oraj360')
 
     $scope.activities = [
       {
-        "date":"2015-10-22",
-        "tags": [
-          {
-            "tag": "SEO"
-          },
-          {
-            "tag": "Soft skills"
-          },
-          {
-            "tag": "Learn"
-          }
-        ],
+        "date": "2015-10-22",
+        "tags": ["SEO", "Soft skills", "Learn"],
         "action": "course",
         "subject": "Google analytics"
       },
       {
-        "date":"2015-10-21",
-        "tags": [
-          {
-            "tag": "Certificates"
-          },
-          {
-            "tag": "Web apps"
-          },
-          {
-            "tag": ".NET"
-          }
-        ],
+        "date": "2015-10-21",
+        "tags": ["Certificates", "Web apps", ".NET"],
         "action": "certificate",
         "subject": "Developing ASP.net MVC Web Applications"
       },
       {
-        "date":"2015-10-20",
-        "tags": [
-          {
-            "tag": "Win store apps"
-          },
-          {
-            "tag": "Design"
-          },
-          {
-            "tag": "Photoshop"
-          }
-        ],
+        "date": "2015-10-20",
+        "tags": ["Win store apps", "Design", "Photoshop"],
         "action": "tutorial",
         "subject": "Windows store app design"
       },
       {
-        "date":"2015-10-12",
-        "tags": [
-          {
-            "tag": "Front-end"
-          }
-        ],
+        "date": "2015-10-12",
+        "tags": ["Front-end"],
         "action": "chat",
         "subject": "Smashing Book #5: Real Life Responsive Web Design"
       },
       {
-        "date":"2015-10-01",
-        "tags": [
-          {
-            "tag": "Certificate"
-          },
-          {
-            "tag": "Java"
-          }
-        ],
+        "date": "2015-10-01",
+        "tags": ["Certificate", "Java"],
         "action": "certificate",
         "subject": "Java SE 8 Programmer I"
       }
     ]
 
-    $scope.calculateDaysBetween = function(date) {
-      var year = parseInt(date.substring(0,4));
-      var month = parseInt(date.substring(5,7));
-      var day = parseInt(date.substring(8,10));
-      var date = new Date(year, month-1, day);
+    $scope.calculateDaysBetween = function (date) {
+      var year = parseInt(date.substring(0, 4));
+      var month = parseInt(date.substring(5, 7));
+      var day = parseInt(date.substring(8, 10));
+      var date = new Date(year, month - 1, day);
       var today = new Date();
 
       var timeDiff = Math.abs(today.getTime() - date.getTime());

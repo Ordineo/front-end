@@ -3,21 +3,17 @@
     background: darkorange;
     width: 2px;
     height: 100%;
-    /*max-height: 325px;*/
-    margin-left: 24px;
+    margin-left: 20px;
     position: absolute;
   }
 
   .activities {
-    overflow-y: scroll;
-    /*max-height: 325px;*/
-    /*padding-top: 15px;*/
     position: relative;
   }
 
   .activity-item-point {
     z-index: 10;
-    margin: auto 8px;
+    margin: auto 4px;
     width: 35px;
     min-width: 35px;
     height: 35px;
@@ -51,37 +47,62 @@
     color: darkorange;
   }
 
-  md-chips .md-chips {
+  .activities md-chips .md-chips {
     float: right;
-    box-shadow: none !important;
-    text-transform: uppercase;
+    box-shadow: none;
+    padding: 0;
     font-size: 12px;
-    padding-bottom: 5px;
   }
 
-  .md-chips .md-chip {
-    margin: 0 2px;
+  .activities .md-chips:not(.md-readonly) .md-chip {
+    padding-right: 12px;
+  }
+
+  .activities md-chips.md-default-theme, md-chips .md-chip {
     background: darkorange;
     color: white;
-    height: 28px;
-    line-height: 28px;
   }
 
-  .worked-with .md-fab.md-mini {
-    background-size: cover;
+  .activities .md-chips .md-chip {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin: 0px 3px 3px 0;
+    height: 28px;
+    line-height: 28px;;
+  }
+
+  .activities .md-chips .md-chip .md-chip-content {
+    padding-right: 0;
+  }
+
+  .activities md-card {
+    position: relative;
+  }
+
+  .activities md-card:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -14px;
+    margin-top: -7px;
+    height: 0;
+    width: 0;
+    border: 7px solid transparent;
+    border-right: 7px solid #E4E4E4;
   }
 </style>
 
-<div layout-padding>
+<div class="activities">
   <h4 class="md-title">Activity</h4>
 
-  <div layout-gt-md="row" layout="column">
-    <div flex="70">
+  <div layout="column">
+    <div>
 
-      <div class="activities" ng-init="limit=3" layout="column">
+      <div class="activities" ng-init="limitActivities=3" layout="column">
         <div class="activities-bar"></div>
 
-        <div class="activity-item" layout ng-repeat="activity in activities | limitTo:limit as result">
+        <div class="activity-item" layout ng-repeat="activity in activities | limitTo:limitActivities as activityCount">
           <div class="activity-item-point" ng-switch="activity.action">
             <ng-md-icon ng-switch-when="course" icon="school" style="fill:darkorange" size="31"></ng-md-icon>
             <ng-md-icon ng-switch-when="certificate" icon="wallet_membership" style="fill:darkorange"
@@ -95,17 +116,11 @@
                 <div layout>
                   <div flex="30" flex-sm="100" class="activity-item-date">
                     <ng-md-icon icon="schedule" size="20"></ng-md-icon>
-                    <!--<span>{{activity.time}}</span>-->
-                    <!--<span ng-if="(today | date:'yyyy-MM-dd') == activity.date">Today</span>-->
-                    <!--<span ng-if="(today | date:'yyyy-MM-dd') != activity.date" ng-init="daysBetween = calculateDaysBetween(activity.date)">{{daysBetween}} day<span ng-show="daysBetween > 1">s</span> ago</span>-->
                     <span>{{calculateDaysBetween(activity.date)}}</span>
                   </div>
                   <div flex="grow" hide-sm>
-                    <md-chips ng-repeat="item in activity.tags">
-                      <md-chip>{{item.tag}}</md-chip>
-                      <!--<md-chip>SEO</md-chip>-->
-                      <!--<md-chip>Soft skills</md-chip>-->
-                      <!--<md-chip>Learn</md-chip>-->
+                    <md-chips ng-model="activity.tags" readonly="true">
+                      <!--<md-chip>{{item.tag}}</md-chip>-->
                     </md-chips>
                   </div>
                 </div>
@@ -123,94 +138,12 @@
             </md-card>
           </div>
         </div>
-
-        <!--<div class="activity-item" layout>-->
-        <!--<div class="activity-item-point">-->
-        <!--<ng-md-icon icon="wallet_membership" style="fill:orange" size="31"></ng-md-icon>-->
-        <!--</div>-->
-        <!--<div flex="grow">-->
-        <!--<md-card>-->
-        <!--<div layout="column" layout-padding>-->
-        <!--<div layout>-->
-        <!--<div flex="30" flex-sm="100" class="activity-item-date">-->
-        <!--<ng-md-icon icon="schedule" size="20"></ng-md-icon>-->
-        <!--<span>5 hours ago</span>-->
-        <!--</div>-->
-        <!--<div flex="grow" hide-sm>-->
-        <!--<md-chips>-->
-        <!--<md-chip>Certificates</md-chip>-->
-        <!--<md-chip>Web apps</md-chip>-->
-        <!--<md-chip>.NET</md-chip>-->
-        <!--</md-chips>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<h5><span class="orange-color">{{myDetails.firstName}}</span> has a new certificate: <span class="orange-color">"Developing ASP.net MVC WEB Applications"</span>-->
-        <!--</h5>-->
-        <!--</div>-->
-        <!--</md-card>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="activity-item" layout>-->
-        <!--<div class="activity-item-point">-->
-        <!--<ng-md-icon icon="desktop_windows" style="fill:orange" size="31"></ng-md-icon>-->
-        <!--</div>-->
-        <!--<div flex="grow">-->
-        <!--<md-card>-->
-        <!--<div layout="column" layout-padding>-->
-        <!--<div layout>-->
-        <!--<div flex="30" flex-sm="100" class="activity-item-date">-->
-        <!--<ng-md-icon icon="schedule" size="20"></ng-md-icon>-->
-        <!--<span>2 days ago</span>-->
-        <!--</div>-->
-        <!--<div flex="grow" hide-sm>-->
-        <!--<md-chips>-->
-        <!--<md-chip>Win store apps</md-chip>-->
-        <!--<md-chip>Design</md-chip>-->
-        <!--&lt;!&ndash;<md-chip>E-learn</md-chip>&ndash;&gt;-->
-        <!--<md-chip>Photoshop</md-chip>-->
-        <!--</md-chips>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<h5><span class="orange-color">{{myDetails.firstName}}</span> created a new tutorial about <span class="orange-color">"Windows store app design"</span>-->
-        <!--</h5>-->
-        <!--</div>-->
-        <!--</md-card>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="activity-item" layout>-->
-        <!--<div class="activity-item-point">-->
-        <!--<ng-md-icon icon="chat" style="fill:orange" size="31"></ng-md-icon>-->
-        <!--</div>-->
-        <!--<div flex="grow">-->
-        <!--<md-card>-->
-        <!--<div layout="column" layout-padding>-->
-        <!--<div layout>-->
-        <!--<div flex="30" flex-sm="100" class="activity-item-date">-->
-        <!--<ng-md-icon icon="schedule" size="20"></ng-md-icon>-->
-        <!--<span>5 days ago</span>-->
-        <!--</div>-->
-        <!--<div flex="grow" hide-sm>-->
-        <!--<md-chips>-->
-        <!--<md-chip>Front-end</md-chip>-->
-        <!--</md-chips>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<h5><span class="orange-color">{{myDetails.firstName}}</span> replied on: <span class="orange-color">"Smashing Book #5: Real Life Responsive Web Design"</span>-->
-        <!--</h5>-->
-        <!--</div>-->
-        <!--</md-card>-->
-        <!--</div>-->
-        <!--</div>-->
-
       </div>
 
-      <md-button layout layout-align="center center" ng-show="result.length < activities.length" ng-click="limit = limit + 1">Show more</md-button>
-    </div>
-    <div flex="grow" class="worked-with" layout-padding>
-      <h6 class="md-subhead">Worked with {{myDetails.firstName}}</h6>
-      <md-button ng-repeat="item in [1,2,3,4,5,6]" class="md-fab md-mini" style="background-image:url('http://lorempixel.com/100/100/');"></md-button>
+      <md-button layout layout-align="center center" ng-show="activityCount.length < activities.length"
+                 ng-click="limitActivities = limitActivities + 1">Show more
+      </md-button>
+
     </div>
   </div>
 </div>

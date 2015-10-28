@@ -33,31 +33,9 @@
     text-transform: uppercase;
     width: 80px;
   }
-
-  /* Extra small devices (phones, less than 768px) */
-  /* No media query since this is the default in Bootstrap */
-
-  /* Small devices (tablets, 768px and up) */
-  @media (min-width: 768px) {
-    .certificatesItem {
-      width: 16.666%;
-    }
-  }
-
-  /* Medium devices (desktops, 992px and up) */
-  @media (min-width: 992px) {
-    #certificates {
-      width: 65%;
-    }
-  }
-
-  /* Large devices (large desktops, 1200px and up) */
-  @media (min-width: 1200px) {
-
-  }
 </style>
 
-<div id="certificates" style="border: solid 1px black;">
+<div id="certificates" layout-padding>
   <h4>CERTIFICATES</h4>
 
   <div ng-if="certificates === null || certificates.length === 0">

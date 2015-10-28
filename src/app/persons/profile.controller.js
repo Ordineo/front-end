@@ -154,56 +154,7 @@ function ProfileCtrl($scope, $log, $window, $location, PersonFactory) {
     }
   ];
 
-  $scope.interests = [
-    {
-      description: 'Microsoft'
-    },
-    {
-      description: '.NET'
-    },
-    {
-      description: 'Sales'
-    },
-    {
-      description: 'MVC'
-    },
-    {
-      description: 'Fishing'
-    },
-    {
-      description: 'CSS'
-    },
-    {
-      description: 'Soccer'
-    },
-    {
-      description: 'HTML5'
-    },
-    {
-      description: 'Java'
-    },
-    {
-      description: 'jQuery'
-    },
-    {
-      description: 'SQL'
-    },
-    {
-      description: 'Matlab'
-    },
-    {
-      description: 'Marketing'
-    },
-    {
-      description: 'Eclipse'
-    },
-    {
-      description: 'Agile'
-    },
-    {
-      description: 'SOAPUI'
-    }
-  ];
+  $scope.interests = ["Microsoft", ".NET", "Sales", "MVC", "Fishing", "CSS", "Soccer", "HTML5", "Java", "jQuery", "SQL", "Matlab", "Marketing", "Eclipse", "Agile", "SOAPUI"];
 
   $scope.dailyRoute = {
     route: {
@@ -684,9 +635,62 @@ function ProfileCtrl($scope, $log, $window, $location, PersonFactory) {
     $scope.mapAddress = address;
     $scope.address = address;
     $scope.transport = 'DRIVING';
-  }
+  };
 
   $scope.changeTransport = function(transportMode) {
     $scope.transport = transportMode;
-  }
+  };
+
+  $scope.experiences = [
+    {
+      "startDate": "2015-08-01",
+      "endDate": null,
+      "project": "CRS medewerker",
+      "function": ".NET Software Engineer",
+      "customer": {
+        "name": "Digipolis",
+        "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+      }
+    },
+    {
+      "startDate": "2014-11-01",
+      "endDate": "2015-08-01",
+      "project": "Digitale handtekencomponent",
+      "function": ".NET Software Engineer",
+      "customer": {
+        "name": "Digipolis",
+        "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+      }
+    },
+    {
+      "startDate": "2014-02-01",
+      "endDate": "2014-11-01",
+      "project": "Handtekenmap",
+      "function": ".NET Software Engineer",
+      "customer": {
+        "name": "Digipolis",
+        "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+      }
+    },
+    {
+      "startDate": "2013-05-01",
+      "endDate": "2014-02-01",
+      "project": "Markten en foren",
+      "function": ".NET Software Engineer",
+      "customer": {
+        "name": "Digipolis",
+        "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+      }
+    },
+    {
+      "startDate": "2012-08-01",
+      "endDate": "2013-05-01",
+      "project": "Brondata groen",
+      "function": ".NET Software Engineer",
+      "customer": {
+        "name": "Digipolis",
+        "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+      }
+    }
+  ];
 }

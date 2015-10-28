@@ -1,57 +1,33 @@
 <style>
-  #interests {
-    display: inline-block;
-    margin-bottom: 30px;
-    width: 100%;
+  .interests md-chips .md-chips {
+    box-shadow: none;
+    padding: 0;
   }
 
-  #interestsContainer {
-
+  .interests .md-chips:not(.md-readonly) .md-chip {
+    padding-right:12px;
   }
 
-  .interestsItem {
-    background-color: #E98321;
+  .interests md-chips.md-default-theme, md-chips .md-chip {
+    background: darkorange;
     color: white;
-    float: left;
-    margin-right: 4px;
-    margin-bottom: 3px;
-    padding: 5px 8px 5px 8px;
-    text-transform: uppercase;
   }
 
-  /* Extra small devices (phones, less than 768px) */
-  /* No media query since this is the default in Bootstrap */
-
-  /* Small devices (tablets, 768px and up) */
-  @media (min-width: 768px) {
-
+  .interests .md-chips .md-chip {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin: 3px 3px 0 0;
   }
 
-  /* Medium devices (desktops, 992px and up) */
-  @media (min-width: 992px) {
-    #interests {
-      width: 35%;
-    }
-  }
-
-  /* Large devices (large desktops, 1200px and up) */
-  @media (min-width: 1200px) {
-
+  .interests .md-chips .md-chip .md-chip-content {
+    padding-right:0;
   }
 </style>
 
-<div id="interests" style="border: solid 1px black;">
-  <h4>INTERESTS</h4>
+<div class="interests" layout-padding>
+  <h4 class="md-title">Interests</h4>
 
-  <div ng-if="interests === null || interests.length === 0">
-    <p>
-      There are no interests yet.
-    </p>
-  </div>
-
-  <div id="interestsContainer" ng-if="interests !== null && interests.length !== 0">
-    <div class="interestsItem" ng-repeat="interest in interests">
-      {{interest.description}}
-    </div>
-  </div>
+  <md-chips ng-model="interests" readonly="true">
+  </md-chips>
 </div>

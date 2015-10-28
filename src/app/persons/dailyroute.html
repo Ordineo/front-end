@@ -13,6 +13,7 @@
 
   .transport-modes {
     float: right;
+    margin-top:-10px;
   }
 
   .transport-modes .md-button {
@@ -25,24 +26,31 @@
   }
 </style>
 
-<div layout-padding ng-init="initPlaces(dailyRoute.route.arrival);">
-  <span class="transport-modes">
-      <md-button aria-label="transport mode car" title="Car" class="md-raised" ng-click="changeTransport('DRIVING')"
-                 ng-class="{'active-transport-mode': transport == 'DRIVING'}">
-        <ng-md-icon icon="directions_car"></ng-md-icon>
-      </md-button>
-      <md-button aria-label="transport mode bike" title="Bike" class="md-raised" ng-click="changeTransport('BICYCLING')"
-                 ng-class="{'active-transport-mode': transport == 'BICYCLING'}">
-        <ng-md-icon icon="directions_bike"></ng-md-icon>
-      </md-button>
-      <md-tooltip>Change transport mode</md-tooltip>
-  </span>
+<div class="daily-route" layout-padding ng-init="initPlaces(dailyRoute.route.arrival);">
+  <div class="transport-modes">
+    <md-button aria-label="transport mode car"
+               title="Car"
+               class="md-raised"
+               ng-click="changeTransport('DRIVING')"
+               ng-class="{'active-transport-mode': transport == 'DRIVING'}">
+      <ng-md-icon icon="directions_car"></ng-md-icon>
+    </md-button>
+
+    <md-button aria-label="transport mode bike"
+               title="Bike"
+               class="md-raised"
+               ng-click="changeTransport('BICYCLING')"
+               ng-class="{'active-transport-mode': transport == 'BICYCLING'}">
+      <ng-md-icon icon="directions_bike"></ng-md-icon>
+    </md-button>
+  </div>
 
   <h4 class="md-title">Daily route</h4>
 
   <md-switch ng-model="state" md-no-ink aria-label="Switch 6" ng-change="onChange(state)">
     Custom destination
   </md-switch>
+
   <div layout="column" style="margin:20px 0;" ng-show="!state">
     <span>{{aLittleAboutMe.address.city}} &#10140; {{dailyRoute.route.arrival}}</span>
     <br/>
@@ -54,12 +62,18 @@
     <span><b>On-site:</b> 8:00 - 17:00</span>
     <span><b>Travelling by <span ng-show="transport == 'DRIVING'">car</span><span ng-show="transport == 'BICYCLING'">bike</span>:</b> {{map.directionsRenderers[0].directions.routes[0].legs[0].distance["text"]}} - {{map.directionsRenderers[0].directions.routes[0].legs[0].duration["text"]}}</span>
   </div>
+
   <div layout="column" style="margin:20px 0;" ng-show="state">
     <input places-auto-complete types="['geocode','establishment']" ng-model="mapAddress" placeholder="Destination"/>
     <br/>
     <span><b>Travelling by <span ng-show="transport == 'DRIVING'">car</span><span ng-show="transport == 'BICYCLING'">bike</span>:</b> {{map.directionsRenderers[0].directions.routes[0].legs[0].distance["text"]}} - {{map.directionsRenderers[0].directions.routes[0].legs[0].duration["text"]}}</span>
   </div>
-  <map zoom="4" style="width:100%;height:300px">
+
+  <map zoom="4"
+       style="width:100%;height:300px"
+       map-type-control="false"
+       scrollwheel="false">
+
     <directions
       draggable="false"
       travel-mode="{{transport}}"

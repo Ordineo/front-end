@@ -16,29 +16,9 @@
     margin-left: 30px;
     padding: 2px 5px 2px 5px;
   }
-
-  /* Extra small devices (phones, less than 768px) */
-  /* No media query since this is the default in Bootstrap */
-
-  /* Small devices (tablets, 768px and up) */
-  @media (min-width: 768px) {
-
-  }
-
-  /* Medium devices (desktops, 992px and up) */
-  @media (min-width: 992px) {
-    #aLittleAboutMe {
-      width: 35%;
-    }
-  }
-
-  /* Large devices (large desktops, 1200px and up) */
-  @media (min-width: 1200px) {
-
-  }
 </style>
 
-<div id="aLittleAboutMe" style="border: solid 1px black;">
+<div id="aLittleAboutMe" layout-padding>
   <h4>A LITTLE ABOUT ME</h4>
 
   <p ng-if="aLittleAboutMe.intro !== null && aLittleAboutMe.intro !== ''">
