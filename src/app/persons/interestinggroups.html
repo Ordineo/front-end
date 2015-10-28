@@ -31,8 +31,17 @@
     float: right;
   }
 
-  #interestingGroups button {
+  .button {
+    background-color: transparent;
+    border: solid 2px #E98321;
     color: #E98321;
+    padding: 5px 8px 5px 8px;
+    text-transform: uppercase;
+  }
+
+  .button:hover {
+    background-color: #E98321;
+    color: white;
   }
 
   .usageInfo {
@@ -42,17 +51,6 @@
   .usageInfo > .usageInfoItem {
     display: inline-block;
     margin: 5px;
-  }
-
-  button {
-    background-color: transparent;
-    border: solid 2px #E98321;
-    padding: 5px 8px 5px 8px;
-    text-transform: uppercase;
-  }
-
-  ng-md-icon {
-
   }
 
   /* Extra small devices (phones, less than 768px) */
@@ -95,8 +93,8 @@
           </div>
         </div>
       </div>
-      <button style="display: table-cell; vertical-align: middle"><strong>Join</strong></button>
+      <button class="button"><strong>Join</strong></button>
     </div>
   </div>
-  <button><strong>Create Group</strong></button>
+  <button class="button"><strong>Create Group</strong></button>
 </div>
