@@ -627,13 +627,16 @@ function ProfileCtrl($scope, $log, $window, $location, PersonFactory) {
   $scope.state = false;
   $scope.onChange = function (cbState) {
     if (cbState == false) {
-      $scope.mapAddress = $scope.address;
+      $scope.mapStart = $scope.start;
+      $scope.mapDestination = $scope.destination;
     }
     $scope.state = cbState;
   };
-  $scope.initPlaces = function (address) {
-    $scope.mapAddress = address;
-    $scope.address = address;
+  $scope.initPlaces = function (start, destination) {
+    $scope.mapStart = start;
+    $scope.start = start;
+    $scope.mapDestination = destination;
+    $scope.destination = destination;
     $scope.transport = 'DRIVING';
   };
 

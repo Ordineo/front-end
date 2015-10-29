@@ -27,6 +27,10 @@
       delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }
     ])
+    .config(['$mdThemingProvider', function ($mdThemingProvider) {
+      $mdThemingProvider.theme('default')
+        .primaryPalette('orange')
+    }])
     .config(function ($routeProvider) {
       $routeProvider
         .when('/', {

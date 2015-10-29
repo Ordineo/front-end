@@ -25,7 +25,8 @@
   }
 </style>
 
-<div class="daily-route" layout-padding ng-init="initPlaces(dailyRoute.route.arrival);">
+<div class="daily-route" layout-padding
+     ng-init="initPlaces(aLittleAboutMe.address.street + ' ' + aLittleAboutMe.address.city, dailyRoute.route.arrival);">
   <div class="transport-modes">
     <md-button aria-label="transport mode car"
                title="Car"
@@ -47,7 +48,7 @@
   <h4 class="md-title">Daily route</h4>
 
   <md-switch ng-model="state" md-no-ink aria-label="Switch 6" ng-change="onChange(state)">
-    Custom destination
+    Custom directions
   </md-switch>
 
   <div layout="column" style="margin:20px 0;" ng-show="!state">
@@ -63,8 +64,14 @@
   </div>
 
   <div layout="column" style="margin:20px 0;" ng-show="state">
-    <input places-auto-complete types="['geocode','establishment']" ng-model="mapAddress" placeholder="Destination"/>
-    <br/>
+    <md-input-container>
+      <label>Starting point</label>
+      <input places-auto-complete types="['geocode','establishment']" ng-model="mapStart" placeholder=""/>
+    </md-input-container>
+    <md-input-container>
+      <label>Destination</label>
+      <input places-auto-complete types="['geocode','establishment']" ng-model="mapDestination" placeholder=""/>
+    </md-input-container>
     <span><b>Travelling by <span ng-show="transport == 'DRIVING'">car</span><span ng-show="transport == 'BICYCLING'">bike</span>:</b> {{map.directionsRenderers[0].directions.routes[0].legs[0].distance["text"]}} - {{map.directionsRenderers[0].directions.routes[0].legs[0].duration["text"]}}</span>
   </div>
 
@@ -76,8 +83,8 @@
     <directions
       draggable="false"
       travel-mode="{{transport}}"
-      origin="{{aLittleAboutMe.address.street + ' ' + alittleAboutMe.address.city}}"
-      destination="{{mapAddress}}">
+      origin="{{mapStart}}"
+      destination="{{mapDestination}}">
     </directions>
   </map>
 </div>
