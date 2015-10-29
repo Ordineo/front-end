@@ -12,23 +12,24 @@
   <md-content>
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab class="md-tab-item" label="ABOUT">
-        <md-content>
+        <md-content layout layout-sm="column">
 
+          <div flex="67" flex-sm="100" flex-order-sm="2">
           <skillset></skillset>
-          <hr/>
-          <a-little-about-me></a-little-about-me>
-          <hr/>
           <certificates></certificates>
-          <hr/>
-          <interests></interests>
-          <hr/>
-          <daily-route></daily-route>
-          <hr/>
           <experience ></experience>
-          <hr/>
-          <worked-with-person ></worked-with-person>
-          <hr/>
-          <interesting-people></interesting-people>
+
+          </div>
+          <div flex="33" flex-sm="100" flex-order-sm="1">
+          <a-little-about-me></a-little-about-me>
+          <interests></interests>
+          <daily-route></daily-route>
+
+          </div>
+
+
+          <!--<worked-with-person ></worked-with-person>-->
+          <!--<interesting-people></interesting-people>-->
 
         </md-content>
       </md-tab>
