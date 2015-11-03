@@ -87,17 +87,36 @@ function SkillCompetenceFactory(SkillCompetenceRestangular) {
 
   return {
     getSkillCompetenceForPerson: getSkillCompetenceForPerson,
+    getSkillCompetenceNotForPerson: getSkillCompetenceNotForPerson,
     remove: remove,
+    findSkillOfCompetence: findSkillOfCompetence,
     add: add
   };
+  function splitLink(href) {
+    var parts = [];
+    parts = href.split("/", 6);
+    return parts[5];
+  }
 
+  function findSkillOfCompetence(href) {
+    var split = splitLink(href);
+    return skillCompetences.one(split, 'skill').get();
 
-  function remove(href) {
-    return skillCompetences.one(href).remove();
+  }
+
+  function remove(competence) {
+    var split = splitLink(competence._links.self.href);
+
+    return skillCompetences.one(split).remove();
   }
 
   function add(skillCompetence) {
     return skillCompetences.post(skillCompetence);
+  }
+
+  function getSkillCompetenceNotForPerson(personId) {
+    return skillCompetences.one('search').getList('findSkillCompetenceByPersonNot', {'username': personId});
+
   }
 
   function getSkillCompetenceForPerson(personId) {

@@ -30,33 +30,12 @@
         if (AuthenticateFactory.isAuthorized()) {
           window.sessionStorage.setItem('logged', true);
           var id = window.sessionStorage.getItem('id');
-          //   checkMyRoles(id);
           window.location.reload();
         }
       }, 1000)
 
     };
 
-
-    function checkMyRoles(personId) {
-      RoleService.getApplicationRoleOfPerson(personId).then(function (data) {
-        data.forEach(function (role) {
-          switch (role.name) {
-            case 'admin':
-              window.sessionStorage.setItem('role', 'admin');
-              break;
-            case 'hero':
-              window.sessionStorage.setItem('role', 'hero');
-              break;
-            case 'user':
-              window.sessionStorage.setItem('role', 'user');
-          }
-        })
-      }, function (response) {
-        console.log(response.status);
-
-      });
-
-    }
   }
-})();
+
+}());
