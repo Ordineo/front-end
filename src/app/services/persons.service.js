@@ -13,6 +13,7 @@
 
     var myId = window.sessionStorage.getItem("id");
     return {
+      createPerson: createPerson,
       getMyDetails: getMyDetails,
       getAll: getAll,
       remove: remove,
@@ -55,24 +56,28 @@
     }
 
     function updatePerson(person) {
-      persons.put(person);
+      return persons.put(person);
+    }
+
+    function createPerson(person) {
+      return persons.post(person);
     }
 
     function addCustomerToPerson(selectedPerson, selectedCustomer) {
-      persons.one(selectedPerson.username).one('customers', selectedCustomer.name).post();
+      return persons.one(selectedPerson.username).one('customers', selectedCustomer.name).post();
     }
 
     function deleteCustomerFromPerson(selectedPerson, selectedPersonsCustomer) {
-      persons.one(selectedPerson.username).one('customers', selectedPersonsCustomer.name).remove();
+      return persons.one(selectedPerson.username).one('customers', selectedPersonsCustomer.name).remove();
     }
   }
 
   angular.module('oraj360')
     .factory('PersonRestangular', function (Restangular) {
       return Restangular.withConfig(function (RestangularConfigurer) {
-        if (window.sessionStorage.getItem('logged')) {
-        RestangularConfigurer.setBaseUrl(window.sessionStorage.getItem('url'));
-        }
+
+        RestangularConfigurer.setBaseUrl('http://localhost:9900/api/');
+
         RestangularConfigurer.setDefaultHeaders({'Content-Type': 'application/json'});
         RestangularConfigurer.setRestangularFields({
           selfLink: 'self.link'

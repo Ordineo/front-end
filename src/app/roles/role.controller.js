@@ -1,29 +1,22 @@
-'use strict';
+(function () {
+  'use strict';
 
-/**
- * @ngdoc function
- * @name oraj360.controller:PersonsCtrl
- * @description
- * # PersonsCtrl
- * Controller of the frontendApp
- */
-angular.module('oraj360')
-    .controller('RoleCtrl',RoleCtrl);
-RoleCtrl.$inject = ['$scope', '$log', 'RoleService', 'roles', 'avroles', 'persons'];
+  angular.module('oraj360').controller('RoleCtrl', RoleCtrl);
 
-function RoleCtrl($scope, $log, RoleService, roles, avroles, persons) {
-  $log.info('RoleCtrl loaded');
+  RoleCtrl.$inject = ['$scope', 'RoleService', 'roles', 'avroles'];
 
-  if (roles == 404) {
+  function RoleCtrl($scope, RoleService, roles, avroles) {
+
+    if (roles == 404) {
     $scope.message = "You have no roles yet! Add some roles to your collection!"
   } else {
     $scope.roles = roles;
   }
-  if (persons == 404) {
+    /* if (persons == 404) {
     $scope.msg = "You have no persons under you!";
   } else {
-    $scope.persons = persons;
-  }
+     $scope.persons = "";
+     }*/
 
   if (avroles == 404) {
     $scope.msgroles = "Can't find any available roles";
@@ -84,8 +77,7 @@ function RoleCtrl($scope, $log, RoleService, roles, avroles, persons) {
   };
 
 
-}
+  }
 
 
-
-
+}());

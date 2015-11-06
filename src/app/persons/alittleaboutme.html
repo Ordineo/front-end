@@ -1,34 +1,11 @@
-<style>
-  #aLittleAboutMe {
-    margin-bottom: 30px;
-    width: 100%;
-  }
-
-  .myDetails {
-    clear: both;
-  }
-
-  .myDetails ng-md-icon {
-    float: left;
-  }
-
-  .myDetails p {
-    margin-left: 30px;
-    padding: 2px 5px 2px 5px;
-  }
-</style>
-
-<div id="aLittleAboutMe" layout-padding>
+<div id="aLittleAboutMe" layout-padding ng-cloak>
   <h4>A LITTLE ABOUT ME</h4>
-
   <p ng-if="aLittleAboutMe.intro !== null && aLittleAboutMe.intro !== ''">
     {{aLittleAboutMe.intro}}
   </p>
-
   <p ng-if="aLittleAboutMe.jobs !== null && aLittleAboutMe.jobs !== ''">
     {{aLittleAboutMe.jobs}}
   </p>
-
   <div class="myDetails">
     <ng-md-icon icon="home" size="24"></ng-md-icon>
     <p>

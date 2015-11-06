@@ -1,21 +1,14 @@
 /*
- * Base structure
- */
+* Custom material design
+*/
 
-
-/*
- * Global add-ons
- */
-
-.sub-header {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+.md-tab:hover {
+  color: #E98300;
 }
 
-/*
- * Top navigation
- * Hide default border to remove 1px line.
- */
+.md-tab:active {
+  color: #E98300;
+}
 
 .fabSpeedDialdemoBasicUsage .text-capitalize {
   text-transform: capitalize;
@@ -37,6 +30,19 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+
+.sub-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+
+
 .navbar-fixed-top {
     border: 0;
 }

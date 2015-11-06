@@ -1,0 +1,200 @@
+/*
+* Css a little about me
+*/
+
+#aLittleAboutMe {
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.myDetails {
+  clear: both;
+}
+
+.myDetails ng-md-icon {
+  float: left;
+}
+
+.myDetails p {
+  margin-left: 30px;
+  padding: 2px 5px 2px 5px;
+}
+
+/*
+* Css certificates
+*/
+
+#certificates {
+  display: inline-block;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+#certificatesContainer {
+
+}
+
+.certificatesItem {
+  float: left;
+  height: 150px;
+  padding: 5px;
+  text-align: center;
+  width: 33.333%;
+}
+
+.certificatesItem img {
+  border: solid 5px #E98321;
+  border-radius: 40px;
+  height: 80px;
+  width: 80px;
+}
+
+.certificatesItem p {
+  color: #797478;
+  font: 9px/1.5 Verdana, Helvetica, sans-serif;
+  margin-top: 5px;
+  margin-right: auto;
+  margin-left: auto;
+  text-transform: uppercase;
+  width: 80px;
+}
+
+/*
+* Css daily route
+*/
+md-switch {
+  margin: 15px 0;
+}
+
+md-switch.md-default-theme.md-checked, md-switch.md-checked .md-thumb {
+  background-color: white;
+}
+
+md-switch.md-default-theme.md-checked, md-switch.md-checked .md-bar {
+  background-color: darkorange;
+}
+
+.transport-modes {
+  float: right;
+}
+
+.transport-modes .md-button {
+  min-width: 24px;
+  margin: 2px;
+}
+
+.active-transport-mode ng-md-icon {
+  fill: darkorange;
+}
+
+.overview {
+  margin: 20px 0;
+}
+
+/*
+* Css experience
+*/
+.experiences-bar {
+  background: lightgray;
+  width: 2px;
+  height: 100%;
+  margin-left: 14px;
+  position: absolute;
+}
+
+.experiences {
+  position: relative;
+}
+
+.experiences .md-button.md-fab.md-mini-mini {
+  line-height: 25px;
+  width: 25px;
+  height: 25px;
+  background-color: orange;
+}
+
+.experience-item-point {
+  z-index: 10;
+  margin: auto 5px;
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  background: orange;
+  border: 2px solid white;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.experience-item h5 {
+  margin: 5px 0;
+}
+
+.experience-item-date {
+  color: darkgrey;
+  fill: darkgrey;
+}
+
+.experience-item-customer-img {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 45px;
+  margin: auto;
+}
+
+.orange-color {
+  color: orange;
+}
+
+.experiences .md-button {
+  min-height: 25px;
+}
+
+.experiences md-card {
+  position: relative;
+}
+
+.experiences md-card:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -14px;
+  margin-top: -7px;
+  height: 0;
+  width: 0;
+  border: 7px solid transparent;
+  border-right: 7px solid #E4E4E4;
+}
+
+/*
+* Css interests
+*/
+.interests md-chips .md-chips {
+  box-shadow: none;
+  padding: 0;
+}
+
+.interests .md-chips:not(.md-readonly) .md-chip {
+  padding-right: 12px;
+}
+
+.interests md-chips.md-default-theme, md-chips .md-chip {
+  background: darkorange;
+  color: white;
+}
+
+.interests .md-chips .md-chip {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  margin: 3px 3px 0 0;
+}
+
+.interests .md-chips .md-chip .md-chip-content {
+  padding-right: 0;
+}
+
+.workedWithButton {
+  background-image: url('http://lorempixel.com/100/100/');
+}

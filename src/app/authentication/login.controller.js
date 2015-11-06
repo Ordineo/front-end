@@ -1,15 +1,12 @@
 (function () {
-
   'use strict';
 
   angular.module('oraj360').controller('LoginCtrl', LoginCtrl);
 
-  LoginCtrl.$inject = ['$scope', '$log', '$http', '$location', 'AuthenticateFactory', '$route', 'RoleService', 'dataservice', '$timeout'];
+  LoginCtrl.$inject = ['$scope', '$location', 'AuthenticateFactory', '$route', '$timeout'];
 
-  function LoginCtrl($scope, $log, $http, $location, AuthenticateFactory, $route, RoleService, dataservice, $timeout) {
+  function LoginCtrl($scope, $location, AuthenticateFactory, $route, $timeout) {
 
-
-    $log.info('LoginCtrl loaded');
     if (window.sessionStorage.getItem('logged')) {
       $location.path('/about');
     }

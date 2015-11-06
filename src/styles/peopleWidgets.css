@@ -1,0 +1,51 @@
+#availableList {
+  width: 50%
+}
+
+#availableTableContainer {
+  border: 1px solid #CDCCCB;
+  width: 80%;
+}
+
+#peopleTableHead {
+  background-color: #CDCCCB;
+  color: white;
+}
+
+.tableTitle {
+  color: white;
+  font-size: 20px;
+}
+
+.person {
+  padding: 20px 20px 20px 20px
+}
+
+.person p {
+  float: left;
+}
+
+.person p img {
+  border-radius: 50%;
+  padding-top: 5px;
+}
+
+.personText {
+  padding: 18px 100px 5px 70px;
+  font-family: Arial;
+  font-size: 16px;
+  color: #E98321
+}
+
+.timeText {
+  padding: 18px 100px 5px 70px;
+  font-family: Arial;
+  font-size: 16px;
+  color: #E98321
+}
+
+#showMore {
+  color: #E98321;
+  border: 1px solid #E98321;
+  margin-left: 38%;
+}

@@ -12,140 +12,85 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-  <link rel="stylesheet" href="bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.css" />
-  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-  <link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.min.css" />
-  <link rel="stylesheet" href="bower_components/angular-material-icons/angular-material-icons.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.css"/>
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
+  <link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.min.css"/>
+  <link rel="stylesheet" href="bower_components/angular-material-icons/angular-material-icons.css"/>
+
   <!-- endbower -->
   <!-- endbuild -->
 
   <!-- build:css(.tmp) styles/app.css -->
-  <link rel="stylesheet" href="styles/main.css"/>
   <link rel="stylesheet" href="styles/dashboard.css"/>
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/activityWidgets.css"/>
+  <link rel="stylesheet" href="styles/aboutWidgets.css"/>
+  <link rel="stylesheet" href="styles/pointsWidgets.css"/>
+  <link rel="stylesheet" href="styles/peopleWidgets.css"/>
   <!-- endbuild -->
 </head>
 
 <body ng-app="oraj360">
-<style>
-  #header {
-    height: 300px;
-    background: url('images/header.jpeg') center center;
-    background-size:cover;
-  }
 
-  #header-logo {
-    float: left;
-  }
-
-  #header-logo img {
-    float: left;
-    height: 40px;
-    margin: 20px 0 20px 20px;
-  }
-
-  #header-menu {
-    float: right;
-  }
-
-  #header-menu #menu-icon {
-    width: 36px;
-    height: 36px;
-    margin: 10px;
-    border-radius: 20px;
-    border: 2px solid white;
-    background-position: center;
-  }
-
-  #header-menu #menu-dropdown {
-    fill:white;
-    margin-left: 40px;
-  }
-
-  #header-details {
-    text-transform: uppercase;
-    border-bottom: 1px solid ghostwhite;
-  }
-
-  #header-details div {
-    width: 166px;
-    height: 166px;
-    border: 2px solid white;
-    border-radius: 85px;
-    margin: -85px 20px 10px 20px;
-    background-position:center;
-  }
-
-  #header-details header {
-    margin: 0px 20px;
-  }
-
-  #header-details header h1 {
-    margin-bottom: 0;
-  }
-</style>
 
 <md-content ng-cloak ng-controller="ProfileCtrl">
   <div ng-if="isLogged">
     <div id="header">
-    <div id="header-logo">
-      <img src="images/ordina-logo.png" alt="logo ordina"/>
-    </div>
+      <div id="header-logo">
+        <img src="images/ordina-logo.png" alt="logo ordina"/>
+      </div>
 
-    <div id="header-menu" layout="row">
-      <md-menu md-offset="0 68">
-        <md-button ng-click="$mdOpenMenu()" aria-label="Open menu" id="menu-button">
-          <div id="menu-icon" style="background-image:url('http://lorempixel.com/100/100/');">
-            <ng-md-icon id="menu-dropdown" icon="expand_more"></ng-md-icon>
-          </div>
+      <div id="header-menu" layout="row">
+        <md-menu md-offset="0 68">
+          <md-button ng-click="$mdOpenMenu()" aria-label="Open menu" id="menu-button">
+            <div id="menu-icon" style="background-image:url('http://lorempixel.com/100/100/');">
+              <ng-md-icon id="menu-dropdown" icon="expand_more"></ng-md-icon>
+            </div>
 
-        </md-button>
-        <md-menu-content width="4">
-          <md-menu-item>
-            <md-button>
-              <div layout="row">
-                <p flex>Timeline</p>
-              </div>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button>
-              <div layout="row">
-                <p flex>Profile</p>
-              </div>
-            </md-button>
-          </md-menu-item>
-          <md-menu-divider></md-menu-divider>
-          <md-menu-item ng-controller="LoginCtrl">
-            <md-button ng-click="logout()">
-              <div layout="row">
-                <p flex>Logout</p>
-              </div>
-            </md-button>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item>
+              <md-button>
+                <div layout="row">
+                  <p flex>Timeline</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="#/admin">
+                <div layout="row">
+                  <p flex>Admin</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+            <md-menu-divider></md-menu-divider>
+            <md-menu-item ng-controller="LoginCtrl">
+              <md-button ng-click="logout()">
+                <div layout="row">
+                  <p flex>Logout</p>
+                </div>
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
     </div>
-  </div>
     <div id="header-details" layout="row">
-    <div hide-sm style="background-image:url('http://lorempixel.com/300/300/');"></div>
-    <header>
-      <h1 class="md-title">{{myDetails.firstName}} {{myDetails.lastName}}</h1>
+      <div hide-sm style="background-image:url('http://lorempixel.com/300/300/');"></div>
+      <header>
+        <h1 class="md-title">{{myDetails.firstName}} {{myDetails.lastName}}</h1>
 
-      <p class="md-subhead">{{myDetails.unit}}</p>
-    </header>
-  </div>
+        <p class="md-subhead">{{myDetails.unit}}</p>
+      </header>
+    </div>
   </div>
 </md-content>
 
-<div class="container">
+<div class="container" ng-cloak>
   <div ng-view=""></div>
-
-
 </div>
-
 </body>
-
 
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
@@ -172,7 +117,8 @@
 <!-- endbower -->
 
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/restangular/1.3.1/restangular.js"></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/restangular/1.3.1/restangular.min.js"></script>
+<script type="text/javascript"
+        src="http://cdnjs.cloudflare.com/ajax/libs/restangular/1.3.1/restangular.min.js"></script>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="http://maps.google.com/maps/api/js?libraries=places"></script>
@@ -192,7 +138,6 @@
 <script src="app/persons/management.controller.js"></script>
 <script src="app/persons/search.controller.js"></script>
 <script src="app/authentication/register.controller.js"></script>
-<script src="app/roles/role.controller.js"></script>
 <script src="app/components/learning.directive.js"></script>
 <script src="app/components/experience.directive.js"></script>
 <script src="app/components/activity.directive.js"></script>
@@ -206,7 +151,8 @@
 <script src="app/services/role.service.js"></script>
 <script src="app/services/authenticate.service.js"></script>
 <script src="app/services/customers.service.js"></script>
+<script src="app/components/roles.directive.js"></script>
+<script src="app/roles/role.controller.js"></script>
 <!-- endbuild -->
-</body>
 </html>
 

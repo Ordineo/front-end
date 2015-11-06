@@ -36,7 +36,7 @@
         .when('/', {
           redirectTo: '/login'
         })
-        .when('/about', {
+        .when('/login', {
           templateUrl: 'app/persons/about.html'
         })
         .when(('/search/:otherId'), {
@@ -56,9 +56,29 @@
           templateUrl: 'app/persons/dashboard.html',
           controller: 'DashboardCtrl'
         })
-        .when('/profile', {
-          templateUrl: 'app/persons/profile.html',
-          controller: 'ProfileCtrl'
+        .when('/about', {
+          templateUrl: 'app/roles/roles.html',
+          controller: 'RoleCtrl',
+          resolve: {
+            roles: function (RoleService) {
+              return RoleService.getFunctionalRolesOfPerson().then(function (data) {
+                return data;
+              }, function (response) {
+
+                return response.status;
+              });
+            },
+            avroles: function (RoleService) {
+              return RoleService.getFunctionalRoles().then(function (data) {
+                return data;
+              }, function (response) {
+                return response.status;
+              });
+            }
+          }
+        })
+        .when('/admin', {
+          templateUrl: 'app/persons/admin.html'
         })
         .when('/panel', {
           templateUrl: 'app/persons/panel.html',
@@ -94,28 +114,6 @@
         .when('/unit', {
           templateUrl: 'app/persons/unit.html'
         })
-        .when('/roles', {
-          templateUrl: 'app/persons/roles.html',
-          controller: 'RoleCtrl',
-          resolve: {
-            roles: function (RoleService) {
-              return RoleService.getAll().then(function (data) {
-                return data;
-              }, function (response) {
-
-                return response.status;
-              });
-            },
-            avroles: function (RoleService) {
-              return RoleService.getFunctionalRoles().then(function (data) {
-                return data;
-              }, function (response) {
-                return response.status;
-              });
-            }
-          }
-        }
-      )
         .otherwise({
           redirectTo: '/'
         });

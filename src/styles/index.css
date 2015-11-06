@@ -1,0 +1,60 @@
+#login {
+  transform: translate(0%, 50%);
+}
+
+#header {
+  height: 300px;
+  background: url('../images/header.jpeg') center center;
+  background-size: cover;
+}
+
+#header-logo {
+  float: left;
+}
+
+#header-logo img {
+  float: left;
+  height: 40px;
+  margin: 20px 0 20px 20px;
+}
+
+#header-menu {
+  float: right;
+}
+
+#header-menu #menu-icon {
+  width: 36px;
+  height: 36px;
+  margin: 10px;
+  border-radius: 20px;
+  border: 2px solid white;
+  background-position: center;
+}
+
+#header-menu #menu-dropdown {
+  fill: white;
+  margin-left: 40px;
+}
+
+#header-details {
+  text-transform: uppercase;
+  border-bottom: 1px solid ghostwhite;
+}
+
+#header-details div {
+  width: 166px;
+  height: 166px;
+  border: 2px solid white;
+  border-radius: 85px;
+  margin: -85px 20px 10px 20px;
+  background-position: center;
+}
+
+#header-details header {
+  margin: 0px 20px;
+}
+
+#header-details header h1 {
+  margin-bottom: 0;
+}
+

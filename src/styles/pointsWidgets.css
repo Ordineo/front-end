@@ -1,0 +1,95 @@
+/*
+* Css endorsements
+*/
+
+#endorsements {
+  color: #575B5D;
+  margin-bottom: 30px;
+  width: 100%;
+  border: solid 1px black;
+}
+
+h4 {
+  text-transform: uppercase;
+}
+
+#endorsements #list {
+  position: relative;
+}
+
+#endorsements .endorsement {
+  display: inline-block;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+#endorsements .info {
+  float: left;
+  /*background-color: transparent;*/
+  display: inline-block;
+  width: 50%;
+}
+
+#endorsements .counter {
+  background-color: #E98321;
+  color: white;
+  display: table-cell;
+  float: left;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  width: 25px;
+}
+
+#endorsements .description {
+  background-color: #F1F1F1;
+  float: left;
+  font-size: 12px;
+  height: 25px;
+  line-height: 25px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+#endorsements .persons {
+  direction: rtl;
+  height: 29px;
+  overflow-y: hidden;
+  white-space: nowrap; /* important */
+  max-width: 50%;
+  position: relative;
+}
+
+#endorsements .persons > img {
+  border: solid 1px white;
+  border-radius: 13px;
+  box-shadow: 0px 0px 2px #575B5D;
+  float: right;
+  margin: 3px 1px 3px 1px;
+}
+
+#endorsements .line {
+  border-bottom: solid 1px #F1F1F1;
+  height: 14px;
+  width: 100%
+}
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  #endorsements {
+    width: 35%;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}

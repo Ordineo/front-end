@@ -1,31 +1,4 @@
-<style>
-  .interests md-chips .md-chips {
-    box-shadow: none;
-    padding: 0;
-  }
-
-  .interests .md-chips:not(.md-readonly) .md-chip {
-    padding-right:12px;
-  }
-
-  .interests md-chips.md-default-theme, md-chips .md-chip {
-    background: darkorange;
-    color: white;
-  }
-
-  .interests .md-chips .md-chip {
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    margin: 3px 3px 0 0;
-  }
-
-  .interests .md-chips .md-chip .md-chip-content {
-    padding-right:0;
-  }
-</style>
-
-<div class="interests" layout-padding>
+<div class="interests" layout-padding ng-cloak>
   <h4 class="md-title">Interests</h4>
 
   <md-chips ng-model="interests" readonly="true">

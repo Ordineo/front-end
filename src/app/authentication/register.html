@@ -1,7 +1,3 @@
-<style>
-
-
-</style>
 <form name="registerForm">
 <md-content layout-padding>
   <form name="userForm">
@@ -15,7 +11,6 @@
       <md-input-container flex>
         <label>First name</label>
         <input ng-model="person.firstName" md-maxlength="20" md-minlength="2" name="firstName" required>
-
         <div ng-messages="registerForm.firstName.$error">
           <div ng-message="required">This is required.</div>
           <div ng-message="md-maxlength">The name has to be less than 20 characters long.</div>
@@ -24,7 +19,6 @@
       <md-input-container flex>
         <label>Last Name</label>
         <input ng-model="person.lastName" required name="lastName" md-maxlength="25" md-minlength="2">
-
         <div ng-messages="registerForm.lastName.$error">
           <div ng-message="required">This is required.</div>
           <div ng-message="md-maxlength">The last name has to be less than 25 characters long.</div>
@@ -35,34 +29,25 @@
     <md-input-container flex>
       <label>Username</label>
       <input ng-model="person.username" required md-minlenght="2" md-maxlength="10" name="username">
-
       <div ng-messages="registerForm.username.$error">
         <div ng-message="required">This is required.</div>
         <div ng-message="md-maxlength">Username has to be less than 10 characters long.</div>
         <div ng-message="md-minlength">Username has to be minimum 2 characters long.</div>
       </div>
     </md-input-container>
-
     <div layout layout-sm="column">
       <md-datepicker ng-model="person.enrolmentDate" md-placeholder="Enter enrolment" name="enrolmentDate"
                      required></md-datepicker>
-
       <div ng-messages="registerForm.enrolmentDate.$error">
         <div ng-message="required">This is required.</div>
       </div>
-
       <md-datepicker ng-model="person.birthDate" name="birthDate" md-placeholder="Enter birthdate"
                      required></md-datepicker>
-
       <div ng-messages="registerForm.birthDate.$error">
         <div ng-message="required">This is required.</div>
       </div>
-
-
     </div>
     <md-button class="md-raised md-accent" ng-click="validate(person)">Register</md-button>
-
-
   </form>
 </md-content>
 </form>

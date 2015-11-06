@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-
   angular.module('oraj360')
     .controller('RegisterCtrl', RegisterCtrl);
   RegisterCtrl.$inject = ['$scope', '$location', 'PersonFactory', 'dataservice', '$mdDialog', '$timeout'];
@@ -18,23 +17,13 @@
           .content('You are successfully registered, you will be redirected to the login page.')
           .ariaLabel('Alert successfully registered')
           .ok('Got it!')
-      );
+      )
     }
 
     $scope.validate = function (person) {
-      console.log('Validating person...');
-      var handleSuccess = function (data, status) {
-        console.log('Person created');
-
-        showDialog();
-        $location.path('/login');
-
-      };
-
       if ($scope.registerForm.$valid) {
         var birthDate = new Date(person.birthDate);
         var enrolmentDate = new Date(person.enrolmentDate);
-
         var formData = {
           firstName: person.firstName,
           lastName: person.lastName,
@@ -44,7 +33,14 @@
           birthDate: [birthDate.getFullYear(), birthDate.getMonth() + 1, birthDate.getDate()]
 
         };
-        dataservice.postItem('POST', 'http://localhost:9900/api/persons/', formData, 'application/json').success(handleSuccess);
+        PersonFactory.createPerson(formData).then(function () {
+          showDialog();
+
+          $timeout(function () {
+            $location.path('/login');
+          }, 1000);
+
+        });
       } else {
         $scope.errmsg = 'Fill in valid data!';
         console.log('Not valid');
