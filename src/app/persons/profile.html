@@ -1,205 +1,178 @@
-<div>
-  <h1>My profile</h1>
-  <hr>
-  <div>
-    <h4>Details</h4>
-    <dl class="dl-horizontal">
-      <dt>Active</dt>
-      <dd><input type="checkbox" ng-model="myDetails.active" disabled/></dd>
-      <dt>Photo</dt>
-      <dd><img ng-src="{{myDetails.photo}}" alt="Profile photo"/></dd>
-      <dt>First name</dt>
-      <dd>{{myDetails.firstName}}</dd>
-      <dt>Last name</dt>
-      <dd>{{myDetails.lastName}}</dd>
-      <dt>Gender</dt>
-      <dd>{{myDetails.gender}}</dd>
-      <dt>Birth date</dt>
-      <dd>{{myDetails.birthDate}}</dd>
-      <dt>Address</dt>
-      <dd>{{myDetails.address.street}} {{myDetails.address.streetNumber}}</dd>
-      <dd>{{myDetails.address.zipCode}} {{myDetails.address.city}}</dd>
-      <dd>{{myDetails.address.province}} {{myDetails.address.country}}</dd>
-      <dt>Unit</dt>
-      <dd>{{myDetails.unit}}</dd>
-      <dt>Enrollment date</dt>
-      <dd>{{myDetails.enrollmentDate}}</dd>
-      <dt>Contact information</dt>
-      <dd>{{myDetails.contactInformation}}</dd>
-    </dl>
-    <hr>
-  </div>
-  <div>
-    <h4>Roles</h4>
-    <table class="table table-hover table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Functional roles</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="myFunctionalRole in myFunctionalRoles">
-          <td>{{myFunctionalRole.name}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr>
-  </div>
-  <div ng-if="hasCustomers">
-    <h4>Customers</h4>
-    <table class="table table-hover table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="myCustomer in myCustomers">
-          <td>{{myCustomer.name}}</td>
-          <td>{{myCustomer.description}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr>
-  </div>
-  <div ng-if="hasBusinessUnitManagers">
-    <h4>Business unit managers</h4>
-    <table class="table table-hover table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>First name</th>
-          <th>Last name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="myBusinessUnitManager in myBusinessUnitManagers">
-          <td>{{myBusinessUnitManager.firstName}}</td>
-          <td>{{myBusinessUnitManager.lastName}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr>
-  </div>
-  <div ng-if="hasCompetenceLeaders">
-    <h4>Competence leaders</h4>
-    <table class="table table-hover table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>First name</th>
-          <th>Last name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="myCompetenceLeader in myCompetenceLeaders">
-          <td>{{myCompetenceLeader.firstName}}</td>
-          <td>{{myCompetenceLeader.lastName}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr>
-  </div>
-  <div ng-if="hasPracticeManagers">
-    <h4>Practice managers</h4>
-    <table class="table table-hover table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>First name</th>
-          <th>Last name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="myPracticeManager in myPracticeManagers">
-          <td>{{myPracticeManager.firstName}}</td>
-          <td>{{myPracticeManager.lastName}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr>
-  </div>
-  <div ng-if="hasCoaches">
-    <h4>Coaches</h4>
-    <table class="table table-hover table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>First name</th>
-          <th>Last name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="myCoach in myCoaches">
-          <td>{{myCoach.firstName}}</td>
-          <td>{{myCoach.lastName}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr>
-  </div>
-  <div ng-if="hasDescendants">
-    <h4>Descendants</h4>
-    <table class="table table-hover table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>First name</th>
-          <th>Last name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="myDescendant in myDescendants">
-          <td>{{myDescendant.firstName}}</td>
-          <td>{{myDescendant.lastName}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr>
-  </div>
-  <div>
-    <h4>Credentials</h4>
-    <div class="row">
-      <div class="col-xs-6">
-        <button type="button" class="btn btn-primary" ng-click="modalPasswordChange()">Change password</button>
-      </div>
-    </div>
-    <hr>
-  </div>
-</div>
+<md-content>
 
-<script type="text/ng-template" id="passwordChangeModalContent">
-  <div class="modal-header">
-    <h3 class="modal-title">Change password</h3>
+  <md-card layout="row" layout-xs="column">
+    <md-card-title flex="15">
+
+      <md-card-title-media>
+        <div
+                style="background: url('http://thesocialmediamonthly.com/wp-content/uploads/2015/08/photo.png') no-repeat ;background-size:contain; width:auto; height:150px;">
+
+        </div>
+      </md-card-title-media>
+    </md-card-title>
+
+
+    <md-card-title flex="45">
+      <md-card-title-text layout="column">
+        <span class="md-headline">Contact Information</span>
+
+        <p layout="column">
+          <span>Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. </span>
+
+        <div layout="row">
+          <div flex="10">
+            <ng-md-icon class="iconsProfile" icon="twitter"></ng-md-icon>
+            <ng-md-icon class="iconsProfile" icon="facebook"></ng-md-icon>
+            <ng-md-icon class="iconsProfile" icon="linkedin"></ng-md-icon>
+          </div>
+          <div flex="40" style="line-height: 25px;">
+            <span>http://twitter.be/kevhun</span>
+            <span>http://facebook.be/kevin</span>
+            <span>http://linkedin.be/kevinVanHoutte</span>
+          </div>
+          <div flex="5">
+            <ng-md-icon icon="phone"></ng-md-icon>
+          </div>
+          <div flex="45">
+            <span> 0457/3493489</span>
+
+          </div>
+
+        </div>
+
+        </p>
+      </md-card-title-text>
+
+    </md-card-title>
+
+
+    <md-card-actions flex="35" layout-align="end center">
+      <div layout="row" class="iconsProfile">
+        <ng-md-icon icon="place" flex="10"></ng-md-icon>
+        <div style="padding-top:30px;" flex="90">
+          <p layout="column">
+            <span>Schaluinstraat 3</span>
+            <span> 3128, Baal</span>
+            <span> Vlaams-Brabant</span>
+            <span> Belgium</span>
+          </p>
+
+        </div>
+      </div>
+
+    </md-card-actions>
+  </md-card>
+
+  <md-button ng-click="profile.toggleRight()"
+             ng-hide="profile.isOpenRight()"
+             class="md-raised md-primary">
+    Edit
+  </md-button>
+</md-content>
+
+
+
+
+<md-toolbar ng-show="!showSearch">
+  <div class="md-toolbar-tools">
+
+    <md-select placeholder="Assign to user" ng-change="profile.changeView(selected)" ng-model="selected" style="min-width: 200px;">
+      <md-option  ng-repeat="selection in profile.selections">{{selection.name}}</md-option>
+    </md-select>
+    <span flex></span>
+    <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+      <ng-md-icon icon="search"></ng-md-icon>
+    </md-button>
+
   </div>
 
-  <div class="modal-body">
-    <div ng-show="passwordChanged" class="alert alert-success" role="alert">
-      Password successfully changed!
-    </div>
-    <div ng-show="passwordWrong" class="alert alert-danger" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      Current password is not correct!
-    </div>
-    <form name="formChangePassword">
-      <div class="form-group">
-        <label for="oldPassword">Current password:</label>
-        <input type="password" id="oldPassword" ng-model="password.oldPassword" placeholder="Old password" class="form-control" required/>
-      </div>
-      <div class="form-group">
-        <label for="newPassword">New password:</label>
-        <input type="password" id="newPassword" name="newPassword" ng-model="password.newPassword" ng-minlength="6" ng-maxlength="18" required placeholder="New password" class="form-control"/>
-        <p ng-show="formChangePassword.newPassword.$touched && formChangePassword.newPassword.$error.minlength">Your password is required to be at least 6 characters</p>
-        <p ng-show="formChangePassword.newPassword.$touched && formChangePassword.newPassword.$error.maxlength">Your password cannot be longer than 18 characters</p>
-      </div>
-      <div class="form-group">
-        <label for="newPasswordConfirm">Confirm new password:</label>
-        <input type="password" id="newPasswordConfirm" name="newPasswordConfirm" ng-model="password.newPasswordConfirm" required pw-check="newPassword" placeholder="Confirm new password" class="form-control" />
-        <p ng-show="formChangePassword.$error"> <span class="msg-error" ng-show="formChangePassword.newPasswordConfirm.$error.pwmatch">Passwords don't match.</span></p>
-      </div>
+</md-toolbar>
+<md-toolbar class="md-hue-1" ng-show="showSearch">
+  <div class="md-toolbar-tools">
+    <md-button ng-click="showSearch = !showSearch" aria-label="Back">
+      <ng-md-icon icon="arrow_back"></ng-md-icon>
+    </md-button>
+    <h3 flex="10">
+      Back
+    </h3>
+    <md-input-container md-theme="input" flex>
+      <label>&nbsp;</label>
+      <input ng-model="searchText" placeholder="enter search">
+    </md-input-container>
+    <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+      <ng-md-icon icon="search"></ng-md-icon>
+    </md-button>
+
+  </div>
+</md-toolbar>
+<md-data-table-toolbar>
+  <h2 class="md-title">Persons</h2>
+</md-data-table-toolbar>
+
+<md-data-table-container>
+  <table md-data-table md-progress="deferred">
+    <thead md-order="unit" md-trigger="">
+    <tr>
+      <th name="First Name" order-by></th>
+      <th name="Last Name" order-by="person.lastName"></th>
+      <th name="Unit" order-by="unit"></th>
+      <th name="Profile"></th>
+      <th name="Join me unit"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr md-auto-select ng-repeat="person in profile.persons">
+      <td>{{person.firstName}}</td>
+      <td>{{person.lastName}}</td>
+      <td>{{person.unit}}</td>
+      <td>
+        <md-button class="md-icon-button md-accent" ng-click="goToProfile(person._links.self.href)">
+          <ng-md-icon icon="send"></ng-md-icon>
+        </md-button>
+      </td>
+      <td>
+        <md-button class="md-icon-button md-accent" ng-click="joinUnit(person.username)">
+          <ng-md-icon icon="person_add"></ng-md-icon>
+        </md-button>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</md-data-table-container>
+
+<md-data-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{desserts.total}}"
+                          md-trigger="onPaginationChange"></md-data-table-pagination>
+
+
+
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+  <md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools">Kevin Van Houtte</h1>
+
+    <h1 class="md-toolbar-tools">Edit</h1>
+  </md-toolbar>
+  <md-content ayout-padding>
+    <form>
+      <md-input-container>
+        <label for="name">{{profile.myDetails.firstName}}</label>
+        <input type="text" id="name"
+               ng-model="profile.updatedPerson.firstName" md-autofocus>
+      </md-input-container>
+      <md-input-container>
+        <label for="lastName">{{profile.myDetails.lastName}}</label>
+        <input type="text" id="lastName"
+               ng-model="profile.updatedPerson.lastName">
+      </md-input-container>
+      <md-input-container>
+        <label for="contact">Contact Information</label>
+            <textarea type="text" id="contact"
+                      ng-model="profile.updatedPerson.contactInformation" md-autofocus></textarea>
+      </md-input-container>
+      <md-button ng-click="profile.updatePerson()" class="md-raised md-primary">
+        Update
+      </md-button>
     </form>
-  </div>
 
-  <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="changePassword(password)" ng-disabled="formChangePassword.$invalid">Save</button>
-    <button class="btn btn-warning" ng-click="cancelModal()">Cancel</button>
-  </div>
-</script>
+  </md-content>
+</md-sidenav>

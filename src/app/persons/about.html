@@ -1,19 +1,73 @@
-<div ng-cloak>
+<div>
   <md-content>
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab class="md-tab-item" label="ABOUT">
         <md-content layout layout-sm="column">
+            <div flex="67" flex-sm="100" flex-order-sm="2">
+                <div id="aLittleAboutMe" layout-padding>
+                    <h4>ABOUT ME</h4>
 
-          <div flex="67" flex-sm="100" flex-order-sm="2">
-            <skillset></skillset>
-            <certificates></certificates>
-            <experience></experience>
-          </div>
-          <div flex="33" flex-sm="100" flex-order-sm="1">
-            <a-little-about-me></a-little-about-me>
-            <interests></interests>
-            <daily-route></daily-route>
-          </div>
+                    <p>
+
+                    </p>
+
+                    <p>
+
+                    </p>
+
+                    <div class="myDetails">
+                        <ng-md-icon icon="home" size="24"></ng-md-icon>
+                        <p>
+                            {{person.myDetails.firstName}}
+                            {{person.myDetails.lastName}}
+                            {{person.myDetails.unit}}
+                            {{person.myDetails.gender}}
+                            {{person.myDetails.active}}
+                        </p>
+                    </div>
+                    <div class="myDetails"
+                         ng-if="aLittleAboutMe.contactInformation !== null && Object.keys(aLittleAboutMe.contactInformation).length !== 0">
+                        <ng-md-icon icon="share" size="24"></ng-md-icon>
+                        <p>
+                            <span ng-if="aLittleAboutMe.contactInformation.twitter !== null && aLittleAboutMe.contactInformation.twitter !== ''">{{aLittleAboutMe.contactInformation.twitter}} (Twitter)<br/></span>
+                            <span ng-if="aLittleAboutMe.contactInformation.skype !== null && aLittleAboutMe.contactInformation.skype !== ''">{{aLittleAboutMe.contactInformation.skype}} (Skype)<br/></span>
+                            <span ng-if="aLittleAboutMe.contactInformation.windowsLiveMessenger !== null && aLittleAboutMe.contactInformation.windowsLiveMessenger !== ''">{{aLittleAboutMe.contactInformation.windowsLiveMessenger}} (Windows Live Messenger)<br/></span>
+                            <span ng-if="aLittleAboutMe.contactInformation.googleTalk !== null && aLittleAboutMe.contactInformation.googleTalk !== ''">{{aLittleAboutMe.contactInformation.googleTalk}} (Google Talk)<br/></span>
+                        </p>
+                    </div>
+                    <div class="myDetails" ng-if="aLittleAboutMe.website !== null && aLittleAboutMe.website !== ''">
+                        <ng-md-icon icon="language" size="24"></ng-md-icon>
+                        <p>
+                            {{aLittleAboutMe.website}}
+                        </p>
+                    </div>
+                    <div class="myDetails">
+                        <ng-md-icon icon="cake" size="24"></ng-md-icon>
+                        <p>
+                            {{aLittleAboutMe.birthDate | date:'longDate'}}
+                        </p>
+                    </div>
+                    <div class="myDetails" ng-if="aLittleAboutMe.children !== null">
+                        <ng-md-icon icon="account_child" size="24"></ng-md-icon>
+                        <p>
+                            {{aLittleAboutMe.children}} <span ng-if="aLittleAboutMe.children === 1">Child</span><span
+                                ng-if="aLittleAboutMe.children !== 1">Children</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--    <div flex="67" flex-sm="100" flex-order-sm="2">
+                  <skillset></skillset>
+                  <certificates></certificates>
+                  <experience></experience>
+                </div>
+                <div flex="33" flex-sm="100" flex-order-sm="1">
+                  <a-little-about-me></a-little-about-me>
+                  <interests></interests>
+                  <daily-route></daily-route>
+                </div>-->
 
           <!--<worked-with-person ></worked-with-person>-->
           <!--<interesting-people></interesting-people>-->
@@ -21,22 +75,22 @@
         </md-content>
       </md-tab>
       <md-tab label="POINTS">
-        <md-content>
-          <endorsements></endorsements>
-        </md-content>
+          <!--    <md-content>
+                <endorsements></endorsements>
+              </md-content>-->
       </md-tab>
       <md-tab label="LEARNING">
         <md-content>
-          <skillcompetence></skillcompetence>
+            <!-- <skillcompetence></skillcompetence>-->
           <!--<learning></learning>-->
         </md-content>
       </md-tab>
       <md-tab label="ACTIVITY">
-        <md-content>
-          <activity layout-padding></activity>
-          <hr/>
-          <interesting-groups></interesting-groups>
-        </md-content>
+          <!--   <md-content>
+               <activity layout-padding></activity>
+               <hr/>
+               <interesting-groups></interesting-groups>
+             </md-content>-->
       </md-tab>
     </md-tabs>
   </md-content>

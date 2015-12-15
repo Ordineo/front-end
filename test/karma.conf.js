@@ -39,6 +39,9 @@ module.exports = function(config) {
       'bower_components/lodash/lodash.js',
       'bower_components/restangular/dist/restangular.js',
       'bower_components/ngmap/build/scripts/ng-map.js',
+      'bower_components/traverson/browser/dist/traverson.js',
+      'bower_components/traverson-hal/browser/dist/traverson-hal.js',
+      'bower_components/traverson-angular/browser/dist/traverson-angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
