@@ -16,6 +16,6 @@ var oraj360;
         };
         return MenuHeader;
     })();
-    angular.module("oraj360").directive("ngHeader", MenuHeader.instance);
+    angular.module("oraj360").directive("orajHeader", MenuHeader.instance);
 })(oraj360 || (oraj360 = {}));
 //# sourceMappingURL=menuHeader.directive.js.map

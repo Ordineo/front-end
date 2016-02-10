@@ -4,9 +4,11 @@
 var oraj360;
 (function (oraj360) {
     var AuthService = (function () {
-        function AuthService(restangulars, $location) {
+        function AuthService(restangulars, $location, username, logged) {
             this.restangulars = restangulars;
             this.$location = $location;
+            this.username = username;
+            this.logged = logged;
             this.username = window.sessionStorage.getItem("username");
             if (this.username !== null) {
                 this.setAuthorized(true);
@@ -15,9 +17,6 @@ var oraj360;
                 $location.path('/login');
             }
         }
-        AuthService.prototype.logIn = function (credentials) {
-            return this.restangulars.all("persons").getList();
-        };
         AuthService.prototype.setAuthorized = function (isLogged) {
             this.logged = isLogged;
         };
@@ -28,6 +27,6 @@ var oraj360;
         return AuthService;
     })();
     oraj360.AuthService = AuthService;
-    angular.module("oraj360").service("AuthService", AuthService);
+    angular.module("oraj360").service("authService", AuthService);
 })(oraj360 || (oraj360 = {}));
 //# sourceMappingURL=auth.service.js.map

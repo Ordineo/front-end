@@ -35,14 +35,14 @@
   <table md-data-table md-progress="deferred">
     <thead md-order="name" md-trigger="">
     <tr>
-      <th name="Name"></th>
+      <th name="Skill"></th>
       <th name="Level"></th>
     </tr>
     </thead>
     <tbody>
-    <tr md-auto-select ng-repeat="skillCompetence in skillCompetences | filter:searchText">
+    <tr md-auto-select ng-repeat="skillCompetence in competence.skillCompetences | filter:searchText">
 
-      <td>{{skillCompetence.skill}}</td>
+      <td>{{skillCompetence.skill.name}}</td>
       <td>{{skillCompetence.competenceLevel}}</td>
       <td>
         <md-button ng-hide="removeIt" ng-click="removeIt=true" class="md-icon-button md-accent">
@@ -54,7 +54,7 @@
       <td>
         <div ng-show="removeIt">
           Are you sure?
-          <md-button ng-click="remove(skillCompetence)" class="md-icon-button">
+          <md-button ng-click="competence.remove(skillCompetence)" class="md-icon-button">
             <ng-md-icon style="color:green" icon="done"></ng-md-icon>
           </md-button>
           <md-button ng-click="removeIt=false" class="md-icon-button">
@@ -67,20 +67,20 @@
     </tr>
     <tr>
       <form name="addForm">
-        <td>
-          <input id="skill" class="form-control" ng-model="skillCompetence.skill" typeahead-no-results="noResults"
-                 typeahead="skill as skill.name for skill in skills | filter:$viewValue | limitTo:8"
+        <td >
+          <input id="skill" class="form-control" ng-model="competence.skillCompetence.skill" typeahead-no-results="noResults"
+                 typeahead="skill as skill.name for skill in competence.skills | filter:$viewValue | limitTo:8"
                  placeholder="Skill">
 
 
         </td>
         <td>
-          <input name="competenceLevel" ng-model="skillCompetence.competenceLevel" placeholder="Competence Level"
+          <input name="competenceLevel" ng-model="competence.skillCompetence.competenceLevel" placeholder="Competence Level"
                  id="competenceLevel" class="form-control" type="number" min="1">
 
         </td>
         <td>
-          <md-button class="md-raised md-primary" ng-click="save(skillCompetence)">Add</md-button>
+          <md-button class="md-raised md-primary" ng-click="competence.save(skillCompetence)">Add</md-button>
         </td>
         <td></td>
 

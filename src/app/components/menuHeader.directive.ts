@@ -5,7 +5,7 @@
 module oraj360 {
 
     export interface IMenuHeader extends ng.IAttributes {
-        ngHeader:string;
+        orajHeader:string;
     }
 
     class MenuHeader implements ng.IDirective {
@@ -24,7 +24,7 @@ module oraj360 {
         }
 
     }
-    angular.module("oraj360").directive("ngHeader", MenuHeader.instance);
+    angular.module("oraj360").directive("orajHeader", MenuHeader.instance);
 
 }
 

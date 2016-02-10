@@ -1,6 +1,7 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
 /// <reference path="../../../typings/restangular/restangular.d.ts" />
 /// <reference path="../../../typings/angularjs/angular-route.d.ts" />
+/// <reference path="../../../typings/angular-material/angular-material.d.ts" />
 /// <reference path="../services/person.service.ts"/>
 var oraj360;
 (function (oraj360) {
@@ -18,14 +19,67 @@ var oraj360;
     })();
     oraj360.updatedPerson = updatedPerson;
     var PersonController = (function () {
-        function PersonController(personService, $location, $scope, $timeout, $mdSidenav) {
-            this.$location = $location;
-            this.$scope = $scope;
+        function PersonController(personService, $timeout, $mdSidenav, myDetails, updatedPerson, username, toggleRight) {
+            this.personService = personService;
             this.$timeout = $timeout;
             this.$mdSidenav = $mdSidenav;
-            this.username = window.sessionStorage.getItem("username");
-            this.example = 'http://thesocialmediamonthly.com/wp-content/uploads/2015/08/photo.png';
+            this.myDetails = myDetails;
+            this.updatedPerson = updatedPerson;
+            this.username = username;
+            this.toggleRight = toggleRight;
             this.persons = [];
+            this.experiences = [
+                {
+                    "startDate": "2015-08-01",
+                    "endDate": null,
+                    "project": "CRS medewerker",
+                    "function": ".NET Software Engineer",
+                    "customer": {
+                        "name": "Digipolis",
+                        "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+                    }
+                },
+                {
+                    "startDate": "2014-11-01",
+                    "endDate": "2015-08-01",
+                    "project": "Digitale handtekencomponent",
+                    "function": ".NET Software Engineer",
+                    "customer": {
+                        "name": "Digipolis",
+                        "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+                    }
+                },
+                {
+                    "startDate": "2014-02-01",
+                    "endDate": "2014-11-01",
+                    "project": "Handtekenmap",
+                    "function": ".NET Software Engineer",
+                    "customer": {
+                        "name": "Digipolis",
+                        "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+                    }
+                },
+                {
+                    "startDate": "2013-05-01",
+                    "endDate": "2014-02-01",
+                    "project": "Markten en foren",
+                    "function": ".NET Software Engineer",
+                    "customer": {
+                        "name": "Digipolis",
+                        "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+                    }
+                },
+                {
+                    "startDate": "2012-08-01",
+                    "endDate": "2013-05-01",
+                    "project": "Brondata groen",
+                    "function": ".NET Software Engineer",
+                    "customer": {
+                        "name": "Digipolis",
+                        "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+                    }
+                }
+            ];
             this.selections = [
                 { name: "Users" },
                 { name: "BusinessUnitManagers" },
@@ -33,12 +87,10 @@ var oraj360;
                 { name: "PracticeManagers" },
                 { name: "Coaches" }
             ];
-            this.toggleRight = this.buildToggler('right');
-            this.isOpenRight = function () {
-                return this.$mdSidenav('right').isOpen();
-            };
-            this.personService = personService;
+            console.log('PersonController');
             var that = this;
+            this.username = window.sessionStorage.getItem("username");
+            this.toggleRight = this.buildToggler('right');
             $timeout(function () {
                 that.myDetails = that.personService.getPerson();
             }, 500);
@@ -82,7 +134,7 @@ var oraj360;
                 });
             };
         };
-        PersonController.$inject = ["PersonService", "$location", "$scope", "$timeout", "$mdSidenav"];
+        PersonController.$inject = ["PersonService", "$timeout", "$mdSidenav"];
         return PersonController;
     })();
     oraj360.PersonController = PersonController;

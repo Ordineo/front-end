@@ -9,19 +9,15 @@ module oraj360 {
     }
 
     export class AuthController {
-        private login:LoginCredentials;
-        private myService:IAuthService;
-        private location:ng.ILocationService;
 
-        static $inject = ["AuthService", "$location", "$timeout", "$rootScope"];
+        static $inject = ["authService", "$location", "$timeout", "$rootScope"];
 
-        constructor(authentication:IAuthService, private $location:ng.ILocationService, private $timeout:ng.ITimeoutService, private $rootScope) {
+        constructor(private authentication:IAuthService, private $location:ng.ILocationService, private $timeout:ng.ITimeoutService, private $rootScope,public login:LoginCredentials) {
 
             this.login = new LoginCredentials();
-            this.myService = authentication;
-            this.location = $location;
 
-            this.myService.isAuthorized() ? $location.path("/about") : $location.path("/login");
+
+            this.authentication.isAuthorized() ? this.$location.path("/about") : this.$location.path("/login");
 
         }
 
@@ -29,12 +25,7 @@ module oraj360 {
             this.login = login;
             var that = this;
             window.sessionStorage.setItem("username", that.login.username);
-            that.$rootScope.$broadcast("user", {any: that.login.username});
-            this.$timeout(function () {
-                that.$location.path('/about')
-            }, 1000)
-
-
+            this.$location.path('/about');
         }
 
         logout():void {

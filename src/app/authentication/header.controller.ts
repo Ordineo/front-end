@@ -5,49 +5,35 @@
 /// <reference path="../authentication/auth.controller.ts"/>
 /// <reference path="../persons/person.controller.ts"/>
 
+module oraj360{
 
-module oraj360 {
+    export interface IHeaderController {
+        myDetails:Person;
+        username:string;
+        loggedIn:boolean;
+        authentication:IAuthService;
+        personService:IPersonService;
+        timeout:ng.ITimeoutService;
+        location:ng.ILocationService;
+        rootScope:any;
+        setMyDetails(person:any):void;
+        logout():void;
+    }
 
     export class HeaderController {
 
+        static $inject = ["authService", "PersonService", "$timeout", "$rootScope","$location"];
 
-        myDetails:Person;
-        private authService:IAuthService;
-        private personService:IPersonService;
-        loggedIn:boolean;
-        username = window.sessionStorage.getItem("username");
+        constructor(private authentication:IAuthService, private personService:IPersonService, private $timeout:ng.ITimeoutService, private $rootScope,private $location:ng.ILocationService,public myDetails:Person, public username:string, public loggedIn:boolean ) {
 
-
-        static $inject = ["AuthService", "PersonService", "$timeout", "$rootScope"];
-
-        constructor(authentication:IAuthService, personService:IPersonService, private $timeout:ng.ITimeoutService, private $rootScope) {
-
-            this.personService = personService;
-            this.authService = authentication;
+            console.log('HeaderController');
             var that = this;
+            username = window.sessionStorage.getItem("username");
+            this.personService.getPersonByUsername(username).then(function (data) {
+                that.setMyDetails(data);
 
-            if (this.authService.isAuthorized()) {
-                this.loggedIn = true;
-                $timeout(function () {
-                    that.myDetails = that.personService.getPerson();
-                }, 1000);
-
-            } else {
-                this.loggedIn = false;
-            }
-
-            this.$rootScope.$on("user", function (event, args) {
-
-                $timeout(function () {
-                    that.$rootScope.$apply(function () {
-                        that.loggedIn = true;
-                        that.personService.getPersonByUsername(args.any).then(function (data) {
-                            that.setMyDetails(data);
-                        });
-
-                    });
-                }, 1000);
             });
+
         }
 
         setMyDetails(person:any) {

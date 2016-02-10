@@ -88,27 +88,57 @@
     fill: black;
     margin: 8px;
   }
+
 </style>
 
-<div ng-if="!myTimelineItems.length">No timeline yet</div>
-<div ng-if="myTimelineItems.length">
+<div layout="row">
+  <md-input-container>
+    <label>Description: </label>
+    <input ng-model="timeline.objective.description" >
+  </md-input-container>
+
+  <md-input-container style="margin-right: 10px;">
+    <label>Term: </label>
+    <md-select ng-model="timeline.objective.length">
+      <md-option ng-repeat="length in timeline.objectiveLengths">{{length.name}}</md-option>
+    </md-select>
+  </md-input-container>
+
+  <md-input-container style="margin-right: 10px;">
+    <label>Type: </label>
+    <md-select ng-model="timeline.objective.type">
+      <md-option ng-repeat="type in timeline.objectiveTypes" >{{type.name}}</md-option>
+    </md-select>
+  </md-input-container>
+
+  </div>
+
+<label> Target date: </label>
+  <md-datepicker ng-model="timeline.format.targetDate" md-placeholder="Enter date"
+                  ></md-datepicker>
+
+
+<md-button class="md-fab md-raised md-primary" ng-click="timeline.saveObjective()">
+  <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+</md-button>
+<div>
   <div class="bar"></div>
   <div class="timeline">
-    <div class="timeline-item" ng-repeat="item in myTimelineItems">
-      <h4>{{item.description}}</h4>
+    <div class="timeline-item" ng-repeat="objective in timeline.objectives">
+      <h4>{{objective.description}}</h4>
 
-      <div ng-switch="item.type">
+      <div ng-switch="objective.type">
         <div ng-switch-when="Competence" class="item-icon">
           <ng-md-icon icon="school" style=""></ng-md-icon>
         </div>
         <div ng-switch-when="Personal" class="item-icon">
           <ng-md-icon icon="person" style=""></ng-md-icon>
         </div>
-        <p>Target date: {{item.targetDate}}</p>
+        <p>Target date: {{objective.targetDate}}</p>
 
-        <p>End date: {{item.endDate}}</p>
+        <p>End date: {{objective.endDate}}</p>
 
-        <p>Length: {{item.length}}</p>
+        <p>Length: {{objective.length}}</p>
       </div>
 
     </div>

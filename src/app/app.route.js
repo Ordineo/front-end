@@ -7,13 +7,14 @@ var oraj360;
     function routes($routeProvider) {
         $routeProvider.when('/', {
             redirectTo: '/login'
-        }).when('/about', {
-            templateUrl: 'app/persons/profile.html',
+        }).when('/admin', {
+            templateUrl: 'app/persons/admin.html',
             controller: 'PersonController',
-            controllerAs: 'profile',
-            resolve: {}
+            controllerAs: 'profile'
         }).when('/profile', {
-            templateUrl: 'app/persons/profile.html',
+            templateUrl: 'app/persons/profile.html'
+        }).when('/about', {
+            templateUrl: 'app/persons/about.html',
             controller: 'PersonController',
             controllerAs: 'profile'
         }).when('/header', {

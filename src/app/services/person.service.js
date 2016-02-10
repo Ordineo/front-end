@@ -6,15 +6,18 @@
 var oraj360;
 (function (oraj360) {
     var PersonService = (function () {
-        function PersonService(personRestService, $location, authentication) {
+        function PersonService(personRestService, $location, authentication, persons, person, username) {
+            this.personRestService = personRestService;
             this.$location = $location;
-            this.username = window.sessionStorage.getItem("username");
-            this.restService = personRestService;
+            this.authentication = authentication;
+            this.persons = persons;
+            this.person = person;
+            this.username = username;
             var that = this;
-            this.authService = authentication;
-            if (this.authService.isAuthorized()) {
-                this.persons = this.restService.all("persons");
-                this.persons.one(this.username).get().then(function (data) {
+            username = window.sessionStorage.getItem("username");
+            if (authentication.isAuthorized()) {
+                persons = personRestService.all("persons");
+                persons.one(username).get().then(function (data) {
                     that.setPerson(data);
                 });
             }
@@ -41,12 +44,12 @@ var oraj360;
             return undefined;
         };
         PersonService.prototype.getPersonByUsername = function (username) {
-            return this.restService.all('persons').one(username).get();
+            return this.personRestService.all('persons').one(username).get();
         };
         PersonService.prototype.getPersonByLink = function (href) {
-            return this.restService.oneUrl('persons', href).get();
+            return this.personRestService.oneUrl('persons', href).get();
         };
-        PersonService.$inject = ["PersonRestangular", "$location", "AuthService"];
+        PersonService.$inject = ["PersonRestangular", "$location", "authService"];
         return PersonService;
     })();
     oraj360.PersonService = PersonService;

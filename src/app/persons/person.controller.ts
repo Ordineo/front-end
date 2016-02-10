@@ -1,6 +1,7 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
 /// <reference path="../../../typings/restangular/restangular.d.ts" />
 /// <reference path="../../../typings/angularjs/angular-route.d.ts" />
+/// <reference path="../../../typings/angular-material/angular-material.d.ts" />
 /// <reference path="../services/person.service.ts"/>
 module oraj360 {
 
@@ -35,13 +36,59 @@ module oraj360 {
 
     export class PersonController {
 
-
-        private personService:IPersonService;
-        username:string = window.sessionStorage.getItem("username");
-        myDetails:Person;
-        updatedPerson:updatedPerson;
-        example = 'http://thesocialmediamonthly.com/wp-content/uploads/2015/08/photo.png';
         persons=[];
+        experiences = [
+        {
+            "startDate": "2015-08-01",
+            "endDate": null,
+            "project": "CRS medewerker",
+            "function": ".NET Software Engineer",
+            "customer": {
+                "name": "Digipolis",
+                "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+            }
+        },
+        {
+            "startDate": "2014-11-01",
+            "endDate": "2015-08-01",
+            "project": "Digitale handtekencomponent",
+            "function": ".NET Software Engineer",
+            "customer": {
+                "name": "Digipolis",
+                "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+            }
+        },
+        {
+            "startDate": "2014-02-01",
+            "endDate": "2014-11-01",
+            "project": "Handtekenmap",
+            "function": ".NET Software Engineer",
+            "customer": {
+                "name": "Digipolis",
+                "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+            }
+        },
+        {
+            "startDate": "2013-05-01",
+            "endDate": "2014-02-01",
+            "project": "Markten en foren",
+            "function": ".NET Software Engineer",
+            "customer": {
+                "name": "Digipolis",
+                "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+            }
+        },
+        {
+            "startDate": "2012-08-01",
+            "endDate": "2013-05-01",
+            "project": "Brondata groen",
+            "function": ".NET Software Engineer",
+            "customer": {
+                "name": "Digipolis",
+                "img": "http://www.internetarchitects.be/wp-content/uploads/2014/10/digipolis.png"
+            }
+        }
+    ];
         selections =[
         {name: "Users"},
         {name:"BusinessUnitManagers"},
@@ -49,15 +96,16 @@ module oraj360 {
             {name:"PracticeManagers"},
             {name:"Coaches"}];
 
-        toggleRight = this.buildToggler('right');
-        isOpenRight = function () {
-            return this.$mdSidenav('right').isOpen();
-        };
-        static $inject = ["PersonService", "$location", "$scope", "$timeout", "$mdSidenav"];
 
-        constructor(personService:IPersonService, private $location:ng.ILocationService, private $scope, private $timeout:ng.ITimeoutService, private $mdSidenav) {
-            this.personService = personService;
+        static $inject = ["PersonService", "$timeout", "$mdSidenav"];
+
+        constructor(private personService:IPersonService, private $timeout:ng.ITimeoutService, public $mdSidenav,public myDetails:Person,public updatedPerson:updatedPerson,public username:string,public toggleRight) {
+            console.log('PersonController');
             var that = this;
+
+            this.username = window.sessionStorage.getItem("username");
+            this.toggleRight = this.buildToggler('right');
+
             $timeout(function () {
 
                 that.myDetails = that.personService.getPerson();
@@ -66,6 +114,8 @@ module oraj360 {
             }, 500);
 
         }
+
+
 
         changeView(selected):void{
             var thos = this;

@@ -1,6 +1,4 @@
-<style>
 
-</style>
 
 <div class="experience" layout-padding>
   <h4 class="md-title">Experience</h4>
@@ -9,7 +7,7 @@
     <div class="experiences-bar"></div>
 
     <div class="experience-item" layout
-         ng-repeat="experience in experiences | limitTo:limitExperiences as experienceCount">
+         ng-repeat="experience in profile.experiences | limitTo:limitExperiences as experienceCount">
       <div class="experience-item-point"></div>
       <div flex="grow">
         <md-card>

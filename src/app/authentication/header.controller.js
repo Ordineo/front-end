@@ -7,31 +7,20 @@
 var oraj360;
 (function (oraj360) {
     var HeaderController = (function () {
-        function HeaderController(authentication, personService, $timeout, $rootScope) {
+        function HeaderController(authentication, personService, $timeout, $rootScope, $location, myDetails, username, loggedIn) {
+            this.authentication = authentication;
+            this.personService = personService;
             this.$timeout = $timeout;
             this.$rootScope = $rootScope;
-            this.username = window.sessionStorage.getItem("username");
-            this.personService = personService;
-            this.authService = authentication;
+            this.$location = $location;
+            this.myDetails = myDetails;
+            this.username = username;
+            this.loggedIn = loggedIn;
+            console.log('HeaderController');
             var that = this;
-            if (this.authService.isAuthorized()) {
-                this.loggedIn = true;
-                $timeout(function () {
-                    that.myDetails = that.personService.getPerson();
-                }, 1000);
-            }
-            else {
-                this.loggedIn = false;
-            }
-            this.$rootScope.$on("user", function (event, args) {
-                $timeout(function () {
-                    that.$rootScope.$apply(function () {
-                        that.loggedIn = true;
-                        that.personService.getPersonByUsername(args.any).then(function (data) {
-                            that.setMyDetails(data);
-                        });
-                    });
-                }, 1000);
+            username = window.sessionStorage.getItem("username");
+            this.personService.getPersonByUsername(username).then(function (data) {
+                that.setMyDetails(data);
             });
         }
         HeaderController.prototype.setMyDetails = function (person) {
@@ -41,7 +30,7 @@ var oraj360;
             window.sessionStorage.clear();
             window.location.reload();
         };
-        HeaderController.$inject = ["AuthService", "PersonService", "$timeout", "$rootScope"];
+        HeaderController.$inject = ["authService", "PersonService", "$timeout", "$rootScope", "$location"];
         return HeaderController;
     })();
     oraj360.HeaderController = HeaderController;

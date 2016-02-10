@@ -1,28 +1,32 @@
-<div ng-cloak>
-  <md-content>
-    <md-tabs md-dynamic-height md-border-bottom>
-      <md-tab class="md-tab-item" label="Role Management">
-        <md-content layout layout-sm="column">
-          <roles></roles>
 
-        </md-content>
-      </md-tab>
-      <md-tab label="Person Management">
-        <md-content>
+<oraj-header></oraj-header>
 
-          <headerMenu></headerMenu>
-        </md-content>
-      </md-tab>
-      <md-tab label="Customer Management">
-        <md-content>
 
-        </md-content>
-      </md-tab>
-      <md-tab label="Skill Management">
-        <md-content>
+<div>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab class="md-tab-item" label="UNIT">
+                    <oraj-unit-administration></oraj-unit-administration>
+            </md-tab>
+            <md-tab label="SKILL CENTER">
 
-        </md-content>
-      </md-tab>
-    </md-tabs>
-  </md-content>
+                <!--    <md-content>
+                      <endorsements></endorsements>
+                    </md-content>-->
+            </md-tab>
+            <md-tab label="CUSTOMERS">
+                <md-content>
+
+
+                </md-content>
+            </md-tab>
+            <md-tab label="APPOINTMENTS">
+                <!--   <md-content>
+                     <activity layout-padding></activity>
+                     <hr/>
+                     <interesting-groups></interesting-groups>
+                   </md-content>-->
+            </md-tab>
+        </md-tabs>
+    </md-content>
 </div>

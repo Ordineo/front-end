@@ -9,17 +9,16 @@ module oraj360 {
         logged:boolean;
         setAuthorized(isLogged:boolean):void;
         isAuthorized():boolean;
-        logIn(credentials:any) : ng.IPromise<{}>;
     }
 
     export class AuthService implements IAuthService {
 
-        username = window.sessionStorage.getItem("username");
-        logged:boolean;
-
         static $inject = ["PersonRestangular", "$location"];
 
-        constructor(private restangulars:restangular.IService, private $location:ng.ILocationService) {
+        constructor(private restangulars:restangular.IService, private $location:ng.ILocationService,public username:string,public logged:boolean) {
+
+            this.username =window.sessionStorage.getItem("username");
+
             if (this.username !== null) {
                 this.setAuthorized(true);
             }
@@ -27,11 +26,6 @@ module oraj360 {
                 $location.path('/login');
 
             }
-        }
-
-        logIn(credentials:any):ng.IPromise<{}> {
-            return this.restangulars.all("persons").getList();
-
         }
 
         setAuthorized(isLogged:boolean):void {
@@ -43,6 +37,6 @@ module oraj360 {
         }
     }
     angular.module("oraj360")
-        .service("AuthService", AuthService);
+        .service("authService", AuthService);
 
 }

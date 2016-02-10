@@ -16,7 +16,7 @@
             'ngMaterial',
             'md.data.table',
             'ngMdIcons',
-            'ngMap', 'traverson', 'traverson-hal'
+            'ngMap'
         ])
         .config(['$httpProvider', function ($httpProvider) {
 

@@ -4,23 +4,24 @@
 module oraj360 {
     "use strict";
 
-    function routes($routeProvider:ng.route.IRouteProvider) {
+    function routes($routeProvider) {
 
         $routeProvider
             .when('/', {
                 redirectTo: '/login'
             })
-            .when('/about', {
-                templateUrl: 'app/persons/profile.html',
+            .when('/admin', {
+                templateUrl: 'app/persons/admin.html',
                 controller: 'PersonController',
                 controllerAs: 'profile',
-                resolve: {}
-
             })
             .when('/profile', {
-                templateUrl: 'app/persons/profile.html',
-                controller: 'PersonController',
-                controllerAs: 'profile'
+                templateUrl: 'app/persons/profile.html'
+        })
+            .when('/about', {
+                templateUrl: 'app/persons/about.html',
+                controller:'PersonController',
+                controllerAs:'profile'
             })
             .when('/header', {
                 templateUrl: 'app/persons/unit.html'

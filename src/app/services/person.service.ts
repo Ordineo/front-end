@@ -25,30 +25,21 @@ module oraj360 {
 
     export class PersonService implements IPersonService {
 
-        person:Person;
-        username = window.sessionStorage.getItem("username");
-        private restService:restangular.IService;
-        private authService:IAuthService;
-        private persons:restangular.IElement;
+        static $inject = ["PersonRestangular", "$location", "authService"];
 
-        static $inject = ["PersonRestangular", "$location", "AuthService"];
+        constructor(private personRestService:restangular.IService, private $location:ng.ILocationService, private authentication:IAuthService, private persons:restangular.IElement,public person:Person,public username:string) {
+             var that = this;
+             username =window.sessionStorage.getItem("username");
 
-        constructor(personRestService:restangular.IService, private $location:ng.ILocationService, authentication:IAuthService) {
-            this.restService = personRestService;
-            var that = this;
-            this.authService = authentication;
-
-            if (this.authService.isAuthorized()) {
-                this.persons = this.restService.all("persons");
-
-                this.persons.one(this.username).get().then(function (data) {
+            if (authentication.isAuthorized()) {
+                persons = personRestService.all("persons");
+                persons.one(username).get().then(function (data) {
                     that.setPerson(data);
                 });
 
 
             }
         }
-
 
         getAll():ng.IPromise<{}> {
             return undefined;
@@ -79,11 +70,11 @@ module oraj360 {
         }
 
         getPersonByUsername(username:string):ng.IPromise<{}> {
-            return this.restService.all('persons').one(username).get()
+            return this.personRestService.all('persons').one(username).get()
 
         }
         getPersonByLink(href:string):ng.IPromise<{}>{
-            return this.restService.oneUrl('persons',href).get();
+            return this.personRestService.oneUrl('persons',href).get();
         }
 
 
