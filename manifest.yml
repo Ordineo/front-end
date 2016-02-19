@@ -6,5 +6,3 @@ applications:
   path: dist/
   buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
   timeout: 120
-  domain: oraj360.cfapps.io
-  no-hostname: true
