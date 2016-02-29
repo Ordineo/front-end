@@ -2,16 +2,13 @@ import IDirective = angular.IDirective;
 var templateUrl = require('./login.html');
 export const LOGIN = "login";
 
-interface ILoginBindings {
-  isLogged:String
-}
 interface ILoginVm {
   isLogged:boolean
 }
 
 export class LoginDirective implements IDirective {
   restrict:string = 'E';
-  bindToController:ILoginBindings = {
+  bindToController:any = {
     isLogged: '@'
   };
   controller:Function = LoginController;
@@ -23,6 +20,6 @@ export class LoginDirective implements IDirective {
   }
 }
 
-class LoginController implements ILoginVm {
-  isLogged:boolean;
+function LoginController(){
+  var isLogged:Boolean = false;
 }
