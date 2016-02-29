@@ -1,5 +1,5 @@
 import IDirective = angular.IDirective;
-var templateUrl = require('./login-new.html');
+var templateUrl = require('./login.html');
 export const LOGIN = "login";
 
 interface ILoginBindings {
