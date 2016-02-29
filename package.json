@@ -40,6 +40,7 @@
     "load-grunt-tasks": "^3.1.0",
     "node-sass": "^3.4.2",
     "phantomjs": "^1.9.18",
+    "raw-loader": "^0.5.1",
     "resolve-url-loader": "^1.4.3",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",

@@ -1,0 +1,21 @@
+<div ng-show="!$ctrl.isLogged" id="login" class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-offset-3 col-sm-6 col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-2">
+        <h1 class="text-center login-title">360 Tool</h1>
+        <form class="form-signin">
+            <md-content>
+                <md-input-container flex>
+                    <label>Password</label>
+                    <input ng-model="userData.username" required md-minlenght="2" md-maxlength="10" name="username">
+                    <div ng-messages="registerForm.username.$error">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="md-maxlength">Username has to be less than 10 characters long.</div>
+                        <div ng-message="md-minlength">Username has to be minimum 2 characters long.</div>
+                    </div>
+                </md-input-container>
+                    <md-button class="md-raised md-primary" ng-click="$ctrl.logIn(userData)">Login</md-button>
+                <div ng-show="invalid" class="alert alert-danger" role="alert">{{errmsg}}</div>
+            </md-content>
+        </form>
+        <a href="#/register" class="text-center new-account">Create an account </a>
+    </div>
+</div>
