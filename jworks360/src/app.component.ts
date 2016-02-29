@@ -12,6 +12,10 @@ export class AppComponent implements IComponentOptions {
   template:string = template;
 }
 
-function AppComponentController() {
-  this.title = 'JWORKS 360';
+class AppComponentController{
+  public title:string;
+
+  constructor(){
+    this.title = "Jworks 360 Tool";
+  }
 }
