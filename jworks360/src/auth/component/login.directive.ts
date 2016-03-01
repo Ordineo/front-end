@@ -1,26 +1,49 @@
-
 import IDirective = angular.IDirective;
-var templateUrl = require('./login.html');
+import {AUTH_SERVICE} from "../service/auth.service";
+import {IAuthService} from "../service/auth.service";
+import {Person} from "../../persons/person";
+import {ICredentials} from "../service/auth.service";
+
 export const LOGIN = "login";
 
 interface ILoginVm {
-  isLogged:boolean
+  onValidated:Function
+  user:ICredentials
 }
 
 export class LoginDirective implements IDirective {
   restrict:string = 'E';
   bindToController:any = {
-    isLogged: '@'
+    isLogged: '@',
+    onValidated: '&'
   };
   controller:Function = LoginController;
-  controllerAs:string = '$ctrl';
-  template:string = templateUrl;
+  controllerAs:string = 'vm';
+  template:string = require('./login.html');
 
   static instance() {
     return new LoginDirective();
   }
 }
 
-function LoginController(){
-  var isLogged:Boolean = false;
+class LoginController implements ILoginVm{
+
+  static $inject:Array<string> = [AUTH_SERVICE];
+
+  onValidated:Function;
+  isLogged:boolean;
+  user:ICredentials;
+
+  constructor(private authService:IAuthService) {
+    this.user = {
+      email:'',
+      pw:''
+    };
+  }
+
+  validate():void {
+    if(this.authService.isAuthorized(this.user)){
+      this.onValidated();
+    }
+  }
 }

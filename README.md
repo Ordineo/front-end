@@ -18,7 +18,7 @@ npm i -g webpack typings
   
 Install dependencies
 ```
-npm install
+npm i
 ```
   
 Launch dev server

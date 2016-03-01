@@ -3,19 +3,16 @@ import 'angular-ui-router';
 import {JWORKS360_CORE} from "./core.module";
 import {IStateProvider} from "angular-ui-router";
 import {IUrlRouterProvider} from "angular-ui-router";
+import {LoginRoute} from "./login.route";
 
 configureStates.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 export function configureStates($stateProvider:IStateProvider, $urlRouterProvider:IUrlRouterProvider) {
-  console.log('configre');
-  var states = getStates();
 
-  states.forEach(function (state) {
-    $stateProvider.state(state.name, state.config);
-  });
+  $stateProvider.state(new LoginRoute());
 
   $urlRouterProvider
-    .when('/','login')
+    .when('/', 'login')
     .otherwise('/');
 }
 
@@ -25,7 +22,11 @@ function getStates() {
       name: 'login',
       config: {
         url: '/login',
-        template: '<login></login>'
+        template: `<h1>{{vm.wicked}}</h1><login is-logged="{{vm.bb}}" on-validated="vm.onValidate()"></login>`,
+        controller: function () {
+          this.wicked = 'hellos';
+        },
+        controllerAs: 'vm'
       }
     },
     {
