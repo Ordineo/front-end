@@ -5,6 +5,7 @@ sudo: false
 install:
 - npm install -g npm
 - npm install -g webpack
+- npm install -g typings
 - npm install
 - npm run build
 before_deploy:

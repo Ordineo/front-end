@@ -46,6 +46,7 @@
     "node": ">=4.2.1"
   },
   "scripts": {
+    "postinstall":"typings i",
     "test": "karma start --NODE_ENV=test",
     "typings": "typings install",
     "build": "webpack --config webpack/build.config.js",
