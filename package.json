@@ -60,6 +60,7 @@
   "scripts": {
     "test": "grunt test",
     "typings": "typings install",
+    "build" : "webpack --config webpack/build.config.js",
     "dev-webp": "webpack --config webpack/dev.config.js",
     "dev": "webpack-dev-server --config webpack/dev.config.js --content-base public/dev --inline"
   }

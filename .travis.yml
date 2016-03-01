@@ -4,11 +4,9 @@ node_js:
 sudo: false
 install:
 - npm install -g npm
-- npm install -g grunt-cli
-- npm install -g bower
+- npm install -g webpack
 - npm install
-- bower install
-- grunt build:dist
+- npm run build
 before_deploy:
 - touch dist/Staticfile
 deploy:
@@ -22,4 +20,4 @@ deploy:
   space: development
   on:
     repo: oraj-360/front-end
-    branch: master
+    branch: new-build-webpack
