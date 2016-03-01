@@ -12,7 +12,7 @@ export class AppComponent implements IComponentOptions {
   template:string = template;
 }
 
-class AppComponentController{
+export class AppComponentController{
   public title:string;
 
   constructor(){

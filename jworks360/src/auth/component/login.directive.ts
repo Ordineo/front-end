@@ -1,3 +1,4 @@
+
 import IDirective = angular.IDirective;
 var templateUrl = require('./login.html');
 export const LOGIN = "login";
