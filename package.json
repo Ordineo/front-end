@@ -58,7 +58,7 @@
     "node": ">=4.2.1"
   },
   "scripts": {
-    "test": "grunt test",
+    "test": "",
     "typings": "typings install",
     "build" : "webpack --config webpack/build.config.js",
     "dev-webp": "webpack --config webpack/dev.config.js",
