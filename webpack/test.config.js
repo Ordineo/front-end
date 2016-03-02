@@ -1,8 +1,9 @@
-var loaders = require("./default.config").module.loaders;
+var defaultConfig = require('./default.config');
+var loaders = defaultConfig.module.loaders;
 var webpack = require('webpack');
 
 module.exports = {
-  entry: ['./src/index.ts'],
+  entry: ['./jworks360/src/bootstrap.ts'],
   output: {
     filename: 'test-build.js',
     path: 'tmp'

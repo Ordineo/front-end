@@ -17,7 +17,7 @@ module.exports = function (config) {
     autoWatchBatchDelay: 300,
     files: [
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
-      './jworks360/src/test.ts'
+      './jworks360/test/test.ts'
     ],
     babelPreprocessor: {
       options: {
@@ -25,7 +25,7 @@ module.exports = function (config) {
       }
     },
     preprocessors: {
-      'jworks360/src/test.ts': ['webpack'],
+      'jworks360/test/test.ts': ['webpack'],
       'jworks360/src/**/!(*.spec)+(.js)': ['coverage']
     },
     webpackMiddleware: {
