@@ -7,6 +7,8 @@ bower_components
 typings
 build
 public
+jworks360/test/**/*.js
+jworks360/test/**/*.map
 jworks360/src/**/*.js
 jworks360/src/**/*.map
 reports
