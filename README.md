@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/oraj-360/front-end.svg?branch=new-build-webpack)](https://travis-ci.org/oraj-360/front-end)
+
 # Front-end
 Front end project for the 360 Tool.
 
