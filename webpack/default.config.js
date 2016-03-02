@@ -13,9 +13,11 @@ module.exports = {
 
   module: {
     loaders: [
-      {test: /\.ts$/, loader: 'ts-loader', exclude: [
+      {
+        test: /\.ts$/, loader: 'ts-loader', exclude: [
         path.resolve('./src')
-      ]},
+      ]
+      },
       {
         test: /\.html$/,
         exclude: /node_modules/,
@@ -23,7 +25,11 @@ module.exports = {
       },
       {test: /\.svg$/, exclude: /node_modules/, loaders: ['file']},
       {test: /\.css$/, loaders: ['style', 'css']},
-      {test: /\.scss$/, loaders: ['style', 'css', 'sass']}
+      {test: /\.scss$/, loaders: ['style', 'css', 'sass']},
+      {
+        test: /\.png$/,
+        loader: 'url'
+      }
     ]
   }
 };
