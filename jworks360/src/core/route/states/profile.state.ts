@@ -1,23 +1,33 @@
 import {IState} from "angular-ui-router";
 import {IStateService} from "angular-ui-router";
 import {LoginState} from "./login.state";
+import {IProfileSummary} from "../../../profile/summary/profile.summary.compoment";
 
-export var profileState:IState = {
-  name:'profile',
-  url:'/profile',
-  controller: ProfileStateController,
-  controllerAs: '$ctrl',
-  template: `<h2>{{$ctrl.title}}</h2><button ng-click="$ctrl.goToLogin()">To Login</button>`
-};
+export class ProfileState implements IState{
+  static NAME = 'profile';
+  name:string = ProfileState.NAME;
+  url:string = '/profile';
+  controller:Function = ProfileStateController;
+  controllerAs:string = '$ctrl';
+  template:string = require('./html/profiles.state.html');
+}
 
-ProfileStateController.$inject = ['$state'];
+class ProfileStateController{
+  static $inject:Array<string> = ['$state'];
 
-function ProfileStateController($state:IStateService){
-  this.title = "Profile Page!";
-  this.goToLogin = GoToLogin;
+  title:string = "Profile Page!";
 
-  function GoToLogin(){
-    $state.go(LoginState.NAME);
+  summary:IProfileSummary = {
+    name: 'ben',
+    unit: 'jworks'
+  };
+
+  constructor(private $state:IStateService){
+
+  }
+
+  GoToLogin():void{
+    this.$state.go(LoginState.NAME);
   }
 }
 

@@ -1,14 +1,14 @@
 import {IState} from "angular-ui-router";
 import {IStateProvider} from "angular-ui-router";
 import {IStateService} from "angular-ui-router";
-import {profileState} from "./profile.state";
+import {ProfileState} from "./profile.state";
 
 export class LoginState implements IState{
   static NAME:string = "login";
 
   name:string = LoginState.NAME;
   url:string = '/login';
-  template:string = `<login on-validated="$ctrl.goToAdmin()"></login>`;
+  template:string = require('./html/login.state.html');
   controllerAs:string = '$ctrl';
   controller:Function = LoginStateController;
 }
@@ -20,6 +20,6 @@ class LoginStateController{
   }
 
   goToAdmin():void {
-    this.$state.go(profileState);
+    this.$state.go(ProfileState.NAME);
   }
 }
