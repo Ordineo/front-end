@@ -6,11 +6,11 @@ export interface ICredentials {
 }
 
 export interface IAuthService {
-  isAuthorized(user:ICredentials):boolean;
+  validateCredentials(user:ICredentials):boolean;
 }
 
 export class AuthService implements IAuthService{
-  isAuthorized(user:ICredentials):boolean {
-    return user.email === 'bum';
+  validateCredentials(user:ICredentials):boolean {
+    return user.email === 'j@d.be';
   }
 }

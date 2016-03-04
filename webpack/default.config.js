@@ -27,8 +27,8 @@ module.exports = {
       {test: /\.css$/, loaders: ['style', 'css']},
       {test: /\.scss$/, loaders: ['style', 'css', 'sass']},
       {
-        test: /\.png$/,
-        loader: 'url'
+        test: /\.(png|jpe?g)$/,
+        loader: 'url?10000'
       }
     ]
   }

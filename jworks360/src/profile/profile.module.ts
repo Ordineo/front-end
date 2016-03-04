@@ -1,6 +1,6 @@
-import {ProfileMenuComponent} from "./menu/profile.menu.component";
-import {ProfileSummaryComponent} from "./summary/profile.summary.compoment";
-import {LearningPathDirective} from "./learning-path/profile.learning-path.directive";
+import {ProfileMenuComponent} from "./header/menu/profile.menu.component";
+import {ProfileSummaryComponent} from "./header/summary/profile.summary.compoment";
+import {LearningPathDirective} from "./header/learning-path/profile.learning-path.directive";
 export const JWORKS360_PROFILE = "jworks360.profile";
 
 angular

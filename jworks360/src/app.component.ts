@@ -1,5 +1,5 @@
-var template = require('./app-component.html');
 import IComponentOptions = angular.IComponentOptions;
+import '../styles/main.scss';
 
 export const APP_COMPONENT = "app";
 
@@ -9,13 +9,13 @@ export class AppComponent implements IComponentOptions {
   bindings:any = {
     title: '@'
   };
-  template:string = template;
+  template:string = require('./app-component.html');
 }
 
-export class AppComponentController{
+export class AppComponentController {
   public title:string;
 
-  constructor(){
+  constructor() {
     this.title = "Jworks 360 Tool";
   }
 }

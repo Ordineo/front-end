@@ -1,0 +1,69 @@
+$loginRegisterMarginTop: 20px;
+$colorPrimary: #ff9800;
+$colorPrimary50: #ffcc80;
+$jworksLogo: '../images/jworks-logo.jpg';
+$loginBg: '../images/landscape.jpg';
+
+body{
+  background-color: #EDF0F1;
+}
+.overlay:after {
+  content: '';
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.login-title{
+  color: #E5CFB5;
+}
+.login-title{
+  text-align: center;
+}
+.jworks-logo {
+  height: 250px;
+  background: url($jworksLogo) no-repeat center;
+  background-size: contain;
+}
+
+.layout-login {
+  max-height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.login-page-body{
+  background: url($loginBg) no-repeat;
+  overflow: hidden;
+  width:100%;
+  height:100%;
+  background-size:cover;
+}
+
+.divider-h{
+  margin-top: $loginRegisterMarginTop;
+}
+
+.divider-h::before {
+  color: $colorPrimary;
+  content: ' | ';
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+a {
+  margin-top: $loginRegisterMarginTop;
+  text-decoration: none;
+  color: $colorPrimary50;
+}
+
+a:hover{
+  color: $colorPrimary;
+  text-decoration: underline;
+}

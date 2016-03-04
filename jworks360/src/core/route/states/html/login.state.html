@@ -1,1 +1,13 @@
-<login on-validated="$ctrl.goToAdmin()"></login>
+<div class="layout-login">
+  <div layout="row" layout-align="center center" class="login-page-body">
+    <div flex="55"
+         flex-gt-sm="45"
+         flex-gt-md="35"
+         flex-gt-lg="25">
+      <login
+        title="{{loginCtrl.title}}"
+        on-validated="loginCtrl.goToAdmin()">
+      </login>
+    </div>
+  </div>
+</div>

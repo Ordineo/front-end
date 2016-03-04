@@ -9,12 +9,13 @@ export class LoginState implements IState{
   name:string = LoginState.NAME;
   url:string = '/login';
   template:string = require('./html/login.state.html');
-  controllerAs:string = '$ctrl';
+  controllerAs:string = 'loginCtrl';
   controller:Function = LoginStateController;
 }
 
 class LoginStateController{
   static $inject:Array<string> = ['$state'];
+  title:string = "Log in to 360 tool";
 
   constructor(private $state:IStateService){
   }

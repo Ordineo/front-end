@@ -1,0 +1,54 @@
+<div class="login-body">
+  <md-card md-whiteframe="24">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <span flex></span><span class="md-headline login-title">{{$ctrl.title}}</span><span flex></span>
+      </div>
+    </md-toolbar>
+    <div layout-align="center">
+      <div class="jworks-logo"></div>
+    </div>
+    <md-card-content>
+      <form id="login-form" name="loginForm" novalidate ng-submit="login(loginForm.$valid)">
+        <div layout="column" layout-padding ng-cloak>
+          <md-content class="autoScroll">
+            <md-input-container class="md-icon-float md-block">
+              <label>Email</label>
+              <md-icon md-svg-icon="com:email"></md-icon>
+              <input
+                required
+                ng-model="$ctrl.user.email" name="user" type="email">
+              <div ng-messages="loginForm.user.$error">
+                <div ng-message="required">Email is required.</div>
+                <div ng-message="email">This is not a valid email address.</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>Password</label>
+              <md-icon></md-icon>
+              <input
+                required
+                ng-model="$ctrl.user.pw" name="pw" type="password">
+              <div ng-messages="loginForm.pw.$error">
+                <div ng-message="required">Password is required.</div>
+              </div>
+            </md-input-container>
+            <md-checkbox ng-model="$ctrl.rememberPw" aria-label="Checkbox Remember me">
+              Remember me
+            </md-checkbox>
+          </md-content>
+          <div layout="row">
+            <span flex></span>
+            <md-button
+              flex="70"
+              ng-disabled="loginForm.$invalid"
+              ng-click="$ctrl.validate()"
+              class="md-raised md-primary">Login
+            </md-button>
+            <span flex></span>
+          </div>
+        </div>
+      </form>
+    </md-card-content>
+  </md-card>
+</div>
