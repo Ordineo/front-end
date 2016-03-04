@@ -5,8 +5,7 @@ import {configureStates} from "./route/core.route.ts";
 
 export const JWORKS360_CORE = 'jworks360.core';
 
-angular.module(JWORKS360_CORE, [
-  'ui.router'
-])
+var deps:Array<string> = ['ui.router'];
 
+angular.module(JWORKS360_CORE, deps)
 .config(configureStates);

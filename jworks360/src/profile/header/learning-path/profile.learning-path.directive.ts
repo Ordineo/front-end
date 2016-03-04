@@ -31,14 +31,14 @@ export class LearningPathDirective implements IDirective{
       {id: 3, content: 'item 3', start: '2016-06-18'},
       {id: 5, content: 'item 5', start: '2016-11-25'},
     ]);
-
+    console.log(instanceElement[0].children[0]);
     // Configuration for the Timeline
     var options = {
       start:'2016-01-01',
       end: '2016-12-31',
     };
 
-    new vis.Timeline(instanceElement[0], items, options);
+    new vis.Timeline(instanceElement[0].children[0], items, options);
   }
 
   static instance() {

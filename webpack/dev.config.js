@@ -6,6 +6,8 @@ var output = {
   filename: "bundle.js"
 };
 
+
+
 devConfig.output = output;
 
 module.exports = devConfig;
