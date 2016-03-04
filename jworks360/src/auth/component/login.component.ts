@@ -45,6 +45,7 @@ class LoginComponentController implements ILogin {
   validate():void {
     if (this.authService.validateCredentials(this.user)) {
       this.onValidated();
+      this.authService.createSession(this.user.email);
     } else {
       this.showNotAuthorizedMessage();
     }

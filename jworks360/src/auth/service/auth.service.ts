@@ -28,6 +28,10 @@ export class AuthService implements IAuthService{
     return this.$window.sessionStorage.getItem(AuthService.SESSION_KEY);
   }
 
+  destroySession():void{
+    this.$window.sessionStorage.removeItem(AuthService.SESSION_KEY);
+  }
+
   validateCredentials(user:ICredentials):boolean {
     return user.email === 'j@d.be';
   }
