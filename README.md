@@ -2,6 +2,7 @@
 
 # Front-end
 Front end project for the 360 Tool.
+[The app is located at http://oraj360.cfapps.io/](http://oraj360.cfapps.io/).
 
 ## Webpack migration
 
