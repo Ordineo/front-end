@@ -2,8 +2,6 @@ import {TimeLineService} from "../service/timeline.service";
 import {TimeLine} from "../model/timeline.model";
 import IScope = angular.IScope;
 import {ITimeLineItem} from "../model/timeline.item.model";
-import IQService = angular.IQService;
-import IDeferred = angular.IDeferred;
 
 /*
  * Fetches timeline data,
@@ -30,7 +28,7 @@ export class TimeLineVisController {
   private getPreppedDataForVis(timeline:TimeLine):Array<any> {
     var items:Array<any> = [];
 
-    var objectives:Array<ITimeLineItem> = timeline.getObjectives();
+    var objectives:Array<ITimeLineItem> = timeline.getTimeLineItems();
 
     for (var i:number = 0; i < objectives.length; i++) {
       var id:number = i + 1;

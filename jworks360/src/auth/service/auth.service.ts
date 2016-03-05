@@ -21,7 +21,7 @@ export class AuthService implements IAuthService{
   }
 
   createSession(user:string):void {
-    this.$window.sessionStorage.setItem(AuthService.SESSION_KEY, 'user');
+    this.$window.sessionStorage.setItem(AuthService.SESSION_KEY, user);
   }
 
   isAuthorized():boolean {
