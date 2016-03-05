@@ -8,6 +8,7 @@ import IHttpPromiseCallback = angular.IHttpPromiseCallback;
 import IPromise = angular.IPromise;
 import IDeferred = angular.IDeferred;
 import IQService = angular.IQService;
+import {GatewayApi} from "../../config/GatewayApi";
 
 export class TimeLineService{
 
@@ -34,10 +35,10 @@ export class TimeLineService{
   /*
   * Unlike getMock data doesnt get parsed yet,
   * so inject TimeLineJSONParser inside a controller and parse it there*/
-  getTimelineByUserName(name:string):IPromise<any> {
+  public getTimelineByUserName(name:string):IPromise<any> {
     var requestConfig:IRequestConfig = {
       method: 'GET',
-      url: 'http://timeline-oraj360.cfapps.io/api/timelines/person/' + name
+      url: GatewayApi.buildTimeLineUriByName('gide')
     };
 
     return this
