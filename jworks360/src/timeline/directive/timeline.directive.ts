@@ -24,8 +24,6 @@ export class TimeLineDirective implements IDirective {
 
   restrict:string = 'E';
   bindToController:boolean = true;
-  scope:any = {
-  };
   link:IDirectiveLinkFn = this.linkFunc;
   controller:Function = TimeLineVisController;
   controllerAs:string = 'vm';
@@ -36,10 +34,11 @@ export class TimeLineDirective implements IDirective {
                   instanceElement:IAugmentedJQuery,
                   instanceAttributes:IAttributes):void {
     scope.vm.getMockData();
-
+    scope.vm.mode = "indeterminate";
     scope.$watch('vm.dataItems', (newValue, oldValue) => {
       //todo find a better way to prevent the timeline from being drawn more than once
       if(newValue.length > 0){
+        scope.vm.mode = null;
         console.log(newValue);
         var elementToPlaceTimeLine = instanceElement.find('md-card-content')[0];
         var items = new vis.DataSet(newValue);
