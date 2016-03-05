@@ -13,10 +13,9 @@ Refactored code can be found inside of jworks360 folder.
 
 ### Install
 
-
 Install cli tools
 ```
-npm i -g webpack typings
+npm i -g webpack typings http-server
 ```
   
 Install dependencies
@@ -29,13 +28,28 @@ Launch dev server
 npm run dev
 ```
 
+### Build
+
+```
+npm run build
+```
+
+Run deployed app
+```
+npm run open
+```
+
 ### Tests
 
-```sh
+```
 npm test
 ```
 - Filenames are required to end with .spec.ts
 - Tests should be located inside of jworks360/src or subfolders
+
+#### Code coverage
+
+run build then locate: reports/index.html
 
 ## Notes
 
