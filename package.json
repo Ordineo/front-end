@@ -58,6 +58,7 @@
     "postinstall": "typings i",
     "test": "karma start --NODE_ENV=test",
     "typings": "typings install",
+    "open": "http-server build/ -p 8540",
     "build": "webpack --config webpack/build.config.js",
     "dev-webp": "webpack --config webpack/dev.config.js",
     "dev": "webpack-dev-server --config webpack/dev.config.js --content-base public/dev --inline"
