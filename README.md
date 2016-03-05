@@ -49,7 +49,9 @@ npm test
 
 #### Code coverage
 
-run build then locate: reports/index.html
+Run tests to generate reports
+reports are located in: reports/
+
 
 ## Notes
 
