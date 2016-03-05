@@ -31,6 +31,9 @@ export class TimeLineService{
     return deferred.promise;
   }
 
+  /*
+  * Unlike getMock data doesnt get parsed yet,
+  * so inject TimeLineJSONParser inside a controller and parse it there*/
   getTimelineByUserName(name:string):IPromise<any> {
     var requestConfig:IRequestConfig = {
       method: 'GET',
