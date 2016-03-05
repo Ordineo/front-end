@@ -1,13 +1,11 @@
-
-import {TimeLineObjective} from "./timeline.objective.model";
-
+import {ITimeLineItem} from "./timeline.item.model";
 export class TimeLine{
 
-  constructor(private objectives:Array<TimeLineObjective>){
+  constructor(private objectives:Array<ITimeLineItem>){
 
   }
 
-  getObjectives():Array<TimeLineObjective>{
+  getObjectives():Array<ITimeLineItem>{
     return this.objectives;
   }
 }

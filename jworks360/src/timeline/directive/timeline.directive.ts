@@ -1,13 +1,11 @@
 import IDirective = angular.IDirective;
 import IAttributes = angular.IAttributes;
 import IAugmentedJQuery = angular.IAugmentedJQuery;
-import IScope = angular.IScope;
 import IDirectiveLinkFn = angular.IDirectiveLinkFn;
-import {TimeLineService} from "../service/timeline.service";
-import {ITimeLineService} from "../service/timeline.service";
 import {TimeLine} from "../model/timeline.model";
-import {ITimeLineObjective} from "../model/timeline.objective.model";
-import {TimeLineObjective} from "../model/timeline.objective.model";
+import IDirectiveFactory = angular.IDirectiveFactory;
+import {TimeLineVisController} from "./timeline.vis.controller";
+import {DateUtil} from "../../util/DateUtil";
 
 require('vis/dist/vis.css');
 require('./style.scss');
@@ -15,58 +13,43 @@ require('./style.scss');
 var vis = require('vis/dist/vis.js');
 
 export class TimeLineDirective implements IDirective {
+
+  //<timeline></timeline>
   static NAME = 'timeline';
 
   restrict:string = 'E';
-  bindToController:any = {};
-  scope:any = {};
-  link:IDirectiveLinkFn = TimeLineDirective.linkFunc;
-  controller:Function = TimeLineController;
+  bindToController:boolean = true;
+  scope:any = {
+  };
+  link:IDirectiveLinkFn = this.linkFunc;
+  controller:Function = TimeLineVisController;
   controllerAs:string = 'vm';
+  transclude:boolean = true;
   template:string = require('./timeline-directive.html');
-  static linkFunc(scope:any,
+
+  private linkFunc(scope:any,
                   instanceElement:IAugmentedJQuery,
-                  instanceAttributes:IAttributes) {
+                  instanceAttributes:IAttributes):void {
+    scope.vm.getMockData();
 
-    var card = instanceElement.find('md-card-content');
+    scope.$watch('vm.dataItems', (newValue, oldValue) => {
+      //todo find a better way to prevent the timeline from being drawn more than once
+      if(newValue.length > 0){
+        console.log(newValue);
+        var elementToPlaceTimeLine = instanceElement.find('md-card-content')[0];
+        var items = new vis.DataSet(newValue);
 
-    var dataItems:Array<any> = [];
-    var objectives:Array<TimeLineObjective> = scope.vm.timeline.getObjectives();
+        var options = {
+          start: DateUtil.getTimeLineStartDate(),
+          end: DateUtil.getTimeLineEndDate(),
+        };
 
-    for(var i:number = 0; i < objectives.length; i++) {
-      var id:number = i + 1;
-      var item:ITimeLineObjective = objectives[i];
-      var dataItem:any = {
-        id: id,
-        content: item.description,
-        start: item.date
-      };
-      dataItems.push(dataItem);
-    }
-
-    var items = new vis.DataSet(dataItems);
-
-    // Configuration for the Timeline
-    var options = {
-      start: '2016-01-01',
-      end: '2016-10-31',
-    };
-
-    new vis.Timeline(card[0], items, options);
+        new vis.Timeline(elementToPlaceTimeLine, items, options);
+      }
+    });
   }
 
-  static instance() {
+  static instance():IDirective {
     return new TimeLineDirective();
-  }
-}
-
-export class TimeLineController {
-
-  static $inject:Array<string> = [TimeLineService.NAME];
-
-  public timeline:TimeLine;
-
-  constructor(private $timeLineService:TimeLineService) {
-    this.timeline = $timeLineService.getMock();
   }
 }

@@ -1,62 +1,43 @@
-
 import {TimeLine} from "../model/timeline.model";
 import {IAuthService} from "../../auth/service/auth.service";
 import IHttpService = angular.IHttpService;
 import IRequestConfig = angular.IRequestConfig;
-import {TimeLineObjective} from "../model/timeline.objective.model";
+import {TimeLineJSONParser} from "./timeline.service.jsonparser";
+import IHttpPromiseCallbackArg = angular.IHttpPromiseCallbackArg;
+import IHttpPromiseCallback = angular.IHttpPromiseCallback;
+import IPromise = angular.IPromise;
+import IDeferred = angular.IDeferred;
+import IQService = angular.IQService;
 
-export interface ITimeLineService{
-  getTimelineByUserName(name:string):TimeLine;
-}
-export class TimeLineService implements ITimeLineService{
+export class TimeLineService{
 
   static NAME = 'jworks360.TimeLineService';
+  static $inject:Array<string> = ['$q','$http', TimeLineJSONParser.NAME];
 
-  static $inject:Array<string> = ['$http'];
-
-  constructor(private $http:IHttpService){
-
+  constructor(private $q:IQService, private $http:IHttpService, private parser:TimeLineJSONParser){
   }
 
-  getMock():TimeLine {
-    var data = require('../../../test/mockdata/timeline.json');
-    var timelineResources = data._embedded.timelineResources;
-    var objectives:Array<TimeLineObjective> = [];
-    for (var i = 0; i < timelineResources.length; i++){
-      var objective = new TimeLineObjective();
-      objective.description = timelineResources[i].description;
-      objective.moreInformation = timelineResources[i].moreInformation;
-      objective.reviewer = timelineResources[i].reviewer;
-      objective.tags = timelineResources[i].tags;
-      objective.date = timelineResources[i].date;
-      objectives.push(objective);
-    }
-    return new TimeLine(objectives);
+  public getMock():IPromise<TimeLine> {
+    var deferred:IDeferred<TimeLine> = this.$q.defer();
+    setTimeout(()=> {
+      var data = require('../../../test/mockdata/timeline.json');
+      if (data !== null) {
+        deferred.resolve(this.parser.parse(data));
+      } else {
+        deferred.reject("No data");
+      }
+    }, 1000);
+
+    return deferred.promise;
   }
 
-  //TODO implement requests
-
-  getTimelineByUserName(name:string):TimeLine {
+  getTimelineByUserName(name:string):IPromise<any> {
     var requestConfig:IRequestConfig = {
       method: 'GET',
       url: 'http://timeline-oraj360.cfapps.io/api/timelines/person/' + name
     };
 
-    this.$http(requestConfig).then(function success(response){
-      console.log("SUCCESS");
-      console.log(response.data);
-    },function error(response){
-      console.log("Failed");
-    });
-
-    return undefined;
-  }
-
-  private parseResponseData(data:any):void{
-    this.parseObjectives(data._embedded.timelineResources);
-  }
-
-  private parseObjectives(data:any):void{
-    console.log("Objectivess: " + data);
+    return this
+      .$http(requestConfig);
   }
 }
