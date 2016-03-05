@@ -12,11 +12,11 @@ import IDeferred = angular.IDeferred;
  * */
 export class TimeLineVisController {
 
-  static $inject:Array<string> = [TimeLineService.NAME, '$q'];
+  static $inject:Array<string> = [TimeLineService.NAME];
 
   public dataItems:Array<any> = [];
 
-  constructor(private timeLineService:TimeLineService, private $q:IQService) {
+  constructor(private timeLineService:TimeLineService) {
   }
 
   public getMockData():void {
