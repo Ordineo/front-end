@@ -19,29 +19,29 @@ export class TimeLineVisController {
   constructor(private timeLineService:TimeLineService, private $q:IQService) {
   }
 
-  public getMockData():void{
+  public getMockData():void {
+    this.timeLineService
+      .getMock()
+      .then((timeline:TimeLine)=> {
+        this.dataItems = this.getPreppedDataForVis(timeline);
+      });
+  }
+
+  private getPreppedDataForVis(timeline:TimeLine):Array<any> {
     var items:Array<any> = [];
 
-    this.timeLineService.getMock().then((timeline:TimeLine)=> {
-      var objectives:Array<ITimeLineItem> = timeline.getObjectives();
+    var objectives:Array<ITimeLineItem> = timeline.getObjectives();
 
-      for (var i:number = 0; i < objectives.length; i++) {
-        var id:number = i + 1;
-        var item:ITimeLineItem = objectives[i];
-        var dataItem:any = {
-          id: id,
-          content: item.description,
-          start: item.date
-        };
-        items.push(dataItem);
-      }
-
-      this.dataItems = items;
-    });
+    for (var i:number = 0; i < objectives.length; i++) {
+      var id:number = i + 1;
+      var item:ITimeLineItem = objectives[i];
+      var dataItem:any = {
+        id: id,
+        content: item.description,
+        start: item.date
+      };
+      items.push(dataItem);
+    }
+    return items;
   }
-}
-
-export interface ITimeLineCtrl{
-  dataItems:Array<any>;
-  getMockData():void
 }
