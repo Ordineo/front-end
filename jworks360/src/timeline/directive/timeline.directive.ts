@@ -12,6 +12,11 @@ require('./style.scss');
 
 var vis = require('vis/dist/vis.js');
 
+//todo show distinction between types (objective/feedback)
+//todo change timeline styles
+//todo show extra information on click
+//todo abstract away vis library as an angular component
+
 export class TimeLineDirective implements IDirective {
 
   //<timeline></timeline>

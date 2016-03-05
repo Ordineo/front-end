@@ -51,7 +51,7 @@ class LoginComponentController implements ILogin {
     }
   }
 
-  //TODO fix toast positioning
+  //TODO fix toast positioning, on resize position is inconscistent
   showNotAuthorizedMessage():void {
     console.log('show toast');
     this.$mdToast.show(
