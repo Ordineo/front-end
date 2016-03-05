@@ -8,6 +8,7 @@ import {ProfileState} from "./states/profile.state";
 
 configureStates.$inject = ['$stateProvider', '$urlRouterProvider'];
 
+/* todo add authentication for routes */
 export function configureStates($stateProvider:IStateProvider, $urlRouterProvider:IUrlRouterProvider) {
 
   $stateProvider.state(new LoginState());
