@@ -1,6 +1,6 @@
 import {TimeLineService} from "./service/timeline.service";
 import {MATERIAL_DESIGN} from "../material-design/material-design";
-import {TimeLineDirective} from "./directive/timeline.directive";
+import {TimeLineDirective} from "./directive/timeline.vis.directive.ts";
 import {TimeLineJSONParser} from "./service/timeline.service.jsonparser";
 
 export const JWORKS_TIMELINE = "TimeLine";

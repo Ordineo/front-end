@@ -6,6 +6,7 @@ import {TimeLine} from "../model/timeline.model";
 import IDirectiveFactory = angular.IDirectiveFactory;
 import {TimeLineVisController} from "./timeline.vis.controller";
 import {DateUtil} from "../../util/DateUtil";
+import {ITimeLineVisController} from "./timeline.vis.controller";
 
 require('vis/dist/vis.css');
 require('./style.scss');
@@ -27,19 +28,20 @@ export class TimeLineDirective implements IDirective {
   link:IDirectiveLinkFn = this.linkFunc;
   controller:Function = TimeLineVisController;
   controllerAs:string = 'vm';
-  transclude:boolean = true;
   template:string = require('./timeline-directive.html');
 
   private linkFunc(scope:any,
                   instanceElement:IAugmentedJQuery,
                   instanceAttributes:IAttributes):void {
-    scope.vm.getMockData();
-    scope.vm.mode = "indeterminate";
+
+    var vm:ITimeLineVisController = scope.vm;
+    vm.getTimeLineItemsAsync();
+
     scope.$watch('vm.dataItems', (newValue, oldValue) => {
       //todo find a better way to prevent the timeline from being drawn more than once
       if(newValue.length > 0){
-        scope.vm.mode = null;
-        console.log(newValue);
+        vm.mode = null;
+
         var elementToPlaceTimeLine = instanceElement.find('md-card-content')[0];
         var items = new vis.DataSet(newValue);
 

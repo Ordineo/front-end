@@ -8,16 +8,22 @@ import {ITimeLineItem} from "../model/timeline.item.model";
  * preps it for vis library http://visjs.org/timeline_examples.html
  * and provides it to the view
  * */
-export class TimeLineVisController {
+export interface ITimeLineVisController {
+  getTimeLineItemsAsync():void;
+  mode:string;
+  dataItems:Array<any>;
+}
+
+export class TimeLineVisController implements ITimeLineVisController{
 
   static $inject:Array<string> = [TimeLineService.NAME];
-
   public dataItems:Array<any> = [];
+  public mode:string = 'indeterminate';
 
   constructor(private timeLineService:TimeLineService) {
   }
 
-  public getMockData():void {
+  public getTimeLineItemsAsync():void {
     this.timeLineService
       .getMock()
       .then((timeline:TimeLine)=> {

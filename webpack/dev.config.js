@@ -1,12 +1,18 @@
 var devConfig = require('./default.config');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var output = {
+devConfig.plugins = [
+  new HtmlWebpackPlugin({
+    template: './webpack/templates/build.html',
+    inject: 'body'
+  })
+];
+
+devConfig.output = {
   path: './public/dev/',
   publicPath: "/assets/js",
   filename: "bundle.js"
 };
-
-devConfig.output = output;
 
 module.exports = devConfig;

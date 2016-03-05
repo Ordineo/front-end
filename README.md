@@ -23,10 +23,17 @@ Install dependencies
 npm i
 ```
   
-Launch dev server
+Create dev build
+```
+npm run webp-dev
+```
+
+Launche webpack-dev-server, you need to have run the above command at least once
 ```
 npm run dev
 ```
+
+Start coding
 
 ### Build
 
@@ -44,13 +51,15 @@ npm run open
 ```
 npm test
 ```
+
 - Filenames are required to end with .spec.ts
 - Tests should be located inside of jworks360/src or subfolders
 
 #### Code coverage
 
 Run tests to generate reports
-reports are located in: reports/
+
+Reports are located inside reports/ folder
 
 
 ## Notes
