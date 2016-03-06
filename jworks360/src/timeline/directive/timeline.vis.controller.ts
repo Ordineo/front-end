@@ -2,6 +2,7 @@ import {TimeLineService} from "../service/timeline.service";
 import {TimeLine} from "../model/timeline.model";
 import IScope = angular.IScope;
 import {ITimeLineItem} from "../model/timeline.item.model";
+import {TimeLineItemType} from "../model/timeline.item.model";
 
 /*
  * Fetches timeline data,
@@ -11,6 +12,7 @@ import {ITimeLineItem} from "../model/timeline.item.model";
 export interface ITimeLineVisController {
   getTimeLineItemsAsync():void;
   mode:string;
+  selectedItem:ITimeLineItem;
   dataItems:Array<any>;
 }
 
@@ -19,6 +21,7 @@ export class TimeLineVisController implements ITimeLineVisController{
   static $inject:Array<string> = [TimeLineService.NAME];
   public dataItems:Array<any> = [];
   public mode:string = 'indeterminate';
+  public selectedItem:ITimeLineItem;
 
   constructor(private timeLineService:TimeLineService) {
   }
@@ -31,6 +34,7 @@ export class TimeLineVisController implements ITimeLineVisController{
       });
   }
 
+
   private getPreppedDataForVis(timeline:TimeLine):Array<any> {
     var items:Array<any> = [];
 
@@ -40,12 +44,34 @@ export class TimeLineVisController implements ITimeLineVisController{
       var id:number = i + 1;
       var item:ITimeLineItem = objectives[i];
       var dataItem:any = {
+        className: this.getClassByType(item.type),
         id: id,
-        content: item.description,
-        start: item.date
+        content: this.getContentByType(item),
+        start: item.date,
+        title: item.moreInformation,
+        timeLineItem: item
       };
       items.push(dataItem);
     }
     return items;
+  }
+
+  private getContentByType(item:ITimeLineItem):string{
+    if(item.type === TimeLineItemType.FEEDBACK) {
+      return `"${item.description}" - <span class="reviewer">${item.reviewer}</span>`
+    }else{
+      return item.description;
+    }
+  }
+
+  private getClassByType(type:string):string{
+    console.log(type);
+    if(type === TimeLineItemType.FEEDBACK) {
+      return 'feedback'
+    } else if (type === TimeLineItemType.OBJECTIVE){
+      return 'blue';
+    }else{
+      return '';
+    }
   }
 }

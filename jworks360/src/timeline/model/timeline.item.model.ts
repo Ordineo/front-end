@@ -6,3 +6,8 @@ export interface ITimeLineItem{
   tags:Array<string>;
   date:string;
 }
+
+export class TimeLineItemType{
+  static OBJECTIVE = 'Objective';
+  static FEEDBACK = 'Feedback';
+}

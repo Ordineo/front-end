@@ -13,8 +13,6 @@ require('./style.scss');
 
 var vis = require('vis/dist/vis.js');
 
-//todo show distinction between types (objective/feedback)
-//todo change timeline styles
 //todo show extra information on click
 //todo abstract away vis library as an angular component
 
@@ -24,7 +22,6 @@ export class TimeLineDirective implements IDirective {
   static NAME = 'timeline';
 
   restrict:string = 'E';
-  bindToController:boolean = true;
   link:IDirectiveLinkFn = this.linkFunc;
   controller:Function = TimeLineVisController;
   controllerAs:string = 'vm';
@@ -38,7 +35,6 @@ export class TimeLineDirective implements IDirective {
     vm.getTimeLineItemsAsync();
 
     scope.$watch('vm.dataItems', (newValue, oldValue) => {
-      //todo find a better way to prevent the timeline from being drawn more than once
       if(newValue.length > 0){
         vm.mode = null;
 
@@ -48,9 +44,21 @@ export class TimeLineDirective implements IDirective {
         var options = {
           start: DateUtil.getTimeLineStartDate(),
           end: DateUtil.getTimeLineEndDate(),
+          showCurrentTime: false,
+          showMajorLabels: false,
         };
 
-        new vis.Timeline(elementToPlaceTimeLine, items, options);
+        var timeline:any = new vis.Timeline(elementToPlaceTimeLine, items, options);
+
+        timeline.on('select', (properties:any)=> {
+          var id = properties.items[0];
+          for(var i = 0; i < vm.dataItems.length; i++) {
+            if(vm.dataItems[i].id === id) {
+              vm.selectedItem = vm.dataItems[i].timeLineItem;
+              scope.$digest();
+            }
+          }
+        });
       }
     });
   }

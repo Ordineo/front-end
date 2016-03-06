@@ -1,12 +1,17 @@
 <md-card>
   <md-card-title>
     <md-card-title-text>
-      <span class="md-headline">Learning</span>
-      <span class="md-subhead">Targets</span>
+      <span class="md-headline">Timeline</span>
+      <p class="md-subhead" ng-show="vm.selectedItem.moreInformation">"{{vm.selectedItem.moreInformation}}"</p>
     </md-card-title-text>
   </md-card-title>
   <md-card-content>
-    <!-- todo remove element after data loaded -->
-      <md-progress-circular layout-align="center" class="md-accent" md-mode="{{vm.mode}}" md-diameter="40"></md-progress-circular>
+      <md-progress-circular ng-show="vm.mode" layout-align="center" class="md-accent" md-mode="{{vm.mode}}" md-diameter="40"></md-progress-circular>
+  </md-card-content>
+  <md-card-content>
+    <md-chips ng-show="vm.selectedItem.tags" layout="row" layout-align="end center">
+      <md-chip layout-align="right" ng-repeat="x in vm.selectedItem.tags">{{x}}</md-chip>
+    </md-chips>
   </md-card-content>
 </md-card>
+

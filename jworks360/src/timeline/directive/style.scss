@@ -1,11 +1,49 @@
 .vis-item {
-  border-color: orange;
-  background-color: yellow;
+  color: white;
+  border-color: #b27100;
+  background-color: #FEAF02;
 }
 .vis-timeline {
   border: none;
 }
-
+.vis-item.feedback{
+  color: white;
+  background-color: #89A831;
+  border-color: darkgreen;
+}
+.vis-item .vis-item-content{
+  padding: 8px;
+}
 .vis-time-axis .vis-grid.vis-minor{
   border:none;
+}
+.reviewer {
+  font-size: 0.6em;
+  font-style: italic;
+
+}
+.vis-time-axis .grid.vis-odd {
+  background: #f5f5f5;
+}
+.vis-panel.vis-center {
+  border-bottom-color: orange;
+  border-bottom-width: 1px;
+}
+.vis-time-axis .vis-text {
+  color: #150d02;
+
+}
+.vis-item.vis-selected{
+  color: #b27100;
+}
+.vis-item.feedback.vis-selected{
+  color: #cfd994;
+}
+
+md-chips.md-default-theme .md-chips, md-chips .md-chips {
+  box-shadow: none;
+}
+
+.vis-time-axis .vis-text {
+  z-index: -1;
 }
