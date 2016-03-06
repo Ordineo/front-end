@@ -28,7 +28,9 @@ Create dev build
 npm run webp-dev
 ```
 
-Launche webpack-dev-server, you need to have run the above command at least once
+Launch webpack-dev-server. 
+You need to have run the above command at least once.
+Dev app is served at http://localhost:8080
 ```
 npm run dev
 ```
@@ -42,6 +44,7 @@ npm run build
 ```
 
 Run deployed app
+App is served at http://localhost:8540
 ```
 npm run open
 ```
