@@ -3,6 +3,9 @@ $colorPrimary: #ff9800;
 $colorPrimary50: #ffcc80;
 $jworksLogo: '../images/jworks-logo.jpg';
 $loginBg: '../images/landscape.jpg';
+$materialBg: '../images/header-bg.png';
+$logoNoMargin: '../images/jworks-trans.png';
+$ordinaLogo: '../images/ordina-logo.png';
 
 body{
   background-color: #EDF0F1;
@@ -27,6 +30,19 @@ body{
   height: 250px;
   background: url($jworksLogo) no-repeat center;
   background-size: contain;
+}
+.ordina-logo{
+  background: url($ordinaLogo) no-repeat left center;
+  background-size: 100px;
+}
+.jworks-logo-nm {
+  background: url($logoNoMargin) no-repeat center ;
+  background-size: 120px;
+}
+
+.material-bg {
+  background: url($materialBg) no-repeat center;
+  background-size: cover;
 }
 
 .layout-login {

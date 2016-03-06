@@ -1,0 +1,49 @@
+<md-toolbar class="main-toolbar md-whiteframe-3dp">
+  <div class="md-toolbar-tools">
+    <div layout="row" class="ordina-logo" layout-align="center center">
+      <md-button>
+      </md-button>
+    </div>
+    <div layout="row" flex layout-align="center center">
+      <div flex="70">
+        <md-autocomplete
+          ng-disabled="$ctrl.isDisabled"
+          md-no-cache="$ctrl.noCache"
+          md-selected-item="$ctrl.selectedItem"
+          md-search-text-change="$ctrl.searchTextChange($ctrl.searchText)"
+          md-search-text="$ctrl.searchText"
+          md-selected-item-change="$ctrl.selectedItemChange(item)"
+          md-items="item in $ctrl.querySearch($ctrl.searchText)"
+          md-item-text="item.display"
+          md-min-length="0"
+          placeholder="Search">
+        </md-autocomplete>
+      </div>
+    </div>
+    <div layout="row" flex="10">
+
+      <md-fab-speed-dial ng-hide="$ctrl.hidden" md-direction="left" md-open="$ctrl.isOpen"
+                         class="md-scale md-fab-top-right" ng-class="{ 'md-hover-full': $ctrl.hover }"
+                         ng-mouseenter="$ctrl.isOpen=true" ng-mouseleave="$ctrl.isOpen=false">
+        <md-fab-trigger>
+          <md-button aria-label="menu" class="md-fab md-primary md-hue-1">
+            <md-icon md-svg-src="social:mood" aria-label="menu"></md-icon>
+          </md-button>
+        </md-fab-trigger>
+        <md-fab-actions>
+          <div ng-repeat="item in $ctrl.items">
+            <md-button aria-label="{{item.name}}" class="md-fab md-raised md-mini"
+                       ng-click="$ctrl.onLogoutClick()">
+              <md-tooltip md-direction="{{item.direction}}" md-visible="tooltipVisible"
+                          md-autohide="false">
+                {{item.name}}
+              </md-tooltip>
+              <md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>
+            </md-button>
+          </div>
+        </md-fab-actions>
+      </md-fab-speed-dial>
+
+    </div>
+  </div>
+</md-toolbar>

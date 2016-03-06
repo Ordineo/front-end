@@ -1,15 +1,16 @@
 .vis-item {
-  color: white;
-  border-color: #b27100;
-  background-color: #FEAF02;
+  color: #8a6d3b;
+  cursor: pointer;
+  border-color: #faebcc;
+  background-color: #fcf8e3;
 }
 .vis-timeline {
   border: none;
 }
 .vis-item.feedback{
-  color: white;
-  background-color: #89A831;
-  border-color: darkgreen;
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
 }
 .vis-item .vis-item-content{
   padding: 8px;
@@ -33,11 +34,15 @@
   color: #150d02;
 
 }
-.vis-item.vis-selected{
-  color: #b27100;
+.vis-item.vis-selected {
+  color: white;
+  background-color: #ec971f;
+  border-color: #805212;
 }
 .vis-item.feedback.vis-selected{
-  color: #cfd994;
+  color: white;
+  background-color: #398439;
+  border-color: #224d22
 }
 
 md-chips.md-default-theme .md-chips, md-chips .md-chips {
@@ -45,5 +50,4 @@ md-chips.md-default-theme .md-chips, md-chips .md-chips {
 }
 
 .vis-time-axis .vis-text {
-  z-index: -1;
 }

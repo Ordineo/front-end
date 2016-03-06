@@ -3,6 +3,7 @@ import 'angular-material';
 //"typescript import uses absolute path so I prefer using commonjs" - Ryan
 //import '../../../node_modules/angular-material/angular-material.css';
 require('angular-material/angular-material.css');
+require('./custom-material-styles.scss')
 import 'angular-aria';
 import 'angular-animate';
 import IIconProvider = angular.material.IIconProvider;
@@ -77,29 +78,15 @@ function mdConfig($mdIcon:IIconProvider, $mdThemingProvider:IThemingProvider) {
     .definePalette('customWarn',
       customWarn);
 
-  var customBackground = {
-    '50': '#dedede',
-    '100': '#d1d1d1',
-    '200': '#c4c4c4',
-    '300': '#b7b7b7',
-    '400': '#ababab',
-    '500': '#9E9E9E',
-    '600': '#919191',
-    '700': '#848484',
-    '800': '#787878',
-    '900': '#6b6b6b',
-    'A100': '#eaeaea',
-    'A200': '#f7f7f7',
-    'A400': '#ffffff',
-    'A700': '#5e5e5e'
-  };
-  $mdThemingProvider
-    .definePalette('customBackground',
-      customBackground);
-
   $mdThemingProvider.theme('default')
     .primaryPalette('customAccent')
-    .warnPalette('red');
+    .warnPalette('customWarn')
+    .accentPalette('customPrimary');
 
-  $mdIcon.iconSet('com', require('./icon-packs/communication-icons.svg'), 24);
+  $mdIcon
+    .iconSet('social',require('./icon-packs/social-icons.svg'), 24)
+    .iconSet('nav',require('./icon-packs/navigation-icons.svg'), 24)
+    .iconSet('content',require('./icon-packs/content-icons.svg'), 24)
+    .iconSet('act', require('./icon-packs/action-icons.svg'), 24)
+    .iconSet('com', require('./icon-packs/communication-icons.svg'), 24);
 }
