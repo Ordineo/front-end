@@ -3,6 +3,8 @@ import {TimeLine} from "../model/timeline.model";
 import IScope = angular.IScope;
 import {ITimeLineItem} from "../model/timeline.item.model";
 import {TimeLineItemType} from "../model/timeline.item.model";
+import {TimeLineJSONParser} from "../service/timeline.service.jsonparser";
+import IPromise = angular.IPromise;
 
 /*
  * Fetches timeline data,
@@ -18,22 +20,22 @@ export interface ITimeLineVisController {
 
 export class TimeLineVisController implements ITimeLineVisController{
 
-  static $inject:Array<string> = [TimeLineService.NAME];
+  static $inject:Array<string> = [TimeLineService.NAME, TimeLineJSONParser.NAME];
   public dataItems:Array<any> = [];
   public mode:string = 'indeterminate';
   public selectedItem:ITimeLineItem;
 
-  constructor(private timeLineService:TimeLineService) {
+  constructor(private timeLineService:TimeLineService, private parser:TimeLineJSONParser) {
   }
 
+  //todo implement on error callback
   public getTimeLineItemsAsync():void {
     this.timeLineService
-      .getMock()
-      .then((timeline:TimeLine)=> {
-        this.dataItems = this.getPreppedDataForVis(timeline);
+      .getTimelineByUserName('gide')
+      .then((result:any)=> {
+        this.dataItems = this.getPreppedDataForVis(this.parser.parse(result.data));
       });
   }
-
 
   private getPreppedDataForVis(timeline:TimeLine):Array<any> {
     var items:Array<any> = [];

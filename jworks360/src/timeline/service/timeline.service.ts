@@ -38,7 +38,7 @@ export class TimeLineService{
   public getTimelineByUserName(name:string):IPromise<any> {
     var requestConfig:IRequestConfig = {
       method: 'GET',
-      url: GatewayApi.buildTimeLineUriByName('gide')
+      url: GatewayApi.buildTimeLineUriByName(name)
     };
 
     return this
