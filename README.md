@@ -25,7 +25,7 @@ npm i
   
 Create dev build
 ```
-npm run webp-dev
+npm run dev-webp
 ```
 
 Launch webpack-dev-server. 
