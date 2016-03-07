@@ -7,7 +7,7 @@ import IDirectiveFactory = angular.IDirectiveFactory;
 import {TimeLineVisController} from "./timeline.vis.controller";
 import {DateUtil} from "../../util/DateUtil";
 import {ITimeLineVisController} from "./timeline.vis.controller";
-
+var Handlebars = require('handlebars-template-loader/runtime');
 require('vis/dist/vis.css');
 require('./style.scss');
 
@@ -29,20 +29,20 @@ export class TimeLineDirective implements IDirective {
   template:string = require('./timeline-directive.html');
 
   private linkFunc(scope:any,
-                  instanceElement:IAugmentedJQuery,
-                  instanceAttributes:IAttributes):void {
+                   instanceElement:IAugmentedJQuery,
+                   instanceAttributes:IAttributes):void {
 
     var vm:ITimeLineVisController = scope.vm;
     vm.getTimeLineItemsAsync();
 
     scope.$watch('vm.hasApiError', (newValue, oldValue) => {
-      if(newValue === true && newValue !== oldValue) {
-      //  show disabled card
+      if (newValue === true && newValue !== oldValue) {
+        //  show disabled card
         instanceElement.find('md-card-content').addClass('ng-hide');
         instanceElement.find('md-card').addClass('md-background md-hue-1');
         instanceElement.find('md-card-title-text').addClass('inactive flex');
         instanceElement.find('h3').text("Cannot connect to timeline");
-      }else{
+      } else {
         instanceElement.find('h3').text("Timeline");
         instanceElement.find('md-card-content').removeClass('ng-hide');
         instanceElement.find('md-card').removeClass('md-background md-hue-1');
@@ -50,17 +50,25 @@ export class TimeLineDirective implements IDirective {
     });
 
     scope.$watch('vm.dataItems', (newValue, oldValue) => {
-      if(newValue.length > 0 && newValue !== oldValue){
+      if (newValue.length > 0 && newValue !== oldValue) {
         instanceElement.find('md-card-content').empty();
 
         var elementToPlaceTimeLine = instanceElement.find('md-card-content')[0];
         var items = new vis.DataSet(newValue);
 
+        var compiled: any = require('./item-template.hbs');
+        var obj = {
+          type: 'hello',
+          title: 'world'
+        };
+        var c: any = compiled(obj);
+
         var options = {
-          start: DateUtil.getTimeLineStartDate(),
-          end: DateUtil.getTimeLineEndDate(),
           showCurrentTime: false,
           showMajorLabels: false,
+          template: function(item){
+            return compiled(item.timeLineItem);
+          }
         };
 
         vm.timeLine = new vis.Timeline(elementToPlaceTimeLine, items, options);
@@ -72,16 +80,21 @@ export class TimeLineDirective implements IDirective {
 
         vm.timeLine.components.push(axis);
 
+        vm.timeLine.setOptions({
+          orientation: {
+            item: 'top'
+          }
+        });
+
         // force a redraw, making the new axis visible
         vm.timeLine.redraw();
-        vm.timeLine.setOptions({orientation: {
-          item: 'top'
-        }});
+
+        console.log(vm.timeLine.components);
 
         vm.timeLine.on('select', (properties:any)=> {
           var id = properties.items[0];
-          for(var i = 0; i < vm.dataItems.length; i++) {
-            if(vm.dataItems[i].id === id) {
+          for (var i = 0; i < vm.dataItems.length; i++) {
+            if (vm.dataItems[i].id === id) {
               vm.selectedItem = vm.dataItems[i].timeLineItem;
               scope.$digest();
             }

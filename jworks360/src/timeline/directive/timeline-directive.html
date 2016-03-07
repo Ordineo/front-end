@@ -6,7 +6,7 @@
         <div layout="row" flex layout-align="center center">
           <md-progress-circular ng-show="vm.isRequestPending" class="md-accent" md-mode="{{vm.mode}}" md-diameter="40"></md-progress-circular>
         </div>
-        <div flex="20">
+        <div flex="20" layout="row" layout-align="end center">
           <md-button ng-disabled="vm.isRequestPending" ng-click="vm.getMock()">
             local
             <!--<md-icon md-svg-src="social:mood"></md-icon>-->

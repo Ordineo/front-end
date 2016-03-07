@@ -18,6 +18,7 @@ module.exports = {
         path.resolve('./src')
       ]
       },
+      {test: /\.hbs/, loader: "handlebars-template-loader"},
       {
         test: /\.html$/,
         exclude: /node_modules/,
@@ -34,5 +35,7 @@ module.exports = {
         test: /\.json$/, exclude: /node_modules/, loader: 'json'
       }
     ]
+  }, node: {
+    fs: "empty" // avoids error messages
   }
 };
