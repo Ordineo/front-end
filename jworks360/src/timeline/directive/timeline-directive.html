@@ -1,17 +1,31 @@
 <md-card>
   <md-card-title>
     <md-card-title-text>
-      <span class="md-headline">Timeline</span>
+      <div layout="row" layout-align="start center">
+        <h3 flex="20" class="md-headline" flex>Timeline</h3>
+        <div layout="row" flex layout-align="center center">
+          <md-progress-circular ng-show="vm.isRequestPending" class="md-accent" md-mode="{{vm.mode}}" md-diameter="40"></md-progress-circular>
+        </div>
+        <div flex="20">
+          <md-button ng-disabled="vm.isRequestPending" ng-click="vm.getMock()">
+            local
+            <!--<md-icon md-svg-src="social:mood"></md-icon>-->
+          </md-button>
+          <md-button ng-disabled="vm.isRequestPending" ng-click="vm.getTimeLineItemsAsync()">
+            remote
+            <!--<md-icon md-svg-src="social:mood_bad"></md-icon>-->
+          </md-button>
+        </div>
+      </div>
       <p class="md-subhead" ng-show="vm.selectedItem.moreInformation">"{{vm.selectedItem.moreInformation}}"</p>
     </md-card-title-text>
   </md-card-title>
-  <md-card-content>
-      <md-progress-circular ng-show="vm.mode" layout-align="center" class="md-accent" md-mode="{{vm.mode}}" md-diameter="40"></md-progress-circular>
+  <md-card-content class="timeline-container" ng-show="!vm.isRequestPending || !vm.hasApiError">
   </md-card-content>
-  <md-card-content>
+  <div>
     <md-chips ng-show="vm.selectedItem.tags" layout="row" layout-align="end center">
       <md-chip layout-align="right" ng-repeat="x in vm.selectedItem.tags">{{x}}</md-chip>
     </md-chips>
-  </md-card-content>
+  </div>
 </md-card>
 

@@ -6,35 +6,63 @@ import {TimeLineItemType} from "../model/timeline.item.model";
 import {TimeLineJSONParser} from "../service/timeline.service.jsonparser";
 import IPromise = angular.IPromise;
 
+require('vis/dist/vis.css');
+require('./style.scss');
+
+var vis = require('vis/dist/vis.js');
+
 /*
  * Fetches timeline data,
  * preps it for vis library http://visjs.org/timeline_examples.html
  * and provides it to the view
+ *
  * */
 export interface ITimeLineVisController {
   getTimeLineItemsAsync():void;
   mode:string;
   selectedItem:ITimeLineItem;
   dataItems:Array<any>;
+  timeLine:any;
+  isRequestPending:boolean;
 }
 
-export class TimeLineVisController implements ITimeLineVisController{
+export class TimeLineVisController implements ITimeLineVisController {
 
   static $inject:Array<string> = [TimeLineService.NAME, TimeLineJSONParser.NAME];
   public dataItems:Array<any> = [];
   public mode:string = 'indeterminate';
   public selectedItem:ITimeLineItem;
+  public hasApiError:boolean = false;
+  public timeLine:any;
+  public isRequestPending:boolean;
 
   constructor(private timeLineService:TimeLineService, private parser:TimeLineJSONParser) {
+
   }
 
-  //todo implement on error callback
   public getTimeLineItemsAsync():void {
+    this.isRequestPending = true;
     this.timeLineService
       .getTimelineByUserName('gide')
       .then((result:any)=> {
+        this.isRequestPending = false;
+        this.hasApiError = false;
         this.dataItems = this.getPreppedDataForVis(this.parser.parse(result.data));
+      }, (error:any) => {
+        this.isRequestPending = false;
+        this.hasApiError = true;
       });
+  }
+
+  public getMock():void{
+    this.isRequestPending = true;
+    this.timeLineService
+      .getMock()
+      .then((data:any)=>{
+        this.isRequestPending = false;
+        this.hasApiError = false
+        this.dataItems = this.getPreppedDataForVis(data);
+      })
   }
 
   private getPreppedDataForVis(timeline:TimeLine):Array<any> {
@@ -58,21 +86,21 @@ export class TimeLineVisController implements ITimeLineVisController{
     return items;
   }
 
-  private getContentByType(item:ITimeLineItem):string{
-    if(item.type === TimeLineItemType.FEEDBACK) {
+  private getContentByType(item:ITimeLineItem):string {
+    if (item.type === TimeLineItemType.FEEDBACK) {
       return `"${item.description}" - <span class="reviewer">${item.reviewer}</span>`
-    }else{
+    } else {
       return item.description;
     }
   }
 
-  private getClassByType(type:string):string{
+  private getClassByType(type:string):string {
     console.log(type);
-    if(type === TimeLineItemType.FEEDBACK) {
+    if (type === TimeLineItemType.FEEDBACK) {
       return 'feedback'
-    } else if (type === TimeLineItemType.OBJECTIVE){
+    } else if (type === TimeLineItemType.OBJECTIVE) {
       return 'blue';
-    }else{
+    } else {
       return '';
     }
   }

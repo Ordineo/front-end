@@ -27,7 +27,7 @@ export class TimeLineService{
       } else {
         deferred.reject("No data");
       }
-    }, 1000);
+    }, 5000);
 
     return deferred.promise;
   }

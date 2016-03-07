@@ -2,10 +2,10 @@
   "_embedded" : {
     "timelineResources" : [ {
       "type" : "Objective",
-      "description" : "Get java se certificate",
-      "moreInformation" : "time to upgrade from java 6 to java 8 certificate.",
+      "description" : "OWASP Certification",
+      "moreInformation" : "Exams can be very challenging, going beyond simple recall and requiring candidates to engage in on the job types of problem solving. Questions include multiple-choice single answer, multiple-choice multiple answers, drag and drop, fill in the blank and simulations.",
       "reviewer" : null,
-      "tags" : [ "certificate", "java" ],
+      "tags" : [ "certificate", "owasp", "security" ],
       "date" : "2016-03-01",
       "_links" : {
         "self" : {
@@ -15,8 +15,8 @@
       }
     }, {
       "type" : "Feedback",
-      "description" : "Vlotte opvolging",
-      "moreInformation" : "Ik zie dat je uw target reeds gehaald hebt, leuk om te zien.",
+      "description" : "Goed bezig.",
+      "moreInformation" : "Een advies is een neerslag van schriftelijke, specifieke, waardevolle raadgevingen en aanbevelingen, verleend door een dienstverlener, die bestaan uit een analyse van de probleemstelling, een eigenlijk advies, een implementatieplan en de begeleiding bij de implementatie, en die uitsluitend of hoofdzakelijk gericht zijn op het verbeteren van het huidige of het toekomstige bedrijfsfunctioneren van de onderneming. Het advies draagt bij tot de versterking, groei of transformatie van de onderneming in Vlaanderen.",
       "reviewer" : "Mr. E",
       "tags" : null,
       "date" : "2016-05-03",

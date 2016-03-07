@@ -15,6 +15,7 @@ var vis = require('vis/dist/vis.js');
 
 //todo show extra information on click
 //todo abstract away vis library as an angular component
+//todo block ui untill request has returned
 
 export class TimeLineDirective implements IDirective {
 
@@ -34,9 +35,23 @@ export class TimeLineDirective implements IDirective {
     var vm:ITimeLineVisController = scope.vm;
     vm.getTimeLineItemsAsync();
 
+    scope.$watch('vm.hasApiError', (newValue, oldValue) => {
+      if(newValue === true && newValue !== oldValue) {
+      //  show disabled card
+        instanceElement.find('md-card-content').addClass('ng-hide');
+        instanceElement.find('md-card').addClass('md-background md-hue-1');
+        instanceElement.find('md-card-title-text').addClass('inactive flex');
+        instanceElement.find('h3').text("Cannot connect to timeline");
+      }else{
+        instanceElement.find('h3').text("Timeline");
+        instanceElement.find('md-card-content').removeClass('ng-hide');
+        instanceElement.find('md-card').removeClass('md-background md-hue-1');
+      }
+    });
+
     scope.$watch('vm.dataItems', (newValue, oldValue) => {
-      if(newValue.length > 0){
-        vm.mode = null;
+      if(newValue.length > 0 && newValue !== oldValue){
+        instanceElement.find('md-card-content').empty();
 
         var elementToPlaceTimeLine = instanceElement.find('md-card-content')[0];
         var items = new vis.DataSet(newValue);
@@ -48,9 +63,22 @@ export class TimeLineDirective implements IDirective {
           showMajorLabels: false,
         };
 
-        var timeline:any = new vis.Timeline(elementToPlaceTimeLine, items, options);
+        vm.timeLine = new vis.Timeline(elementToPlaceTimeLine, items, options);
 
-        timeline.on('select', (properties:any)=> {
+        var axisOptions = {
+          orientation: 'top'
+        };
+        var axis = new vis.timeline.components.TimeAxis(vm.timeLine.body, axisOptions);
+
+        vm.timeLine.components.push(axis);
+
+        // force a redraw, making the new axis visible
+        vm.timeLine.redraw();
+        vm.timeLine.setOptions({orientation: {
+          item: 'top'
+        }});
+
+        vm.timeLine.on('select', (properties:any)=> {
           var id = properties.items[0];
           for(var i = 0; i < vm.dataItems.length; i++) {
             if(vm.dataItems[i].id === id) {
