@@ -24,6 +24,7 @@ export interface ITimeLineVisController {
   dataItems:Array<any>;
   timeLine:any;
   isRequestPending:boolean;
+  showMore:boolean;
 }
 
 export class TimeLineVisController implements ITimeLineVisController {
@@ -34,6 +35,7 @@ export class TimeLineVisController implements ITimeLineVisController {
   public hasApiError:boolean = false;
   public timeLine:any;
   public isRequestPending:boolean;
+  public showMore:boolean = false;
 
   constructor(private timeLineService:TimeLineService, private parser:TimeLineJSONParser) {
   }
@@ -54,6 +56,10 @@ export class TimeLineVisController implements ITimeLineVisController {
       });
   }
 
+  public toggleInfo():void{
+    this.showMore = !this.showMore;
+  }
+
   public getMock():void{
     this.isRequestPending = true;
     this.selectedItem = null;
@@ -62,7 +68,7 @@ export class TimeLineVisController implements ITimeLineVisController {
       .getMock()
       .then((data:any)=> {
         this.isRequestPending = false;
-        this.hasApiError = false
+        this.hasApiError = false;
         this.dataItems = this.getPreppedDataForVis(data);
       }, (error:any)=> {
         this.isRequestPending = false;
@@ -78,6 +84,8 @@ export class TimeLineVisController implements ITimeLineVisController {
     for (var i:number = 0; i < objectives.length; i++) {
       var id:number = i + 1;
       var item:ITimeLineItem = objectives[i];
+      item.shortInfo = StringUtil.createShortVersion(item.moreInformation);
+
       var dataItem:any = {
         className: this.getClassByType(item.type),
         id: id,

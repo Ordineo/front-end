@@ -5,6 +5,7 @@ export interface ITimeLineItem{
   reviewer:string;
   tags:Array<string>;
   date:string;
+  shortInfo?:string;
 }
 
 export class TimeLineItemType{

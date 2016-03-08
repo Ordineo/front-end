@@ -19,14 +19,24 @@
         </div>
       </div>
       <div ng-show="vm.selectedItem">
-        <p>{{vm.selectedItem.date | amUtc | amDateFormat:'dddd, MMMM Do YYYY'}}</p>
-        <p>{{vm.selectedItem.description}}</p>
-        <p class="md-subhead" ng-show="vm.selectedItem.moreInformation">{{vm.selectedItem.moreInformation}}</p>
+        <p class="md-subhead">
+          <strong>{{vm.selectedItem.description}}
+            <span ng-if="vm.selectedItem.type === 'Feedback'"> - <span
+            >{{vm.selectedItem.reviewer}}</span></span>
+          </strong>
+        </p>
+        <p class="md-caption">{{vm.selectedItem.date | amUtc | amDateFormat:'dddd, MMMM Do YYYY'}}</p>
+        <p class="md-body-1" ng-show="vm.selectedItem.moreInformation && !vm.showMore">{{vm.selectedItem.shortInfo}}
+          <md-button ng-click="vm.toggleInfo()" class="md-primary">more</md-button>
+        </p>
+        <p class="md-body-1" ng-show="vm.selectedItem.moreInformation && vm.showMore">
+          {{vm.selectedItem.moreInformation}}
+          <md-button ng-click="vm.toggleInfo()" class="md-primary">less</md-button>
+        </p>
       </div>
     </md-card-title-text>
   </md-card-title>
-  <md-card-content class="timeline-container" ng-show="!vm.isRequestPending && !vm.hasApiError"
-  >
+  <md-card-content class="timeline-container" ng-show="!vm.isRequestPending && !vm.hasApiError">
   </md-card-content>
   <div>
     <md-chips ng-show="vm.selectedItem.tags" layout="row" layout-align="end center">
