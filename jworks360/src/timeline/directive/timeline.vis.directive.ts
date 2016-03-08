@@ -15,7 +15,6 @@ var vis = require('vis/dist/vis.js');
 
 //todo show extra information on click
 //todo abstract away vis library as an angular component
-//todo block ui untill request has returned
 
 export class TimeLineDirective implements IDirective {
 
@@ -33,10 +32,11 @@ export class TimeLineDirective implements IDirective {
                    instanceAttributes:IAttributes):void {
 
     var vm:ITimeLineVisController = scope.vm;
+
     vm.getTimeLineItemsAsync();
 
     scope.$watch('vm.hasApiError', (newValue, oldValue) => {
-      if (newValue === true && newValue !== oldValue) {
+      if (newValue === true) {
         //  show disabled card
         instanceElement.find('md-card-content').addClass('ng-hide');
         instanceElement.find('md-card').addClass('md-background md-hue-1');
@@ -57,11 +57,6 @@ export class TimeLineDirective implements IDirective {
         var items = new vis.DataSet(newValue);
 
         var compiled: any = require('./item-template.hbs');
-        var obj = {
-          type: 'hello',
-          title: 'world'
-        };
-        var c: any = compiled(obj);
 
         var options = {
           showCurrentTime: false,
@@ -76,8 +71,8 @@ export class TimeLineDirective implements IDirective {
         var axisOptions = {
           orientation: 'top'
         };
-        var axis = new vis.timeline.components.TimeAxis(vm.timeLine.body, axisOptions);
 
+        var axis = new vis.timeline.components.TimeAxis(vm.timeLine.body, axisOptions);
         vm.timeLine.components.push(axis);
 
         vm.timeLine.setOptions({
@@ -88,8 +83,6 @@ export class TimeLineDirective implements IDirective {
 
         // force a redraw, making the new axis visible
         vm.timeLine.redraw();
-
-        console.log(vm.timeLine.components);
 
         vm.timeLine.on('select', (properties:any)=> {
           var id = properties.items[0];

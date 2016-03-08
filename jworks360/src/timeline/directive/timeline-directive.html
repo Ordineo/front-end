@@ -20,7 +20,7 @@
       <p class="md-subhead" ng-show="vm.selectedItem.moreInformation">"{{vm.selectedItem.moreInformation}}"</p>
     </md-card-title-text>
   </md-card-title>
-  <md-card-content class="timeline-container" ng-show="!vm.isRequestPending || !vm.hasApiError">
+  <md-card-content class="timeline-container" ng-show="!vm.isRequestPending && !vm.hasApiError">
   </md-card-content>
   <div>
     <md-chips ng-show="vm.selectedItem.tags" layout="row" layout-align="end center">

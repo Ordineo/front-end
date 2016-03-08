@@ -10,7 +10,6 @@ require('vis/dist/vis.css');
 require('./style.scss');
 
 var vis = require('vis/dist/vis.js');
-
 /*
  * Fetches timeline data,
  * preps it for vis library http://visjs.org/timeline_examples.html
@@ -27,7 +26,6 @@ export interface ITimeLineVisController {
 }
 
 export class TimeLineVisController implements ITimeLineVisController {
-
   static $inject:Array<string> = [TimeLineService.NAME, TimeLineJSONParser.NAME];
   public dataItems:Array<any> = [];
   public mode:string = 'indeterminate';
@@ -37,11 +35,11 @@ export class TimeLineVisController implements ITimeLineVisController {
   public isRequestPending:boolean;
 
   constructor(private timeLineService:TimeLineService, private parser:TimeLineJSONParser) {
-
   }
 
   public getTimeLineItemsAsync():void {
     this.isRequestPending = true;
+
     this.timeLineService
       .getTimelineByUserName('gide')
       .then((result:any)=> {
@@ -56,13 +54,17 @@ export class TimeLineVisController implements ITimeLineVisController {
 
   public getMock():void{
     this.isRequestPending = true;
+
     this.timeLineService
       .getMock()
-      .then((data:any)=>{
+      .then((data:any)=> {
         this.isRequestPending = false;
         this.hasApiError = false
         this.dataItems = this.getPreppedDataForVis(data);
-      })
+      }, (error:any)=> {
+        this.isRequestPending = false;
+        this.hasApiError = true;
+      });
   }
 
   private getPreppedDataForVis(timeline:TimeLine):Array<any> {
@@ -95,7 +97,6 @@ export class TimeLineVisController implements ITimeLineVisController {
   }
 
   private getClassByType(type:string):string {
-    console.log(type);
     if (type === TimeLineItemType.FEEDBACK) {
       return 'feedback'
     } else if (type === TimeLineItemType.OBJECTIVE) {
