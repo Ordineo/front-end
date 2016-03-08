@@ -63,7 +63,9 @@ export class TimeLineDirective implements IDirective {
           showMajorLabels: false,
           template: function(item){
             return compiled(item);
-          }
+          },
+          zoomMin: 2629746000,
+          zoomMax: 63113904000
         };
 
         vm.timeLine = new vis.Timeline(elementToPlaceTimeLine, items, options);
