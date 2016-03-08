@@ -4,7 +4,8 @@
       <div layout="row" layout-align="start center">
         <h3 flex="20" class="md-headline" flex>Timeline</h3>
         <div layout="row" flex layout-align="center center">
-          <md-progress-circular ng-show="vm.isRequestPending" class="md-accent" md-mode="{{vm.mode}}" md-diameter="40"></md-progress-circular>
+          <md-progress-circular ng-show="vm.isRequestPending" class="md-accent" md-mode="{{vm.mode}}"
+                                md-diameter="40"></md-progress-circular>
         </div>
         <div flex="20" layout="row" layout-align="end center">
           <md-button ng-disabled="vm.isRequestPending" ng-click="vm.getMock()">
@@ -17,7 +18,11 @@
           </md-button>
         </div>
       </div>
-      <p class="md-subhead" ng-show="vm.selectedItem.moreInformation">"{{vm.selectedItem.moreInformation}}"</p>
+      <div ng-show="vm.selectedItem">
+        <p>{{vm.selectedItem.date | amUtc | amDateFormat:'dddd, MMMM Do YYYY'}}</p>
+        <p>{{vm.selectedItem.description}}</p>
+        <p class="md-subhead">"{{vm.selectedItem.moreInformation}}"</p>
+      </div>
     </md-card-title-text>
   </md-card-title>
   <md-card-content class="timeline-container" ng-show="!vm.isRequestPending && !vm.hasApiError">

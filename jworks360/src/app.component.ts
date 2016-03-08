@@ -1,5 +1,6 @@
 import IComponentOptions = angular.IComponentOptions;
 import '../styles/main.scss';
+import {StringUtil} from "./util/StringUtil";
 
 export const APP_COMPONENT = "app";
 
@@ -17,5 +18,7 @@ export class AppComponentController {
 
   constructor() {
     this.title = "Jworks 360 Tool";
+    var s = StringUtil.createShortVersion("How to build, design and test the security of web applications and web services.");
+    console.log(s);
   }
 }

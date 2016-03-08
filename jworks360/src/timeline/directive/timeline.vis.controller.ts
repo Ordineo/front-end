@@ -5,6 +5,7 @@ import {ITimeLineItem} from "../model/timeline.item.model";
 import {TimeLineItemType} from "../model/timeline.item.model";
 import {TimeLineJSONParser} from "../service/timeline.service.jsonparser";
 import IPromise = angular.IPromise;
+import {StringUtil} from "../../util/StringUtil";
 
 require('vis/dist/vis.css');
 require('./style.scss');
@@ -38,6 +39,7 @@ export class TimeLineVisController implements ITimeLineVisController {
   }
 
   public getTimeLineItemsAsync():void {
+    this.selectedItem = null;
     this.isRequestPending = true;
 
     this.timeLineService
@@ -54,6 +56,7 @@ export class TimeLineVisController implements ITimeLineVisController {
 
   public getMock():void{
     this.isRequestPending = true;
+    this.selectedItem = null;
 
     this.timeLineService
       .getMock()
@@ -81,16 +84,19 @@ export class TimeLineVisController implements ITimeLineVisController {
         content: this.getContentByType(item),
         start: item.date,
         title: item.moreInformation,
-        timeLineItem: item
+        timeLineItem: item,
+        shortDescription: StringUtil.createShortVersion(item.description)
       };
       items.push(dataItem);
     }
+
     return items;
+
   }
 
   private getContentByType(item:ITimeLineItem):string {
     if (item.type === TimeLineItemType.FEEDBACK) {
-      return `"${item.description}" - <span class="reviewer">${item.reviewer}</span>`
+      return `${item.description}`;
     } else {
       return item.description;
     }

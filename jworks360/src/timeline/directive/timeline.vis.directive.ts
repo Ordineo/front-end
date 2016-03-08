@@ -62,7 +62,7 @@ export class TimeLineDirective implements IDirective {
           showCurrentTime: false,
           showMajorLabels: false,
           template: function(item){
-            return compiled(item.timeLineItem);
+            return compiled(item);
           }
         };
 

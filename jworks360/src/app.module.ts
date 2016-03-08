@@ -8,6 +8,10 @@ import {JWORKS360_TIMELINE} from "./timeline/timeline.module";
 import {JWORKS360_LAYOUT} from "./layout/LayoutModule";
 export const APP_NAME = "jworks360";
 
+require('angular-moment');
+require('moment');
+
+
 var deps:Array<string> = [
   JWORKS360_AUTH,
   JWORKS360_CORE,
@@ -15,6 +19,7 @@ var deps:Array<string> = [
   JWORKS360_LAYOUT,
   JWORKS360_TIMELINE,
   MATERIAL_DESIGN,
+  'angularMoment'
 ];
 
 angular
