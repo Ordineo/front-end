@@ -26,12 +26,8 @@
           </strong>
         </p>
         <p class="md-caption">{{vm.selectedItem.date | amUtc | amDateFormat:'dddd, MMMM Do YYYY'}}</p>
-        <p class="md-body-1" ng-show="vm.selectedItem.moreInformation && !vm.showMore">{{vm.selectedItem.shortInfo}}
-          <md-button ng-click="vm.toggleInfo()" class="md-primary">more</md-button>
-        </p>
-        <p class="md-body-1" ng-show="vm.selectedItem.moreInformation && vm.showMore">
+        <p class="md-body-1" ng-show="vm.selectedItem.moreInformation">
           {{vm.selectedItem.moreInformation}}
-          <md-button ng-click="vm.toggleInfo()" class="md-primary">less</md-button>
         </p>
       </div>
     </md-card-title-text>

@@ -86,7 +86,7 @@ export class TimeLineDirective implements IDirective {
         // force a redraw, making the new axis visible
         vm.timeLine.redraw();
 
-        vm.timeLine.on('select', (properties:any)=> {
+        vm.timeLine.on('select', (properties:any, evt:any)=> {
           var id = properties.items[0];
           for (var i = 0; i < vm.dataItems.length; i++) {
             if (vm.dataItems[i].id === id) {

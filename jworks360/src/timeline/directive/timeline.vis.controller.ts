@@ -6,6 +6,7 @@ import {TimeLineItemType} from "../model/timeline.item.model";
 import {TimeLineJSONParser} from "../service/timeline.service.jsonparser";
 import IPromise = angular.IPromise;
 import {StringUtil} from "../../util/StringUtil";
+import IDialogService = angular.material.IDialogService;
 
 require('vis/dist/vis.css');
 require('./style.scss');
@@ -28,7 +29,7 @@ export interface ITimeLineVisController {
 }
 
 export class TimeLineVisController implements ITimeLineVisController {
-  static $inject:Array<string> = [TimeLineService.NAME, TimeLineJSONParser.NAME];
+  static $inject:Array<string> = ['$mdDialog', TimeLineService.NAME, TimeLineJSONParser.NAME];
   public dataItems:Array<any> = [];
   public mode:string = 'indeterminate';
   public selectedItem:ITimeLineItem;
@@ -37,7 +38,27 @@ export class TimeLineVisController implements ITimeLineVisController {
   public isRequestPending:boolean;
   public showMore:boolean = false;
 
-  constructor(private timeLineService:TimeLineService, private parser:TimeLineJSONParser) {
+  constructor(private $mdDialog:IDialogService, private timeLineService:TimeLineService, private parser:TimeLineJSONParser) {
+  }
+
+  public showDialog(event):void {
+    this.$mdDialog.show({
+      controller: ($scope, $mdDialog)=>{
+        $scope.hide = function() {
+          $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+          $mdDialog.cancel();
+        };
+        $scope.answer = function(answer) {
+          $mdDialog.hide(answer);
+        };
+      },
+      templateUrl: 'item.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: event,
+      clickOutsideToClose:true,
+    })
   }
 
   public getTimeLineItemsAsync():void {
@@ -56,11 +77,11 @@ export class TimeLineVisController implements ITimeLineVisController {
       });
   }
 
-  public toggleInfo():void{
+  public toggleInfo():void {
     this.showMore = !this.showMore;
   }
 
-  public getMock():void{
+  public getMock():void {
     this.isRequestPending = true;
     this.selectedItem = null;
 
