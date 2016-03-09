@@ -20,7 +20,7 @@ export class GatewayApiService{
 
   constructor(private $window:IWindowService){
     this.protocol = $window.location.protocol + "//";
-    this.host = $window.location.host;
+    this.host = 'gateway-' + $window.location.host;
   }
 
   private buildApiUrl(servicePath:string):string{
