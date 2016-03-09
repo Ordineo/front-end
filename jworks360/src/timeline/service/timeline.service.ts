@@ -8,7 +8,7 @@ import IHttpPromiseCallback = angular.IHttpPromiseCallback;
 import IPromise = angular.IPromise;
 import IDeferred = angular.IDeferred;
 import IQService = angular.IQService;
-import {GatewayApi} from "../../config/GatewayApi";
+import {GatewayApi} from "../../gateway/GatewayApi";
 
 export class TimeLineService{
 

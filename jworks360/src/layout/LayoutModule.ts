@@ -4,6 +4,7 @@ import {TabMenuComponent} from "./tab-menu/TabMenuComponent";
 import {MainToolbarV2Component} from "./main-toolbarv2/MainToolbarV2Component";
 import {HeaderV2Component} from "./header-v2/HeaderV2Component";
 import {HeaderMenuComponent} from "./header-menu/HeaderMenuComponent";
+import {JWORKS360_CORE} from "../core/core.module";
 
 export const JWORKS360_LAYOUT = "jworks360.layout";
 

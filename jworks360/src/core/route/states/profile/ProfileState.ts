@@ -13,4 +13,6 @@ export class ProfileState implements IState {
 
 export class ProfileStateCtrl {
 
+  constructor() {
+  }
 }

@@ -17,6 +17,6 @@ export function configureStates($stateProvider:IStateProvider, $urlRouterProvide
   $stateProvider.state(new ProfileState());
 
   $urlRouterProvider
-    .when('/', 'profile')
+    .when('/', 'login')
     .otherwise('/');
 }

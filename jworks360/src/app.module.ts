@@ -6,6 +6,8 @@ import {JWORKS360_CORE} from "./core/core.module";
 import {JWORKS360_PROFILE} from "./profile/profile.module";
 import {JWORKS360_TIMELINE} from "./timeline/timeline.module";
 import {JWORKS360_LAYOUT} from "./layout/LayoutModule";
+import {JWORKS360_OBJECTIVES} from "./objectives/ObjectivesModule";
+import {JWORKS360_GATEWAY} from "./gateway/GatewayModule";
 export const APP_NAME = "jworks360";
 
 require('angular-moment');
@@ -17,6 +19,8 @@ var deps:Array<string> = [
   JWORKS360_PROFILE,
   JWORKS360_LAYOUT,
   JWORKS360_TIMELINE,
+  JWORKS360_OBJECTIVES,
+  JWORKS360_GATEWAY,
   MATERIAL_DESIGN,
   'angularMoment'
 ];

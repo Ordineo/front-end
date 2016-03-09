@@ -9,6 +9,8 @@ devConfig.plugins = [
   })
 ];
 
+devConfig.devtool = 'source-map';
+
 devConfig.output = {
   path: './public/dev/',
   publicPath: "/assets/js",
