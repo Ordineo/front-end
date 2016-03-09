@@ -16,4 +16,3 @@ angular
   .service(TimeLineService.NAME, TimeLineService)
   .service(TimeLineJSONParser.NAME, TimeLineJSONParser)
   .directive(TimeLineDirective.NAME, TimeLineDirective.instance);
-

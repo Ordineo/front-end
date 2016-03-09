@@ -20,3 +20,5 @@ deploy:
   on:
     repo: oraj-360/front-end
     branch: new-build-webpack
+after_deploy:
+- cat ./reports/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js

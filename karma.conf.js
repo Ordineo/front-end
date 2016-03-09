@@ -54,6 +54,10 @@ module.exports = function (config) {
           dir: 'reports/coverage/',
           subdir: '.',
           type: 'json'
+        },{
+          dir: 'reports/coverage/',
+          subdir:'.',
+          type: 'lcov'
         }
       ]
     }

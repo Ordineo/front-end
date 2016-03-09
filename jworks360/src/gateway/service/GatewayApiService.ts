@@ -12,7 +12,7 @@ export class GatewayApiService{
    * example: "http://"
    */
   private protocol:string;
-  public host:string;
+  public host:string = 'gateway-oraj360.cfapps.io';
 
   public PERSONS_API:string = "/persons-oraj360/api/";
   public OBJECTIVES_API:string = "/objectives-oraj360/api/";
@@ -20,7 +20,6 @@ export class GatewayApiService{
 
   constructor(private $window:IWindowService){
     this.protocol = $window.location.protocol + "//";
-    this.host = 'gateway-' + $window.location.host;
   }
 
   private buildApiUrl(servicePath:string):string{
