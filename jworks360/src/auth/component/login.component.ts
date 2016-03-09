@@ -1,6 +1,6 @@
 import {AUTH_SERVICE} from "../service/auth.service";
 import {IAuthService} from "../service/auth.service";
-import {Person} from "../../persons/person";
+import {Person} from "../../persons/model/person";
 import {ICredentials} from "../service/auth.service";
 import IComponentOptions = angular.IComponentOptions;
 import IToastService = angular.material.IToastService;

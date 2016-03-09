@@ -15,7 +15,7 @@ Refactored code can be found inside of jworks360 folder.
 
 Install cli tools
 ```
-npm i -g webpack typings http-servert
+npm i -g webpack typings http-server
 ```
   
 Install dependencies
