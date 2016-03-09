@@ -28,7 +28,6 @@ export class LoginComponent implements IComponentOptions {
 class LoginComponentController implements ILogin {
 
   static authError:string = 'Authentication Failed.';
-
   static $inject:Array<string> = [AUTH_SERVICE, '$mdToast'];
 
   title:string;

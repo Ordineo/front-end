@@ -1,0 +1,20 @@
+$logoTopLeft: './images/o.jpg';
+$logoSize: 88px;
+main-toolbar-v2 {
+  md-toolbar.toolbar-v2{
+    background-color: white;
+  }
+  .logo{
+    background: url($logoTopLeft) no-repeat center;
+    background-size: cover;
+    width: $logoSize;
+    height: $logoSize;
+  }
+  .md-icon-button svg{
+    color: #cfcfcf;
+  }
+
+  .md-icon-button:hover svg{
+    color: black;
+  }
+}

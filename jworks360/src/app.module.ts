@@ -11,7 +11,6 @@ export const APP_NAME = "jworks360";
 require('angular-moment');
 require('moment');
 
-
 var deps:Array<string> = [
   JWORKS360_AUTH,
   JWORKS360_CORE,

@@ -13,10 +13,24 @@ require('./style.scss');
 
 var vis = require('vis/dist/vis.js');
 
-//todo show extra information on click
-//todo abstract away vis library as an angular component
+/**
+ * @ngDoc directive
+ * @name timeline
+ * @module jworks360.timeline
+ *
+ * @restrict E
+ *
+ * @description
+ *
+ * @usage
+ * <timeline></timeline>
+ */
 
+//  todo abstract away vis library as an angular component
 export class TimeLineDirective implements IDirective {
+
+  static minZoom:number = 2629746000;
+  static maxZoom:number = 63113904000;
 
   //<timeline></timeline>
   static NAME = 'timeline';
@@ -64,8 +78,8 @@ export class TimeLineDirective implements IDirective {
           template: function(item){
             return compiled(item);
           },
-          zoomMin: 2629746000,
-          zoomMax: 63113904000
+          zoomMin: TimeLineDirective.minZoom,
+          zoomMax: TimeLineDirective.maxZoom
         };
 
         vm.timeLine = new vis.Timeline(elementToPlaceTimeLine, items, options);
@@ -94,6 +108,8 @@ export class TimeLineDirective implements IDirective {
               scope.$digest();
             }
           }
+          console.log(evt);
+          vm.showDialog(evt);
         });
       }
     });

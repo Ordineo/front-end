@@ -7,6 +7,7 @@ import {TimeLineJSONParser} from "../service/timeline.service.jsonparser";
 import IPromise = angular.IPromise;
 import {StringUtil} from "../../util/StringUtil";
 import IDialogService = angular.material.IDialogService;
+import IDialogOptions = angular.material.IDialogOptions;
 
 require('vis/dist/vis.css');
 require('./style.scss');
@@ -26,6 +27,7 @@ export interface ITimeLineVisController {
   timeLine:any;
   isRequestPending:boolean;
   showMore:boolean;
+  showDialog:Function;
 }
 
 export class TimeLineVisController implements ITimeLineVisController {
@@ -42,23 +44,30 @@ export class TimeLineVisController implements ITimeLineVisController {
   }
 
   public showDialog(event):void {
-    this.$mdDialog.show({
-      controller: ($scope, $mdDialog)=>{
-        $scope.hide = function() {
-          $mdDialog.hide();
-        };
-        $scope.cancel = function() {
-          $mdDialog.cancel();
-        };
-        $scope.answer = function(answer) {
-          $mdDialog.hide(answer);
-        };
-      },
-      templateUrl: 'item.tmpl.html',
-      parent: angular.element(document.body),
-      targetEvent: event,
-      clickOutsideToClose:true,
-    })
+    var options:IDialogOptions = {
+      clickOutsideToClose: true,
+      template: `
+      <md-dialog flex="30">
+        <md-dialog-content>
+         <p class="md-caption">{{date | amUtc | amDateFormat:'dddd, MMMM Do YYYY'}}</p>
+         <p class="md-subhead">{{description}}</p>
+         <p class="md-body-1">{{info}}</p>
+         <div>
+         <md-chips ng-repeat="x in tags">`
+          + '<md-chip >{{x}}</md-chip>' +
+        `</md-chips>
+         {{tags}}
+        </div>
+        </md-dialog-content>
+      </md-dialog>`,
+      controller: ($scope, $mdDialog)=> {
+        $scope.date = this.selectedItem.date;
+        $scope.description = this.selectedItem.description;
+        $scope.info = this.selectedItem.moreInformation;
+        $scope.tags = this.selectedItem.tags;
+      }
+    };
+    this.$mdDialog.show(options);
   }
 
   public getTimeLineItemsAsync():void {

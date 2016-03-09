@@ -1,0 +1,15 @@
+$backgroundImg: './images/header-v2-bg.jpg';
+$headerHeight: 400px;
+
+header-v2 {
+  .header-v2-bg {
+    color: white;
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url($backgroundImg) no-repeat;
+    overflow: hidden;
+    width: 100%;
+    height: $headerHeight;
+    background-position: 50%;
+    background-size: cover;
+  }
+}
+
