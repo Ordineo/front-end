@@ -5,4 +5,4 @@ var deps:Array<string> = [];
 
 angular
   .module(JWORKS360_GATEWAY, deps)
-  .service(JWORKS360_GATEWAY, GatewayApiService);
+  .service(GatewayApiService.SERVICE_NAME, GatewayApiService);

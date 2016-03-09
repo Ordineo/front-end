@@ -8,14 +8,22 @@ import IHttpPromiseCallback = angular.IHttpPromiseCallback;
 import IPromise = angular.IPromise;
 import IDeferred = angular.IDeferred;
 import IQService = angular.IQService;
-import {GatewayApi} from "../../gateway/GatewayApi";
+import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 
 export class TimeLineService{
 
   static NAME = 'jworks360.TimeLineService';
-  static $inject:Array<string> = ['$q','$http', TimeLineJSONParser.NAME];
+  static $inject:Array<string> = [
+    '$q',
+    '$http',
+    GatewayApiService.SERVICE_NAME,
+    TimeLineJSONParser.NAME];
 
-  constructor(private $q:IQService, private $http:IHttpService, private parser:TimeLineJSONParser){
+  constructor(
+    private $q:IQService,
+    private $http:IHttpService,
+    private gateway:GatewayApiService,
+    private parser:TimeLineJSONParser){
   }
 
   public getMock():IPromise<TimeLine> {
@@ -38,7 +46,7 @@ export class TimeLineService{
   public getTimelineByUserName(name:string):IPromise<any> {
     var requestConfig:IRequestConfig = {
       method: 'GET',
-      url: GatewayApi.buildTimeLineUriByName(name)
+      url: this.gateway.getTimeLineSampleUrl()
     };
 
     return this

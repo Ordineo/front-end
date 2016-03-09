@@ -1,4 +1,3 @@
-import {GatewayApi} from "../../gateway/GatewayApi";
 import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 
 var traverson = require('traverson');
