@@ -52,8 +52,14 @@ npm run open
 
 ### Tests
 
+test single run
 ```
 npm test
+```
+
+autowatch tests
+```
+npm run devtest
 ```
 
 - Filenames are required to end with .spec.ts
