@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/oraj-360/front-end.svg?branch=new-build-webpack)](https://travis-ci.org/oraj-360/front-end)
+[![Coverage Status](https://coveralls.io/repos/github/oraj-360/front-end/badge.svg?branch=new-build-webpack)](https://coveralls.io/github/oraj-360/front-end?branch=new-build-webpack)
 
 # Front-end
 Front end project for the 360 Tool.
