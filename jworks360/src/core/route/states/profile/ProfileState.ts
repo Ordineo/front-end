@@ -19,12 +19,12 @@ export class ProfileStateCtrl {
   static $inject:Array<string> = [PERSONS_SERVICE];
 
   constructor(private personsService:IPersonsDataService) {
-    //this.personsService.getAllPersons()
-    //  .then(this.onSuccess, this.onError);
+    this.personsService.getPersonByUserName("john")
+      .then(this.onSuccess, this.onError);
   }
 
-  private onSuccess():void{
-    console.log("success");
+  private onSuccess(data):void{
+    console.log(data);
   }
 
   private onError():void{

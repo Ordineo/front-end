@@ -9,9 +9,11 @@ export class TraversonHalService {
   }
 
   public hal():any {
-    return this.travs.registerMediaType(
+    this.travs.registerMediaType(
       JsonHalAdapter.mediaType,
       JsonHalAdapter
     );
+
+    return this.travs;
   }
 }

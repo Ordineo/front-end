@@ -25,6 +25,7 @@
   "repository": {},
   "devDependencies": {
     "babel-core": "^6.6.5",
+    "concurrently": "^2.0.0",
     "coveralls": "^2.11.8",
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
@@ -67,6 +68,7 @@
   "scripts": {
     "postinstall": "typings i",
     "test": "karma start --NODE_ENV=test",
+    "devtest": "karma start --auto-watch --no-single-run --NODE_ENV=test",
     "typings": "typings install",
     "open": "http-server build/ -p 8540",
     "build": "webpack --config webpack/build.config.js",

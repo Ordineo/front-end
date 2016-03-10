@@ -19,7 +19,6 @@ class HomeStateCtrl {
   public menuItems:Array<string> = ['About', 'Points', 'Learning', 'Activity'];
 
   constructor(private $state:IStateService) {
-
   }
 
   public goToLogin():void {

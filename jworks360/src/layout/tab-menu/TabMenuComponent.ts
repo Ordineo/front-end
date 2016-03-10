@@ -2,6 +2,7 @@
 import IComponentOptions = angular.IComponentOptions;
 
 require('./tab-menu-styles.scss');
+
 export interface IProfileMenu {
   menuItems:Array<string>
 }

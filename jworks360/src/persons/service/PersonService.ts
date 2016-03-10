@@ -7,6 +7,7 @@ import {TraversonHalService} from "../../traverson/service/TraversonHalService";
 export const PERSONS_SERVICE = "jworks360.persons.service";
 
 export interface IPersonsDataService {
+  getPersonByUserName(userName:string):IPromise<any>;
   getAllPersons():IPromise<any>;
 }
 
@@ -21,21 +22,22 @@ export class PersonsService implements IPersonsDataService {
 
   }
 
-  public getAllPersons():IPromise<any> {
-    //this.traverson.hal()
-    //  .from(this.gate.getPersonsApi())
-    //  .jsonHal()
-    //  .follow('persons')
-    //  .getResource()
-    //  .result
-    //  .then(function (document) {
-    //    console.log('We have followed the path and reached our destination.');
-    //    console.log(JSON.stringify(document))
-    //  }, function (err) {
-    //    console.error('No luck');
-    //  });
-
-    return null;
+  public getPersonByUserName(userName:string):IPromise<any> {
+    return this.traverson.hal()
+      .from(this.gate.getPersonsApi())
+      .jsonHal()
+      .withTemplateParameters({user: userName})
+      .follow('persons')
+      .getResource()
+      .result
   }
 
+  public getAllPersons():IPromise<any> {
+    return this.traverson.hal()
+      .from(this.gate.getPersonsApi())
+      .jsonHal()
+      .follow('persons')
+      .getResource()
+      .result
+  }
 }
