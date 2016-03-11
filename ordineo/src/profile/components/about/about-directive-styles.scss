@@ -8,14 +8,6 @@ profile-about {
     -webkit-box-shadow: 2px 3px 0px 1px $shadowColor;
     -moz-box-shadow: 2px 3px 0px 1px $shadowColor;
     box-shadow: 2px 3px 0px 1px $shadowColor;
-    .about-header {
-      color: #BDBDBD;
-      font-family: NeuratextBold;
-      border-bottom: 1px solid $borderColor;
-      md-icon {
-        color: rgba(237, 148, 36, 1);
-      }
-    }
     h3 {
       margin: 0;
     }

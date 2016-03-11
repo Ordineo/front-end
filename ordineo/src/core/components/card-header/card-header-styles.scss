@@ -1,0 +1,11 @@
+$borderColor: #eeeeee;
+
+card-header {
+  color: #BDBDBD;
+  font-family: NeuratextBold;
+  border-bottom: 1px solid $borderColor;
+
+  md-icon {
+    color: rgba(237, 148, 36, 1);
+  }
+}

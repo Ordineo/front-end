@@ -7,12 +7,17 @@ export class AboutDirective implements IDirective {
 
   static NAME:string = "profileAbout";
 
-  restrict:string = 'E';
-  bindToController:any = {};
   scope:any = {};
+  restrict:string = 'E';
+  transclude:boolean = true;
+  bindToController:any = {
+    functie: '@',
+    unit:'@',
+    description: '@'
+  };
   controller:Function = AboutDirectiveController;
   controllerAs:string = '$ctrl';
-  template:string = require('./about-template.html');
+  template:string = require('./about-directive-template.html');
 
   static instance():IDirective{
     return new AboutDirective();

@@ -1,0 +1,32 @@
+<md-card>
+  <div layout="row">
+    <span flex="5"></span>
+    <!-- Content -->
+    <div flex layout="column">
+      <card-header title="About myself" class="hide-xs"></card-header>
+      <div class="about-content" layout="row" layout-xs="column">
+        <div class="about-img" layout="row" layout-align="start top" layout-align-xs="center center">
+          <!--todo replace this with <img src=url /> -->
+          <div class="sample"></div>
+        </div>
+        <div layout="column">
+          <div class="about-job">
+            <h4 class="to-upper-case">Function</h4>
+            <span>{{$ctrl.functie}}</span>
+            <h4 class="to-upper-case">Unit</h4>
+            <span class="unit">{{$ctrl.unit}}</span>
+          </div>
+        </div>
+        <div flex class="about-description">
+            <ng-transclude></ng-transclude>
+        </div>
+      </div>
+      <div layout="row" layout-align="end center" class="about-footer">
+        <md-button>
+          more
+        </md-button>
+      </div>
+    </div>
+    <span flex="5"></span>
+  </div>
+</md-card>
