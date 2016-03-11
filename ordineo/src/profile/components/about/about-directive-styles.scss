@@ -1,12 +1,20 @@
 $borderColor: #eeeeee;
 $accentColor: #ED9424;
 $profileContentMarginTop: 1em;
+$shadowColor: rgba(219,216,219,1);
 profile-about {
   md-card {
+    border-radius: 0;
+    -webkit-box-shadow: 2px 3px 0px 1px $shadowColor;
+    -moz-box-shadow: 2px 3px 0px 1px $shadowColor;
+    box-shadow: 2px 3px 0px 1px $shadowColor;
     .about-header {
       color: #BDBDBD;
       font-family: NeuratextBold;
       border-bottom: 1px solid $borderColor;
+      md-icon {
+        color: rgba(237, 148, 36, 1);
+      }
     }
     h3 {
       margin: 0;
@@ -26,6 +34,8 @@ profile-about {
       height: $size;
       background: url('images/designer.jpg') no-repeat center;
       background-size: contain;
+      margin-right: 1em;
+      margin-bottom: 1em;
     }
     .about-job {
       font-family: Neuratext;
@@ -49,7 +59,10 @@ profile-about {
     }
     .about-footer {
       border-top: 1px solid $borderColor;
-      button {
+      .md-button {
+        font-size: 1em;
+        font-family: Neuratext;
+        border-radius: 0;
         background-color: $accentColor;
         color: white;
       }
