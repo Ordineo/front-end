@@ -3,7 +3,7 @@ var loaders = defaultConfig.module.loaders;
 var webpack = require('webpack');
 
 module.exports = {
-  entry: ['./jworks360/src/bootstrap.ts'],
+  entry: ['./ordineo/src/bootstrap.ts'],
   output: {
     filename: 'test-build.js',
     path: 'tmp'

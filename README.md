@@ -1,16 +1,8 @@
-[![Build Status](https://travis-ci.org/oraj-360/front-end.svg?branch=new-build-webpack)](https://travis-ci.org/oraj-360/front-end)
-[![Coverage Status](https://coveralls.io/repos/github/oraj-360/front-end/badge.svg?branch=new-build-webpack)](https://coveralls.io/github/oraj-360/front-end?branch=new-build-webpack)
+[![Build Status](https://travis-ci.org/Ordineo/front-end.svg?branch=master)](https://travis-ci.org/Ordineo/front-end)
 
 # Front-end
-Front end project for the 360 Tool.
-[The app is located at http://oraj360.cfapps.io/](http://oraj360.cfapps.io/).
-
-## Webpack migration
-
-This branch will be used for migrating from grunt to webpack. 
-Code will be refactored towards a Web components / Angular 2 paradigm.
-
-Refactored code can be found inside of jworks360 folder.
+Front end project for Ordineo.
+[The app is located at http://ordineo.cfapps.io/](http://ordineo.cfapps.io/).
 
 ### Install
 
@@ -63,7 +55,7 @@ npm run devtest
 ```
 
 - Filenames are required to end with .spec.ts
-- Tests should be located inside of jworks360/src or subfolders
+- Tests should be located inside of ordineo/src or subfolders
 
 #### Code coverage
 

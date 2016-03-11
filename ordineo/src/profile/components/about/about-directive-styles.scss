@@ -1,0 +1,58 @@
+$borderColor: #eeeeee;
+$accentColor: #ED9424;
+$profileContentMarginTop: 1em;
+profile-about {
+  md-card {
+    .about-header {
+      color: #BDBDBD;
+      font-family: NeuratextBold;
+      border-bottom: 1px solid $borderColor;
+    }
+    h3 {
+      margin: 0;
+    }
+    h4:first-of-type {
+      margin-top: 0;
+    }
+    h4 {
+      color: $accentColor;
+      margin-bottom: 0.5em;
+    }
+    .sample {
+      $size: 130px;
+
+      margin-top: $profileContentMarginTop;
+      width: $size;
+      height: $size;
+      background: url('images/designer.jpg') no-repeat center;
+      background-size: contain;
+    }
+    .about-job {
+      font-family: Neuratext;
+      font-weight: 800;
+      margin-top: $profileContentMarginTop;
+      border-right: 1px solid $borderColor;
+      padding-right: 25px;
+      margin-right: 25px;
+      padding-bottom: 25px;
+      h4 {
+        font-family: NexaBold;
+        font-size: 1em;
+        margin-bottom: 0;
+      }
+    }
+    .about-description {
+      font-family: Neuratext;
+      font-weight: 800;
+      line-height: 150%;
+      letter-spacing: 1px;
+    }
+    .about-footer {
+      border-top: 1px solid $borderColor;
+      button {
+        background-color: $accentColor;
+        color: white;
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-  entry: ['./jworks360/src/bootstrap.ts'],
+  entry: ['./ordineo/src/bootstrap.ts'],
   resolve: {
     extensions: ['', '.ts', '.js']
   }, plugins: [
@@ -36,6 +36,7 @@ module.exports = {
       {test: /\.woff$/, loader: 'url?limit=65000&mimetype=application/font-woff&name=public/fonts/[name].[ext]'},
       {test: /\.woff2$/, loader: 'url?limit=65000&mimetype=application/font-woff2&name=public/fonts/[name].[ext]'},
       {test: /\.ttf$/, loader: 'url?limit=65000'},
+      {test: /\.otf$/, loader: 'url?limit=65000'},
       {test: /\.eot$/, loader: 'url?limit=65000&mimetype=application/vnd.ms-fontobject&name=public/fonts/[name].[ext]'},
       {
         test: /\.json$/, exclude: /node_modules/, loader: 'json'

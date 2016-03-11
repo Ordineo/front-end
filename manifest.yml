@@ -2,7 +2,7 @@
 memory: 64M
 instances: 1
 applications:
-- name: frontend-oraj360
+- name: frontend-ordineo
   path: build/
   buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
   timeout: 120
