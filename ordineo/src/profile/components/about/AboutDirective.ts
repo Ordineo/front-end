@@ -11,7 +11,10 @@ require('./about-directive-styles.scss');
  * @restrict E
  *
  * @usage
- * <profile-about functie="designer" unit="clockwork">
+ * <profile-about
+ *        functie="designer"
+ *        unit="clockwork"
+ *        >
  *     <p>description of the person</p>
  * </profile-about>
  */
@@ -25,7 +28,7 @@ export class AboutDirective implements IDirective {
   bindToController:any = {
     functie: '@',
     unit:'@',
-    description: '@'
+    description: '@',
   };
   controller:Function = AboutDirectiveController;
   controllerAs:string = '$ctrl';

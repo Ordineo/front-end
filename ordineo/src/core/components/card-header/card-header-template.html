@@ -2,10 +2,10 @@
   <h3 flex class="to-upper-case">{{$ctrl.title}}</h3>
   <div layout="row" layout-align="end center">
     <div layout="row">
-      <md-button class="md-icon-button">
+      <md-button ng-show="$ctrl.showBtnEdit" class="md-icon-button">
         <md-icon md-svg-icon="content:create"></md-icon>
       </md-button>
-      <md-button class="md-icon-button">
+      <md-button ng-show="$ctrl.showBtnDrag" class="md-icon-button">
         <md-icon md-svg-src="act:open_with"></md-icon>
       </md-button>
     </div>
