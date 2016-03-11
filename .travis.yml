@@ -8,17 +8,18 @@ install:
 - npm install -g typings
 - npm install
 - npm run build
-deploy:
-  edge: true
-  provider: cloudfoundry
-  api: https://api.run.pivotal.io
-  username: andreas.evers@ordina.be
-  password:
-    secure: "cWnnP6oLSTYE7ncNKuIcRCl/aKLXLbayqeLqADLT/lTNjblDWDjQyJIk7HOdnWZ2R7qtFHyU03wvsMfkWn4XHenhkXvdpWEKrsKoKFz91uAgyNW8YWuuTzCC4gSoV3KaOtvO2wPIdDH5KLl5WZp6OpNMPmf5DRYWesD5E+thk0PPG2W8msOHZn6Hxi7rEE9/0n+EmNPDVjfHBer9h0x5AdbQn8iv20N9EE1VuQ/csugz1ZfA3qzux77TK+DEB6/B5YX+lOBx6EDMulLoNBiz4jb15hhw/eP4b3QhTSUve+831slOyWfikIt1WWuJcQruEEpxx1a/PO6kNatrzQDKwa6xSZb0LbEo24E7Qa+orq58FGF2pdeRekG33X5LMXKs+/TBXFnDKE8Fm1/L8XZwWMkYVShF2kWJJ8MUpDo+bLlxSRq00ae+wLTIAI9UPL4DZde9SKnG1mbA0dNu5keQinDULSz9XEhCYHFeei5cTvZkQRVbELKnTKvl49HmuSSk+R6L6ERbzz+pwWXeukmrkHgl9YcHy2jDbVSaaajWj2G3pp+rqRTF0S2Zz5F85hEK9uIsi///VdrFcqWo/XT4yEn7fy5NXXQmAlCveCoGMOpOhrNHpzVWXdFb57DcGReCW+nP/eSpZDbBfrFHJnPrElP3l6XzI1QN7Rt7nZLoUF0="
-  organization: OrdinaBelgiumNV
-  space: development
-  on:
-    repo: oraj-360/front-end
-    branch: new-build-webpack
-after_deploy:
-- cat ./reports/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+
+#deploy:
+#  edge: true
+#  provider: cloudfoundry
+#  api: https://api.run.pivotal.io
+#  username: ryan.degruyter@ordina.be
+#  password:
+#    secure: "cWnnP6oLSTYE7ncNKuIcRCl/aKLXLbayqeLqADLT/lTNjblDWDjQyJIk7HOdnWZ2R7qtFHyU03wvsMfkWn4XHenhkXvdpWEKrsKoKFz91uAgyNW8YWuuTzCC4gSoV3KaOtvO2wPIdDH5KLl5WZp6OpNMPmf5DRYWesD5E+thk0PPG2W8msOHZn6Hxi7rEE9/0n+EmNPDVjfHBer9h0x5AdbQn8iv20N9EE1VuQ/csugz1ZfA3qzux77TK+DEB6/B5YX+lOBx6EDMulLoNBiz4jb15hhw/eP4b3QhTSUve+831slOyWfikIt1WWuJcQruEEpxx1a/PO6kNatrzQDKwa6xSZb0LbEo24E7Qa+orq58FGF2pdeRekG33X5LMXKs+/TBXFnDKE8Fm1/L8XZwWMkYVShF2kWJJ8MUpDo+bLlxSRq00ae+wLTIAI9UPL4DZde9SKnG1mbA0dNu5keQinDULSz9XEhCYHFeei5cTvZkQRVbELKnTKvl49HmuSSk+R6L6ERbzz+pwWXeukmrkHgl9YcHy2jDbVSaaajWj2G3pp+rqRTF0S2Zz5F85hEK9uIsi///VdrFcqWo/XT4yEn7fy5NXXQmAlCveCoGMOpOhrNHpzVWXdFb57DcGReCW+nP/eSpZDbBfrFHJnPrElP3l6XzI1QN7Rt7nZLoUF0="
+#  organization: OrdinaBelgiumNV
+#  space: development
+#  on:
+#    repo: Ordineo/front-end
+#    branch: master
+#after_deploy:
+#- cat ./reports/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
