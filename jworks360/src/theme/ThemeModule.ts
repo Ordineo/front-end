@@ -3,7 +3,9 @@ import 'angular-material';
 //"typescript import uses absolute path so I prefer using commonjs" - Ryan
 //import '../../../node_modules/angular-material/angular-material.css';
 require('angular-material/angular-material.css');
-require('./custom-material-styles.scss')
+require('./custom-material-styles.scss');
+import '../../styles/main.scss';
+import '../../fonts/neuratext.scss';
 import 'angular-aria';
 import 'angular-animate';
 import IIconProvider = angular.material.IIconProvider;

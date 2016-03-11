@@ -10,6 +10,9 @@ $ordinaLogo: '../images/ordina-logo.png';
 body{
   background-color: #EDF0F1;
 }
+.to-upper-case{
+  text-transform: uppercase;
+}
 .overlay:after {
   content: '';
   position: absolute;

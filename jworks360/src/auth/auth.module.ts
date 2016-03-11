@@ -1,6 +1,6 @@
 import 'angular';
 import 'angular-messages';
-import {MATERIAL_DESIGN} from "../material-design/material-design";
+import {MATERIAL_DESIGN} from "../theme/ThemeModule";
 import IModule = angular.IModule;
 import {AUTH_SERVICE} from "./service/auth.service";
 import {AuthService} from "./service/auth.service";

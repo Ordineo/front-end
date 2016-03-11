@@ -16,11 +16,12 @@ profile-about {
       color: $accentColor;
       margin-bottom: 0.5em;
     }
-
     .about-description {
       margin-top: 1em;
       border-right: 1px solid $borderColor;
-      padding-right: 0.5em;
+      padding-right: 25px;
+      margin-right: 25px;
+      padding-bottom: 25px;
     }
 
     .about-footer {

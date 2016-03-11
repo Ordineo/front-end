@@ -1,5 +1,5 @@
 import {TabMenuComponent} from "../layout/tab-menu/TabMenuComponent.ts";
-import {MATERIAL_DESIGN} from "../material-design/material-design";
+import {MATERIAL_DESIGN} from "../theme/ThemeModule";
 import {AboutDirective} from "./components/about/AboutDirective";
 
 export const JWORKS360_PROFILE = "jworks360.profile";

@@ -1,5 +1,4 @@
 import IComponentOptions = angular.IComponentOptions;
-import '../styles/main.scss';
 import {StringUtil} from "./util/StringUtil";
 
 export const APP_COMPONENT = "app";

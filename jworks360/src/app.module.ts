@@ -1,5 +1,5 @@
 import {JWORKS360_AUTH} from "./auth/auth.module";
-import {MATERIAL_DESIGN} from "./material-design/material-design";
+import {MATERIAL_DESIGN} from "./theme/ThemeModule";
 import {APP_COMPONENT} from "./app.component";
 import {AppComponent} from "./app.component";
 import {JWORKS360_CORE} from "./core/core.module";

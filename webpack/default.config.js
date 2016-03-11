@@ -31,6 +31,12 @@ module.exports = {
         test: /\.(png|jpe?g)$/,
         loader: 'url?10000'
       },
+      //{test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap')},
+      // Font Definitions
+      {test: /\.woff$/, loader: 'url?limit=65000&mimetype=application/font-woff&name=public/fonts/[name].[ext]'},
+      {test: /\.woff2$/, loader: 'url?limit=65000&mimetype=application/font-woff2&name=public/fonts/[name].[ext]'},
+      {test: /\.ttf$/, loader: 'url?limit=65000'},
+      {test: /\.eot$/, loader: 'url?limit=65000&mimetype=application/vnd.ms-fontobject&name=public/fonts/[name].[ext]'},
       {
         test: /\.json$/, exclude: /node_modules/, loader: 'json'
       }
