@@ -10,6 +10,7 @@ install:
 - npm run build
 
 #deploy:
+#sdf
 #  edge: true
 #  provider: cloudfoundry
 #  api: https://api.run.pivotal.io
