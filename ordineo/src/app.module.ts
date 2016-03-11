@@ -1,14 +1,14 @@
-import {JWORKS360_AUTH} from "./auth/auth.module";
+import {ORDINEO_AUTH} from "./auth/auth.module";
 import {MATERIAL_DESIGN} from "./theme/ThemeModule";
 import {APP_COMPONENT} from "./app.component";
 import {AppComponent} from "./app.component";
-import {JWORKS360_CORE} from "./core/core.module";
-import {JWORKS360_PROFILE} from "./profile/profile.module";
-import {JWORKS360_TIMELINE} from "./timeline/timeline.module";
-import {JWORKS360_LAYOUT} from "./layout/LayoutModule";
-import {JWORKS360_OBJECTIVES} from "./objectives/ObjectivesModule";
-import {JWORKS360_GATEWAY} from "./gateway/GatewayModule";
-import {JWORKS360_PERSONS} from "./persons/PersonsModule";
+import {ORDINEO_CORE} from "./core/core.module";
+import {ORDINEO_PROFILE} from "./profile/profile.module";
+import {ORDINEO_TIMELINE} from "./timeline/timeline.module";
+import {ORDINEO_LAYOUT} from "./layout/LayoutModule";
+import {ORDINEO_OBJECTIVES} from "./objectives/ObjectivesModule";
+import {ORDINEO_GATEWAY} from "./gateway/GatewayModule";
+import {ORDINEO_PERSONS} from "./persons/PersonsModule";
 import {TRAVERSON} from "./traverson/TraversonModule";
 export const APP_NAME = "ordineo";
 
@@ -16,14 +16,14 @@ require('angular-moment');
 require('moment');
 
 var deps:Array<string> = [
-  JWORKS360_AUTH,
-  JWORKS360_CORE,
-  JWORKS360_PROFILE,
-  JWORKS360_LAYOUT,
-  JWORKS360_TIMELINE,
-  JWORKS360_OBJECTIVES,
-  JWORKS360_GATEWAY,
-  JWORKS360_PERSONS,
+  ORDINEO_AUTH,
+  ORDINEO_CORE,
+  ORDINEO_PROFILE,
+  ORDINEO_LAYOUT,
+  ORDINEO_TIMELINE,
+  ORDINEO_OBJECTIVES,
+  ORDINEO_GATEWAY,
+  ORDINEO_PERSONS,
   MATERIAL_DESIGN,
   TRAVERSON,
   'angularMoment'

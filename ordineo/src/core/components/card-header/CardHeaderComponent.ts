@@ -1,6 +1,18 @@
 require('./card-header-styles.scss');
 import IComponentOptions = angular.IComponentOptions;
 
+/**
+ * @ngdoc component
+ * @name cardHeader
+ * @module ordineo.core
+ *
+ * @restrict E
+ *
+ * @usage
+ * <card-header title="About myself" onEditClick="$ctrl.func()" onDragClick="$ctrl.func()">
+ * </card-header>
+ */
+
 interface CardHeaderScope{
   title:string;
   onEditClick:Function;

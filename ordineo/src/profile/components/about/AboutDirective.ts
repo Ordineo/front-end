@@ -3,6 +3,18 @@ import {AboutDirectiveController} from "./AboutDirectiveController";
 
 require('./about-directive-styles.scss');
 
+/**
+ * @ngdoc directive
+ * @name profileAbout
+ * @module ordineo.profile
+ *
+ * @restrict E
+ *
+ * @usage
+ * <profile-about functie="designer" unit="clockwork">
+ *     <p>description of the person</p>
+ * </profile-about>
+ */
 export class AboutDirective implements IDirective {
 
   static NAME:string = "profileAbout";
