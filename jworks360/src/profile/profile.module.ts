@@ -1,6 +1,6 @@
 import {TabMenuComponent} from "../layout/tab-menu/TabMenuComponent.ts";
-import {ProfileSummaryComponent} from "./header/summary/profile.summary.compoment";
 import {MATERIAL_DESIGN} from "../material-design/material-design";
+import {AboutDirective} from "./components/about/AboutDirective";
 
 export const JWORKS360_PROFILE = "jworks360.profile";
 
@@ -10,5 +10,4 @@ var deps:Array<string> = [
 
 angular
   .module(JWORKS360_PROFILE, deps)
-  .component(ProfileSummaryComponent.NAME, new ProfileSummaryComponent());
-
+  .directive(AboutDirective.NAME, AboutDirective.instance);

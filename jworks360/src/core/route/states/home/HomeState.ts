@@ -1,7 +1,6 @@
 import {IState} from "angular-ui-router";
 import {IStateService} from "angular-ui-router";
 import {LoginState} from "./../login/login.state.ts";
-import {IProfileSummary} from "../../../../profile/header/summary/profile.summary.compoment.ts";
 
 export class HomeState implements IState {
   static NAME = 'home';

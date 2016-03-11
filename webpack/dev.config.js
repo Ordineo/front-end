@@ -9,7 +9,7 @@ devConfig.plugins = [
   })
 ];
 
-devConfig.devtool = 'source-map';
+//devConfig.devtool = 'source-map';
 
 devConfig.output = {
   path: './public/dev/',
