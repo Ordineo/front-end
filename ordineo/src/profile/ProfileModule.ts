@@ -2,6 +2,7 @@ import {TabMenuComponent} from "../layout/tab-menu/TabMenuComponent.ts";
 import {MATERIAL_DESIGN} from "../theme/ThemeModule";
 import {AboutDirective} from "./components/about/AboutDirective";
 import {ORDINEO_CORE} from "../core/core.module";
+import {ProfileService} from "./services/ProfileService";
 
 
 /**
@@ -20,4 +21,5 @@ var deps:Array<string> = [
 
 angular
   .module(ORDINEO_PROFILE, deps)
+  .service(ProfileService.NAME, ProfileService)
   .directive(AboutDirective.NAME, AboutDirective.instance);

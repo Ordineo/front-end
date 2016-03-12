@@ -11,10 +11,13 @@ require('./about-directive-styles.scss');
  * @restrict E
  *
  * @usage
+ * <profile-about username="john"></profile-about>
+ *
+ * or
+ *
  * <profile-about
  *        functie="designer"
- *        unit="clockwork"
- *        >
+ *        unit="clockwork">
  *     <p>description of the person</p>
  * </profile-about>
  */
@@ -26,9 +29,9 @@ export class AboutDirective implements IDirective {
   restrict:string = 'E';
   transclude:boolean = true;
   bindToController:any = {
-    functie: '@',
-    unit:'@',
-    description: '@',
+    functie: '=?',
+    unit:'=?',
+    description: '=?',
   };
   controller:Function = AboutDirectiveController;
   controllerAs:string = '$ctrl';

@@ -1,63 +1,57 @@
 $borderColor: #eeeeee;
 $accentColor: #ED9424;
 $profileContentMarginTop: 1em;
-$shadowColor: rgba(219,216,219,1);
-profile-about {
-  md-card {
-    border-radius: 0;
-    -webkit-box-shadow: 2px 3px 0px 1px $shadowColor;
-    -moz-box-shadow: 2px 3px 0px 1px $shadowColor;
-    box-shadow: 2px 3px 0px 1px $shadowColor;
-    h3 {
-      margin: 0;
-    }
-    h4:first-of-type {
-      margin-top: 0;
-    }
-    h4 {
-      color: $accentColor;
-      margin-bottom: 0.5em;
-    }
-    .sample {
-      $size: 130px;
 
-      margin-top: $profileContentMarginTop;
-      width: $size;
-      height: $size;
-      background: url('images/designer.jpg') no-repeat center;
-      background-size: contain;
-      margin-right: 1em;
-      margin-bottom: 1em;
+profile-about {
+  h3 {
+    margin: 0;
+  }
+  h4:first-of-type {
+    margin-top: 0;
+  }
+  h4 {
+    color: $accentColor;
+    margin-bottom: 0.5em;
+  }
+  .sample {
+    $size: 130px;
+
+    margin-top: $profileContentMarginTop;
+    width: $size;
+    height: $size;
+    background: url('images/designer.jpg') no-repeat center;
+    background-size: contain;
+    margin-right: 1em;
+    margin-bottom: 1em;
+  }
+  .about-job {
+    font-family: Neuratext;
+    font-weight: 800;
+    margin-top: $profileContentMarginTop;
+    border-right: 1px solid $borderColor;
+    padding-right: 25px;
+    margin-right: 25px;
+    padding-bottom: 25px;
+    h4 {
+      font-family: NexaBold;
+      font-size: 1em;
+      margin-bottom: 0;
     }
-    .about-job {
+  }
+  .about-description {
+    font-family: Neuratext;
+    font-weight: 800;
+    line-height: 150%;
+    letter-spacing: 1px;
+  }
+  .about-footer {
+    border-top: 1px solid $borderColor;
+    .md-button {
+      font-size: 1em;
       font-family: Neuratext;
-      font-weight: 800;
-      margin-top: $profileContentMarginTop;
-      border-right: 1px solid $borderColor;
-      padding-right: 25px;
-      margin-right: 25px;
-      padding-bottom: 25px;
-      h4 {
-        font-family: NexaBold;
-        font-size: 1em;
-        margin-bottom: 0;
-      }
-    }
-    .about-description {
-      font-family: Neuratext;
-      font-weight: 800;
-      line-height: 150%;
-      letter-spacing: 1px;
-    }
-    .about-footer {
-      border-top: 1px solid $borderColor;
-      .md-button {
-        font-size: 1em;
-        font-family: Neuratext;
-        border-radius: 0;
-        background-color: $accentColor;
-        color: white;
-      }
+      border-radius: 0;
+      background-color: $accentColor;
+      color: white;
     }
   }
 }

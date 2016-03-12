@@ -18,7 +18,8 @@
           </div>
         </div>
         <div flex class="about-description">
-            <ng-transclude></ng-transclude>
+          <p ng-if="$ctrl.description">{{$ctrl.description}}</p>
+          <ng-transclude></ng-transclude>
         </div>
       </div>
       <div layout="row" layout-align="end center" class="about-footer">

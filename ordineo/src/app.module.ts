@@ -3,7 +3,7 @@ import {MATERIAL_DESIGN} from "./theme/ThemeModule";
 import {APP_COMPONENT} from "./app.component";
 import {AppComponent} from "./app.component";
 import {ORDINEO_CORE} from "./core/core.module";
-import {ORDINEO_PROFILE} from "./profile/profile.module";
+import {ORDINEO_PROFILE} from "./profile/ProfileModule.ts";
 import {ORDINEO_TIMELINE} from "./timeline/timeline.module";
 import {ORDINEO_LAYOUT} from "./layout/LayoutModule";
 import {ORDINEO_OBJECTIVES} from "./objectives/ObjectivesModule";
