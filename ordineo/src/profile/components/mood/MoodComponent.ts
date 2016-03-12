@@ -19,35 +19,18 @@ export class MoodComponentController {
     ],
   };
 
-  public barResponsiveOptions:any = [
-  ['screen and (min-width: 641px) and (max-width: 1024px)', {
+  public barOptions:any = {
     seriesBarDistance: 10,
+    horizontalBars:true,
     high: 100,
-    low:0,
+    low: 0,
     axisX: {
-      showLabel:false,
-      showGrid:false,
+      showLabel: false,
+      showGrid: false,
     },
     axisY: {
-      showLabel:false,
-      showGrid:false,
-    }
-  }],
-  ['screen and (max-width: 640px)', {
-    seriesBarDistance: 5,
-    axisX: {
-      labelInterpolationFnc: function(value) {
-        return value[0];
-      }
-    }
-  }]
-];
-
-  public barOptions:any = {
-    seriesBarDistance: 15,
-    horizontalBars:true,
-    axisY:{
-      offset:70
+      showLabel: false,
+      showGrid: false,
     }
   };
 

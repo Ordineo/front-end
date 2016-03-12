@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 $loginRegisterMarginTop: 20px;
 $colorPrimary: #ff9800;
 $colorPrimary50: #ffcc80;
@@ -7,8 +9,63 @@ $materialBg: '../images/header-bg.png';
 $logoNoMargin: '../images/jworks-trans.png';
 $ordinaLogo: '../images/ordina-logo.png';
 
+.HAPPY_2_
+{
+  background-image : url(../images/neo-icons/HAPPY_2_.png);
+  background-repeat : no-repeat;
+}
+.NormalCharacterStyle45
+{
+  font-family : Neuratext;
+  font-weight : bold;
+  font-size : 11px;
+  line-height : 20px;
+  text-transform : uppercase;
+  color : #E98300;
+  color : rgb(233, 131, 0);
+}
+.NormalCharacterStyle46
+{
+  font-family : Neuratext;
+  font-weight : bold;
+  font-size : 11px;
+  line-height : 20px;
+  text-transform : uppercase;
+  color : #E98300;
+  color : rgb(233, 131, 0);
+}
+.HAPPY_1_
+{
+  height: 24px;
+  width: 24px;
+  background-image : url(../images/neo-icons/HAPPY_1_.png);
+  background-repeat : no-repeat;
+  background-size: contain;
+}
+.background_grey_3_
+{
+  background : #F4F4F4;
+  background : rgba(244, 244, 244, 1);
+}
+.NormalCharacterStyle44
+{
+  font-family : Neuratext;
+  font-weight : bold;
+  font-size : 11px;
+  line-height : 20px;
+  text-transform : uppercase;
+  color : #E98300;
+  color : rgb(233, 131, 0);
+
+}
+.Well_done_thumb_4_
+{
+  background-image : url(../images/neo-icons/Well_done_thumb_4_.png);
+  background-repeat : no-repeat;
+}
 body{
-  background-color: #EDF0F1;
+  background : #F4F4F4;
+  background : rgba(244, 244, 244, 1);
 }
 .to-upper-case{
   text-transform: uppercase;
