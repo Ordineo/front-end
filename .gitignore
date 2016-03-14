@@ -10,6 +10,7 @@ public
 ordineo/test/**/*.js
 ordineo/test/**/*.map
 ordineo/src/**/*.js
+!ordineo/src/gsap/*.js
 ordineo/src/**/*.map
 reports
 out
