@@ -1,5 +1,10 @@
 <md-card>
-  <div layout="row">
+  <div layout="row" layout-align="center center" ng-hide="$ctrl.isContentLoaded">
+    <md-progress-circular
+      class="md-primary"
+      md-diameter="60"></md-progress-circular>
+  </div>
+  <div layout="row" ng-show="$ctrl.isContentLoaded" class="test" >
     <span flex="5"></span>
     <!-- Content -->
     <div flex layout="column">

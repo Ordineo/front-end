@@ -29,7 +29,7 @@ export class ProfileService implements IProfileService {
       } else {
         deferred.reject("No data");
       }
-    }, 3000);
+    },2000);
 
     return deferred.promise;
   }
