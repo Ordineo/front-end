@@ -6,3 +6,5 @@ applications:
   path: build/
   buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
   timeout: 120
+  services:
+    - registry
