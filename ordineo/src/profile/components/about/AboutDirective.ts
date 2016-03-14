@@ -42,6 +42,11 @@ export class AboutDirective implements IDirective {
   controllerAs:string = '$ctrl';
   template:string = require('./about-directive-template.html');
   link:IDirectiveLinkFn = (scope:IScope, el:IAugmentedJQuery)=> {
+    scope.$watch('$ctrl.isContentLoaded', (newValue, oldValue)=> {
+      if(newValue === true) {
+
+      }
+    });
   };
 
   constructor(private animate:IAnimateService){

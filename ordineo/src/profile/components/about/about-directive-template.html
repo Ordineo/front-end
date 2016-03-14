@@ -1,9 +1,14 @@
 <md-card>
-  <div layout="row">
+  <div layout="row" layout-align="center center" ng-hide="$ctrl.isContentLoaded">
+    <md-progress-circular
+      class="md-primary"
+      md-diameter="60"></md-progress-circular>
+  </div>
+  <div layout="row" ng-show="$ctrl.isContentLoaded" class="test" >
     <span flex="5"></span>
     <!-- Content -->
     <div flex layout="column">
-      <card-header show-btn-edit="true" title="About myself" class="hide-xs"></card-header>
+      <card-header show-btn-edit="true" title="About myself"></card-header>
       <div class="about-content" layout="row" layout-xs="column">
         <div class="about-img" layout="row" layout-align="start top" layout-align-xs="center center">
           <!--todo replace this with <img src=url /> -->
