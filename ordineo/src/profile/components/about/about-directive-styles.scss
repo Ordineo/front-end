@@ -1,6 +1,7 @@
 $borderColor: #eeeeee;
 $accentColor: #ED9424;
 $profileContentMarginTop: 1em;
+$layout-xs-max-width: 600px;
 
 profile-about {
   h3 {
@@ -29,6 +30,9 @@ profile-about {
     font-weight: 800;
     margin-top: $profileContentMarginTop;
     border-right: 1px solid $borderColor;
+    @media screen and (max-width: $layout-xs-max-width){
+      border-right: none;
+    }
     padding-right: 25px;
     margin-right: 25px;
     padding-bottom: 25px;
