@@ -3,13 +3,13 @@ import {PersonsService} from "./service/PersonService.ts";
 import {PERSONS_SERVICE} from "./service/PersonService.ts";
 import {TRAVERSON} from "../traverson/TraversonModule";
 
-export const JWORKS360_PERSONS = 'ordineo.persons';
+export const ORDINEO_PERSONS = 'ordineo.persons';
 
 var deps:Array<string> = [
   TRAVERSON
 ];
 
 angular
-  .module(JWORKS360_PERSONS, deps)
+  .module(ORDINEO_PERSONS, deps)
   .service(PERSONS_SERVICE, PersonsService);
 

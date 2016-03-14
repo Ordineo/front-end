@@ -1,6 +1,6 @@
 import 'angular';
 import 'angular-ui-router';
-import {JWORKS360_CORE} from "./../core.module.ts";
+import {ORDINEO_CORE} from "./../core.module.ts";
 import {IStateProvider} from "angular-ui-router";
 import {IUrlRouterProvider} from "angular-ui-router";
 import {LoginState} from "./states/login/login.state.ts";
@@ -17,6 +17,6 @@ export function configureStates($stateProvider:IStateProvider, $urlRouterProvide
   $stateProvider.state(new ProfileState());
 
   $urlRouterProvider
-    .when('/', 'login')
+    .when('/', 'profile')
     .otherwise('/');
 }

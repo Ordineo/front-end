@@ -7,14 +7,14 @@ import {AuthService} from "./service/auth.service";
 import {LoginComponent} from "./component/login.component";
 import {LOGIN} from "./component/login.component";
 
-export const JWORKS360_AUTH = 'ordineo.auth';
+export const ORDINEO_AUTH = 'ordineo.auth';
 
 var deps:Array<string> = [
   MATERIAL_DESIGN,
   'ngMessages'
 ];
 
-var authModule:IModule = angular.module(JWORKS360_AUTH, deps);
+var authModule:IModule = angular.module(ORDINEO_AUTH, deps);
 
 authModule
   .service(AUTH_SERVICE, AuthService)

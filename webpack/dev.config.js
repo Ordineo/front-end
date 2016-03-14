@@ -8,7 +8,6 @@ devConfig.plugins = [
     inject: 'body'
   })
 ];
-
 //devConfig.devtool = 'source-map';
 
 devConfig.output = {

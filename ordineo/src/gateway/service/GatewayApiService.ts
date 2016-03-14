@@ -1,4 +1,4 @@
-import {JWORKS360_GATEWAY} from "../GatewayModule";
+import {ORDINEO_GATEWAY} from "../GatewayModule";
 import IWindowService = angular.IWindowService;
 
 export class GatewayApiService{
