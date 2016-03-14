@@ -6,6 +6,9 @@ var path = require('path');
 module.exports = {
   entry: ['./ordineo/src/bootstrap.ts'],
   resolve: {
+    alias:{
+      'TweenLite':'./ordineo/src/gsap/TweenLite.js'
+    },
     extensions: ['', '.ts', '.js']
   }, plugins: [
     new HtmlWebpackPlugin()

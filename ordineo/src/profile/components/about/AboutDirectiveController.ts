@@ -1,5 +1,6 @@
 import {ProfileService} from "../../services/ProfileService";
 import {IProfileService} from "../../services/ProfileService";
+
 interface IAboutDirective {
   functie:string;
   unit:string;
@@ -21,7 +22,8 @@ export class AboutDirectiveController implements IAboutDirective {
         this.functie = data.info.functie;
         this.unit = data.info.unit;
         this.description = data.info.description;
-      }, ()=>{});
+      }, ()=> {
+      });
   }
 
 }

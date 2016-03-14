@@ -23,4 +23,4 @@ angular
   .module(ORDINEO_PROFILE, deps)
   .component(MoodComponent.NAME, new MoodComponent())
   .service(ProfileService.NAME, ProfileService)
-  .directive(AboutDirective.NAME, AboutDirective.instance);
+  .directive(AboutDirective.NAME, AboutDirective.instance());

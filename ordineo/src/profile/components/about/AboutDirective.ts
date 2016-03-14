@@ -1,6 +1,11 @@
 import IDirective = angular.IDirective;
 import {AboutDirectiveController} from "./AboutDirectiveController";
+import IDirectiveLinkFn = angular.IDirectiveLinkFn;
+import IScope = angular.IScope;
+import IAugmentedJQuery = angular.IAugmentedJQuery;
 
+import '../../../gsap/TweenMax.js';
+import IAnimateService = angular.animate.IAnimateService;
 require('./about-directive-styles.scss');
 
 /**
@@ -36,8 +41,15 @@ export class AboutDirective implements IDirective {
   controller:Function = AboutDirectiveController;
   controllerAs:string = '$ctrl';
   template:string = require('./about-directive-template.html');
+  link:IDirectiveLinkFn = (scope:IScope, el:IAugmentedJQuery)=> {
+  };
 
-  static instance():IDirective{
-    return new AboutDirective();
+  constructor(private animate:IAnimateService){
+  }
+
+  static instance():any{
+    const directive = (ani:IAnimateService)=>new AboutDirective(ani);
+    directive.$inject = ['$animate'];
+    return directive;
   }
 }
