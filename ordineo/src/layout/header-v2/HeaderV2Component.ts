@@ -19,7 +19,6 @@ export class HeaderV2ComponentController{
   public menuItems:Array<string>;
 
   constructor(){
-    this.menuItems = ['Profile', 'Requests','CV Tool', 'Calendar', 'Timesheets'];
   }
 
 }
