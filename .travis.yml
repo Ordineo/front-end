@@ -20,6 +20,8 @@ deploy:
   on:
     repo: Ordineo/front-end
     branch: master
+after_deploy:
+- cat ./reports/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 notifications:
   slack:
     secure: XOx179r8kckIs1a2a6X6Q6gf+Ja1aM/HypmA1NCk/hY5igllxgXzvvPj9ZzMJ/ORR84oD035/4Aj9R4RFT70LmEApzGZkGFSeRN/DdceGRsTiznAk8CBJ+flXTNs21Sm19/M8NOavm0CClZEvXNTcnguv+LEkp4+p41lTGG4roPK9rH5BI30LZKMTSxCgXDQ0Ciy/A0/N5/4K8kJKGBdyDDR9D7t15Ogx5YEYD72BP2og6BNFbxYw3BTuCBxnAePDDZ1um1hHEe4XxJcrx5lrj/YcMbHW1OzkCEBRyJtmxXaZkceuq+nADtUfl9rw7PxL/z9m/51EHAKaqxemgeklTkfUh7tFCUj5OXOl3fk/koLi3uD0EquvLM2PfgCK90Un2TnbvBeeXIZ6134/hgjyMmq3PsXSX1wLnVoyPaX8/xYX/eUtOhdNxdafFdrkO4ipm7XZUHALTqK74u4I469xLdo0r+sLQygWPXd7KIxGduRopLoEB4rOiCN1dVMvMxUaumlYw8Qzimxn9Z6mcQ8yU9UzFetLxM9Jrpbh53C+QTfB5jOepyy6th1+hTe3n7UUUZWESHU7ONnqGnqUmVYlmsmUBh2Auq0ni07mIi22djGAHaMKx8dAfEsgfBz7Hu2naAWzEJmhGVY1CPCmTqkH2qPcCK3nI0MROJJ2GwL0uI=
