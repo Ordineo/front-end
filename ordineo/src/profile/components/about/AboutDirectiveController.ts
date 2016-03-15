@@ -9,6 +9,7 @@ interface IAboutDirective {
   username:string;
   isContentLoaded:boolean;
   isEditModeEnabled:boolean;
+  title:string;
 }
 
 export class AboutDirectiveController implements IAboutDirective {
@@ -19,6 +20,7 @@ export class AboutDirectiveController implements IAboutDirective {
   public isContentLoaded:boolean = false;
   public isEditModeEnabled:boolean = false;
   public aboutInfoCache:IAboutModel;
+  public title:string = 'About Myself';
 
   static $inject:Array<string> = [ProfileService.NAME];
 
@@ -29,6 +31,7 @@ export class AboutDirectiveController implements IAboutDirective {
         this.functie = data.function;
         this.unit = data.unit.name;
         this.description = data.description;
+        this.title = data.firstName + ' ' + data.lastName;
         this.isContentLoaded = true;
       }, (error:any)=> {
         console.log(error);
