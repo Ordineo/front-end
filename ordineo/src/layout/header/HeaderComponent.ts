@@ -1,24 +1,17 @@
 import IComponentOptions = angular.IComponentOptions;
+import {HeaderController} from "./HeaderController";
+
 
 require('./header.scss');
 
 /**
  * @ngdoc Component
  */
-export class HeaderV2Component implements IComponentOptions{
+export class HeaderComponent implements IComponentOptions{
 
-  static NAME:string = "headerV2";
+  static NAME:string = "header";
 
-  controller:Function = HeaderV2ComponentController;
+  controller:Function = HeaderController;
   controllerAs:string = '$ctrl';
   template:string = require('./header.html');
-}
-
-export class HeaderV2ComponentController{
-
-  public menuItems:Array<string>;
-
-  constructor(){
-  }
-
 }

@@ -1,4 +1,4 @@
-export class HeaderComponentController{
+export class HeaderController{
 
   public menuItems:Array<string>;
 

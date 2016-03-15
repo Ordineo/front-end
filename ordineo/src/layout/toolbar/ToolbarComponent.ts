@@ -1,7 +1,7 @@
 import IComponentOptions = angular.IComponentOptions;
-import {MainToolbarV2Controller} from "./MainToolbarV2Controller";
+import {ToolbarController} from "./ToolbarController";
 
-require('./toolbar-styles.scss');
+require('./toolbar.scss');
 
 /**
  * @ngdoc component
@@ -12,17 +12,16 @@ require('./toolbar-styles.scss');
  * The main toolbar for the ordineo home page
  *
  * @usage
- * <main-toolbar-v2></main-toolbar-v2>
+ * <toolbar></toolbar>
  */
-export class MainToolbarV2Component implements IComponentOptions{
-  static NAME:string = "mainToolbarV2";
+export class ToolbarComponent implements IComponentOptions{
+  static NAME:string = "toolbar";
 
   binding:any = {
     newMessagesCount: '<'
   };
-  controller:any = MainToolbarV2Controller;
+  controller:any = ToolbarController;
   controllerAs:string = '$ctrl';
   template:string = require('./toolbar.html');
 
 }
-
