@@ -1,12 +1,12 @@
 
-export interface IMainToolbarV2Scope{
+export interface IToolbarScope{
   buttons:Array<ButtonConfig>
 }
 interface ButtonConfig{
   title:string;
   icon:string;
 }
-export class MainToolbarV2Controller implements IMainToolbarV2Scope{
+export class ToolbarController implements IToolbarScope{
   public buttons:Array<ButtonConfig> = [];
 
   constructor(){
