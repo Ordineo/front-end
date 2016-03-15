@@ -8,6 +8,18 @@ install:
 - npm install -g typings
 - npm install
 - npm run build
+deploy:
+  edge: true
+  provider: cloudfoundry
+  api: https://api.run.pivotal.io
+  username: gina.debeukelaer@ordina.be
+  password:
+    secure: OmF0odhymluHc+WenyYNB5hdvnL3xtRFe6n7dQWjtzYmeBhyJ6EtdEPQ14q6hWTKqnPoO/OgSBN8B+z6oZo2K3iLxzcwhUENo0WxoP7ozRFKwiQQBl96VJk2rGqVPUCwbUDbkuYBdVYSGPhyf+IVfEVeUGjcNyZnfPh6nRxdi30XOLnzAotvVQjNC9/+xDEj23O+AUZr2og0701/HeRq1LOQb0ec3Oxg7dohilSiZ+nInDLbKBGZt8I8jX3xLDS28Yu2t4QUpTLf+TKRWq+WL7Oi4Fanrj3JwSYoqXhqH1ch65SYABxfgzpDwegQl5KRBsXO0nKrWZBCwMEMFW2hLAIYyHF4GVjoQHG1ZhHf8F99rP2ssp/httHX18BVV6KAK8YtFMQ668QbFtqo6m9Adwp/K4VpkPbem2o/mtTWWW4alw9+DAkWqUiGCorxZ+SJPzDnbvD5KkzLZhsrzR3YQbS1gjxbQb/6Y/VFZ5Pex9Orjmayz0xNdtcZoqyqKHlBiUNqQ5uDCIU9YAZssQCEz1zFCajgR7ybhnCCbpGuNnILkAz52CTb9sJBYr/too9J12jg1d2NI3EhkifIzw4RyCc2lZ4HHwm1O/BkPH1kki7kJx91D3rWy2yGkjyjQm0/Axbw3g9IJLzMyVu7kLqVa3Fv7P8bPY4nZi9fj2o5KvY=
+  organization: OrdinaBelgiumNV
+  space: development
+  on:
+    repo: Ordineo/front-end
+    branch: master
 notifications:
   slack:
     secure: XOx179r8kckIs1a2a6X6Q6gf+Ja1aM/HypmA1NCk/hY5igllxgXzvvPj9ZzMJ/ORR84oD035/4Aj9R4RFT70LmEApzGZkGFSeRN/DdceGRsTiznAk8CBJ+flXTNs21Sm19/M8NOavm0CClZEvXNTcnguv+LEkp4+p41lTGG4roPK9rH5BI30LZKMTSxCgXDQ0Ciy/A0/N5/4K8kJKGBdyDDR9D7t15Ogx5YEYD72BP2og6BNFbxYw3BTuCBxnAePDDZ1um1hHEe4XxJcrx5lrj/YcMbHW1OzkCEBRyJtmxXaZkceuq+nADtUfl9rw7PxL/z9m/51EHAKaqxemgeklTkfUh7tFCUj5OXOl3fk/koLi3uD0EquvLM2PfgCK90Un2TnbvBeeXIZ6134/hgjyMmq3PsXSX1wLnVoyPaX8/xYX/eUtOhdNxdafFdrkO4ipm7XZUHALTqK74u4I469xLdo0r+sLQygWPXd7KIxGduRopLoEB4rOiCN1dVMvMxUaumlYw8Qzimxn9Z6mcQ8yU9UzFetLxM9Jrpbh53C+QTfB5jOepyy6th1+hTe3n7UUUZWESHU7ONnqGnqUmVYlmsmUBh2Auq0ni07mIi22djGAHaMKx8dAfEsgfBz7Hu2naAWzEJmhGVY1CPCmTqkH2qPcCK3nI0MROJJ2GwL0uI=
