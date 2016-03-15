@@ -1,6 +1,6 @@
 import {ProfileService} from "../../services/ProfileService";
 import {IProfileService} from "../../services/ProfileService";
-import {IAboutModel} from "./AboutModel";
+import {IAboutModel} from "./IAboutModel";
 
 interface IAboutDirective {
   functie:string;

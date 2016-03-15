@@ -23,13 +23,15 @@
           </div>
           <div layout="column">
             <div class="about-job">
-              <h4 class="to-upper-case">Function</h4>
+              <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Function</h4>
               <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
+                <label>Function</label>
                 <input required name="userFunctie" ng-model="$ctrl.functie">
               </md-input-container>
               <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.functie}}</span>
-              <h4 class="to-upper-case">Unit</h4>
+              <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Unit</h4>
               <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
+                <label>Unit</label>
                 <input ng-if="$ctrl.isEditModeEnabled" required name="userUnit" ng-model="$ctrl.unit">
               </md-input-container>
               <span ng-if="!$ctrl.isEditModeEnabled" class="unit">{{$ctrl.unit}}</span>
@@ -37,7 +39,7 @@
           </div>
           <div flex class="about-description">
             <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
-
+              <label>Description</label>
           <textarea ng-if="$ctrl.isEditModeEnabled" ng-model="$ctrl.description" md-maxlength="365"
                     md-select-on-focus></textarea>
 
@@ -46,8 +48,8 @@
             <ng-transclude></ng-transclude>
           </div>
         </div>
-        <div layout="row" layout-align="end center" ng-if="!$ctrl.isEditModeEnabled" class="about-footer">
-          <md-button class="md-raised md-primary" >
+        <div layout="row" layout-align="end center" class="about-footer">
+          <md-button class="md-raised md-primary">
             more
           </md-button>
         </div>

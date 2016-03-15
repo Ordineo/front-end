@@ -2,22 +2,25 @@
   <h3 flex class="to-upper-case">{{$ctrl.title}}</h3>
   <div layout="row" layout-align="end center">
     <div layout="row">
-      <md-button
-        ng-show="$ctrl.showBtnSave"
-        ng-click="$ctrl.save()"
-        class="md-icon-button md-warn">
-        <md-icon md-svg-src="act:done"></md-icon>
-      </md-button>
-      <md-button
-        ng-click="$ctrl.cancel()"
-        ng-show="$ctrl.showBtnCancel"
-        class="md-icon-button">
-        <md-icon md-svg-src="act:highlight_off"></md-icon>
-      </md-button>
+      <div ng-show="$ctrl.showBtnSave" class="edit-icons-fade">
+        <md-button
+          aria-label="Save"
+          ng-show="$ctrl.showBtnSave"
+          ng-click="$ctrl.save()"
+          class="md-icon-button md-warn ">
+          <md-icon md-svg-src="act:done"></md-icon>
+        </md-button>
+        <md-button
+          ng-click="$ctrl.cancel()"
+          ng-show="$ctrl.showBtnCancel"
+          class="md-icon-button btn-red">
+          <md-icon md-svg-src="act:highlight_off"></md-icon>
+        </md-button>
+      </div>
       <md-button
         ng-click="$ctrl.editMode()"
         ng-show="$ctrl.showBtnEdit"
-        class="md-icon-button">
+        class="md-icon-button simple-fade">
         <md-icon md-svg-icon="content:create"></md-icon>
       </md-button>
       <!--todo add on drag handler-->
