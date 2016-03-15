@@ -34,6 +34,7 @@ export class AboutDirective implements IDirective {
   restrict:string = 'E';
   transclude:boolean = true;
   bindToController:any = {
+    username: '@',
     functie: '=?',
     unit:'=?',
     description: '=?',

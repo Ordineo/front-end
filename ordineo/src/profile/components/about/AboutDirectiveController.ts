@@ -15,7 +15,7 @@ export class AboutDirectiveController implements IAboutDirective {
   public functie:string = '';
   public unit:string = '';
   public description:string = '';
-  public username:string = '';
+  public username:string;
   public isContentLoaded:boolean = false;
   public isEditModeEnabled:boolean = false;
   public aboutInfoCache:IAboutModel;
@@ -23,13 +23,15 @@ export class AboutDirectiveController implements IAboutDirective {
   static $inject:Array<string> = [ProfileService.NAME];
 
   constructor(private profileService:IProfileService) {
-    profileService.getAboutInfo(this.username)
+    console.log(this.username);
+    profileService.getAboutInfoByUsername(this.username)
       .then((data:any)=> {
+        this.functie = data.function;
+        this.unit = data.unit.name;
+        this.description = data.description;
         this.isContentLoaded = true;
-        this.functie = data.info.functie;
-        this.unit = data.info.unit;
-        this.description = data.info.description;
-      }, ()=> {
+      }, (error:any)=> {
+        console.log(error);
       });
   }
 
