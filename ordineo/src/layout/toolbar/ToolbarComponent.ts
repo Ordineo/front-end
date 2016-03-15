@@ -1,7 +1,7 @@
 import IComponentOptions = angular.IComponentOptions;
 import {MainToolbarV2Controller} from "./MainToolbarV2Controller";
 
-require('./main-toolbar-v2-styles.scss');
+require('./toolbar-styles.scss');
 
 /**
  * @ngdoc component
@@ -22,7 +22,7 @@ export class MainToolbarV2Component implements IComponentOptions{
   };
   controller:any = MainToolbarV2Controller;
   controllerAs:string = '$ctrl';
-  template:string = require('./main-toolbar-v2-template.html');
+  template:string = require('./toolbar.html');
 
 }
 

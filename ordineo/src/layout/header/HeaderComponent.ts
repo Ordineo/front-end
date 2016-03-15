@@ -1,19 +1,24 @@
 import IComponentOptions = angular.IComponentOptions;
 
-require('./header-component-styles.scss');
-export class HeaderComponent implements IComponentOptions{
-  //<home-header></home-header>
-  static NAME = "homeHeader";
+require('./header.scss');
 
-  bindings:any = {
-    title: '@',
-  };
+/**
+ * @ngdoc Component
+ */
+export class HeaderV2Component implements IComponentOptions{
+
+  static NAME:string = "headerV2";
+
+  controller:Function = HeaderV2ComponentController;
   controllerAs:string = '$ctrl';
-  controller:Function = HeaderComponentCtrl;
-  template:string = require('./header-component-template.html');
+  template:string = require('./header.html');
 }
-export class HeaderComponentCtrl{
-  static DEFAULT_TITLE:string = "";
 
-  public title:string = HeaderComponentCtrl.DEFAULT_TITLE;
+export class HeaderV2ComponentController{
+
+  public menuItems:Array<string>;
+
+  constructor(){
+  }
+
 }
