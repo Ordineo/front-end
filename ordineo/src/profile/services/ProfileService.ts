@@ -6,7 +6,7 @@ import IDeferred = angular.IDeferred;
 import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 export interface IProfileService {
   getAboutInfoByUsername(userName:string):IPromise<any>;
-
+  getMock():IPromise<any>;
 }
 
 export class ProfileService implements IProfileService {
@@ -38,7 +38,7 @@ export class ProfileService implements IProfileService {
       .result
   }
 
-  private getMock():IPromise<any> {
+  public getMock():IPromise<any> {
     var deferred:IDeferred<any> = this.$q.defer();
     setTimeout(()=> {
       var data = require('../../../test/mockdata/about.json');
@@ -47,7 +47,7 @@ export class ProfileService implements IProfileService {
       } else {
         deferred.reject("No data");
       }
-    },0);
+    },1000);
 
     return deferred.promise;
   }

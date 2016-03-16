@@ -4,7 +4,6 @@ import IDirectiveLinkFn = angular.IDirectiveLinkFn;
 import IScope = angular.IScope;
 import IAugmentedJQuery = angular.IAugmentedJQuery;
 
-import '../../../gsap/TweenMax.js';
 import IAnimateService = angular.animate.IAnimateService;
 require('./about-directive-styles.scss');
 

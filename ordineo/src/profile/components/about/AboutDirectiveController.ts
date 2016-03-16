@@ -25,7 +25,6 @@ export class AboutDirectiveController implements IAboutDirective {
   static $inject:Array<string> = [ProfileService.NAME];
 
   constructor(private profileService:IProfileService) {
-    console.log(this.username);
     profileService.getAboutInfoByUsername(this.username)
       .then((data:any)=> {
         this.functie = data.function;
@@ -34,7 +33,12 @@ export class AboutDirectiveController implements IAboutDirective {
         this.title = data.firstName + ' ' + data.lastName;
         this.isContentLoaded = true;
       }, (error:any)=> {
-        console.log(error);
+        profileService.getMock().then((data:any)=> {
+          this.functie = data.info.functie;
+          this.unit = data.info.unit;
+          this.description = data.info.description;
+          this.isContentLoaded = true;
+        });
       });
   }
 

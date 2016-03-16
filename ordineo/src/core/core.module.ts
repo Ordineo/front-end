@@ -5,15 +5,10 @@ import {configureStates} from "./route/core.route.ts";
 import {CardHeaderComponent} from "./components/card-header/CardHeaderComponent";
 import {LoadingStatusDirective} from "./components/loading-status/LoadingStatusDirective";
 
-require('angular-chartist.js');
-require('chartist/dist/chartist.css');
-require('chartist');
-
 export const ORDINEO_CORE = 'ordineo.core';
 
 var deps:Array<string> = [
   'ui.router',
-  'angular-chartist',
   'ngAnimate'
 ];
 
@@ -23,7 +18,22 @@ angular.module(ORDINEO_CORE, deps)
   .directive(LoadingStatusDirective.NAME, LoadingStatusDirective.instance)
   .animation(".test", fadeInOnNgShow)
   .animation(".simple-fade", simpleFade)
-  .animation(".edit-icons-fade", editIcons);
+  .animation(".edit-icons-fade", editIcons)
+  .animation(".trans-height", transitionHeight);
+
+require('../gsap/TweenMax.js');
+
+export function transitionHeight():any {
+  return {
+    removeClass: function (element, className, done) {
+      if (className === 'ng-hide') {
+        TweenMax.set(element, {height: 'auto', autoAlpha: 0});
+        TweenMax.from(element, 0.5, {ease: Circ.easeOut, height: 0, onComplete: done});
+        TweenMax.to(element, 1, {delay: 0.5, autoAlpha: 1});
+      }
+    }
+  };
+}
 
 export function fadeInOnNgShow():any{
   return {
