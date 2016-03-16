@@ -13,20 +13,21 @@ interface IAboutDirective {
 }
 
 export class AboutDirectiveController implements IAboutDirective {
+  public functie:string;
+  public unit:string;
+  public description:string;
+  public isContentLoaded:boolean;
+  public isEditModeEnabled:boolean;
+  public aboutInfoCache:IAboutModel;
+  public title:string;
+  public username:string;
 
   static $inject:Array<string> = [
     ProfileService.NAME,
   ];
 
-  constructor(private profileService:IProfileService,
-              public functie:string,
-              public unit:string,
-              public description:string,
-              public username:string,
-              public isContentLoaded:boolean,
-              public isEditModeEnabled:boolean,
-              public aboutInfoCache:IAboutModel,
-              public title:string) {
+  constructor(public profileService:IProfileService) {
+    this.isContentLoaded = false;
 
     profileService.getAboutInfoByUsername(this.username)
       .then((data:any)=> {

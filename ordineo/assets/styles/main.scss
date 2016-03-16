@@ -63,9 +63,11 @@ $ordinaLogo: '../images/ordina-logo.png';
   background-image : url(../images/neo-icons/Well_done_thumb_4_.png);
   background-repeat : no-repeat;
 }
-body{
-  background : #F4F4F4;
-  background : rgba(244, 244, 244, 1);
+body {
+  height: auto;
+
+  background: #F4F4F4;
+  background: rgba(244, 244, 244, 1);
 }
 .to-upper-case{
   text-transform: uppercase;
