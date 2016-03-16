@@ -50,12 +50,17 @@ profile-about {
   }
   .about-footer {
     border-top: 1px solid $borderColor;
-    .md-button {
+    .md-button.md-primary {
       font-size: 1em;
       font-family: Neuratext;
       border-radius: 0;
-      background-color: $accentColor;
-      color: white;
+      color:white;
+    }
+    .md-button.md-warn {
+      font-size: 1em;
+      font-family: Neuratext;
+      border-radius: 0;
+      color:white;
     }
   }
 }
