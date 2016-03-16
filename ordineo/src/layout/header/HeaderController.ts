@@ -1,8 +1,7 @@
 export class HeaderController{
-
-  public menuItems:Array<string>;
+  public button:any;
 
   constructor(){
+    this.button = {title: 'search', icon: 'act:search'};
   }
-
 }
