@@ -13,18 +13,21 @@ interface IAboutDirective {
 }
 
 export class AboutDirectiveController implements IAboutDirective {
-  public functie:string = '';
-  public unit:string = '';
-  public description:string = '';
-  public username:string;
-  public isContentLoaded:boolean = false;
-  public isEditModeEnabled:boolean = false;
-  public aboutInfoCache:IAboutModel;
-  public title:string = 'About Myself';
 
-  static $inject:Array<string> = [ProfileService.NAME];
+  static $inject:Array<string> = [
+    ProfileService.NAME,
+  ];
 
-  constructor(private profileService:IProfileService) {
+  constructor(private profileService:IProfileService,
+              public functie:string,
+              public unit:string,
+              public description:string,
+              public username:string,
+              public isContentLoaded:boolean,
+              public isEditModeEnabled:boolean,
+              public aboutInfoCache:IAboutModel,
+              public title:string) {
+
     profileService.getAboutInfoByUsername(this.username)
       .then((data:any)=> {
         this.functie = data.function;
@@ -42,7 +45,7 @@ export class AboutDirectiveController implements IAboutDirective {
       });
   }
 
-  public onEdit():void{
+  onEdit():void {
     this.isEditModeEnabled = !this.isEditModeEnabled;
     this.aboutInfoCache = {
       functie: this.functie,
@@ -51,18 +54,18 @@ export class AboutDirectiveController implements IAboutDirective {
     };
   }
 
-  public onCancel():void{
+  onCancel():void {
     this.isEditModeEnabled = false;
     this.restore();
   }
 
-  public restore():void{
+  restore():void {
     this.functie = this.aboutInfoCache.functie;
     this.unit = this.aboutInfoCache.unit;
     this.description = this.aboutInfoCache.description;
   }
 
-  public onSubmit():void{
+  onSubmit():void {
     //todo make a post request and submit data
     this.isEditModeEnabled = false;
   }
