@@ -1,8 +1,8 @@
-$backgroundImg: './images/header-v2-bg.jpg';
+$backgroundImg: './images/header-bg.jpg';
 $headerHeight: 400px;
 
-header-v2 {
-  .header-v2-bg {
+header {
+  .header-bg {
     color: white;
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url($backgroundImg) no-repeat;
     overflow: hidden;
