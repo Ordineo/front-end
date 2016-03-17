@@ -4,7 +4,6 @@ import {APP_COMPONENT} from "./app.component";
 import {AppComponent} from "./app.component";
 import {ORDINEO_CORE} from "./core/core.module";
 import {ORDINEO_PROFILE} from "./profile/ProfileModule.ts";
-import {ORDINEO_TIMELINE} from "./timeline/timeline.module";
 import {ORDINEO_LAYOUT} from "./layout/LayoutModule";
 import {ORDINEO_OBJECTIVES} from "./objectives/ObjectivesModule";
 import {ORDINEO_GATEWAY} from "./gateway/GatewayModule";
@@ -20,7 +19,6 @@ var deps:Array<string> = [
   ORDINEO_CORE,
   ORDINEO_PROFILE,
   ORDINEO_LAYOUT,
-  ORDINEO_TIMELINE,
   ORDINEO_OBJECTIVES,
   ORDINEO_GATEWAY,
   ORDINEO_PERSONS,
