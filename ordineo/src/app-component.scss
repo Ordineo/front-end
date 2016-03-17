@@ -1,4 +1,13 @@
+body {
+  height: auto;
+}
+
 #page-wrap {
   margin: auto;
   width: 960px;
+}
+
+section[ui-view] {
+  border: solid 1px black;
+  padding: 25px;
 }
