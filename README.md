@@ -2,7 +2,7 @@
 
 # Front-end
 Front end project for Ordineo.
-[The app is located at http://ordineo.cfapps.io/](http://ordineo.cfapps.io/).
+[The app is located at http://ordineo.cfapps.io/](http://frontend-ordineo.cfapps.io/).
 
 ### Install
 

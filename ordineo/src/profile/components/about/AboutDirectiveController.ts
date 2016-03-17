@@ -29,21 +29,23 @@ export class AboutDirectiveController implements IAboutDirective {
   constructor(public profileService:IProfileService) {
     this.isContentLoaded = false;
 
-    profileService.getAboutInfoByUsername(this.username)
-      .then((data:any)=> {
-        this.functie = data.function;
-        this.unit = data.unit.name;
-        this.description = data.description;
-        this.title = data.firstName + ' ' + data.lastName;
-        this.isContentLoaded = true;
-      }, (error:any)=> {
-        profileService.getMock().then((data:any)=> {
-          this.functie = data.info.functie;
-          this.unit = data.info.unit;
-          this.description = data.info.description;
+    if (this.username) {
+      profileService.getAboutInfoByUsername(this.username)
+        .then((data:any)=> {
+          this.functie = data.function;
+          this.unit = data.unit.name;
+          this.description = data.description;
+          this.title = data.firstName + ' ' + data.lastName;
           this.isContentLoaded = true;
+        }, (error:any)=> {
+          profileService.getMock().then((data:any)=> {
+            this.functie = data.info.functie;
+            this.unit = data.info.unit;
+            this.description = data.info.description;
+            this.isContentLoaded = true;
+          });
         });
-      });
+    }
   }
 
   onEdit():void {
