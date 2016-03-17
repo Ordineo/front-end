@@ -6,9 +6,7 @@
         Welcome back, <strong>Hans</strong>!
       </span>
       <div flex layout="row" layout-align="center center">
-        <md-button class="md-icon-button " style="border: solid 1px black;" ng-repeat="btn in $ctrl.buttons">
-          <!--<span>{{btn.messages}}</span>-->
-
+        <md-button class="md-icon-button" ng-repeat="btn in $ctrl.buttons">
           <!-- Alert must be placed after the icon -->
           <md-icon md-svg-icon="{{btn.icon}}"></md-icon>
           <div class="push"><div><p>25</p></div></div>
