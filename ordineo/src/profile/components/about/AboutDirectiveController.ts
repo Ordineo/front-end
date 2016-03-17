@@ -2,7 +2,7 @@ import {ProfileService} from "../../services/ProfileService";
 import {IProfileService} from "../../services/ProfileService";
 import {IAboutModel} from "./IAboutModel";
 
-interface IAboutDirective {
+export interface IAboutDirective {
   functie:string;
   unit:string;
   description:string;
@@ -12,6 +12,7 @@ interface IAboutDirective {
   isEditModeEnabled:boolean;
   title:string;
   aboutInfoCache:IAboutModel;
+  hasError:boolean;
   isCollapsed:boolean;
   setIsCollapsed:Function;
 }
@@ -27,6 +28,7 @@ export class AboutDirectiveController implements IAboutDirective {
   public title:string;
   public username:string;
   public isCollapsed:boolean;
+  public hasError:boolean;
 
   static $inject:Array<string> = [
     ProfileService.NAME,
@@ -35,6 +37,7 @@ export class AboutDirectiveController implements IAboutDirective {
   constructor(public profileService:IProfileService) {
     this.isContentLoaded = false;
     this.setIsCollapsed(true);
+    this.hasError = false;
     this.setInfoCache();
     if (this.username) {
       profileService.getAboutInfoByUsername(this.username)
@@ -46,6 +49,7 @@ export class AboutDirectiveController implements IAboutDirective {
           this.isContentLoaded = true;
         }, (error:any)=> {
           this.isContentLoaded = false;
+          this.hasError = true;
         });
     }
   }

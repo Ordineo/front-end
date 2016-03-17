@@ -39,6 +39,9 @@ describe('About directive controller', ()=> {
     it("should not have content loaded", ()=> {
       expect(ctrl.isContentLoaded).toBeFalsy();
     });
+    it("should set hasError to false", ()=> {
+      expect(ctrl.hasError).toBeFalsy();
+    });
     it("should be collapsed", ()=> {
       expect(ctrl.isCollapsed).toBeTruthy();
     });
@@ -121,6 +124,10 @@ describe('About directive controller', ()=> {
 
       it('should set isContentLoaded to false', ()=> {
         expect(ctrl.isContentLoaded).toBeFalsy();
+      });
+
+      it('should set hasError to true', ()=> {
+        expect(ctrl.hasError).toBeTruthy();
       });
     });
   });

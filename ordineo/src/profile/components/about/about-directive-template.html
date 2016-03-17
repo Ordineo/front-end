@@ -1,11 +1,11 @@
 <md-card>
   <form>
-    <div layout="row" layout-align="center center" ng-hide="$ctrl.isContentLoaded">
+    <div class="loading-container" layout="row" layout-align="center center" ng-hide="$ctrl.isContentLoaded">
       <md-progress-circular
         class="md-primary"
         md-diameter="60"></md-progress-circular>
     </div>
-    <div layout="row" ng-show="$ctrl.isContentLoaded" class="trans-height">
+    <div class="content-container" layout="row" ng-show="$ctrl.isContentLoaded" class="trans-height">
       <span flex="5"></span>
       <!-- Content -->
       <div flex layout="column">
