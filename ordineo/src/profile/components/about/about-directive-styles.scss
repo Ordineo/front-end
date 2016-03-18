@@ -26,8 +26,6 @@ profile-about {
     margin-bottom: 1em;
   }
   .about-job {
-    font-family: Neuratext;
-    font-weight: 800;
     margin-top: $profileContentMarginTop;
     border-right: 1px solid $borderColor;
     @media screen and (max-width: $layout-xs-max-width){
@@ -37,28 +35,22 @@ profile-about {
     margin-right: 25px;
     padding-bottom: 25px;
     h4 {
-      font-family: NexaBold;
       font-size: 1em;
       margin-bottom: 0;
     }
   }
   .about-description {
-    font-family: Neuratext;
-    font-weight: 800;
     line-height: 150%;
-    letter-spacing: 1px;
   }
   .about-footer {
     border-top: 1px solid $borderColor;
     .md-button.md-primary {
       font-size: 1em;
-      font-family: Neuratext;
       border-radius: 0;
       color:white;
     }
     .md-button.md-warn {
       font-size: 1em;
-      font-family: Neuratext;
       border-radius: 0;
       color:white;
     }
