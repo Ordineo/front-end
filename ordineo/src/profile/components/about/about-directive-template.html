@@ -14,8 +14,7 @@
           title="{{$ctrl.title}}"
           on-edit-click="$ctrl.onEdit()"
           on-cancel-click="$ctrl.onCancel()"
-          on-save-click="$ctrl.onSubmit()"
-        ></card-header>
+          on-save-click="$ctrl.onSubmit()"></card-header>
         <div class="about-content" layout="row" layout-xs="column">
           <div class="about-img" layout="row" layout-align="start top" layout-align-xs="center center">
             <!--todo replace this with <img src=url /> -->
@@ -23,18 +22,42 @@
           </div>
           <div layout="column">
             <div class="about-job">
-              <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Function</h4>
-              <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
-                <label>Function</label>
-                <input required name="userFunctie" ng-model="$ctrl.functie">
-              </md-input-container>
-              <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.functie}}</span>
-              <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Unit</h4>
-              <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
-                <label>Unit</label>
-                <input ng-if="$ctrl.isEditModeEnabled" required name="userUnit" ng-model="$ctrl.unit">
-              </md-input-container>
-              <span ng-if="!$ctrl.isEditModeEnabled" class="unit">{{$ctrl.unit}}</span>
+              <div class="about-function">
+                <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Function</h4>
+                <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
+                  <label>Function</label>
+                  <input required name="userFunctie" ng-model="$ctrl.functie">
+                </md-input-container>
+                <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.functie}}</span>
+              </div>
+              <div class="about-unit">
+                <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Unit</h4>
+                <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
+                  <label>Unit</label>
+                  <input ng-if="$ctrl.isEditModeEnabled" required name="userUnit" ng-model="$ctrl.unit">
+                </md-input-container>
+                <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.unit}}</span>
+              </div>
+              <div class="about-gender">
+                <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Gender</h4>
+                <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
+                  <label>Gender</label>
+                  <input ng-if="$ctrl.isEditModeEnabled" required name="userGender" ng-model="$ctrl.gender">
+                </md-input-container>
+                <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.gender}}</span>
+              </div>
+              <div class="about-start-date">
+                <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Start date</h4>
+                <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
+                  <label>Start date</label>
+                  <input ng-if="$ctrl.isEditModeEnabled" required name="userStartDate" ng-model="$ctrl.startDate">
+                </md-input-container>
+                <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.startDate}}</span>
+              </div>
+              <div class="about-end-date">
+                <h4>End date</h4>
+                <span>{{$ctrl.endDate}}</span>
+              </div>
             </div>
           </div>
           <div flex class="about-description">
@@ -49,9 +72,7 @@
           </div>
         </div>
         <div layout="row" layout-align="end center" class="about-footer">
-          <md-button class="md-raised md-primary">
-            more
-          </md-button>
+          <md-button class="md-raised md-primary">{{$ctrl.footerButtonLabel}}</md-button>
         </div>
       </div>
       <span flex="5"></span>
