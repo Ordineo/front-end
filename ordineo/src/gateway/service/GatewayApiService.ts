@@ -30,20 +30,4 @@ export class GatewayApiService{
   public getEmployeesApi():string{
     return this.buildApiUrl(this.EMPLOYEE_API);
   }
-
-  public getObjectivesApi():string{
-    return this.buildApiUrl(this.OBJECTIVES_API);
-  }
-
-  public getPersonsApi():string{
-    return this.buildApiUrl(this.PERSONS_API);
-  }
-
-  public getTimelineApi():string{
-    return this.buildApiUrl(this.TIMELINES_API);
-  }
-
-  public getTimeLineSampleUrl():string{
-    return this.getTimelineApi() + 'timelines/person/gide';
-  }
 }
