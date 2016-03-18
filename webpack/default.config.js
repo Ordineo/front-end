@@ -6,14 +6,14 @@ var path = require('path');
 module.exports = {
   entry: ['./ordineo/src/bootstrap.ts'],
   resolve: {
-    alias:{
-      'TweenLite':'./ordineo/src/gsap/TweenLite.js'
-    },
+    //TODO Replace uncompressed tweenmax with minifeid tweenlite
+    //alias: {
+    //  'TweenLite': '../TweenLite.js'
+    //},
     extensions: ['', '.ts', '.js']
   }, plugins: [
     new HtmlWebpackPlugin()
   ],
-
   module: {
     loaders: [
       {
@@ -27,6 +27,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'raw'
       },
+      {test: /Lite\.js$/, exclude: /node_modules/, loaders: ['file']},
       {test: /\.svg$/, exclude: /node_modules/, loaders: ['file']},
       {test: /\.css$/, loaders: ['style', 'css']},
       {test: /\.scss$/, loaders: ['style', 'css', 'sass']},

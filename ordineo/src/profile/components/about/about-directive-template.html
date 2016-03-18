@@ -1,38 +1,60 @@
 <md-card>
-  <div layout="row" layout-align="center center" ng-hide="$ctrl.isContentLoaded">
-    <md-progress-circular
-      class="md-primary"
-      md-diameter="60"></md-progress-circular>
-  </div>
-  <div layout="row" ng-show="$ctrl.isContentLoaded" class="test" >
-    <span flex="5"></span>
-    <!-- Content -->
-    <div flex layout="column">
-      <card-header show-btn-edit="true" title="About myself"></card-header>
-      <div class="about-content" layout="row" layout-xs="column">
-        <div class="about-img" layout="row" layout-align="start top" layout-align-xs="center center">
-          <!--todo replace this with <img src=url /> -->
-          <div class="sample"></div>
-        </div>
-        <div layout="column">
-          <div class="about-job">
-            <h4 class="to-upper-case">Function</h4>
-            <span>{{$ctrl.functie}}</span>
-            <h4 class="to-upper-case">Unit</h4>
-            <span class="unit">{{$ctrl.unit}}</span>
+  <form>
+    <div layout="row" layout-align="center center" ng-hide="$ctrl.isContentLoaded">
+      <md-progress-circular
+        class="md-primary"
+        md-diameter="60"></md-progress-circular>
+    </div>
+    <div layout="row" ng-show="$ctrl.isContentLoaded" class="trans-height">
+      <span flex="5"></span>
+      <!-- Content -->
+      <div flex layout="column">
+        <card-header
+          show-btn-edit="true"
+          title="{{$ctrl.title}}"
+          on-edit-click="$ctrl.onEdit()"
+          on-cancel-click="$ctrl.onCancel()"
+          on-save-click="$ctrl.onSubmit()"
+        ></card-header>
+        <div class="about-content" layout="row" layout-xs="column">
+          <div class="about-img" layout="row" layout-align="start top" layout-align-xs="center center">
+            <!--todo replace this with <img src=url /> -->
+            <div class="sample"></div>
+          </div>
+          <div layout="column">
+            <div class="about-job">
+              <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Function</h4>
+              <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
+                <label>Function</label>
+                <input required name="userFunctie" ng-model="$ctrl.functie">
+              </md-input-container>
+              <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.functie}}</span>
+              <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Unit</h4>
+              <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
+                <label>Unit</label>
+                <input ng-if="$ctrl.isEditModeEnabled" required name="userUnit" ng-model="$ctrl.unit">
+              </md-input-container>
+              <span ng-if="!$ctrl.isEditModeEnabled" class="unit">{{$ctrl.unit}}</span>
+            </div>
+          </div>
+          <div flex class="about-description">
+            <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
+              <label>Description</label>
+          <textarea ng-if="$ctrl.isEditModeEnabled" ng-model="$ctrl.description" md-maxlength="365"
+                    md-select-on-focus></textarea>
+
+            </md-input-container>
+            <p ng-if="$ctrl.description && !$ctrl.isEditModeEnabled">{{$ctrl.description}}</p>
+            <ng-transclude></ng-transclude>
           </div>
         </div>
-        <div flex class="about-description" >
-          <p ng-if="$ctrl.description">{{$ctrl.description}}</p>
-          <ng-transclude></ng-transclude>
+        <div layout="row" layout-align="end center" class="about-footer">
+          <md-button class="md-raised md-primary">
+            more
+          </md-button>
         </div>
       </div>
-      <div layout="row" layout-align="end center" class="about-footer">
-        <md-button>
-          more
-        </md-button>
-      </div>
+      <span flex="5"></span>
     </div>
-    <span flex="5"></span>
-  </div>
+  </form>
 </md-card>

@@ -18,33 +18,66 @@ import IComponentOptions = angular.IComponentOptions;
  *      >
  * </card-header>
  */
-
-interface CardHeaderScope{
-  title:string;
-  onEditClick:Function;
-  onDragClick:Function;
-  showBtnDrag:boolean;
-  showBtnEdit:boolean;
-}
-export class CardHeaderComponent implements IComponentOptions{
+export class CardHeaderComponent implements IComponentOptions {
   static NAME:string = "cardHeader";
   controller:Function = CardHeaderController;
   controllerAs:string = '$ctrl';
   template:string = require('./card-header-template.html');
   bindings:any = {
     title: '@',
-    onEditClick:'&',
-    onDragClick:'&',
-    showBtnDrag:'=?',
-    showBtnEdit:'=?'
+    onEditClick: '&',
+    onDragClick: '&',
+    onSaveClick: '&',
+    onCancelClick: '&',
+    showBtnDrag: '=?',
+    showBtnEdit: '=?',
+    showBtnCancel: '=?',
+    showBtnSave: '=?'
   };
-
 }
-export class CardHeaderController implements CardHeaderScope{
+
+interface CardHeaderScope {
+  title:string;
+  onEditClick?:Function;
+  onDragClick?:Function;
+  showBtnDrag?:boolean;
+  showBtnEdit?:boolean;
+  showBtnCancel?:boolean;
+  showBtnSave?:boolean;
+}
+
+export class CardHeaderController implements CardHeaderScope {
   public title:string;
   public onEditClick:Function;
   public onDragClick:Function;
+  public onSaveClick:Function;
+  public onCancelClick:Function;
   public showBtnDrag:boolean = true;
   public showBtnEdit:boolean = true;
+  public showBtnCancel:boolean = false;
+  public showBtnSave:boolean = false;
+
+  public save():void {
+    this.normalMode();
+    this.onSaveClick();
+  }
+
+  public cancel():void {
+    this.normalMode();
+    this.onCancelClick();
+  }
+
+  public normalMode():void {
+    this.showBtnEdit = true;
+    this.showBtnCancel = false;
+    this.showBtnSave = false;
+  }
+
+  public editMode():void {
+    this.showBtnEdit = false;
+    this.showBtnCancel = true;
+    this.showBtnSave = true;
+    this.onEditClick();
+  }
 }
 

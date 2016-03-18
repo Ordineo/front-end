@@ -11,12 +11,16 @@ toolbar {
     width: $logoSize;
     height: $logoSize;
   }
-  .md-icon-button svg{
-    color: #cfcfcf;
-  }
+  .md-icon-button{
+    md-icon{
+      color: #cfcfcf;
+    }
 
-  .md-icon-button:hover svg{
-    color: black;
+    &:hover{
+      md-icon{
+        color: black;
+      }
+    }
   }
 
   .push {
