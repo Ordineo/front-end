@@ -25,8 +25,7 @@ module.exports = function (config) {
       }
     },
     preprocessors: {
-      'ordineo/test/test.ts': ['webpack'],
-      'ordineo/src/**/!(*.spec)+(.js)': ['coverage']
+      'ordineo/test/test.ts': ['webpack']
     },
     webpackMiddleware: {
       stats: {
