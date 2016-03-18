@@ -1,8 +1,5 @@
 import {IState} from "angular-ui-router";
 import IControllerProvider = angular.IControllerProvider;
-import {PersonsService} from "../../../../persons/service/PersonService";
-import {PERSONS_SERVICE} from "../../../../persons/service/PersonService";
-import {IPersonsDataService} from "../../../../persons/service/PersonService";
 
 export class ProfileState implements IState {
   static NAME:string = "profileState";
@@ -16,8 +13,8 @@ export class ProfileState implements IState {
 
 export class ProfileStateCtrl {
 
-  static $inject:Array<string> = [PERSONS_SERVICE];
+  static $inject:Array<string> = [];
 
-  constructor(private personsService:IPersonsDataService) {
+  constructor() {
   }
 }

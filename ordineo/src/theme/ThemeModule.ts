@@ -5,7 +5,7 @@ import 'angular-material';
 require('angular-material/angular-material.css');
 require('./custom-material-styles.scss');
 import '../../assets/styles/main.scss';
-import '../../assets/fonts/neuratext.scss';
+import '../../assets/fonts/fonts.scss';
 import 'angular-aria';
 import 'angular-animate';
 import IIconProvider = angular.material.IIconProvider;

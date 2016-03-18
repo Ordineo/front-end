@@ -9,7 +9,17 @@ $materialBg: '../images/header-bg.png';
 $logoNoMargin: '../images/jworks-trans.png';
 $ordinaLogo: '../images/ordina-logo.png';
 
-.HAPPY_2_
+body{
+  background : #F4F4F4;
+  background : rgba(244, 244, 244, 1);
+  height: auto;
+  font-family: NeutraTextBook;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: NeutraTextBold;
+}
+
+/*.HAPPY_2_
 {
   background-image : url(../images/neo-icons/HAPPY_2_.png);
   background-repeat : no-repeat;
@@ -62,11 +72,6 @@ $ordinaLogo: '../images/ordina-logo.png';
 {
   background-image : url(../images/neo-icons/Well_done_thumb_4_.png);
   background-repeat : no-repeat;
-}
-body{
-  background : #F4F4F4;
-  background : rgba(244, 244, 244, 1);
-  height: auto;
 }
 .to-upper-case{
   text-transform: uppercase;
@@ -143,4 +148,4 @@ a {
 a:hover{
   color: $colorPrimary;
   text-decoration: underline;
-}
+}*/

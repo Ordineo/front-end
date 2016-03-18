@@ -1,11 +1,18 @@
 $borderColor: #eeeeee;
 
 card-header {
+  position: relative;
+  overflow: hidden;
   color: #BDBDBD;
   font-family: NeuratextBold;
   border-bottom: 1px solid $borderColor;
 
   md-icon {
+    //position: absolute;
     color: rgba(237, 148, 36, 1);
+  }
+
+  .edit-icons-fade{
+    position: absolute;
   }
 }

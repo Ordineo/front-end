@@ -12,8 +12,9 @@ export class GatewayApiService{
    * example: "http://"
    */
   private protocol:string;
-  public host:string = 'gateway-oraj360.cfapps.io';
+  public host:string = 'gateway-ordineo.cfapps.io';
 
+  public EMPLOYEE_API:string = "/employee-ordineo/api/";
   public PERSONS_API:string = "/persons-oraj360/api/";
   public OBJECTIVES_API:string = "/objectives-oraj360/api/";
   public TIMELINES_API:string = "/timeline-oraj360/api/";
@@ -24,6 +25,10 @@ export class GatewayApiService{
 
   private buildApiUrl(servicePath:string):string{
     return this.protocol + this.host + servicePath;
+  }
+
+  public getEmployeesApi():string{
+    return this.buildApiUrl(this.EMPLOYEE_API);
   }
 
   public getObjectivesApi():string{

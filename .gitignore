@@ -10,7 +10,10 @@ public
 ordineo/test/**/*.js
 ordineo/test/**/*.map
 ordineo/src/**/*.js
-!ordineo/src/gsap/*.js
+!ordineo/src/*.js
+!ordineo/src/gsap/TweenLite.js
+!ordineo/src/gsap/easing/EasePack.js
+!ordineo/src/gsap/plugins/CSSPlugin.js
 ordineo/src/**/*.map
 reports
 out
