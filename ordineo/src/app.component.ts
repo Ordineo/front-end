@@ -1,6 +1,8 @@
 import IComponentOptions = angular.IComponentOptions;
 import {StringUtil} from "./util/StringUtil";
 
+require('./app-component.scss');
+
 export const APP_COMPONENT = "app";
 
 export class AppComponent implements IComponentOptions {

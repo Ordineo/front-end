@@ -1,15 +1,41 @@
-$backgroundImg: './images/header-bg.jpg';
+$backgroundImg: './images/header-background.jpg';
 $headerHeight: 400px;
 
 header {
   .header-bg {
     color: white;
-    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url($backgroundImg) no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25) ),url($backgroundImg) no-repeat;
     overflow: hidden;
     width: 100%;
     height: $headerHeight;
     background-position: 50%;
     background-size: cover;
+  }
+
+  span {
+    font-size: 40px;
+    margin: 10px;
+  }
+
+  #search {
+    background-color: #f1f2f3;
+    width: 50%;
+
+    input {
+      width: 92%;
+      padding: 10px;
+      background-color: #f1f2f3;
+      border: none;
+      outline: none;
+
+      ~ md-icon {
+        color: #ec7f00;
+      }
+
+      ~ md-icon:hover {
+        cursor: pointer;
+      }
+    }
   }
 }
 
