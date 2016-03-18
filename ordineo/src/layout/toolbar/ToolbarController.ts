@@ -1,6 +1,6 @@
 
 export interface IToolbarScope{
-  buttons:Array<ButtonConfig>
+  buttons:Array<ButtonConfig>;
 }
 interface ButtonConfig{
   title:string;
@@ -16,12 +16,12 @@ export class ToolbarController implements IToolbarScope{
   private getButtons():Array<ButtonConfig>{
     var btns:Array<ButtonConfig> = [];
 
-    btns.push(this.createButtonConfig('Messages', 'com:contact_mail'));
-    btns.push(this.createButtonConfig('live_help', 'com:live_help'));
-    btns.push(this.createButtonConfig('forum', 'com:forum'));
+    btns.push(this.createButtonConfig('public', 'social:public'));
     btns.push(this.createButtonConfig('email', 'com:email'));
-    btns.push(this.createButtonConfig('contacts', 'com:contacts'));
-    btns.push(this.createButtonConfig('comment', 'com:comment'));
+    btns.push(this.createButtonConfig('today', 'act:today'));
+    btns.push(this.createButtonConfig('alarm', 'act:alarm'));
+    btns.push(this.createButtonConfig('perm_contact_calendar', 'act:perm_contact_calendar'));
+    btns.push(this.createButtonConfig('person', 'social:person'));
 
     return btns;
   }

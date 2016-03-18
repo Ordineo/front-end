@@ -1,5 +1,7 @@
 import IComponentOptions = angular.IComponentOptions;
 
+require('./app-component.scss');
+
 export const APP_COMPONENT = "app";
 
 export class AppComponent implements IComponentOptions {

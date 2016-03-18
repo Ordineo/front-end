@@ -1,5 +1,6 @@
-$logoTopLeft: './images/o.jpg';
+$logoTopLeft: './images/Ordineo_top_left_logo.svg';
 $logoSize: 88px;
+
 toolbar {
   md-toolbar.toolbar{
     background-color: white;
@@ -10,11 +11,34 @@ toolbar {
     width: $logoSize;
     height: $logoSize;
   }
-  .md-icon-button svg{
-    color: #cfcfcf;
+  .md-icon-button{
+    md-icon{
+      color: #cfcfcf;
+    }
+
+    &:hover{
+      md-icon{
+        color: black;
+      }
+    }
   }
 
-  .md-icon-button:hover svg{
-    color: black;
+  .push {
+    background-color: #ec7f00;
+    border-radius: 7px;
+    font-size: 8px;
+    height: 14px;
+    width: 14px;
+    margin: 0;
+    position: absolute;
+    top: 6px;
+    left: 22px;
+
+    p {
+      margin: 0;
+      padding: 0;
+      line-height: 14px;
+      color: white;
+    }
   }
 }

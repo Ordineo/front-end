@@ -1,12 +1,15 @@
-<md-toolbar class="md-medium-tall toolbar" md-whiteframe="1">
+<md-toolbar class="md-medium-tall toolbar"> <!--md-whiteframe="1"-->
   <div layout="row" flex="grow" layout-align="center center">
     <div class="logo"></div>
     <div class="md-toolbar-tools">
-      <span flex="60" flex-gt-md="70"></span>
+      <span flex="60" flex-gt-md="60">
+        Welcome back, <strong>Hans</strong>!
+      </span>
       <div flex layout="row" layout-align="center center">
-        <md-button class="md-icon-button " ng-repeat="btn in $ctrl.buttons">
-          <span>{{btn.messages}}</span>
+        <md-button class="md-icon-button" ng-repeat="btn in $ctrl.buttons">
+          <!-- Alert must be placed after the icon -->
           <md-icon md-svg-icon="{{btn.icon}}"></md-icon>
+          <div class="push"><div><p>25</p></div></div>
         </md-button>
       </div>
     </div>

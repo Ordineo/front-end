@@ -5,7 +5,7 @@ require('./toolbar.scss');
 
 /**
  * @ngdoc component
- * @name mainToolbarV2
+ * @name toolbar
  * @module ordineo.layout.components.header
  *
  * @description
