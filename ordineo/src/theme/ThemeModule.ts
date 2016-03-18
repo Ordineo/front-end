@@ -90,5 +90,6 @@ function mdConfig($mdIcon:IIconProvider, $mdThemingProvider:IThemingProvider) {
     .iconSet('nav',require('./icon-packs/navigation-icons.svg'), 24)
     .iconSet('content',require('./icon-packs/content-icons.svg'), 24)
     .iconSet('act', require('./icon-packs/action-icons.svg'), 24)
-    .iconSet('com', require('./icon-packs/communication-icons.svg'), 24);
+    .iconSet('com', require('./icon-packs/communication-icons.svg'), 24)
+    .iconSet('mdi', require('./icon-packs/mdi-icons.svg'), 24);
 }

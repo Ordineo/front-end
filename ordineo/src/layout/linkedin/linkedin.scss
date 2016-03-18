@@ -1,0 +1,15 @@
+$orange: #ec7f00;
+
+a {
+  color: $orange;
+  font-size: 12px;
+
+  &:hover {
+    color: $orange;
+    cursor: pointer;
+  }
+}
+
+md-icon {
+  color: $orange;
+}
