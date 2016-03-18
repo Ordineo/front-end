@@ -1,0 +1,20 @@
+$orange: #ec7f00;
+
+div#getDetails {
+  float: right;
+}
+
+a {
+  color: $orange;
+  font-size: 12px;
+
+  &:hover {
+    color: $orange;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+md-icon {
+  color: $orange;
+}

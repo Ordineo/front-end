@@ -5,7 +5,7 @@ import 'angular-material';
 require('angular-material/angular-material.css');
 require('./custom-material-styles.scss');
 import '../../assets/styles/main.scss';
-import '../../assets/fonts/neuratext.scss';
+import '../../assets/fonts/fonts.scss';
 import 'angular-aria';
 import 'angular-animate';
 import IIconProvider = angular.material.IIconProvider;
@@ -90,5 +90,6 @@ function mdConfig($mdIcon:IIconProvider, $mdThemingProvider:IThemingProvider) {
     .iconSet('nav',require('./icon-packs/navigation-icons.svg'), 24)
     .iconSet('content',require('./icon-packs/content-icons.svg'), 24)
     .iconSet('act', require('./icon-packs/action-icons.svg'), 24)
-    .iconSet('com', require('./icon-packs/communication-icons.svg'), 24);
+    .iconSet('com', require('./icon-packs/communication-icons.svg'), 24)
+    .iconSet('mdi', require('./icon-packs/mdi-icons.svg'), 24);
 }
