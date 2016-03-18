@@ -3,7 +3,6 @@ import 'angular-ui-router';
 import './route/core.route.ts';
 import {configureStates} from "./route/core.route.ts";
 import {CardHeaderComponent} from "./components/card-header/CardHeaderComponent";
-import {LoadingStatusDirective} from "./components/loading-status/LoadingStatusDirective";
 
 export const ORDINEO_CORE = 'ordineo.core';
 
@@ -15,7 +14,6 @@ var deps:Array<string> = [
 angular.module(ORDINEO_CORE, deps)
   .config(configureStates)
   .component(CardHeaderComponent.NAME, new CardHeaderComponent())
-  .directive(LoadingStatusDirective.NAME, LoadingStatusDirective.instance)
   .animation(".test", fadeInOnNgShow)
   .animation(".simple-fade", simpleFade)
   .animation(".edit-icons-fade", editIcons)

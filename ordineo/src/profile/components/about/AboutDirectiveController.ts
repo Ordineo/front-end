@@ -37,6 +37,7 @@ export class AboutDirectiveController implements IAboutDirective {
   constructor(public profileService:IProfileService) {
     this.isContentLoaded = false;
     this.setIsCollapsed(true);
+    this.isEditModeEnabled = false;
     this.hasError = false;
     this.setInfoCache();
     if (this.username) {
@@ -44,7 +45,7 @@ export class AboutDirectiveController implements IAboutDirective {
         .then((data:any)=> {
           this.functie = data.function;
           this.unit = data.unit.name;
-          this.description = data.description;
+          this.setDescription(data.description);
           this.title = data.firstName + ' ' + data.lastName;
           this.isContentLoaded = true;
         }, (error:any)=> {
@@ -52,6 +53,11 @@ export class AboutDirectiveController implements IAboutDirective {
           this.hasError = true;
         });
     }
+  }
+
+  private setDescription(description:string):void{
+    this.description = description;
+    this.shortDescription = description.substr(1, 365);
   }
 
   onEdit():void {
@@ -65,13 +71,6 @@ export class AboutDirectiveController implements IAboutDirective {
 
   setIsCollapsed(isCollapsed:boolean):void {
     this.isCollapsed = isCollapsed;
-    if (this.description) {
-      if (isCollapsed) {
-        this.shortDescription = this.description.substr(1, 365);
-      } else {
-        this.description = this.aboutInfoCache.description;
-      }
-    }
   }
 
   private setInfoCache():void {

@@ -34,6 +34,7 @@ describe('About directive controller', ()=> {
   describe("When the controller gets instantiated for the first time", ()=> {
     it("should have edit mode disabled", ()=> {
       ctrl = $controller(AboutDirectiveController);
+      expect(ctrl.isEditModeEnabled).toBeDefined();
       expect(ctrl.isEditModeEnabled).toBeFalsy();
     });
     it("should not have content loaded", ()=> {
@@ -44,20 +45,6 @@ describe('About directive controller', ()=> {
     });
     it("should be collapsed", ()=> {
       expect(ctrl.isCollapsed).toBeTruthy();
-    });
-    it("should have a short description property wich cannot be longer than 365 chars", ()=> {
-      bindings = {
-        description: getMockAboutInfo().description
-      };
-      ctrl = $controller(AboutDirectiveController, {$scope: scope}, bindings);
-      expect(ctrl.shortDescription.length).toBeLessThan(366);
-    });
-    it("should have a short description wich equals the first same 365 characters of the description", ()=> {
-      bindings = {
-        description: getMockAboutInfo().description
-      };
-      ctrl = $controller(AboutDirectiveController, {$scope: scope}, bindings);
-      expect(ctrl.shortDescription).toBe(getMockAboutInfo().description.substr(1, 365));
     });
   });
 
@@ -102,6 +89,14 @@ describe('About directive controller', ()=> {
         scope.$digest();
       });
 
+      it("should have a short description property wich cannot be longer than 365 chars", ()=> {
+        expect(ctrl.shortDescription.length).toBeLessThan(366);
+      });
+
+      it("should have a short description wich equals the first same 365 characters of the description", ()=> {
+        expect(ctrl.shortDescription).toBe(getMockAboutInfo().description.substr(1, 365));
+      });
+
       it('should set isContentLoaded to true', ()=> {
         expect(ctrl.isContentLoaded).toBeTruthy();
       });
@@ -129,6 +124,53 @@ describe('About directive controller', ()=> {
       it('should set hasError to true', ()=> {
         expect(ctrl.hasError).toBeTruthy();
       });
+    });
+  });
+
+  describe("when onEdit gets called", ()=> {
+    beforeEach(()=> {
+      ctrl = $controller(AboutDirectiveController);
+      ctrl.onEdit();
+    });
+    it("should set isEditModeEnabled to true ",()=>{
+      expect(ctrl.isEditModeEnabled).toBeTruthy();
+    });
+    it("should store the current about information", ()=> {
+      expect(ctrl.aboutInfoCache).toBeDefined();
+      expect(ctrl.aboutInfoCache.description).toBe(ctrl.description);
+      expect(ctrl.aboutInfoCache.functie).toBe(ctrl.functie);
+      expect(ctrl.aboutInfoCache.unit).toBe(ctrl.unit);
+    });
+  });
+
+  describe("when onCancel gets called", ()=> {
+    beforeEach(()=> {
+      ctrl = $controller(AboutDirectiveController);
+      ctrl.onCancel();
+    });
+    it("should set isEditModeEnabled to false", ()=> {
+      expect(ctrl.isEditModeEnabled).toBeFalsy();
+    });
+    it("should call the restore function", ()=> {
+      spyOn(ctrl, 'restore');
+      ctrl.onCancel();
+      expect(ctrl.restore).toHaveBeenCalled();
+    });
+    it("should restore the information",()=>{
+      expect(ctrl.description).toBe(ctrl.aboutInfoCache.description);
+      expect(ctrl.unit).toBe(ctrl.aboutInfoCache.unit);
+      expect(ctrl.functie).toBe(ctrl.aboutInfoCache.functie);
+    });
+  });
+
+  describe("when onSubmit gets called", ()=> {
+    beforeEach(()=> {
+      ctrl = $controller(AboutDirectiveController);
+      ctrl.onSubmit();
+    });
+
+    it("should set edit mode to false", ()=> {
+      expect(ctrl.isEditModeEnabled).toBe(false);
     });
   });
   describe("when username does not get binded", ()=> {
