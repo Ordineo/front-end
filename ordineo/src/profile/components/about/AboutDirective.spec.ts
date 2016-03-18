@@ -41,6 +41,10 @@ describe('About directive', ()=> {
       expect(elm.find("card-header").length).toBe(1);
     });
 
+    it('should have one card header with a title of About myself', ()=> {
+
+    });
+
     it('should have one div with class loading-container', ()=> {
       expect(elm.find("div.loading-container").length).toBe(1);
     });
