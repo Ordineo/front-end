@@ -34,10 +34,19 @@ module.exports = function (config) {
     },
     webpack: webpackConfig,
     reporters: [
+      'mocha',
       'dots',
-      'spec',
       'coverage'
     ],
+    mochaReporter: {
+      colors: {
+        success: 'blue',
+        info: 'bgGreen',
+        warning: 'cyan',
+        error: 'bgBlack'
+      },
+      output: 'autowatch'
+    },
     coverageReporter: {
       reporters: [
         {

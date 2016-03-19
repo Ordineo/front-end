@@ -163,7 +163,7 @@ describe('About directive: ', ()=> {
       });
 
       it('should change the button text from "collapse" to "more"', ()=>{
-        expect(button.text()).toBe(ButtonState.MORE);
+        expect(button.text()).not.toBe(ButtonState.MORE);
       })
     });
   });
