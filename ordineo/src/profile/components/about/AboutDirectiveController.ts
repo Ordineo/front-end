@@ -37,6 +37,7 @@ export class AboutDirectiveController implements IAboutDirective {
   public footerButtonLabel:string;
   public startDate:string;
   public gender:string;
+  public height:string;
 
   static $inject:Array<string> = [
     ProfileService.NAME,

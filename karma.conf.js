@@ -3,7 +3,6 @@
 var webpackConfig = require('./webpack/test.config.js');
 require('phantomjs-polyfill');
 webpackConfig.entry = {};
-
 module.exports = function (config) {
   config.set({
     basePath: '',

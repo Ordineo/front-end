@@ -44,6 +44,9 @@ module.exports = {
       {test: /\.eot$/, loader: 'url?limit=65000&mimetype=application/vnd.ms-fontobject&name=public/fonts/[name].[ext]'},
       {
         test: /\.json$/, exclude: /node_modules/, loader: 'json'
+      },
+      { test: /vendor\/.+\.(jsx|js)$/,
+        loader: 'imports?jQuery=jquery,$=jquery,this=>window'
       }
     ]
   }, node: {

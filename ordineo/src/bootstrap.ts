@@ -1,3 +1,4 @@
+import 'jquery';
 import 'angular';
 import {APP_NAME} from "./app.module";
 
