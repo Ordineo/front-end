@@ -56,7 +56,7 @@ export class AboutDirectiveController implements IAboutDirective {
         .then((data:employee)=> {
           this.functie = data.function;
           this.unit = data.unit.name;
-          this.setDescription(data.description);
+          this.setDescription(data.description + data.description + data.description + data.description + data.description + data.description + data.description + data.description + data.description);
           this.endDate = data.resignationDate;
           this.startDate = data.startDate;
           this.gender = data.gender;
@@ -69,9 +69,9 @@ export class AboutDirectiveController implements IAboutDirective {
     }
   }
 
-  private setDescription(description:string):void {
+  setDescription(description:string):void {
     this.description = description;
-    this.shortDescription = description.substr(1, 365);
+    this.shortDescription = description.substr(1, 362) + ' ...';
   }
 
   onExpandCollapseButtonClick():void {

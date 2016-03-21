@@ -10,7 +10,6 @@ import IControllerService = angular.IControllerService;
 import IRootScopeService = angular.IRootScopeService;
 import IScope = angular.IScope;
 import IDeferred = angular.IDeferred;
-import {IAboutModel} from "./IAboutModel";
 
 describe('About directive controller', ()=> {
   var $controller:IControllerService, $q:IQService, $rootScope:IRootScopeService;

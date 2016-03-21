@@ -96,6 +96,11 @@ describe('About directive: ', ()=> {
     it('should have one div with class about-footer', ()=> {
       expect(elm.find("div.about-footer").length).toBe(1);
     });
+    it('should show short description', ()=> {
+      ctrl.setDescription('Test TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest'.trim());
+      isolateScope.$digest();
+      expect(elm.find('div.about-description p').text()).toContain(ctrl.shortDescription);
+    });
     it('should have a button with text "more" inside the about-footer', ()=> {
       var aboutFooter:IAugmentedJQuery = elm.find("div.about-footer");
       expect(aboutFooter.find('.md-button').length).toBe(1);
@@ -156,10 +161,22 @@ describe('About directive: ', ()=> {
       expect(elm.find('div.about-end-date').hasClass('ng-hide')).toBeTruthy();
     });
 
+    it('should show full description', ()=> {
+      ctrl.setDescription('Test TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest'.trim());
+      isolateScope.$digest();
+      expect(elm.find('div.about-description p').text()).toContain(ctrl.description);
+    });
+
     describe('when the button gets clicked again', ()=> {
       beforeEach(()=> {
         ctrl.onExpandCollapseButtonClick();
         isolateScope.$digest();
+      });
+
+      it('should show short description', ()=> {
+        ctrl.setDescription('Test TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest'.trim());
+        isolateScope.$digest();
+        expect(elm.find('div.about-description p').text()).toContain(ctrl.shortDescription);
       });
 
       it('should change the button text from "collapse" to "more"', ()=>{
