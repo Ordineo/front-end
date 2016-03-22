@@ -32,8 +32,17 @@ describe('About directive controller', ()=> {
   }));
 
   describe("When the controller gets instantiated for the first time", ()=> {
-    it("should have edit mode disabled", ()=> {
+
+    beforeEach(()=> {
       ctrl = $controller(AboutDirectiveController);
+    });
+    it("should have footerButtonLabel equal to more", ()=> {
+      expect(ctrl.footerButtonLabel).toBe('more');
+    });
+    it("should have a default title of about myself", ()=> {
+      expect(ctrl.title).toBe('About myself');
+    });
+    it("should have edit mode disabled", ()=> {
       expect(ctrl.isEditModeEnabled).toBeDefined();
       expect(ctrl.isEditModeEnabled).toBeFalsy();
     });
@@ -141,6 +150,10 @@ describe('About directive controller', ()=> {
       expect(ctrl.aboutInfoCache.functie).toBe(ctrl.functie);
       expect(ctrl.aboutInfoCache.unit).toBe(ctrl.unit);
     });
+  });
+
+  describe("when onButtonClick gets called", ()=> {
+
   });
 
   describe("when onCancel gets called", ()=> {

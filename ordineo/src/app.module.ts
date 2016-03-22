@@ -6,6 +6,7 @@ import {ORDINEO_PROFILE} from "./profile/ProfileModule.ts";
 import {ORDINEO_LAYOUT} from "./layout/LayoutModule";
 import {ORDINEO_GATEWAY} from "./gateway/GatewayModule";
 import {TRAVERSON} from "./traverson/TraversonModule";
+import IHttpProvider = angular.IHttpProvider;
 export const APP_NAME = "ordineo";
 
 require('angular-moment');

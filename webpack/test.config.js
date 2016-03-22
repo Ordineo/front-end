@@ -29,7 +29,7 @@ module.exports = {
     postLoaders: [
       {
         test: /^((?!\.spec\.ts).)*.ts$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: [/(node_modules|bower_components)/,/animations/, /test/],
         loader: 'istanbul-instrumenter'
       }
     ]
