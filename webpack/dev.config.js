@@ -6,9 +6,9 @@ devConfig.plugins = [
   new HtmlWebpackPlugin({
     template: './webpack/templates/build.html',
     inject: 'body'
-  }),
+  })
 ];
-//devConfig.devtool = 'source-map';
+devConfig.devtool = 'source-map';
 
 devConfig.output = {
   path: './public/dev/',
