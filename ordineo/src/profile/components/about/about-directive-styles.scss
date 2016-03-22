@@ -1,3 +1,10 @@
+$orange: #e98300;
+$lightOrange: #f9a858;
+$grey: #57595b;
+$lightGrey: #bdbcbc;
+$darkGrey: #686868;
+$mainBackground: #f4f4f4;
+
 $borderColor: #eeeeee;
 $accentColor: #ED9424;
 $profileContentMarginTop: 1em;
@@ -11,7 +18,7 @@ profile-about {
     margin-top: 0;
   }
   h4 {
-    color: $accentColor;
+    color: $orange;
     margin-bottom: 0.5em;
   }
   .sample {

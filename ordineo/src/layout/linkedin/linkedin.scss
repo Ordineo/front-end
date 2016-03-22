@@ -1,4 +1,9 @@
-$orange: #ec7f00;
+$orange: #e98300;
+$lightOrange: #f9a858;
+$grey: #57595b;
+$lightGrey: #bdbcbc;
+$darkGrey: #686868;
+$mainBackground: #f4f4f4;
 
 div#getDetails {
   float: right;
@@ -9,7 +14,6 @@ a {
   font-size: 12px;
 
   &:hover {
-    color: $orange;
     cursor: pointer;
     text-decoration: underline;
   }
