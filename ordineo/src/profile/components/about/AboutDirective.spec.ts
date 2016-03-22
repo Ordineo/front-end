@@ -5,8 +5,6 @@ import ICompileService = angular.ICompileService;
 import IHttpBackendService = angular.IHttpBackendService;
 import IScope = angular.IScope;
 import IAugmentedJQuery = angular.IAugmentedJQuery;
-import {IAboutDirective} from "./AboutDirectiveController";
-import {AboutDirective} from "./AboutDirective";
 import {AboutDirectiveController} from "./AboutDirectiveController";
 import {ButtonState} from "../../../core/labels/ButtonState";
 

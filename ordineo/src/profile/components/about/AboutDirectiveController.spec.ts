@@ -97,12 +97,12 @@ describe('About directive controller', ()=> {
         scope.$digest();
       });
 
-      it("should have a short description property wich cannot be longer than 365 chars", ()=> {
-        expect(ctrl.shortDescription.length).toBeLessThan(366);
+      it("should have a short description property which cannot be longer than 365 chars", ()=> {
+        expect(ctrl.shortDescription.length).toBeLessThan(367);
       });
 
       it("should have a short description wich equals the first same 365 characters of the description", ()=> {
-        expect(ctrl.shortDescription).toBe(getMockAboutInfo().description.substr(1, 365));
+        expect(ctrl.shortDescription).toBe(getMockAboutInfo().description.substr(0, 362) + ' ...');
       });
 
       it('should set isContentLoaded to true', ()=> {
