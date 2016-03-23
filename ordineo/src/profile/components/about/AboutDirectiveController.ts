@@ -19,6 +19,7 @@ export interface IAboutDirective {
   setIsCollapsed:Function;
   endDate:string
   footerButtonLabel:string;
+  profilePicture:string;
 }
 
 export class AboutDirectiveController implements IAboutDirective {
@@ -37,7 +38,7 @@ export class AboutDirectiveController implements IAboutDirective {
   public footerButtonLabel:string;
   public startDate:string;
   public gender:string;
-  public height:string;
+  public profilePicture:string;
 
   static $inject:Array<string> = [
     ProfileService.NAME,
@@ -62,6 +63,7 @@ export class AboutDirectiveController implements IAboutDirective {
           this.gender = data.gender;
           this.title = data.firstName + ' ' + data.lastName;
           this.isContentLoaded = true;
+          this.profilePicture = "https://gateway-ordineo.cfapps.io/image-ordineo/api/images/" + this.username + ".jpg";
         }, (error:any)=> {
           this.isContentLoaded = false;
           this.hasError = true;
@@ -69,14 +71,10 @@ export class AboutDirectiveController implements IAboutDirective {
     }
   }
 
-  setDescription(description:string):void {
+  private setDescription(description:string):void {
     if(description !== null) {
       this.description = description;
-      if (description.length < 366) {
-        this.shortDescription = description;
-      } else {
-        this.shortDescription = description.substr(0, 362) + ' ...';
-      }
+      this.shortDescription = description.substr(1, 365);
     }
   }
 
