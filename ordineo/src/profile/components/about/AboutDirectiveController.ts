@@ -70,11 +70,13 @@ export class AboutDirectiveController implements IAboutDirective {
   }
 
   setDescription(description:string):void {
-    this.description = description;
-    if (description.length < 366) {
-      this.shortDescription = description;
-    } else {
-      this.shortDescription = description.substr(0, 362) + ' ...';
+    if(description !== null) {
+      this.description = description;
+      if (description.length < 366) {
+        this.shortDescription = description;
+      } else {
+        this.shortDescription = description.substr(0, 362) + ' ...';
+      }
     }
   }
 

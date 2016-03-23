@@ -1,4 +1,7 @@
 <div id="getDetails">
-  <a ng-click="$ctrl.onClick()">Get details</a> <md-icon md-svg-icon="{{$ctrl.linkedinIcon.icon}}"></md-icon>
+  <form ng-if="!$ctrl.isAuthorized" method="post" action="https://gateway-ordineo.cfapps.io/social-ordineo/connect/linkedin?username=Nivek">
+    <button type="submit">Get details</button>
+  </form>
+  <span ng-if="$ctrl.isAuthorized">Logged in</span>
+  <md-icon md-svg-icon="{{$ctrl.linkedinIcon.icon}}"></md-icon>
 </div>
-`
