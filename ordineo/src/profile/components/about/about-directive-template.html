@@ -5,7 +5,7 @@
         class="md-primary"
         md-diameter="60"></md-progress-circular>
     </div>
-    <div class="content-container" layout="row" ng-show="$ctrl.isContentLoaded" class="trans-height">
+    <div class="content-container trans-height" layout="row" ng-show="$ctrl.isContentLoaded">
       <span flex="5"></span>
       <!-- Content -->
       <div flex layout="column">
@@ -14,45 +14,66 @@
           title="{{$ctrl.title}}"
           on-edit-click="$ctrl.onEdit()"
           on-cancel-click="$ctrl.onCancel()"
-          on-save-click="$ctrl.onSubmit()"
-        ></card-header>
-        <div class="about-content" layout="row" layout-xs="column">
-          <div class="about-img" layout="row" layout-align="start top" layout-align-xs="center center">
-            <!--todo replace this with <img src=url /> -->
-            <div class="sample"></div>
-          </div>
-          <div layout="column">
-            <div class="about-job">
-              <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Function</h4>
+          on-save-click="$ctrl.onSubmit()"></card-header>
+        <cnt>
+          <div class="about-content" layout="row" layout-xs="column">
+            <div class="about-img" layout="row" layout-align="start top" layout-align-xs="center center">
+              <!--todo replace this with <img src=url /> -->
+              <div class="sample"></div>
+            </div>
+            <div layout="column">
+              <div class="about-job">
+                <div class="about-function">
+                  <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Function</h4>
+                  <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
+                    <label>Function</label>
+                    <input required name="userFunctie" ng-model="$ctrl.functie">
+                  </md-input-container>
+                  <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.functie}}</span>
+                </div>
+                <div class="about-unit">
+                  <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Unit</h4>
+                  <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
+                    <label>Unit</label>
+                    <input ng-if="$ctrl.isEditModeEnabled" required name="userUnit" ng-model="$ctrl.unit">
+                  </md-input-container>
+                  <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.unit}}</span>
+                </div>
+                <div class="about-gender fade" ng-hide="$ctrl.isCollapsed">
+                  <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Gender</h4>
+                  <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
+                    <label>Gender</label>
+                    <input ng-if="$ctrl.isEditModeEnabled" required name="userGender" ng-model="$ctrl.gender">
+                  </md-input-container>
+                  <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.gender}}</span>
+                </div>
+                <div class="about-start-date fade" ng-hide="$ctrl.isCollapsed">
+                  <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Start date</h4>
+                  <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
+                    <label>Start date</label>
+                    <input ng-if="$ctrl.isEditModeEnabled" required name="userStartDate" ng-model="$ctrl.startDate">
+                  </md-input-container>
+                  <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.startDate}}</span>
+                </div>
+                <div class="about-end-date fade"
+                     ng-hide="$ctrl.isCollapsed || $ctrl.endDate === '' || $ctrl.endDate === null">
+                  <h4>End date</h4>
+                  <span>{{$ctrl.endDate}}</span>
+                </div>
+              </div>
+            </div>
+            <div flex class="about-description">
               <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
-                <label>FUNCTION</label>
-                <input required name="userFunctie" ng-model="$ctrl.functie">
-              </md-input-container>
-              <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.functie}}</span>
-              <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Unit</h4>
-              <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
-                <label>UNIT</label>
-                <input ng-if="$ctrl.isEditModeEnabled" required name="userUnit" ng-model="$ctrl.unit">
-              </md-input-container>
-              <span ng-if="!$ctrl.isEditModeEnabled" class="unit">{{$ctrl.unit}}</span>
+                <label>Description</label><textarea ng-if="$ctrl.isEditModeEnabled" ng-model="$ctrl.description" md-maxlength="365"
+                    md-select-on-focus></textarea></md-input-container><p ng-if="$ctrl.description && !$ctrl.isEditModeEnabled">
+                <span ng-if="$ctrl.isCollapsed === true">{{$ctrl.shortDescription}}</span>
+                <span ng-if="$ctrl.isCollapsed === false">{{$ctrl.description}}</span></p>
             </div>
           </div>
-          <div flex class="about-description">
-            <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
-              <label>Description</label>
-          <textarea ng-if="$ctrl.isEditModeEnabled" ng-model="$ctrl.description" md-maxlength="365"
-                    md-select-on-focus></textarea>
-
-            </md-input-container>
-            <p ng-if="$ctrl.description && !$ctrl.isEditModeEnabled">{{$ctrl.description}}</p>
-            <ng-transclude></ng-transclude>
+          <div layout="row" layout-align="end center" class="about-footer">
+            <md-button ng-click="$ctrl.onExpandCollapseButtonClick()" class="md-raised md-primary">{{$ctrl.footerButtonLabel}}</md-button>
           </div>
-        </div>
-        <div layout="row" layout-align="end center" class="about-footer">
-          <md-button class="md-raised md-primary">
-            more
-          </md-button>
-        </div>
+        </cnt>
       </div>
       <span flex="5"></span>
     </div>

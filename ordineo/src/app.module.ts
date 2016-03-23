@@ -6,6 +6,7 @@ import {ORDINEO_PROFILE} from "./profile/ProfileModule.ts";
 import {ORDINEO_LAYOUT} from "./layout/LayoutModule";
 import {ORDINEO_GATEWAY} from "./gateway/GatewayModule";
 import {TRAVERSON} from "./traverson/TraversonModule";
+import {ORDINEO_SOCIAL} from "./social/SocialModule";
 export const APP_NAME = "ordineo";
 
 require('angular-moment');
@@ -17,6 +18,7 @@ var deps:Array<string> = [
   ORDINEO_LAYOUT,
   ORDINEO_GATEWAY,
   MATERIAL_DESIGN,
+  ORDINEO_SOCIAL,
   TRAVERSON,
   'angularMoment'
 ];

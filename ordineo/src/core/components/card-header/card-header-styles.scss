@@ -1,15 +1,21 @@
+$orange: #e98300;
+$lightOrange: #f9a858;
+$grey: #57595b;
+$lightGrey: #bdbcbc;
+$darkGrey: #686868;
+$mainBackground: #f4f4f4;
+
 $borderColor: #eeeeee;
 
 card-header {
   position: relative;
   overflow: hidden;
   color: #BDBDBD;
-  font-family: NeuratextBold;
   border-bottom: 1px solid $borderColor;
 
   md-icon {
     //position: absolute;
-    color: rgba(237, 148, 36, 1);
+    color: $orange;
   }
 
   .edit-icons-fade{

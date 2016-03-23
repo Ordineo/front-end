@@ -1,6 +1,8 @@
 import {ProfileService} from "../../services/ProfileService";
 import {IProfileService} from "../../services/ProfileService";
 import {IAboutModel} from "./IAboutModel";
+import {employee} from "../../../core/models/employee";
+import {ButtonState} from "../../../core/labels/ButtonState";
 
 export interface IAboutDirective {
   functie:string;
@@ -15,6 +17,8 @@ export interface IAboutDirective {
   hasError:boolean;
   isCollapsed:boolean;
   setIsCollapsed:Function;
+  endDate:string
+  footerButtonLabel:string;
 }
 
 export class AboutDirectiveController implements IAboutDirective {
@@ -29,23 +33,33 @@ export class AboutDirectiveController implements IAboutDirective {
   public username:string;
   public isCollapsed:boolean;
   public hasError:boolean;
+  public endDate:string;
+  public footerButtonLabel:string;
+  public startDate:string;
+  public gender:string;
+  public height:string;
 
   static $inject:Array<string> = [
     ProfileService.NAME,
   ];
 
   constructor(public profileService:IProfileService) {
+    this.footerButtonLabel = ButtonState.MORE;
     this.isContentLoaded = false;
+    this.title = "About myself";
     this.setIsCollapsed(true);
     this.isEditModeEnabled = false;
     this.hasError = false;
     this.setInfoCache();
     if (this.username) {
       profileService.getAboutInfoByUsername(this.username)
-        .then((data:any)=> {
+        .then((data:employee)=> {
           this.functie = data.function;
           this.unit = data.unit.name;
           this.setDescription(data.description);
+          this.endDate = data.resignationDate;
+          this.startDate = data.startDate;
+          this.gender = data.gender;
           this.title = data.firstName + ' ' + data.lastName;
           this.isContentLoaded = true;
         }, (error:any)=> {
@@ -55,9 +69,22 @@ export class AboutDirectiveController implements IAboutDirective {
     }
   }
 
-  private setDescription(description:string):void{
+  setDescription(description:string):void {
     this.description = description;
-    this.shortDescription = description.substr(1, 365);
+    if (description.length < 366) {
+      this.shortDescription = description;
+    } else {
+      this.shortDescription = description.substr(0, 362) + ' ...';
+    }
+  }
+
+  onExpandCollapseButtonClick():void {
+    this.isCollapsed = !this.isCollapsed;
+    if (this.isCollapsed) {
+      this.footerButtonLabel = ButtonState.MORE
+    } else {
+      this.footerButtonLabel = ButtonState.COLLAPSE;
+    }
   }
 
   onEdit():void {
