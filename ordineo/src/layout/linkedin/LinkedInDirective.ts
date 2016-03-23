@@ -1,3 +1,6 @@
+var $ = require('jquery');
+
+require('./linkedin.scss');
 
 import IDirective = angular.IDirective;
 import {LinkedInController} from "./LinkedInController";
@@ -12,8 +15,9 @@ export class LinkedInDirective implements IDirective{
   controller:Function = LinkedInController;
   controllerAs:string = '$ctrl';
   link:angular.IDirectiveLinkFn = (scope:IScope, el:IAugmentedJQuery, attrs:IAttributes)=>{
-    scope.$watch('$ctrl.isAuthorized', (newVal, oldVal)=> {
-      
+    scope.$on(LinkedInController.EVENT_AUTH, ()=> {
+      var find = $(el).find('.btn-linkedin');
+      find.click();
     });
   };
 

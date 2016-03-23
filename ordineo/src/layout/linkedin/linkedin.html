@@ -1,7 +1,10 @@
 <div id="getDetails">
-  <form ng-if="!$ctrl.isAuthorized" method="post" action="https://gateway-ordineo.cfapps.io/social-ordineo/connect/linkedin?username=Nivek">
-    <button type="submit">Get details</button>
-    <md-icon md-svg-icon="{{$ctrl.linkedinIcon.icon}}"></md-icon>
-  </form>
+  <a href="#" ng-click="$ctrl.onClick()">Sync with Linkedin</a>
+  <md-icon md-svg-icon="{{$ctrl.linkedinIcon.icon}}"></md-icon>
   <md-icon ng-if="$ctrl.isAuthorized" md-svg-icon="{{$ctrl.linkedinIcon.icon}}"></md-icon>
+  <form style="display: none" ng-if="!$ctrl.isAuthorized" method="post" action="https://social-ordineo.cfapps.io/connect/linkedin">
+      <input type="hidden" name="username" value="Nivek" />
+      <input type="hidden" name="scope" value="r_basicprofile" />
+      <button class="btn-linkedin" type="submit">Authorize ln</button>
+  </form>
 </div>

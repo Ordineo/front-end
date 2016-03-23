@@ -1,22 +1,40 @@
 import {LinkedInService} from "../../social/linkedin/LinkedInService";
+import IRootScopeService = angular.IRootScopeService;
 export class LinkedInController {
   public linkedinIcon:any;
   public url:string;
 
-  static $inject:Array<string> = [LinkedInService.SERVICE_NAME];
+  static EVENT_AUTH:string = 'goToAuth';
+  static $inject:Array<string> = [LinkedInService.SERVICE_NAME, '$rootScope'];
 
   isAuthorized:boolean;
 
-  constructor(private service:LinkedInService) {
+  constructor(private service:LinkedInService, private scope:IRootScopeService) {
     this.linkedinIcon = {title: 'linkedin-box', icon: 'mdi:linkedin-box'};
+    //
+    // service.authorize('Nivek')
+    //   .then((ok)=> {
+    //     console.log(ok);
+    //     console.log("OK" + ok.status);
+    //     this.isAuthorized = true;
+    //   }, (err)=> {
+    //     console.log(err);
+    //     console.log("error " + err.status);
+    //     this.isAuthorized = false;
+    //   });
+  }
 
-    service.authorize('Nivek')
+  onClick():void{
+    this.service.authorize('Nivek')
       .then((ok)=> {
-        console.log("error " + ok.status);
+        console.log(ok);
+        console.log("OK" + ok.status);
         this.isAuthorized = true;
       }, (err)=> {
+        console.log(err);
         console.log("error " + err.status);
         this.isAuthorized = false;
+        this.scope.$broadcast(LinkedInController.EVENT_AUTH);
       });
   }
 }
