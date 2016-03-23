@@ -17,8 +17,7 @@
           on-save-click="$ctrl.onSubmit()"></card-header>
         <div class="about-content" layout="row" layout-xs="column">
           <div class="about-img" layout="row" layout-align="start top" layout-align-xs="center center">
-            <!--todo replace this with <img src=url /> -->
-            <div class="sample"></div>
+            <img ng-src="{{$ctrl.profilePicture}}" alt="Profile picture" class="sample">
           </div>
           <div layout="column">
             <div class="about-job">
