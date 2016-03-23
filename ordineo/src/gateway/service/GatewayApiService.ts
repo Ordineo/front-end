@@ -18,6 +18,7 @@ export class GatewayApiService{
   public PERSONS_API:string = "/persons-oraj360/api/";
   public OBJECTIVES_API:string = "/objectives-oraj360/api/";
   public TIMELINES_API:string = "/timeline-oraj360/api/";
+  public SOCIAL_API:string = "/social-ordineo/api/";
 
   constructor(private $window:IWindowService){
     this.protocol = $window.location.protocol + "//";
@@ -25,6 +26,10 @@ export class GatewayApiService{
 
   private buildApiUrl(servicePath:string):string{
     return this.protocol + this.host + servicePath;
+  }
+
+  public getLinkedInApi():string{
+    return this.buildApiUrl(this.SOCIAL_API).concat('linkedin');
   }
 
   public getEmployeesApi():string{
