@@ -40,7 +40,7 @@ export class AboutDirectiveController implements IAboutDirective {
   public gender:string;
   public profilePicture:string;
   public height:string;
-  
+
   static $inject:Array<string> = [
     ProfileService.NAME,
   ];
@@ -64,7 +64,7 @@ export class AboutDirectiveController implements IAboutDirective {
           this.gender = data.gender;
           this.title = data.firstName + ' ' + data.lastName;
           this.isContentLoaded = true;
-          this.profilePicture = "https://gateway-ordineo.cfapps.io/image-ordineo/api/images/" + this.username + ".jpg";
+          this.profilePicture = "https://gateway-ordineo.cfapps.io/image-ordineo/api/images/" + this.username;
         }, (error:any)=> {
           this.isContentLoaded = false;
           this.hasError = true;

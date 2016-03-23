@@ -18,7 +18,6 @@ export function flowHeight():any {
   };
   function open(element, className, done) {
     var ht = $(element).attr('sup');
-    console.log('suop' + ht);
     TweenMax.set(element, {height: 'auto'});
     TweenMax.from(element, 0.5, {delay:0.1, ease: Circ.easeOut, height: ht, onComplete: done});
     //TweenMax.from(element, 1, {height:ht});
@@ -26,7 +25,6 @@ export function flowHeight():any {
   }
   function close(element, className, done) {
     var ht = $(element).attr('sup');
-    console.log('suop' + ht);
     TweenMax.set(element, {height: 'auto'});
     TweenMax.from(element, 0.5, {delay:0.1, ease: Circ.easeOut, height: ht, onComplete: done});
   }
