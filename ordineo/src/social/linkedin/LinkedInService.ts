@@ -49,7 +49,7 @@ export class LinkedInService {
       cf
     ).then((success)=>{
       console.log("ok");
-      console.log(success);
+
     },(error)=>{
       console.log(error);
     });
