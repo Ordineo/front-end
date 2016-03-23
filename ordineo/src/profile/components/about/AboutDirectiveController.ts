@@ -39,7 +39,8 @@ export class AboutDirectiveController implements IAboutDirective {
   public startDate:string;
   public gender:string;
   public profilePicture:string;
-
+  public height:string;
+  
   static $inject:Array<string> = [
     ProfileService.NAME,
   ];
@@ -71,10 +72,14 @@ export class AboutDirectiveController implements IAboutDirective {
     }
   }
 
-  private setDescription(description:string):void {
-    if(description !== null) {
+  public setDescription(description:string):void {
+    if (description !== null) {
       this.description = description;
-      this.shortDescription = description.substr(1, 365);
+      if (description.length < 366) {
+        this.shortDescription = description;
+      } else {
+        this.shortDescription = description.substr(0, 362) + ' ...';
+      }
     }
   }
 
