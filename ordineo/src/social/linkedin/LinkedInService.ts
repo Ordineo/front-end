@@ -1,6 +1,7 @@
 import {GatewayApiService} from "../../gateway/service/GatewayApiService";
-import IHttpService = angular.IHttpService;
 import IRequestConfig = angular.IRequestConfig;
+import IHttpService = angular.IHttpService;
+import IRequestShortcutConfig = angular.IRequestShortcutConfig;
 export class LinkedInService {
   static SERVICE_NAME:string = 'ordineo.social.linkedin';
 
@@ -36,6 +37,21 @@ export class LinkedInService {
   }
 
   private handle401():void{
-    console.log('401');
+  //  make post to https://gateway-ordineo.cfapps.io/social-ordineo/connect/linkedin
+    var cf:IRequestShortcutConfig = {
+      headers:{
+        'Content-type':'application/x-www-form-urlencoded'
+      }
+    };
+    this.$http.post(
+      'https://gateway-ordineo.cfapps.io/social-ordineo/connect/linkedin',
+      'scope=r_basicprofile',
+      cf
+    ).then((success)=>{
+      console.log("ok");
+      console.log(success);
+    },(error)=>{
+      console.log(error);
+    });
   }
 }

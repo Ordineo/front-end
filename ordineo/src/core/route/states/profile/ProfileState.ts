@@ -1,6 +1,5 @@
 import {IState} from "angular-ui-router";
 import IControllerProvider = angular.IControllerProvider;
-import {LinkedInService} from "../../../../social/linkedin/LinkedInService";
 
 export class ProfileState implements IState {
   static NAME:string = "profileState";
@@ -14,9 +13,8 @@ export class ProfileState implements IState {
 
 export class ProfileStateCtrl {
 
-  static $inject:Array<string> = [LinkedInService.SERVICE_NAME];
+  static $inject:Array<string> = [];
 
-  constructor(public service:LinkedInService) {
-    service.authorize('nivek');
+  constructor() {
   }
 }
