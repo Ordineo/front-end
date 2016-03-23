@@ -1,151 +1,28 @@
 @charset "utf-8";
+$orange: #e98300;
+$lightOrange: #f9a858;
+$grey: #57595b;
+$lightGrey: #bdbcbc;
+$darkGrey: #686868;
+$mainBackground: #f4f4f4;
 
 $loginRegisterMarginTop: 20px;
-$colorPrimary: #ff9800;
-$colorPrimary50: #ffcc80;
 $jworksLogo: '../images/jworks-logo.jpg';
 $loginBg: '../images/landscape.jpg';
 $materialBg: '../images/header-bg.png';
 $logoNoMargin: '../images/jworks-trans.png';
 $ordinaLogo: '../images/ordina-logo.png';
 
-body{
-  background : #F4F4F4;
-  background : rgba(244, 244, 244, 1);
+body {
+  background-color: $mainBackground;
   height: auto;
   font-family: NeutraTextBook;
 }
+
 h1, h2, h3, h4, h5, h6 {
   font-family: NeutraTextBold;
 }
 
-/*.HAPPY_2_
-{
-  background-image : url(../images/neo-icons/HAPPY_2_.png);
-  background-repeat : no-repeat;
+section[ui-view] {
+  background-color: $mainBackground;
 }
-.NormalCharacterStyle45
-{
-  font-family : Neuratext;
-  font-weight : bold;
-  font-size : 11px;
-  line-height : 20px;
-  text-transform : uppercase;
-  color : #E98300;
-  color : rgb(233, 131, 0);
-}
-.NormalCharacterStyle46
-{
-  font-family : Neuratext;
-  font-weight : bold;
-  font-size : 11px;
-  line-height : 20px;
-  text-transform : uppercase;
-  color : #E98300;
-  color : rgb(233, 131, 0);
-}
-.HAPPY_1_
-{
-  height: 24px;
-  width: 24px;
-  background-image : url(../images/neo-icons/HAPPY_1_.png);
-  background-repeat : no-repeat;
-  background-size: contain;
-}
-.background_grey_3_
-{
-  background : #F4F4F4;
-  background : rgba(244, 244, 244, 1);
-}
-.NormalCharacterStyle44
-{
-  font-family : Neuratext;
-  font-weight : bold;
-  font-size : 11px;
-  line-height : 20px;
-  text-transform : uppercase;
-  color : #E98300;
-  color : rgb(233, 131, 0);
-
-}
-.Well_done_thumb_4_
-{
-  background-image : url(../images/neo-icons/Well_done_thumb_4_.png);
-  background-repeat : no-repeat;
-}
-.to-upper-case{
-  text-transform: uppercase;
-}
-.overlay:after {
-  content: '';
-  position: absolute;
-  width: inherit;
-  height: inherit;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.login-title{
-  color: #E5CFB5;
-}
-.login-title{
-  text-align: center;
-}
-.jworks-logo {
-  height: 250px;
-  background: url($jworksLogo) no-repeat center;
-  background-size: contain;
-}
-.ordina-logo{
-  background: url($ordinaLogo) no-repeat left center;
-  background-size: 100px;
-}
-.jworks-logo-nm {
-  background: url($logoNoMargin) no-repeat center ;
-  background-size: 120px;
-}
-
-.material-bg {
-  background: url($materialBg) no-repeat center;
-  background-size: cover;
-}
-
-.layout-login {
-  max-height: 100%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.login-page-body{
-  background: url($loginBg) no-repeat;
-  overflow: hidden;
-  width:100%;
-  height:100%;
-  background-size:cover;
-}
-
-.divider-h{
-  margin-top: $loginRegisterMarginTop;
-}
-
-.divider-h::before {
-  color: $colorPrimary;
-  content: ' | ';
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-a {
-  margin-top: $loginRegisterMarginTop;
-  text-decoration: none;
-  color: $colorPrimary50;
-}
-
-a:hover{
-  color: $colorPrimary;
-  text-decoration: underline;
-}*/

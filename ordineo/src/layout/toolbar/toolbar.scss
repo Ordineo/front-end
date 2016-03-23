@@ -1,30 +1,38 @@
+$orange: #e98300;
+$lightOrange: #f9a858;
+$grey: #57595b;
+$lightGrey: #bdbcbc;
+$darkGrey: #686868;
+$mainBackground: #f4f4f4;
 $logoTopLeft: './images/Ordineo_top_left_logo.svg';
 $logoSize: 88px;
 
 toolbar {
-  md-toolbar.toolbar{
+  md-toolbar.toolbar {
     background-color: white;
   }
-  .logo{
+
+  .logo {
     background: url($logoTopLeft) no-repeat center;
     background-size: cover;
     width: $logoSize;
     height: $logoSize;
   }
-  .md-icon-button{
-    md-icon{
-      color: #cfcfcf;
+
+  .md-icon-button {
+    md-icon {
+      color: $lightGrey;
     }
 
-    &:hover{
-      md-icon{
-        color: black;
+    &:hover {
+      md-icon {
+        color: $darkGrey;
       }
     }
   }
 
   .push {
-    background-color: #ec7f00;
+    background-color: $orange;
     border-radius: 7px;
     font-size: 8px;
     height: 14px;

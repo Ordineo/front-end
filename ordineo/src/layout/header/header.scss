@@ -1,3 +1,9 @@
+$orange: #e98300;
+$lightOrange: #f9a858;
+$grey: #57595b;
+$lightGrey: #bdbcbc;
+$darkGrey: #686868;
+$mainBackground: #f4f4f4;
 $backgroundImg: './images/header-background.jpg';
 $headerHeight: 400px;
 
@@ -18,18 +24,18 @@ header {
   }
 
   #search {
-    background-color: #f1f2f3;
+    background-color: $mainBackground;
     width: 50%;
 
     input {
       width: 92%;
       padding: 10px;
-      background-color: #f1f2f3;
+      background-color: $mainBackground;
       border: none;
       outline: none;
 
       ~ md-icon {
-        color: #ec7f00;
+        color: $orange;
       }
 
       ~ md-icon:hover {

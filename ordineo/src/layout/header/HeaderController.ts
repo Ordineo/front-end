@@ -4,4 +4,5 @@ export class HeaderController{
   constructor(){
     this.button = {title: 'search', icon: 'act:search'};
   }
+
 }
