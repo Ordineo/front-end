@@ -5,12 +5,10 @@ import ICompileService = angular.ICompileService;
 import IHttpBackendService = angular.IHttpBackendService;
 import IScope = angular.IScope;
 import IAugmentedJQuery = angular.IAugmentedJQuery;
-import {IAboutDirective} from "./AboutDirectiveController";
-import {AboutDirective} from "./AboutDirective";
 import {AboutDirectiveController} from "./AboutDirectiveController";
 import {ButtonState} from "../../../core/labels/ButtonState";
 
-describe('About directive', ()=> {
+describe('About directive: ', ()=> {
   beforeEach(angular.mock.module(ORDINEO_PROFILE));
 
   var template:string = `<profile-about username="Turbots"></profile-about>`;
@@ -75,17 +73,31 @@ describe('About directive', ()=> {
     it('should have one div with class about-gender', ()=> {
       expect(elm.find("div.about-gender").length).toBe(1);
     });
+    it('should hide about-gender', ()=> {
+      expect(elm.find("div.about-gender").hasClass('ng-hide')).toBeTruthy();
+    });
     it('should have one div with class about-start-date', ()=> {
       expect(elm.find("div.about-start-date").length).toBe(1);
     });
+    it('should hide about-start-date div', ()=> {
+      expect(elm.find("div.about-start-date").hasClass('ng-hide')).toBeTruthy();
+    });
     it('should have one div with class about-end-date', ()=> {
       expect(elm.find("div.about-end-date").length).toBe(1);
+    });
+    it('should hide about-end-date div', ()=> {
+      expect(elm.find("div.about-end-date").hasClass('ng-hide')).toBeTruthy();
     });
     it('should hide the loading-container', ()=> {
       expect(elm.find("div.loading-container").hasClass('ng-hide')).toBeTruthy();
     });
     it('should have one div with class about-footer', ()=> {
       expect(elm.find("div.about-footer").length).toBe(1);
+    });
+    it('should show short description', ()=> {
+      ctrl.setDescription('Test TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest'.trim());
+      isolateScope.$digest();
+      expect(elm.find('div.about-description p').text()).toContain(ctrl.shortDescription);
     });
     it('should have a button with text "more" inside the about-footer', ()=> {
       var aboutFooter:IAugmentedJQuery = elm.find("div.about-footer");
@@ -122,14 +134,47 @@ describe('About directive', ()=> {
       isolateScope.$digest();
     });
 
+    it('should show about-gender', ()=> {
+      expect(elm.find('div.about-gender').hasClass('ng-hide')).toBeFalsy();
+    });
+
+    it('should show about-start-date div', ()=> {
+      expect(elm.find('div.about-start-date').hasClass('ng-hide')).toBeFalsy();
+    });
+
+    it('should show about-end-date div', ()=> {
+      expect(elm.find('div.about-end-date').hasClass('ng-hide')).toBeFalsy();
+    });
+
     it('should change the button text from "more" to "collapse"', ()=> {
       expect(button.text()).toBe(ButtonState.COLLAPSE);
+    });
+
+    it('should hide about-end-date if end date is empty or null and element is not collapsed.', ()=> {
+      ctrl.endDate = null;
+      isolateScope.$digest();
+      expect(elm.find('div.about-end-date').hasClass('ng-hide')).toBeTruthy();
+      ctrl.endDate = '';
+      isolateScope.$digest();
+      expect(elm.find('div.about-end-date').hasClass('ng-hide')).toBeTruthy();
+    });
+
+    it('should show full description', ()=> {
+      ctrl.setDescription('Test TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest'.trim());
+      isolateScope.$digest();
+      expect(elm.find('div.about-description p').text()).toContain(ctrl.description);
     });
 
     describe('when the button gets clicked again', ()=> {
       beforeEach(()=> {
         ctrl.onExpandCollapseButtonClick();
         isolateScope.$digest();
+      });
+
+      it('should show short description', ()=> {
+        ctrl.setDescription('Test TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest'.trim());
+        isolateScope.$digest();
+        expect(elm.find('div.about-description p').text()).toContain(ctrl.shortDescription);
       });
 
       it('should change the button text from "collapse" to "more"', ()=>{

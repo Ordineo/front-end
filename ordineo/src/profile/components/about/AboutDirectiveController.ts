@@ -37,6 +37,7 @@ export class AboutDirectiveController implements IAboutDirective {
   public footerButtonLabel:string;
   public startDate:string;
   public gender:string;
+  public height:string;
 
   static $inject:Array<string> = [
     ProfileService.NAME,
@@ -68,9 +69,13 @@ export class AboutDirectiveController implements IAboutDirective {
     }
   }
 
-  private setDescription(description:string):void {
+  setDescription(description:string):void {
     this.description = description;
-    this.shortDescription = description.substr(1, 365);
+    if (description.length < 366) {
+      this.shortDescription = description;
+    } else {
+      this.shortDescription = description.substr(0, 362) + ' ...';
+    }
   }
 
   onExpandCollapseButtonClick():void {

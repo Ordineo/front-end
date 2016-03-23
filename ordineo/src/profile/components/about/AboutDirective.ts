@@ -5,8 +5,11 @@ import IScope = angular.IScope;
 import IAugmentedJQuery = angular.IAugmentedJQuery;
 
 import IAnimateService = angular.animate.IAnimateService;
+import IAttributes = angular.IAttributes;
+import IControllerService = angular.IControllerService;
+import IAnimationOptions = angular.animate.IAnimationOptions;
 require('./about-directive-styles.scss');
-
+var $ = require('jquery');
 /**
  * @ngdoc directive
  * @name profileAbout
@@ -36,24 +39,38 @@ export class AboutDirective implements IDirective {
     title: '@',
     username: '@',
     functie: '=?',
-    unit:'=?',
+    unit: '=?',
     description: '=?',
   };
   controller:Function = AboutDirectiveController;
   controllerAs:string = '$ctrl';
   template:string = require('./about-directive-template.html');
-  link:IDirectiveLinkFn = (scope:IScope, el:IAugmentedJQuery)=> {
-    scope.$watch('$ctrl.isContentLoaded', (newValue, oldValue)=> {
-      if(newValue === true) {
-
+  link:IDirectiveLinkFn = (scope:IScope, el:IAugmentedJQuery, attr:IAttributes, ctrl:AboutDirectiveController)=> {
+    scope.$watch('$ctrl.isCollapsed', (newValue, oldValue)=> {
+      if (ctrl.isContentLoaded) {
+        var any = $(el).find('.about-content');
+        ctrl.height = any.height();
+        $(any).attr('sup', ctrl.height);
+        newValue ?
+          this.animate.removeClass($(el).find('.about-content')[0], 'flow-height')
+          : this.animate.addClass($(el).find('.about-content')[0], 'flow-height');
       }
+    });
+
+    scope.$watch('$ctrl.isEditModeEnabled', (newValeu)=> {
+      var any = $(el).find('.about-content');
+      ctrl.height = any.height();
+      $(any).attr('sup', ctrl.height);
+      newValeu ?
+        this.animate.removeClass($(el).find('.about-content')[0], 'flow-height')
+        : this.animate.addClass($(el).find('.about-content')[0], 'flow-height');
     });
   };
 
-  constructor(private animate:IAnimateService){
+  constructor(private animate:IAnimateService) {
   }
 
-  static instance():any{
+  static instance():any {
     const directive = (ani:IAnimateService)=>new AboutDirective(ani);
     directive.$inject = ['$animate'];
     return directive;

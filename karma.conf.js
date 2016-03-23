@@ -3,7 +3,6 @@
 var webpackConfig = require('./webpack/test.config.js');
 require('phantomjs-polyfill');
 webpackConfig.entry = {};
-
 module.exports = function (config) {
   config.set({
     basePath: '',
@@ -35,10 +34,19 @@ module.exports = function (config) {
     },
     webpack: webpackConfig,
     reporters: [
+      'mocha',
       'dots',
-      'spec',
       'coverage'
     ],
+    mochaReporter: {
+      colors: {
+        success: 'blue',
+        info: 'bgGreen',
+        warning: 'cyan',
+        error: 'bgBlack'
+      },
+      output: 'autowatch'
+    },
     coverageReporter: {
       reporters: [
         {
