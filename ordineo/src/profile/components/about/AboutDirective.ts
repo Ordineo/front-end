@@ -10,6 +10,7 @@ import IControllerService = angular.IControllerService;
 import IAnimationOptions = angular.animate.IAnimationOptions;
 require('./about-directive-styles.scss');
 var $ = require('jquery');
+
 /**
  * @ngdoc directive
  * @name profileAbout
@@ -26,13 +27,8 @@ export class AboutDirective implements IDirective {
 
   scope:any = {};
   restrict:string = 'E';
-  transclude:boolean = true;
   bindToController:any = {
-    title: '@',
-    username: '@',
-    functie: '=?',
-    unit: '=?',
-    description: '=?',
+    username: '@'
   };
   controller:Function = AboutDirectiveController;
   controllerAs:string = '$ctrl';
