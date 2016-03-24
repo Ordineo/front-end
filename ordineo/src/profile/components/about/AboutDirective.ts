@@ -31,10 +31,10 @@ export class AboutDirective implements IDirective {
     username: '@'
   };
   controller:Function = AboutDirectiveController;
-  controllerAs:string = '$ctrl';
+  controllerAs:string = 'about';
   template:string = require('./about-directive-template.html');
   link:IDirectiveLinkFn = (scope:IScope, el:IAugmentedJQuery, attr:IAttributes, ctrl:AboutDirectiveController)=> {
-    scope.$watch('$ctrl.isCollapsed', (newValue, oldValue)=> {
+    scope.$watch('about.isCollapsed', (newValue, oldValue)=> {
       if (ctrl.isContentLoaded) {
         var any = $(el).find('.about-content');
         ctrl.height = any.height();
@@ -45,7 +45,7 @@ export class AboutDirective implements IDirective {
       }
     });
 
-    scope.$watch('$ctrl.isEditModeEnabled', (newValeu)=> {
+    scope.$watch('about.isEditModeEnabled', (newValeu)=> {
       var any = $(el).find('.about-content');
       ctrl.height = any.height();
       $(any).attr('sup', ctrl.height);
