@@ -1,6 +1,5 @@
 import {ProfileService} from "../../services/ProfileService";
 import {IProfileService} from "../../services/ProfileService";
-import {IAboutModel} from "./IAboutModel";
 import {employee} from "../../../core/models/employee";
 import {ButtonState} from "../../../core/labels/ButtonState";
 import IRootScopeService = angular.IRootScopeService;
@@ -11,7 +10,7 @@ export class AboutDirectiveController {
   public username:string;
 
   employee:employee;
-  public aboutInfoCache:IAboutModel;
+  public aboutInfoCache:employee;
 
   public shortDescription:string;
   public footerButtonLabel:string;
@@ -35,7 +34,7 @@ export class AboutDirectiveController {
 
   constructor(public profileService:IProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {
     this.init();
-    
+
     if (window.sessionStorage.getItem('linkedin') === 'authorized') {
       linkedin.authorize(this.username).then(()=> {
         this.getEmployeeDataAsync(this.username, profileService, rootScope);
@@ -98,8 +97,8 @@ export class AboutDirectiveController {
   }
 
   restore():void {
-    this.employee.function = this.aboutInfoCache.functie;
-    this.employee.unit.name = this.aboutInfoCache.unit;
+    this.employee.function = this.aboutInfoCache.function;
+    this.employee.unit.name = this.aboutInfoCache.unit.name;
     this.employee.description = this.aboutInfoCache.description;
   }
 
@@ -111,9 +110,11 @@ export class AboutDirectiveController {
 
   private setInfoCache():void {
     this.aboutInfoCache = {
-      functie: this.employee.function,
+      function: this.employee.function,
       description: this.employee.description,
-      unit: this.employee.unit.name
+      unit: {
+        name: this.employee.unit.name
+      }
     };
   }
 
