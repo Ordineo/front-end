@@ -5,6 +5,7 @@ import {employee} from "../../../core/models/employee";
 import {ButtonState} from "../../../core/labels/ButtonState";
 import IRootScopeService = angular.IRootScopeService;
 import {ToolbarController} from "../../../layout/toolbar/ToolbarController";
+import {LinkedInService} from "../../../social/linkedin/LinkedInService";
 
 export interface IAboutDirective {
   functie:string;
@@ -42,13 +43,32 @@ export class AboutDirectiveController implements IAboutDirective {
   public gender:string;
   public profilePicture:string;
   public height:string;
+  isAuth:boolean;
 
   static $inject:Array<string> = [
     ProfileService.NAME,
-    '$rootScope'
+    '$rootScope',
+    LinkedInService.SERVICE_NAME
   ];
 
-  constructor(public profileService:IProfileService, private rootScope:IRootScopeService) {
+  constructor(public profileService:IProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {
+    if (window.sessionStorage.getItem('linkedin') === 'authorized') {
+      linkedin.authorize(this.username).then(()=> {
+        profileService.getAboutInfoByUsername(this.username).then((data:employee)=> {
+          this.functie = data.function;
+          this.unit = data.unit.name;
+          this.setDescription(data.description);
+          this.endDate = data.resignationDate;
+          this.startDate = data.startDate;
+          rootScope.$broadcast(ToolbarController.EVENT_USERNAME, {firstName: data.firstName});
+          this.gender = data.gender;
+          this.title = data.firstName + ' ' + data.lastName;
+          this.isContentLoaded = true;
+          this.profilePicture = "https://gateway-ordineo.cfapps.io/image-ordineo/api/images/" + this.username;
+        });
+      });
+    }
+    
     this.footerButtonLabel = ButtonState.MORE;
     this.isContentLoaded = false;
     this.title = "About myself";

@@ -27,10 +27,10 @@ export class LinkedInController {
   onClick():void{
     this.service.authorize('Nivek')
       .then((ok)=> {
-        console.log(ok);
-        console.log("OK" + ok.status);
+        console.log('ok');
         this.isAuthorized = true;
       }, (err)=> {
+        window.sessionStorage.setItem('linkedin', 'authorized');
         console.log(err);
         console.log("error " + err.status);
         this.isAuthorized = false;
