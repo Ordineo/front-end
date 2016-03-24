@@ -4,7 +4,7 @@
   <md-icon md-svg-icon="{{$ctrl.linkedinIcon.icon}}"></md-icon>
   </span>
   <form style="display: none" method="post"
-        action="https://social-ordineo.cfapps.io/connect/linkedin">
+        action="{{$ctrl.action}}">
     <input type="hidden" name="username" value="Nivek"/>
     <input type="hidden" name="scope" value="r_basicprofile"/>
     <button class="btn-linkedin" type="submit">Authorize ln</button>

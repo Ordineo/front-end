@@ -15,8 +15,8 @@ export class LinkedInService {
   constructor(private gateway:GatewayApiService, private $http:IHttpService) {
     this.httpConfig = {
       method: 'GET',
-      url: 'https://social-ordineo.cfapps.io/api/linkedin',
-      withCredentials:true
+      url: gateway.getLinkedInApi(),
+      withCredentials: true
     };
   }
 

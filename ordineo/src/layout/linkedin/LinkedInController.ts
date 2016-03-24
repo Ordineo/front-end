@@ -1,39 +1,34 @@
 import {LinkedInService} from "../../social/linkedin/LinkedInService";
 import IRootScopeService = angular.IRootScopeService;
+import IHttpService = angular.IHttpService;
+import IRequestConfig = angular.IRequestConfig;
+import ISCEService = angular.ISCEService;
+
 export class LinkedInController {
   public linkedinIcon:any;
-  public url:string;
+  public action:string;
 
   static EVENT_AUTH:string = 'goToAuth';
-  static $inject:Array<string> = [LinkedInService.SERVICE_NAME, '$rootScope'];
+  static $inject:Array<string> = [
+    '$sce',
+    LinkedInService.SERVICE_NAME,
+    '$rootScope',
+    '$http'
+  ];
 
-  isAuthorized:boolean;
-
-  constructor(private service:LinkedInService, private scope:IRootScopeService) {
+  constructor(private $sce:ISCEService, private service:LinkedInService, private scope:IRootScopeService, private http:IHttpService) {
     this.linkedinIcon = {title: 'linkedin-box', icon: 'mdi:linkedin-box'};
-    //
-    // service.authorize('Nivek')
-    //   .then((ok)=> {
-    //     console.log(ok);
-    //     console.log("OK" + ok.status);
-    //     this.isAuthorized = true;
-    //   }, (err)=> {
-    //     console.log(err);
-    //     console.log("error " + err.status);
-    //     this.isAuthorized = false;
-    //   });
+    this.action = $sce.trustAsResourceUrl('https://social-ordineo.cfapps.io/connect/linkedin');
   }
+
 
   onClick():void{
     this.service.authorize('Nivek')
       .then((ok)=> {
-        console.log('ok');
-        this.isAuthorized = true;
+      //todo  sync
+
       }, (err)=> {
         window.sessionStorage.setItem('linkedin', 'authorized');
-        console.log(err);
-        console.log("error " + err.status);
-        this.isAuthorized = false;
         this.scope.$broadcast(LinkedInController.EVENT_AUTH);
       });
   }
