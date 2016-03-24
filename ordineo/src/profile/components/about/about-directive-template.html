@@ -16,12 +16,17 @@
           on-cancel-click="$ctrl.onCancel()"
           on-save-click="$ctrl.onSubmit()"></card-header>
           <div class="about-content" layout="row" layout-xs="column">
-            <div class="about-img" layout="row" layout-align="start top" layout-align-xs="center center">
+
+            <!-- Picture -->
+            <div flex="25" class="about-img" layout="row" layout-align="start top" layout-align-xs="center center">
               <img ng-src="{{$ctrl.profilePicture}}" alt="Profile picture" class="sample">
             </div>
-            <div layout="column">
+
+            <div flex="30" layout="column">
               <div class="about-job">
-                <div class="about-function">
+
+                <!-- Function -->
+                <div class="about-function about-job-detail">
                   <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Function</h4>
                   <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
                     <label>Function</label>
@@ -29,7 +34,9 @@
                   </md-input-container>
                   <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.functie}}</span>
                 </div>
-                <div class="about-unit">
+
+                <!-- Unit -->
+                <div class="about-unit about-job-detail">
                   <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Unit</h4>
                   <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
                     <label>Unit</label>
@@ -37,7 +44,9 @@
                   </md-input-container>
                   <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.unit}}</span>
                 </div>
-                <div class="about-gender fade" ng-hide="$ctrl.isCollapsed">
+
+                <!-- Gender -->
+                <div class="about-gender about-job-detail fade" ng-hide="$ctrl.isCollapsed">
                   <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Gender</h4>
                   <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
                     <label>Gender</label>
@@ -45,7 +54,9 @@
                   </md-input-container>
                   <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.gender}}</span>
                 </div>
-                <div class="about-start-date fade" ng-hide="$ctrl.isCollapsed">
+
+                <!-- Start date -->
+                <div class="about-start-date about-job-detail fade" ng-hide="$ctrl.isCollapsed">
                   <h4 class="to-upper-case" ng-if="!$ctrl.isEditModeEnabled">Start date</h4>
                   <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
                     <label>Start date</label>
@@ -53,14 +64,17 @@
                   </md-input-container>
                   <span ng-if="!$ctrl.isEditModeEnabled">{{$ctrl.startDate}}</span>
                 </div>
-                <div class="about-end-date fade"
+
+                <!-- End date -->
+                <div class="about-end-date about-job-detail fade"
                      ng-hide="$ctrl.isCollapsed || $ctrl.endDate === '' || $ctrl.endDate === null">
                   <h4>End date</h4>
                   <span>{{$ctrl.endDate}}</span>
                 </div>
+
               </div>
             </div>
-            <div flex-gt-sm="70" class="about-description">
+            <div flex="45" flex-gt-sm="70" class="about-description">
               <md-input-container ng-if="$ctrl.isEditModeEnabled" class="md-block" flex-gt-xs>
                 <label>Description</label><textarea ng-if="$ctrl.isEditModeEnabled" ng-model="$ctrl.description" md-maxlength="365"
                                                     md-select-on-focus></textarea></md-input-container><p ng-if="$ctrl.description && !$ctrl.isEditModeEnabled">
