@@ -4,46 +4,26 @@ import {IAboutModel} from "./IAboutModel";
 import {employee} from "../../../core/models/employee";
 import {ButtonState} from "../../../core/labels/ButtonState";
 import IRootScopeService = angular.IRootScopeService;
-import {ToolbarController} from "../../../layout/toolbar/ToolbarController";
 import {LinkedInService} from "../../../social/linkedin/LinkedInService";
 
-export interface IAboutDirective {
-  functie:string;
-  unit:string;
-  description:string;
-  shortDescription:string;
-  username:string;
-  isContentLoaded:boolean;
-  isEditModeEnabled:boolean;
-  title:string;
-  aboutInfoCache:IAboutModel;
-  hasError:boolean;
-  isCollapsed:boolean;
-  setIsCollapsed:Function;
-  endDate:string
-  footerButtonLabel:string;
-  profilePicture:string;
-}
-
-export class AboutDirectiveController implements IAboutDirective {
-  public functie:string;
-  public unit:string;
-  public shortDescription:string;
-  public description:string;
-  public isContentLoaded:boolean;
-  public isEditModeEnabled:boolean;
-  public aboutInfoCache:IAboutModel;
+export class AboutDirectiveController {
   public title:string;
   public username:string;
+
+  employee:employee;
+  public aboutInfoCache:IAboutModel;
+
+  public shortDescription:string;
+  public footerButtonLabel:string;
+  public profilePicture:string;
+
+  public isContentLoaded:boolean;
+  public isEditModeEnabled:boolean;
   public isCollapsed:boolean;
   public hasError:boolean;
-  public endDate:string;
-  public footerButtonLabel:string;
-  public startDate:string;
-  public gender:string;
-  public profilePicture:string;
+
+  //used for animations
   public height:string;
-  isAuth:boolean;
 
   static $inject:Array<string> = [
     ProfileService.NAME,
@@ -51,54 +31,41 @@ export class AboutDirectiveController implements IAboutDirective {
     LinkedInService.SERVICE_NAME
   ];
 
+  static EVENT_ON_EMPLOYEEDATA_SET:string = "event_on_employee_data_set";
+
   constructor(public profileService:IProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {
+    this.init();
+    
     if (window.sessionStorage.getItem('linkedin') === 'authorized') {
       linkedin.authorize(this.username).then(()=> {
-        profileService.getAboutInfoByUsername(this.username).then((data:employee)=> {
-          this.functie = data.function;
-          this.unit = data.unit.name;
-          this.setDescription(data.description);
-          this.endDate = data.resignationDate;
-          this.startDate = data.startDate;
-          rootScope.$broadcast(ToolbarController.EVENT_USERNAME, {firstName: data.firstName});
-          this.gender = data.gender;
-          this.title = data.firstName + ' ' + data.lastName;
-          this.isContentLoaded = true;
-          this.profilePicture = "https://gateway-ordineo.cfapps.io/image-ordineo/api/images/" + this.username;
-        });
+        this.getEmployeeDataAsync(this.username, profileService, rootScope);
       });
     }
-    
+
+    if (this.username) {
+      this.getEmployeeDataAsync(this.username, profileService, rootScope);
+    }
+  }
+
+  private init():void {
     this.footerButtonLabel = ButtonState.MORE;
-    this.isContentLoaded = false;
-    this.title = "About myself";
     this.setIsCollapsed(true);
+    this.isContentLoaded = false;
     this.isEditModeEnabled = false;
     this.hasError = false;
-    this.setInfoCache();
-    if (this.username) {
-      profileService.getAboutInfoByUsername(this.username)
-        .then((data:employee)=> {
-          this.functie = data.function;
-          this.unit = data.unit.name;
-          this.setDescription(data.description);
-          this.endDate = data.resignationDate;
-          this.startDate = data.startDate;
-          rootScope.$broadcast(ToolbarController.EVENT_USERNAME, {firstName: data.firstName});
-          this.gender = data.gender;
-          this.title = data.firstName + ' ' + data.lastName;
-          this.isContentLoaded = true;
-          this.profilePicture = "https://gateway-ordineo.cfapps.io/image-ordineo/api/images/" + this.username;
-        }, (error:any)=> {
-          this.isContentLoaded = false;
-          this.hasError = true;
-        });
+  }
+
+  setProfilePicture(pictureLocation:string):void {
+    if (pictureLocation.match(/http/)) {
+      this.profilePicture = pictureLocation;
+    } else {
+      this.profilePicture = "https://gateway-ordineo.cfapps.io/image-ordineo/api/images/" + this.username;
     }
   }
 
   public setDescription(description:string):void {
     if (description !== null) {
-      this.description = description;
+      this.employee.description = description;
       if (description.length < 366) {
         this.shortDescription = description;
       } else {
@@ -118,23 +85,11 @@ export class AboutDirectiveController implements IAboutDirective {
 
   onEdit():void {
     this.isEditModeEnabled = !this.isEditModeEnabled;
-    this.aboutInfoCache = {
-      functie: this.functie,
-      description: this.description,
-      unit: this.unit
-    };
+    this.setInfoCache();
   }
 
   setIsCollapsed(isCollapsed:boolean):void {
     this.isCollapsed = isCollapsed;
-  }
-
-  private setInfoCache():void {
-    this.aboutInfoCache = {
-      functie: this.functie,
-      description: this.description,
-      unit: this.unit
-    };
   }
 
   onCancel():void {
@@ -143,13 +98,52 @@ export class AboutDirectiveController implements IAboutDirective {
   }
 
   restore():void {
-    this.functie = this.aboutInfoCache.functie;
-    this.unit = this.aboutInfoCache.unit;
-    this.description = this.aboutInfoCache.description;
+    this.employee.function = this.aboutInfoCache.functie;
+    this.employee.unit.name = this.aboutInfoCache.unit;
+    this.employee.description = this.aboutInfoCache.description;
   }
 
   onSubmit():void {
     //todo make a post request and submit data
     this.isEditModeEnabled = false;
   }
+
+
+  private setInfoCache():void {
+    this.aboutInfoCache = {
+      functie: this.employee.function,
+      description: this.employee.description,
+      unit: this.employee.unit.name
+    };
+  }
+
+  private setViewModelOnEmployeeDataFetched(_employee_:employee):void {
+    this.employee = _employee_;
+    this.title = _employee_.firstName + ' ' + _employee_.lastName;
+    this.setDescription(_employee_.description);
+    this.setProfilePicture(_employee_.profilePicture);
+
+    this.isContentLoaded = true;
+  }
+
+  private broadCastOnEmployeeDataSet(employee:employee, rootScope:IRootScopeService) {
+    rootScope.$broadcast(AboutDirectiveController.EVENT_ON_EMPLOYEEDATA_SET, {
+      username: employee.username,
+      firstName: employee.firstName
+    });
+  }
+
+  private getEmployeeDataAsync(_userName_:string, profileService:IProfileService, rootScope:IRootScopeService):void {
+    profileService
+      .getAboutInfoByUsername(_userName_)
+      .then((employeeData:employee)=> {
+        this.broadCastOnEmployeeDataSet(employeeData, rootScope);
+        this.setViewModelOnEmployeeDataFetched(employeeData);
+      }, (onErrorData)=> {
+        console.log(onErrorData);
+        this.isContentLoaded = false;
+        this.hasError = true;
+      });
+  }
+
 }

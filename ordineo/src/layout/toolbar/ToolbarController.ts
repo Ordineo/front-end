@@ -1,5 +1,6 @@
 
 import IRootScopeService = angular.IRootScopeService;
+import {AboutDirectiveController} from "../../profile/components/about/AboutDirectiveController";
 export interface IToolbarScope{
   buttons:Array<ButtonConfig>;
 }
@@ -13,12 +14,10 @@ export class ToolbarController implements IToolbarScope{
   firstName:string;
 
   static $inject = ['$rootScope'];
-  static EVENT_USERNAME = "onUserNameSet";
 
   constructor(private $rootScope:IRootScopeService){
     this.buttons = this.getButtons();
-    $rootScope.$on(ToolbarController.EVENT_USERNAME,(event, args)=>{
-      console.log(args);
+    $rootScope.$on(AboutDirectiveController.EVENT_ON_EMPLOYEEDATA_SET,(event, args)=>{
       this.firstName = args.firstName;
     });
   }
