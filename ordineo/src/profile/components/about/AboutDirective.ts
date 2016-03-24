@@ -19,14 +19,6 @@ var $ = require('jquery');
  *
  * @usage
  * <profile-about username="john"></profile-about>
- *
- * or
- *
- * <profile-about
- *        functie="designer"
- *        unit="clockwork">
- *     <p>description of the person</p>
- * </profile-about>
  */
 export class AboutDirective implements IDirective {
 
