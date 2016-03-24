@@ -3,6 +3,8 @@ import {IProfileService} from "../../services/ProfileService";
 import {IAboutModel} from "./IAboutModel";
 import {employee} from "../../../core/models/employee";
 import {ButtonState} from "../../../core/labels/ButtonState";
+import IRootScopeService = angular.IRootScopeService;
+import {ToolbarController} from "../../../layout/toolbar/ToolbarController";
 
 export interface IAboutDirective {
   functie:string;
@@ -43,9 +45,10 @@ export class AboutDirectiveController implements IAboutDirective {
 
   static $inject:Array<string> = [
     ProfileService.NAME,
+    '$rootScope'
   ];
 
-  constructor(public profileService:IProfileService) {
+  constructor(public profileService:IProfileService, private rootScope:IRootScopeService) {
     this.footerButtonLabel = ButtonState.MORE;
     this.isContentLoaded = false;
     this.title = "About myself";
@@ -61,6 +64,7 @@ export class AboutDirectiveController implements IAboutDirective {
           this.setDescription(data.description);
           this.endDate = data.resignationDate;
           this.startDate = data.startDate;
+          rootScope.$broadcast(ToolbarController.EVENT_USERNAME, {firstName: data.firstName});
           this.gender = data.gender;
           this.title = data.firstName + ' ' + data.lastName;
           this.isContentLoaded = true;
