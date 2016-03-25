@@ -141,7 +141,6 @@ export class AboutDirectiveController {
         this.broadCastOnEmployeeDataSet(employeeData, rootScope);
         this.setViewModelOnEmployeeDataFetched(employeeData);
       }, (onErrorData)=> {
-        console.log(onErrorData);
         this.isContentLoaded = false;
         this.hasError = true;
       });
