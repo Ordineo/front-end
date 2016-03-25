@@ -10,6 +10,7 @@ import IControllerService = angular.IControllerService;
 import IAnimationOptions = angular.animate.IAnimationOptions;
 require('./about-directive-styles.scss');
 var $ = require('jquery');
+
 /**
  * @ngdoc directive
  * @name profileAbout
@@ -19,14 +20,6 @@ var $ = require('jquery');
  *
  * @usage
  * <profile-about username="john"></profile-about>
- *
- * or
- *
- * <profile-about
- *        functie="designer"
- *        unit="clockwork">
- *     <p>description of the person</p>
- * </profile-about>
  */
 export class AboutDirective implements IDirective {
 
@@ -34,19 +27,14 @@ export class AboutDirective implements IDirective {
 
   scope:any = {};
   restrict:string = 'E';
-  transclude:boolean = true;
   bindToController:any = {
-    title: '@',
-    username: '@',
-    functie: '=?',
-    unit: '=?',
-    description: '=?',
+    username: '@'
   };
   controller:Function = AboutDirectiveController;
-  controllerAs:string = '$ctrl';
+  controllerAs:string = 'about';
   template:string = require('./about-directive-template.html');
   link:IDirectiveLinkFn = (scope:IScope, el:IAugmentedJQuery, attr:IAttributes, ctrl:AboutDirectiveController)=> {
-    scope.$watch('$ctrl.isCollapsed', (newValue, oldValue)=> {
+    scope.$watch('about.isCollapsed', (newValue, oldValue)=> {
       if (ctrl.isContentLoaded) {
         var any = $(el).find('.about-content');
         ctrl.height = any.height();
@@ -57,7 +45,7 @@ export class AboutDirective implements IDirective {
       }
     });
 
-    scope.$watch('$ctrl.isEditModeEnabled', (newValeu)=> {
+    scope.$watch('about.isEditModeEnabled', (newValeu)=> {
       var any = $(el).find('.about-content');
       ctrl.height = any.height();
       $(any).attr('sup', ctrl.height);

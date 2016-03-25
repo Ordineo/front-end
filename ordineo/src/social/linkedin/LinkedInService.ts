@@ -15,11 +15,12 @@ export class LinkedInService {
   constructor(private gateway:GatewayApiService, private $http:IHttpService) {
     this.httpConfig = {
       method: 'GET',
-      url: 'https://social-ordineo.cfapps.io/api/linkedin'
+      url: gateway.getLinkedInApi(),
+      withCredentials: true
     };
   }
 
-  public authorize(username:string):IPromise<any> {
+  public requestSync(username:string):IPromise<any> {
     this.httpConfig.params = {
       username: username
     };
