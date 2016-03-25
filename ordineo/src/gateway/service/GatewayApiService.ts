@@ -28,6 +28,8 @@ export class GatewayApiService{
     return this.protocol + this.host + servicePath;
   }
 
+
+
   public getLinkedInApi():string{
     return 'https://social-ordineo.cfapps.io/api/linkedin';
   }

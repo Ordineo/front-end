@@ -1,16 +1,17 @@
 import {ProfileService} from "../../services/ProfileService";
 import {IProfileService} from "../../services/ProfileService";
-import {employee} from "../../../core/models/employee";
+import {Employee} from "../../../core/models/employee";
 import {ButtonState} from "../../../core/labels/ButtonState";
 import IRootScopeService = angular.IRootScopeService;
 import {LinkedInService} from "../../../social/linkedin/LinkedInService";
+import {LinkedInController} from "../../../layout/linkedin/LinkedInController";
 
 export class AboutDirectiveController {
   public title:string;
   public username:string;
 
-  employee:employee;
-  public aboutInfoCache:employee;
+  employee:Employee;
+  public aboutInfoCache:Employee;
 
   public shortDescription:string;
   public footerButtonLabel:string;
@@ -35,10 +36,11 @@ export class AboutDirectiveController {
   constructor(public profileService:IProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {
     this.init();
 
-    if (window.sessionStorage.getItem('linkedin') === 'authorized') {
-      linkedin.authorize(this.username).then(()=> {
-        this.getEmployeeDataAsync(this.username, profileService, rootScope);
-      });
+    if (window.sessionStorage.getItem(LinkedInController.SESSION_ITEM)) {
+      //when this session item was set it means we came from an auth page.
+      //we need to request a sync again from linkedin
+      this.linkedin.requestSync(this.username);
+      window.sessionStorage.removeItem('linkedin');
     }
 
     if (this.username) {
@@ -52,6 +54,9 @@ export class AboutDirectiveController {
     this.isContentLoaded = false;
     this.isEditModeEnabled = false;
     this.hasError = false;
+    this.rootScope.$on(LinkedInController.EVENT_SYNC_EMPLOYEE, ()=> {
+      this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
+    });
   }
 
   setProfilePicture(pictureLocation:string):void {
@@ -103,7 +108,16 @@ export class AboutDirectiveController {
   }
 
   onSubmit():void {
-    //todo make a post request and submit data
+    this.setDescription(this.employee.description);
+    this.isContentLoaded = false;
+
+    this.profileService.putEmployeeData(this.employee)
+      .then((ok)=> {
+        this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
+      }, (err)=> {
+        console.log(err)
+      });
+
     this.isEditModeEnabled = false;
   }
 
@@ -118,7 +132,7 @@ export class AboutDirectiveController {
     };
   }
 
-  private setViewModelOnEmployeeDataFetched(_employee_:employee):void {
+  private setViewModelOnEmployeeDataFetched(_employee_:Employee):void {
     this.employee = _employee_;
     this.title = _employee_.firstName + ' ' + _employee_.lastName;
     this.setDescription(_employee_.description);
@@ -127,7 +141,7 @@ export class AboutDirectiveController {
     this.isContentLoaded = true;
   }
 
-  private broadCastOnEmployeeDataSet(employee:employee, rootScope:IRootScopeService) {
+  private broadCastOnEmployeeDataSet(employee:Employee, rootScope:IRootScopeService) {
     rootScope.$broadcast(AboutDirectiveController.EVENT_ON_EMPLOYEEDATA_SET, {
       username: employee.username,
       firstName: employee.firstName
@@ -135,12 +149,15 @@ export class AboutDirectiveController {
   }
 
   private getEmployeeDataAsync(_userName_:string, profileService:IProfileService, rootScope:IRootScopeService):void {
+    this.isContentLoaded = false;
     profileService
       .getAboutInfoByUsername(_userName_)
-      .then((employeeData:employee)=> {
+      .then((employeeData:any)=> {
+        this.isContentLoaded = true;
         this.broadCastOnEmployeeDataSet(employeeData, rootScope);
         this.setViewModelOnEmployeeDataFetched(employeeData);
       }, (onErrorData)=> {
+        console.log(onErrorData);
         this.isContentLoaded = false;
         this.hasError = true;
       });
