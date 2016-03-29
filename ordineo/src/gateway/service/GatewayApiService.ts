@@ -38,6 +38,10 @@ export class GatewayApiService{
     return 'https://social-ordineo.cfapps.io/connect/linkedin';
   }
 
+  public getSearchEmployeeApi():string{
+    return this.getEmployeesApi() + 'employees/search/';
+  }
+
   public getEmployeesApi():string{
     return this.buildApiUrl(this.EMPLOYEE_API);
   }
