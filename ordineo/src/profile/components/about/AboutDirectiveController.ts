@@ -30,7 +30,7 @@ export class AboutDirectiveController {
     '$rootScope',
     LinkedInService.SERVICE_NAME
   ];
-
+  
   static EVENT_ON_EMPLOYEEDATA_SET:string = "event_on_employee_data_set";
 
   constructor(public profileService:IProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {

@@ -1,5 +1,5 @@
 <md-card>
-  <form>
+  <form name="aboutEditForm" novalidate>
     <div class="loading-container" layout="row" layout-align="center center" ng-if="!about.isContentLoaded">
       <md-progress-circular
         class="md-primary"
@@ -125,7 +125,8 @@
               </div>
 
               <!-- Gender -->
-              <div class="about-gender about-job-detail fade" ng-if="!about.isCollapsed">
+              <div class="about-gender about-job-detail fade" ng-if="!about.isCollapsed || about.isEditModeEnabled
+              ">
                 <div>
                   <md-input-container class="md-block" flex-gt-xs>
                     <label>Gender</label>
@@ -135,7 +136,7 @@
               </div>
 
               <!-- Start date -->
-              <div class="about-start-date about-job-detail fade" ng-if="!about.isCollapsed">
+              <div class="about-start-date about-job-detail fade" ng-if="!about.isCollapsed || about.isEditModeEnabled">
                 <div>
                   <md-input-container class="md-block" flex-gt-xs>
                     <label>Start date</label>
@@ -158,8 +159,11 @@
             <div>
               <md-input-container class="md-block" flex-gt-xs>
                 <label>Description</label>
-              <textarea ng-model="about.employee.description"
+              <textarea name="userDescription"
+                        required
+                        ng-model="about.employee.description"
                         md-maxlength="2048"
+                        ng-maxlength="2048"
                         md-select-on-focus>
               </textarea>
               </md-input-container>
