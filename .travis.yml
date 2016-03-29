@@ -3,7 +3,7 @@ node_js:
 - 4.2.1
 sudo: false
 install:
-- npm config set unsafe-perm true
+- npm config set strict-ssl false
 - npm install -g npm
 - npm install -g webpack
 - npm install -g typings
