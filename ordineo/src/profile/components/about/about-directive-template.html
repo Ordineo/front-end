@@ -6,9 +6,16 @@
         md-diameter="60"></md-progress-circular>
     </div>
     <div class="content-container trans-height" layout="row" ng-if="about.isContentLoaded">
-      <span flex="5"></span>
-      <!-- Card Content row-->
+
+      <!--<span flex="5"></span>-->
+      
+      <!-- Card content -->
       <div flex layout="column">
+
+
+
+        <!-- Card header -->
+
         <card-header
           show-btn-edit="true"
           title="{{about.title}}"
@@ -16,7 +23,12 @@
           on-cancel-click="about.onCancel()"
           on-save-click="about.onSubmit()">
         </card-header>
-        <div class="about-content" layout="row" layout-xs="column">
+
+
+
+        <!-- Show info -->
+
+        <div class="about-content" layout="row" layout-xs="column" ng-if="!about.isEditModeEnabled">
 
           <!-- Left column: Picture -->
           <div flex="25" class="about-img" layout="row" layout-align="start top" layout-align-xs="center center">
@@ -26,14 +38,75 @@
           <!-- Center column: Overview -->
           <div flex="30" layout="column">
             <div class="about-job">
+
               <!-- Function -->
               <div class="about-function about-job-detail">
-                <div ng-if="!about.isEditModeEnabled">
+                <div>
                   <h4 class="to-upper-case">Function</h4>
                   <span>{{about.employee.function}}</span>
                 </div>
+              </div>
 
-                <div ng-if="about.isEditModeEnabled">
+              <!-- Unit -->
+              <div class="about-unit about-job-detail">
+                <div>
+                  <h4 class="to-upper-case">Unit</h4>
+                  <span>{{about.employee.unit.name}}</span>
+                </div>
+              </div>
+
+              <!-- Gender -->
+              <div class="about-gender about-job-detail fade" ng-if="!about.isCollapsed">
+                <div>
+                  <h4 class="to-upper-case">Gender</h4>
+                  <span>{{about.employee.gender}}</span>
+                </div>
+              </div>
+
+              <!-- Start date -->
+              <div class="about-start-date about-job-detail fade" ng-if="!about.isCollapsed">
+                <div>
+                  <h4 class="to-upper-case">Start date</h4>
+                  <span>{{about.employee.startDate}}</span>
+                </div>
+              </div>
+
+              <!-- End date -->
+              <div class="about-end-date about-job-detail fade"
+                   ng-if="about.isCollapsed && about.employee.resignationDate !== '' && about.employee.resignationDate !== null">
+                <h4>End date</h4>
+                <span>{{about.employee.resignationDate}}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column: Description -->
+          <div flex="45" flex-gt-sm="70" class="about-description">
+            <p ng-if="about.employee.description">
+              <span ng-if="about.isCollapsed">{{about.shortDescription}}</span>
+              <span ng-if="!about.isCollapsed">{{about.employee.description}}</span>
+            </p>
+          </div>
+        </div>
+
+
+
+        <!-- Edit info -->
+
+        <div class="about-content" layout="row" layout-xs="column" ng-if="about.isEditModeEnabled">
+
+          <!-- Left column: Picture -->
+          <div flex="25" class="about-img" layout="row" layout-align="start top" layout-align-xs="center center">
+            <img ng-src="{{about.profilePicture}}" alt="Profile picture" class="sample">
+          </div>
+
+          <!-- Center column: Overview -->
+          <div flex="30" layout="column">
+            <div class="about-job">
+
+              <!-- Function -->
+              <div class="about-function about-job-detail">
+                <div>
                   <md-input-container class="md-block" flex-gt-xs>
                     <label>Function</label>
                     <input required name="userFunctie" ng-model="about.employee.function">
@@ -43,12 +116,7 @@
 
               <!-- Unit -->
               <div class="about-unit about-job-detail">
-                <div ng-if="!about.isEditModeEnabled">
-                  <h4 class="to-upper-case">Unit</h4>
-                  <span>{{about.employee.unit.name}}</span>
-                </div>
-
-                <div ng-if="about.isEditModeEnabled">
+                <div>
                   <md-input-container class="md-block" flex-gt-xs>
                     <label>Unit</label>
                     <input required name="userUnit" ng-model="about.employee.unit.name">
@@ -58,12 +126,7 @@
 
               <!-- Gender -->
               <div class="about-gender about-job-detail fade" ng-if="!about.isCollapsed">
-                <div ng-if="!about.isEditModeEnabled">
-                  <h4 class="to-upper-case">Gender</h4>
-                  <span>{{about.employee.gender}}</span>
-                </div>
-
-                <div ng-if="about.isEditModeEnabled">
+                <div>
                   <md-input-container class="md-block" flex-gt-xs>
                     <label>Gender</label>
                     <input required name="userGender" ng-model="about.employee.gender">
@@ -73,11 +136,7 @@
 
               <!-- Start date -->
               <div class="about-start-date about-job-detail fade" ng-if="!about.isCollapsed">
-                <div ng-if="!about.isEditModeEnabled">
-                  <h4 class="to-upper-case">Start date</h4>
-                  <span>{{about.employee.startDate}}</span>
-                </div>
-                <div ng-if="about.isEditModeEnabled">
+                <div>
                   <md-input-container class="md-block" flex-gt-xs>
                     <label>Start date</label>
                     <input required name="userStartDate" ng-model="about.employee.startDate">
@@ -96,7 +155,7 @@
 
           <!-- Right column: Description -->
           <div flex="45" flex-gt-sm="70" class="about-description">
-            <div ng-if="about.isEditModeEnabled">
+            <div>
               <md-input-container class="md-block" flex-gt-xs>
                 <label>Description</label>
               <textarea ng-model="about.employee.description"
@@ -105,21 +164,22 @@
               </textarea>
               </md-input-container>
             </div>
-            <p ng-if="about.employee.description && !about.isEditModeEnabled">
-              <span ng-if="about.isCollapsed">{{about.shortDescription}}</span>
-              <span ng-if="!about.isCollapsed">{{about.employee.description}}</span>
-            </p>
           </div>
         </div>
 
+
+
         <!-- Card footer -->
+
         <div layout="row" layout-align="end center" class="about-footer">
           <md-button ng-click="about.onExpandCollapseButtonClick()" class="md-raised md-primary">
             {{about.footerButtonLabel}}
           </md-button>
         </div>
       </div>
-      <span flex="5"></span>
+
+      <!--<span flex="5"></span>-->
+
     </div>
   </form>
 </md-card>
