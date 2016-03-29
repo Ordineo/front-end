@@ -20,7 +20,7 @@ export class LinkedInService {
     };
   }
 
-  public authorize(username:string):IPromise<any> {
+  public requestSync(username:string):IPromise<any> {
     this.httpConfig.params = {
       username: username
     };

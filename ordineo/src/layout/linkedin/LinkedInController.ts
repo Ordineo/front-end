@@ -8,7 +8,10 @@ export class LinkedInController {
   public linkedinIcon:any;
   public action:string;
 
+  static SESSION_ITEM:string = 'fromAuth';
   static EVENT_AUTH:string = 'goToAuth';
+  static EVENT_SYNC_EMPLOYEE:string = 'syncEmployeeData';
+
   static $inject:Array<string> = [
     '$sce',
     LinkedInService.SERVICE_NAME,
@@ -23,12 +26,11 @@ export class LinkedInController {
 
 
   onClick():void{
-    this.service.authorize('Nivek')
+    this.service.requestSync('Nivek')
       .then((ok)=> {
-      //todo  sync
-
+        this.scope.$broadcast(LinkedInController.EVENT_SYNC_EMPLOYEE);
       }, (err)=> {
-        window.sessionStorage.setItem('linkedin', 'authorized');
+        window.sessionStorage.setItem(LinkedInController.SESSION_ITEM, 'true');
         this.scope.$broadcast(LinkedInController.EVENT_AUTH);
       });
   }
