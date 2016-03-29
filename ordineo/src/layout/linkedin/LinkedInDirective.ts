@@ -11,6 +11,10 @@ export class LinkedInDirective implements IDirective{
 
   static NAME:string = "linkedin";
 
+  scope:{};
+  bindToController:any = {
+    username: '@'
+  };
   template:string = require('./linkedin.html');
   controller:Function = LinkedInController;
   controllerAs:string = '$ctrl';

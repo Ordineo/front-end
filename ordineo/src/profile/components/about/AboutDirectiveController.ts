@@ -30,7 +30,7 @@ export class AboutDirectiveController {
     '$rootScope',
     LinkedInService.SERVICE_NAME
   ];
-  
+
   static EVENT_ON_EMPLOYEEDATA_SET:string = "event_on_employee_data_set";
 
   constructor(public profileService:IProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {
@@ -60,13 +60,7 @@ export class AboutDirectiveController {
   }
 
   setProfilePicture(pictureLocation:string):void {
-    /*TODO remove conditional when image service can store linked in images*/
-    if (pictureLocation.match(/http/)) {
-      this.profilePicture = pictureLocation;
-    } else {
-      //TODO remove hardcoded string
-      this.profilePicture = "https://gateway-ordineo.cfapps.io/image-ordineo/api/images/" + this.username;
-    }
+    this.profilePicture = pictureLocation;
   }
 
   public setDescription(description:string):void {
