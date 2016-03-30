@@ -21,9 +21,10 @@ export class AboutDirectiveController {
   public isEditModeEnabled:boolean;
   public isCollapsed:boolean;
   public hasError:boolean;
+  public genders:Array<string>;
 
   //used for animations
-  public height:string;
+  public height:any;
 
   static $inject:Array<string> = [
     ProfileService.NAME,
@@ -46,6 +47,12 @@ export class AboutDirectiveController {
     if (this.username) {
       this.getEmployeeDataAsync(this.username, profileService, rootScope);
     }
+
+    this.genders = [
+      "MALE",
+      "FEMALE",
+      "TRANSGENDER"
+    ];
   }
 
   private init():void {
@@ -136,7 +143,8 @@ export class AboutDirectiveController {
     this.employee = _employee_;
     this.title = _employee_.firstName + ' ' + _employee_.lastName;
     this.setDescription(_employee_.description);
-    this.setProfilePicture(_employee_.profilePicture);
+    //this.setProfilePicture(_employee_.profilePicture);
+    this.employee.startDateTypeDate = new Date(_employee_.startDate);
 
     this.isContentLoaded = true;
   }
@@ -163,4 +171,10 @@ export class AboutDirectiveController {
       });
   }
 
+  private changeStartDate() {
+    var date = new Date();
+    date.setDate(this.employee.startDateTypeDate.getDate());
+    this.employee.startDate = JSON.stringify(date).substring(1, JSON.stringify(date).indexOf('T'));
+    //console.log(this.employee.startDate);
+  }
 }

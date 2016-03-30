@@ -39,9 +39,9 @@ export class AboutDirective implements IDirective {
         var any = $(el).find('.about-content');
         ctrl.height = any.height();
         $(any).attr('sup', ctrl.height);
-        newValue ?
+        /*newValue ?
           this.animate.removeClass($(el).find('.about-content')[0], 'flow-height')
-          : this.animate.addClass($(el).find('.about-content')[0], 'flow-height');
+          : this.animate.addClass($(el).find('.about-content')[0], 'flow-height');*/
       }
     });
 
@@ -49,9 +49,9 @@ export class AboutDirective implements IDirective {
       var any = $(el).find('.about-content');
       ctrl.height = any.height();
       $(any).attr('sup', ctrl.height);
-      newValeu ?
+      /*newValeu ?
         this.animate.removeClass($(el).find('.about-content')[0], 'flow-height')
-        : this.animate.addClass($(el).find('.about-content')[0], 'flow-height');
+        : this.animate.addClass($(el).find('.about-content')[0], 'flow-height');*/
     });
   };
 

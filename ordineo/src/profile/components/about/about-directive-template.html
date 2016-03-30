@@ -125,28 +125,27 @@
               </div>
 
               <!-- Gender -->
-              <div class="about-gender about-job-detail fade" ng-if="!about.isCollapsed">
+              <div class="about-gender about-job-detail fade">
                 <div>
-                  <md-input-container class="md-block" flex-gt-xs>
+                  <md-input-container style="margin-right: 10px;">
                     <label>Gender</label>
-                    <input required name="userGender" ng-model="about.employee.gender">
+                    <md-select ng-model="about.employee.gender">
+                      <md-option ng-repeat="gender in about.genders" value="{{gender}}">{{gender}}</md-option>
+                    </md-select>
                   </md-input-container>
                 </div>
               </div>
 
               <!-- Start date -->
-              <div class="about-start-date about-job-detail fade" ng-if="!about.isCollapsed">
+              <div class="about-start-date about-job-detail fade">
                 <div>
-                  <md-input-container class="md-block" flex-gt-xs>
-                    <label>Start date</label>
-                    <input required name="userStartDate" ng-model="about.employee.startDate">
-                  </md-input-container>
+                  <md-datepicker ng-model="about.employee.startDateTypeDate" ng-change="about.changeStartDate()" md-placeholder="Start date"></md-datepicker>
                 </div>
               </div>
 
               <!-- End date -->
               <div class="about-end-date about-job-detail fade"
-                   ng-if="about.isCollapsed && about.employee.resignationDate !== '' && about.employee.resignationDate !== null">
+                   ng-if="about.employee.resignationDate !== '' && about.employee.resignationDate !== null">
                 <h4>End date</h4>
                 <span>{{about.employee.resignationDate}}</span>
               </div>
@@ -158,10 +157,10 @@
             <div>
               <md-input-container class="md-block" flex-gt-xs>
                 <label>Description</label>
-              <textarea ng-model="about.employee.description"
-                        md-maxlength="2048"
-                        md-select-on-focus>
-              </textarea>
+                <textarea ng-model="about.employee.description"
+                          maxlength="2048"
+                          md-select-on-focus>
+                </textarea>
               </md-input-container>
             </div>
           </div>
@@ -172,7 +171,7 @@
         <!-- Card footer -->
 
         <div layout="row" layout-align="end center" class="about-footer">
-          <md-button ng-click="about.onExpandCollapseButtonClick()" class="md-raised md-primary">
+          <md-button ng-click="about.onExpandCollapseButtonClick()" ng-if="!about.isEditModeEnabled" class="md-raised md-primary">
             {{about.footerButtonLabel}}
           </md-button>
         </div>
