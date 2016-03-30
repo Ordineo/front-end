@@ -26,8 +26,8 @@ export class ProfileService implements IProfileService {
 
   public putEmployeeData(employee:Employee):IPromise<any> {
     return this.traverson.hal()
-      .from(this.gateway.getEmployeesApi())
-      .follow('employees', 'search', 'employee','self')
+      .from(this.gateway.getSearchEmployeeApi())
+      .follow('employee','self')
       .withTemplateParameters({username: employee.username})
       .withRequestOptions({
         headers: {
@@ -40,9 +40,9 @@ export class ProfileService implements IProfileService {
 
   public getAboutInfoByUsername(userName:string):IPromise<any> {
     return this.traverson.hal()
-      .from(this.gateway.getEmployeesApi())
+      .from(this.gateway.getSearchEmployeeApi())
       .jsonHal()
-      .follow('employees', 'search', 'employee')
+      .follow('employee')
       .withTemplateParameters({username: userName})
       .getResource()
       .result;

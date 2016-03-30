@@ -1,34 +1,42 @@
-// import 'angular-mocks';
-// import {ORDINEO_PROFILE} from '../../ProfileModule.ts';
-// import {AboutDirectiveController} from "./AboutDirectiveController";
-// import {ProfileService} from "../../services/ProfileService";
-// import {IProfileService} from "../../services/ProfileService";
-// import IQService = ng.IQService;
-// import {MockProfileService} from "../../../../test/mock/MockProfileService";
-// import IProvideService = angular.auto.IProvideService;
-// import IControllerService = angular.IControllerService;
-// import IRootScopeService = angular.IRootScopeService;
-// import IScope = angular.IScope;
-// import IDeferred = angular.IDeferred;
-//
-// describe('About directive controller', ()=> {
-//   var $controller:IControllerService, $q:IQService, $rootScope:IRootScopeService;
-//   var serviceMock:IProfileService;
-//   var ctrl:AboutDirectiveController;
-//   var scope:IScope, bindings:any;
-//
-//   beforeEach(angular.mock.module(ORDINEO_PROFILE,
-//     ($provide:IProvideService)=> {
-//       serviceMock = new MockProfileService();
-//       $provide.service(ProfileService.NAME, ()=>serviceMock);
-//     }));
-//
-//   beforeEach(inject((_$controller_:IControllerService, _$q_:IQService, _$rootScope_:IRootScopeService)=> {
-//     $controller = _$controller_;
-//     $q = _$q_;
-//     $rootScope = _$rootScope_;
-//     scope = $rootScope.$new();
-//   }));
+import 'angular-mocks';
+import {ORDINEO_PROFILE} from '../../ProfileModule.ts';
+import {AboutDirectiveController} from "./AboutDirectiveController";
+import {ProfileService} from "../../services/ProfileService";
+import {IProfileService} from "../../services/ProfileService";
+import IQService = ng.IQService;
+import {MockProfileService} from "../../../../test/mock/MockProfileService";
+import IProvideService = angular.auto.IProvideService;
+import IControllerService = angular.IControllerService;
+import IRootScopeService = angular.IRootScopeService;
+import IScope = angular.IScope;
+import IDeferred = angular.IDeferred;
+
+describe('About directive controller', ()=> {
+  var $controller:IControllerService, $q:IQService, $rootScope:IRootScopeService;
+  var serviceMock:IProfileService;
+  var ctrl:AboutDirectiveController;
+  var scope:IScope, bindings:any;
+
+  beforeEach(angular.mock.module(ORDINEO_PROFILE,
+    ($provide:IProvideService)=> {
+      serviceMock = new MockProfileService();
+      $provide.service(ProfileService.NAME, ()=>serviceMock);
+    }));
+
+  beforeEach(inject((_$controller_:IControllerService, _$q_:IQService, _$rootScope_:IRootScopeService)=> {
+    $controller = _$controller_;
+    $q = _$q_;
+    $rootScope = _$rootScope_;
+    scope = $rootScope.$new();
+  }));
+
+  describe("Validation", ()=> {
+    beforeEach(()=> {
+      ctrl = $controller(AboutDirectiveController);
+    });
+  });
+});
+
 //
 //   describe("When the controller gets instantiated for the first time", ()=> {
 //

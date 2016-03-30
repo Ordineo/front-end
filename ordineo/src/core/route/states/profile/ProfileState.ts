@@ -7,7 +7,7 @@ export class ProfileState implements IState {
   name:string = ProfileState.NAME;
   url:string = '/profile';
   controller:Function = ProfileStateCtrl;
-  controllerAs:string = '$profile';
+  controllerAs:string = 'profile';
   template:string = require('./profile-state.html');
 }
 
@@ -15,6 +15,9 @@ export class ProfileStateCtrl {
 
   static $inject:Array<string> = [];
 
+  public username:string;
+
   constructor() {
+    this.username = "Rydg";
   }
 }

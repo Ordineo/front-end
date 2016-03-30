@@ -1,39 +1,178 @@
-// import {ORDINEO_PROFILE} from '../../ProfileModule.ts';
-// import IRootScopeService = angular.IRootScopeService;
-// import 'angular-mocks'
-// import ICompileService = angular.ICompileService;
-// import IHttpBackendService = angular.IHttpBackendService;
-// import IScope = angular.IScope;
-// import IAugmentedJQuery = angular.IAugmentedJQuery;
-// import {AboutDirectiveController} from "./AboutDirectiveController";
-// import {ButtonState} from "../../../core/labels/ButtonState";
-//
-// describe('About directive: ', ()=> {
-//   beforeEach(angular.mock.module(ORDINEO_PROFILE));
-//
-//   var template:string = `<profile-about username="Turbots"></profile-about>`;
-//
-//   var $compile:ICompileService;
-//   var $rootScope:IRootScopeService;
-//   var elm:IAugmentedJQuery;
-//   var scope:IScope;
-//   var isolateScope:IScope;
-//   var ctrl:AboutDirectiveController;
-//   var controllerAs:string = '$ctrl';
-//
-//   beforeEach(inject((_$httpBackend_:IHttpBackendService, _$compile_:ICompileService, _$rootScope_:IRootScopeService)=> {
-//     $compile = _$compile_;
-//     $rootScope = _$rootScope_;
-//     _$httpBackend_.whenGET(/.svg$/).respond(200, '');
-//   }));
-//
-//   beforeEach(()=> {
-//     scope = $rootScope.$new();
-//     elm = $compile(template)(scope);
-//     isolateScope = elm.isolateScope();
-//     ctrl = isolateScope[controllerAs];
-//     isolateScope.$digest();
-//   });
+import {ORDINEO_PROFILE} from '../../ProfileModule.ts';
+import IRootScopeService = angular.IRootScopeService;
+import 'angular-mocks'
+import ICompileService = angular.ICompileService;
+import IHttpBackendService = angular.IHttpBackendService;
+import IScope = angular.IScope;
+import IAugmentedJQuery = angular.IAugmentedJQuery;
+import {AboutDirectiveController} from "./AboutDirectiveController";
+import IProvideService = angular.auto.IProvideService;
+import {LinkedInService} from "../../../social/linkedin/LinkedInService";
+import IFormController = angular.IFormController;
+import {AboutDirective} from "./AboutDirective";
+import {MockAboutData} from "../../../../test/mock/MockAboutData";
+
+describe('About directive: ', ()=> {
+  beforeEach(
+    angular.mock.module(ORDINEO_PROFILE,
+    ($provide:IProvideService)=> {
+      $provide.service(LinkedInService.SERVICE_NAME, LinkedInService);
+    }));
+
+  var template:string = `<profile-about username="Turbots"></profile-about>`;
+
+  var $compile:ICompileService;
+  var $rootScope:IRootScopeService;
+  var elm:IAugmentedJQuery;
+  var scope:any;
+  var isolateScope:IScope;
+  var ctrl:AboutDirectiveController;
+  var controllerAs:string = AboutDirective.CONTROLLER_AS;
+
+  beforeEach(inject((_$httpBackend_:IHttpBackendService, _$compile_:ICompileService, _$rootScope_:IRootScopeService)=> {
+    $compile = _$compile_;
+    $rootScope = _$rootScope_;
+    _$httpBackend_.whenGET(/.svg$/).respond(200, '');
+  }));
+
+  beforeEach(()=> {
+    scope = $rootScope.$new();
+    elm = $compile(template)(scope);
+    isolateScope = elm.isolateScope();
+    ctrl = isolateScope[controllerAs];
+    isolateScope.$digest();
+  });
+
+  describe('Form validation', ()=> {
+    var form:IFormController;
+
+    beforeEach(()=> {
+      form = isolateScope['aboutEditForm'];
+      ctrl.isContentLoaded = true;
+      ctrl.isEditModeEnabled = true;
+      isolateScope.$digest();
+    });
+
+    describe('form input function', function () {
+      var inputUserFunctie;
+
+      beforeEach(()=> {
+        inputUserFunctie = form['userFunctie'];
+      });
+
+      it('should have a form input named userFunctie', function () {
+        expect(inputUserFunctie).toBeDefined();
+      });
+
+      it('when function is empty it should be invalid', function () {
+        form['userFunctie'].$setViewValue('');
+        isolateScope.$digest();
+        expect(form['userFunctie'].$valid).toBe(false);
+      });
+    });
+    describe('form input unit', function () {
+      var inputUnit;
+
+      beforeEach(()=> {
+        inputUnit = form['userUnit'];
+      });
+
+      it('should have a form input named userUnit', function () {
+        expect(inputUnit).toBeDefined();
+      });
+
+      it('when unit value is empty the input field should be invalid', function () {
+        form['userUnit'].$setViewValue('');
+        isolateScope.$digest();
+        expect(form['userUnit'].$valid).toBe(false);
+      });
+    });
+    describe('form input Gender', function () {
+      var inputGender;
+
+      beforeEach(()=> {
+        inputGender = form['userGender'];
+      });
+
+      it('should have a form input named userGender', function () {
+        expect(inputGender).toBeDefined();
+      });
+
+      it('when gender value is empty the input field should be invalid', function () {
+        form['userGender'].$setViewValue('');
+        isolateScope.$digest();
+        expect(form['userGender'].$valid).toBe(false);
+      });
+    });
+    describe('form textarea description', function () {
+      var textareaDescription;
+
+      beforeEach(()=> {
+        textareaDescription = form['userDescription'];
+      });
+
+      it('should have a form textarea named userDescription', function () {
+        expect(textareaDescription).toBeDefined();
+      });
+
+      it('when description value is empty the textarea should be invalid', function () {
+        form['userDescription'].$setViewValue('');
+        isolateScope.$digest();
+        expect(form['userDescription'].$valid).toBe(false);
+      });
+
+      it('should be invalid when description length is greater then 2048', ()=> {
+        form['userDescription'].$setViewValue(MockAboutData.DESCRIPTION);
+        isolateScope.$digest();
+        expect(MockAboutData.DESCRIPTION.length).toBeGreaterThan(2049);
+        expect(form['userDescription'].$valid).toBe(false);
+      });
+    });
+  });
+
+  describe('When edit mode is NOT active', ()=> {
+    beforeEach(()=> {
+      ctrl.isContentLoaded = true;
+      isolateScope.$digest();
+    });
+    
+    it('Should have a footer with class about-footer', function () {
+      expect(elm.find('div.about-footer').length).toBe(1);
+    });
+  });
+
+  describe('When edit mode is active', ()=> {
+    beforeEach(()=> {
+      ctrl.isContentLoaded = true;
+      ctrl.isEditModeEnabled = true;
+      isolateScope.$digest();
+    });
+
+    it('Should remove the card footer', function () {
+      expect(elm.find('div.about-footer').length).toBe(0);
+    });
+
+    it('Should have a textarea element userDescription', ()=> {
+      expect(elm.find('textarea[name="userDescription"]').length).toBe(1);
+    });
+
+    it('Should have an input element userFunction', ()=> {
+      expect(elm.find('input[name="userFunctie"]').length).toBe(1);
+    });
+
+    it('Should have an input element userUnit', ()=> {
+      expect(elm.find('input[name="userUnit"]').length).toBe(1);
+    });
+
+    it('Should have an input element userGender', ()=> {
+      expect(elm.find('input[name="userGender"]').length).toBe(1);
+    });
+
+    it('Should have an input element userStartDate', ()=> {
+      expect(elm.find('input[name="userStartDate"]').length).toBe(1);
+    });
+  });
+});
 //
 //   describe('when the about directive gets created', ()=> {
 //     it('should have one card header', ()=> {
