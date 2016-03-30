@@ -38,6 +38,15 @@ export class ProfileService implements IProfileService {
       .result;
   }
 
+  public getAllEmployees():IPromise<any>{
+    return this.traverson.hal()
+      .from(this.gateway.getEmployeesApi())
+      .jsonHal()
+      .follow('employees')
+      .getResource()
+      .result;
+  }
+
   public getAboutInfoByUsername(userName:string):IPromise<any> {
     return this.traverson.hal()
       .from(this.gateway.getSearchEmployeeApi())

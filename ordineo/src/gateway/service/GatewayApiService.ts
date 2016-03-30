@@ -28,7 +28,6 @@ export class GatewayApiService{
   }
 
 
-
   public getLinkedInApi():string{
     return this.protocol + 'social-ordineo.cfapps.io/api/linkedin';
   }
@@ -40,7 +39,7 @@ export class GatewayApiService{
   public getSearchEmployeeApi():string{
     return this.getEmployeesApi() + 'employees/search/';
   }
-
+  
   public getEmployeesApi():string{
     return this.buildApiUrl(this.EMPLOYEE_API);
   }
