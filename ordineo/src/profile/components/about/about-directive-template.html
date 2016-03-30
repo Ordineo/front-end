@@ -82,10 +82,7 @@
 
           <!-- Right column: Description -->
           <div flex="45" flex-gt-sm="70" class="about-description">
-            <p ng-if="about.employee.description">
-              <span ng-if="about.isCollapsed">{{about.shortDescription}}</span>
-              <span ng-if="!about.isCollapsed">{{about.employee.description}}</span>
-            </p>
+            <p class="translate-whitespace" ng-if="about.employee.description"><span ng-if="about.isCollapsed">{{about.shortDescription}}</span><span ng-if="!about.isCollapsed">{{about.employee.description}}</span></p>
           </div>
         </div>
 
