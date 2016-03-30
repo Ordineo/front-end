@@ -3,8 +3,8 @@ node_js:
 - 4.2.1
 sudo: false
 install:
-- npm cache clean
 - npm install -g npm
+- npm cache clean
 - npm install -g webpack
 - npm install -g typings
 - npm install
