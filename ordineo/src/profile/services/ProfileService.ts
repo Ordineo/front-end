@@ -7,6 +7,7 @@ import IQService = angular.IQService;
 import IDeferred = angular.IDeferred;
 export interface IProfileService {
   getAboutInfoByUsername(userName:string):IPromise<any>;
+  getAllEmployees():IPromise<any>;
   putEmployeeData(employee:Employee):IPromise<any>;
 }
 
@@ -35,6 +36,15 @@ export class ProfileService implements IProfileService {
         }
       })
       .put(employee)
+      .result;
+  }
+
+  public getAllEmployees():IPromise<any>{
+    return this.traverson.hal()
+      .from(this.gateway.getEmployeesApi())
+      .jsonHal()
+      .follow('employees','employees[$all]')
+      .getResource()
       .result;
   }
 
