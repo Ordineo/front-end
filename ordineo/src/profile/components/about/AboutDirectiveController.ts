@@ -60,11 +60,7 @@ export class AboutDirectiveController {
   }
 
   setProfilePicture(pictureLocation:string):void {
-    if (pictureLocation.match(/http/)) {
-      this.profilePicture = pictureLocation;
-    } else {
-      this.profilePicture = "https://gateway-ordineo.cfapps.io/image-ordineo/api/images/" + this.username;
-    }
+    this.profilePicture = pictureLocation;
   }
 
   public setDescription(description:string):void {
