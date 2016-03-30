@@ -62,7 +62,8 @@ export class AboutDirectiveController {
     this.isEditModeEnabled = false;
     this.hasError = false;
     this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt, data)=> {
-      this.getEmployeeDataAsync(data.username, this.profileService, this.rootScope);
+      this.username = data.username;
+      this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
     });
     this.rootScope.$on(LinkedInController.EVENT_SYNC_EMPLOYEE, ()=> {
       this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
