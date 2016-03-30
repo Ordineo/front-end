@@ -1,17 +1,43 @@
 import {ProfileService} from "../../profile/services/ProfileService";
-export class HeaderController{
+import {Employee} from "../../core/models/employee";
+import IRootScopeService = angular.IRootScopeService;
+export class HeaderController {
   public button:any;
+  public users:Array<any>;
 
-  static $inject = [ProfileService.NAME];
+  static EVENT_USER_SELECTED:string = "searchUserSelected";
+  static $inject = [ProfileService.NAME, '$rootScope'];
 
-  constructor(private profileService:ProfileService){
+  constructor(private profileService:ProfileService, private rootScope:IRootScopeService) {
     this.button = {title: 'search', icon: 'act:search'};
+    this.users = [];
   }
 
-  $onInit():void{
+  selectedItemChange(user:any):void{
+    if(user){
+      this.rootScope.$broadcast(HeaderController.EVENT_USER_SELECTED, {username: user.value});
+    }
+  }
+
+  querySearch(query:any):any{
+    return query ? this.users.filter(this.filter(query)) : this.users;
+  }
+
+  filter(query):any{
+    return (user:any)=>{
+      return user.display.indexOf(query) === 0;
+    }
+  }
+
+  $onInit():void {
     this.profileService.getAllEmployees()
-      .then((ok)=>{
-        console.log(ok);
+      .then((employees:Array<Employee>)=> {
+        for (var emp of employees) {
+          this.users.push({
+            value: emp.username,
+            display: emp.firstName + ' ' + emp.lastName
+          });
+        }
       });
   }
 }

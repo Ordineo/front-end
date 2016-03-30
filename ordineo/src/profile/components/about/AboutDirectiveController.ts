@@ -3,6 +3,7 @@ import {Employee} from "../../../core/models/employee";
 import {ButtonState} from "../../../core/labels/ButtonState";
 import {LinkedInService} from "../../../social/linkedin/LinkedInService";
 import {LinkedInController} from "../../../layout/linkedin/LinkedInController";
+import {HeaderController} from "../../../layout/header/HeaderController";
 import IRootScopeService = angular.IRootScopeService;
 
 export class AboutDirectiveController {
@@ -60,6 +61,9 @@ export class AboutDirectiveController {
     this.isContentLoaded = false;
     this.isEditModeEnabled = false;
     this.hasError = false;
+    this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt, data)=> {
+      this.getEmployeeDataAsync(data.username, this.profileService, this.rootScope);
+    });
     this.rootScope.$on(LinkedInController.EVENT_SYNC_EMPLOYEE, ()=> {
       this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
     });
