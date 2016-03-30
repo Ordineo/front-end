@@ -26,3 +26,7 @@ h1, h2, h3, h4, h5, h6 {
 section[ui-view] {
   background-color: $mainBackground;
 }
+
+.translate-whitespace{
+  white-space: pre-line;
+}

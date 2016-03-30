@@ -1,5 +1,5 @@
 <md-card>
-  <form>
+  <form name="aboutEditForm" novalidate>
     <div class="loading-container" layout="row" layout-align="center center" ng-if="!about.isContentLoaded">
       <md-progress-circular
         class="md-primary"
@@ -82,10 +82,7 @@
 
           <!-- Right column: Description -->
           <div flex="45" flex-gt-sm="70" class="about-description">
-            <p ng-if="about.employee.description">
-              <span ng-if="about.isCollapsed">{{about.shortDescription}}</span>
-              <span ng-if="!about.isCollapsed">{{about.employee.description}}</span>
-            </p>
+            <p class="translate-whitespace" ng-if="about.employee.description"><span ng-if="about.isCollapsed">{{about.shortDescription}}</span><span ng-if="!about.isCollapsed">{{about.employee.description}}</span></p>
           </div>
         </div>
 
@@ -137,7 +134,7 @@
               </div>
 
               <!-- Start date -->
-              <div class="about-start-date about-job-detail fade">
+              <div class="about-start-date about-job-detail fade" ng-if="!about.isCollapsed || about.isEditModeEnabled">
                 <div>
                   <md-datepicker ng-model="about.employee.startDateTypeDate" ng-change="about.changeStartDate()" md-placeholder="Start date"></md-datepicker>
                 </div>
@@ -157,10 +154,13 @@
             <div>
               <md-input-container class="md-block" flex-gt-xs>
                 <label>Description</label>
-                <textarea ng-model="about.employee.description"
-                          maxlength="2048"
-                          md-select-on-focus>
-                </textarea>
+              <textarea name="userDescription"
+                        required
+                        ng-model="about.employee.description"
+                        md-maxlength="2048"
+                        ng-maxlength="2048"
+                        md-select-on-focus>
+              </textarea>
               </md-input-container>
             </div>
           </div>
