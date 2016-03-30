@@ -4,7 +4,6 @@ node_js:
 sudo: false
 install:
 - npm install -g npm
-- npm cache clean
 - npm install -g webpack
 - npm install -g typings
 - npm install
