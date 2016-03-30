@@ -174,8 +174,7 @@
 
 
         <!-- Card footer -->
-
-        <div layout="row" layout-align="end center" class="about-footer">
+        <div layout="row" ng-if="!about.isEditModeEnabled" layout-align="end center" class="about-footer">
           <md-button ng-click="about.onExpandCollapseButtonClick()" class="md-raised md-primary">
             {{about.footerButtonLabel}}
           </md-button>

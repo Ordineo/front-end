@@ -130,11 +130,26 @@ describe('About directive: ', ()=> {
     });
   });
 
+  describe('When edit mode is NOT active', ()=> {
+    beforeEach(()=> {
+      ctrl.isContentLoaded = true;
+      isolateScope.$digest();
+    });
+    
+    it('Should have a footer with class about-footer', function () {
+      expect(elm.find('div.about-footer').length).toBe(1);
+    });
+  });
+
   describe('When edit mode is active', ()=> {
     beforeEach(()=> {
       ctrl.isContentLoaded = true;
       ctrl.isEditModeEnabled = true;
       isolateScope.$digest();
+    });
+
+    it('Should remove the card footer', function () {
+      expect(elm.find('div.about-footer').length).toBe(0);
     });
 
     it('Should have a textarea element userDescription', ()=> {

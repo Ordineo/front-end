@@ -1,7 +1,5 @@
 import {HeaderComponent} from "./header/HeaderComponent";
 import {ToolbarComponent} from "./toolbar/ToolbarComponent";
-import {ORDINEO_CORE} from "../core/core.module";
-import {LinkedInComponent} from "./linkedin/LinkedInComponent";
 import {LinkedInDirective} from "./linkedin/LinkedInDirective";
 
 export const ORDINEO_LAYOUT = "ordineo.layout";
