@@ -1,10 +1,9 @@
-import 'angular-mocks';
-import {ORDINEO_PROFILE} from '../../ProfileModule.ts';
+import {ORDINEO_PROFILE} from "../../ProfileModule.ts";
 import {AboutDirectiveController} from "./AboutDirectiveController";
-import {ProfileService} from "../../services/ProfileService";
-import {IProfileService} from "../../services/ProfileService";
-import IQService = ng.IQService;
+import {ProfileService, IProfileService} from "../../services/ProfileService";
 import {MockProfileService} from "../../../../test/mock/MockProfileService";
+import "angular-mocks";
+import IQService = ng.IQService;
 import IProvideService = angular.auto.IProvideService;
 import IControllerService = angular.IControllerService;
 import IRootScopeService = angular.IRootScopeService;

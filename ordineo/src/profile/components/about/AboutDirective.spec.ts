@@ -1,16 +1,16 @@
-import {ORDINEO_PROFILE} from '../../ProfileModule.ts';
+import {ORDINEO_PROFILE} from "../../ProfileModule.ts";
+import {AboutDirectiveController} from "./AboutDirectiveController";
+import {LinkedInService} from "../../../social/linkedin/LinkedInService";
+import {AboutDirective} from "./AboutDirective";
+import {MockAboutData} from "../../../../test/mock/MockAboutData";
+import "angular-mocks";
 import IRootScopeService = angular.IRootScopeService;
-import 'angular-mocks'
 import ICompileService = angular.ICompileService;
 import IHttpBackendService = angular.IHttpBackendService;
 import IScope = angular.IScope;
 import IAugmentedJQuery = angular.IAugmentedJQuery;
-import {AboutDirectiveController} from "./AboutDirectiveController";
 import IProvideService = angular.auto.IProvideService;
-import {LinkedInService} from "../../../social/linkedin/LinkedInService";
 import IFormController = angular.IFormController;
-import {AboutDirective} from "./AboutDirective";
-import {MockAboutData} from "../../../../test/mock/MockAboutData";
 
 describe('About directive: ', ()=> {
   beforeEach(
@@ -87,23 +87,23 @@ describe('About directive: ', ()=> {
         expect(form['userUnit'].$valid).toBe(false);
       });
     });
-    describe('form input Gender', function () {
-      var inputGender;
-
-      beforeEach(()=> {
-        inputGender = form['userGender'];
-      });
-
-      it('should have a form input named userGender', function () {
-        expect(inputGender).toBeDefined();
-      });
-
-      it('when gender value is empty the input field should be invalid', function () {
-        form['userGender'].$setViewValue('');
-        isolateScope.$digest();
-        expect(form['userGender'].$valid).toBe(false);
-      });
-    });
+    // describe('form input Gender', function () {
+    //   var inputGender;
+    //
+    //   beforeEach(()=> {
+    //     inputGender = form['userGender'];
+    //   });
+    //
+    //   it('should have a form input named userGender', function () {
+    //     expect(inputGender).toBeDefined();
+    //   });
+    //
+    //   it('when gender value is empty the input field should be invalid', function () {
+    //     form['userGender'].$setViewValue('');
+    //     isolateScope.$digest();
+    //     expect(form['userGender'].$valid).toBe(false);
+    //   });
+    // });
     describe('form textarea description', function () {
       var textareaDescription;
 
@@ -135,7 +135,7 @@ describe('About directive: ', ()=> {
       ctrl.isContentLoaded = true;
       isolateScope.$digest();
     });
-    
+
     it('Should have a footer with class about-footer', function () {
       expect(elm.find('div.about-footer').length).toBe(1);
     });
@@ -150,26 +150,6 @@ describe('About directive: ', ()=> {
 
     it('Should remove the card footer', function () {
       expect(elm.find('div.about-footer').length).toBe(0);
-    });
-
-    it('Should have a textarea element userDescription', ()=> {
-      expect(elm.find('textarea[name="userDescription"]').length).toBe(1);
-    });
-
-    it('Should have an input element userFunction', ()=> {
-      expect(elm.find('input[name="userFunctie"]').length).toBe(1);
-    });
-
-    it('Should have an input element userUnit', ()=> {
-      expect(elm.find('input[name="userUnit"]').length).toBe(1);
-    });
-
-    it('Should have an input element userGender', ()=> {
-      expect(elm.find('input[name="userGender"]').length).toBe(1);
-    });
-
-    it('Should have an input element userStartDate', ()=> {
-      expect(elm.find('input[name="userStartDate"]').length).toBe(1);
     });
   });
 });

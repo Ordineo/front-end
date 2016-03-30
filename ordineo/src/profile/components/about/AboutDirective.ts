@@ -57,7 +57,6 @@ export class AboutDirective implements IDirective {
   };
 
   constructor(private animate:IAnimateService) {
-  
   }
 
   static instance():any {

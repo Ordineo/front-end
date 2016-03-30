@@ -12,6 +12,7 @@ export interface Employee{
   profilePicture?:string,
   resignationDate?:string,
   startDate?:string,
+  startDateTypeDate?:Date,
   unit?:{
     name:string
   },
