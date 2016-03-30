@@ -1,10 +1,10 @@
 import IPromise = angular.IPromise;
 import {TraversonHalService} from "../../traverson/service/TraversonHalService";
+import {GatewayApiService} from "../../gateway/service/GatewayApiService";
+import {Employee} from "../../core/models/employee";
 import IHttpService = angular.IHttpService;
 import IQService = angular.IQService;
 import IDeferred = angular.IDeferred;
-import {GatewayApiService} from "../../gateway/service/GatewayApiService";
-import {Employee} from "../../core/models/employee";
 export interface IProfileService {
   getAboutInfoByUsername(userName:string):IPromise<any>;
   putEmployeeData(employee:Employee):IPromise<any>;

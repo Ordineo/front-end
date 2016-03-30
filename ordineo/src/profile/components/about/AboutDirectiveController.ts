@@ -1,10 +1,9 @@
-import {ProfileService} from "../../services/ProfileService";
-import {IProfileService} from "../../services/ProfileService";
+import {ProfileService, IProfileService} from "../../services/ProfileService";
 import {Employee} from "../../../core/models/employee";
 import {ButtonState} from "../../../core/labels/ButtonState";
-import IRootScopeService = angular.IRootScopeService;
 import {LinkedInService} from "../../../social/linkedin/LinkedInService";
 import {LinkedInController} from "../../../layout/linkedin/LinkedInController";
+import IRootScopeService = angular.IRootScopeService;
 
 export class AboutDirectiveController {
   public title:string;

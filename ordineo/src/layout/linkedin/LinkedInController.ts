@@ -1,9 +1,9 @@
 import {LinkedInService} from "../../social/linkedin/LinkedInService";
+import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 import IRootScopeService = angular.IRootScopeService;
 import IHttpService = angular.IHttpService;
 import IRequestConfig = angular.IRequestConfig;
 import ISCEService = angular.ISCEService;
-import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 
 export class LinkedInController {
   public linkedinIcon:any;

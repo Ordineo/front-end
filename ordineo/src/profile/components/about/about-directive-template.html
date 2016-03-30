@@ -170,8 +170,8 @@
 
         <!-- Card footer -->
 
-        <div layout="row" layout-align="end center" class="about-footer">
-          <md-button ng-click="about.onExpandCollapseButtonClick()" ng-if="!about.isEditModeEnabled" class="md-raised md-primary">
+        <div layout="row" layout-align="end center" class="about-footer" ng-if="!about.isEditModeEnabled">
+          <md-button ng-click="about.onExpandCollapseButtonClick()" class="md-raised md-primary">
             {{about.footerButtonLabel}}
           </md-button>
         </div>
