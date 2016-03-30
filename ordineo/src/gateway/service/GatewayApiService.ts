@@ -1,4 +1,3 @@
-import {ORDINEO_GATEWAY} from "../GatewayModule";
 import IWindowService = angular.IWindowService;
 
 export class GatewayApiService{
@@ -21,7 +20,7 @@ export class GatewayApiService{
   public SOCIAL_API:string = "/social-ordineo/api/";
 
   constructor(private $window:IWindowService){
-    this.protocol = $window.location.protocol + "//";
+    this.protocol =  "https://";
   }
 
   private buildApiUrl(servicePath:string):string{
@@ -31,11 +30,11 @@ export class GatewayApiService{
 
 
   public getLinkedInApi():string{
-    return 'https://social-ordineo.cfapps.io/api/linkedin';
+    return this.protocol + 'social-ordineo.cfapps.io/api/linkedin';
   }
 
   public getLinkedInAuthUrl():string{
-    return 'https://social-ordineo.cfapps.io/connect/linkedin';
+    return this.protocol + 'social-ordineo.cfapps.io/connect/linkedin';
   }
 
   public getSearchEmployeeApi():string{
