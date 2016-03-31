@@ -27,6 +27,7 @@ deploy:
     repo: Ordineo/front-end
     branch: master
 after_deploy:
+- codeceptjs run --steps --debug
 - cat ./reports/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 notifications:
   slack:
