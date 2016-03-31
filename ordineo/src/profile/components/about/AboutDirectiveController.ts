@@ -4,6 +4,7 @@ import {ButtonState} from "../../../core/labels/ButtonState";
 import {LinkedInService} from "../../../social/linkedin/LinkedInService";
 import {LinkedInController} from "../../../layout/linkedin/LinkedInController";
 import {HeaderController} from "../../../layout/header/HeaderController";
+import {GatewayApiService} from "../../../gateway/service/GatewayApiService";
 import IRootScopeService = angular.IRootScopeService;
 
 export class AboutDirectiveController {
@@ -70,8 +71,8 @@ export class AboutDirectiveController {
     });
   }
 
-  setProfilePicture(pictureLocation:string):void {
-    this.profilePicture = pictureLocation;
+  setProfilePicture(userName:string):void {
+    this.profilePicture = GatewayApiService.getImagesEmployeeApi() + userName;
   }
 
   public setDescription(description:string):void {
@@ -143,7 +144,7 @@ export class AboutDirectiveController {
     this.employee = _employee_;
     this.title = _employee_.firstName + ' ' + _employee_.lastName;
     this.setDescription(_employee_.description);
-    //this.setProfilePicture(_employee_.profilePicture);
+    this.setProfilePicture(_employee_.username);
     this.employee.startDateTypeDate = new Date(_employee_.startDate);
 
     this.isContentLoaded = true;
