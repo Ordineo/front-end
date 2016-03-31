@@ -11,11 +11,12 @@ import IScope = angular.IScope;
 import IAugmentedJQuery = angular.IAugmentedJQuery;
 import IProvideService = angular.auto.IProvideService;
 import IFormController = angular.IFormController;
-
+var matchers:any = require('jasmine_dom_matchers');
 describe('About directive: ', ()=> {
   beforeEach(
     angular.mock.module(ORDINEO_PROFILE,
     ($provide:IProvideService)=> {
+      jasmine.addMatchers(matchers);
       $provide.service(LinkedInService.SERVICE_NAME, LinkedInService);
     }));
 
@@ -41,6 +42,13 @@ describe('About directive: ', ()=> {
     isolateScope = elm.isolateScope();
     ctrl = isolateScope[controllerAs];
     isolateScope.$digest();
+  });
+
+  describe('When the directive gets created', ()=> {
+    it('it should show a loading bar', function () {
+      console.log(elm);
+      // expect(elm).toBeInDOM();
+    });
   });
 
   describe('Form validation', ()=> {

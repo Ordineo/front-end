@@ -1,0 +1,17 @@
+{
+  "tests": "./e2e/*_test.js",
+  "timeout": 10000,
+  "output": "./output",
+  "helpers": {
+    "WebDriverIO": {
+      "url": "https://frontend-ordineo.cfapps.io",
+      "driver": "hosted",
+      "browser": "firefox",
+      "rootElement": "body"
+    }
+  },
+  "include":{},
+  "bootstrap": false,
+  "mocha": {},
+  "name": "todoangular"
+}
