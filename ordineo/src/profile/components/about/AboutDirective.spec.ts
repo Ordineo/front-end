@@ -46,8 +46,6 @@ describe('About directive: ', ()=> {
 
   describe('When the directive gets created', ()=> {
     it('it should show a loading bar', function () {
-      console.log(elm);
-      // expect(elm).toBeInDOM();
     });
   });
 
