@@ -9,7 +9,7 @@ sudo: false
 install:
 - npm install -g npm
 - npm install -g protractor
-- webdriver-manager update --standalone --firefox
+- webdriver-manager update --standalone
 - webdriver-manager start 2>&1 &
 - npm install -g codeceptjs
 - npm install -g webpack
