@@ -9,11 +9,15 @@ sudo: false
 install:
 - npm install -g npm
 - npm install -g protractor
+- webdriver-manager update --standalone --firefox
+- webdriver-manager start 2>&1 &
 - npm install -g codeceptjs
 - npm install -g webpack
 - npm install -g typings
 - npm install
 - npm run build
+after_success:
+- codeceptjs run --steps --debug
 deploy:
   edge: true
   provider: cloudfoundry
