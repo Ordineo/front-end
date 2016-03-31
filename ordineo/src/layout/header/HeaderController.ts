@@ -25,7 +25,8 @@ export class HeaderController {
 
   filter(query):any{
     return (user:any)=>{
-      return user.display.indexOf(query) === 0;
+      var lowerCaseUserDisplay:string = user.display.toLocaleLowerCase().trim();
+      return lowerCaseUserDisplay.indexOf(query) !== -1;
     }
   }
 
