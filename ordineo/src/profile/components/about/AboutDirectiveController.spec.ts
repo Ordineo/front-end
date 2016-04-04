@@ -11,6 +11,7 @@ import IScope = angular.IScope;
 import IDeferred = angular.IDeferred;
 import {LinkedInService} from "../../../social/linkedin/LinkedInService";
 import {GatewayApiService} from "../../../gateway/service/GatewayApiService";
+import {ButtonState} from "../../../core/labels/ButtonState";
 
 describe('About directive controller', ()=> {
   var $controller:IControllerService, $q:IQService, $rootScope:IRootScopeService;
@@ -18,6 +19,7 @@ describe('About directive controller', ()=> {
   var ctrl:AboutDirectiveController;
   var scope:IScope, bindings:any;
   var username:string;
+  var description:string;
 
   beforeEach(angular.mock.module(ORDINEO_PROFILE,
     ($provide:IProvideService)=> {
@@ -33,12 +35,92 @@ describe('About directive controller', ()=> {
     scope = $rootScope.$new();
   }));
 
+  describe("when onEdit get called", ()=> {
+    it('should negate isEditModeEnabled', ()=> {
+      givenAboutDirectiveController();
+      ctrl.isEditModeEnabled = true;
+      expect(ctrl.isEditModeEnabled).toBeTruthy();
+      spyOn(ctrl, 'setInfoCache');
+      ctrl.onEdit();
+      expect(ctrl.isEditModeEnabled).toBeFalsy();
+    });
+  });
+
+  describe("when onCancel gets called", ()=> {
+    it('should set edit mode off and restore', ()=> {
+      givenAboutDirectiveController();
+      spyOn(ctrl, 'restore');
+      ctrl.onCancel();
+      expect(ctrl.isEditModeEnabled).toBeFalsy();
+      expect(ctrl.restore).toHaveBeenCalled();
+    });
+  });
+
+  describe("when restore gets called", ()=> {
+    it('should get cached employee data', ()=> {
+      givenAboutDirectiveController();
+      ctrl.employee = {};
+      ctrl.aboutInfoCache = {function: 'designer', unit: 'jworks', description: getMockDescription()};
+      ctrl.restore();
+      expect(ctrl.employee).toEqual({function: 'designer', unit: 'jworks', description: getMockDescription()});
+    });
+  });
+
+  describe("when onSubmit gets called", ()=> {
+    beforeEach(()=> {
+      givenAboutDirectiveController();
+      ctrl.employee = {};
+      spyOn(ctrl, 'setDescription');
+      spyOn(profileService, 'putEmployeeData').and.returnValue($q.resolve({}));
+      ctrl.onSubmit();
+    });
+
+    it("should call setDescription", ()=> {
+      expect(ctrl.setDescription).toHaveBeenCalled();
+    });
+  });
+
+  describe('when onExpandCollapseButtonClick gets called', ()=> {
+    it('should negate isCollapsed', ()=> {
+      givenAboutDirectiveController();
+      expect(ctrl.isCollapsed).toBeTruthy();
+      whenOnExpandCollapseClick();
+      expect(ctrl.isCollapsed).toBeFalsy();
+    });
+    it('should change button state', ()=> {
+      givenAboutDirectiveController();
+      expect(ctrl.footerButtonLabel).toBe(ButtonState.MORE);
+      whenOnExpandCollapseClick();
+      expect(ctrl.footerButtonLabel).toBe(ButtonState.COLLAPSE);
+    });
+  });
+
   it('should set profile picture based on username', ()=> {
     givenAboutDirectiveController();
     givenUsername('ryan');
     whenSetProfilePictureIsCalled();
     expect(ctrl.profilePicture).toBe(GatewayApiService.getImagesEmployeeApi() + username);
   });
+
+  it('should set short description to description if description < 366 chars', ()=> {
+    givenDescription(getMockDescriptionLessThen366Chars());
+    whenSetDescriptionGetsCalled();
+    expect(ctrl.shortDescription).toBe(getMockDescriptionLessThen366Chars());
+  });
+
+  it('should set short description to the first 362 characters of description + 3 dots if description > 366 chars', ()=> {
+    givenDescription(getMockDescription());
+    expect(description.length).toBeGreaterThan(366);
+    whenSetDescriptionGetsCalled();
+    expect(ctrl.shortDescription).toBe(getMockDescription().substr(0,362) + '...');
+  });
+
+  function whenSetDescriptionGetsCalled():void{
+    ctrl.setDescription(description);
+  }
+  function givenDescription(_description_:string){
+    description = _description_;
+  }
 
   function whenSetProfilePictureIsCalled(){
     ctrl.setProfilePicture(username);
@@ -49,6 +131,25 @@ describe('About directive controller', ()=> {
   }
   function givenAboutDirectiveController(){
     ctrl = $controller(AboutDirectiveController, {$scope: scope});
+  }
+
+  function whenOnExpandCollapseClick(){
+    ctrl.onExpandCollapseButtonClick();
+  }
+  function getMockDescriptionLessThen366Chars(){
+    return getMockDescription().substr(0, 255);
+  }
+
+  function getMockDescription(){
+    return `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    In rhoncus libero nec tortor cursus pulvinar. 
+    Aenean ultrices dui quis justo venenatis sagittis. 
+    Proin lectus mauris, tristique sed dictum in, ultrices eget ex. 
+    Phasellus sodales lorem metus, vel tempus mauris lobortis in. 
+    Morbi laoreet auctor nunc, at gravida augue venenatis et. 
+    Quisque non diam sagittis, rhoncus metus non, lobortis nulla. 
+    Phasellus lobortis metus eu ultrices imperdiet. Quisque dapibus sapien ac vulputate hendrerit. 
+    Maecenas ipsum ligula, interdum sed hendrerit et, posuere non tellus.`
   }
 });
 

@@ -63,11 +63,10 @@ export class AboutDirectiveController {
 
   setDescription(description:string):void {
     if (description !== null) {
-      this.employee.description = description;
       if (description.length < 366) {
         this.shortDescription = description;
       } else {
-        this.shortDescription = description.substr(0, 362) + ' ...';
+        this.shortDescription = description.substr(0, 362) + '...';
       }
     }
   }
@@ -106,22 +105,22 @@ export class AboutDirectiveController {
     this.isContentLoaded = false;
 
     this.profileService.putEmployeeData(this.employee)
-      .then((ok)=> {
-        this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
-      }, (err)=> {
-        console.log(err)
-      });
+      .then(this.onPutEmployeeDataResolved);
 
     this.isEditModeEnabled = false;
   }
 
-  private onUserSelectedListener(event:IAngularEvent, data:any):void{
+  private onPutEmployeeDataResolved() {
+    this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
+  }
+
+  private onUserSelectedListener(event:IAngularEvent, data:any):void {
     /* istanbul ignore next */
     this.username = data.username;
     this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
   }
 
-  private onSyncEmployeeListener():void{
+  private onSyncEmployeeListener():void {
     this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
   }
 
