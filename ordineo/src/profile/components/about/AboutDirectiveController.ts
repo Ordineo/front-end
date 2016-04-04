@@ -111,7 +111,7 @@ export class AboutDirectiveController {
 
   restore():void {
     this.employee.function = this.aboutInfoCache.function;
-    this.employee.unit.name = this.aboutInfoCache.unit.name;
+    this.employee.unit = this.aboutInfoCache.unit;
     this.employee.description = this.aboutInfoCache.description;
   }
 
@@ -134,9 +134,7 @@ export class AboutDirectiveController {
     this.aboutInfoCache = {
       function: this.employee.function,
       description: this.employee.description,
-      unit: {
-        name: this.employee.unit.name
-      }
+      unit: this.employee.unit
     };
   }
 
