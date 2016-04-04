@@ -12,7 +12,7 @@ export interface IProfileService {
 }
 
 export class ProfileService implements IProfileService {
-  static NAME:string = "ordineo.profile.service";
+  static NAME:string = "ordineoProfileService";
   static $inject:Array<string> = [
     TraversonHalService.SERVICE_NAME,
     GatewayApiService.SERVICE_NAME,
