@@ -9,17 +9,21 @@ import IControllerService = angular.IControllerService;
 import IRootScopeService = angular.IRootScopeService;
 import IScope = angular.IScope;
 import IDeferred = angular.IDeferred;
+import {LinkedInService} from "../../../social/linkedin/LinkedInService";
+import {GatewayApiService} from "../../../gateway/service/GatewayApiService";
 
 describe('About directive controller', ()=> {
   var $controller:IControllerService, $q:IQService, $rootScope:IRootScopeService;
-  var serviceMock:IProfileService;
+  var profileService:IProfileService;
   var ctrl:AboutDirectiveController;
   var scope:IScope, bindings:any;
+  var username:string;
 
   beforeEach(angular.mock.module(ORDINEO_PROFILE,
     ($provide:IProvideService)=> {
-      serviceMock = new MockProfileService();
-      $provide.service(ProfileService.NAME, ()=>serviceMock);
+      profileService = new MockProfileService();
+      $provide.service(ProfileService.NAME, ()=>profileService);
+      $provide.service(LinkedInService.SERVICE_NAME, ()=><LinkedInService>{});
     }));
 
   beforeEach(inject((_$controller_:IControllerService, _$q_:IQService, _$rootScope_:IRootScopeService)=> {
@@ -29,11 +33,23 @@ describe('About directive controller', ()=> {
     scope = $rootScope.$new();
   }));
 
-  describe("Validation", ()=> {
-    beforeEach(()=> {
-      ctrl = $controller(AboutDirectiveController);
-    });
+  it('should set profile picture based on username', ()=> {
+    givenAboutDirectiveController();
+    givenUsername('ryan');
+    whenSetProfilePictureIsCalled();
+    expect(ctrl.profilePicture).toBe(GatewayApiService.getImagesEmployeeApi() + username);
   });
+
+  function whenSetProfilePictureIsCalled(){
+    ctrl.setProfilePicture(username);
+  }
+
+  function givenUsername(userName:string){
+    username = userName;
+  }
+  function givenAboutDirectiveController(){
+    ctrl = $controller(AboutDirectiveController, {$scope: scope});
+  }
 });
 
 //

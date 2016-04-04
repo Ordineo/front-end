@@ -6,6 +6,7 @@ import {LinkedInController} from "../../../layout/linkedin/LinkedInController";
 import {HeaderController} from "../../../layout/header/HeaderController";
 import {GatewayApiService} from "../../../gateway/service/GatewayApiService";
 import IRootScopeService = angular.IRootScopeService;
+import IAngularEvent = angular.IAngularEvent;
 
 export class AboutDirectiveController {
   public title:string;
@@ -56,26 +57,11 @@ export class AboutDirectiveController {
     ];
   }
 
-  private init():void {
-    this.footerButtonLabel = ButtonState.MORE;
-    this.setIsCollapsed(true);
-    this.isContentLoaded = false;
-    this.isEditModeEnabled = false;
-    this.hasError = false;
-    this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt, data)=> {
-      this.username = data.username;
-      this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
-    });
-    this.rootScope.$on(LinkedInController.EVENT_SYNC_EMPLOYEE, ()=> {
-      this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
-    });
-  }
-
   setProfilePicture(userName:string):void {
     this.profilePicture = GatewayApiService.getImagesEmployeeApi() + userName;
   }
 
-  public setDescription(description:string):void {
+  setDescription(description:string):void {
     if (description !== null) {
       this.employee.description = description;
       if (description.length < 366) {
@@ -129,6 +115,25 @@ export class AboutDirectiveController {
     this.isEditModeEnabled = false;
   }
 
+  private onUserSelectedListener(event:IAngularEvent, data:any):void{
+    /* istanbul ignore next */
+    this.username = data.username;
+    this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
+  }
+
+  private onSyncEmployeeListener():void{
+    this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
+  }
+
+  private init():void {
+    this.footerButtonLabel = ButtonState.MORE;
+    this.setIsCollapsed(true);
+    this.isContentLoaded = false;
+    this.isEditModeEnabled = false;
+    this.hasError = false;
+    this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, this.onUserSelectedListener);
+    this.rootScope.$on(LinkedInController.EVENT_SYNC_EMPLOYEE, this.onSyncEmployeeListener);
+  }
 
   private setInfoCache():void {
     this.aboutInfoCache = {
