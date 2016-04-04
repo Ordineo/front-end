@@ -7,9 +7,12 @@ import IServiceProvider = angular.IServiceProvider;
 import IProvideService = angular.auto.IProvideService;
 import IRootScopeService = angular.IRootScopeService;
 import IQService = angular.IQService;
+import IScope = angular.IScope;
 describe("Header controller", ()=> {
   var $componentController;
-  var scope;
+  var scope:IScope;
+  var rootScope:IRootScopeService;
+  var user:string;
   var ctrl:HeaderController;
 
   var profileService:IProfileService;
@@ -19,17 +22,34 @@ describe("Header controller", ()=> {
   }));
 
   beforeEach(inject((_$rootScope_:IRootScopeService,_$componentController_:any)=> {
+    rootScope = _$rootScope_;
     scope = _$rootScope_.$new();
     $componentController = _$componentController_;
     // spyOn(profileService,)
     ctrl = $componentController(HeaderComponent.NAME, {$scope: scope});
   }));
 
-  it("should be defined", ()=> {
-    expect(ctrl).toBeDefined();
+  it('should not broadcast event when user null', ()=> {
+    givenUser(null);
+    givenSpyOnBroadcast();
+    whenSelectedItemIsCalled();
+    expect(rootScope.$broadcast).not.toHaveBeenCalled();
   });
 
-  it("oninit should set users", function () {
-    expect(ctrl.users).toBeDefined();
+  it('should broadcast event when user is not null', ()=> {
+    givenUser("ryan");
+    givenSpyOnBroadcast();
+    whenSelectedItemIsCalled();
+    expect(rootScope.$broadcast).toHaveBeenCalled();
   });
+
+  function givenUser(_user_:string):void{
+    user = _user_;
+  }
+  function givenSpyOnBroadcast():void{
+    spyOn(rootScope, '$broadcast');
+  }
+  function whenSelectedItemIsCalled():void{
+    ctrl.selectedItemChange(user);
+  }
 });
