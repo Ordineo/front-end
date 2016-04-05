@@ -1,4 +1,4 @@
-import {HeaderController} from "./HeaderController";
+import {HeaderController, User} from "./HeaderController";
 import {ProfileService, IProfileService} from "../../profile/services/ProfileService";
 import {ORDINEO_LAYOUT} from "../LayoutModule";
 import {HeaderComponent} from "./HeaderComponent";
@@ -19,7 +19,7 @@ describe("Header controller", ()=> {
   var defer:IDeferred<any>;
   var promise:IPromise<any>;
   var rootScope:IRootScopeService;
-  var user:string;
+  var user:User;
   var ctrl:HeaderController;
 
   var profileService:IProfileService;
@@ -59,7 +59,8 @@ describe("Header controller", ()=> {
   });
 
   it('should broadcast event when user is not null', ()=> {
-    givenUser("ryan");
+    givenUser({display:'ryan',value:'Ryde'});
+
     givenSpyOnBroadcast();
     whenSelectedItemChangeIsCalled();
     expect(rootScope.$broadcast).toHaveBeenCalled();
@@ -80,7 +81,7 @@ describe("Header controller", ()=> {
     spyOn(profileService, 'getAllEmployees').and.returnValue(promise);
   }
 
-  function givenUser(_user_:string):void {
+  function givenUser(_user_:User):void {
     user = _user_;
   }
 

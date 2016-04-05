@@ -12,9 +12,9 @@ export class HeaderController {
     this.button = {title: 'search', icon: 'act:search'};
   }
 
-  selectedItemChange(user:any):void{
-    if(user){
-      this.rootScope.$broadcast(HeaderController.EVENT_USER_SELECTED, {username: user.value});
+  selectedItemChange(_user_:User):void{
+    if(_user_){
+      this.rootScope.$broadcast(HeaderController.EVENT_USER_SELECTED, {username: _user_.value});
     }
   }
 
@@ -48,7 +48,7 @@ export class HeaderController {
   }
 }
 
-interface User{
+export interface User{
   value:string;
   display:string;
 }
