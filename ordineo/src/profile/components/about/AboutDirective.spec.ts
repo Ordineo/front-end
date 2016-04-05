@@ -11,7 +11,6 @@ import IScope = angular.IScope;
 import IAugmentedJQuery = angular.IAugmentedJQuery;
 import IProvideService = angular.auto.IProvideService;
 import IFormController = angular.IFormController;
-
 describe('About directive: ', ()=> {
   beforeEach(
     angular.mock.module(ORDINEO_PROFILE,
@@ -41,6 +40,11 @@ describe('About directive: ', ()=> {
     isolateScope = elm.isolateScope();
     ctrl = isolateScope[controllerAs];
     isolateScope.$digest();
+  });
+
+  describe('When the directive gets created', ()=> {
+    it('it should show a loading bar', function () {
+    });
   });
 
   describe('Form validation', ()=> {
