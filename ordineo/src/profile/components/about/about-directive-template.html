@@ -95,10 +95,8 @@
           <!-- Left column: Picture -->
           <div class="about-img" layout="column" layout-align="start top" layout-align-xs="center center">
             <img ng-src="{{about.profilePicture}}" alt="Profile picture" class="sample">
-            <form method='POST' action='https://image-ordina.cfapps.io/api/images/{{about.username}}' enctype='multipart/form-data'>
-              <input id="uploadPictureDialogBox" type="file" name="uploadPictureDialogBox" />
-              <input id="submit" type="submit" />
-            </form>
+            <input type="file" file-model="about.myFile" />
+            <input id="upload" type="button" value="Upload" ng-click="about.changePicture()" />
           </div>
 
           <!-- Center column: Overview -->

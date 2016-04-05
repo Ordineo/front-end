@@ -28,6 +28,8 @@ export class AboutDirectiveController {
   //used for animations
   public height:any;
 
+  public myFile:any;
+
   static $inject:Array<string> = [
     ProfileService.NAME,
     '$rootScope',
@@ -36,7 +38,7 @@ export class AboutDirectiveController {
 
   static EVENT_ON_EMPLOYEEDATA_SET:string = "event_on_employee_data_set";
 
-  constructor(public profileService:IProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {
+  constructor(public profileService:ProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {
     this.init();
 
     if (window.sessionStorage.getItem(LinkedInController.SESSION_ITEM)) {
@@ -169,10 +171,16 @@ export class AboutDirectiveController {
       });
   }
 
-  private changeStartDate() {
+  changeStartDate() {
     var date = new Date();
     date.setDate(this.employee.startDateTypeDate.getDate());
     this.employee.startDate = JSON.stringify(date).substring(1, JSON.stringify(date).indexOf('T'));
     //console.log(this.employee.startDate);
+  }
+
+  changePicture():void {
+    var file = this.myFile;
+    var uploadUrl = GatewayApiService.getImagesEmployeeApi + this.username;
+    this.profileService.setProfilePicture(file, uploadUrl);
   }
 }

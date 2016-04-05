@@ -20,6 +20,21 @@ var deps:Array<string> = [
 angular.module(ORDINEO_CORE, deps)
   .config(configureStates)
   .component(CardHeaderComponent.NAME, new CardHeaderComponent())
+  .directive('fileModel', ['$parse', function ($parse) {
+    return {
+      restrict: 'A',
+      link: function(scope, element, attrs) {
+        var model = $parse(attrs.fileModel);
+        var modelSetter = model.assign;
+
+        element.bind('change', function(){
+          scope.$apply(function(){
+            modelSetter(scope, element[0].files[0]);
+          });
+        });
+      }
+    };
+  }])
   .animation(".fade", fadeInOnNgShow)
   .animation(".simple-fade", simpleFade)
   .animation(".edit-icons-fade", editIcons)
