@@ -8,6 +8,7 @@ import {simpleFade} from "./animations/animations";
 import {editIcons} from "./animations/animations";
 import {transitionHeight} from "./animations/animations";
 import {flowHeight} from "./animations/animations";
+import {FileUploadDirective} from "./components/FileUploadDirective";
 require('../gsap/TweenMax.js');
 
 export const ORDINEO_CORE = 'ordineo.core';
@@ -20,21 +21,7 @@ var deps:Array<string> = [
 angular.module(ORDINEO_CORE, deps)
   .config(configureStates)
   .component(CardHeaderComponent.NAME, new CardHeaderComponent())
-  .directive('fileModel', ['$parse', function ($parse) {
-    return {
-      restrict: 'A',
-      link: function(scope, element, attrs) {
-        var model = $parse(attrs.fileModel);
-        var modelSetter = model.assign;
-
-        element.bind('change', function(){
-          scope.$apply(function(){
-            modelSetter(scope, element[0].files[0]);
-          });
-        });
-      }
-    };
-  }])
+  .directive(FileUploadDirective.NAME, FileUploadDirective.instance())
   .animation(".fade", fadeInOnNgShow)
   .animation(".simple-fade", simpleFade)
   .animation(".edit-icons-fade", editIcons)

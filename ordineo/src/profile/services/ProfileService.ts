@@ -62,12 +62,13 @@ export class ProfileService implements IProfileService {
     var fd = new FormData();
     fd.append('file', file);
 
+    console.log(uploadUrl);
     this.$http.post(uploadUrl, fd, {
       transformRequest: angular.identity,
-      headers: {'Content-Type': undefined}
-    }).success(function(data) {
+      headers: {'Content-Type': 'multipart/form-data; boundary=gc0p4Jq0M2Yt08jU534c0p'}
+    }).then(function (data) {
       console.log(data);
-    }).error(function(data) {
+    }, function (data) {
       console.log(data);
     });
   }

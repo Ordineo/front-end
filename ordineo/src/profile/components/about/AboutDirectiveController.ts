@@ -7,6 +7,7 @@ import {HeaderController} from "../../../layout/header/HeaderController";
 import {GatewayApiService} from "../../../gateway/service/GatewayApiService";
 import IRootScopeService = angular.IRootScopeService;
 import IAngularEvent = angular.IAngularEvent;
+import ISCEService = angular.ISCEService;
 
 export class AboutDirectiveController {
   public title:string;
@@ -29,8 +30,10 @@ export class AboutDirectiveController {
   public height:any;
 
   public myFile:any;
+  public imgUrl:string;
 
   static $inject:Array<string> = [
+    '$sce',
     ProfileService.NAME,
     '$rootScope',
     LinkedInService.SERVICE_NAME
@@ -38,7 +41,7 @@ export class AboutDirectiveController {
 
   static EVENT_ON_EMPLOYEEDATA_SET:string = "event_on_employee_data_set";
 
-  constructor(public profileService:ProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {
+  constructor(private $sce:ISCEService, public profileService:ProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {
     this.init();
 
     if (window.sessionStorage.getItem(LinkedInController.SESSION_ITEM)) {
@@ -145,6 +148,7 @@ export class AboutDirectiveController {
     this.setDescription(_employee_.description);
     this.setProfilePicture(_employee_.username);
     this.employee.startDateTypeDate = new Date(_employee_.startDate);
+    this.imgUrl = this.$sce.trustAsResourceUrl('https://image-ordineo.cfapps.io/api/images/' + _employee_.username);
 
     this.isContentLoaded = true;
   }
@@ -180,7 +184,7 @@ export class AboutDirectiveController {
 
   changePicture():void {
     var file = this.myFile;
-    var uploadUrl = GatewayApiService.getImagesEmployeeApi + this.username;
+    var uploadUrl = 'https://gateway-ordineo.cfapps.io/api/images/' + this.username;
     this.profileService.setProfilePicture(file, uploadUrl);
   }
 }

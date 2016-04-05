@@ -91,12 +91,19 @@
         <!-- Edit info -->
 
         <div class="about-content edit-info" layout="row" layout-xs="column" ng-if="about.isEditModeEnabled">
-
           <!-- Left column: Picture -->
           <div class="about-img" layout="column" layout-align="start top" layout-align-xs="center center">
             <img ng-src="{{about.profilePicture}}" alt="Profile picture" class="sample">
-            <input type="file" file-model="about.myFile" />
-            <input id="upload" type="button" value="Upload" ng-click="about.changePicture()" />
+            <form action=""></form>
+            <form action=""></form>
+
+            <form action=""></form>
+            <form action=""></form>
+
+            <form method="post" enctype="multipart/form-data" action="{{about.imgUrl}}">
+              <input type="file" name="profilePicture" file-model="about.myFile" />
+              <input id="submit" type="submit" value="Upload" />
+            </form>
           </div>
 
           <!-- Center column: Overview -->
