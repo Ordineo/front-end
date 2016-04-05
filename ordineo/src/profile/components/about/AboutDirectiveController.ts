@@ -110,13 +110,11 @@ export class AboutDirectiveController {
     this.isContentLoaded = false;
 
     this.profileService.putEmployeeData(this.employee)
-      .then(this.onPutEmployeeDataResolved);
+      .then((data)=>{
+        this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
+      });
 
     this.isEditModeEnabled = false;
-  }
-
-  private onPutEmployeeDataResolved() {
-    this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
   }
 
   private init():void {
@@ -162,6 +160,7 @@ export class AboutDirectiveController {
   }
 
   private getEmployeeDataAsync(_userName_:string, profileService:IProfileService, rootScope:IRootScopeService):void {
+    console.log(_userName_);
     this.isContentLoaded = false;
     profileService
       .getAboutInfoByUsername(_userName_)
