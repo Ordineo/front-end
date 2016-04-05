@@ -13,7 +13,6 @@
       <div flex layout="column">
 
 
-
         <!-- Card header -->
 
         <card-header
@@ -23,7 +22,6 @@
           on-cancel-click="about.onCancel()"
           on-save-click="about.onSubmit()">
         </card-header>
-
 
 
         <!-- Show info -->
@@ -82,11 +80,10 @@
 
           <!-- Right column: Description -->
           <div flex="45" flex-gt-sm="70" class="about-description">
-            <p class="translate-whitespace" ng-if="about.employee.description"><span ng-if="about.isCollapsed">{{about.shortDescription}}</span><span ng-if="!about.isCollapsed">{{about.employee.description}}</span></p>
+            <p class="translate-whitespace" ng-if="about.employee.description"><span ng-if="about.isCollapsed">{{about.shortDescription}}</span><span
+              ng-if="!about.isCollapsed">{{about.employee.description}}</span></p>
           </div>
         </div>
-
-
 
         <!-- Edit info -->
 
@@ -94,16 +91,8 @@
           <!-- Left column: Picture -->
           <div class="about-img" layout="column" layout-align="start top" layout-align-xs="center center">
             <img ng-src="{{about.profilePicture}}" alt="Profile picture" class="sample">
-            <form action=""></form>
-            <form action=""></form>
-
-            <form action=""></form>
-            <form action=""></form>
-
-            <form method="post" enctype="multipart/form-data" action="{{about.imgUrl}}">
-              <input type="file" name="profilePicture" file-model="about.myFile" />
-              <input id="submit" type="submit" value="Upload" />
-            </form>
+            <input type="file" name="profilePicture" file-model="about.myFile"/>
+            <input id="submit" type="submit" ng-click="about.changePicture()" value="Upload"/>
           </div>
 
           <!-- Center column: Overview -->
@@ -145,7 +134,8 @@
               <!-- Start date -->
               <div class="about-start-date about-job-detail fade" ng-if="!about.isCollapsed || about.isEditModeEnabled">
                 <div>
-                  <md-datepicker ng-model="about.employee.startDateTypeDate" ng-change="about.changeStartDate()" md-placeholder="Start date"></md-datepicker>
+                  <md-datepicker ng-model="about.employee.startDateTypeDate" ng-change="about.changeStartDate()"
+                                 md-placeholder="Start date"></md-datepicker>
                 </div>
               </div>
 
@@ -174,7 +164,6 @@
             </div>
           </div>
         </div>
-
 
 
         <!-- Card footer -->

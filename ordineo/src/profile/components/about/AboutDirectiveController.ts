@@ -148,7 +148,8 @@ export class AboutDirectiveController {
     this.setDescription(_employee_.description);
     this.setProfilePicture(_employee_.username);
     this.employee.startDateTypeDate = new Date(_employee_.startDate);
-    this.imgUrl = this.$sce.trustAsResourceUrl('https://image-ordineo.cfapps.io/api/images/' + _employee_.username);
+    this.$sce.trustAsResourceUrl('https://gateway-ordineo.cfapps.io/image-ordineo/api/images/' + _employee_.username);
+    this.imgUrl = 'https://gateway-ordineo.cfapps.io/image-ordineo/api/images/' + _employee_.username;
 
     this.isContentLoaded = true;
   }
@@ -184,7 +185,6 @@ export class AboutDirectiveController {
 
   changePicture():void {
     var file = this.myFile;
-    var uploadUrl = 'https://gateway-ordineo.cfapps.io/api/images/' + this.username;
-    this.profileService.setProfilePicture(file, uploadUrl);
+    this.profileService.setProfilePicture(file, this.imgUrl);
   }
 }

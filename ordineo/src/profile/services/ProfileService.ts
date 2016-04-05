@@ -60,12 +60,17 @@ export class ProfileService implements IProfileService {
 
   public setProfilePicture(file:any, uploadUrl:string):void {
     var fd = new FormData();
-    fd.append('file', file);
-
-    console.log(uploadUrl);
-    this.$http.post(uploadUrl, fd, {
-      transformRequest: angular.identity,
-      headers: {'Content-Type': 'multipart/form-data; boundary=gc0p4Jq0M2Yt08jU534c0p'}
+    fd.append('profilePicture', file);
+    console.log(file);
+    this.$http({
+      method: 'POST',
+      url: uploadUrl,
+      data: {
+        'profilePicture': file
+      },
+      headers: {
+        'Content-type':'multipart/form-data'
+      }
     }).then(function (data) {
       console.log(data);
     }, function (data) {
