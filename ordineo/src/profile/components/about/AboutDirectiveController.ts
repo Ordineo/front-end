@@ -4,7 +4,9 @@ import {ButtonState} from "../../../core/labels/ButtonState";
 import {LinkedInService} from "../../../social/linkedin/LinkedInService";
 import {LinkedInController} from "../../../layout/linkedin/LinkedInController";
 import {HeaderController} from "../../../layout/header/HeaderController";
+import {GatewayApiService} from "../../../gateway/service/GatewayApiService";
 import IRootScopeService = angular.IRootScopeService;
+import IAngularEvent = angular.IAngularEvent;
 
 export class AboutDirectiveController {
   public title:string;
@@ -55,32 +57,16 @@ export class AboutDirectiveController {
     ];
   }
 
-  private init():void {
-    this.footerButtonLabel = ButtonState.MORE;
-    this.setIsCollapsed(true);
-    this.isContentLoaded = false;
-    this.isEditModeEnabled = false;
-    this.hasError = false;
-    this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt, data)=> {
-      this.username = data.username;
-      this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
-    });
-    this.rootScope.$on(LinkedInController.EVENT_SYNC_EMPLOYEE, ()=> {
-      this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
-    });
+  setProfilePicture(userName:string):void {
+    this.profilePicture = GatewayApiService.getImagesEmployeeApi() + userName;
   }
 
-  setProfilePicture(pictureLocation:string):void {
-    this.profilePicture = pictureLocation;
-  }
-
-  public setDescription(description:string):void {
+  setDescription(description:string):void {
     if (description !== null) {
-      this.employee.description = description;
       if (description.length < 366) {
         this.shortDescription = description;
       } else {
-        this.shortDescription = description.substr(0, 362) + ' ...';
+        this.shortDescription = description.substr(0, 362) + '...';
       }
     }
   }
@@ -110,7 +96,7 @@ export class AboutDirectiveController {
 
   restore():void {
     this.employee.function = this.aboutInfoCache.function;
-    this.employee.unit.name = this.aboutInfoCache.unit.name;
+    this.employee.unit = this.aboutInfoCache.unit;
     this.employee.description = this.aboutInfoCache.description;
   }
 
@@ -119,23 +105,35 @@ export class AboutDirectiveController {
     this.isContentLoaded = false;
 
     this.profileService.putEmployeeData(this.employee)
-      .then((ok)=> {
-        this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
-      }, (err)=> {
-        console.log(err)
-      });
+      .then(this.onPutEmployeeDataResolved);
 
     this.isEditModeEnabled = false;
   }
 
+  private onPutEmployeeDataResolved() {
+    this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
+  }
+
+  private init():void {
+    this.footerButtonLabel = ButtonState.MORE;
+    this.setIsCollapsed(true);
+    this.isContentLoaded = false;
+    this.isEditModeEnabled = false;
+    this.hasError = false;
+    this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=>{
+      this.username = data.username;
+      this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
+    });
+    this.rootScope.$on(LinkedInController.EVENT_SYNC_EMPLOYEE, ()=>{
+      this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
+    });
+  }
 
   private setInfoCache():void {
     this.aboutInfoCache = {
       function: this.employee.function,
       description: this.employee.description,
-      unit: {
-        name: this.employee.unit.name
-      }
+      unit: this.employee.unit
     };
   }
 
@@ -143,7 +141,7 @@ export class AboutDirectiveController {
     this.employee = _employee_;
     this.title = _employee_.firstName + ' ' + _employee_.lastName;
     this.setDescription(_employee_.description);
-    //this.setProfilePicture(_employee_.profilePicture);
+    this.setProfilePicture(_employee_.username);
     this.employee.startDateTypeDate = new Date(_employee_.startDate);
 
     this.isContentLoaded = true;

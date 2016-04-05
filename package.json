@@ -37,6 +37,7 @@
     "istanbul-instrumenter-loader": "0.2.0",
     "jasmine": "2.4.1",
     "jasmine-core": "^2.2.0",
+    "jasmine_dom_matchers": "^1.4.0",
     "jshint-stylish": "^2.0.0",
     "karma": "^0.13.21",
     "karma-coverage": "0.5.5",

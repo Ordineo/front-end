@@ -13,8 +13,6 @@ export interface Employee{
   resignationDate?:string,
   startDate?:string,
   startDateTypeDate?:Date,
-  unit?:{
-    name:string
-  },
+  unit?:string,
   username?:string
 }

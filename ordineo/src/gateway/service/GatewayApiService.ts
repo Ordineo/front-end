@@ -36,10 +36,14 @@ export class GatewayApiService{
     return this.protocol + 'social-ordineo.cfapps.io/connect/linkedin';
   }
 
+  static getImagesEmployeeApi():string{
+    return 'https://image-ordineo.cfapps.io/api/images/';
+  }
+
   public getSearchEmployeeApi():string{
     return this.getEmployeesApi() + 'employees/search/';
   }
-  
+
   public getEmployeesApi():string{
     return this.buildApiUrl(this.EMPLOYEE_API);
   }
