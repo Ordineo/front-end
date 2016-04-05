@@ -7,6 +7,7 @@ import {HeaderController} from "../../../layout/header/HeaderController";
 import {GatewayApiService} from "../../../gateway/service/GatewayApiService";
 import IRootScopeService = angular.IRootScopeService;
 import IAngularEvent = angular.IAngularEvent;
+import ISCEService = angular.ISCEService;
 
 export class AboutDirectiveController {
   public title:string;
@@ -28,7 +29,11 @@ export class AboutDirectiveController {
   //used for animations
   public height:any;
 
+  public myFile:any;
+  public imgUrl:string;
+
   static $inject:Array<string> = [
+    '$sce',
     ProfileService.NAME,
     '$rootScope',
     LinkedInService.SERVICE_NAME
@@ -36,7 +41,7 @@ export class AboutDirectiveController {
 
   static EVENT_ON_EMPLOYEEDATA_SET:string = "event_on_employee_data_set";
 
-  constructor(public profileService:IProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {
+  constructor(private $sce:ISCEService, public profileService:ProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {
     this.init();
 
     if (window.sessionStorage.getItem(LinkedInController.SESSION_ITEM)) {
@@ -105,13 +110,11 @@ export class AboutDirectiveController {
     this.isContentLoaded = false;
 
     this.profileService.putEmployeeData(this.employee)
-      .then(this.onPutEmployeeDataResolved);
+      .then((data)=>{
+        this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
+      });
 
     this.isEditModeEnabled = false;
-  }
-
-  private onPutEmployeeDataResolved() {
-    this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
   }
 
   private init():void {
@@ -143,6 +146,8 @@ export class AboutDirectiveController {
     this.setDescription(_employee_.description);
     this.setProfilePicture(_employee_.username);
     this.employee.startDateTypeDate = new Date(_employee_.startDate);
+    this.$sce.trustAsResourceUrl('https://gateway-ordineo.cfapps.io/image-ordineo/api/images/' + _employee_.username);
+    this.imgUrl = 'https://gateway-ordineo.cfapps.io/image-ordineo/api/images/' + _employee_.username;
 
     this.isContentLoaded = true;
   }
@@ -155,6 +160,7 @@ export class AboutDirectiveController {
   }
 
   private getEmployeeDataAsync(_userName_:string, profileService:IProfileService, rootScope:IRootScopeService):void {
+    console.log(_userName_);
     this.isContentLoaded = false;
     profileService
       .getAboutInfoByUsername(_userName_)
@@ -169,10 +175,15 @@ export class AboutDirectiveController {
       });
   }
 
-  private changeStartDate() {
+  changeStartDate() {
     var date = new Date();
     date.setDate(this.employee.startDateTypeDate.getDate());
     this.employee.startDate = JSON.stringify(date).substring(1, JSON.stringify(date).indexOf('T'));
     //console.log(this.employee.startDate);
+  }
+
+  changePicture():void {
+    var file = this.myFile;
+    this.profileService.setProfilePicture(file, this.imgUrl);
   }
 }
