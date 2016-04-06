@@ -76,6 +76,48 @@ profile-about {
     margin-top: 30px;
   }
 
+  .edit-info {
+    input[type="button"], input[type="submit"] {
+      font-family: NeutraTextBook;
+      background-color: $orange;
+      border: none;
+      color: white;
+      padding-top: 10px;
+      padding-bottom: 5px;
+      width: 130px;
+    }
+
+    input[type="file"] {
+      width: 200px;
+    }
+
+    .inputWrapper {
+      overflow: hidden;
+      position: relative;
+      color: white;
+      height: 20px;
+      width: 130px;
+      padding-top: 10px;
+      cursor: pointer;
+      text-align: center;
+      background-color: $orange;
+    }
+
+    .fileInput {
+      cursor: pointer;
+      height: 100%;
+      position:absolute;
+      top: 0;
+      right: 0;
+      font-size:50px;
+    }
+    .hidden {
+      opacity: 0;
+      -moz-opacity: 0;
+      filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0)
+    }
+  }
+
   .md-datepicker-button {
     display: none !important;
   }
