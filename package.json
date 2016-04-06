@@ -27,6 +27,7 @@
   "repository": {},
   "devDependencies": {
     "babel-core": "^6.6.5",
+    "codeceptjs": "^0.3.3",
     "concurrently": "^2.0.0",
     "coveralls": "^2.11.8",
     "css-loader": "^0.23.1",
