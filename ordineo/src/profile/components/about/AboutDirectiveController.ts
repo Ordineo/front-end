@@ -125,6 +125,7 @@ export class AboutDirectiveController {
     this.hasError = false;
     this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=>{
       this.username = data.username;
+      this.isEditModeEnabled = false;
       this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
     });
     this.rootScope.$on(LinkedInController.EVENT_SYNC_EMPLOYEE, ()=>{
