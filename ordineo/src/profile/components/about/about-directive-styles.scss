@@ -77,6 +77,12 @@ profile-about {
   }
 
   .edit-info {
+    .material {
+      color: $grey;
+      font-size: 12px;
+      padding-left: 3px;
+    }
+
     input[type="button"], input[type="submit"] {
       font-family: NeutraTextBook;
       background-color: $orange;
