@@ -32,12 +32,14 @@ export class CardHeaderComponent implements IComponentOptions {
     showBtnDrag: '=?',
     showBtnEdit: '=?',
     showBtnCancel: '=?',
-    showBtnSave: '=?'
+    showBtnSave: '=?',
+    isSaveDisabled: '=?'
   };
 }
 
 interface CardHeaderScope {
   title:string;
+  isSaveDisabled:boolean;
   onEditClick?:Function;
   onDragClick?:Function;
   showBtnDrag?:boolean;
@@ -48,6 +50,7 @@ interface CardHeaderScope {
 
 export class CardHeaderController implements CardHeaderScope {
   public title:string;
+  isSaveDisabled:boolean;
   public onEditClick:Function;
   public onDragClick:Function;
   public onSaveClick:Function;

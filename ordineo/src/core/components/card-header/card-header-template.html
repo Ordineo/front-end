@@ -4,6 +4,7 @@
     <div layout="row">
       <div ng-show="$ctrl.showBtnSave" class="edit-icons-fade">
         <md-button
+          ng-disabled="$ctrl.isSaveDisabled"
           aria-label="Save"
           ng-show="$ctrl.showBtnSave"
           ng-click="$ctrl.save()"

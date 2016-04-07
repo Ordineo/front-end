@@ -14,8 +14,8 @@
 
 
         <!-- Card header -->
-
         <card-header
+          is-save-disabled="aboutEditForm.$invalid"
           show-btn-edit="true"
           title="{{about.title}}"
           on-edit-click="about.onEdit()"
@@ -25,7 +25,6 @@
 
 
         <!-- Show info -->
-
         <div class="about-content" layout="row" layout-xs="column" ng-if="!about.isEditModeEnabled">
 
           <!-- Left column: Picture -->
@@ -86,7 +85,6 @@
         </div>
 
         <!-- Edit info -->
-
         <div class="about-content edit-info" layout="row" layout-xs="column" ng-if="about.isEditModeEnabled">
           <!-- Left column: Picture -->
           <div class="about-img" layout="column" layout-align="start top" layout-align-xs="center center">
@@ -94,11 +92,11 @@
 
             <!-- Original -->
             <!--<input type="file" name="profilePicture" file-model="about.myFile"/>-->
-
             <div class="inputWrapper">
               Choose File
               <input class="fileInput hidden" type="file" name="profilePicture" file-model="about.myFile"/>
-            </div><br/>
+            </div>
+            <br/>
             <input id="submit" type="submit" ng-click="about.changePicture()" value="Upload"/>
           </div>
 
@@ -111,17 +109,41 @@
                 <div>
                   <md-input-container class="md-block" flex-gt-xs>
                     <label>Function</label>
-                    <input required class="userFunctie" name="userFunctie" ng-model="about.employee.function">
+                    <input
+                      required
+                      minlength="2"
+                      ng-pattern="about.alphanumeric"
+                      maxlength="52"
+                      class="userFunctie"
+                      name="userFunctie"
+                      ng-model="about.employee.function">
+                    <div ng-messages="aboutEditForm.userFunctie.$error">
+                      <div ng-message="pattern">Not a valid format.</div>
+                      <div ng-message="required">Function is required.</div>
+                      <div ng-message="minlength">Function should be atleast 2 characters.</div>
+                      <div ng-message="maxlength">Function should be less then 52 characters.</div>
+                    </div>
                   </md-input-container>
                 </div>
               </div>
-
               <!-- Unit -->
               <div class="about-unit about-job-detail">
                 <div>
                   <md-input-container class="md-block" flex-gt-xs>
                     <label>Unit</label>
-                    <input required name="userUnit" ng-model="about.employee.unit.name">
+                    <input required
+                           name="userUnit"
+                           class="userUnit"
+                           ng-pattern="about.alphanumeric"
+                           minlength="2"
+                           maxlength="52"
+                           ng-model="about.employee.unit.name">
+                    <div ng-messages="aboutEditForm.userUnit.$error">
+                      <div ng-message="ng-pattern">Not a valid format.</div>
+                      <div ng-message="required">Unit is required.</div>
+                      <div ng-message="minlength">Unit should be atleast 2 characters.</div>
+                      <div ng-message="maxlength">Unit should be less then 52 characters.</div>
+                    </div>
                   </md-input-container>
                 </div>
               </div>
@@ -166,6 +188,11 @@
                         maxlength="2048"
                         ng-maxlength="2048"
                         md-select-on-focus>
+                <div ng-messages="aboutEditForm.userDescription.$error">
+                      <div ng-message="required">description is required.</div>
+                      <div ng-message="minlength">description should be atleast 2 characters.</div>
+                      <div ng-message="maxlength">description should be less then 2048 characters.</div>
+                </div>
               </textarea>
               </md-input-container>
             </div>

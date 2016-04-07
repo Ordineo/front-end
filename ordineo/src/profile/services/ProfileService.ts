@@ -58,20 +58,15 @@ export class ProfileService implements IProfileService {
       .result;
   }
 
-  public setProfilePicture(file:any, uploadUrl:string):void {
+  public setProfilePicture(file:any, uploadUrl:string):IPromise<any>{
     var fd = new FormData();
     fd.append('profilePicture', file);
-    this.$http.post(uploadUrl,fd,{
+    return this.$http.post(uploadUrl, fd, {
+      cache: false,
       headers: {
         'Content-type': undefined
       },
       transformRequest: angular.identity
-    }).then(function (data) {
-      console.log("OK ");
-      console.log(data);
-    }, function (data) {
-      console.log("NOT OK");
-      console.log(data);
     });
   }
 }
