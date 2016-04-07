@@ -88,8 +88,8 @@ profile-about {
       background-color: $orange;
       border: none;
       color: white;
-      padding-top: 10px;
-      padding-bottom: 5px;
+      padding-top: 0.5em;
+      padding-bottom: 0.25em;
       width: 130px;
     }
 
@@ -103,7 +103,7 @@ profile-about {
       color: white;
       height: 20px;
       width: 130px;
-      padding-top: 10px;
+      padding-top: 0.5em;
       cursor: pointer;
       text-align: center;
       background-color: $orange;
