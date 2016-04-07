@@ -2,7 +2,6 @@ import {HeaderController, User} from "./HeaderController";
 import {ProfileService, IProfileService} from "../../profile/services/ProfileService";
 import {ORDINEO_LAYOUT} from "../LayoutModule";
 import {HeaderComponent} from "./HeaderComponent";
-import {MockProfileService} from "../../../test/mock/MockProfileService";
 import IServiceProvider = angular.IServiceProvider;
 import IProvideService = angular.auto.IProvideService;
 import IRootScopeService = angular.IRootScopeService;
@@ -11,6 +10,7 @@ import IScope = angular.IScope;
 import IDeferred = angular.IDeferred;
 import IPromise = angular.IPromise;
 import {Employee} from "../../core/models/employee";
+import {MockProfileService} from "../../../../test/mock/MockProfileService";
 
 describe("Header controller", ()=> {
   var $componentController;
