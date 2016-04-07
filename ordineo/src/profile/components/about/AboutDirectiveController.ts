@@ -12,9 +12,11 @@ import ISCEService = angular.ISCEService;
 export class AboutDirectiveController {
   public title:string;
   public username:string;
+  public alphanumeric:RegExp = /^[a-z0-9 \-]+$/i;
 
   employee:Employee;
   public aboutInfoCache:Employee;
+  public imageSelected:boolean;
 
   public shortDescription:string;
   public footerButtonLabel:string;
@@ -43,7 +45,6 @@ export class AboutDirectiveController {
 
   constructor(private $sce:ISCEService, public profileService:ProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {
     this.init();
-
     if (window.sessionStorage.getItem(LinkedInController.SESSION_ITEM)) {
       //when this session item was set it means we came from an auth page.
       //we need to request a sync again from linkedin
@@ -63,7 +64,7 @@ export class AboutDirectiveController {
   }
 
   setProfilePicture(userName:string):void {
-    this.profilePicture = GatewayApiService.getImagesEmployeeApi() + userName;
+    this.profilePicture = GatewayApiService.getImagesEmployeeApi() + userName + '?' + new Date().getTime();
   }
 
   setDescription(description:string):void {
@@ -85,6 +86,11 @@ export class AboutDirectiveController {
     }
   }
 
+  test():void{
+    console.log(this.imageSelected);
+    this.imageSelected = true;
+  }
+
   onEdit():void {
     this.isEditModeEnabled = !this.isEditModeEnabled;
     this.setInfoCache();
@@ -101,7 +107,9 @@ export class AboutDirectiveController {
 
   restore():void {
     this.employee.function = this.aboutInfoCache.function;
-    this.employee.unit = this.aboutInfoCache.unit;
+    this.employee.unit = {
+      name: this.aboutInfoCache.unit
+    }
     this.employee.description = this.aboutInfoCache.description;
   }
 
@@ -110,7 +118,7 @@ export class AboutDirectiveController {
     this.isContentLoaded = false;
 
     this.profileService.putEmployeeData(this.employee)
-      .then((data)=>{
+      .then((data)=> {
         this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
       });
 
@@ -118,17 +126,18 @@ export class AboutDirectiveController {
   }
 
   private init():void {
+    this.imageSelected = false;
     this.footerButtonLabel = ButtonState.MORE;
     this.setIsCollapsed(true);
     this.isContentLoaded = false;
     this.isEditModeEnabled = false;
     this.hasError = false;
-    this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=>{
+    this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=> {
       this.username = data.username;
       this.isEditModeEnabled = false;
       this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
     });
-    this.rootScope.$on(LinkedInController.EVENT_SYNC_EMPLOYEE, ()=>{
+    this.rootScope.$on(LinkedInController.EVENT_SYNC_EMPLOYEE, ()=> {
       this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
     });
   }
@@ -137,11 +146,14 @@ export class AboutDirectiveController {
     this.aboutInfoCache = {
       function: this.employee.function,
       description: this.employee.description,
-      unit: this.employee.unit
+      unit: this.employee.unit.name
     };
   }
 
   private setViewModelOnEmployeeDataFetched(_employee_:Employee):void {
+    if(!_employee_.unit){
+      _employee_.unit = {name: 'tes'};
+    }
     this.employee = _employee_;
     this.title = _employee_.firstName + ' ' + _employee_.lastName;
     this.setDescription(_employee_.description);
@@ -161,12 +173,14 @@ export class AboutDirectiveController {
   }
 
   private getEmployeeDataAsync(_userName_:string, profileService:IProfileService, rootScope:IRootScopeService):void {
-    console.log(_userName_);
+    this.imageSelected = false;
     this.isContentLoaded = false;
     profileService
       .getAboutInfoByUsername(_userName_)
       .then((employeeData:any)=> {
+        console.log(employeeData)
         this.isContentLoaded = true;
+        this.setProfilePicture(this.username);
         this.broadCastOnEmployeeDataSet(employeeData, rootScope);
         this.setViewModelOnEmployeeDataFetched(employeeData);
       }, (onErrorData)=> {
@@ -185,6 +199,15 @@ export class AboutDirectiveController {
 
   changePicture():void {
     var file = this.myFile;
-    this.profileService.setProfilePicture(file, this.imgUrl);
+    this.profileService.setProfilePicture(file, this.imgUrl)
+      .then((data)=>{
+        console.log('uploaded');
+        this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
+        this.isEditModeEnabled = false;
+      }, (data) => {
+        console.log("Profile picture could not be set");
+        console.log(data);
+      });
+    ;
   }
 }

@@ -14,8 +14,8 @@
 
 
         <!-- Card header -->
-
         <card-header
+          is-save-disabled="aboutEditForm.$invalid"
           show-btn-edit="true"
           title="{{about.title}}"
           on-edit-click="about.onEdit()"
@@ -25,7 +25,6 @@
 
 
         <!-- Show info -->
-
         <div class="about-content" layout="row" layout-xs="column" ng-if="!about.isEditModeEnabled">
 
           <!-- Left column: Picture -->
@@ -86,12 +85,19 @@
         </div>
 
         <!-- Edit info -->
-
         <div class="about-content edit-info" layout="row" layout-xs="column" ng-if="about.isEditModeEnabled">
           <!-- Left column: Picture -->
           <div class="about-img" layout="column" layout-align="start top" layout-align-xs="center center">
-            <img ng-src="{{about.profilePicture}}" alt="Profile picture" class="sample">
-            <input type="file" name="profilePicture" file-model="about.myFile"/>
+
+            <img ng-if="!about.imageSelected" ng-src="{{about.profilePicture}}" alt="Profile picture" class="sample">
+
+            <!-- Original -->
+            <!--<input type="file" name="profilePicture" file-model="about.myFile"/>-->
+            <div class="inputWrapper">
+              Choose File
+              <input class="fileInput hidden" custom-on-change="about.test" type="file" name="profilePicture" file-model="about.myFile"/>
+            </div>
+            <br/>
             <input id="submit" type="submit" ng-click="about.changePicture()" value="Upload"/>
           </div>
 
@@ -104,17 +110,41 @@
                 <div>
                   <md-input-container class="md-block" flex-gt-xs>
                     <label>Function</label>
-                    <input required class="userFunctie" name="userFunctie" ng-model="about.employee.function">
+                    <input
+                      required
+                      minlength="2"
+                      ng-pattern="about.alphanumeric"
+                      maxlength="52"
+                      class="userFunctie"
+                      name="userFunctie"
+                      ng-model="about.employee.function">
+                    <div ng-messages="aboutEditForm.userFunctie.$error" md-auto-hide="false">
+                      <div ng-message="pattern">Not a valid format.</div>
+                      <div ng-message="required">Function is required.</div>
+                      <div ng-message="minlength">Function should be atleast 2 characters.</div>
+                      <div ng-message="maxlength">Function should be less then 52 characters.</div>
+                    </div>
                   </md-input-container>
                 </div>
               </div>
-
               <!-- Unit -->
               <div class="about-unit about-job-detail">
                 <div>
                   <md-input-container class="md-block" flex-gt-xs>
                     <label>Unit</label>
-                    <input required name="userUnit" ng-model="about.employee.unit.name">
+                    <input required
+                           name="userUnit"
+                           class="userUnit"
+                           ng-pattern="about.alphanumeric"
+                           minlength="2"
+                           maxlength="52"
+                           ng-model="about.employee.unit.name">
+                    <div ng-messages="aboutEditForm.userUnit.$error" md-auto-hide="false">
+                      <div ng-message="pattern">Not a valid format.</div>
+                      <div ng-message="required">Unit is required.</div>
+                      <div ng-message="minlength">Unit should be atleast 2 characters.</div>
+                      <div ng-message="maxlength">Unit should be less then 52 characters.</div>
+                    </div>
                   </md-input-container>
                 </div>
               </div>
@@ -134,6 +164,7 @@
               <!-- Start date -->
               <div class="about-start-date about-job-detail fade" ng-if="!about.isCollapsed || about.isEditModeEnabled">
                 <div>
+                  <label class="material">Start Date</label>
                   <md-datepicker ng-model="about.employee.startDateTypeDate" ng-change="about.changeStartDate()"
                                  md-placeholder="Start date"></md-datepicker>
                 </div>
@@ -155,11 +186,17 @@
                 <label>Description</label>
               <textarea name="userDescription"
                         required
+                        md-auto-hide="false"
                         ng-model="about.employee.description"
                         maxlength="2048"
                         ng-maxlength="2048"
                         md-select-on-focus>
               </textarea>
+                <div ng-messages="aboutEditForm.userDescription.$error" md-auto-hide="false">
+                  <div ng-message="required">description is required.</div>
+                  <div ng-message="minlength">description should be atleast 2 characters.</div>
+                  <div ng-message="maxlength">description should be less then 2048 characters.</div>
+                </div>
               </md-input-container>
             </div>
           </div>
