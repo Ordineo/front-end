@@ -10,9 +10,8 @@ devConfig.plugins = [
 devConfig.devtool = 'source-map';
 
 devConfig.output = {
-  path: './public/dev/',
-  publicPath: "/assets/js",
-  filename: "bundle.js"
+  path: 'build',
+  filename: 'bundle.js'
 };
 
 module.exports = devConfig;
