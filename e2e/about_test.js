@@ -1,6 +1,6 @@
 Feature('About directive');
 
-var pageTitle = 'Jworks 360';
+var pageTitle = 'JWorks 360';
 
 Before((I) => {
   I.amOnPage('/#/profile');
