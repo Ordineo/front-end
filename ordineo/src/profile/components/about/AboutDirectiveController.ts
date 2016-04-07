@@ -12,6 +12,7 @@ import ISCEService = angular.ISCEService;
 export class AboutDirectiveController {
   public title:string;
   public username:string;
+  public alphanumeric:RegExp = /^[a-z0-9 \-]+$/i;
 
   employee:Employee;
   public aboutInfoCache:Employee;
@@ -63,7 +64,7 @@ export class AboutDirectiveController {
   }
 
   setProfilePicture(userName:string):void {
-    this.profilePicture = GatewayApiService.getImagesEmployeeApi() + userName;
+    this.profilePicture = GatewayApiService.getImagesEmployeeApi() + userName + '?' + new Date().getTime();
   }
 
   setDescription(description:string):void {
@@ -110,7 +111,7 @@ export class AboutDirectiveController {
     this.isContentLoaded = false;
 
     this.profileService.putEmployeeData(this.employee)
-      .then((data)=>{
+      .then((data)=> {
         this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
       });
 
@@ -123,12 +124,12 @@ export class AboutDirectiveController {
     this.isContentLoaded = false;
     this.isEditModeEnabled = false;
     this.hasError = false;
-    this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=>{
+    this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=> {
       this.username = data.username;
       this.isEditModeEnabled = false;
       this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
     });
-    this.rootScope.$on(LinkedInController.EVENT_SYNC_EMPLOYEE, ()=>{
+    this.rootScope.$on(LinkedInController.EVENT_SYNC_EMPLOYEE, ()=> {
       this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
     });
   }
@@ -142,6 +143,9 @@ export class AboutDirectiveController {
   }
 
   private setViewModelOnEmployeeDataFetched(_employee_:Employee):void {
+    if(!_employee_.unit){
+      _employee_.unit = {name: 'tes'};
+    }
     this.employee = _employee_;
     this.title = _employee_.firstName + ' ' + _employee_.lastName;
     this.setDescription(_employee_.description);
@@ -166,7 +170,9 @@ export class AboutDirectiveController {
     profileService
       .getAboutInfoByUsername(_userName_)
       .then((employeeData:any)=> {
+        console.log(employeeData)
         this.isContentLoaded = true;
+        this.setProfilePicture(this.username);
         this.broadCastOnEmployeeDataSet(employeeData, rootScope);
         this.setViewModelOnEmployeeDataFetched(employeeData);
       }, (onErrorData)=> {
@@ -185,6 +191,15 @@ export class AboutDirectiveController {
 
   changePicture():void {
     var file = this.myFile;
-    this.profileService.setProfilePicture(file, this.imgUrl);
+    this.profileService.setProfilePicture(file, this.imgUrl)
+      .then((data)=>{
+        console.log('uploaded');
+        this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
+        this.isEditModeEnabled = false;
+      }, (data) => {
+        console.log("Profile picture could not be set");
+        console.log(data);
+      });
+    ;
   }
 }

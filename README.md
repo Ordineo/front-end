@@ -8,7 +8,7 @@ Front end project for Ordineo.
 
 Install cli tools
 ```
-npm i -g webpack typings http-server
+npm i -g webpack typings http-server protractor codeceptjs
 ```
   
 Install dependencies
