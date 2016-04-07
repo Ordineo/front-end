@@ -88,13 +88,14 @@
         <div class="about-content edit-info" layout="row" layout-xs="column" ng-if="about.isEditModeEnabled">
           <!-- Left column: Picture -->
           <div class="about-img" layout="column" layout-align="start top" layout-align-xs="center center">
-            <img ng-src="{{about.profilePicture}}" alt="Profile picture" class="sample">
+
+            <img ng-if="!about.imageSelected" ng-src="{{about.profilePicture}}" alt="Profile picture" class="sample">
 
             <!-- Original -->
             <!--<input type="file" name="profilePicture" file-model="about.myFile"/>-->
-            <div class="inputWrapper" ng-click="about.test()">
+            <div class="inputWrapper">
               Choose File
-              <input class="fileInput hidden" type="file" name="profilePicture" file-model="about.myFile"/>
+              <input class="fileInput hidden" custom-on-change="about.test" type="file" name="profilePicture" file-model="about.myFile"/>
             </div>
             <br/>
             <input id="submit" type="submit" ng-click="about.changePicture()" value="Upload"/>

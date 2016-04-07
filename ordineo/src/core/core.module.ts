@@ -25,6 +25,15 @@ angular.module(ORDINEO_CORE, deps)
   .config(configureStates)
   .component(CardHeaderComponent.NAME, new CardHeaderComponent())
   .directive(FileUploadDirective.NAME, FileUploadDirective.instance())
+  .directive('customOnChange', function () {
+    return {
+      restrict: 'A',
+      link: function (scope, element, attrs:any) {
+        var onChangeHandler = scope.$eval(attrs.customOnChange);
+        element.bind('change', onChangeHandler);
+      }
+    };
+  })
   .animation(".fade", fadeInOnNgShow)
   .animation(".simple-fade", simpleFade)
   .animation(".edit-icons-fade", editIcons)

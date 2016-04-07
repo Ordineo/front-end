@@ -16,6 +16,7 @@ export class AboutDirectiveController {
 
   employee:Employee;
   public aboutInfoCache:Employee;
+  public imageSelected:boolean;
 
   public shortDescription:string;
   public footerButtonLabel:string;
@@ -44,7 +45,6 @@ export class AboutDirectiveController {
 
   constructor(private $sce:ISCEService, public profileService:ProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {
     this.init();
-
     if (window.sessionStorage.getItem(LinkedInController.SESSION_ITEM)) {
       //when this session item was set it means we came from an auth page.
       //we need to request a sync again from linkedin
@@ -86,6 +86,11 @@ export class AboutDirectiveController {
     }
   }
 
+  test():void{
+    console.log(this.imageSelected);
+    this.imageSelected = true;
+  }
+
   onEdit():void {
     this.isEditModeEnabled = !this.isEditModeEnabled;
     this.setInfoCache();
@@ -102,7 +107,9 @@ export class AboutDirectiveController {
 
   restore():void {
     this.employee.function = this.aboutInfoCache.function;
-    this.employee.unit = this.aboutInfoCache.unit;
+    this.employee.unit = {
+      name: this.aboutInfoCache.unit
+    }
     this.employee.description = this.aboutInfoCache.description;
   }
 
@@ -119,6 +126,7 @@ export class AboutDirectiveController {
   }
 
   private init():void {
+    this.imageSelected = false;
     this.footerButtonLabel = ButtonState.MORE;
     this.setIsCollapsed(true);
     this.isContentLoaded = false;
@@ -138,7 +146,7 @@ export class AboutDirectiveController {
     this.aboutInfoCache = {
       function: this.employee.function,
       description: this.employee.description,
-      unit: this.employee.unit
+      unit: this.employee.unit.name
     };
   }
 
@@ -165,7 +173,7 @@ export class AboutDirectiveController {
   }
 
   private getEmployeeDataAsync(_userName_:string, profileService:IProfileService, rootScope:IRootScopeService):void {
-    console.log(_userName_);
+    this.imageSelected = false;
     this.isContentLoaded = false;
     profileService
       .getAboutInfoByUsername(_userName_)
