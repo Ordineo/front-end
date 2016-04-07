@@ -117,7 +117,7 @@
                       class="userFunctie"
                       name="userFunctie"
                       ng-model="about.employee.function">
-                    <div ng-messages="aboutEditForm.userFunctie.$error">
+                    <div ng-messages="aboutEditForm.userFunctie.$error" md-auto-hide="false">
                       <div ng-message="pattern">Not a valid format.</div>
                       <div ng-message="required">Function is required.</div>
                       <div ng-message="minlength">Function should be atleast 2 characters.</div>
@@ -138,8 +138,8 @@
                            minlength="2"
                            maxlength="52"
                            ng-model="about.employee.unit.name">
-                    <div ng-messages="aboutEditForm.userUnit.$error">
-                      <div ng-message="ng-pattern">Not a valid format.</div>
+                    <div ng-messages="aboutEditForm.userUnit.$error" md-auto-hide="false">
+                      <div ng-message="pattern">Not a valid format.</div>
                       <div ng-message="required">Unit is required.</div>
                       <div ng-message="minlength">Unit should be atleast 2 characters.</div>
                       <div ng-message="maxlength">Unit should be less then 52 characters.</div>
@@ -185,16 +185,17 @@
                 <label>Description</label>
               <textarea name="userDescription"
                         required
+                        md-auto-hide="false"
                         ng-model="about.employee.description"
                         maxlength="2048"
                         ng-maxlength="2048"
                         md-select-on-focus>
-                <div ng-messages="aboutEditForm.userDescription.$error">
-                      <div ng-message="required">description is required.</div>
-                      <div ng-message="minlength">description should be atleast 2 characters.</div>
-                      <div ng-message="maxlength">description should be less then 2048 characters.</div>
-                </div>
               </textarea>
+                <div ng-messages="aboutEditForm.userDescription.$error" md-auto-hide="false">
+                  <div ng-message="required">description is required.</div>
+                  <div ng-message="minlength">description should be atleast 2 characters.</div>
+                  <div ng-message="maxlength">description should be less then 2048 characters.</div>
+                </div>
               </md-input-container>
             </div>
           </div>
