@@ -1,6 +1,6 @@
 import {MATERIAL_DESIGN} from "../theme/ThemeModule";
 import {AboutDirective} from "./components/about/AboutDirective";
-import {ORDINEO_CORE} from "../core/core.module";
+import {ORDINEO_CORE} from "../core/core.module.ts";
 import {ProfileService} from "./services/ProfileService";
 import {TRAVERSON} from "../traverson/TraversonModule";
 import {ORDINEO_GATEWAY} from "../gateway/GatewayModule";

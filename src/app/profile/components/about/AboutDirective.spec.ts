@@ -2,7 +2,6 @@ import {ORDINEO_PROFILE} from "../../ProfileModule.ts";
 import {AboutDirectiveController} from "./AboutDirectiveController";
 import {LinkedInService} from "../../../social/linkedin/LinkedInService";
 import {AboutDirective} from "./AboutDirective";
-import {MockAboutData} from "../../../../test/mock/MockAboutData";
 import "angular-mocks";
 import IRootScopeService = angular.IRootScopeService;
 import ICompileService = angular.ICompileService;
@@ -11,6 +10,7 @@ import IScope = angular.IScope;
 import IAugmentedJQuery = angular.IAugmentedJQuery;
 import IProvideService = angular.auto.IProvideService;
 import IFormController = angular.IFormController;
+import {MockAboutData} from "../../../../../test/mock/MockAboutData";
 describe('About directive: ', ()=> {
   beforeEach(
     angular.mock.module(ORDINEO_PROFILE,

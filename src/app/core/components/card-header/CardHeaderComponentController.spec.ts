@@ -3,7 +3,7 @@ import IControllerService = angular.IControllerService;
 import IRootScopeService = angular.IRootScopeService;
 import IScope = angular.IScope;
 import 'angular-mocks';
-import {ORDINEO_CORE} from "../../core.module";
+import {ORDINEO_CORE} from "../../core.module.ts";
 
 describe("card header controller", ()=> {
 
