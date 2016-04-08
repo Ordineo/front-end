@@ -4,7 +4,7 @@
   "output": "./output",
   "helpers": {
     "Protractor": {
-      "url": "https://frontend-ordineo.cfapps.io/#/profile",
+      "url": "http://localhost:8080",
       "driver": "hosted",
       "browser": "firefox",
       "rootElement": "body"

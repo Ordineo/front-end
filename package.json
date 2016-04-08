@@ -61,7 +61,11 @@
     "postinstall": "typings i",
     "build": "webpack --config webpack/build.config.js",
     "start": "webpack-dev-server --config webpack/dev.config.js --inline --content-base src/",
-    "test": "karma start --NODE_ENV=test",
-    "watch:test": "karma start --auto-watch --no-single-run --NODE_ENV=test"
+    "test": "npm run test:karma && npm run test:e2e",
+    "test:karma": "karma start --NODE_ENV=test",
+    "watch:test": "karma start --auto-watch --no-single-run --NODE_ENV=test",
+    "webdriver:update": "webdriver-manager update --standalone --firefox",
+    "webdriver:start": "webdriver-manager start 2>&1 &",
+    "test:e2e": "codeceptjs run --steps"
   }
 }
