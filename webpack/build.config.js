@@ -11,8 +11,7 @@ buildConfig.output = {
 
 buildConfig.plugins = [
   new HtmlWebpackPlugin({
-    template: './webpack/templates/build.html',
-    inject: 'body'
+    template: 'src/index.html'
   })
 ];
 

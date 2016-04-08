@@ -4,7 +4,7 @@
   "output": "./output",
   "helpers": {
     "Protractor": {
-      "url": "http://localhost:8080",
+      "url": "https://frontend-ordineo.cfapps.io/#/profile",
       "driver": "hosted",
       "browser": "firefox",
       "rootElement": "body"
@@ -13,5 +13,5 @@
   "include":{},
   "bootstrap": false,
   "mocha": {},
-  "name": "JWorks 360"
+  "name": "JWorks 360 tool"
 }

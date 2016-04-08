@@ -1,7 +1,6 @@
 import {ORDINEO_PROFILE} from "../../ProfileModule.ts";
 import {AboutDirectiveController} from "./AboutDirectiveController";
 import {ProfileService, IProfileService} from "../../services/ProfileService";
-import {MockProfileService} from "../../../../test/mock/MockProfileService";
 import "angular-mocks";
 import IQService = ng.IQService;
 import IProvideService = angular.auto.IProvideService;
@@ -12,6 +11,7 @@ import IDeferred = angular.IDeferred;
 import {LinkedInService} from "../../../social/linkedin/LinkedInService";
 import {GatewayApiService} from "../../../gateway/service/GatewayApiService";
 import {ButtonState} from "../../../core/labels/ButtonState";
+import {MockProfileService} from "../../../../../test/mock/MockProfileService";
 
 describe('About directive controller', ()=> {
   var $controller:IControllerService, $q:IQService, $rootScope:IRootScopeService;

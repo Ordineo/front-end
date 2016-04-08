@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-  entry: ['./ordineo/src/bootstrap.ts'],
+  entry: ['./src/bootstrap.ts'],
   resolve: {
     //TODO Replace uncompressed tweenmax with minifeid tweenlite
     //alias: {
@@ -17,9 +17,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.ts$/, loader: 'ts-loader', exclude: [
-        path.resolve('./src')
-      ]
+        test: /\.ts$/, loader: 'ts-loader'
       },
       {test: /\.hbs/, loader: "handlebars-template-loader"},
       {

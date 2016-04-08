@@ -8,21 +8,15 @@ Front end project for Ordineo.
 
 Install cli tools
 ```
-npm i -g webpack typings http-server protractor codeceptjs
+npm i -g webpack typings protractor codeceptjs
 ```
   
 Install dependencies
 ```
 npm i
 ```
-  
-Create dev build
-```
-npm run dev-webp
-```
 
 Launch webpack-dev-server. 
-You need to have run the above command at least once.
 Dev app is served at http://localhost:8080
 ```
 npm run dev
@@ -34,12 +28,6 @@ Start coding
 
 ```
 npm run build
-```
-
-Run deployed app
-App is served at http://localhost:8540
-```
-npm run open
 ```
 
 ### Tests

@@ -4,16 +4,14 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 devConfig.plugins = [
   new HtmlWebpackPlugin({
-    template: './webpack/templates/build.html',
-    inject: 'body'
+    template: 'src/index.html'
   })
 ];
 devConfig.devtool = 'source-map';
 
 devConfig.output = {
-  path: './public/dev/',
-  publicPath: "/assets/js",
-  filename: "bundle.js"
+  path: 'build',
+  filename: 'bundle.js'
 };
 
 module.exports = devConfig;

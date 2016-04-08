@@ -1,5 +1,5 @@
 import 'phantomjs-polyfill';
-import {APP_NAME} from "./app.module";
+import {APP_NAME} from "./app.module.ts";
 
 describe("Main App Component", () => {
 
