@@ -1,8 +1,9 @@
-import {IProfileService} from "../../src/profile/services/ProfileService";
-import {Employee} from "../../src/core/models/employee";
 import IPromise = angular.IPromise;
+import {Employee} from "../../src/app/core/models/employee";
+import {IProfileService} from "../../src/app/profile/services/ProfileService";
 
 export class MockProfileService implements IProfileService {
+
   getAboutInfoByUsername(username:string):IPromise<any> {
     return null;
   }

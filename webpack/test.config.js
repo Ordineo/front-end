@@ -3,7 +3,6 @@ var loaders = defaultConfig.module.loaders;
 var webpack = require('webpack');
 
 module.exports = {
-  entry: ['./ordineo/src/bootstrap.ts'],
   output: {
     filename: 'test-build.js',
     path: 'tmp'
