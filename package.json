@@ -53,6 +53,7 @@
     "node-sass": "^3.4.2",
     "phantomjs-polyfill": "0.0.2",
     "phantomjs-prebuilt": "2.1.7",
+    "protractor": "^3.2.2",
     "raw-loader": "^0.5.1",
     "resolve-url-loader": "^1.4.3",
     "restangular": "^1.5.2",
@@ -77,6 +78,8 @@
     "open": "http-server build/ -p 8540",
     "build": "webpack --config webpack/build.config.js",
     "dev-webp": "webpack --config webpack/dev.config.js",
-    "dev": "webpack-dev-server --config webpack/dev.config.js --content-base public/dev --inline"
+    "dev": "webpack-dev-server --config webpack/dev.config.js --content-base public/dev --inline",
+    "e2e:manager": "webdriver-manager start",
+    "e2e:test": "codeceptjs run --steps"
   }
 }

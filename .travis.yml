@@ -4,8 +4,6 @@ node_js:
 sudo: false
 install:
 - npm install -g npm
-- npm install -g protractor
-- npm install -g codeceptjs
 - npm install -g webpack
 - npm install -g typings
 - npm install
@@ -29,7 +27,7 @@ deploy:
     repo: Ordineo/front-end
     branch: master
 after_deploy:
-- codeceptjs run --steps --debug
+- npm run e2e:test
 - cat ./reports/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 notifications:
   slack:
