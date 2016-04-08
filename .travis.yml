@@ -3,10 +3,6 @@ node_js:
 - 4.2.1
 sudo: false
 install:
-- npm install -g npm
-- npm install -g webpack
-- npm install -g typings
-- npm install
 - npm run build
 before_script:
 - "export DISPLAY=:99.0"
