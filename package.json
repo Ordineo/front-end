@@ -67,6 +67,6 @@
     "watch:test": "karma start --auto-watch --no-single-run --NODE_ENV=test",
     "webdriver:update": "webdriver-manager update --standalone --firefox",
     "webdriver:start": "webdriver-manager start 2>&1 &",
-    "test:e2e": "codeceptjs run --steps --debug"
+    "test:e2e": "codeceptjs run --steps"
   }
 }
