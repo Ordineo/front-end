@@ -197,6 +197,11 @@ export class AboutDirectiveController {
     //console.log(this.employee.startDate);
   }
 
+  previewPicture(event) {
+    var output:any = document.getElementById('profilePicturePreview');
+    output.src = URL.createObjectURL(event.target.files[0]);
+  }
+
   changePicture():void {
     var file = this.myFile;
     this.profileService.setProfilePicture(file, this.imgUrl)

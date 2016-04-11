@@ -89,13 +89,13 @@
           <!-- Left column: Picture -->
           <div class="about-img" layout="column" layout-align="start top" layout-align-xs="center center">
 
-            <img ng-if="!about.imageSelected" ng-src="{{about.profilePicture}}" alt="Profile picture" class="sample">
+            <img id="profilePicturePreview" ng-if="!about.imageSelected" ng-src="{{about.profilePicture}}" alt="Profile picture" class="sample">
 
             <!-- Original -->
             <!--<input type="file" name="profilePicture" file-model="about.myFile"/>-->
             <div class="inputWrapper">
               Choose File
-              <input class="fileInput hidden" custom-on-change="about.test" type="file" name="profilePicture" file-model="about.myFile"/>
+              <input class="fileInput hidden" custom-on-change="about.test" type="file" accept="image/jpeg" name="profilePicture" onchange="angular.element(this).scope().about.previewPicture(event)" file-model="about.myFile"/>
             </div>
             <br/>
             <input id="submit" type="submit" ng-click="about.changePicture()" value="Upload"/>
