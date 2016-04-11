@@ -56,7 +56,7 @@ export class CardHeaderController implements CardHeaderScope {
   public onSaveClick:Function;
   public onCancelClick:Function;
   public showBtnDrag:boolean = true;
-  public showBtnEdit:boolean = true;
+  public showBtnEdit:boolean = false;
   public showBtnCancel:boolean = false;
   public showBtnSave:boolean = false;
 
