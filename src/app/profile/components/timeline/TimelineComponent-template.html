@@ -2,7 +2,14 @@
   <card-header
     title="{{$ctrl.title}}">
   </card-header>
+
+
+
   <ul>
-    <milestone ng-repeat="milestone in $ctrl.milestones"></milestone>
+    <div layout="row">
+      <milestone clasmilestone="mile" ng-repeat="mile in $ctrl.milestones">
+      </milestone>
+    </div>
   </ul>
+
 </md-card>
