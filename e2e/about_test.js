@@ -7,7 +7,6 @@ Before((I) => {
 });
 
 Scenario('Open the profile page', (I) => {
-  I.see('fail');
   I.see(pageTitle, '.header-bg');
   I.see('Sync with Linkedin', '#getDetails');
   I.waitForElement('.about-header', 2);
@@ -23,7 +22,7 @@ Scenario('Open the profile page', (I) => {
   I.see('COLLAPSE', '.about-footer');
 });
 
-/*Scenario('Edit about section and cancel', (I) => {
+Scenario('Edit about section and cancel', (I) => {
   I.waitForElement('.btnEdit', 2);
   I.click('.btnEdit');
   I.waitForElement({model: 'about.employee.function'});
@@ -44,7 +43,7 @@ Scenario('Edit about section and save changes', (I) => {
   I.see( 'test function', '.about-function');
   I.see( 'test unit', '.about-unit');
   I.see( 'test description', '.about-description');
-});*/
+});
 
 
 
