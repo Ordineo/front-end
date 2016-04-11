@@ -18,7 +18,6 @@
   },
   "repository": {},
   "devDependencies": {
-    "json-loader": "^0.5.4",
     "babel-core": "^6.6.5",
     "codeceptjs": "^0.3.3",
     "concurrently": "^2.0.0",
@@ -31,6 +30,7 @@
     "istanbul-instrumenter-loader": "0.2.0",
     "jasmine": "2.4.1",
     "jasmine-core": "^2.2.0",
+    "json-loader": "^0.5.4",
     "karma": "^0.13.21",
     "karma-coverage": "0.5.5",
     "karma-jasmine": "^0.3.5",
@@ -43,12 +43,14 @@
     "node-sass": "^3.4.2",
     "phantomjs-polyfill": "0.0.2",
     "phantomjs-prebuilt": "2.1.7",
+    "protractor": "^3.2.2",
     "raw-loader": "^0.5.1",
     "resolve-url-loader": "^1.4.3",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
     "ts-loader": "^0.8.1",
     "typescript": "^1.8.2",
+    "typings": "^0.7.12",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
@@ -58,9 +60,13 @@
   },
   "scripts": {
     "postinstall": "typings i",
-    "test": "karma start --NODE_ENV=test",
-    "devtest": "karma start --auto-watch --no-single-run --NODE_ENV=test",
     "build": "webpack --config webpack/build.config.js",
-    "dev": "webpack-dev-server --config webpack/dev.config.js --inline --content-base src/"
+    "start": "webpack-dev-server --config webpack/dev.config.js --inline --content-base src/ &",
+    "test": "npm run test:karma && npm run test:e2e",
+    "test:karma": "karma start --NODE_ENV=test",
+    "watch:test": "karma start --auto-watch --no-single-run --NODE_ENV=test",
+    "webdriver:update": "webdriver-manager update --standalone --firefox",
+    "webdriver:start": "webdriver-manager start 2>&1 &",
+    "test:e2e": "codeceptjs run --steps --debug"
   }
 }
