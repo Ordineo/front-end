@@ -4,6 +4,9 @@ import {ORDINEO_CORE} from "../core/core.module.ts";
 import {ProfileService} from "./services/ProfileService";
 import {TRAVERSON} from "../traverson/TraversonModule";
 import {ORDINEO_GATEWAY} from "../gateway/GatewayModule";
+import {TimelineComponent} from "./components/timeline/TimelineComponent";
+import {MilestoneComponent} from "./components/timeline/MilestoneComponent";
+import {TimelineService} from "./services/TimelineService";
 
 /**
  * @ngdoc module
@@ -24,4 +27,7 @@ var deps:Array<string> = [
 angular
   .module(ORDINEO_PROFILE, deps)
   .service(ProfileService.NAME, ProfileService)
+  .service(TimelineService.NAME, TimelineService)
+  .component(TimelineComponent.NAME, new TimelineComponent())
+  .component(MilestoneComponent.NAME, new MilestoneComponent())
   .directive(AboutDirective.NAME, AboutDirective.instance());
