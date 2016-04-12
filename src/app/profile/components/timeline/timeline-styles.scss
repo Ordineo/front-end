@@ -1,6 +1,10 @@
 $lightOrange: #f9a858;
+$lightGrey: rgba(0, 0, 0, 0.14);
 
 timeline {
+  h3 {
+    margin: 0;
+  }
   ul {
     list-style: none;
     padding: 0;
@@ -9,27 +13,57 @@ timeline {
       position: absolute;
       top: 0;
       bottom: 0;
-      left: 25%;
+      left: 20%;
       margin-left: -20px;
       content: " ";
       width: 3px;
       background-color: $lightOrange;
     }
-    li {
-      .timeline-card {
-        position: relative;
-        &:before {
-          left: -15px;
-          right: auto;
-          position: absolute;
-          top: 35px;
-          display: inline-block;
-          border-top: 15px solid transparent;
-          border-left: 0 solid #ccc;
-          border-right: 15px solid #ccc;
-          border-bottom: 15px solid transparent;
-          content: " ";
-        }
+  }
+}
+
+milestone {
+  li {
+    position: relative;
+    .milestone-badge {
+      background-color: $lightOrange;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      position: absolute;
+      left: 20%;
+      margin-left: -26px;
+      top: 35px;
+    }
+    .timeline-card {
+      position: relative;
+      box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+      &:before {
+        left: -15px;
+        right: auto;
+        position: absolute;
+        top: 20px;
+        display: inline-block;
+        border-top: 15px solid transparent;
+        border-left: 0 solid $lightGrey;
+        border-right: 15px solid $lightGrey;
+        border-bottom: 15px solid transparent;
+        content: " ";
+      }
+      &:after {
+        left: -14px;
+        right: auto;
+        position: absolute;
+        top: 21px;
+        display: inline-block;
+        border-top: 14px solid transparent;
+        border-left: 0 solid white;
+        border-right: 14px solid white;
+        border-bottom: 14px solid transparent;
+        content: " ";
+      }
+      .md-chips {
+        box-shadow: none;
       }
     }
   }

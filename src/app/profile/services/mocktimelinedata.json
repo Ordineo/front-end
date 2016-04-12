@@ -18,7 +18,7 @@
     },
     "createDate": "2016-02-01",
     "dueDate": "2016-12-31",
-    "endDate": "2016-03-01",
+    "endDate": null,
     "moreInformation": "time to upgrade from java 6 to java 8 certificate.",
     "_links": {
       "self": {
