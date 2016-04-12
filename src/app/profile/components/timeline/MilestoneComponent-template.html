@@ -1,17 +1,17 @@
 <li layout="row">
-  <div flex="20">
+  <div flex="25">
     <p class="md-headline due-date" ng-if="!$ctrl.milestone.endDate">{{$ctrl.milestone.dueDate}}</p>
     <p class="md-headline end-date" ng-if="$ctrl.milestone.endDate">{{$ctrl.milestone.endDate}}</p>
   </div>
   <div class="milestone-badge"></div>
-  <md-card flex="80" class="timeline-card">
+  <md-card flex="75" class="timeline-card">
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">{{$ctrl.milestone.objective.title}}</span>
       </md-card-title-text>
     </md-card-title>
     <md-card-content>
-      <p>{{$ctrl.milestone.objective.description}}</p>
+      <p class="fade-text">{{$ctrl.milestone.objective.description}}</p>
 
       <md-chips readonly="true" ng-model="$ctrl.milestone.objective.tags">
       </md-chips>

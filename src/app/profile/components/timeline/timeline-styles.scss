@@ -35,6 +35,9 @@ milestone {
       margin-left: -26px;
       top: 35px;
     }
+    .md-headline {
+      font-size: 1.3em;
+    }
     .timeline-card {
       position: relative;
       box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
@@ -64,6 +67,13 @@ milestone {
       }
       .md-chips {
         box-shadow: none;
+        font-size: 0.9em;
+      }
+      p.fade-text {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
   }
