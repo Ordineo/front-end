@@ -1,15 +1,21 @@
 <md-card>
-  <card-header
-    title="{{$ctrl.title}}">
-  </card-header>
+  <div class="content-container trans-height" layout="row">
+    <span flex="5"></span>
+
+    <!-- Card content -->
+    <div flex layout="column">
+      <card-header
+        title="{{$ctrl.title}}">
+      </card-header>
 
 
-
-  <ul>
-    <div layout="row">
-      <milestone milestone="mile" ng-repeat="mile in $ctrl.milestones">
-      </milestone>
+      <ul>
+        <div>
+          <milestone milestone="mile" ng-repeat="mile in $ctrl.milestones">
+          </milestone>
+        </div>
+      </ul>
     </div>
-  </ul>
-
+    <span flex="5"></span>
+  </div>
 </md-card>

@@ -1,6 +1,7 @@
 import IComponentOptions = angular.IComponentOptions;
 import {Milestone} from "../../../core/models/milestone";
 import {TimelineService} from "../../services/TimelineService";
+require('./timeline-styles.scss');
 
 export class TimelineComponent implements IComponentOptions {
   static NAME:string = "timeline";
@@ -25,6 +26,7 @@ export class TimelineController {
   $onInit():void {
     this.timelineService.getTimelineByUsername(this.username)
       .then((milestones:Milestone[])=>{
+        console.log(milestones);
         this.milestones = milestones;
       },(onError)=>{
         console.log(onError);

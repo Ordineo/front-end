@@ -1,0 +1,36 @@
+$lightOrange: #f9a858;
+
+timeline {
+  ul {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    &:before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 25%;
+      margin-left: -20px;
+      content: " ";
+      width: 3px;
+      background-color: $lightOrange;
+    }
+    li {
+      .timeline-card {
+        position: relative;
+        &:before {
+          left: -15px;
+          right: auto;
+          position: absolute;
+          top: 35px;
+          display: inline-block;
+          border-top: 15px solid transparent;
+          border-left: 0 solid #ccc;
+          border-right: 15px solid #ccc;
+          border-bottom: 15px solid transparent;
+          content: " ";
+        }
+      }
+    }
+  }
+}
