@@ -53,7 +53,8 @@
     "typings": "^0.7.12",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "webpack-strip-block": "0.0.1"
   },
   "engines": {
     "node": ">=4.2.1"

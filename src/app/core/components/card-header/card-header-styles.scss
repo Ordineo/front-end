@@ -8,17 +8,10 @@ $mainBackground: #f4f4f4;
 $borderColor: #eeeeee;
 
 card-header {
-  position: relative;
-  overflow: hidden;
   color: #BDBDBD;
   border-bottom: 1px solid $borderColor;
 
   md-icon {
-    //position: absolute;
     color: $orange;
-  }
-
-  .edit-icons-fade{
-    position: absolute;
   }
 }

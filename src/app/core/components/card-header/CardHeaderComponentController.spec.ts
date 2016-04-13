@@ -28,7 +28,7 @@ describe("card header controller", ()=> {
     };
     ctrl = $controller(CardHeaderController, {$scope: scope}, bindings);
   });
-
+  
   describe("when save gets called", ()=> {
     it("normalMode should get called", ()=> {
       spyOn(ctrl, 'normalMode');
