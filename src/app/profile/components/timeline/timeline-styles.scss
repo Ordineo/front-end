@@ -29,6 +29,9 @@ milestone {
       color: limegreen;
       padding-left: 10px;
     }
+    .dateBox {
+      padding-top: 5px;
+    }
     .milestone-badge {
       background-color: $lightOrange;
       width: 35px;
@@ -37,7 +40,7 @@ milestone {
       position: absolute;
       left: 20%;
       margin-left: -36px;
-      top: 27px;
+      top: 24px;
       color: white;
       font-size: 1.5em;
       font-weight: bold;
