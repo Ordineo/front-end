@@ -59,7 +59,6 @@ describe('About directive: ', ()=> {
 
     describe('form input function', function () {
       var inputUserFunctie;
-
       beforeEach(()=> {
         inputUserFunctie = form['userFunctie'];
       });

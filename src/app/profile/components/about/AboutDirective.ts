@@ -41,8 +41,8 @@ export class AboutDirective implements IDirective {
         ctrl.height = any.height();
         $(any).attr('sup', ctrl.height);
         newValue ?
-          this.animate.removeClass($(el).find('.about-content')[0], 'flow-height')
-          : this.animate.addClass($(el).find('.about-content')[0], 'flow-height');
+          this.animate.removeClass($(el).find('.about-content'), 'flow-height')
+          : this.animate.addClass($(el).find('.about-content'), 'flow-height');
       }
     });
 
