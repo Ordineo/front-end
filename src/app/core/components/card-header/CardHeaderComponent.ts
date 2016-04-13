@@ -21,7 +21,6 @@ import IComponentOptions = angular.IComponentOptions;
 export class CardHeaderComponent implements IComponentOptions {
   static NAME:string = "cardHeader";
   controller:Function = CardHeaderController;
-  controllerAs:string = '$ctrl';
   template:string = require('./card-header-template.html');
   bindings:any = {
     title: '@',
@@ -29,10 +28,10 @@ export class CardHeaderComponent implements IComponentOptions {
     onDragClick: '&',
     onSaveClick: '&',
     onCancelClick: '&',
-    showBtnDrag: '=?',
-    showBtnEdit: '=?',
-    showBtnCancel: '=?',
-    showBtnSave: '=?',
+    showBtnDrag: '<',
+    showBtnEdit: '<',
+    showBtnCancel: '<',
+    showBtnSave: '<',
     isSaveDisabled: '=?'
   };
 }
