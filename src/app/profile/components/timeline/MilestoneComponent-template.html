@@ -4,7 +4,7 @@
     <p class="md-headline end-date" ng-if="$ctrl.milestone.endDate">{{$ctrl.milestone.endDate | amDateFormat:'DD.MM.YYYY'}}<i class="fa fa-check greenIcon" aria-hidden="true"></i></p>
   </div>
   <div class="milestone-badge">{{$ctrl.mileStoneBadge}}</div>
-  <md-card flex="75" class="timeline-card" ng-click="$ctrl.toggleShowDetail()">
+  <md-card flex class="timeline-card" ng-click="$ctrl.toggleShowDetail()">
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">{{$ctrl.milestone.objective.title}}</span>

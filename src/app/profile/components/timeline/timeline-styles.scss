@@ -14,7 +14,6 @@ timeline {
       top: 0;
       bottom: 0;
       left: 20%;
-      margin-left: -20px;
       content: " ";
       width: 3px;
       background-color: $lightOrange;
@@ -39,7 +38,7 @@ milestone {
       border-radius: 50%;
       position: absolute;
       left: 20%;
-      margin-left: -36px;
+      margin-left: -16px;
       top: 24px;
       color: white;
       font-size: 1.5em;
