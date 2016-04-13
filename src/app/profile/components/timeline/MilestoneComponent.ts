@@ -15,7 +15,10 @@ export class MilestoneController {
   milestone:Milestone;
   mileStoneBadge:string;
   showDetail:boolean = false;
-
+  
+  /*devblock:start*/
+  public testSetMilestoneBadge:Function = this.setMilestoneBadge;
+  /*devblock:end*/
 
   $onInit():void {
     this.setMilestoneBadge();
@@ -24,7 +27,7 @@ export class MilestoneController {
   private setMilestoneBadge():void {
     this.mileStoneBadge = this.milestone.objective.objectiveType.charAt(0).toUpperCase();
   }
-  
+
   toggleShowDetail():void {
     this.showDetail = !this.showDetail;
   }
