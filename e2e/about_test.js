@@ -9,7 +9,7 @@ Before((I) => {
 Scenario('Open the profile page', (I) => {
   I.see(pageTitle, '.header-bg');
   I.see('Sync with Linkedin', '#getDetails');
-  I.waitForElement('.about-header');
+  I.waitForElement('.about-header', 2);
   I.seeElement('.about-header');
   //I.seeNumberOfElements('.about-header', 1);
   I.seeElement('.btnEdit');
@@ -26,7 +26,7 @@ Scenario('Open the profile page', (I) => {
 
 
 Scenario('Edit about section and cancel', (I) => {
-  I.waitForElement('.about-header');
+  I.waitForElement('.about-header', 2);
   I.click('.btnEdit', '.about-header');
   I.waitForElement({model: 'about.employee.function'}, 2);
   I.fillField({model: 'about.employee.function'},'wrong function');
@@ -42,7 +42,7 @@ Scenario('Edit about section and save changes', (I) => {
   I.fillField({model: 'about.employee.description'},'test description');
   I.fillField({model: 'about.employee.unit.name'},'test unit');
   I.click('.btnSave', '.about-header');
-  I.waitForElement('.about-header');
+  I.waitForElement('.about-header', 2);
   I.see( 'test function', '.about-function');
   I.see( 'test unit', '.about-unit');
   I.see( 'test description', '.about-description');

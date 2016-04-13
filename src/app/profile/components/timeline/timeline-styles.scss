@@ -2,29 +2,28 @@ $lightOrange: #f9a858;
 $lightGrey: rgba(0, 0, 0, 0.14);
 
 timeline {
+
   h3 {
     margin: 0;
   }
   ul {
     list-style: none;
     padding: 0;
-    position: relative;
-    &:before {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 20%;
-      margin-left: -20px;
-      content: " ";
-      width: 3px;
-      background-color: $lightOrange;
-    }
+    max-height: 560px;
+    overflow-y: scroll;
   }
 }
 
 milestone {
   li {
     position: relative;
+    .greenIcon {
+      color: limegreen;
+      padding-left: 10px;
+    }
+    .dateBox {
+      padding-top: 5px;
+    }
     .milestone-badge {
       background-color: $lightOrange;
       width: 35px;
@@ -32,13 +31,22 @@ milestone {
       border-radius: 50%;
       position: absolute;
       left: 20%;
-      margin-left: -36px;
-      top: 27px;
+      margin-left: -16px;
+      top: 24px;
       color: white;
       font-size: 1.5em;
       font-weight: bold;
       text-align: center;
       line-height: 35px;
+    }
+    &:before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 20%;
+      content: " ";
+      width: 3px;
+      background-color: $lightOrange;
     }
     .md-headline {
       font-size: 1.3em;
@@ -60,7 +68,6 @@ milestone {
       }
       &:after {
         left: -14px;
-        right: auto;
         position: absolute;
         top: 21px;
         display: inline-block;
@@ -70,15 +77,25 @@ milestone {
         border-bottom: 14px solid transparent;
         content: " ";
       }
+      &:focus {
+        outline: none;
+      }
+      &:hover {
+        cursor: pointer;
+      }
       .md-chips {
         box-shadow: none;
         font-size: 0.9em;
       }
-      p.fade-text {
+      .fade-text {
         display: block;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+      }
+      h4 {
+        color: $lightOrange;
+        margin-bottom: 0.5em;
       }
     }
   }

@@ -14,6 +14,7 @@ export class MilestoneComponent implements IComponentOptions {
 export class MilestoneController {
   milestone:Milestone;
   mileStoneBadge:string;
+  showDetail:boolean = false;
 
 
   $onInit():void {
@@ -22,5 +23,9 @@ export class MilestoneController {
 
   private setMilestoneBadge():void {
     this.mileStoneBadge = this.milestone.objective.objectiveType.charAt(0).toUpperCase();
+  }
+  
+  toggleShowDetail():void {
+    this.showDetail = !this.showDetail;
   }
 }
