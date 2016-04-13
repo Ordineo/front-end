@@ -32,7 +32,7 @@ export class CardHeaderComponent implements IComponentOptions {
     showBtnEdit: '<',
     showBtnCancel: '<',
     showBtnSave: '<',
-    isSaveDisabled: '=?'
+    isSaveDisabled: '<'
   };
 }
 

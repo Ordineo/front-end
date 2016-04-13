@@ -1,12 +1,11 @@
 <div layout="row" layout-align="start end">
   <h3 flex class="to-upper-case">{{$ctrl.title}}</h3>
   <div layout="row" layout-align="end center">
-    <div layout="row">
-      <div ng-show="$ctrl.showBtnSave" class="edit-icons-fade">
+      <div ng-if="$ctrl.showBtnSave">
         <md-button
           ng-disabled="$ctrl.isSaveDisabled"
           aria-label="Save"
-          ng-show="$ctrl.showBtnSave"
+          ng-if="$ctrl.showBtnSave"
           ng-click="$ctrl.save()"
           class="btnSave md-icon-button md-warn ">
           <md-icon md-svg-src="act:done"></md-icon>
@@ -19,16 +18,15 @@
         </md-button>
       </div>
       <md-button
-        class="btnEdit"
         ng-click="$ctrl.editMode()"
         ng-if="$ctrl.showBtnEdit"
-        class="md-icon-button simple-fade">
+        class="btnEdit md-icon-button edit-icon-animation">
         <md-icon md-svg-icon="content:create"></md-icon>
       </md-button>
+
       <!--todo add on drag handler-->
-      <md-button ng-show="$ctrl.showBtnDrag" class="md-icon-button">
+      <md-button ng-if="$ctrl.showBtnDrag" class="md-icon-button btnDrag">
         <md-icon md-svg-src="act:open_with"></md-icon>
       </md-button>
-    </div>
   </div>
 </div>

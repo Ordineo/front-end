@@ -13,7 +13,7 @@ describe("Card header component", ()=> {
   var $compile:ICompileService;
   var $rootScope:IRootScopeService;
   var elm:IAugmentedJQuery;
-  var scope:any;
+  var scope:IScope;
   var isolateScope:IScope;
   var ctrl:CardHeaderController;
   var controllerAs:string = '$ctrl';
@@ -35,18 +35,84 @@ describe("Card header component", ()=> {
   });
 
   describe("when showBtnEdit is true", ()=> {
-    it('should show the edit button', ()=> {
+    var btnEdit:IAugmentedJQuery;
+
+    beforeEach(()=> {
       ctrl.showBtnEdit = true;
+      btnEdit = elm.find('md-button.btnEdit');
+    });
+
+    it('should add the edit button to the DOM', ()=> {
       isolateScope.$digest();
-      expect(elm.find('.btnEdit').length).toBe(1);
+      expect(btnEdit.length).toBe(1);
+    });
+
+    describe("when the edit btn is clicked", ()=> {
+      it('should show the save button', ()=> {
+        expect(elm.find('md-button.btnSave').length).toBe(0);
+        ctrl.editMode();
+        isolateScope.$digest();
+        expect(elm.find('md-button.btnSave').length).toBe(1);
+      });
+      it('should show the cancel button', ()=> {
+        expect(elm.find('md-button.btnCancel').length).toBe(0);
+        ctrl.editMode();
+        isolateScope.$digest();
+        expect(elm.find('md-button.btnCancel').length).toBe(1);
+      });
     });
   });
 
   describe("when showBtnEdit is false", ()=> {
-    it("should not show the edit button", ()=> {
+    it("should remove the edit button from the DOM", ()=> {
       ctrl.showBtnEdit = false;
       isolateScope.$digest();
-      expect(elm.find('.btnEdit').length).toBe(0);
+      expect(elm.find('md-button.btnEdit').length).toBe(0);
+    });
+  });
+
+  describe("when showBtnDrag is false", ()=> {
+    it("should remove the drag button from the DOM", ()=> {
+      ctrl.showBtnDrag = false;
+      isolateScope.$digest();
+      expect(elm.find('md-button.btnDrag').length).toBe(0);
+    });
+
+    describe("AND when showBtnEdit is true", ()=> {
+      var btnEdit:IAugmentedJQuery;
+
+      beforeEach(()=> {
+        ctrl.showBtnEdit = true;
+        btnEdit = elm.find('md-button.btnEdit');
+      });
+
+      it('should add the edit button to the DOM', ()=> {
+        isolateScope.$digest();
+        expect(btnEdit.length).toBe(1);
+      });
+
+      describe("when the edit btn is clicked", ()=> {
+        it('should show the save button', ()=> {
+          expect(elm.find('md-button.btnSave').length).toBe(0);
+          ctrl.editMode();
+          isolateScope.$digest();
+          expect(elm.find('md-button.btnSave').length).toBe(1);
+        });
+        it('should show the cancel button', ()=> {
+          expect(elm.find('md-button.btnCancel').length).toBe(0);
+          ctrl.editMode();
+          isolateScope.$digest();
+          expect(elm.find('md-button.btnCancel').length).toBe(1);
+        });
+      });
+    });
+  });
+
+  describe("when showBtnDrag is true", ()=> {
+    it("should add the drag button to the DOM", ()=> {
+      ctrl.showBtnDrag = true;
+      isolateScope.$digest();
+      expect(elm.find('md-button.btnDrag').length).toBe(1);
     });
   });
 });
