@@ -28,7 +28,11 @@ deploy:
     repo: Ordineo/front-end
     branch: master
 after_deploy:
+- mv ./codecept.json ./codecept-local.json
+- mv ./codecept-remote.json ./codecept.json
 - npm run test:e2e
+- mv ./codecept.json ./codecept-remote.json
+- mv ./codecept-local.json ./codecept.json
 - cat ./reports/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 notifications:
   slack:
