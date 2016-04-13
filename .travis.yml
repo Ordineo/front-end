@@ -11,6 +11,8 @@ before_script:
 - sleep 3 # give xvfb some time to start
 - npm run webdriver:start
 - npm start
+after_succes:
+- mv ./webdriver-output /dev/null
 before_deploy:
 - npm run build
 deploy:
