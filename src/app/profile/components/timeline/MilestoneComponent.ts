@@ -13,4 +13,14 @@ export class MilestoneComponent implements IComponentOptions {
 
 export class MilestoneController {
   milestone:Milestone;
+  mileStoneBadge:string;
+
+
+  $onInit():void {
+    this.setMilestoneBadge();
+  }
+
+  private setMilestoneBadge():void {
+    this.mileStoneBadge = this.milestone.objective.objectiveType.charAt(0).toUpperCase();
+  }
 }
