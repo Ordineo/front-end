@@ -77,17 +77,26 @@ milestone {
         border-bottom: 14px solid transparent;
         content: " ";
       }
+      &:focus {
+        outline: none;
+      }
+      &:hover {
+        cursor: pointer;
+      }
       .md-chips {
         box-shadow: none;
         font-size: 0.9em;
       }
-      p.fade-text {
+      .fade-text {
         display: block;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-
+      h4 {
+        color: $lightOrange;
+        margin-bottom: 0.5em;
+      }
     }
   }
 }

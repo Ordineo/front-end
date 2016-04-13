@@ -4,14 +4,18 @@
     <p class="md-headline end-date" ng-if="$ctrl.milestone.endDate">{{$ctrl.milestone.endDate | amDateFormat:'DD.MM.YYYY'}}<i class="fa fa-check greenIcon" aria-hidden="true"></i></p>
   </div>
   <div class="milestone-badge">{{$ctrl.mileStoneBadge}}</div>
-  <md-card flex="75" class="timeline-card">
+  <md-card flex="75" class="timeline-card" ng-click="$ctrl.toggleShowDetail()">
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">{{$ctrl.milestone.objective.title}}</span>
       </md-card-title-text>
     </md-card-title>
     <md-card-content>
-      <p class="fade-text">{{$ctrl.milestone.objective.description}}</p>
+      <p ng-class="{'fade-text': !$ctrl.showDetail}">{{$ctrl.milestone.objective.description}}</p>
+      <div ng-if="$ctrl.showDetail">
+        <h4>Personal motivation</h4>
+        <p>{{$ctrl.milestone.moreInformation}}</p>
+      </div>
 
       <md-chips readonly="true" ng-model="$ctrl.milestone.objective.tags">
       </md-chips>
