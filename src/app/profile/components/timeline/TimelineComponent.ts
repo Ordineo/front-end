@@ -16,6 +16,7 @@ export class TimelineController {
   public title:string = "Timeline";
   public milestones:Milestone[];
   public username:string;
+  public isContentLoaded:boolean;
 
   static $inject = [TimelineService.NAME];
 
@@ -24,10 +25,11 @@ export class TimelineController {
   }
 
   $onInit():void {
+    this.isContentLoaded = false;
     this.timelineService.getTimelineByUsername(this.username)
       .then((milestones:Milestone[])=>{
-        console.log(milestones);
         this.milestones = milestones;
+        this.isContentLoaded = true;
       },(onError)=>{
         console.log(onError);
       });
