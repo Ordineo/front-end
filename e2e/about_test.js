@@ -42,7 +42,7 @@ Scenario('Edit about section and save changes', (I) => {
   I.fillField({model: 'about.employee.description'},'test description');
   I.fillField({model: 'about.employee.unit.name'},'test unit');
   I.click('.btnSave', '.about-header');
-  I.waitForElement('.about-header');
+  I.waitForElement('.about-header', 2);
   I.see( 'test function', '.about-function');
   I.see( 'test unit', '.about-unit');
   I.see( 'test description', '.about-description');
