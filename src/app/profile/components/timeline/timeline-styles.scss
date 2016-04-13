@@ -2,22 +2,15 @@ $lightOrange: #f9a858;
 $lightGrey: rgba(0, 0, 0, 0.14);
 
 timeline {
+
   h3 {
     margin: 0;
   }
   ul {
     list-style: none;
     padding: 0;
-    position: relative;
-    &:before {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 20%;
-      content: " ";
-      width: 3px;
-      background-color: $lightOrange;
-    }
+    max-height: 560px;
+    overflow-y: scroll;
   }
 }
 
@@ -45,6 +38,15 @@ milestone {
       font-weight: bold;
       text-align: center;
       line-height: 35px;
+    }
+    &:before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 20%;
+      content: " ";
+      width: 3px;
+      background-color: $lightOrange;
     }
     .md-headline {
       font-size: 1.3em;
