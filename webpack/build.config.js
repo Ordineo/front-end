@@ -15,6 +15,8 @@ buildConfig.plugins = [
   })
 ];
 
+buildConfig.module.loaders.push({test: /\.ts$/, loader: "webpack-strip-block"});
+
 buildConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
 
 module.exports = buildConfig;
