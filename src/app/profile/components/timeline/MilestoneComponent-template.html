@@ -1,7 +1,7 @@
 <li layout="row">
   <div flex="25">
     <p class="md-headline due-date" ng-if="!$ctrl.milestone.endDate">{{$ctrl.milestone.dueDate | amDateFormat:'DD.MM.YYYY'}}</p>
-    <p class="md-headline end-date" ng-if="$ctrl.milestone.endDate">{{$ctrl.milestone.endDate | amDateFormat:'DD.MM.YYYY'}}</p>
+    <p class="md-headline end-date" ng-if="$ctrl.milestone.endDate">{{$ctrl.milestone.endDate | amDateFormat:'DD.MM.YYYY'}}<i class="fa fa-check greenIcon" aria-hidden="true"></i></p>
   </div>
   <div class="milestone-badge">{{$ctrl.mileStoneBadge}}</div>
   <md-card flex="75" class="timeline-card">

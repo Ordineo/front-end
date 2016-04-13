@@ -25,6 +25,10 @@ timeline {
 milestone {
   li {
     position: relative;
+    .greenIcon {
+      color: limegreen;
+      padding-left: 5px;
+    }
     .milestone-badge {
       background-color: $lightOrange;
       width: 35px;
@@ -80,6 +84,7 @@ milestone {
         text-overflow: ellipsis;
         white-space: nowrap;
       }
+
     }
   }
 }
