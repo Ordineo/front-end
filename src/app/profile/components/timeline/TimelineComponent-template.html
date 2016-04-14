@@ -1,0 +1,23 @@
+<md-card>
+  <div class="loading-container" layout="row" layout-align="center center" ng-if="!$ctrl.isContentLoaded">
+    <md-progress-circular class="md-primary" md-diameter="60"></md-progress-circular>
+  </div>
+  <div class="content-container trans-height" layout="row" ng-if="$ctrl.isContentLoaded">
+    <span flex="5"></span>
+
+    <!-- Card content -->
+    <div flex layout="column">
+      <card-header
+        show-btn-drag="true"
+        title="{{$ctrl.title}}">
+      </card-header>
+
+
+      <ul>
+        <milestone milestone="mile" ng-repeat="mile in $ctrl.milestones">
+        </milestone>
+      </ul>
+    </div>
+    <span flex="5"></span>
+  </div>
+</md-card>

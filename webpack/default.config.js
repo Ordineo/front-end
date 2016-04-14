@@ -17,9 +17,9 @@ module.exports = {
   module: {
     loaders: [
       {
+
         test: /\.ts$/, loader: 'ts-loader'
       },
-      {test: /\.hbs/, loader: "handlebars-template-loader"},
       {
         test: /\.html$/,
         exclude: /node_modules/,
