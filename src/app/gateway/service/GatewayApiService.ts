@@ -47,4 +47,8 @@ export class GatewayApiService{
   public getEmployeesApi():string{
     return this.buildApiUrl(this.EMPLOYEE_API);
   }
+
+  public getMilestonesApi(username:string):string {
+    return 'https://gateway-ordineo.cfapps.io/milestone-ordineo/api/milestones/search/findByUsername?username=' + username;
+  }
 }

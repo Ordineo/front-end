@@ -69,4 +69,8 @@ export class ProfileService implements IProfileService {
       transformRequest: angular.identity
     });
   }
+
+  public getMilestonesByUsername(username:string):IPromise<any> {
+    return this.$http.get(this.gateway.getMilestonesApi(username));
+  }
 }
