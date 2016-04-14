@@ -11,9 +11,10 @@
         show-btn-drag="true"
         title="{{$ctrl.title}}">
       </card-header>
-
-
-      <ul>
+      <div flex layout="row" layout-align="center center" ng-if="!$ctrl.milestones || $ctrl.milestones.length === 0">
+        <div class="md-headline">No milestones</div>
+      </div>
+      <ul ng-if="$ctrl.milestones && $ctrl.milestones.length > 0">
         <milestone milestone="mile" ng-repeat="mile in $ctrl.milestones">
         </milestone>
       </ul>

@@ -2,7 +2,6 @@ $lightOrange: #f9a858;
 $lightGrey: rgba(0, 0, 0, 0.14);
 
 timeline {
-
   h3 {
     margin: 0;
   }
@@ -11,6 +10,10 @@ timeline {
     padding: 0;
     max-height: 560px;
     overflow-y: scroll;
+  }
+  .md-headline {
+    padding-top: 1em;
+    padding-bottom: 1em;
   }
 }
 
