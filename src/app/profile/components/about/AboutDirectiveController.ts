@@ -54,16 +54,6 @@ export class AboutDirectiveController {
 
     if (this.username) {
       this.getEmployeeDataAsync(this.username, profileService, rootScope);
-
-      // Testing get milestones
-      profileService.getMilestonesByUsername(this.username)
-        .then((milestonesData:any)=> {
-          console.log("success");
-          console.log(milestonesData)
-        }, (onErrorData)=> {
-          console.log("error");
-          console.log(onErrorData);
-        });
     }
 
     this.genders = [
