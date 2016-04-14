@@ -16,6 +16,7 @@
     "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#470954c4f427e0805a2d633636a7c6aa7170def8",
     "require": "github:DefinitelyTyped/DefinitelyTyped/requirejs/require.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c",
     "restangular": "github:DefinitelyTyped/DefinitelyTyped/restangular/restangular.d.ts#f2ae460e1751bb6668d291d4eb9255f047dd0ac5",
+    "rx.angular": "registry:dt/rx.angular#0.0.0+20160317120654",
     "source-map": "github:DefinitelyTyped/DefinitelyTyped/source-map/source-map.d.ts#5d0f2126c8dac8fce0ff020218aea06607213b0d",
     "traverson": "github:DefinitelyTyped/DefinitelyTyped/traverson/traverson.d.ts#9cc31a80a70d882ffe3f02247e3c8c968d3518a9",
     "uglify-js": "github:DefinitelyTyped/DefinitelyTyped/uglify-js/uglify-js.d.ts#5d0f2126c8dac8fce0ff020218aea06607213b0d",
