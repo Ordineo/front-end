@@ -2,14 +2,21 @@
   <div class="loading-container" layout="row" layout-align="center center" ng-if="!$ctrl.isContentLoaded">
     <md-progress-circular class="md-primary" md-diameter="60"></md-progress-circular>
   </div>
-  <div class="content-container trans-height" layout="row" ng-if="$ctrl.isContentLoaded">
+
+  <div class="content-container trans-height" layout="row">
     <span flex="5"></span>
     <div flex layout="column">
       <card-header
         show-btn-drag="true"
         title="{{$ctrl.title}}">
       </card-header>
-      <timeline id="timeline" username="{{$ctrl.username}}" onContentLoaded="$ctrl.onContentLoaded"></timeline>
+      <timeline
+        ng-if="!$ctrl.createMode"
+        ng-show="$ctrl.isContentLoaded"
+        id="timeline"
+        username="{{$ctrl.username}}"
+        on-content-loaded="$ctrl.loaded(isLoaded)">
+      </timeline>
       <!--todo editorview-->
     </div>
     <span flex="5"></span>

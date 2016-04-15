@@ -28,8 +28,7 @@ export class MilestoneContainerController {
 
   }
 
-  onContentLoaded(isLoaded:boolean):void {
+  public loaded(isLoaded:any):void {
     this.isContentLoaded = isLoaded;
   }
-
 }

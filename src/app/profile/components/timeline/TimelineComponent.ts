@@ -44,7 +44,7 @@ export class TimelineController {
     this.timelineService.getMilestonesByUsername(this.username)
       .then((milestones:Milestone[])=> {
           this.milestones = milestones;
-        this.onContentLoaded({isLoaded: true});
+          this.onContentLoaded({isLoaded: true});
         }, (onError)=> {
           console.log(onError);
         }
