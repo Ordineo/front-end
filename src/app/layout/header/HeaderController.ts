@@ -1,14 +1,15 @@
 import {ProfileService} from "../../profile/services/ProfileService";
 import {Employee} from "../../core/models/employee";
 import IRootScopeService = angular.IRootScopeService;
+import IObservable = Rx.IObservable;
 export class HeaderController {
   public button:any;
   public users:Array<User>;
 
   static EVENT_USER_SELECTED:string = "searchUserSelected";
-  static $inject = [ProfileService.NAME, '$rootScope'];
+  static $inject = [ProfileService.NAME, '$rootScope','rx'];
 
-  constructor(private profileService:ProfileService, private rootScope:IRootScopeService) {
+  constructor(private profileService:ProfileService, private rootScope:IRootScopeService, private rx:any) {
     this.button = {title: 'search', icon: 'act:search'};
   }
 
@@ -30,6 +31,8 @@ export class HeaderController {
   }
 
   $onInit():void {
+    var observable:IObservable = this.rx.Observable;
+    observable.
     this.profileService.getAllEmployees()
       .then((employees:Array<Employee>)=> {
         this.users = this.parseEmployees(employees);
