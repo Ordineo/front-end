@@ -3,11 +3,10 @@ import IHttpService = angular.IHttpService;
 import IQService = angular.IQService;
 import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 import {TraversonHalService} from "../../traverson/service/TraversonHalService";
-var mock:any = require('./mocktimelinedata.json');
 
-export class TimelineService {
+export class MilestoneService {
 
-  static NAME:string = "TimelineService";
+  static NAME:string = "MilestoneService";
   static $inject:Array<string> = [
     TraversonHalService.SERVICE_NAME,
     GatewayApiService.SERVICE_NAME,
@@ -28,10 +27,5 @@ export class TimelineService {
       .withTemplateParameters({username: userName})
       .getResource()
       .result;
-    /*var deffered = this.$q.defer();
-    deffered.resolve(
-      this.$http.get(this.gateway.getMilestonesApi(username))
-    );
-    return deffered.promise;*/
   }
 }

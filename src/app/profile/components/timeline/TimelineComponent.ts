@@ -1,17 +1,17 @@
 import IComponentOptions = angular.IComponentOptions;
 import {Milestone} from "../../../core/models/milestone";
-import {TimelineService} from "../../services/TimelineService";
+import {MilestoneService} from "../../services/MilestoneService";
 import IScope = angular.IScope;
 import {HeaderController} from "../../../layout/header/HeaderController";
 import IAngularEvent = angular.IAngularEvent;
-require('./timeline-styles.scss');
 
 export class TimelineComponent implements IComponentOptions {
   static NAME:string = "timeline";
   controller:any = TimelineController;
   template:string = require('./TimelineComponent-template.html');
   bindings:any = {
-    username: '@'
+    username: '@',
+    onContentLoaded: '&'
   };
 }
 
@@ -19,16 +19,15 @@ export class TimelineController {
   public title:string = "Timeline";
   public milestones:Milestone[];
   public username:string;
-  public isContentLoaded:boolean;
+  public onContentLoaded:Function;
 
-  static $inject = [TimelineService.NAME, '$rootScope'];
+  static $inject = [MilestoneService.NAME, '$rootScope'];
 
-  constructor(private timelineService:TimelineService, private rootScope:IScope) {
+  constructor(private timelineService:MilestoneService, private rootScope:IScope) {
 
   }
 
   $onInit():void {
-    this.isContentLoaded = false;
     this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=> {
       this.username = data.username;
       this.getMilestoneDataAsync();
@@ -36,16 +35,16 @@ export class TimelineController {
     if (this.username) {
       this.getMilestoneDataAsync();
     } else {
-      this.isContentLoaded = true;
+      this.onContentLoaded({isLoaded: true});
     }
   }
 
   getMilestoneDataAsync():void {
-    this.isContentLoaded = false;
+    this.onContentLoaded({isLoaded: false});
     this.timelineService.getMilestonesByUsername(this.username)
       .then((milestones:Milestone[])=> {
           this.milestones = milestones;
-          this.isContentLoaded = true;
+          this.onContentLoaded({isLoaded: true});
         }, (onError)=> {
           console.log(onError);
         }
