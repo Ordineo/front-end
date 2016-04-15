@@ -7,9 +7,9 @@ export class HeaderController {
   public users:Array<User>;
 
   static EVENT_USER_SELECTED:string = "searchUserSelected";
-  static $inject = [ProfileService.NAME, '$rootScope','rx'];
+  static $inject = [ProfileService.NAME, '$rootScope'];
 
-  constructor(private profileService:ProfileService, private rootScope:IRootScopeService, private rx:any) {
+  constructor(private profileService:ProfileService, private rootScope:IRootScopeService) {
     this.button = {title: 'search', icon: 'act:search'};
   }
 
@@ -31,8 +31,6 @@ export class HeaderController {
   }
 
   $onInit():void {
-    var observable:IObservable = this.rx.Observable;
-    observable.
     this.profileService.getAllEmployees()
       .then((employees:Array<Employee>)=> {
         this.users = this.parseEmployees(employees);
