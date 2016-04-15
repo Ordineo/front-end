@@ -1,10 +1,9 @@
 import IComponentOptions = angular.IComponentOptions;
 import {Milestone} from "../../../core/models/milestone";
-import {TimelineService} from "../../services/TimelineService";
+import {MilestoneService} from "../../services/MilestoneService";
 import IScope = angular.IScope;
 import {HeaderController} from "../../../layout/header/HeaderController";
 import IAngularEvent = angular.IAngularEvent;
-require('./timeline-styles.scss');
 
 export class TimelineComponent implements IComponentOptions {
   static NAME:string = "timeline";
@@ -21,9 +20,9 @@ export class TimelineController {
   public username:string;
   public isContentLoaded:boolean;
 
-  static $inject = [TimelineService.NAME, '$rootScope'];
+  static $inject = [MilestoneService.NAME, '$rootScope'];
 
-  constructor(private timelineService:TimelineService, private rootScope:IScope) {
+  constructor(private timelineService:MilestoneService, private rootScope:IScope) {
 
   }
 
@@ -33,6 +32,7 @@ export class TimelineController {
       this.username = data.username;
       this.getMilestoneDataAsync();
     });
+    console.log(this.username);
     if (this.username) {
       this.getMilestoneDataAsync();
     } else {
