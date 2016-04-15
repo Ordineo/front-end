@@ -37,6 +37,7 @@ angular.module(ORDINEO_CORE, deps)
       }
     };
   })
+
   .animation(".fade", fadeInOnNgShow)
   .animation(".simple-fade", simpleFade)
   .animation(".edit-icons-fade", editIcons)

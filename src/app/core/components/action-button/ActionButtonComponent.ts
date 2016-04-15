@@ -29,7 +29,7 @@ export class ActionButtonController{
     this.onClick({btn: this});
   }
 }
-export interface ActionButtonConfig {
+export interface ActionButton {
   label?:string,
   onClick?:Function,
   isActive?:boolean,

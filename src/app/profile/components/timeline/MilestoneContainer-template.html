@@ -1,21 +1,21 @@
 <md-card>
-  <div class="loading-container" layout="row" layout-align="center center" ng-if="!$ctrl.isContentLoaded">
-    <md-progress-circular class="md-primary" md-diameter="60"></md-progress-circular>
-  </div>
-
   <div class="content-container trans-height" layout="row">
     <span flex="5"></span>
     <div flex layout="column">
       <card-header
+        buttons="$ctrl.actionButtons"
         show-btn-drag="true"
         title="{{$ctrl.title}}">
       </card-header>
+      <div class="loading-container" layout="row" layout-align="center center" ng-if="!$ctrl.isContentLoaded">
+        <md-progress-circular class="md-primary" md-diameter="60"></md-progress-circular>
+      </div>
       <timeline
         ng-if="!$ctrl.createMode"
         ng-show="$ctrl.isContentLoaded"
         id="timeline"
         username="{{$ctrl.username}}"
-        on-content-loaded="$ctrl.loaded(isLoaded)">
+        on-content-loaded="$ctrl.onContentLoaded(isLoaded)">
       </timeline>
       <!--todo editorview-->
     </div>

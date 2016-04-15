@@ -1,4 +1,4 @@
-import {ActionButtonConfig} from "../action-button/ActionButtonComponent";
+import {ActionButton} from "../action-button/ActionButtonComponent";
 require('./card-header-styles.scss');
 import IComponentOptions = angular.IComponentOptions;
 
@@ -50,7 +50,7 @@ interface CardHeaderScope {
 }
 
 export class CardHeaderController implements CardHeaderScope {
-  public buttons:Array<ActionButtonConfig>;
+  public buttons:Array<ActionButton>;
   public title:string;
   isSaveDisabled:boolean;
   public onEditClick:Function;
