@@ -10,6 +10,7 @@ import {editIcons} from "./animations/animations";
 import {transitionHeight} from "./animations/animations";
 import {flowHeight} from "./animations/animations";
 import {FileUploadDirective} from "./components/FileUploadDirective";
+import {ActionButtonComponent} from "./components/action-button/ActionButtonComponent";
 require('../gsap/TweenMax.js');
 
 
@@ -24,6 +25,7 @@ var deps:Array<string> = [
 angular.module(ORDINEO_CORE, deps)
   .config(configureStates)
   .component(CardHeaderComponent.NAME, new CardHeaderComponent())
+  .component(ActionButtonComponent.NAME, new ActionButtonComponent())
   .directive(FileUploadDirective.NAME, FileUploadDirective.instance())
   .directive('customOnChange', function () {
     return {

@@ -1,3 +1,4 @@
+import {ActionButtonConfig} from "../action-button/ActionButtonComponent";
 require('./card-header-styles.scss');
 import IComponentOptions = angular.IComponentOptions;
 
@@ -24,6 +25,7 @@ export class CardHeaderComponent implements IComponentOptions {
   template:string = require('./card-header-template.html');
   bindings:any = {
     title: '@',
+    buttons: '<',
     onEditClick: '&',
     onDragClick: '&',
     onSaveClick: '&',
@@ -48,6 +50,7 @@ interface CardHeaderScope {
 }
 
 export class CardHeaderController implements CardHeaderScope {
+  public buttons:Array<ActionButtonConfig>;
   public title:string;
   isSaveDisabled:boolean;
   public onEditClick:Function;
@@ -80,6 +83,10 @@ export class CardHeaderController implements CardHeaderScope {
     this.showBtnCancel = true;
     this.showBtnSave = true;
     this.onEditClick();
+  }
+
+  $onInit():void {
+
   }
 }
 
