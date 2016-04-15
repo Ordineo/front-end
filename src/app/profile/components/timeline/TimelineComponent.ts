@@ -18,22 +18,9 @@ export class TimelineComponent implements IComponentOptions {
 
 export class TimelineController {
   public actionButtons:Array<ActionButtonConfig> = [];
-
   public createButton:ActionButtonConfig;
-
-  public saveButton:ActionButtonConfig = {
-    label: 'save milestone',
-    isActive: false,
-    onClick: this.save,
-    svgSrc: 'act:done'
-  };
-
-  public cancelButton:ActionButtonConfig = {
-    label: 'cancel create milestone',
-    isActive: false,
-    onClick: this.cancel,
-    svgSrc: 'act:highlight_off'
-  };
+  public saveButton:ActionButtonConfig;
+  public cancelButton:ActionButtonConfig;
 
   public title:string = "Timeline";
   public milestones:Milestone[];
@@ -67,9 +54,11 @@ export class TimelineController {
     this.initCreateButton();
     this.actionButtons.push(this.createButton);
 
+    this.initSaveButton();
+    this.actionButtons.push(this.saveButton);
 
-    this.actionButtons.push(configureSaveButton());
-    this.actionButtons.push(configureCancelButton());
+    this.initCancelButton();
+    this.actionButtons.push(this.cancelButton);
   }
 
   initCreateButton():void {
@@ -79,17 +68,25 @@ export class TimelineController {
       svgSrc: 'content:add_circle',
       onClick: (selectedButton:ActionButtonConfig)=> {
         selectedButton.isActive = !selectedButton.isActive;
+        if(!selectedButton.isActive) {
+          this.cancelButton.isActive = true;
+          this.saveButton.isActive = true;
+        }
       },
     };
   }
 
   initSaveButton():void {
-    this.saveButton= {
+    this.saveButton = {
       label: 'Save milestone',
       isActive: false,
       svgSrc: 'act:done',
       onClick: (selectedButton:ActionButtonConfig)=> {
         selectedButton.isActive = !selectedButton.isActive;
+        if(!selectedButton.isActive) {
+          this.cancelButton.isActive = false;
+          this.createButton.isActive = true;
+        }
       },
     };
   }
@@ -101,6 +98,10 @@ export class TimelineController {
       svgSrc: 'act:highlight_off',
       onClick: (selectedButton:ActionButtonConfig)=> {
         selectedButton.isActive = !selectedButton.isActive;
+        if(!selectedButton.isActive) {
+          this.saveButton.isActive = false;
+          this.createButton.isActive = true;
+        }
       },
     };
   }
