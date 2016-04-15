@@ -10,7 +10,8 @@ export class TimelineComponent implements IComponentOptions {
   controller:any = TimelineController;
   template:string = require('./TimelineComponent-template.html');
   bindings:any = {
-    username: '@'
+    username: '@',
+    onContentLoaded: '&'
   };
 }
 
@@ -18,7 +19,7 @@ export class TimelineController {
   public title:string = "Timeline";
   public milestones:Milestone[];
   public username:string;
-  public isContentLoaded:boolean;
+  public onContentLoaded:Function;
 
   static $inject = [MilestoneService.NAME, '$rootScope'];
 
@@ -27,25 +28,23 @@ export class TimelineController {
   }
 
   $onInit():void {
-    this.isContentLoaded = false;
     this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=> {
       this.username = data.username;
       this.getMilestoneDataAsync();
     });
-    console.log(this.username);
     if (this.username) {
       this.getMilestoneDataAsync();
     } else {
-      this.isContentLoaded = true;
+      this.onContentLoaded({isLoaded: true});
     }
   }
 
   getMilestoneDataAsync():void {
-    this.isContentLoaded = false;
+    this.onContentLoaded({isLoaded: false});
     this.timelineService.getMilestonesByUsername(this.username)
       .then((milestones:Milestone[])=> {
           this.milestones = milestones;
-          this.isContentLoaded = true;
+        this.onContentLoaded({isLoaded: true});
         }, (onError)=> {
           console.log(onError);
         }

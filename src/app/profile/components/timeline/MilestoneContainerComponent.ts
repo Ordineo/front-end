@@ -18,7 +18,7 @@ export class MilestoneContainerComponent implements IComponentOptions {
 export class MilestoneContainerController {
   public title:string = "Timeline"; //todo
   public username:string;
-  public isContentLoaded:boolean = true; //todo
+  public isContentLoaded:boolean = false ;
 
   constructor() {
 
@@ -27,4 +27,9 @@ export class MilestoneContainerController {
   $onInit():void {
 
   }
+
+  onContentLoaded(isLoaded:boolean):void {
+    this.isContentLoaded = isLoaded;
+  }
+
 }

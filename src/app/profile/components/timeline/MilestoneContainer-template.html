@@ -9,7 +9,7 @@
         show-btn-drag="true"
         title="{{$ctrl.title}}">
       </card-header>
-      <timeline id="timeline" username="{{$ctrl.username}}"></timeline>
+      <timeline id="timeline" username="{{$ctrl.username}}" onContentLoaded="$ctrl.onContentLoaded"></timeline>
       <!--todo editorview-->
     </div>
     <span flex="5"></span>
