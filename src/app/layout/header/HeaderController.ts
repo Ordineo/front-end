@@ -1,6 +1,7 @@
 import {ProfileService} from "../../profile/services/ProfileService";
 import {Employee} from "../../core/models/employee";
 import IRootScopeService = angular.IRootScopeService;
+import IObservable = Rx.IObservable;
 export class HeaderController {
   public button:any;
   public users:Array<User>;

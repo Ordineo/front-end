@@ -12,14 +12,15 @@ import {flowHeight} from "./animations/animations";
 import {FileUploadDirective} from "./components/FileUploadDirective";
 import {ActionButtonComponent} from "./components/action-button/ActionButtonComponent";
 require('../gsap/TweenMax.js');
-
+import 'rx-angular'
 
 export const ORDINEO_CORE = 'ordineo.core';
 
 var deps:Array<string> = [
   'ui.router',
   'ngAnimate',
-  'ngMessages'
+  'ngMessages',
+  'rx'
 ];
 
 angular.module(ORDINEO_CORE, deps)
