@@ -19,6 +19,7 @@ export class MilestoneContainerController {
   public title:string = "Timeline"; //todo
   public username:string;
   public isContentLoaded:boolean = false ;
+  public createMode:boolean = true;
 
   constructor() {
 
