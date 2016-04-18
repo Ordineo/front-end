@@ -1,17 +1,16 @@
 <div layout="column">
   <div layout="row">
-    <md-input-container class="md-block flex-50">
+    <md-input-container class="md-block flex-75">
       <label>Objective</label>
       <input>
     </md-input-container>
     <md-input-container class="md-block datepicker-container flex-25">
       <label>Start Date</label>
-      <md-datepicker></md-datepicker>
+      <md-datepicker ng-model=""></md-datepicker>
     </md-input-container>
-
   </div>
   <div layout="row">
-    <md-input-container class="md-block flex-75">
+    <md-input-container class="md-block flex">
       <label>Description</label>
       <textarea  md-maxlength="150" rows="5" md-select-on-focus></textarea>
     </md-input-container>
