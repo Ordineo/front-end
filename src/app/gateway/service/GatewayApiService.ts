@@ -51,4 +51,8 @@ export class GatewayApiService{
   public getMilestonesApi(username:string):string {
     return 'https://gateway-ordineo.cfapps.io/milestone-ordineo/api/milestones/search/findByUsername?username=' + username;
   }
+
+  public getCreateMilestonesApi():string {
+    return 'https://gateway-ordineo.cfapps.io/milestone-ordineo/api/milestones';
+  }
 }
