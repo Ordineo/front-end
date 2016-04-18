@@ -16,6 +16,7 @@
         <!-- Card header -->
         <card-header
           class="about-header"
+          buttons="about.actionButtons"
           is-save-disabled="aboutEditForm.$invalid"
           show-btn-edit="true"
           show-btn-drag="true"
@@ -24,7 +25,6 @@
           on-cancel-click="about.onCancel()"
           on-save-click="about.onSubmit()">
         </card-header>
-
 
         <!-- Show info -->
         <div class="about-content" layout="row" layout-xs="column" ng-if="!about.isEditModeEnabled">

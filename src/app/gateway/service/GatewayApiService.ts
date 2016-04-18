@@ -13,11 +13,12 @@ export class GatewayApiService{
   private protocol:string;
   public host:string = 'gateway-ordineo.cfapps.io';
 
-  public EMPLOYEE_API:string = "/employee-ordineo/api/";
+  public EMPLOYEES_API:string = "/employee-ordineo/api/";
   public PERSONS_API:string = "/persons-oraj360/api/";
   public OBJECTIVES_API:string = "/objectives-oraj360/api/";
-  public TIMELINES_API:string = "/timeline-oraj360/api/";
   public SOCIAL_API:string = "/social-ordineo/api/";
+  public MILESTONES_API:string = "/milestone-ordineo/api/";
+
 
   constructor(private $window:IWindowService){
     this.protocol =  "https://";
@@ -45,11 +46,11 @@ export class GatewayApiService{
   }
 
   public getEmployeesApi():string{
-    return this.buildApiUrl(this.EMPLOYEE_API);
+    return this.buildApiUrl(this.EMPLOYEES_API);
   }
 
-  public getMilestonesApi(username:string):string {
-    return 'https://gateway-ordineo.cfapps.io/milestone-ordineo/api/milestones/search/findByUsername?username=' + username;
+  public getMilestonesApi():string {
+    return this.buildApiUrl(this.MILESTONES_API) + 'milestones/search/';
   }
 
   public getCreateMilestonesApi():string {

@@ -18,6 +18,6 @@ export class ProfileStateCtrl {
   public username:string;
 
   constructor() {
-    this.username = "Rydg";
+    this.username = "gide";
   }
 }

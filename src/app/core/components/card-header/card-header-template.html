@@ -1,32 +1,40 @@
 <div layout="row" layout-align="start end">
   <h3 flex class="to-upper-case">{{$ctrl.title}}</h3>
   <div layout="row" layout-align="end center">
-      <div ng-if="$ctrl.showBtnSave">
-        <md-button
-          ng-disabled="$ctrl.isSaveDisabled"
-          aria-label="Save"
-          ng-if="$ctrl.showBtnSave"
-          ng-click="$ctrl.save()"
-          class="btnSave md-icon-button md-warn ">
-          <md-icon md-svg-src="act:done"></md-icon>
-        </md-button>
-        <md-button
-          ng-click="$ctrl.cancel()"
-          ng-show="$ctrl.showBtnCancel"
-          class="btnCancel md-icon-button btn-red">
-          <md-icon md-svg-src="act:highlight_off"></md-icon>
-        </md-button>
-      </div>
+    <div ng-if="$ctrl.showBtnSave">
       <md-button
-        ng-click="$ctrl.editMode()"
-        ng-if="$ctrl.showBtnEdit"
-        class="btnEdit md-icon-button edit-icon-animation">
-        <md-icon md-svg-icon="content:create"></md-icon>
+        ng-disabled="$ctrl.isSaveDisabled"
+        aria-label="Save"
+        ng-if="$ctrl.showBtnSave"
+        ng-click="$ctrl.save()"
+        class="btnSave md-icon-button md-warn ">
+        <md-icon md-svg-src="act:done"></md-icon>
       </md-button>
+      <md-button
+        ng-click="$ctrl.cancel()"
+        ng-show="$ctrl.showBtnCancel"
+        class="btnCancel md-icon-button btn-red">
+        <md-icon md-svg-src="act:highlight_off"></md-icon>
+      </md-button>
+    </div>
+    <md-button
+      ng-click="$ctrl.editMode()"
+      ng-if="$ctrl.showBtnEdit"
+      class="btnEdit md-icon-button edit-icon-animation">
+      <md-icon md-svg-icon="content:create"></md-icon>
+    </md-button>
 
-      <!--todo add on drag handler-->
-      <md-button ng-if="$ctrl.showBtnDrag" class="md-icon-button btnDrag">
-        <md-icon md-svg-src="act:open_with"></md-icon>
-      </md-button>
+    <!--todo add on drag handler-->
+    <action-button ng-repeat="btn in $ctrl.buttons"
+      svg-src="{{btn.svgSrc}}"
+      is-active="btn.isActive"
+      on-click="btn.onClick(btn)"
+      label="{{btn.label}}"
+      is-disabled="btn.isDisabled">
+    </action-button>
+
+    <md-button ng-if="$ctrl.showBtnDrag" class="md-icon-button btnDrag">
+      <md-icon md-svg-src="act:open_with"></md-icon>
+    </md-button>
   </div>
 </div>

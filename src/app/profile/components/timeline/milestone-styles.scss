@@ -1,16 +1,17 @@
 $lightOrange: #f9a858;
+$orange: #e98300;
 $lightGrey: rgba(0, 0, 0, 0.14);
 
 timeline {
-
-  h3 {
-    margin: 0;
-  }
   ul {
     list-style: none;
     padding: 0;
     max-height: 560px;
     overflow-y: scroll;
+  }
+  .md-headline {
+    padding-top: 1em;
+    padding-bottom: 1em;
   }
 }
 
@@ -100,3 +101,18 @@ milestone {
     }
   }
 }
+
+md-input-container {
+  margin-bottom: 0;
+}
+
+.datepicker-container {
+  .md-datepicker-button {
+    display: none !important;
+  }
+  .md-datepicker-input-container {
+    margin-left: 0 !important;
+    border-bottom: none;
+  }
+}
+

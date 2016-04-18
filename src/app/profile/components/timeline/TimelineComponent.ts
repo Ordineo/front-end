@@ -1,14 +1,17 @@
 import IComponentOptions = angular.IComponentOptions;
 import {Milestone} from "../../../core/models/milestone";
-import {TimelineService} from "../../services/TimelineService";
-require('./timeline-styles.scss');
+import {MilestoneService} from "../../services/MilestoneService";
+import IScope = angular.IScope;
+import {HeaderController} from "../../../layout/header/HeaderController";
+import IAngularEvent = angular.IAngularEvent;
 
 export class TimelineComponent implements IComponentOptions {
   static NAME:string = "timeline";
   controller:any = TimelineController;
   template:string = require('./TimelineComponent-template.html');
   bindings:any = {
-    username: '@'
+    username: '@',
+    onContentLoaded: '&'
   };
 }
 
@@ -16,22 +19,35 @@ export class TimelineController {
   public title:string = "Timeline";
   public milestones:Milestone[];
   public username:string;
-  public isContentLoaded:boolean;
+  public onContentLoaded:Function;
 
-  static $inject = [TimelineService.NAME];
+  static $inject = [MilestoneService.NAME, '$rootScope'];
 
-  constructor(private timelineService:TimelineService) {
+  constructor(private timelineService:MilestoneService, private rootScope:IScope) {
 
   }
 
   $onInit():void {
-    this.isContentLoaded = false;
-    this.timelineService.getTimelineByUsername(this.username)
-      .then((milestones:Milestone[])=>{
-        this.milestones = milestones;
-        this.isContentLoaded = true;
-      },(onError)=>{
-        console.log(onError);
-      });
+    this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=> {
+      this.username = data.username;
+      this.getMilestoneDataAsync();
+    });
+    if (this.username) {
+      this.getMilestoneDataAsync();
+    } else {
+      this.onContentLoaded({isLoaded: true});
+    }
+  }
+
+  getMilestoneDataAsync():void {
+    this.onContentLoaded({isLoaded: false});
+    this.timelineService.getMilestonesByUsername(this.username)
+      .then((milestones:Milestone[])=> {
+          this.milestones = milestones;
+          this.onContentLoaded({isLoaded: true});
+        }, (onError)=> {
+          console.log(onError);
+        }
+      );
   }
 }

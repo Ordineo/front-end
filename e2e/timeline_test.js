@@ -5,10 +5,10 @@ Before((I) => {
 });
 
 Scenario('Show the timeline and click on a card', (I) => {
-  I.seeElement('timeline');
+  I.seeElement('milestone-container');
+  I.see('Timeline', '#milestone-container');
   I.waitForElement('#timeline', 2);
-  I.see('Timeline', '#timeline');
-  I.dontSeeElement('#timeline .btnEdit');
+  I.dontSeeElement('#milestone-container .btnEdit');
   I.seeElement('.fade-text', '#timeline');
   I.dontSee('Personal motivation', '#timeline');
   I.click('.timeline-card', '#timeline');

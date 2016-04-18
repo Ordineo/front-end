@@ -86,7 +86,7 @@ export class AboutDirectiveController {
     }
   }
 
-  test():void{
+  test():void {
     console.log(this.imageSelected);
     this.imageSelected = true;
   }
@@ -141,7 +141,6 @@ export class AboutDirectiveController {
       this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
     });
   }
-
   private setInfoCache():void {
     this.aboutInfoCache = {
       function: this.employee.function,
@@ -151,7 +150,7 @@ export class AboutDirectiveController {
   }
 
   private setViewModelOnEmployeeDataFetched(_employee_:Employee):void {
-    if(!_employee_.unit){
+    if (!_employee_.unit) {
       _employee_.unit = {name: 'tes'};
     }
     this.employee = _employee_;
@@ -205,7 +204,7 @@ export class AboutDirectiveController {
   changePicture():void {
     var file = this.myFile;
     this.profileService.setProfilePicture(file, this.imgUrl)
-      .then((data)=>{
+      .then((data)=> {
         console.log('uploaded');
         this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
         this.isEditModeEnabled = false;
