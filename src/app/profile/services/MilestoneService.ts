@@ -3,6 +3,7 @@ import IHttpService = angular.IHttpService;
 import IQService = angular.IQService;
 import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 import {TraversonHalService} from "../../traverson/service/TraversonHalService";
+import {Milestone} from "../../core/models/milestone";
 
 export class MilestoneService {
 
@@ -16,16 +17,31 @@ export class MilestoneService {
   constructor(private traverson:TraversonHalService,
               private gateway:GatewayApiService,
               private $q:IQService,
-              private $http:IHttpService){
+              private $http:IHttpService) {
   }
 
   public getMilestonesByUsername(userName:string):IPromise<any> {
     return this.traverson.hal()
-      .from(this.gateway.getMilestonesApi())
+      .from(this.gateway.getMilestonesApi() + '/milestones/search')
       .jsonHal()
-      .follow('findByUsername','milestones[$all]')
+      .follow('findByUsername', 'milestones[$all]')
       .withTemplateParameters({username: userName})
       .getResource()
       .result;
+  }
+
+  public searchObjectives(qry:string):IPromise<any> {
+    return this.traverson.hal()
+      .from(this.gateway.getMilestonesApi() + 'objectives/search')
+      .jsonHal()
+      .follow('findByTitleOrTags', 'objectives[$all]')
+      .withTemplateParameters({text: qry})
+      .getResource()
+      .result;
+  }
+
+  public createMilestoneByUsername(username:string, ms:Milestone):IPromise<any> {
+    ms['username'] = username;
+    return this.$http.post(this.gateway.getMilestonesApi() + '/milestones', ms);
   }
 }

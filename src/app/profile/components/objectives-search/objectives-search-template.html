@@ -1,0 +1,16 @@
+<div class="objectives-search">
+  <md-autocomplete
+    md-selected-item="$ctrl.selectedItem"
+    md-item-text="obj.title"
+    md-search-text="$ctrl.searchText"
+    md-items="obj in $ctrl.objectives"
+    md-min-length="0"
+    placeholder="Search objectives by title or tag">
+    <md-item-template>
+      <span md-highlight-text="$ctrl.searchText">{{obj.title}}</span>
+    </md-item-template>
+    <md-not-found>
+      "Cannot find anything matching {{$ctrl.searchText}}".
+    </md-not-found>
+  </md-autocomplete>
+</div>
