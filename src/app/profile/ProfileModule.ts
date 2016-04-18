@@ -8,6 +8,7 @@ import {TimelineComponent} from "./components/timeline/TimelineComponent";
 import {MilestoneComponent} from "./components/timeline/MilestoneComponent";
 import {MilestoneService} from "./services/MilestoneService";
 import {MilestoneContainerComponent} from "./components/timeline/MilestoneContainerComponent";
+import {MilestoneCreateComponent} from "./components/timeline/MilestoneCreateComponent";
 
 /**
  * @ngdoc module
@@ -32,4 +33,5 @@ angular
   .component(MilestoneContainerComponent.NAME, new MilestoneContainerComponent())
   .component(TimelineComponent.NAME, new TimelineComponent())
   .component(MilestoneComponent.NAME, new MilestoneComponent())
+  .component(MilestoneCreateComponent.NAME, new MilestoneCreateComponent())
   .directive(AboutDirective.NAME, AboutDirective.instance());

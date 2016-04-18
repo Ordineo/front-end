@@ -17,7 +17,13 @@
         username="{{$ctrl.username}}"
         on-content-loaded="$ctrl.onContentLoaded(isLoaded)">
       </timeline>
-      <!--todo editorview-->
+      <milestone-create
+        id="milestone-create"
+        ng-if="$ctrl.createMode"
+        ng-show="$ctrl.isContentLoaded"
+        username="{{$ctrl.username}}"
+        on-content-loaded="$ctrl.loaded(isLoaded)">
+      </milestone-create>
     </div>
     <span flex="5"></span>
   </div>
