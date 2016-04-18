@@ -22,7 +22,8 @@
         ng-if="$ctrl.createMode"
         ng-show="$ctrl.isContentLoaded"
         username="{{$ctrl.username}}"
-        on-content-loaded="$ctrl.loaded(isLoaded)">
+        on-content-loaded="$ctrl.loaded(isLoaded)"
+        is-save-enabled="$ctrl.isSaveEnabled(isEnabled)">
       </milestone-create>
     </div>
     <span flex="5"></span>

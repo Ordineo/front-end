@@ -37,6 +37,10 @@ export class MilestoneContainerController {
   public onContentLoaded(isLoaded:any):void {
     this.isContentLoaded = isLoaded;
   }
+  
+  public isSaveEnabled(isEnabled:any):void {
+    this.saveButton.isDisabled = !isEnabled;
+  }
 
   private toggleCreateMode():void {
     this.createMode = !this.createMode;

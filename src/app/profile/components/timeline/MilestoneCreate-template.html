@@ -1,23 +1,40 @@
-<div layout="column">
-  <div layout="row">
-    <md-input-container class="md-block flex-75">
-      <label>Objective</label>
-      <input ng-model="$ctrl.milestone.objective">
-    </md-input-container>
-    <div class="datepicker-container flex-25">
-      <!--<label>Due Date</label>-->
-      <md-datepicker ng-model="$ctrl.milestone.dueDate" md-placeholder="Due Date"></md-datepicker>
+<form name="milestoneCreateForm" novalidate>
+  <div layout="column">
+    <div layout="row">
+      <md-input-container class="md-block flex-75">
+        <label>Objective</label>
+        <input
+          required
+          name="objective"
+          ng-model="$ctrl.milestone.objective">
+        <div ng-messages="milestoneCreateForm.objective.$error">
+          <div ng-message="required">Objective is required.</div>
+        </div>
+      </md-input-container>
+      <div class="datepicker-container flex-25">
+        <!--<label>Due Date</label>-->
+        <md-datepicker
+          ng-model="$ctrl.milestone.dueDate"
+          md-placeholder="Due Date"
+          name="dueDate"
+          md-min-date="$ctrl.minDate"
+          required></md-datepicker>
+        <div class="validation-messages" ng-messages="milestoneCreateForm.dueDate.$error">
+          <div ng-message="required">Due date is required.</div>
+          <div ng-message="mindate">Due date is in past.</div>
+        </div>
+      </div>
+    </div>
+    <div layout="column" ng-if="$ctrl.milestone.objective">
+      <h5>Description</h5>
+      <p ng-if="$ctrl.milestone.objective.description">{{$ctrl.milestone.objective.description}}</p>
+      <p ng-if="!$ctrl.milestone.objective.description">No description</p>
+    </div>
+    <div layout="row">
+      <md-input-container class="md-block flex">
+        <label>More Information</label>
+        <textarea ng-model="$ctrl.milestone.moreInformation" md-select-on-focus></textarea>
+      </md-input-container>
     </div>
   </div>
-  <div layout="column" ng-if="$ctrl.milestone.objective">
-    <h5>Description</h5>
-    <p ng-if="$ctrl.milestone.objective.description">{{$ctrl.milestone.objective.description}}</p>
-    <p ng-if="!$ctrl.milestone.objective.description">No description</p>
-  </div>
-  <div layout="row">
-    <md-input-container class="md-block flex">
-      <label>More Information</label>
-      <textarea ng-model="$ctrl.milestone.moreInformation" md-select-on-focus></textarea>
-    </md-input-container>
-  </div>
-</div>
+</form>
