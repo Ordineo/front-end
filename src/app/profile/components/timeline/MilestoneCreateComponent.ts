@@ -8,7 +8,6 @@ export class MilestoneCreateComponent implements IComponentOptions {
   static NAME:string = "milestoneCreate";
   controller:any = MilestoneCreateController;
   template:string = require('./MilestoneCreate-template.html');
-
   bindings:any = {
     username: '@',
     onContentLoaded: '&',
@@ -17,8 +16,6 @@ export class MilestoneCreateComponent implements IComponentOptions {
 }
 
 export class MilestoneCreateController {
-  public form:any;
-  public milestoneCreateForm:IFormController;
   public title:string = "MilestoneCreate";
   public username:string;
   public onContentLoaded:Function;
@@ -27,7 +24,9 @@ export class MilestoneCreateController {
 
   public milestone:Milestone;
 
-  constructor() {
+  static $inject = ['$scope'];
+
+  constructor(private scope:IScope) {
     this.milestone = <Milestone>{};
     this.milestone.createDate = new Date();
     this.milestone.dueDate = new Date();
@@ -36,7 +35,9 @@ export class MilestoneCreateController {
 
   $onInit():void {
     this.onContentLoaded({isLoaded: true});
-    this.isSaveEnabled({isEnabled: false/*this.milestoneCreateForm.$valid*/});
+    this.scope.$watch('milestoneCreateForm.$valid', ()=> {
+      this.isSaveEnabled({isEnabled: this.scope['milestoneCreateForm'].$valid});
+    });
   }
 
   private save():void {
