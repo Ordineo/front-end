@@ -52,4 +52,8 @@ export class GatewayApiService{
   public getMilestonesApi():string {
     return this.buildApiUrl(this.MILESTONES_API) + 'milestones/search/';
   }
+
+  public getCreateMilestonesApi():string {
+    return 'https://gateway-ordineo.cfapps.io/milestone-ordineo/api/milestones';
+  }
 }
