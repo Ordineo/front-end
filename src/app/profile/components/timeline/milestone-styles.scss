@@ -107,12 +107,34 @@ md-input-container {
 }
 
 .datepicker-container {
+  position: relative;
+  padding: 2px;
+  margin: 18px 0 0 0;
+  vertical-align: middle;
   .md-datepicker-button {
     display: none !important;
   }
   .md-datepicker-input-container {
     margin-left: 0 !important;
-    border-bottom: none;
+    width: 100%;
   }
+  .md-datepicker-input {
+    margin-bottom: 3px;
+  }
+  .validation-messages {
+    font-size: 12px;
+    color: #0B548F;
+    padding-top: 5px;
+  }
+}
+
+h5 {
+  color: $orange;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+p {
+  margin-top: 0;
 }
 
