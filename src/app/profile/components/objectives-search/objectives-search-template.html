@@ -2,11 +2,13 @@
   <md-autocomplete
     md-selected-item="$ctrl.selectedItem"
     md-item-text="obj.title"
+    md-no-cache="true"
+    md-selected-item-change="$ctrl.selectedItemChange(obj)"
     md-search-text="$ctrl.searchText"
-    md-items="obj in $ctrl.objectives"
-    md-min-length="0"
+    md-items="obj in $ctrl.getObjectives()"
     placeholder="Search objectives by title or tag">
     <md-item-template>
+
       <span md-highlight-text="$ctrl.searchText">{{obj.title}}</span>
     </md-item-template>
     <md-not-found>

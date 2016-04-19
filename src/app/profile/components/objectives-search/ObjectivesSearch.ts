@@ -5,34 +5,39 @@ import IRootScopeService = angular.IRootScopeService;
 import IScope = angular.IScope;
 import IRxScope = rx.angular.IRxScope;
 import {Objective} from "../../../core/models/objective";
+import IQService = angular.IQService;
+import IDeferred = angular.IDeferred;
+import IPromise = Rx.IPromise;
 export class ObjectivesSearch implements IComponentOptions {
   static NAME:string = "objectivesSearch";
+
+  bindings:any = {
+    onSelected: '&'
+  };
 
   controller:any = ObjectivesSearchController;
   template:string = require('./objectives-search-template.html');
 }
 export class ObjectivesSearchController {
-
+  public deferred:IDeferred<any>;
+  public onSelected:Function;
   public objectives:Objective[] = [];
 
-  static $inject = ['rx', '$scope', 'observeOnScope', MilestoneService.NAME];
+  static $inject = ['$q','rx', '$scope', MilestoneService.NAME];
 
-  constructor(private rx:any, private $scope:IRxScope, private observeOnScope:any, private milestoneService:MilestoneService) {
+  constructor(private $q:IQService, private rx:any, private $scope:IRxScope, private milestoneService:MilestoneService) {
+    this.deferred = this.$q.defer();
   }
 
-  selectedItemChange(data:any):void {
-
+  getObjectives():IPromise<any>{
+    this.deferred = this.$q.defer();
+    return this.deferred.promise.then((data)=>{
+      return data;
+    });
   }
 
-  querySearch(query:any):any {
-    if (!this.objectives) {
-      this.objectives = [];
-    }
-    return this.objectives;
-  }
-
-  filter(query):any {
-
+  selectedItemChange(selectedObjective:Objective):void {
+    this.onSelected({objective: selectedObjective});
   }
 
   $onInit():void {
@@ -48,12 +53,11 @@ export class ObjectivesSearchController {
           return this.rx.Observable
             .fromPromise(this.milestoneService.searchObjectives(qry))
         } else {
-          return Rx.Observable.empty<string>();
+          return Rx.Observable.empty<Objective>();
         }
       })
       .subscribe((objectives:Objective[])=> {
-        console.log(objectives);
-
+        this.deferred.resolve(objectives);
         this.objectives = objectives;
       });
   }
