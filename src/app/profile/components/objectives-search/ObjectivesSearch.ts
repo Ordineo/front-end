@@ -8,6 +8,8 @@ import {Objective} from "../../../core/models/objective";
 import IQService = angular.IQService;
 import IDeferred = angular.IDeferred;
 import IPromise = Rx.IPromise;
+require('./objectives-search.scss');
+
 export class ObjectivesSearch implements IComponentOptions {
   static NAME:string = "objectivesSearch";
 
