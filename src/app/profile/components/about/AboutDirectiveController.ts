@@ -177,7 +177,6 @@ export class AboutDirectiveController {
     profileService
       .getAboutInfoByUsername(_userName_)
       .then((employeeData:any)=> {
-        console.log(employeeData)
         this.isContentLoaded = true;
         this.setProfilePicture(this.username);
         this.broadCastOnEmployeeDataSet(employeeData, rootScope);

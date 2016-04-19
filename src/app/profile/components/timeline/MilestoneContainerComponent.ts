@@ -2,6 +2,7 @@ import IComponentOptions = angular.IComponentOptions;
 import IScope = angular.IScope;
 import IAngularEvent = angular.IAngularEvent;
 import {ActionButton} from "../../../core/components/action-button/ActionButtonComponent";
+import {MilestoneService} from "../../services/MilestoneService";
 require('./milestone-styles.scss');
 
 export class MilestoneContainerComponent implements IComponentOptions {
@@ -26,7 +27,9 @@ export class MilestoneContainerController {
   public username:string;
   public isContentLoaded:boolean = false;
 
-  constructor() {
+  static $inject = [MilestoneService.NAME];
+
+  constructor(private milestoneService:MilestoneService) {
   }
 
   $onInit():void {
@@ -37,7 +40,7 @@ export class MilestoneContainerController {
   public onContentLoaded(isLoaded:any):void {
     this.isContentLoaded = isLoaded;
   }
-  
+
   public isSaveEnabled(isEnabled:any):void {
     this.saveButton.isDisabled = !isEnabled;
   }
@@ -83,6 +86,7 @@ export class MilestoneContainerController {
       isActive: false,
       svgSrc: 'act:done',
       onClick: (saveButton:ActionButton)=> {
+        this.milestoneService.createMilestoneByUsername(this.username);
         this.toggleCreateMode();
       },
     };
