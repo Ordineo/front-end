@@ -5,17 +5,23 @@ $lightGrey: #bdbcbc;
 $darkGrey: #686868;
 $mainBackground: #f4f4f4;
 $logoTopLeft: './images/ordineo.png';
-$logoSize: 88px;
+$logoSize: 64px;
 
 toolbar {
-  md-toolbar.toolbar {
+  #toolbar {
     background-color: white;
+  }
+
+  #welcome {
+    width: 300px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .logo {
     background: url($logoTopLeft) no-repeat center;
     background-size: cover;
-    width: 100px;
+    width: $logoSize;
     height: $logoSize;
   }
 
