@@ -1,16 +1,16 @@
 <form name="milestoneCreateForm" novalidate>
   <div layout="column">
     <div layout="row">
-      <md-input-container class="md-block flex-75">
-        <label>Objective</label>
-        <input
-          required
-          name="objective"
-          ng-model="$ctrl.milestone.objective">
-        <div ng-messages="milestoneCreateForm.objective.$error">
-          <div ng-message="required">Objective is required.</div>
-        </div>
-      </md-input-container>
+      <div class="md-block flex-75">
+        <!--<input-->
+        <!--required-->
+        <!--name="objective"-->
+        <!--ng-model="$ctrl.milestone.objective">-->
+        <!--<div ng-messages="milestoneCreateForm.objective.$error">-->
+        <!--<div ng-message="required">Objective is required.</div>-->
+        <!--</div>-->
+        <objectives-search on-selected="$ctrl.onObjectiveSelected(objective)"></objectives-search>
+      </div>
       <div class="datepicker-container flex-25">
         <!--<label>Due Date</label>-->
         <md-datepicker

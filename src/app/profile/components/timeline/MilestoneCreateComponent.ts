@@ -3,6 +3,7 @@ import IScope = angular.IScope;
 import IAngularEvent = angular.IAngularEvent;
 import {Milestone} from "../../../core/models/milestone";
 import IFormController = angular.IFormController;
+import {Objective} from "../../../core/models/objective";
 
 export class MilestoneCreateComponent implements IComponentOptions {
   static NAME:string = "milestoneCreate";
@@ -31,6 +32,10 @@ export class MilestoneCreateController {
     this.milestone.createDate = new Date();
     this.milestone.dueDate = new Date();
     this.minDate = new Date();
+  }
+
+  public onObjectiveSelected(objective:Objective):void{
+    this.milestone.objective = objective;
   }
 
   $onInit():void {

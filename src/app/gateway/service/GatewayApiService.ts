@@ -50,7 +50,7 @@ export class GatewayApiService{
   }
 
   public getMilestonesApi():string {
-    return this.buildApiUrl(this.MILESTONES_API) + 'milestones/search/';
+    return this.buildApiUrl(this.MILESTONES_API);
   }
 
   public getCreateMilestonesApi():string {

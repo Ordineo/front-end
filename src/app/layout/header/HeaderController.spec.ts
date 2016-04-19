@@ -1,4 +1,4 @@
-import {HeaderController, User} from "./HeaderController";
+  import {HeaderController, User} from "./HeaderController";
 import {ProfileService, IProfileService} from "../../profile/services/ProfileService";
 import {ORDINEO_LAYOUT} from "../LayoutModule";
 import {HeaderComponent} from "./HeaderComponent";
