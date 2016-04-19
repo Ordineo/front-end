@@ -23,15 +23,16 @@ export class MilestoneCreateController {
   public onContentLoaded:Function;
   public isSaveEnabled:Function;
   public minDate:Date;
+  private milestone:Milestone;
 
   static $inject = [MilestoneService.NAME, '$scope', 'moment'];
 
   constructor(private milestoneService:MilestoneService, private scope:IScope, private moment:any) {
-    console.log(moment().format("YYYY-MM-DD"));
     this.milestoneService.milestone = <Milestone>{};
-    this.milestoneService.milestone.createDate = moment().format("YYYY-MM-DD");
-    this.milestoneService.milestone.dueDate = moment().format("YYYY-MM-DD");
-    this.minDate = moment().format("YYYY-MM-DD");
+    this.milestoneService.milestone.createDate = new Date();
+    this.milestoneService.milestone.dueDate = new Date();
+    this.milestone = this.milestoneService.milestone;
+    this.minDate = new Date();
   }
 
   public onObjectiveSelected(objective:Objective):void{
