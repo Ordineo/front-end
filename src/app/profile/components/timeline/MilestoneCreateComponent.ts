@@ -4,6 +4,7 @@ import IAngularEvent = angular.IAngularEvent;
 import {Milestone} from "../../../core/models/milestone";
 import IFormController = angular.IFormController;
 import {Objective} from "../../../core/models/objective";
+import {MilestoneService} from "../../services/MilestoneService";
 
 export class MilestoneCreateComponent implements IComponentOptions {
   static NAME:string = "milestoneCreate";
@@ -22,20 +23,20 @@ export class MilestoneCreateController {
   public onContentLoaded:Function;
   public isSaveEnabled:Function;
   public minDate:Date;
+  private milestone:Milestone;
 
-  public milestone:Milestone;
+  static $inject = [MilestoneService.NAME, '$scope', 'moment'];
 
-  static $inject = ['$scope'];
-
-  constructor(private scope:IScope) {
-    this.milestone = <Milestone>{};
-    this.milestone.createDate = new Date();
-    this.milestone.dueDate = new Date();
+  constructor(private milestoneService:MilestoneService, private scope:IScope, private moment:any) {
+    this.milestoneService.milestone = <Milestone>{};
+    this.milestoneService.milestone.createDate = new Date();
+    this.milestoneService.milestone.dueDate = new Date();
+    this.milestone = this.milestoneService.milestone;
     this.minDate = new Date();
   }
 
   public onObjectiveSelected(objective:Objective):void{
-    this.milestone.objective = objective;
+    this.milestoneService.milestone.objective = objective;
   }
 
   $onInit():void {
@@ -43,9 +44,5 @@ export class MilestoneCreateController {
     this.scope.$watch('milestoneCreateForm.$valid', ()=> {
       this.isSaveEnabled({isEnabled: this.scope['milestoneCreateForm'].$valid});
     });
-  }
-
-  private save():void {
-    this.milestone.createDate = new Date();
   }
 }
