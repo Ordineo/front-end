@@ -9,17 +9,20 @@
                    md-no-cache="true"
                    md-selected-item-change="$ctrl.selectedItemChange(obj)"
                    md-search-text="$ctrl.searchText"
-                   md-floating-label="Search objectives"
+                   md-floating-label="Search objectives by title or tags"
                    md-items="obj in $ctrl.getObjectives()"
                    md-menu-class="autocomplete-custom-template">
     <md-item-template>
       <div class="item-title">
-        <span class=item-title md-highlight-text="$ctrl.searchText">{{obj.title}}</span>
+        <span md-highlight-text="$ctrl.searchText" md-highlight-flags="gi">{{obj.title}}</span>
       </div>
       <div class="item-tag">
-        <span ng-repeat="tag in obj.tags">{{tag}}</span>
+        <span md-highlight-text="$ctrl.searchText" md-highlight-flags="gi" class="tag" ng-repeat="tag in obj.tags">{{tag}}</span>
       </div>
     </md-item-template>
+    <md-not-found>
+      "Could not find objective {{$ctrl.searchText}}"
+    </md-not-found>
     <div ng-messages="$ctrl.formCtrl.autocompleteField.$error" ng-if="$ctrl.formCtrl.autocompleteField.$touched">
       <div ng-message="required">You <b>must</b> select an objective</div>
       <div ng-message="minlength">Your entry is not long enough.</div>

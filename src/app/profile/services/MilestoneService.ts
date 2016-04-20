@@ -31,6 +31,7 @@ export class MilestoneService implements IMilestoneService{
               private moment:any) {
   }
 
+
   setObjective(objective:Objective):void{
     this.milestone.objective = objective;
   }
@@ -63,8 +64,12 @@ export class MilestoneService implements IMilestoneService{
 
   public createMilestoneByUsername(username:string):IPromise<any> {
     this.milestone['username'] = username;
-    this.milestone['objective'] = this.milestone.objective['_links']['self']['href'];
+    if(this.milestone.objective && this.milestone.objective['_links']) {
+      this.milestone.title = this.milestone.objective.title;
+      this.milestone['objective'] = this.milestone.objective['_links']['self']['href'];
+    }
     this.milestone['createDate'] = this.moment().format("YYYY-MM-DD");
+    //TODO fix duedate is 2way binded to datepicker but datepicker only accepts Date objects, below duedate is set as a string
     this.milestone['dueDate'] = this.moment(this.milestone['dueDate']).format("YYYY-MM-DD");
     return this.$http.post(this.gateway.getMilestonesApi() + 'milestones/', this.milestone);
   }

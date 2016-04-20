@@ -26,6 +26,7 @@ export class MilestoneCreateComponent implements IComponentOptions {
 export class MilestoneCreateController implements IMilestoneCreateBindings {
   public title:string = "MilestoneCreate";
   public username:string;
+  public isSelected:boolean;
   public onContentLoaded:Function;
   public isSaveEnabled:Function;
   public minDate:Date;
@@ -41,8 +42,9 @@ export class MilestoneCreateController implements IMilestoneCreateBindings {
   public onObjectiveSelected(objective:Objective):void {
     this.milestoneService.setObjective(objective);
   }
-  
+
   $onInit():void {
+    this.isSelected = false;
     this.onContentLoaded({isLoaded: true});
 
     this.scope.$watch('milestoneCreateForm.$valid', ()=> {

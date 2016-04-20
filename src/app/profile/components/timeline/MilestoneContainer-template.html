@@ -8,7 +8,7 @@
         title="{{$ctrl.title}}">
       </card-header>
       <div layout="row" ng-if="$ctrl.hasError" layout-align="center center">
-        <span class="error-milestone alert alert-danger md-subhead">Something went wrong...</span>
+        <span class="error-milestone alert alert-danger md-subhead">{{$ctrl.errorMsg}}</span>
       </div>
       <div class="loading-container" layout="row" layout-align="center center" ng-if="!$ctrl.isContentLoaded">
         <md-progress-circular class="md-primary" md-mode="indeterminate" md-diameter="60"></md-progress-circular>

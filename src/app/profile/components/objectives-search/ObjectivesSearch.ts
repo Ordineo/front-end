@@ -8,6 +8,7 @@ import {Objective} from "../../../core/models/objective";
 import IQService = angular.IQService;
 import IDeferred = angular.IDeferred;
 import IPromise = Rx.IPromise;
+import IFormController = angular.IFormController;
 require('./objectives-search.scss');
 
 export class ObjectivesSearch implements IComponentOptions {
@@ -25,6 +26,7 @@ export class ObjectivesSearch implements IComponentOptions {
   template:string = require('./objectives-search-template.html');
 }
 export class ObjectivesSearchController {
+  public formCtrl:IFormController;
   public deferred:IDeferred<any>;
   public onSelected:Function;
   public objectives:Objective[] = [];
@@ -63,8 +65,8 @@ export class ObjectivesSearchController {
         }
       })
       .subscribe((objectives:Objective[])=> {
-        this.deferred.resolve(objectives);
         this.objectives = objectives;
+        this.deferred.resolve(objectives);
       });
   }
 }

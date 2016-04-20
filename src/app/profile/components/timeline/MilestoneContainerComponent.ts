@@ -2,7 +2,7 @@ import IComponentOptions = angular.IComponentOptions;
 import IScope = angular.IScope;
 import IAngularEvent = angular.IAngularEvent;
 import {ActionButton} from "../../../core/components/action-button/ActionButtonComponent";
-import {MilestoneService} from "../../services/MilestoneService";
+import {MilestoneService, IMilestoneService} from "../../services/MilestoneService";
 import {HeaderController} from "../../../layout/header/HeaderController";
 require('./milestone-styles.scss');
 
@@ -26,6 +26,8 @@ export class MilestoneContainerController {
 
   private hasError:boolean;
 
+  private errorMsg:string;
+
   public title:string = "Timeline"; //todo
   public username:string;
   public isContentLoaded:boolean = false;
@@ -39,6 +41,9 @@ export class MilestoneContainerController {
     this.hasError = false;
     this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=> {
       this.username = data.username;
+      if(this.createMode) {
+        this.toggleCreateMode();
+      }
     });
     this.configureCardHeaderButtons();
     this.createMode = false;
@@ -61,6 +66,7 @@ export class MilestoneContainerController {
     } else {
       this.createButton.isActive = true;
       this.cancelButton.isActive = false;
+      this.hasError = false;
       this.saveButton.isActive = false;
     }
   }
@@ -96,6 +102,15 @@ export class MilestoneContainerController {
         this.milestoneService.createMilestoneByUsername(this.username).then((success:any)=> {
           this.toggleCreateMode();
         }, (error:any)=> {
+          if (error.status === 409) {
+            this.errorMsg = "You already have a milestone " + this.milestoneService.milestone.title;
+          } else if (error.status > 500) {
+            this.errorMsg = "check your connection";
+          } else if (error.status >= 400 && error.status < 500) {
+            this.errorMsg = "Please select a correct objective"
+          } else {
+            this.errorMsg = "Something went wrong";
+          }
           this.hasError = true;
         });
       },

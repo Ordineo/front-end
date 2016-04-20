@@ -2,6 +2,10 @@ $lightOrange: #f9a858;
 $orange: #e98300;
 $lightGrey: rgba(0, 0, 0, 0.14);
 
+.error-milestone {
+  margin-top: 1em;
+}
+
 timeline {
   ul {
     list-style: none;
@@ -143,10 +147,10 @@ milestone-create {
       color: rgba(0, 0, 0, 0.4);
     }
   }
-  md-input-container {
-    padding-bottom: 0 !important;
-    margin-bottom: 0;
-  }
+  //md-input-container {
+  //  padding-bottom: 0 !important;
+  //  margin-bottom: 0;
+  //}
 
   h5 {
     color: $orange;
