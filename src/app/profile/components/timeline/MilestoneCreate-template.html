@@ -2,10 +2,9 @@
   <div layout="column">
     <div layout="row">
       <objectives-search
-        on-selected="$ctrl.onObjectiveSelected(objective)"
-        flex="75"></objectives-search>
-      <div class="datepicker-container" flex>
-        <!--<label>Due Date</label>-->
+        on-selected="$ctrl.onObjectiveSelected(objective)" flex="50"></objectives-search>
+      <div class="datepicker-container">
+        <label>Due Date</label>
         <md-datepicker
           ng-model="$ctrl.milestone.dueDate"
           md-placeholder="Due Date"
