@@ -7,10 +7,11 @@
         aria-label="Save"
         ng-if="$ctrl.showBtnSave"
         ng-click="$ctrl.save()"
-        class="btnSave md-icon-button md-warn ">
+        class="btnSave md-icon-button md-warn">
         <md-icon md-svg-src="act:done"></md-icon>
       </md-button>
       <md-button
+        aria-label="Cancel"
         ng-click="$ctrl.cancel()"
         ng-show="$ctrl.showBtnCancel"
         class="btnCancel md-icon-button btn-red">
@@ -18,6 +19,7 @@
       </md-button>
     </div>
     <md-button
+      aria-label="Edit"
       ng-click="$ctrl.editMode()"
       ng-if="$ctrl.showBtnEdit"
       class="btnEdit md-icon-button edit-icon-animation">
@@ -25,7 +27,8 @@
     </md-button>
 
     <!--todo add on drag handler-->
-    <action-button ng-repeat="btn in $ctrl.buttons"
+    <action-button
+      ng-repeat="btn in $ctrl.buttons"
       svg-src="{{btn.svgSrc}}"
       is-active="btn.isActive"
       on-click="btn.onClick(btn)"
@@ -33,7 +36,9 @@
       is-disabled="btn.isDisabled">
     </action-button>
 
-    <md-button ng-if="$ctrl.showBtnDrag" class="md-icon-button btnDrag">
+    <md-button ng-if="$ctrl.showBtnDrag"
+               class="md-icon-button btnDrag"
+               aria-label="Drag">
       <md-icon md-svg-src="act:open_with"></md-icon>
     </md-button>
   </div>

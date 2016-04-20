@@ -8,7 +8,7 @@
         title="{{$ctrl.title}}">
       </card-header>
       <div class="loading-container" layout="row" layout-align="center center" ng-if="!$ctrl.isContentLoaded">
-        <md-progress-circular class="md-primary" md-diameter="60"></md-progress-circular>
+        <md-progress-circular class="md-primary" md-mode="indeterminate" md-diameter="60"></md-progress-circular>
       </div>
       <timeline
         ng-if="!$ctrl.createMode"

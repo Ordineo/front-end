@@ -6,10 +6,15 @@
     md-selected-item-change="$ctrl.selectedItemChange(obj)"
     md-search-text="$ctrl.searchText"
     md-items="obj in $ctrl.getObjectives()"
+    md-menu-class="autocomplete-custom-template"
     placeholder="Search objectives by title or tag">
     <md-item-template>
-
-      <span md-highlight-text="$ctrl.searchText">{{obj.title}}</span>
+      <div class="item-title">
+        <span class=item-title md-highlight-text="$ctrl.searchText">{{obj.title}}</span>
+      </div>
+      <div class="item-tag">
+        <span ng-repeat="tag in obj.tags">{{tag}}</span>
+      </div>
     </md-item-template>
     <md-not-found>
       "Cannot find anything matching {{$ctrl.searchText}}".
