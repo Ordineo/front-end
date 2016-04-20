@@ -2,6 +2,12 @@ $lightOrange: #f9a858;
 $orange: #e98300;
 $lightGrey: rgba(0, 0, 0, 0.14);
 
+milestone-container {
+  .error-milestone {
+    margin-top: 1em;
+  }
+}
+
 timeline {
   ul {
     list-style: none;
@@ -100,10 +106,6 @@ milestone {
       }
     }
   }
-}
-
-md-input-container {
-  margin-bottom: 0;
 }
 
 .datepicker-container {

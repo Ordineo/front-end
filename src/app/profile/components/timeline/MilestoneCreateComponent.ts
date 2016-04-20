@@ -41,7 +41,7 @@ export class MilestoneCreateController implements IMilestoneCreateBindings {
   public onObjectiveSelected(objective:Objective):void {
     this.milestoneService.setObjective(objective);
   }
-
+  
   $onInit():void {
     this.onContentLoaded({isLoaded: true});
 

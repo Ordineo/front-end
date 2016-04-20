@@ -13,6 +13,10 @@ require('./objectives-search.scss');
 export class ObjectivesSearch implements IComponentOptions {
   static NAME:string = "objectivesSearch";
 
+  require:Object = {
+    formCtrl: '^form'
+  };
+
   bindings:any = {
     onSelected: '&'
   };
