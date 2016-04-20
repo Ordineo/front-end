@@ -1,13 +1,17 @@
 <div class="objectives-search">
-  <md-autocomplete
-    md-selected-item="$ctrl.selectedItem"
-    md-item-text="obj.title"
-    md-no-cache="true"
-    md-selected-item-change="$ctrl.selectedItemChange(obj)"
-    md-search-text="$ctrl.searchText"
-    md-items="obj in $ctrl.getObjectives()"
-    md-menu-class="autocomplete-custom-template"
-    placeholder="Search objectives by title or tag">
+  <md-autocomplete flex
+                   md-selected-item="$ctrl.selectedItem"
+                   md-item-text="obj.title"
+                   md-input-minlength="2"
+                   required
+                   md-input-maxlength="18"
+                   md-input-name="autocompleteField"
+                   md-no-cache="true"
+                   md-selected-item-change="$ctrl.selectedItemChange(obj)"
+                   md-search-text="$ctrl.searchText"
+                   md-floating-label="Search objectives"
+                   md-items="obj in $ctrl.getObjectives()"
+                   md-menu-class="autocomplete-custom-template">
     <md-item-template>
       <div class="item-title">
         <span class=item-title md-highlight-text="$ctrl.searchText">{{obj.title}}</span>
@@ -16,8 +20,11 @@
         <span ng-repeat="tag in obj.tags">{{tag}}</span>
       </div>
     </md-item-template>
-    <md-not-found>
-      "Cannot find anything matching {{$ctrl.searchText}}".
-    </md-not-found>
+    <div ng-messages="$ctrl.formCtrl.autocompleteField.$error" ng-if="$ctrl.formCtrl.autocompleteField.$touched">
+      <div ng-message="required">You <b>must</b> select an objective</div>
+      <div ng-message="minlength">Your entry is not long enough.</div>
+      <div ng-message="maxlength">Your entry is too long.</div>
+    </div>
   </md-autocomplete>
 </div>
+
