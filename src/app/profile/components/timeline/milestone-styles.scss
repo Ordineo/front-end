@@ -127,14 +127,31 @@ milestone-create {
       color: #0B548F;
       padding-top: 5px;
     }
+    label {
+      order: 1;
+      pointer-events: none;
+      padding-left: 15px;
+      padding-right: 0;
+      z-index: 1;
+      transform: translate3d(0, 6px, 0) scale(0.75);
+      transition: transform cubic-bezier(0.25, 0.8, 0.25, 1) 0.25s;
+      transform-origin: left top;
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      right: auto;
+      color: rgba(0, 0, 0, 0.4);
+    }
   }
   md-input-container {
     padding-bottom: 0 !important;
     margin-bottom: 0;
   }
+
   h5 {
     color: $orange;
     margin-bottom: 0.5em;
     margin-top: 0.5em;
   }
+
 }
