@@ -24,6 +24,8 @@ export class MilestoneContainerController {
   private saveButton:ActionButton;
   private cancelButton:ActionButton;
 
+  private hasError:boolean;
+
   public title:string = "Timeline"; //todo
   public username:string;
   public isContentLoaded:boolean = false;
@@ -34,6 +36,7 @@ export class MilestoneContainerController {
   }
 
   $onInit():void {
+    this.hasError = false;
     this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=> {
       this.username = data.username;
     });
@@ -90,8 +93,11 @@ export class MilestoneContainerController {
       isActive: false,
       svgSrc: 'act:done',
       onClick: (saveButton:ActionButton)=> {
-        this.milestoneService.createMilestoneByUsername(this.username);
-        this.toggleCreateMode();
+        this.milestoneService.createMilestoneByUsername(this.username).then((success:any)=> {
+          this.toggleCreateMode();
+        }, (error:any)=> {
+          this.hasError = true;
+        });
       },
     };
   }
