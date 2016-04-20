@@ -3,6 +3,7 @@ import IScope = angular.IScope;
 import IAngularEvent = angular.IAngularEvent;
 import {ActionButton} from "../../../core/components/action-button/ActionButtonComponent";
 import {MilestoneService} from "../../services/MilestoneService";
+import {HeaderController} from "../../../layout/header/HeaderController";
 require('./milestone-styles.scss');
 
 export class MilestoneContainerComponent implements IComponentOptions {
@@ -27,12 +28,15 @@ export class MilestoneContainerController {
   public username:string;
   public isContentLoaded:boolean = false;
 
-  static $inject = [MilestoneService.NAME];
+  static $inject = [MilestoneService.NAME, '$rootScope'];
 
-  constructor(private milestoneService:MilestoneService) {
+  constructor(private milestoneService:MilestoneService, private rootScope:IScope) {
   }
 
   $onInit():void {
+    this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=> {
+      this.username = data.username;
+    });
     this.configureCardHeaderButtons();
     this.createMode = false;
   }
