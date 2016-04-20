@@ -45,7 +45,6 @@ export class TimelineController {
       .then((milestones:Milestone[])=> {
           this.milestones = milestones;
           this.onContentLoaded({isLoaded: true});
-          console.log(this.milestones);
         }, (onError)=> {
           console.log(onError);
         }
