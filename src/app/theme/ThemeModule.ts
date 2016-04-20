@@ -10,16 +10,20 @@ import 'angular-aria';
 import 'angular-animate';
 import IIconProvider = angular.material.IIconProvider;
 import IThemingProvider = angular.material.IThemingProvider;
+import IDateLocaleProvider = angular.material.IDateLocaleProvider;
 
 export const MATERIAL_DESIGN = "material.design";
 
 angular
-  .module(MATERIAL_DESIGN, ['ngMaterial'])
+  .module(MATERIAL_DESIGN, ['ngMaterial', 'angularMoment'])
   .config(mdConfig);
 
-mdConfig.$inject = ['$mdIconProvider', '$mdThemingProvider'];
+mdConfig.$inject = ['$mdIconProvider', '$mdThemingProvider', '$mdDateLocaleProvider', 'moment'];
 
-function mdConfig($mdIcon:IIconProvider, $mdThemingProvider:IThemingProvider) {
+function mdConfig($mdIcon:IIconProvider,
+                  $mdThemingProvider:IThemingProvider,
+                  $mdDateLocaleProvider:IDateLocaleProvider,
+                  moment:any) {
   var customPrimary = {
     '50': '#747e99',
     '100': '#67718d',
@@ -92,4 +96,13 @@ function mdConfig($mdIcon:IIconProvider, $mdThemingProvider:IThemingProvider) {
     .iconSet('act', require('./icon-packs/action-icons.svg'), 24)
     .iconSet('com', require('./icon-packs/communication-icons.svg'), 24)
     .iconSet('mdi', require('./icon-packs/mdi-icons.svg'), 24);
+
+  $mdDateLocaleProvider.formatDate = function(date) {
+    return moment(date).format('DD-MM-YYYY');
+  };
+
+  $mdDateLocaleProvider.parseDate = function(dateString) {
+    var m = moment(dateString, 'DD-MM-YYYY', true);
+    return m.isValid() ? m.toDate() : new Date(NaN);
+  };
 }

@@ -9,10 +9,12 @@
           md-placeholder="Due Date"
           name="dueDate"
           md-min-date="$ctrl.minDate"
+          md-is-error="$ctrl.milestone.dueDate.$invalid"
           required></md-datepicker>
         <div class="validation-messages" ng-messages="milestoneCreateForm.dueDate.$error">
           <div ng-message="required">Due date is required.</div>
           <div ng-message="mindate">Due date is in past.</div>
+          <div ng-message="valid">Date is invalid.</div>
         </div>
       </div>
     </div>
