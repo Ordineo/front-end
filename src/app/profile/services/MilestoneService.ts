@@ -8,6 +8,7 @@ import {Moment} from "~moment/moment";
 
 export class MilestoneService {
   public milestone:Milestone;
+  public dueDate:Date;
   static NAME:string = "MilestoneService";
   static $inject:Array<string> = [
     TraversonHalService.SERVICE_NAME,
@@ -47,7 +48,7 @@ export class MilestoneService {
     this.milestone['username'] = username;
     this.milestone['objective'] = this.milestone.objective['_links']['self']['href'];
     this.milestone['createDate'] = this.moment(this.milestone['createDate']).format("YYYY-MM-DD");
-    this.milestone['dueDate'] = this.moment(this.milestone['dueDate']).format("YYYY-MM-DD");
+    this.milestone['dueDate'] = this.moment(this.dueDate).format("YYYY-MM-DD");
     return this.$http.post(this.gateway.getMilestonesApi() + 'milestones/', this.milestone);
   }
 }

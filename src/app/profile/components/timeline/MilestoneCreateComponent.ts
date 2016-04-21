@@ -23,6 +23,7 @@ export class MilestoneCreateController {
   public onContentLoaded:Function;
   public isSaveEnabled:Function;
   public minDate:Date;
+  public dueDate:Date;
   private milestone:Milestone;
 
   static $inject = [MilestoneService.NAME, '$scope', 'moment'];
@@ -30,8 +31,9 @@ export class MilestoneCreateController {
   constructor(private milestoneService:MilestoneService, private scope:IScope, private moment:any) {
     this.milestoneService.milestone = <Milestone>{};
     this.milestoneService.milestone.createDate = new Date();
-    this.milestoneService.milestone.dueDate = new Date();
     this.milestone = this.milestoneService.milestone;
+    this.dueDate = this.milestoneService.dueDate;
+    this.dueDate = new Date();
     this.minDate = new Date();
   }
 
