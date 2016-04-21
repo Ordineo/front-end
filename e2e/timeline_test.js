@@ -4,7 +4,7 @@ Before((I) => {
   I.amOnPage('/#/profile');
 });
 
-/*Scenario('Show the timeline and click on a card', (I) => {
+Scenario('Show the timeline and click on a card', (I) => {
   I.seeElement('#milestone-container');
   I.see('Timeline', '#milestone-container');
   I.waitForElement('#timeline', 2);
@@ -13,7 +13,7 @@ Before((I) => {
   I.dontSee('Personal motivation', '#timeline');
   I.click('.timeline-card', '#timeline');
   I.see('Personal motivation', '#timeline');
-});*/
+});
 
 Scenario('Show the timeline and create a milestone', (I) => {
   I.waitForElement('#milestone-container');
@@ -32,7 +32,8 @@ Scenario('Show the timeline and create a milestone', (I) => {
   I.see('Please select a correct objective', '#milestone-container');
   I.fillField('autocompleteField', '');
   I.see('You must select an objective', '#milestone-container');
-  //I.wait(10);
+  I.click('.btnCancel', '#milestone-container');
+  I.see('Timeline', '#milestone-container');
 });
 
 
