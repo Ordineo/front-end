@@ -4,7 +4,7 @@ import IAngularEvent = angular.IAngularEvent;
 import {Milestone} from "../../../core/models/milestone";
 import IFormController = angular.IFormController;
 import {Objective} from "../../../core/models/objective";
-import {MilestoneService, IMilestoneService} from "../../services/MilestoneService";
+import {MilestoneService} from "../../services/MilestoneService";
 
 export interface IMilestoneCreateBindings {
   username:string;
@@ -35,7 +35,7 @@ export class MilestoneCreateController implements IMilestoneCreateBindings {
 
   static $inject = [MilestoneService.NAME, '$scope'];
 
-  constructor(private milestoneService:IMilestoneService, private scope:IScope) {
+  constructor(private milestoneService:MilestoneService, private scope:IScope) {
     this.milestone = this.milestoneService.getNewMilestone();
     this.dueDate = this.milestoneService.dueDate;
     this.dueDate = new Date();

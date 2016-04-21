@@ -64,13 +64,15 @@ export class MilestoneService implements IMilestoneService{
   }
 
   public createMilestoneByUsername(username:string):IPromise<any> {
-    this.milestone['username'] = username;
     if(this.milestone.objective && this.milestone.objective['_links']) {
+      this.milestone['username'] = username;
       this.milestone.title = this.milestone.objective.title;
       this.milestone['objective'] = this.milestone.objective['_links']['self']['href'];
+      this.milestone['createDate'] = this.moment(this.milestone['createDate']).format("YYYY-MM-DD");
+      this.milestone['dueDate'] = this.moment(this.dueDate).format("YYYY-MM-DD");
+      return this.$http.post(this.gateway.getMilestonesApi() + 'milestones/', this.milestone);
+    } else {
+      return null;
     }
-    this.milestone['createDate'] = this.moment(this.milestone['createDate']).format("YYYY-MM-DD");
-    this.milestone['dueDate'] = this.moment(this.dueDate).format("YYYY-MM-DD");
-    return this.$http.post(this.gateway.getMilestonesApi() + 'milestones/', this.milestone);
   }
 }
