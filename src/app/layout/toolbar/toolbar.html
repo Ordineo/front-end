@@ -3,7 +3,7 @@
     <div class="logo"></div>
     <div id="welcome" layout="row" layout-align="start center">
       <span>
-        Welcome back, <strong>{{$ctrl.firstName}}</strong>!
+        Welcome back!
       </span>
     </div>
     <div layout="row" layout-align="end center" class="md-toolbar-tools">
@@ -24,9 +24,11 @@
             "{{}}" levert geen resultaten op.
           </md-not-found>
         </md-autocomplete>
+
+<!--
         <div>
           <md-button class="md-icon-button" ng-repeat="btn in $ctrl.buttons">
-            <!-- Alert must be placed after the icon -->
+            &lt;!&ndash; Alert must be placed after the icon &ndash;&gt;
             <md-icon md-svg-icon="{{btn.icon}}"></md-icon>
             <div class="push">
               <div>
@@ -35,6 +37,35 @@
             </div>
           </md-button>
         </div>
+-->
+
+        <md-menu>
+          <md-button aria-label="Open account menu" ng-click="$ctrl.openMenu($mdOpenMenu, $event)">
+            <md-icon md-menu-origin md-svg-icon="{{$ctrl.buttons[0].icon}}"></md-icon>
+            <span id="profileMenu">{{$ctrl.firstName}} {{$ctrl.lastName}}</span>
+          </md-button>
+          <md-menu-content width="3">
+            <md-menu-item>
+              <md-button aria-label="My Profile" ng-click="">
+                <md-icon md-svg-icon="{{$ctrl.buttons[0].icon}}" md-menu-align-target></md-icon>
+                My Profile
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button aria-label="Inbox" ng-click="">
+                <md-icon md-svg-icon="{{$ctrl.buttons[1].icon}}" md-menu-align-target></md-icon>
+                Inbox
+              </md-button>
+            </md-menu-item>
+            <md-menu-divider></md-menu-divider>
+            <md-menu-item>
+              <md-button aria-label="Logout" ng-click="">
+                <md-icon md-svg-icon="{{$ctrl.buttons[2].icon}}" md-menu-align-target></md-icon>
+                Logout
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
       </div>
     </div>
   </div>

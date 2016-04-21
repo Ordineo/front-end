@@ -25,19 +25,17 @@ toolbar {
     height: $logoSize;
   }
 
-  .md-icon-button {
-    md-icon {
-      color: $lightGrey;
-    }
-
-    &:hover {
-      md-icon {
-        color: $darkGrey;
-      }
-    }
+  #profileMenu {
+    position: relative;
+    top: 2px;
+    text-transform: none;
   }
 
-  .push {
+  md-autocomplete {
+    margin: 20px;
+  }
+
+  /*.push {
     background-color: $orange;
     border-radius: 7px;
     font-size: 8px;
@@ -54,5 +52,5 @@ toolbar {
       line-height: 14px;
       color: white;
     }
-  }
+  }*/
 }

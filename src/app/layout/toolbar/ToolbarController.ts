@@ -10,8 +10,10 @@ interface ButtonConfig{
 }
 export class ToolbarController implements IToolbarScope{
   public buttons:Array<ButtonConfig> = [];
+  originatorEv:any;
 
   firstName:string;
+  lastName:string;
 
   static $inject = ['$rootScope'];
 
@@ -19,18 +21,16 @@ export class ToolbarController implements IToolbarScope{
     this.buttons = this.getButtons();
     $rootScope.$on(AboutDirectiveController.EVENT_ON_EMPLOYEEDATA_SET,(event, args)=>{
       this.firstName = args.firstName;
+      this.lastName = args.lastName;
     });
   }
 
   private getButtons():Array<ButtonConfig>{
     var btns:Array<ButtonConfig> = [];
 
-    btns.push(this.createButtonConfig('public', 'social:public'));
-    btns.push(this.createButtonConfig('email', 'com:email'));
-    btns.push(this.createButtonConfig('today', 'act:today'));
-    btns.push(this.createButtonConfig('alarm', 'act:alarm'));
-    btns.push(this.createButtonConfig('perm_contact_calendar', 'act:perm_contact_calendar'));
     btns.push(this.createButtonConfig('person', 'social:person'));
+    btns.push(this.createButtonConfig('email', 'com:email'));
+    btns.push(this.createButtonConfig('logout', 'mdi:logout'));
 
     return btns;
   }
@@ -40,5 +40,10 @@ export class ToolbarController implements IToolbarScope{
       title: _title,
       icon: _icon
     };
+  }
+
+  private openMenu($mdOpenMenu, ev) {
+    this.originatorEv = ev;
+    $mdOpenMenu(ev);
   }
 }
