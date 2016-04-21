@@ -4,6 +4,7 @@ import IAngularEvent = angular.IAngularEvent;
 import {ActionButton} from "../../../core/components/action-button/ActionButtonComponent";
 import {MilestoneService, IMilestoneService} from "../../services/MilestoneService";
 import {HeaderController} from "../../../layout/header/HeaderController";
+import IPromise = Rx.IPromise;
 require('./milestone-styles.scss');
 
 export class MilestoneContainerComponent implements IComponentOptions {
@@ -99,20 +100,26 @@ export class MilestoneContainerController {
       isActive: false,
       svgSrc: 'act:done',
       onClick: (saveButton:ActionButton)=> {
-        this.milestoneService.createMilestoneByUsername(this.username).then((success:any)=> {
-          this.toggleCreateMode();
-        }, (error:any)=> {
-          if (error.status === 409) {
-            this.errorMsg = "You already have a milestone " + this.milestoneService.milestone.title;
-          } else if (error.status > 500) {
-            this.errorMsg = "check your connection";
-          } else if (error.status >= 400 && error.status < 500) {
-            this.errorMsg = "Please select a correct objective"
-          } else {
-            this.errorMsg = "Something went wrong";
-          }
+        var promise:IPromise<any> = this.milestoneService.createMilestoneByUsername(this.username);
+        if (promise) {
+          promise.then((success:any)=> {
+            this.toggleCreateMode();
+          }, (error:any)=> {
+            if (error.status === 409) {
+              this.errorMsg = "You already have a milestone " + this.milestoneService.milestone.title;
+            } else if (error.status > 500) {
+              this.errorMsg = "check your connection";
+            } else if (error.status >= 400 && error.status < 500) {
+              this.errorMsg = "Please select a correct objective"
+            } else {
+              this.errorMsg = "Something went wrong";
+            }
+            this.hasError = true;
+          });
+        } else {
+          this.errorMsg = "Please select a correct objective";
           this.hasError = true;
-        });
+        }
       },
     };
   }

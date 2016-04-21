@@ -4,7 +4,7 @@ import IAngularEvent = angular.IAngularEvent;
 import {Milestone} from "../../../core/models/milestone";
 import IFormController = angular.IFormController;
 import {Objective} from "../../../core/models/objective";
-import {MilestoneService, IMilestoneService} from "../../services/MilestoneService";
+import {MilestoneService} from "../../services/MilestoneService";
 
 export interface IMilestoneCreateBindings {
   username:string;
@@ -30,12 +30,15 @@ export class MilestoneCreateController implements IMilestoneCreateBindings {
   public onContentLoaded:Function;
   public isSaveEnabled:Function;
   public minDate:Date;
+  public dueDate:Date;
   private milestone:Milestone;
 
   static $inject = [MilestoneService.NAME, '$scope'];
 
-  constructor(private milestoneService:IMilestoneService, private scope:IScope) {
+  constructor(private milestoneService:MilestoneService, private scope:IScope) {
     this.milestone = this.milestoneService.getNewMilestone();
+    this.dueDate = this.milestoneService.dueDate;
+    this.dueDate = new Date();
     this.minDate = new Date();
   }
 
@@ -46,10 +49,8 @@ export class MilestoneCreateController implements IMilestoneCreateBindings {
   $onInit():void {
     this.isSelected = false;
     this.onContentLoaded({isLoaded: true});
-
     this.scope.$watch('milestoneCreateForm.$valid', ()=> {
       this.isSaveEnabled({isEnabled: this.scope['milestoneCreateForm'].$valid});
     });
   }
 }
-

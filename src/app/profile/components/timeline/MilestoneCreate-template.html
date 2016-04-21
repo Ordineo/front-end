@@ -3,13 +3,13 @@
     <div layout="row">
       <objectives-search flex on-selected="$ctrl.onObjectiveSelected(objective)"></objectives-search>
       <div class="datepicker-container">
-        <!--<label>Due Date</label>-->
+        <label>Due Date</label>
         <md-datepicker
-          ng-model="$ctrl.milestone.dueDate"
+          ng-model="$ctrl.dueDate"
           md-placeholder="Due Date"
           name="dueDate"
           md-min-date="$ctrl.minDate"
-          md-is-error="$ctrl.milestone.dueDate.$invalid"
+          md-is-error="$ctrl.dueDate.$invalid"
           required></md-datepicker>
         <div class="validation-messages" ng-messages="milestoneCreateForm.dueDate.$error">
           <div ng-message="required">Due date is required.</div>
