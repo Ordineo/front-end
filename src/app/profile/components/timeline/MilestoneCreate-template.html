@@ -1,10 +1,9 @@
 <form name="milestoneCreateForm" novalidate>
   <div layout="column">
     <div layout="row">
-      <objectives-search
-        on-selected="$ctrl.onObjectiveSelected(objective)" flex="50"></objectives-search>
+      <objectives-search flex on-selected="$ctrl.onObjectiveSelected(objective)"></objectives-search>
       <div class="datepicker-container">
-        <label>Due Date</label>
+        <!--<label>Due Date</label>-->
         <md-datepicker
           ng-model="$ctrl.milestone.dueDate"
           md-placeholder="Due Date"

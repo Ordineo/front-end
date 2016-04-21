@@ -4,9 +4,17 @@ import IQService = angular.IQService;
 import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 import {TraversonHalService} from "../../traverson/service/TraversonHalService";
 import {Milestone} from "../../core/models/milestone";
-import {Moment} from "~moment/moment";
+import {Objective} from "../../core/models/objective";
 
-export class MilestoneService {
+export interface IMilestoneService {
+  getMilestonesByUsername(userName:string):IPromise<any>;
+  setObjective(objective:Objective):void;
+  getNewMilestone():Milestone;
+  searchObjectives(qry:string):IPromise<any>;
+  createMilestoneByUsername(username:string):IPromise<any>
+}
+
+export class MilestoneService implements IMilestoneService{
   public milestone:Milestone;
   static NAME:string = "MilestoneService";
   static $inject:Array<string> = [
@@ -23,6 +31,11 @@ export class MilestoneService {
               private moment:any) {
   }
 
+
+  setObjective(objective:Objective):void{
+    this.milestone.objective = objective;
+  }
+
   public getMilestonesByUsername(userName:string):IPromise<any> {
     return this.traverson.hal()
       .from(this.gateway.getMilestonesApi() + '/milestones/search')
@@ -31,6 +44,12 @@ export class MilestoneService {
       .withTemplateParameters({username: userName})
       .getResource()
       .result;
+  }
+
+  public getNewMilestone():Milestone{
+    this.milestone = <Milestone>{};
+    this.milestone.dueDate = new Date();
+    return this.milestone;
   }
 
   public searchObjectives(qry:string):IPromise<any> {
@@ -45,8 +64,12 @@ export class MilestoneService {
 
   public createMilestoneByUsername(username:string):IPromise<any> {
     this.milestone['username'] = username;
-    this.milestone['objective'] = this.milestone.objective['_links']['self']['href'];
-    this.milestone['createDate'] = this.moment(this.milestone['createDate']).format("YYYY-MM-DD");
+    if(this.milestone.objective && this.milestone.objective['_links']) {
+      this.milestone.title = this.milestone.objective.title;
+      this.milestone['objective'] = this.milestone.objective['_links']['self']['href'];
+    }
+    this.milestone['createDate'] = this.moment().format("YYYY-MM-DD");
+    //TODO fix duedate is 2way binded to datepicker but datepicker only accepts Date objects, below duedate is set as a string
     this.milestone['dueDate'] = this.moment(this.milestone['dueDate']).format("YYYY-MM-DD");
     return this.$http.post(this.gateway.getMilestonesApi() + 'milestones/', this.milestone);
   }

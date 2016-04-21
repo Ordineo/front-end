@@ -4,7 +4,13 @@ import IAngularEvent = angular.IAngularEvent;
 import {Milestone} from "../../../core/models/milestone";
 import IFormController = angular.IFormController;
 import {Objective} from "../../../core/models/objective";
-import {MilestoneService} from "../../services/MilestoneService";
+import {MilestoneService, IMilestoneService} from "../../services/MilestoneService";
+
+export interface IMilestoneCreateBindings {
+  username:string;
+  onContentLoaded:Function;
+  isSaveEnabled:Function;
+}
 
 export class MilestoneCreateComponent implements IComponentOptions {
   static NAME:string = "milestoneCreate";
@@ -17,32 +23,33 @@ export class MilestoneCreateComponent implements IComponentOptions {
   };
 }
 
-export class MilestoneCreateController {
+export class MilestoneCreateController implements IMilestoneCreateBindings {
   public title:string = "MilestoneCreate";
   public username:string;
+  public isSelected:boolean;
   public onContentLoaded:Function;
   public isSaveEnabled:Function;
   public minDate:Date;
   private milestone:Milestone;
 
-  static $inject = [MilestoneService.NAME, '$scope', 'moment'];
+  static $inject = [MilestoneService.NAME, '$scope'];
 
-  constructor(private milestoneService:MilestoneService, private scope:IScope, private moment:any) {
-    this.milestoneService.milestone = <Milestone>{};
-    this.milestoneService.milestone.createDate = new Date();
-    this.milestoneService.milestone.dueDate = new Date();
-    this.milestone = this.milestoneService.milestone;
+  constructor(private milestoneService:IMilestoneService, private scope:IScope) {
+    this.milestone = this.milestoneService.getNewMilestone();
     this.minDate = new Date();
   }
 
-  public onObjectiveSelected(objective:Objective):void{
-    this.milestoneService.milestone.objective = objective;
+  public onObjectiveSelected(objective:Objective):void {
+    this.milestoneService.setObjective(objective);
   }
 
   $onInit():void {
+    this.isSelected = false;
     this.onContentLoaded({isLoaded: true});
+
     this.scope.$watch('milestoneCreateForm.$valid', ()=> {
       this.isSaveEnabled({isEnabled: this.scope['milestoneCreateForm'].$valid});
     });
   }
 }
+
