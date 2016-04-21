@@ -19,6 +19,19 @@ body {
   font-family: NeutraTextBook;
 }
 
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: NeutraTextBold;
 }
@@ -27,9 +40,10 @@ section[ui-view] {
   background-color: $mainBackground;
 }
 
-.translate-whitespace{
+.translate-whitespace {
   white-space: pre-line;
 }
+
 img {
   font-family: 'NeutraTextBook';
   font-weight: 300;
@@ -41,6 +55,7 @@ img {
   display: block;
   position: relative;
 }
+
 img:before {
   content: " ";
   display: block;
