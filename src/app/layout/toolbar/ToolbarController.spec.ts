@@ -6,7 +6,7 @@ describe("ToolbarController", ()=> {
     ctrl = new ToolbarController(_$rootScope_);
   }));
 
-  it("should get 6 buttons", ()=> {
+  it("should get 3 buttons", ()=> {
     expect(ctrl.buttons.length).toBe(3);
   });
 });
