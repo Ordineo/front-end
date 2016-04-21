@@ -29,7 +29,10 @@ export class MilestoneContainerController {
 
   private errorMsg:string;
 
-  public title:string = "Timeline"; //todo
+  private titleTimeline:string = "Timeline";
+  private titleCreate:string = "Create milestone";
+  public title:string;
+
   public username:string;
   public isContentLoaded:boolean = false;
 
@@ -46,6 +49,7 @@ export class MilestoneContainerController {
         this.toggleCreateMode();
       }
     });
+    this.title = this.titleTimeline;
     this.configureCardHeaderButtons();
     this.createMode = false;
   }
@@ -61,10 +65,12 @@ export class MilestoneContainerController {
   private toggleCreateMode():void {
     this.createMode = !this.createMode;
     if (this.createMode) {
+      this.title = this.titleCreate;
       this.createButton.isActive = false;
       this.cancelButton.isActive = true;
       this.saveButton.isActive = true;
     } else {
+      this.title = this.titleTimeline;
       this.createButton.isActive = true;
       this.cancelButton.isActive = false;
       this.hasError = false;
