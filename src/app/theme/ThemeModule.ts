@@ -12,10 +12,10 @@ import IIconProvider = angular.material.IIconProvider;
 import IThemingProvider = angular.material.IThemingProvider;
 import IDateLocaleProvider = angular.material.IDateLocaleProvider;
 
-export const MATERIAL_DESIGN = "material.design";
+export const THEME_MODULE = "ordineoThemeModule";
 
 angular
-  .module(MATERIAL_DESIGN, ['ngMaterial', 'angularMoment'])
+  .module(THEME_MODULE, ['ngMaterial', 'angularMoment'])
   .config(mdConfig);
 
 mdConfig.$inject = ['$mdIconProvider', '$mdThemingProvider', '$mdDateLocaleProvider', 'moment'];
