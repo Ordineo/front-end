@@ -1,4 +1,4 @@
-<form name="loginForm" novalidate ng-submit="$ctrl.login(loginForm.$valid)">
+<form name="loginForm" novalidate>
     <div layout="column" layout-padding ng-cloak>
         <md-content class="autoScroll">
             <md-input-container class="md-icon-float md-block">
@@ -48,10 +48,10 @@
             <md-button
                     flex="70"
                     ng-disabled="loginForm.$invalid"
-                    ng-click="$ctrl.validate()"
+                    ng-click="$ctrl.logIn($ctrl.user)"
                     class="md-raised md-primary">Login
             </md-button>
-            <span flex></span>
+          <span flex></span>
         </div>
     </div>
 </form>

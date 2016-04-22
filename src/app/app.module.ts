@@ -6,6 +6,7 @@ import {ORDINEO_LAYOUT} from "./layout/LayoutModule";
 import {ORDINEO_GATEWAY} from "./gateway/GatewayModule";
 import {ORDINEO_SOCIAL} from "./social/SocialModule";
 import IHttpProvider = angular.IHttpProvider;
+import {JWORKS_AUTH} from "./auth/AuthModule";
 
 export const APP_NAME = "ordineo";
 
@@ -16,6 +17,7 @@ angular
     ORDINEO_LAYOUT,
     ORDINEO_GATEWAY,
     ORDINEO_SOCIAL,
+    JWORKS_AUTH,
     THEME_MODULE,
   ])
   .component(AppComponent.NAME, new AppComponent());
