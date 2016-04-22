@@ -1,4 +1,4 @@
-import {MATERIAL_DESIGN} from "../theme/ThemeModule";
+import {THEME_MODULE} from "../theme/ThemeModule";
 import {AboutDirective} from "./components/about/AboutDirective";
 import {ORDINEO_CORE} from "../core/core.module.ts";
 import {ProfileService} from "./services/ProfileService";
@@ -21,7 +21,7 @@ import {ObjectivesSearch} from "./components/objectives-search/ObjectivesSearch"
 export const ORDINEO_PROFILE = "ordineo.profile";
 
 var deps:Array<string> = [
-  MATERIAL_DESIGN,
+  THEME_MODULE,
   ORDINEO_CORE,
   TRAVERSON,
   ORDINEO_GATEWAY
