@@ -35,7 +35,7 @@ Scenario('Edit about section and cancel', (I) => {
 });
 
 Scenario('Edit about section and save changes', (I) => {
-  I.waitForElement('.about-header');
+  I.waitForElement('.about-header', 2);
   I.click('.btnEdit', '.about-header');
   I.waitForElement({model: 'about.employee.function'});
   I.fillField({model: 'about.employee.function'},'test function');

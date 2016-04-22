@@ -7,7 +7,8 @@ export class ActionButtonComponent implements IComponentOptions {
     onClick: '&',
     isActive: '<',
     svgSrc: '@',
-    isDisabled: '<'
+    isDisabled: '<',
+    aClass: '@'
   };
 
   template:string = `
@@ -16,7 +17,7 @@ export class ActionButtonComponent implements IComponentOptions {
           aria-label="{{$ctrl.label}}"
           ng-if="$ctrl.isActive"
           ng-click="$ctrl.click()"
-          class="md-icon-button">
+          class="md-icon-button {{$ctrl.aClass}}">
           <md-icon md-svg-src="{{$ctrl.svgSrc}}"></md-icon>
         </md-button>
   `;
@@ -34,5 +35,6 @@ export interface ActionButton {
   onClick?:Function,
   isActive?:boolean,
   svgSrc?:string,
-  isDisabled?:boolean
+  isDisabled?:boolean,
+  aClass?:string
 }
