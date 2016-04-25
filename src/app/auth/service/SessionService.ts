@@ -11,9 +11,10 @@ export class SessionService implements ISessionService {
 
   constructor(private $window:IWindowService) {
     this._authData = {
-      token: this.$window.localStorage.getItem(this.ITEM_TOKEN),
+
+      token: JSON.parse(this.$window.localStorage.getItem(this.ITEM_TOKEN)),
       username: this.$window.localStorage.getItem(this.ITEM_USER)
-    }
+    };
   }
 
   setAuthData(authData:AuthData):void {

@@ -59,7 +59,7 @@
             </md-menu-item>
             <md-menu-divider></md-menu-divider>
             <md-menu-item>
-              <md-button aria-label="Logout" ng-click="">
+              <md-button aria-label="Logout" ng-click="$root.authService.logOut()">
                 <md-icon md-svg-icon="{{$ctrl.buttons[2].icon}}" md-menu-align-target></md-icon>
                 Logout
               </md-button>

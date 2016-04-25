@@ -18,6 +18,7 @@ export class LoginComponent implements IComponentOptions {
   template:string = require('./login-template.html');
 }
 export class LoginController {
+  /*todo remove default credentials*/
   public user:ICredentials = {
     email: 'ryan@mail.be',
     password: 'hottentottentettententoonstelling',
@@ -27,20 +28,18 @@ export class LoginController {
   /*
    * Controller Dependencies
    * */
-  static $inject = ['$rootRouter',AuthService.NAME];
+  static $inject = [AuthService.NAME];
 
-  constructor(private $router:Router, private authService:IAuthService) {
+  constructor(private authService:IAuthService) {
   }
 
-  /*
-   * component lifecycle hooks
-   * */
-  $postLink():void {
+  $onInit():void {
+    this.authService.authenticate();
   }
 
   logIn(user):void {
     this.authService.logIn(user).then(()=> {
-      this.$router.navigate([DashboardRoute.NAME]);
+      this.$onInit();
     });
   }
 }

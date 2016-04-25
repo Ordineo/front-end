@@ -17,16 +17,12 @@ export class AppComponent implements IComponentOptions {
   ];
 }
 export class AppComponentController {
-  static $inject = ['$rootRouter', AuthService.NAME];
+  static $inject = [AuthService.NAME];
 
-  constructor(private $router:Router, private authService:IAuthService) {
+  constructor(private authService:IAuthService) {
   }
 
   $onInit():void {
-    if (this.authService.isAuthorized()) {
-      this.$router.navigate([DashboardRoute.NAME]);
-    } else {
-      this.$router.navigate([LoginRoute.NAME]);
-    }
+    this.authService.authenticate();
   }
 }

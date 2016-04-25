@@ -2,6 +2,7 @@ import {AuthService, IAuthService} from "./service/AuthService";
 import {LoginComponent} from "./LoginComponent";
 import {SessionService, ISessionService} from "./service/SessionService";
 import IRootScopeService = angular.IRootScopeService;
+import Router = angular.Router;
 export const JWORKS_AUTH = "jworksAuth";
 
 angular
@@ -13,7 +14,9 @@ angular
 
 assignServicesToRootScope.$inject = ['$rootScope', SessionService.NAME, AuthService.NAME];
 
-function assignServicesToRootScope($rootScope:IRootScopeService, sessionService:ISessionService, authService:IAuthService) {
+function assignServicesToRootScope($rootScope:IRootScopeService,
+                                   sessionService:ISessionService,
+                                   authService:IAuthService) {
   $rootScope[SessionService.NAME] = sessionService;
   $rootScope[AuthService.NAME] = authService;
 }
