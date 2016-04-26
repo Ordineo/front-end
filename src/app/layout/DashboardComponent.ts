@@ -18,7 +18,6 @@ export class DashboardComponent implements IComponentOptions {
   template:string = `
   <div id="page-wrap">
     <toolbar></toolbar>
-    <header></header>
     <ng-outlet></ng-outlet>
   </div>
   `;
