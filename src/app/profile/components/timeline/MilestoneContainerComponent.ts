@@ -94,6 +94,7 @@ export class MilestoneContainerController {
       label: 'Create milestone',
       isActive: true,
       svgSrc: 'content:add_circle',
+      aClass: 'btnCreate',
       onClick: (createButton:ActionButton)=> {
         this.toggleCreateMode();
       },
@@ -105,6 +106,7 @@ export class MilestoneContainerController {
       label: 'Save milestone',
       isActive: false,
       svgSrc: 'act:done',
+      aClass: 'btnSave',
       onClick: (saveButton:ActionButton)=> {
         var promise:IPromise<any> = this.milestoneService.createMilestoneByUsername(this.username);
         if (promise) {
@@ -135,6 +137,7 @@ export class MilestoneContainerController {
       label: 'Cancel milestone',
       isActive: false,
       svgSrc: 'act:highlight_off',
+      aClass: 'btnCancel',
       onClick: (cancelButton:ActionButton)=> {
         this.toggleCreateMode();
       },
