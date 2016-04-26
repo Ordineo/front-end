@@ -34,7 +34,7 @@ export class AuthService implements IAuthService {
     var deferred:IDeferred<any> = this.$q.defer();
     deferred.resolve();
     return deferred.promise.then(()=> {
-      this.sessionService.setAuthData({token: '12345', username: credentials.username});
+      this.sessionService.setAuthData("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJ5ZGUifQ.S8xMgpsiJccXvUNRqSjzU914heUUHadRH9lY00PhxVI");
     });
   }
 
@@ -48,7 +48,7 @@ export class AuthService implements IAuthService {
 
   /*todo refactor code to validate token*/
   isAuthorized():boolean {
-    return this.sessionService.getAuthData().token !== null;
+    return this.sessionService.getUsername() !== null;
   }
 }
 export interface IAuthService {
