@@ -4,17 +4,17 @@ import RouteDefinition = angular.RouteDefinition;
 export class DashboardComponent implements IComponentOptions {
   static NAME:string = 'dashboard';
 
-  $routeConfig:RouteDefinition[] = [
+  /*$routeConfig:RouteDefinition[] = [
     {path: "/profile", name: "Profile", component: "", useAsDefault: true}
-  ];
+  ];*/
 
   template:string = `
   <div id="page-wrap">
     <toolbar></toolbar>
     <header></header>
     <ng-outlet></ng-outlet>
-    <!--<profile-about username="{{profile.username}}"></profile-about>
-    <milestone-container id="milestone-container" username="{{profile.username}}"></milestone-container>-->
+    <profile-about username="{{profile.username}}"></profile-about>
+    <milestone-container id="milestone-container" username="{{profile.username}}"></milestone-container>
   </div>
   `;
   controller:Function = DashboardComponentController;
