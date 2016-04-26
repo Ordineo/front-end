@@ -34,7 +34,7 @@ export class LoginController {
   }
 
   $onInit():void {
-    this.authService.authenticate();
+    this.authService.authenticate([DashboardRoute.NAME],null);
   }
 
   logIn(user):void {

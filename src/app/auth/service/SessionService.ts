@@ -14,7 +14,11 @@ export class SessionService implements ISessionService {
 
   setAuthData(token:string):void {
     this.token = token;
-    this.$window.localStorage.setItem(this.ITEM_TOKEN, this.token);
+    if(token) {
+      this.$window.localStorage.setItem(this.ITEM_TOKEN, this.token);
+    }else{
+      this.$window.localStorage.removeItem(this.ITEM_TOKEN);
+    }
   }
 
   getUsername():string {
