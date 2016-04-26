@@ -1,6 +1,6 @@
 import {THEME_MODULE} from "../theme/ThemeModule";
 import {AboutDirective} from "./components/about/AboutDirective";
-import {ORDINEO_CORE} from "../core/core.module.ts";
+import {JWORKS360_CORE} from "../core/core.module.ts";
 import {ProfileService} from "./services/ProfileService";
 import {TRAVERSON} from "../traverson/TraversonModule";
 import {ORDINEO_GATEWAY} from "../gateway/GatewayModule";
@@ -22,7 +22,7 @@ export const ORDINEO_PROFILE = "ordineo.profile";
 
 var deps:Array<string> = [
   THEME_MODULE,
-  ORDINEO_CORE,
+  JWORKS360_CORE,
   TRAVERSON,
   ORDINEO_GATEWAY
 ];

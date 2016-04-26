@@ -54,7 +54,12 @@ export class ActionButtonComponent implements IComponentOptions {
   `;
   controller:Function = ActionButtonController;
 }
-export class ActionButtonController {
+export class ActionButtonController implements ActionButton {
+  label:string;
+  isActive:boolean;
+  svgSrc:string;
+  isDisabled:boolean;
+  aClass:string;
   public onClick:Function;
 
   click():void {

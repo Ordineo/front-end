@@ -5,13 +5,13 @@ import IControllerService = angular.IControllerService;
 import IRootScopeService = angular.IRootScopeService;
 import IScope = angular.IScope;
 import 'angular-mocks';
-import {ORDINEO_CORE} from "../../../core/core.module.ts";
+import {JWORKS360_CORE} from "../../../core/core.module.ts";
 import {MilestoneController} from "./MilestoneComponent";
 
 var mockdata = require('../../services/mocktimelinedata.json');
 describe("card header controller", ()=> {
 
-  beforeEach(angular.mock.module(ORDINEO_CORE));
+  beforeEach(angular.mock.module(JWORKS360_CORE));
 
   var $controller:IControllerService;
   var scope:IScope;

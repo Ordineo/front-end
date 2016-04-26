@@ -17,7 +17,7 @@ import '@angular/router/angular1/angular_1_router';
 import {TRAVERSON} from "../traverson/TraversonModule";
 import {AppComponent} from "../app.component";
 
-export const ORDINEO_CORE = 'jworks360.core';
+export const JWORKS360_CORE = 'jworks360.core';
 
 var deps:Array<string> = [
   TRAVERSON,
@@ -28,7 +28,7 @@ var deps:Array<string> = [
   'ngComponentRouter'
 ];
 
-angular.module(ORDINEO_CORE, deps)
+angular.module(JWORKS360_CORE, deps)
   .value('$routerRootComponent', AppComponent.NAME)
   .component(CardHeaderComponent.NAME, new CardHeaderComponent())
   .component(ActionButtonComponent.NAME, new ActionButtonComponent())

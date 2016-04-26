@@ -3,11 +3,11 @@ import IControllerService = angular.IControllerService;
 import IRootScopeService = angular.IRootScopeService;
 import IScope = angular.IScope;
 import 'angular-mocks';
-import {ORDINEO_CORE} from "../../core.module.ts";
+import {JWORKS360_CORE} from "../../core.module.ts";
 
 describe("card header controller", ()=> {
 
-  beforeEach(angular.mock.module(ORDINEO_CORE));
+  beforeEach(angular.mock.module(JWORKS360_CORE));
 
   var $controller:IControllerService;
   var scope:IScope;
