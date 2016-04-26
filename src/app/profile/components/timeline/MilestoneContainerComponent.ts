@@ -3,7 +3,6 @@ import IScope = angular.IScope;
 import IAngularEvent = angular.IAngularEvent;
 import {ActionButton} from "../../../core/components/action-button/ActionButtonComponent";
 import {MilestoneService, IMilestoneService} from "../../services/MilestoneService";
-import {HeaderController} from "../../../layout/header/HeaderController";
 import IPromise = Rx.IPromise;
 require('./milestone-styles.scss');
 
@@ -43,12 +42,13 @@ export class MilestoneContainerController {
 
   $onInit():void {
     this.hasError = false;
-    this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=> {
-      this.username = data.username;
-      if(this.createMode) {
-        this.toggleCreateMode();
-      }
-    });
+    //todo use profileservice
+    // this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=> {
+    //   this.username = data.username;
+    //   if(this.createMode) {
+    //     this.toggleCreateMode();
+    //   }
+    // });
     this.title = this.titleTimeline;
     this.configureCardHeaderButtons();
     this.createMode = false;

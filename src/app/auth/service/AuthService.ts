@@ -34,7 +34,7 @@ export class AuthService implements IAuthService {
     var deferred:IDeferred<any> = this.$q.defer();
     deferred.resolve();
     return deferred.promise.then(()=> {
-      this.sessionService.setAuthData("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJ5ZGUifQ.S8xMgpsiJccXvUNRqSjzU914heUUHadRH9lY00PhxVI");
+      this.sessionService.setAuthData("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJ5ZGcifQ.h04qk5YxTYGhse8rtvECrN0fabk83jWeI5aCGD-1Jxw");
     });
   }
 

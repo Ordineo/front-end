@@ -22,7 +22,7 @@ export class LoginController {
   public user:ICredentials = {
     email: 'ryan@mail.be',
     password: 'hottentottentettententoonstelling',
-    username: 'ryde'
+    username: 'Rydg'
   };
 
   /*
