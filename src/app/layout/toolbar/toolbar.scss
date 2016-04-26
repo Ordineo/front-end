@@ -4,7 +4,7 @@ $grey: #57595b;
 $lightGrey: #bdbcbc;
 $darkGrey: #686868;
 $mainBackground: #f4f4f4;
-$logoTopLeft: './images/ordineo.png';
+$logoTopLeft: '/assets/images/jworks-logo-nomargin.png';
 $logoSize: 64px;
 
 toolbar {
@@ -13,16 +13,17 @@ toolbar {
   }
 
   #welcome {
-    width: 300px;
     padding-left: 15px;
     padding-right: 15px;
+    color: $orange;
+    font-size: 2em;
   }
 
   .logo {
     background: url($logoTopLeft) no-repeat center;
-    background-size: cover;
+    background-size: contain;
+    margin: 5px;
     width: $logoSize;
-    height: $logoSize;
   }
 
   #profileMenu {
