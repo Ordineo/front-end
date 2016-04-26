@@ -7,7 +7,7 @@ Before((I) => {
 });
 
 Scenario('Open the profile page', (I) => {
-  I.see(pageTitle, '.header-bg');
+  //I.see(pageTitle, '.header-bg');
   I.see('Sync with Linkedin', '#getDetails');
   I.waitForElement('.about-header', 2);
   I.seeElement('.about-header');

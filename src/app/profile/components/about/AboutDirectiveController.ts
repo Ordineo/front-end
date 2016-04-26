@@ -167,7 +167,8 @@ export class AboutDirectiveController {
   private broadCastOnEmployeeDataSet(employee:Employee, rootScope:IRootScopeService) {
     rootScope.$broadcast(AboutDirectiveController.EVENT_ON_EMPLOYEEDATA_SET, {
       username: employee.username,
-      firstName: employee.firstName
+      firstName: employee.firstName,
+      lastName: employee.lastName
     });
   }
 

@@ -1,20 +1,71 @@
-<md-toolbar class="md-medium-tall toolbar"> <!--md-whiteframe="1"-->
-  <div layout="row" flex="grow" layout-align="center center">
+<md-toolbar id="toolbar">
+  <div layout="row">
     <div class="logo"></div>
-    <div class="md-toolbar-tools">
-      <span flex="60" flex-gt-md="60">
-        Welcome back, <strong>{{$ctrl.firstName}}</strong>!
+    <div id="welcome" layout="row" layout-align="start center">
+      <span>
+        Welcome back!
       </span>
-      <div flex layout="row" layout-align="center center">
-        <md-button class="md-icon-button" ng-repeat="btn in $ctrl.buttons">
-          <!-- Alert must be placed after the icon -->
-          <md-icon md-svg-icon="{{btn.icon}}"></md-icon>
-          <div class="push">
-            <div>
-              <p><strong>25</strong></p>
+    </div>
+    <div layout="row" layout-align="end center" class="md-toolbar-tools">
+      <div layout="row">
+        <md-autocomplete
+          md-selected-item="$ctrl.selectedItem"
+          md-search-text-change="$ctrl.searchTextChange($ctrl.searchText)"
+          md-search-text="$ctrl.searchText"
+          md-selected-item-change="$ctrl.selectedItemChange(item)"
+          md-items="item in $ctrl.querySearch($ctrl.searchText)"
+          md-item-text="item.display"
+          md-min-length="0"
+          placeholder="Zoek gebruiker">
+          <md-item-template>
+            <span md-highlight-text="$ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+          </md-item-template>
+          <md-not-found>
+            "{{$ctrl.searchText}}" levert geen resultaten op.
+          </md-not-found>
+        </md-autocomplete>
+
+<!--
+        <div>
+          <md-button class="md-icon-button" ng-repeat="btn in $ctrl.buttons">
+            &lt;!&ndash; Alert must be placed after the icon &ndash;&gt;
+            <md-icon md-svg-icon="{{btn.icon}}"></md-icon>
+            <div class="push">
+              <div>
+                <p><strong>25</strong></p>
+              </div>
             </div>
-          </div>
-        </md-button>
+          </md-button>
+        </div>
+-->
+
+        <md-menu>
+          <md-button aria-label="Open account menu" ng-click="$ctrl.openMenu($mdOpenMenu, $event)">
+            <md-icon md-menu-origin md-svg-icon="{{$ctrl.buttons[0].icon}}"></md-icon>
+            <span id="profileMenu">{{$ctrl.firstName}} {{$ctrl.lastName}}</span>
+          </md-button>
+          <md-menu-content width="3">
+            <md-menu-item>
+              <md-button aria-label="My Profile" ng-click="">
+                <md-icon md-svg-icon="{{$ctrl.buttons[0].icon}}" md-menu-align-target></md-icon>
+                My Profile
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button aria-label="Inbox" ng-click="">
+                <md-icon md-svg-icon="{{$ctrl.buttons[1].icon}}" md-menu-align-target></md-icon>
+                Inbox
+              </md-button>
+            </md-menu-item>
+            <md-menu-divider></md-menu-divider>
+            <md-menu-item>
+              <md-button aria-label="Logout" ng-click="">
+                <md-icon md-svg-icon="{{$ctrl.buttons[2].icon}}" md-menu-align-target></md-icon>
+                Logout
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
       </div>
     </div>
   </div>
