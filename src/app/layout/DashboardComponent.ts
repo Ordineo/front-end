@@ -12,7 +12,7 @@ export class DashboardComponent implements IComponentOptions {
   };
 
   $routeConfig:RouteDefinition[] = [
-    {path: '/profile', name: 'Profile', component: ProfileComponent.NAME, useAsDefault: true}
+    {path: '/profile', name: DashboardRoutes.PROFILE, component: ProfileComponent.NAME, useAsDefault: true}
   ];
 
   template:string = `
@@ -24,6 +24,7 @@ export class DashboardComponent implements IComponentOptions {
   `;
   controller:Function = DashboardComponentController;
 }
+
 export class DashboardComponentController {
   static $inject = [AuthService.NAME];
   public routerOutlet:any;
@@ -33,7 +34,12 @@ export class DashboardComponentController {
 
   $onInit():void {
     this.authService.authenticate(null, ()=> {
-      this.routerOutlet.$$router.navigate(['Profile']);
+      this.routerOutlet.$$router.navigate([DashboardRoutes.PROFILE]);
     });
   }
 }
+
+export class DashboardRoutes {
+  static PROFILE:string = 'Profile';
+}
+
