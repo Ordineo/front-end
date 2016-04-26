@@ -1,16 +1,14 @@
 import IRootScopeService = angular.IRootScopeService;
-export interface IToolbarScope {
-  buttons:Array<ButtonConfig>;
-}
+import {EmployeeName} from "../../core/models/EmployeeName";
 interface ButtonConfig {
   title:string;
   icon:string;
 }
-export class ToolbarController implements IToolbarScope {
+export class ToolbarController {
   public buttons:Array<ButtonConfig> = [];
+  public employeeName:EmployeeName;
+
   originatorEv:any;
-  firstName:string;
-  lastName:string;
 
   constructor() {
     this.buttons = this.getButtons();

@@ -20,11 +20,10 @@
           </md-button>
         </div>
 -->
-
         <md-menu>
           <md-button aria-label="Open account menu" ng-click="$ctrl.openMenu($mdOpenMenu, $event)">
             <md-icon md-menu-origin md-svg-icon="{{$ctrl.buttons[0].icon}}"></md-icon>
-            <span id="profileMenu">{{$ctrl.firstName}} {{$ctrl.lastName}}</span>
+            <span id="profileMenu">{{$ctrl.employeeName.first}} {{$ctrl.employeeName.last}}</span>
           </md-button>
           <md-menu-content width="3">
             <md-menu-item>

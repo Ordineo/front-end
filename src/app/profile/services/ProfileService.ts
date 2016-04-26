@@ -38,7 +38,7 @@ export class ProfileService implements IProfileService {
     scope.$on('$destroy', handler);
   }
 
-  public setUsername(username:string){
+  public setUsername(username:string) {
     this.username = username;
     this.notifyUsernameChanged()
   }
@@ -76,6 +76,16 @@ export class ProfileService implements IProfileService {
       .jsonHal()
       .follow('employee')
       .withTemplateParameters({username: userName})
+      .getResource()
+      .result;
+  }
+
+  public getBasicInfoByUsername(userName:string):IPromise<any> {
+    return this.traverson.hal()
+      .from(this.gateway.getSearchEmployeeApi())
+      .jsonHal()
+      .follow('employee')
+      .withTemplateParameters({username: userName, projection: 'searchProjection'})
       .getResource()
       .result;
   }

@@ -4,6 +4,9 @@ import RouteDefinition = angular.RouteDefinition;
 import {ProfileComponent} from "../profile/ProfileComponent";
 import RouterOutlet = angular.RouterOutlet;
 import Router = angular.Router;
+import {ProfileService} from "../profile/services/ProfileService";
+import {SessionService} from "../auth/service/SessionService";
+import {EmployeeName} from "../core/models/EmployeeName";
 export class DashboardComponent implements IComponentOptions {
   static NAME:string = 'dashboard';
 
@@ -17,23 +20,31 @@ export class DashboardComponent implements IComponentOptions {
 
   template:string = `
   <div id="page-wrap">
-    <toolbar></toolbar>
-    <ng-outlet></ng-outlet>
+    <toolbar employee-name="$ctrl.name"></toolbar>
+    <ng-outlet ></ng-outlet>
   </div>
   `;
   controller:Function = DashboardComponentController;
 }
 
 export class DashboardComponentController {
-  static $inject = [AuthService.NAME];
+  static $inject = [AuthService.NAME, SessionService.NAME, ProfileService.NAME];
   public routerOutlet:any;
+  public name:EmployeeName;
 
-  constructor(private authService:IAuthService) {
+  constructor(private authService:IAuthService, private sessionService:SessionService, private profileService:ProfileService) {
   }
 
   $onInit():void {
     this.authService.authenticate(null, ()=> {
       this.routerOutlet.$$router.navigate([DashboardRoutes.PROFILE]);
+    });
+    this.profileService.getBasicInfoByUsername(this.sessionService.getUsername()).then((data)=> {
+      this.profileService.setUsername(data.username);
+      this.name = {
+        first: data.firstName,
+        last: data.lastName
+      };
     });
   }
 }

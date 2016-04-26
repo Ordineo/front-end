@@ -3,6 +3,8 @@ import {Milestone} from "../../../core/models/milestone";
 import {MilestoneService} from "../../services/MilestoneService";
 import IScope = angular.IScope;
 import IAngularEvent = angular.IAngularEvent;
+import {ProfileService} from "../../services/ProfileService";
+import {SessionService} from "../../../auth/service/SessionService";
 
 export class TimelineComponent implements IComponentOptions {
   static NAME:string = "timeline";
@@ -20,17 +22,21 @@ export class TimelineController {
   public username:string;
   public onContentLoaded:Function;
 
-  static $inject = [MilestoneService.NAME, '$rootScope'];
+  static $inject = [ProfileService.NAME, '$scope', MilestoneService.NAME, SessionService.NAME];
 
-  constructor(private timelineService:MilestoneService, private rootScope:IScope) {
-
+  constructor(private profileService:ProfileService,
+              private $scope:IScope,
+              private timelineService:MilestoneService,
+              private sessionService:SessionService) {
   }
 
   $onInit():void {
-    // this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=> {
-    //   this.username = data.username;
-    //   this.getMilestoneDataAsync();
-    // });
+    this.username = this.sessionService.getUsername();
+    this.profileService.subscribeUsernameChanged(this.$scope, (evt:IAngularEvent, data:any)=> {
+      this.username = data.username;
+      console.log(this.username);
+      this.getMilestoneDataAsync();
+    });
     if (this.username) {
       this.getMilestoneDataAsync();
     } else {
