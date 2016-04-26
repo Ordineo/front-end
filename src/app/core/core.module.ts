@@ -17,7 +17,7 @@ import '@angular/router/angular1/angular_1_router';
 import {TRAVERSON} from "../traverson/TraversonModule";
 import {AppComponent} from "../app.component";
 
-export const ORDINEO_CORE = 'ordineo.core';
+export const ORDINEO_CORE = 'jworks360.core';
 
 var deps:Array<string> = [
   TRAVERSON,
