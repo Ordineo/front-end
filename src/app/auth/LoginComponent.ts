@@ -41,13 +41,6 @@ export class LoginController {
   }
 
   logIn(user):void {
-    this.profileService.getAboutInfoByUsername('rydg')
-      .then(()=>{
-        console.log('user exists');
-      }, ()=>{
-        console.log('user doesn\'t exist');
-      });
-
     this.authService.logIn(user).then(()=> {
       this.$onInit();
     });
