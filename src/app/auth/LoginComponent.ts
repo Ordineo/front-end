@@ -8,11 +8,7 @@ import {ICredentials} from "./ICredentials";
 import Router = angular.Router;
 import IRootScopeService = angular.IRootScopeService;
 import {AuthService, IAuthService} from "./service/AuthService";
-import {ProfileService} from "../profile/services/ProfileService";
-import {DashboardComponent} from "../layout/DashboardComponent";
 import {DashboardRoute} from "../app.routes";
-
-var $ = require('jquery');
 
 export class LoginComponent implements IComponentOptions {
   static NAME:string = 'login';
@@ -31,9 +27,9 @@ export class LoginController {
   /*
    * Controller Dependencies
    * */
-  static $inject = [AuthService.NAME, ProfileService.NAME];
+  static $inject = [AuthService.NAME];
 
-  constructor(private authService:IAuthService, private profileService:ProfileService) {
+  constructor(private authService:IAuthService) {
   }
 
   $onInit():void {
