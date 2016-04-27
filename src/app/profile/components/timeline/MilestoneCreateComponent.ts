@@ -17,7 +17,6 @@ export class MilestoneCreateComponent implements IComponentOptions {
   controller:any = MilestoneCreateController;
   template:string = require('./MilestoneCreate-template.html');
   bindings:any = {
-    username: '@',
     onContentLoaded: '&',
     isSaveEnabled: '&'
   };

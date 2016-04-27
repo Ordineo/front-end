@@ -11,7 +11,6 @@ export class TimelineComponent implements IComponentOptions {
   controller:any = TimelineController;
   template:string = require('./TimelineComponent-template.html');
   bindings:any = {
-    username: '@',
     onContentLoaded: '&'
   };
 }
@@ -31,7 +30,7 @@ export class TimelineController {
   }
 
   $onInit():void {
-    this.username = this.sessionService.getUsername();
+    this.username = this.profileService.username;
     this.profileService.subscribeUsernameChanged(this.$scope, (evt:IAngularEvent, data:any)=> {
       this.username = data.username;
       console.log(this.username);
