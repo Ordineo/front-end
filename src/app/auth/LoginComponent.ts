@@ -8,8 +8,11 @@ import {ICredentials} from "./ICredentials";
 import Router = angular.Router;
 import IRootScopeService = angular.IRootScopeService;
 import {AuthService, IAuthService} from "./service/AuthService";
+import {ProfileService} from "../profile/services/ProfileService";
 import {DashboardComponent} from "../layout/DashboardComponent";
 import {DashboardRoute} from "../app.routes";
+
+var $ = require('jquery');
 
 export class LoginComponent implements IComponentOptions {
   static NAME:string = 'login';
@@ -28,9 +31,9 @@ export class LoginController {
   /*
    * Controller Dependencies
    * */
-  static $inject = [AuthService.NAME];
+  static $inject = [AuthService.NAME, ProfileService.NAME];
 
-  constructor(private authService:IAuthService) {
+  constructor(private authService:IAuthService, private profileService:ProfileService) {
   }
 
   $onInit():void {
@@ -38,6 +41,13 @@ export class LoginController {
   }
 
   logIn(user):void {
+    this.profileService.getAboutInfoByUsername('rydg')
+      .then(()=>{
+        console.log('user exists');
+      }, ()=>{
+        console.log('user doesn\'t exist');
+      });
+
     this.authService.logIn(user).then(()=> {
       this.$onInit();
     });
