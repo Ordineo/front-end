@@ -12,9 +12,6 @@ export class MilestoneContainerComponent implements IComponentOptions {
   static NAME:string = "milestoneContainer";
   controller:any = MilestoneContainerController;
   template:string = require('./MilestoneContainer-template.html');
-  bindings:any = {
-    username: '@'
-  };
 }
 
 export class MilestoneContainerController {
