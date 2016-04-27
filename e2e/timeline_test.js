@@ -1,6 +1,6 @@
 Feature('Timeline directive');
 
-Before((I) => {
+/*Before((I) => {
   I.amOnPage('/#/profile');
 });
 
@@ -34,7 +34,7 @@ Scenario('Show the timeline and create a milestone', (I) => {
   I.see('You must select an objective', '#milestone-container');
   I.click('.btnCancel', '#milestone-container');
   I.see('Timeline', '#milestone-container');
-});
+});*/
 
 
 

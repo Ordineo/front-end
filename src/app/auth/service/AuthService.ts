@@ -5,7 +5,7 @@ import IQService = angular.IQService;
 import IDeferred = angular.IDeferred;
 import {SessionService, ISessionService} from "./SessionService";
 import Router = angular.Router;
-import {DashboardRoute, LoginRoute} from "../../app.routes";
+import {DashboardRoute, LoginRoute, MainRoute} from "../../app.routes";
 export class AuthService implements IAuthService {
   static NAME:string = 'authService';
 
@@ -25,7 +25,7 @@ export class AuthService implements IAuthService {
 
     return deferred.promise.then(()=> {
       this.sessionService.destroySession();
-      this.authenticate();
+      this.authenticate([MainRoute.NAME], null);
     });
   }
 
@@ -34,14 +34,19 @@ export class AuthService implements IAuthService {
     var deferred:IDeferred<any> = this.$q.defer();
     deferred.resolve();
     return deferred.promise.then(()=> {
-      this.sessionService.setAuthData("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJ5ZGUifQ.S8xMgpsiJccXvUNRqSjzU914heUUHadRH9lY00PhxVI");
+      this.sessionService.setAuthData("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJ5ZGcifQ.h04qk5YxTYGhse8rtvECrN0fabk83jWeI5aCGD-1Jxw");
     });
   }
 
-  authenticate():void {
-    if(this.isAuthorized()){
-      this.$rootRouter.navigate([DashboardRoute.NAME]);
-    }else{
+  authenticate(routeNames:string[], callBack:Function):void {
+    if (this.isAuthorized()) {
+      if (routeNames !== null) {
+        this.$rootRouter.navigate(routeNames);
+      }
+      if (callBack) {
+        callBack();
+      }
+    } else {
       this.$rootRouter.navigate([LoginRoute.NAME]);
     }
   }
@@ -52,7 +57,7 @@ export class AuthService implements IAuthService {
   }
 }
 export interface IAuthService {
-  authenticate():void;
+  authenticate(routeNames:string[], callBack:Function):void;
   logIn(credentials:ICredentials):IPromise<any>;
   logOut():IPromise<any>;
   isAuthorized():boolean;

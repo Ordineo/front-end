@@ -2,7 +2,7 @@ Feature('About directive');
 
 var pageTitle = 'JWorks 360';
 
-Before((I) => {
+/*Before((I) => {
   I.amOnPage('/#/profile');
 });
 
@@ -46,7 +46,7 @@ Scenario('Edit about section and save changes', (I) => {
   I.see( 'test function', '.about-function');
   I.see( 'test unit', '.about-unit');
   I.see( 'test description', '.about-description');
-});
+});*/
 
 
 
