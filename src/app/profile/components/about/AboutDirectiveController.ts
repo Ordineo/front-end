@@ -3,16 +3,17 @@ import {Employee} from "../../../core/models/employee";
 import {ButtonState} from "../../../core/labels/ButtonState";
 import {LinkedInService} from "../../../social/linkedin/LinkedInService";
 import {LinkedInController} from "../../../layout/linkedin/LinkedInController";
-import {HeaderController} from "../../../layout/header/HeaderController";
 import {GatewayApiService} from "../../../gateway/service/GatewayApiService";
 import IRootScopeService = angular.IRootScopeService;
 import IAngularEvent = angular.IAngularEvent;
 import ISCEService = angular.ISCEService;
+import {SessionService} from "../../../auth/service/SessionService";
+import IScope = angular.IScope;
 
 export class AboutDirectiveController {
   public title:string;
-  public username:string;
   public alphanumeric:RegExp = /^[a-z0-9 \-]+$/i;
+  public username:string;
 
   employee:Employee;
   public aboutInfoCache:Employee;
@@ -35,6 +36,8 @@ export class AboutDirectiveController {
   public imgUrl:string;
 
   static $inject:Array<string> = [
+    SessionService.NAME,
+    '$scope',
     '$sce',
     ProfileService.NAME,
     '$rootScope',
@@ -43,7 +46,12 @@ export class AboutDirectiveController {
 
   static EVENT_ON_EMPLOYEEDATA_SET:string = "event_on_employee_data_set";
 
-  constructor(private $sce:ISCEService, public profileService:ProfileService, private rootScope:IRootScopeService, private linkedin:LinkedInService) {
+  constructor(private sessionsService:SessionService,
+              private scope:IScope,
+              private $sce:ISCEService,
+              public profileService:ProfileService,
+              private rootScope:IRootScopeService,
+              private linkedin:LinkedInService) {
     this.init();
     if (window.sessionStorage.getItem(LinkedInController.SESSION_ITEM)) {
       //when this session item was set it means we came from an auth page.
@@ -51,16 +59,7 @@ export class AboutDirectiveController {
       this.linkedin.requestSync(this.username);
       window.sessionStorage.removeItem('linkedin');
     }
-
-    if (this.username) {
-      this.getEmployeeDataAsync(this.username, profileService, rootScope);
-    }
-
-    this.genders = [
-      "MALE",
-      "FEMALE",
-      "TRANSGENDER"
-    ];
+    this.getEmployeeDataAsync(this.username, profileService, rootScope);
   }
 
   setProfilePicture(userName:string):void {
@@ -126,13 +125,19 @@ export class AboutDirectiveController {
   }
 
   private init():void {
+    this.username = this.sessionsService.getUsername();
+    this.genders = [
+      "MALE",
+      "FEMALE",
+      "TRANSGENDER"
+    ];
     this.imageSelected = false;
     this.footerButtonLabel = ButtonState.MORE;
     this.setIsCollapsed(true);
     this.isContentLoaded = false;
     this.isEditModeEnabled = false;
     this.hasError = false;
-    this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=> {
+    this.profileService.subscribeUsernameChanged(this.scope, (evt:IAngularEvent, data:any)=> {
       this.username = data.username;
       this.isEditModeEnabled = false;
       this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
@@ -141,6 +146,7 @@ export class AboutDirectiveController {
       this.getEmployeeDataAsync(this.username, this.profileService, this.rootScope);
     });
   }
+
   private setInfoCache():void {
     this.aboutInfoCache = {
       function: this.employee.function,

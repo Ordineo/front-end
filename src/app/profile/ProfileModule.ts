@@ -1,4 +1,4 @@
-import {MATERIAL_DESIGN} from "../theme/ThemeModule";
+import {THEME_MODULE} from "../theme/ThemeModule";
 import {AboutDirective} from "./components/about/AboutDirective";
 import {ORDINEO_CORE} from "../core/core.module.ts";
 import {ProfileService} from "./services/ProfileService";
@@ -10,6 +10,8 @@ import {MilestoneService} from "./services/MilestoneService";
 import {MilestoneContainerComponent} from "./components/timeline/MilestoneContainerComponent";
 import {MilestoneCreateComponent} from "./components/timeline/MilestoneCreateComponent";
 import {ObjectivesSearch} from "./components/objectives-search/ObjectivesSearch";
+import {ProfileComponent} from "./ProfileComponent";
+import {ProfileSearchComponent} from "./components/profile-search/ProfileSearchComponent";
 
 /**
  * @ngdoc module
@@ -21,7 +23,7 @@ import {ObjectivesSearch} from "./components/objectives-search/ObjectivesSearch"
 export const ORDINEO_PROFILE = "ordineo.profile";
 
 var deps:Array<string> = [
-  MATERIAL_DESIGN,
+  THEME_MODULE,
   ORDINEO_CORE,
   TRAVERSON,
   ORDINEO_GATEWAY
@@ -36,4 +38,6 @@ angular
   .component(MilestoneComponent.NAME, new MilestoneComponent())
   .component(MilestoneCreateComponent.NAME, new MilestoneCreateComponent())
   .component(ObjectivesSearch.NAME, new ObjectivesSearch())
+  .component(ProfileComponent.NAME, new ProfileComponent())
+  .component(ProfileSearchComponent.NAME, new ProfileSearchComponent())
   .directive(AboutDirective.NAME, AboutDirective.instance());

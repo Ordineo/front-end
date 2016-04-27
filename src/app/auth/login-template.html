@@ -1,0 +1,48 @@
+<div id="login-background">
+  <div id="login">
+    <form id="login-form" name="loginForm" novalidate>
+      <div layout="column">
+        <md-content>
+          <img ng-src="../../assets/images/jworks-logo-nomargin.png" alt="JWorks">
+          <md-input-container>
+            <label>Username</label>
+            <input required
+                   ng-model="$ctrl.user.username" name="username" type="text"
+                   ng-change="$ctrl.onChange(this, 'username')"
+                   unique-username
+                   minlength="4"
+                   maxlength="4"
+                   pattern="[A-Za-z]{4}">
+            <div ng-messages="loginForm.username.$error">
+              <div ng-message="required">Username is required.</div>
+              <div ng-message="minlength">Should have at least 4 characters.</div>
+              <div ng-message="maxlength">Should have at most 4 characters.</div>
+              <div ng-message="pattern">Should contain only alphabetic characters.</div>
+              <div ng-message="uniqueUsername">Username is not available.</div>
+            </div>
+          </md-input-container>
+          <md-input-container>
+            <label>Password</label>
+            <input required
+                   ng-model="$ctrl.user.password" name="password" type="password"
+                   ng-change="$ctrl.onChange(this, 'password')">
+            <div ng-messages="loginForm.password.$error">
+              <div ng-message="required">Password is required.</div>
+            </div>
+          </md-input-container>
+          <md-checkbox ng-model="$ctrl.rememberPw" aria-label="Remember me">
+            <span>Remember me</span>
+          </md-checkbox>
+          <div layout="row">
+            <md-button ng-click="$ctrl.logIn($ctrl.user)"
+                       ng-disabled="loginForm.$invalid"
+                       class="md-primary md-raised"
+                       flex="100">
+              Login
+            </md-button>
+          </div>
+        </md-content>
+      </div>
+    </form>
+  </div>
+</div>

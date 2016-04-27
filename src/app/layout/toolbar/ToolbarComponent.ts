@@ -12,16 +12,15 @@ require('./toolbar.scss');
  * The main toolbar for the ordineo home page
  *
  * @usage
- * <toolbar></toolbar>
+ * <toolbar employee-name='$ctrl.name'></toolbar>
  */
 export class ToolbarComponent implements IComponentOptions{
   static NAME:string = "toolbar";
 
-  binding:any = {
+  bindings:any = {
+    employeeName: '<',
     newMessagesCount: '<'
   };
   controller:any = ToolbarController;
-  controllerAs:string = '$ctrl';
   template:string = require('./toolbar.html');
-
 }

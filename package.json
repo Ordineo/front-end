@@ -2,9 +2,11 @@
   "name": "jworks-360-front-end-webpack",
   "version": "0.1.2",
   "dependencies": {
+    "@angular/router": "^0.2.0",
     "angular": "^1.5.0",
     "angular-animate": "^1.5.0",
     "angular-aria": "^1.5.0",
+    "angular-jwt": "0.0.9",
     "angular-material": "^1.0.6",
     "angular-messages": "^1.5.0",
     "angular-mocks": "^1.5.0",
