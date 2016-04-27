@@ -1,0 +1,40 @@
+$border-radius: 3px;
+
+html, body {
+  height: 100%;
+}
+
+#login-background {
+  background-image: url('../../assets/images/login-background.jpg');
+  display: flex;
+  height: 100%;
+}
+
+#login {
+  align-items: center;
+  border-radius: $border-radius;
+  box-shadow: 0px 1px 5px #888888;
+  margin: auto;
+  width: 400px;
+
+  #login-form {
+
+  }
+
+  md-content {
+    border-radius: $border-radius;
+    padding: 15px;
+
+    md-input-container {
+      margin-top: 5px;
+      width: 100%;
+    }
+  }
+
+  img {
+    margin: 0 auto 25px auto;
+    height: auto;
+    width: auto;
+    max-height: 100px;
+  }
+}
