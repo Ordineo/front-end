@@ -5,9 +5,10 @@ html, body {
 }
 
 #login-background {
-  background-image: url('../../assets/images/login-background.jpg');
+  background: url('../../assets/images/login-background.jpg') no-repeat center;
   display: flex;
   height: 100%;
+  background-size: cover;
 }
 
 #login {
