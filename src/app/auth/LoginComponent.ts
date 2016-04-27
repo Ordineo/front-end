@@ -8,7 +8,6 @@ import {ICredentials} from "./ICredentials";
 import Router = angular.Router;
 import IRootScopeService = angular.IRootScopeService;
 import {AuthService, IAuthService} from "./service/AuthService";
-import {DashboardComponent} from "../layout/DashboardComponent";
 import {DashboardRoute} from "../app.routes";
 
 export class LoginComponent implements IComponentOptions {

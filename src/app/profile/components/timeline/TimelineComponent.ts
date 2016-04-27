@@ -31,7 +31,6 @@ export class TimelineController {
   }
 
   $onInit():void {
-    this.username = this.sessionService.getUsername();
     this.profileService.subscribeUsernameChanged(this.$scope, (evt:IAngularEvent, data:any)=> {
       this.username = data.username;
       console.log(this.username);
