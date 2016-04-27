@@ -11,7 +11,6 @@ export class TimelineComponent implements IComponentOptions {
   controller:any = TimelineController;
   template:string = require('./TimelineComponent-template.html');
   bindings:any = {
-    username: '@',
     onContentLoaded: '&'
   };
 }

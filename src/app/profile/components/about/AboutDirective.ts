@@ -28,9 +28,6 @@ export class AboutDirective implements IDirective {
 
   scope:any = {};
   restrict:string = 'E';
-  bindToController:any = {
-    username: '@'
-  };
   controller:Function = AboutDirectiveController;
   controllerAs:string = AboutDirective.CONTROLLER_AS;
   template:string = require('./about-directive-template.html');
