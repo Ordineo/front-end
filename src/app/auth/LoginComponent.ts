@@ -10,6 +10,8 @@ import IRootScopeService = angular.IRootScopeService;
 import {AuthService, IAuthService} from "./service/AuthService";
 import {DashboardRoute} from "../app.routes";
 
+require('./login.scss');
+
 export class LoginComponent implements IComponentOptions {
   static NAME:string = 'login';
 
