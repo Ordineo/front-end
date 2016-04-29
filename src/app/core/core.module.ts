@@ -56,7 +56,7 @@ angular.module(ORDINEO_CORE, deps)
 configureJWT.$inject = ['$httpProvider', 'jwtInterceptorProvider'];
 
 function configureJWT($httpProvider, jwtInterceptorProvider) {
-  jwtInterceptorProvider.tokenGetter = [SessionService.NAME, function(myService) {
+  jwtInterceptorProvider.tokenGetter = [SessionService.NAME, function (myService) {
     return myService.getAuthData();
   }];
   $httpProvider.interceptors.push('jwtInterceptor'); //todo
