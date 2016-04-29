@@ -50,6 +50,7 @@ export class ProfileService implements IProfileService {
   public putEmployeeData(employee:Employee):IPromise<any> {
     return this.traverson.hal()
       .from(this.gateway.getSearchEmployeeApi())
+      .useAngularHttp()
       .follow('employee', 'self')
       .withTemplateParameters({username: employee.username})
       .withRequestOptions({
@@ -64,6 +65,7 @@ export class ProfileService implements IProfileService {
   public getAllEmployees():IPromise<any> {
     return this.traverson.hal()
       .from(this.gateway.getEmployeesApi())
+      .useAngularHttp()
       .jsonHal()
       .follow('employees', 'employees[$all]')
       .getResource()
@@ -73,6 +75,7 @@ export class ProfileService implements IProfileService {
   public getAboutInfoByUsername(userName:string):IPromise<any> {
     return this.traverson.hal()
       .from(this.gateway.getSearchEmployeeApi())
+      .useAngularHttp()
       .jsonHal()
       .follow('employee')
       .withTemplateParameters({username: userName})
@@ -83,6 +86,7 @@ export class ProfileService implements IProfileService {
   public getBasicInfoByUsername(userName:string):IPromise<any> {
     return this.traverson.hal()
       .from(this.gateway.getSearchEmployeeApi())
+      .useAngularHttp()
       .jsonHal()
       .follow('employee')
       .withTemplateParameters({username: userName, projection: 'searchProjection'})

@@ -11,6 +11,10 @@ export class SessionService implements ISessionService {
   constructor(private $window:IWindowService, private jwtHelper:any) {
     this.token = this.$window.localStorage.getItem(this.ITEM_TOKEN);
   }
+  
+  getAuthData():string {
+    return this.$window.localStorage.getItem(this.ITEM_TOKEN);
+  }
 
   setAuthData(token:string):void {
     this.token = token;
@@ -23,7 +27,7 @@ export class SessionService implements ISessionService {
 
   getUsername():string {
     if (this.token) {
-      return this.jwtHelper.decodeToken(this.token).username;
+      return this.jwtHelper.decodeToken(this.token).sub;
     } else {
       return null;
     }
@@ -36,6 +40,7 @@ export class SessionService implements ISessionService {
 
 export interface ISessionService {
   setAuthData(authData:string):void;
+  getAuthData():string;
   getUsername():string;
   destroySession():void;
 }

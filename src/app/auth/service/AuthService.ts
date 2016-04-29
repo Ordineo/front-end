@@ -6,15 +6,17 @@ import IDeferred = angular.IDeferred;
 import {SessionService, ISessionService} from "./SessionService";
 import Router = angular.Router;
 import {DashboardRoute, LoginRoute, MainRoute} from "../../app.routes";
+import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 export class AuthService implements IAuthService {
   static NAME:string = 'authService';
 
-  static $inject = ['$rootRouter', '$http', '$q', SessionService.NAME];
+  static $inject = ['$rootRouter', '$http', '$q', SessionService.NAME, GatewayApiService.SERVICE_NAME];
 
   constructor(private $rootRouter:Router,
-              private http:IHttpService,
+              private $http:IHttpService,
               private $q:IQService,
-              private sessionService:ISessionService) {
+              private sessionService:ISessionService,
+              private gateway:GatewayApiService) {
   }
 
   /*todo refactor code to make http authentication request*/
@@ -29,13 +31,8 @@ export class AuthService implements IAuthService {
     });
   }
 
-  /*todo refactor code to make http authentication request*/
   logIn(credentials:ICredentials):IPromise<any> {
-    var deferred:IDeferred<any> = this.$q.defer();
-    deferred.resolve();
-    return deferred.promise.then(()=> {
-      this.sessionService.setAuthData("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJ5ZGcifQ.h04qk5YxTYGhse8rtvECrN0fabk83jWeI5aCGD-1Jxw");
-    });
+    return this.$http.post(this.gateway.getAuthApi(), credentials);
   }
 
   authenticate(routeNames:string[], callBack:Function):void {
@@ -51,7 +48,6 @@ export class AuthService implements IAuthService {
     }
   }
 
-  /*todo refactor code to validate token*/
   isAuthorized():boolean {
     return this.sessionService.getUsername() !== null;
   }
