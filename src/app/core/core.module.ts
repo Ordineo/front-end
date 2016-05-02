@@ -56,6 +56,8 @@ angular.module(ORDINEO_CORE, deps)
 configureJWT.$inject = ['$httpProvider', 'jwtInterceptorProvider'];
 
 function configureJWT($httpProvider, jwtInterceptorProvider) {
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
   jwtInterceptorProvider.tokenGetter = [SessionService.NAME, function (myService) {
     return myService.getAuthData();
   }];
