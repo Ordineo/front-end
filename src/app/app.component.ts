@@ -23,6 +23,6 @@ export class AppComponentController {
   }
 
   $onInit():void {
-    this.authService.authenticate();
+    this.authService.authenticate([DashboardRoute.NAME], null);
   }
 }

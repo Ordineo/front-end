@@ -1,19 +1,17 @@
 import IComponentOptions = angular.IComponentOptions;
-import IScope = angular.IScope;
 import IAngularEvent = angular.IAngularEvent;
 import {ActionButton} from "../../../core/components/action-button/ActionButtonComponent";
-import {MilestoneService, IMilestoneService} from "../../services/MilestoneService";
-import {HeaderController} from "../../../layout/header/HeaderController";
+import {MilestoneService} from "../../services/MilestoneService";
 import IPromise = Rx.IPromise;
+import {ProfileService} from "../../services/ProfileService";
+import IScope = angular.IScope;
+import {SessionService} from "../../../auth/service/SessionService";
 require('./milestone-styles.scss');
 
 export class MilestoneContainerComponent implements IComponentOptions {
   static NAME:string = "milestoneContainer";
   controller:any = MilestoneContainerController;
   template:string = require('./MilestoneContainer-template.html');
-  bindings:any = {
-    username: '@'
-  };
 }
 
 export class MilestoneContainerController {
@@ -36,16 +34,25 @@ export class MilestoneContainerController {
   public username:string;
   public isContentLoaded:boolean = false;
 
-  static $inject = [MilestoneService.NAME, '$rootScope'];
+  static $inject = [
+    MilestoneService.NAME,
+    ProfileService.NAME,
+    SessionService.NAME,
+    '$scope'
+  ];
 
-  constructor(private milestoneService:MilestoneService, private rootScope:IScope) {
+  constructor(private milestoneService:MilestoneService,
+              private profileService:ProfileService,
+              private sessionService:SessionService,
+              private $scope:IScope) {
   }
 
   $onInit():void {
     this.hasError = false;
-    this.rootScope.$on(HeaderController.EVENT_USER_SELECTED, (evt:IAngularEvent, data:any)=> {
+    this.username = this.sessionService.getUsername();
+    this.profileService.subscribeUsernameChanged(this.$scope, (evt:IAngularEvent, data:any)=> {
       this.username = data.username;
-      if(this.createMode) {
+      if (this.createMode) {
         this.toggleCreateMode();
       }
     });

@@ -32,14 +32,13 @@ export class MilestoneService implements IMilestoneService{
               private moment:any) {
   }
 
-
   setObjective(objective:Objective):void{
     this.milestone.objective = objective;
   }
 
   public getMilestonesByUsername(userName:string):IPromise<any> {
     return this.traverson.hal()
-      .from(this.gateway.getMilestonesApi() + '/milestones/search')
+      .from(this.gateway.getMilestonesApi() + 'milestones/search')
       .jsonHal()
       .follow('findByUsername', 'milestones[$all]')
       .withTemplateParameters({username: userName})

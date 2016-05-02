@@ -1,31 +1,20 @@
-
 import IRootScopeService = angular.IRootScopeService;
-import {AboutDirectiveController} from "../../profile/components/about/AboutDirectiveController";
-export interface IToolbarScope{
-  buttons:Array<ButtonConfig>;
-}
-interface ButtonConfig{
+import {EmployeeName} from "../../core/models/EmployeeName";
+interface ButtonConfig {
   title:string;
   icon:string;
 }
-export class ToolbarController implements IToolbarScope{
+export class ToolbarController {
   public buttons:Array<ButtonConfig> = [];
+  public employeeName:EmployeeName;
+
   originatorEv:any;
 
-  firstName:string;
-  lastName:string;
-
-  static $inject = ['$rootScope'];
-
-  constructor(private $rootScope:IRootScopeService){
+  constructor() {
     this.buttons = this.getButtons();
-    $rootScope.$on(AboutDirectiveController.EVENT_ON_EMPLOYEEDATA_SET,(event, args)=>{
-      this.firstName = args.firstName;
-      this.lastName = args.lastName;
-    });
   }
 
-  private getButtons():Array<ButtonConfig>{
+  private getButtons():Array<ButtonConfig> {
     var btns:Array<ButtonConfig> = [];
 
     btns.push(this.createButtonConfig('person', 'social:person'));
@@ -35,14 +24,14 @@ export class ToolbarController implements IToolbarScope{
     return btns;
   }
 
-  private createButtonConfig(_title:string, _icon:string):ButtonConfig{
+  private createButtonConfig(_title:string, _icon:string):ButtonConfig {
     return {
       title: _title,
       icon: _icon
     };
   }
 
-  private openMenu($mdOpenMenu, ev) {
+  public openMenu($mdOpenMenu, ev) {
     this.originatorEv = ev;
     $mdOpenMenu(ev);
   }

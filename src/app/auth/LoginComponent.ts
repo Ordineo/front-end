@@ -8,8 +8,9 @@ import {ICredentials} from "./ICredentials";
 import Router = angular.Router;
 import IRootScopeService = angular.IRootScopeService;
 import {AuthService, IAuthService} from "./service/AuthService";
-import {DashboardComponent} from "../layout/DashboardComponent";
 import {DashboardRoute} from "../app.routes";
+
+require('./login.scss');
 
 export class LoginComponent implements IComponentOptions {
   static NAME:string = 'login';
@@ -22,7 +23,7 @@ export class LoginController {
   public user:ICredentials = {
     email: 'ryan@mail.be',
     password: 'hottentottentettententoonstelling',
-    username: 'ryde'
+    username: 'Rydg'
   };
 
   /*
@@ -34,7 +35,7 @@ export class LoginController {
   }
 
   $onInit():void {
-    this.authService.authenticate();
+    this.authService.authenticate([DashboardRoute.NAME],null);
   }
 
   logIn(user):void {

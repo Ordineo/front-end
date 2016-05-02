@@ -17,14 +17,12 @@
         ng-if="!$ctrl.createMode"
         ng-show="$ctrl.isContentLoaded"
         id="timeline"
-        username="{{$ctrl.username}}"
         on-content-loaded="$ctrl.onContentLoaded(isLoaded)">
       </timeline>
       <milestone-create
         id="milestone-create"
         ng-if="$ctrl.createMode"
         ng-show="$ctrl.isContentLoaded"
-        username="{{$ctrl.username}}"
         on-content-loaded="$ctrl.loaded(isLoaded)"
         is-save-enabled="$ctrl.isSaveEnabled(isEnabled)">
       </milestone-create>

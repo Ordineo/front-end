@@ -14,6 +14,7 @@ import '../gsap/TweenMax.js';
 import 'angular-moment';
 import 'moment';
 import '@angular/router/angular1/angular_1_router';
+import 'angular-jwt';
 import {TRAVERSON} from "../traverson/TraversonModule";
 import {AppComponent} from "../app.component";
 
@@ -25,7 +26,8 @@ var deps:Array<string> = [
   'ngAnimate',
   'ngMessages',
   'rx',
-  'ngComponentRouter'
+  'ngComponentRouter',
+  'angular-jwt'
 ];
 
 angular.module(JWORKS360_CORE, deps)

@@ -1,30 +1,28 @@
-import {ProfileService} from "../../profile/services/ProfileService";
-import {Employee} from "../../core/models/employee";
-import IRootScopeService = angular.IRootScopeService;
-import IObservable = Rx.IObservable;
-export class HeaderController {
+import {ProfileService} from "../../services/ProfileService";
+import {Employee} from "../../../core/models/employee";
+export class ProfileSearchController {
   public button:any;
   public users:Array<User>;
 
   static EVENT_USER_SELECTED:string = "searchUserSelected";
-  static $inject = [ProfileService.NAME, '$rootScope'];
+  static $inject = [ProfileService.NAME];
 
-  constructor(private profileService:ProfileService, private rootScope:IRootScopeService) {
+  constructor(private profileService:ProfileService) {
     this.button = {title: 'search', icon: 'act:search'};
   }
 
-  selectedItemChange(_user_:User):void{
-    if(_user_){
-      this.rootScope.$broadcast(HeaderController.EVENT_USER_SELECTED, {username: _user_.value});
+  selectedItemChange(_user_:User):void {
+    if (_user_) {
+      this.profileService.setUsername(_user_.value);
     }
   }
 
-  querySearch(query:any):any{
+  querySearch(query:any):any {
     return query ? this.users.filter(this.filter(query)) : this.users;
   }
 
-  filter(query):any{
-    return (user:any)=>{
+  filter(query):any {
+    return (user:any)=> {
       var lowerCaseUserDisplay:string = user.display.toLocaleLowerCase().trim();
       return lowerCaseUserDisplay.indexOf(query) !== -1;
     }
@@ -37,7 +35,7 @@ export class HeaderController {
       });
   }
 
-  private parseEmployees(employees:Array<Employee>):Array<User>{
+  private parseEmployees(employees:Array<Employee>):Array<User> {
     var users:Array<User> = [];
     for (var emp of employees) {
       users.push({
@@ -49,7 +47,7 @@ export class HeaderController {
   }
 }
 
-export interface User{
+export interface User {
   value:string;
   display:string;
 }
