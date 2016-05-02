@@ -11,7 +11,7 @@ export class GatewayApiService{
    * example: "http://"
    */
   private protocol:string;
-  public host:string = 'localhost:9900';
+  public host:string = 'http://gateway-ordineo.cfapps.io';
 
   public EMPLOYEES_API:string = "/employee-ordineo/api/";
   public PERSONS_API:string = "/persons-oraj360/api/";
@@ -22,7 +22,7 @@ export class GatewayApiService{
 
 
   constructor(private $window:IWindowService){
-    this.protocol =  "http://";
+    this.protocol =  "https://";
   }
 
   private buildApiUrl(servicePath:string):string{
