@@ -13,9 +13,9 @@ export class GatewayApiService{
   private protocol:string;
   public host:string = 'gateway-ordineo.cfapps.io';
 
-  public EMPLOYEES_API:string = "/api/employees/";
+  public EMPLOYEES_API:string = "/employee-ordineo/api/";
   public SOCIAL_API:string = "/social-ordineo/api/";
-  public MILESTONES_API:string = "/api/milestones/";
+  public MILESTONES_API:string = "/milestone-ordineo/api/";
   public AUTH_API:string = "/auth/";
 
 
@@ -41,7 +41,7 @@ export class GatewayApiService{
   }
 
   public getSearchEmployeeApi():string{
-    return this.getEmployeesApi() + 'search/';
+    return this.getEmployeesApi() + 'employees/search/';
   }
 
   public getEmployeesApi():string{

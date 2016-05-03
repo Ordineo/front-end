@@ -38,7 +38,7 @@ export class MilestoneService implements IMilestoneService{
 
   public getMilestonesByUsername(userName:string):IPromise<any> {
     return this.traverson.hal()
-      .from(this.gateway.getMilestonesApi() + 'search')
+      .from(this.gateway.getMilestonesApi() + 'milestones/search')
       .useAngularHttp()
       .jsonHal()
       .follow('findByUsername', 'milestones[$all]')
