@@ -5,7 +5,10 @@ import IAngularEvent = angular.IAngularEvent;
 
 export class MilestoneDetailsComponent implements IComponentOptions {
   static NAME:string = "milestoneDetails";
-  controller:any = MilestoneDetailsController;
+  static CONTROLLER_AS:string = 'milestoneDetails';
+
+  controller:Function = MilestoneDetailsController;
+  controllerAs:string = MilestoneDetailsComponent.CONTROLLER_AS;
   template:string = require('./milestone-details.html');
   bindings:any = {
     onContentLoaded: '&'
