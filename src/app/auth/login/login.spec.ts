@@ -10,18 +10,22 @@ import IDeferred = angular.IDeferred;
 import IScope = angular.IScope;
 import IRootScopeService = angular.IRootScopeService;
 import {LoginComponent, LoginController} from "../LoginComponent";
+import {ISessionService, SessionService} from "../service/SessionService";
 
 describe("Login controller", ()=> {
   var scope:IScope;
   var ctrl:LoginController;
   var authService:IAuthService;
+  var sessionService:ISessionService;
 
   beforeEach(
     angular.mock.module(JWORKS_AUTH,
       ($provide:IProvideService)=> {
         authService = new AuthMock();
+        sessionService = new SessionMock();
 
         $provide.service(AuthService.NAME, ()=>authService);
+        $provide.service(SessionService.NAME, ()=>sessionService);
       }));
 
   beforeEach(inject((_$componentController_, _$rootScope_:IRootScopeService)=> {
@@ -38,8 +42,9 @@ describe("Login controller", ()=> {
 
   it('should login', inject((_$q_:IQService)=> {
     var deferred:IDeferred<any> = _$q_.defer();
-    spyOn(ctrl, '$onInit');
     spyOn(authService, 'logIn').and.returnValue(deferred.promise);
+    spyOn(sessionService, 'setAuthData');
+    spyOn(authService, 'authenticate');
     ctrl.logIn({
       email: 'ryan@mail.be',
       password: 'hottentottentettententoonstelling',
@@ -48,11 +53,26 @@ describe("Login controller", ()=> {
     expect(authService.logIn).toHaveBeenCalled();
     deferred.resolve({data: {}});
     scope.$digest();
-    expect(ctrl.$onInit).toHaveBeenCalled();
+    expect(sessionService.setAuthData).toHaveBeenCalled();
+    expect(authService.authenticate).toHaveBeenCalled();
   }));
 
 });
+export class SessionMock implements ISessionService {
+  setAuthData(authData:string):void {
+  }
 
+  getAuthData():string {
+    return null;
+  }
+
+  getUsername():string {
+    return null;
+  }
+
+  destroySession():void {
+  }
+}
 export class AuthMock implements IAuthService {
   authenticate(routeNames:string[], callBack:Function):void {
 
