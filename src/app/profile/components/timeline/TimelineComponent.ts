@@ -33,7 +33,6 @@ export class TimelineController {
     this.username = this.profileService.username;
     this.profileService.subscribeUsernameChanged(this.$scope, (evt:IAngularEvent, data:any)=> {
       this.username = data.username;
-      console.log(this.username);
       this.getMilestoneDataAsync();
     });
     if (this.username) {
