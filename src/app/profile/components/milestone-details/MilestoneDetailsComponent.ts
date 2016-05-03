@@ -2,6 +2,7 @@ import IComponentOptions = angular.IComponentOptions;
 import {MilestoneDetailsController} from "./MilestoneDetailsController";
 import IScope = angular.IScope;
 import IAngularEvent = angular.IAngularEvent;
+require('./milestone-details.scss');
 
 export class MilestoneDetailsComponent implements IComponentOptions {
   static NAME:string = "milestoneDetails";

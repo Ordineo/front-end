@@ -1,0 +1,25 @@
+$orange: #e98300;
+$lightOrange: #f9a858;
+$grey: #57595b;
+$lightGrey: #bdbcbc;
+$darkGrey: #686868;
+$mainBackground: #f4f4f4;
+$green: #5bb75b;
+$red: #dd0000;
+
+#status {
+  border-bottom: solid 1px #eeeeee;
+  padding: 10px;
+
+  .inProgress {
+    color: $orange;
+  }
+
+  .accomplished {
+    color: $green;
+  }
+
+  .notAccomplished {
+    color: $red;
+  }
+}

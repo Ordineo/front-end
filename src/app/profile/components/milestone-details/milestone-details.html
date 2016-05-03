@@ -4,10 +4,20 @@
                show-btn-edit="true"
                show-btn-drag="true">
   </card-header>
-  <div id="milestone">
-    <p>Milestone</p>
+  <div id="status">
+    <span>
+      {{milestoneDetails.userFirstName}} {{milestoneDetails.userLastName}} -
+      <span ng-if="milestoneDetails.status == 0" class="inProgress">In progress</span>
+      <span ng-if="milestoneDetails.status == 1" class="accomplished">Accomplished</span>
+      <span ng-if="milestoneDetails.status == 2" class="notAccomplished">Not accomplished</span>
+    </span>
   </div>
-  <div id="comments">
-    <p>Comments</p>
+  <div>
+    <div id="milestone">
+      ...
+    </div>
+    <div id="comments">
+      ...
+    </div>
   </div>
 </md-card>
