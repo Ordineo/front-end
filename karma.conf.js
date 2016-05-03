@@ -10,9 +10,9 @@ module.exports = function (config) {
     frameworks: ['jasmine'],
     port: 9876,
     colors: true,
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
     autoWatch: false,
-    browsers: ['PhantomJS'],
+    browsers: ['Firefox'],
     singleRun: true,
     autoWatchBatchDelay: 300,
     files: [

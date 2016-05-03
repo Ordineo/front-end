@@ -1,7 +1,7 @@
 import {DashboardComponent} from "./layout/DashboardComponent";
 import {AppComponent} from "./app.component";
 import RouteDefinition = angular.RouteDefinition;
-import {LoginComponent} from "./auth/LoginComponent";
+import {LoginComponent} from "./auth/login/LoginComponent";
 
 export class DashboardRoute implements RouteDefinition{
   static NAME:string = "Dashboard";
