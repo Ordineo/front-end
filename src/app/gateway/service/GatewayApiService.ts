@@ -11,13 +11,11 @@ export class GatewayApiService{
    * example: "http://"
    */
   private protocol:string;
-  public host:string = 'http://gateway-ordineo.cfapps.io';
+  public host:string = 'gateway-ordineo.cfapps.io';
 
-  public EMPLOYEES_API:string = "/employee-ordineo/api/";
-  public PERSONS_API:string = "/persons-oraj360/api/";
-  public OBJECTIVES_API:string = "/objectives-oraj360/api/";
+  public EMPLOYEES_API:string = "/api/employees/";
   public SOCIAL_API:string = "/social-ordineo/api/";
-  public MILESTONES_API:string = "/milestone-ordineo/api/";
+  public MILESTONES_API:string = "/api/milestones/";
   public AUTH_API:string = "/auth/";
 
 
@@ -43,7 +41,7 @@ export class GatewayApiService{
   }
 
   public getSearchEmployeeApi():string{
-    return this.getEmployeesApi() + 'employees/search/';
+    return this.getEmployeesApi() + 'search/';
   }
 
   public getEmployeesApi():string{
