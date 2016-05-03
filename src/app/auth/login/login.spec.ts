@@ -1,6 +1,6 @@
 import 'angular-mocks';
 import {JWORKS_AUTH} from "../AuthModule";
-import {LoginComponent, LoginController} from "./LoginComponent";
+
 import IProvideService = angular.auto.IProvideService;
 import {AuthService, IAuthService} from "../service/AuthService";
 import createSpy = jasmine.createSpy;
@@ -9,6 +9,7 @@ import IQService = angular.IQService;
 import IDeferred = angular.IDeferred;
 import IScope = angular.IScope;
 import IRootScopeService = angular.IRootScopeService;
+import {LoginComponent, LoginController} from "../LoginComponent";
 
 describe("Login controller", ()=> {
   var scope:IScope;
@@ -45,7 +46,7 @@ describe("Login controller", ()=> {
       username: 'Rydg'
     });
     expect(authService.logIn).toHaveBeenCalled();
-    deferred.resolve({});
+    deferred.resolve({data: {}});
     scope.$digest();
     expect(ctrl.$onInit).toHaveBeenCalled();
   }));
