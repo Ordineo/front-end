@@ -19,7 +19,7 @@ npm i
 Launch webpack-dev-server. 
 Dev app is served at http://localhost:8080
 ```
-npm run dev
+npm start
 ```
 
 Start coding
@@ -32,14 +32,30 @@ npm run build
 
 ### Tests
 
-test single run
+First update and start webdriver
+```
+npm run webdriver:update
+npm run webdriver:start
+```
+
+Run all tests
 ```
 npm test
 ```
 
-autowatch tests
+Run unit tests
 ```
-npm run devtest
+npm run test:karma
+```
+
+Run end-to-end tests
+```
+npm run test:e2e
+```
+
+Autowatch tests
+```
+npm run watch:test
 ```
 
 - Filenames are required to end with .spec.ts
