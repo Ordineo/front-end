@@ -6,5 +6,6 @@ export class ProfileComponent implements IComponentOptions {
     <!--<linkedin></linkedin>-->
     <profile-about></profile-about>
     <milestone-container></milestone-container>
+    <milestone-details></milestone-details>
   `
 }
