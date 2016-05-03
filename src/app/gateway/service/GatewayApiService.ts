@@ -13,11 +13,10 @@ export class GatewayApiService{
   private protocol:string;
   public host:string = 'gateway-ordineo.cfapps.io';
 
-  public EMPLOYEES_API:string = "/employee-ordineo/api/";
-  public PERSONS_API:string = "/persons-oraj360/api/";
-  public OBJECTIVES_API:string = "/objectives-oraj360/api/";
+  public EMPLOYEES_API:string = "/api/employees/";
   public SOCIAL_API:string = "/social-ordineo/api/";
-  public MILESTONES_API:string = "/milestone-ordineo/api/";
+  public MILESTONES_API:string = "/api/milestones/";
+  public AUTH_API:string = "/auth/";
 
 
   constructor(private $window:IWindowService){
@@ -42,7 +41,7 @@ export class GatewayApiService{
   }
 
   public getSearchEmployeeApi():string{
-    return this.getEmployeesApi() + 'employees/search/';
+    return this.getEmployeesApi() + 'search/';
   }
 
   public getEmployeesApi():string{
@@ -54,6 +53,10 @@ export class GatewayApiService{
   }
 
   public getCreateMilestonesApi():string {
-    return 'https://gateway-ordineo.cfapps.io/milestone-ordineo/api/milestones';
+    return this.getMilestonesApi() + 'milestones/';
+  }
+
+  public getAuthApi():string {
+    return this.buildApiUrl(this.AUTH_API);
   }
 }

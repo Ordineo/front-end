@@ -9,6 +9,7 @@ import Router = angular.Router;
 import IRootScopeService = angular.IRootScopeService;
 import {AuthService, IAuthService} from "./service/AuthService";
 import {DashboardRoute} from "../app.routes";
+import {ISessionService, SessionService} from "./service/SessionService";
 
 require('./login.scss');
 
@@ -21,26 +22,31 @@ export class LoginComponent implements IComponentOptions {
 export class LoginController {
   /*todo remove default credentials*/
   public user:ICredentials = {
-    email: 'ryan@mail.be',
-    password: 'hottentottentettententoonstelling',
-    username: 'Rydg'
+    username: 'Nivek',
+    password: 'password'
   };
 
   /*
    * Controller Dependencies
    * */
-  static $inject = [AuthService.NAME];
+  static $inject = [AuthService.NAME, SessionService.NAME];
 
-  constructor(private authService:IAuthService) {
+  constructor(private authService:IAuthService, private sessionService:ISessionService) {
   }
 
   $onInit():void {
-    this.authService.authenticate([DashboardRoute.NAME],null);
+    this.authService.authenticate([DashboardRoute.NAME], null);
   }
 
   logIn(user):void {
-    this.authService.logIn(user).then(()=> {
-      this.$onInit();
-    });
+    this.authService.logIn(user).then(
+      (res)=> {
+        this.sessionService.setAuthData(res.data['token']);
+        this.authService.authenticate([DashboardRoute.NAME], null);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 }
