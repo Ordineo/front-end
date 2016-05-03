@@ -38,7 +38,8 @@ export class MilestoneService implements IMilestoneService{
 
   public getMilestonesByUsername(userName:string):IPromise<any> {
     return this.traverson.hal()
-      .from(this.gateway.getMilestonesApi() + 'milestones/search')
+      .from(this.gateway.getMilestonesApi() + 'search')
+      .useAngularHttp()
       .jsonHal()
       .follow('findByUsername', 'milestones[$all]')
       .withTemplateParameters({username: userName})
@@ -55,6 +56,7 @@ export class MilestoneService implements IMilestoneService{
   public searchObjectives(qry:string):IPromise<any> {
     return this.traverson.hal()
       .from(this.gateway.getMilestonesApi() + 'objectives/search')
+      .useAngularHttp()
       .jsonHal()
       .follow('findByTitleOrTags', 'objectives[$all]')
       .withTemplateParameters({text: qry})

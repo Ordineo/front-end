@@ -11,12 +11,12 @@
                    ng-change="$ctrl.onChange(this, 'username')"
                    unique-username
                    minlength="4"
-                   maxlength="4"
-                   pattern="[A-Za-z]{4}">
+                   maxlength="10"
+                   pattern="[A-Za-z]*">
             <div ng-messages="loginForm.username.$error">
               <div ng-message="required">Username is required.</div>
               <div ng-message="minlength">Should have at least 4 characters.</div>
-              <div ng-message="maxlength">Should have at most 4 characters.</div>
+              <div ng-message="maxlength">Should have at most 10 characters.</div>
               <div ng-message="pattern">Should contain only alphabetic characters.</div>
               <div ng-message="uniqueUsername">Username is not available.</div>
             </div>
@@ -36,8 +36,7 @@
           <div layout="row">
             <md-button ng-click="$ctrl.logIn($ctrl.user)"
                        ng-disabled="loginForm.$invalid"
-                       class="md-primary md-raised"
-                       flex="100">
+                       class="md-primary md-raised">
               Login
             </md-button>
           </div>

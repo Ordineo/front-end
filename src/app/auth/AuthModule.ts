@@ -9,7 +9,6 @@ export const JWORKS_AUTH = "jworksAuth";
 angular
   .module(JWORKS_AUTH, [ORDINEO_CORE])
   .service(AuthService.NAME, AuthService)
-  .service(SessionService.NAME, SessionService)
   .component(LoginComponent.NAME, new LoginComponent())
   .run(assignServicesToRootScope);
 

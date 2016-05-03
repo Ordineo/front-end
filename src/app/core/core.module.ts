@@ -17,6 +17,7 @@ import '@angular/router/angular1/angular_1_router';
 import 'angular-jwt';
 import {TRAVERSON} from "../traverson/TraversonModule";
 import {AppComponent} from "../app.component";
+import {SessionService} from "../auth/service/SessionService";
 
 export const JWORKS360_CORE = 'jworks360.core';
 
@@ -34,6 +35,7 @@ angular.module(JWORKS360_CORE, deps)
   .value('$routerRootComponent', AppComponent.NAME)
   .component(CardHeaderComponent.NAME, new CardHeaderComponent())
   .component(ActionButtonComponent.NAME, new ActionButtonComponent())
+  .service(SessionService.NAME, SessionService)
   .directive(FileUploadDirective.NAME, FileUploadDirective.instance())
   .directive('customOnChange', function () {
     return {
@@ -48,4 +50,17 @@ angular.module(JWORKS360_CORE, deps)
   .animation(".simple-fade", simpleFade)
   .animation(".edit-icons-fade", editIcons)
   .animation(".flow-height", flowHeight)
-  .animation(".trans-height", transitionHeight);
+  .animation(".trans-height", transitionHeight)
+  .config(configureJWT);
+
+configureJWT.$inject = ['$httpProvider', 'jwtInterceptorProvider'];
+
+function configureJWT($httpProvider, jwtInterceptorProvider) {
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  jwtInterceptorProvider.tokenGetter = [SessionService.NAME, function (myService) {
+    return myService.getAuthData();
+  }];
+  $httpProvider.interceptors.push('jwtInterceptor'); //todo
+}
+
