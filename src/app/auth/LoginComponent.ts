@@ -38,13 +38,13 @@ export class LoginController {
     this.authService.authenticate([DashboardRoute.NAME], null);
   }
 
-  logIn(user):void {
+  logIn(user:ICredentials):void {
     this.authService.logIn(user).then(
-      (res)=> {
+      (res:any)=> {
         this.sessionService.setAuthData(res.data['token']);
         this.authService.authenticate([DashboardRoute.NAME], null);
       },
-      (error) => {
+      (error:any) => {
         console.log(error);
       }
     )
