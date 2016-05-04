@@ -47,19 +47,26 @@ export class ProfileService implements IProfileService {
     this.$rootScope.$emit(ProfileService.EVENT_USERNAME_CHANGED, {username: this.username});
   }
 
-  public putEmployeeData(employee:Employee):IPromise<any> {
-    return this.traverson.hal()
-      .from(this.gateway.getSearchEmployeeApi())
-      .useAngularHttp()
-      .follow('employee', 'self')
-      .withTemplateParameters({username: employee.username})
-      .withRequestOptions({
-        headers: {
-          'Content-type': 'application/json'
-        }
-      })
-      .put(employee)
-      .result;
+  public putEmployeeData(employee:any):IPromise<any> {
+    /*Todo use traverson for post*/
+    return this.$http.put(employee._links.self.href,
+      employee);
+    // var test = this.traverson.hal()
+    //   .from(this.gateway.getSearchEmployeeApi())
+    //   .useAngularHttp()
+    //   .follow('employee', 'self')
+    //   .withTemplateParameters({username: employee.username})
+    //   .withRequestOptions({
+    //     headers: {
+    //       'Content-type': 'application/json'
+    //     }
+    //   })
+    //   .put(employee)
+    //   .result;
+    // debugger;
+    // console.log(test);
+    //
+    // return test;
   }
 
   public getAllEmployees():IPromise<any> {
