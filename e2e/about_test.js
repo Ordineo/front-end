@@ -1,17 +1,17 @@
-Feature('About directive');
+Feature('About information');
 
-var pageTitle = 'JWorks 360';
-
-/*Before((I) => {
-  I.amOnPage('/#/profile');
+Before((I) => {
+  I.amOnPage('/#/login');
+  I.fillField({model: '$ctrl.user.username'},'Nivek');
+  I.fillField({model: '$ctrl.user.password'},'password');
+  I.click('#login-btn');
 });
 
 Scenario('Open the profile page', (I) => {
-  //I.see(pageTitle, '.header-bg');
-  I.see('Sync with Linkedin', '#getDetails');
+  I.see('JWorks 360', '#toolbar');
+  //I.see('Sync with Linkedin', '#getDetails'); //todo show linkdin
   I.waitForElement('.about-header', 2);
   I.seeElement('.about-header');
-  //I.seeNumberOfElements('.about-header', 1);
   I.seeElement('.btnEdit');
   I.dontSeeElement('.btnSave');
   I.dontSeeElement('.edit-info');
@@ -46,7 +46,7 @@ Scenario('Edit about section and save changes', (I) => {
   I.see( 'test function', '.about-function');
   I.see( 'test unit', '.about-unit');
   I.see( 'test description', '.about-description');
-});*/
+});
 
 
 
