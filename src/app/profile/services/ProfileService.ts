@@ -11,6 +11,7 @@ export interface IProfileService {
   getAboutInfoByUsername(userName:string):IPromise<any>;
   getAllEmployees():IPromise<any>;
   putEmployeeData(employee:Employee):IPromise<any>;
+  getBasicInfoByUsername(userName:string):IPromise<any>;
 }
 
 export class ProfileService implements IProfileService {
