@@ -47,11 +47,16 @@ $red: #dd0000;
   }
 }
 
-#comments {
+#comments-section {
   border-left: solid 1px #eeeeee;
-  padding: 10px 10px 0 10px;
+  padding: 5px 10px 0 5px;
   position: relative;
   width: 500px;
+
+  #comments {
+    height: 175px;
+    overflow-y: scroll;
+  }
 
   md-input-container {
     bottom: 0;
@@ -70,6 +75,28 @@ $red: #dd0000;
   display: inline-block;
 
   & > h4 {
+    color: $orange;
     margin-bottom: 3px;
   }
+}
+
+.balloon {
+  margin-left: 5px;
+}
+
+.comment {
+  background-color: lightgray;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 5px;
+}
+
+.spike {
+  background-color: lightgray;
+  height: 5px;
+  transform: rotate(45deg);
+  width: 5px;
+  position: relative;
+  left: -2px;
+  top: 15px;
 }
