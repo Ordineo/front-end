@@ -45,8 +45,16 @@ export class LoginController {
         this.authService.authenticate([DashboardRoute.NAME], null);
       },
       (error) => {
-        console.log(error);
+        if (error.status === 401) {
+          this.showErrorMessage("Login failed. Invalid username or password");
+        } else {
+          this.showErrorMessage("Connection Error");
+        }
       }
     )
+  }
+
+  showErrorMessage(msg:string):void {
+
   }
 }
