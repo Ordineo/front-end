@@ -10,6 +10,7 @@ import IRootScopeService = angular.IRootScopeService;
 import {AuthService, IAuthService} from "./service/AuthService";
 import {DashboardRoute} from "../app.routes";
 import {ISessionService, SessionService} from "./service/SessionService";
+require('../../assets/images/jworks-logo-nomargin.png');
 
 require('./login.scss');
 
