@@ -4,46 +4,56 @@
                show-btn-edit="true"
                show-btn-drag="true">
   </card-header>
-  <div id="milestone-details-wrap">
-    <div id="status">
-      {{milestoneDetails.userFirstName}} {{milestoneDetails.userLastName}} -
-      <span ng-if="milestoneDetails.status == 0" class="inProgress">In progress</span>
-      <span ng-if="milestoneDetails.status == 1" class="accomplished">Accomplished</span>
-      <span ng-if="milestoneDetails.status == 2" class="notAccomplished">Not accomplished</span>
-    </div>
-    <div id="milestone-details-header">
-      <div id="milestone-title">
-        {{milestoneDetails.title}}<br>
-        <span class="small-text">{{milestoneDetails.description}}</span>
-        <div>
-          <div ng-repeat="tag in milestoneDetails.tags" class="tag small-text">
-            {{tag}}
+  <div layout="row">
+    <div id="milestone-details-wrap" style="width: 100%;">
+      <div id="status">
+        {{milestoneDetails.userFirstName}} {{milestoneDetails.userLastName}} -
+        <span ng-if="milestoneDetails.status == 0" class="inProgress">In progress</span>
+        <span ng-if="milestoneDetails.status == 1" class="accomplished">Accomplished</span>
+        <span ng-if="milestoneDetails.status == 2" class="notAccomplished">Not accomplished</span>
+      </div>
+      <div id="milestone-details-header">
+        <div id="milestone-title">
+          {{milestoneDetails.title}}<br>
+          <span class="small-text">{{milestoneDetails.description}}</span>
+          <div>
+            <md-chips readonly="true" ng-model="milestoneDetails.tags"></md-chips>
           </div>
         </div>
       </div>
-    </div>
-    <div id="milestone-details">
-      <div id="milestone-details-dates">
-        <div class="detail">
-          <h4 class="details-title">Create date</h4>
-          <span>{{milestoneDetails.createDate}}</span>
+      <div id="milestone-details">
+        <div id="milestone-details-dates">
+          <div class="detail">
+            <h4 class="details-title">Create date</h4>
+            <span>{{milestoneDetails.createDate}}</span>
+          </div>
+          <div class="detail">
+            <h4 class="details-title">Due date</h4>
+            <span>{{milestoneDetails.dueDate}}</span>
+          </div>
+          <div class="detail">
+            <h4 class="details-title">End date</h4>
+            <span>{{milestoneDetails.endDate}}</span>
+          </div>
         </div>
         <div class="detail">
-          <h4 class="details-title">Due date</h4>
-          <span>{{milestoneDetails.dueDate}}</span>
-        </div>
-        <div class="detail">
-          <h4 class="details-title">End date</h4>
-          <span>{{milestoneDetails.endDate}}</span>
+          <h4>More information</h4>
+          {{milestoneDetails.moreInformation}}
         </div>
       </div>
-      <div class="detail">
-        <h4>More information</h4>
-        {{milestoneDetails.moreInformation}}
-      </div>
     </div>
-  </div>
-  <div id="comments">
-    Comments
+    <div id="comments">
+      <div>
+        <div>
+          [Comment 1]
+        </div>
+        <div>
+          [Comment 2]
+        </div>
+      </div>
+      <md-input-container>
+        <input type="text" placeholder="Send a comment">
+      </md-input-container>
+    </div>
   </div>
 </md-card>
