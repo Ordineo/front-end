@@ -7,19 +7,69 @@ $mainBackground: #f4f4f4;
 $green: #5bb75b;
 $red: #dd0000;
 
-#status {
+#milestone-details-wrap {
   border-bottom: solid 1px #eeeeee;
   padding: 10px;
 
-  .inProgress {
-    color: $orange;
+  #status {
+    //display: inline-block;
+    float: right;
+    text-align: right;
+
+    .inProgress {
+      color: #0e90d2;
+    }
+
+    .accomplished {
+      color: $green;
+    }
+
+    .notAccomplished {
+      color: $red;
+    }
   }
 
-  .accomplished {
-    color: $green;
+  #milestone-details-header {
+    margin-bottom: 10px;
+
+    #milestone-title {
+      //display: inline-block;
+      //float: left;
+      font-size: 30px;
+    }
   }
 
-  .notAccomplished {
-    color: $red;
+  #milestone-details {
+    clear: both;
+
+    #milestone-details-dates {
+      & > .detail {
+        width: 100px;
+      }
+    }
+  }
+}
+
+#comments {
+  padding: 10px;
+}
+
+.small-text {
+  font-size: 20px;
+}
+
+.tag {
+  background-color: $orange;
+  color: white;
+  display: inline-block;
+  margin-right: 5px;
+  padding: 5px;
+}
+
+.detail {
+  display: inline-block;
+
+  & > h4 {
+    margin-bottom: 3px;
   }
 }
