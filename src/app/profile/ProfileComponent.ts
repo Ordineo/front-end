@@ -3,7 +3,7 @@ export class ProfileComponent implements IComponentOptions {
   static NAME:string = "profile";
 
   template:string = `
-    <linkedin></linkedin>
+    <!--<linkedin></linkedin>-->
     <profile-about></profile-about>
     <milestone-container id="milestone-container"></milestone-container>
   `
