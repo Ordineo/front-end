@@ -8,14 +8,14 @@ import IHttpRequestConfigHeaders = angular.IHttpRequestConfigHeaders;
 export class LinkedInService {
   static SERVICE_NAME:string = 'ordineo.social.linkedin';
 
-  static $inject:Array<string> = [GatewayApiService.SERVICE_NAME, '$http'];
+  static $inject:Array<string> = ['$http'];
 
   private httpConfig:IRequestConfig;
 
-  constructor(private gateway:GatewayApiService, private $http:IHttpService) {
+  constructor(private $http:IHttpService) {
     this.httpConfig = {
       method: 'GET',
-      url: gateway.getLinkedInApi(),
+      url: GatewayApiService.getLinkedInApi(),
       withCredentials: true
     };
   }
