@@ -21,13 +21,11 @@ export class ProfileService implements IProfileService {
 
   static $inject:Array<string> = [
     TraversonHalService.SERVICE_NAME,
-    GatewayApiService.SERVICE_NAME,
     '$q',
     '$http',
     '$rootScope'];
 
   constructor(private traverson:TraversonHalService,
-              private gateway:GatewayApiService,
               private $q:IQService,
               private $http:IHttpService,
               private $rootScope:IRootScopeService) {
@@ -71,7 +69,7 @@ export class ProfileService implements IProfileService {
 
   public getAllEmployees():IPromise<any> {
     return this.traverson.hal()
-      .from(this.gateway.getEmployeesApi())
+      .from(GatewayApiService.getEmployeesApi())
       .useAngularHttp()
       .jsonHal()
       .follow('employees', 'employees[$all]')
@@ -81,7 +79,7 @@ export class ProfileService implements IProfileService {
 
   public getAboutInfoByUsername(userName:string):IPromise<any> {
     return this.traverson.hal()
-      .from(this.gateway.getSearchEmployeeApi())
+      .from(GatewayApiService.getSearchEmployeeApi())
       .useAngularHttp()
       .jsonHal()
       .follow('employee')
@@ -92,7 +90,7 @@ export class ProfileService implements IProfileService {
 
   public getBasicInfoByUsername(userName:string):IPromise<any> {
     return this.traverson.hal()
-      .from(this.gateway.getSearchEmployeeApi())
+      .from(GatewayApiService.getSearchEmployeeApi())
       .useAngularHttp()
       .jsonHal()
       .follow('employee')

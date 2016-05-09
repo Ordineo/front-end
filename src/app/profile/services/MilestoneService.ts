@@ -20,13 +20,11 @@ export class MilestoneService implements IMilestoneService{
   static NAME:string = "MilestoneService";
   static $inject:Array<string> = [
     TraversonHalService.SERVICE_NAME,
-    GatewayApiService.SERVICE_NAME,
     '$q',
     '$http',
     'moment'];
 
   constructor(private traverson:TraversonHalService,
-              private gateway:GatewayApiService,
               private $q:IQService,
               private $http:IHttpService,
               private moment:any) {
@@ -38,7 +36,7 @@ export class MilestoneService implements IMilestoneService{
 
   public getMilestonesByUsername(userName:string):IPromise<any> {
     return this.traverson.hal()
-      .from(this.gateway.getMilestonesApi() + 'milestones/search')
+      .from(GatewayApiService.getMilestonesApi() + 'milestones/search')
       .useAngularHttp()
       .jsonHal()
       .follow('findByUsername', 'milestones[$all]')
@@ -55,7 +53,7 @@ export class MilestoneService implements IMilestoneService{
 
   public searchObjectives(qry:string):IPromise<any> {
     return this.traverson.hal()
-      .from(this.gateway.getMilestonesApi() + 'objectives/search')
+      .from(GatewayApiService.getMilestonesApi() + 'objectives/search')
       .useAngularHttp()
       .jsonHal()
       .follow('findByTitleOrTags', 'objectives[$all]')
@@ -71,7 +69,7 @@ export class MilestoneService implements IMilestoneService{
       this.milestone['objective'] = this.milestone.objective['_links']['self']['href'];
       this.milestone['createDate'] = this.moment(this.milestone['createDate']).format("YYYY-MM-DD");
       this.milestone['dueDate'] = this.moment(this.dueDate).format("YYYY-MM-DD");
-      return this.$http.post(this.gateway.getMilestonesApi() + 'milestones/', this.milestone);
+      return this.$http.post(GatewayApiService.getCreateMilestonesApi(), this.milestone);
     } else {
       return null;
     }
