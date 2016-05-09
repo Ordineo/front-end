@@ -5,6 +5,6 @@ export class ProfileComponent implements IComponentOptions {
   template:string = `
     <linkedin></linkedin>
     <profile-about></profile-about>
-    <milestone-container></milestone-container>
+    <milestone-container id="milestone-container"></milestone-container>
   `
 }
