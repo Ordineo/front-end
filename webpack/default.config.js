@@ -29,10 +29,6 @@ module.exports = {
       {test: /\.svg$/, exclude: /node_modules/, loaders: ['file']},
       {test: /\.css$/, loaders: ['style', 'css']},
       {test: /\.scss$/, loaders: ['style', 'css', 'sass']},
-      {
-        test: /\.(png|jpe?g)$/,
-        loader: 'url?10000'
-      },
       //{test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap')},
       // Font Definitions
       {test: /\.woff$/, loader: 'url?limit=65000&mimetype=application/font-woff&name=public/fonts/[name].[ext]'},
@@ -42,7 +38,8 @@ module.exports = {
       {test: /\.eot$/, loader: 'url?limit=65000&mimetype=application/vnd.ms-fontobject&name=public/fonts/[name].[ext]'},
       {
         test: /\.json$/, exclude: /node_modules/, loader: 'json'
-      }
+      },
+      {test: /\.(png|jpg)$/, loader: 'url?limit=1024&name=images/[name].[ext]'}
     ]
   }, node: {
     fs: "empty" // avoids error messages
