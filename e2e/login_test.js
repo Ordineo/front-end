@@ -18,7 +18,7 @@ Scenario('Login with wrong credentials', (I) => {
   I.fillField({model: '$ctrl.user.password'},'nopassword');
   I.click('#login-btn');
   I.seeElement('#login-form');
-  //I.see('an error', '#login-form'); //todo
+  I.see('Login failed. Invalid username or password', '#login-form');
   I.dontSee('JWorks 360', '#toolbar');
 });
 
@@ -30,7 +30,5 @@ Scenario('Logout', (I) => {
   I.click('#logout-btn');
   I.seeElement('#login-form');
 });
-
-//todo add for some errors
 
 
