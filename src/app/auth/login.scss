@@ -19,7 +19,15 @@ html, body {
   width: 400px;
 
   #login-form {
-
+    #login-error {
+      background-color: blanchedalmond;
+      border: solid 1px black;
+      border-radius: 3px;
+      color: black;
+      margin-left: 8px;
+      margin-right: 8px;
+      padding: 3px;
+    }
   }
 
   button {

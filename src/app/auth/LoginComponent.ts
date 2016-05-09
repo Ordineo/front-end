@@ -12,6 +12,7 @@ import {DashboardRoute} from "../app.routes";
 import {ISessionService, SessionService} from "./service/SessionService";
 
 require('./login.scss');
+var $ = require('jquery');
 
 export class LoginComponent implements IComponentOptions {
   static NAME:string = 'login';
@@ -26,12 +27,15 @@ export class LoginController {
     password: 'password'
   };
 
+  public errorMessage;
+
   /*
    * Controller Dependencies
    * */
   static $inject = [AuthService.NAME, SessionService.NAME];
 
   constructor(private authService:IAuthService, private sessionService:ISessionService) {
+    $('#login-error').hide();
   }
 
   $onInit():void {
@@ -46,8 +50,10 @@ export class LoginController {
       },
       (error) => {
         if (error.status === 401) {
+          this.errorMessage = "Login failed. Invalid username or password";
           this.showErrorMessage("Login failed. Invalid username or password");
         } else {
+          this.errorMessage = "Connection Error";
           this.showErrorMessage("Connection Error");
         }
       }
@@ -55,6 +61,6 @@ export class LoginController {
   }
 
   showErrorMessage(msg:string):void {
-
+    $('#login-error').slideDown(50);
   }
 }
