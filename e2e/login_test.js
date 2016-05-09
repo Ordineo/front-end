@@ -31,6 +31,4 @@ Scenario('Logout', (I) => {
   I.seeElement('#login-form');
 });
 
-//todo add for some errors
-
 
