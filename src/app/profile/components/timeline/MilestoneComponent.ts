@@ -28,7 +28,11 @@ export class MilestoneController {
     this.mileStoneBadge = this.milestone.objective.objectiveType.charAt(0).toUpperCase();
   }
 
-  toggleShowDetail():void {
+  public toggleShowDetail():void {
     this.showDetail = !this.showDetail;
+  }
+  
+  private gotoMilestoneDetail():void {
+    //todo navigate to detail
   }
 }
