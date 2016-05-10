@@ -38,4 +38,5 @@ angular
   .component(MilestoneCreateComponent.NAME, new MilestoneCreateComponent())
   .component(ObjectivesSearch.NAME, new ObjectivesSearch())
   .component(ProfileComponent.NAME, new ProfileComponent())
-  .directive(AboutDirective.NAME, AboutDirective.instance());
+  .directive(AboutDirective.NAME, AboutDirective.instance())
+  .component(MilestoneDetailsComponent.NAME, new MilestoneDetailsComponent());
