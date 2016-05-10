@@ -11,6 +11,7 @@ import {MilestoneContainerComponent} from "./milestones/timeline/MilestoneContai
 import {MilestoneCreateComponent} from "./milestones/timeline/MilestoneCreateComponent";
 import {ObjectivesSearch} from "./milestones/objectives-search/ObjectivesSearch";
 import {ProfileComponent} from "./ProfileComponent";
+import {MilestoneDetailsComponent} from "./milestones/milestone-details/MilestoneDetailsComponent";
 
 /**
  * @ngdoc module
