@@ -1,5 +1,5 @@
-import {ProfileService} from "../../services/ProfileService";
-import {Employee} from "../../../core/models/employee";
+import {ProfileService} from "../../../profile/services/ProfileService";
+import {Employee} from "../../models/employee";
 export class ProfileSearchController {
   public button:any;
   public users:Array<User>;
