@@ -15,7 +15,7 @@ export class DashboardComponent implements IComponentOptions {
   };
 
   $routeConfig:RouteDefinition[] = [
-    {path: '/profile', name: DashboardRoutes.PROFILE, component: ProfileComponent.NAME, useAsDefault: true}
+    {path: '/profile/...', name: DashboardRoutes.PROFILE, component: ProfileComponent.NAME, useAsDefault: true}
   ];
 
   template:string = `

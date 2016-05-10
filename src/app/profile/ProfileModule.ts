@@ -14,6 +14,7 @@ import {ProfileComponent} from "./ProfileComponent";
 import {MilestoneDetailsComponent} from "./milestones/milestone-details/MilestoneDetailsComponent";
 import {ProfileMenuComponent} from "./profile-menu/ProfileMenuComponent";
 import {SummaryPageComponent} from "./summary-page/SummaryPageComponent";
+import {MilestoneDetailsPageComponent} from "./milestones-details-page/MilestoneDetailsPageComponent";
 
 /**
  * @ngdoc module
@@ -36,7 +37,7 @@ angular
 
   /*Tab pages*/
   .component(SummaryPageComponent.NAME, new SummaryPageComponent())
-  .component(MilestoneDetailsComponent.NAME, new MilestoneDetailsComponent())
+  .component(MilestoneDetailsPageComponent.NAME, new MilestoneDetailsPageComponent())
 
   /* services */
   .service(ProfileService.NAME, ProfileService)
