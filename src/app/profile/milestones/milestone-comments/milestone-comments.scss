@@ -6,9 +6,12 @@
   }
 
   #commentsAdd {
+    display: table;
+
     md-input-container {
-      margin: 15px 0 0 0;
-      width: 95%;
+      display: table-cell;
+      top: 15px;
+      width: 100%;
     }
   }
 }
