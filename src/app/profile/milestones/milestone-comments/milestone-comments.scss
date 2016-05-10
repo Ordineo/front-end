@@ -1,0 +1,22 @@
+#comments {
+  padding: 15px;
+
+  #commentsTitle {
+    margin-bottom: 20px;
+  }
+
+  #commentsAdd {
+    md-input-container {
+      margin: 15px 0 0 0;
+      width: 95%;
+    }
+  }
+}
+
+.profilePicture {
+  background-color: lightgray;
+  float: left;
+  height: 50px;
+  margin-right: 15px;
+  width: 50px;
+}

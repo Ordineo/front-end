@@ -12,6 +12,7 @@ import {MilestoneCreateComponent} from "./milestones/timeline/MilestoneCreateCom
 import {ObjectivesSearch} from "./milestones/objectives-search/ObjectivesSearch";
 import {ProfileComponent} from "./ProfileComponent";
 import {MilestoneDetailsComponent} from "./milestones/milestone-details/MilestoneDetailsComponent";
+import {MilestoneCommentsComponent} from "./milestones/milestone-comments/MilestoneCommentsComponent";
 
 /**
  * @ngdoc module
@@ -40,4 +41,5 @@ angular
   .component(ObjectivesSearch.NAME, new ObjectivesSearch())
   .component(ProfileComponent.NAME, new ProfileComponent())
   .directive(AboutDirective.NAME, AboutDirective.instance())
-  .component(MilestoneDetailsComponent.NAME, new MilestoneDetailsComponent());
+  .component(MilestoneDetailsComponent.NAME, new MilestoneDetailsComponent())
+  .component(MilestoneCommentsComponent.NAME, new MilestoneCommentsComponent());
