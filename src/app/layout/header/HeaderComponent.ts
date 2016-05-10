@@ -1,9 +1,19 @@
 import IComponentOptions = angular.IComponentOptions;
-export class HeaderComponent implements IComponentOptions{
+import './header-styles.scss';
 
-  template:string = require('./header-template.html');
-  controller:string = HeaderComponentController;
+export class HeaderComponent implements IComponentOptions {
+  static NAME:string = "appHeader";
+
+  bindings:any = {
+    title: '@'
+  };
+  template:string = `
+    <div>
+      <span class="md-display-1">{{$ctrl.title}}</span>    
+    </div>
+  `;
+
 }
-export class HeaderComponentController{
+export class HeaderComponentController {
 
 }

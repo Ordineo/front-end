@@ -1,0 +1,10 @@
+app-header {
+  div {
+    min-height: 120px;
+    max-height: 160px;
+    background-size: cover;
+    background: orange url('./header-bg.png');
+    color: white;
+    padding: 2em 2em 0;
+  }
+}
