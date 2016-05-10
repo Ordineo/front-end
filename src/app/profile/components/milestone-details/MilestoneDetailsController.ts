@@ -29,6 +29,8 @@ export class MilestoneDetailsController {
   public timestamp:string = "09:18, 15 February";
 
   constructor() {
-
+    //Auto show last comments
+    var divComments = document.getElementById("comments");
+    divComments.scrollTop = divComments.scrollHeight;
   }
 }
