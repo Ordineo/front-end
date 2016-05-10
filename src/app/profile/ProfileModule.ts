@@ -13,6 +13,7 @@ import {ObjectivesSearch} from "./milestones/objectives-search/ObjectivesSearch"
 import {ProfileComponent} from "./ProfileComponent";
 import {MilestoneDetailsComponent} from "./milestones/milestone-details/MilestoneDetailsComponent";
 import {ProfileMenuComponent} from "./profile-menu/ProfileMenuComponent";
+import {SummaryPageComponent} from "./summary-page/SummaryPageComponent";
 
 /**
  * @ngdoc module
@@ -32,8 +33,16 @@ var deps:Array<string> = [
 
 angular
   .module(ORDINEO_PROFILE, deps)
+
+  /*Tab pages*/
+  .component(SummaryPageComponent.NAME, new SummaryPageComponent())
+  .component(MilestoneDetailsComponent.NAME, new MilestoneDetailsComponent())
+
+  /* services */
   .service(ProfileService.NAME, ProfileService)
   .service(MilestoneService.NAME, MilestoneService)
+
+  /* components and directives*/
   .component(MilestoneContainerComponent.NAME, new MilestoneContainerComponent())
   .component(TimelineComponent.NAME, new TimelineComponent())
   .component(MilestoneComponent.NAME, new MilestoneComponent())
@@ -41,5 +50,7 @@ angular
   .component(ObjectivesSearch.NAME, new ObjectivesSearch())
   .component(ProfileMenuComponent.NAME, new ProfileMenuComponent())
   .component(ProfileComponent.NAME, new ProfileComponent())
+  .component(MilestoneDetailsComponent.NAME, new MilestoneDetailsComponent())
   .directive(AboutDirective.NAME, AboutDirective.instance())
-  .component(MilestoneDetailsComponent.NAME, new MilestoneDetailsComponent());
+
+;

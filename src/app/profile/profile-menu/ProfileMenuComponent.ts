@@ -11,6 +11,6 @@ export class ProfileMenuComponentController {
       label: "Summary",
     }, {
       label: "Milestones"
-    }
+    } 
   ]
 }
