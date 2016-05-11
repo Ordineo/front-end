@@ -4,7 +4,7 @@ import 'angular-material';
 /**
  * @ngdoc component
  * @name actionButton
- * @module jworks360.core
+ * @module ordineo.core
  *
  *
  * @description

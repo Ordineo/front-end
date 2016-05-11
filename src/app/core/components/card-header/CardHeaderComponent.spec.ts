@@ -4,7 +4,7 @@ import IAugmentedJQuery = angular.IAugmentedJQuery;
 import IRootScopeService = angular.IRootScopeService;
 import IHttpBackendService = angular.IHttpBackendService;
 import IScope = angular.IScope;
-import {JWORKS360_CORE} from "../../core.module";
+import {ORDINEO_CORE} from "../../core.module";
 import 'angular-mocks';
 describe("Card header component", ()=> {
 
@@ -18,7 +18,7 @@ describe("Card header component", ()=> {
   var ctrl:CardHeaderController;
   var controllerAs:string = '$ctrl';
 
-  beforeEach(angular.mock.module(JWORKS360_CORE));
+  beforeEach(angular.mock.module(ORDINEO_CORE));
 
   beforeEach(inject((_$httpBackend_:IHttpBackendService, _$compile_:ICompileService, _$rootScope_:IRootScopeService)=> {
     $compile = _$compile_;

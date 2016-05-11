@@ -1,4 +1,4 @@
-import {JWORKS360_CORE} from "../../core.module";
+import {ORDINEO_CORE} from "../../core.module";
 import 'angular-mocks';
 import IRootScopeService = angular.IRootScopeService;
 import {ActionButtonComponent, ActionButtonController} from "./ActionButtonComponent";
@@ -11,7 +11,7 @@ describe("Action bar component", ()=> {
 
   /*mock our module*/
   beforeEach(()=> {
-    angular.mock.module(JWORKS360_CORE);
+    angular.mock.module(ORDINEO_CORE);
   });
 
   beforeEach(inject((_$rootScope_:IRootScopeService, _$componentController_)=> {
