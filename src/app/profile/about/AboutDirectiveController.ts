@@ -1,14 +1,14 @@
-import {ProfileService, IProfileService} from "../../services/ProfileService";
-import {Employee} from "../../../core/models/employee";
-import {ButtonState} from "../../../core/labels/ButtonState";
-import {LinkedInService} from "../../../social/linkedin/LinkedInService";
-import {LinkedInController} from "../../../layout/linkedin/LinkedInController";
-import {GatewayApiService} from "../../../gateway/service/GatewayApiService";
+import {ProfileService, IProfileService} from "../services/ProfileService";
+import {ButtonState} from "../../core/labels/ButtonState";
+import {LinkedInService} from "../../social/linkedin/LinkedInService";
+import {LinkedInController} from "../../layout/linkedin/LinkedInController";
+import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 import IRootScopeService = angular.IRootScopeService;
 import IAngularEvent = angular.IAngularEvent;
 import ISCEService = angular.ISCEService;
-import {SessionService} from "../../../auth/service/SessionService";
 import IScope = angular.IScope;
+import {SessionService} from "../../auth/service/SessionService";
+import {Employee} from "../../core/models/employee";
 
 export class AboutDirectiveController {
   public title:string;
@@ -125,7 +125,7 @@ export class AboutDirectiveController {
   }
 
   private init():void {
-    this.username = this.sessionsService.getUsername();
+    this.username = this.profileService.username;
     this.genders = [
       "MALE",
       "FEMALE",
