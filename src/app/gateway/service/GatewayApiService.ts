@@ -1,62 +1,55 @@
 import IWindowService = angular.IWindowService;
 
 export class GatewayApiService{
-
   static SERVICE_NAME:string = "GatewayApiService";
-
   static $inject:Array<string> = ['$window'];
 
-  /**
-   * protocol with slashes
-   * example: "http://"
-   */
-  private protocol:string;
-  public host:string = 'gateway-ordineo.cfapps.io';
+  private static protocol:string =  "https://";
+  private static host:string = 'gateway-ordineo.cfapps.io';
 
-  public EMPLOYEES_API:string = "/employee-ordineo/api/";
-  public SOCIAL_API:string = "/social-ordineo/api/";
-  public MILESTONES_API:string = "/milestone-ordineo/api/";
-  public AUTH_API:string = "/auth/";
+  private static SOCIAL_API:string = "/social-ordineo/";
+  private static IMAGE_API:string = "https://image-ordineo.cfapps.io/api/"; //todo andere oplossing vinden
+  private static EMPLOYEES_API:string = "/employee-ordineo/api/";
+  private static MILESTONES_API:string = "/milestone-ordineo/api/";
+  private static AUTH_API:string = "/auth/";
 
 
   constructor(private $window:IWindowService){
-    this.protocol =  "https://";
   }
 
-  private buildApiUrl(servicePath:string):string{
+  private static buildApiUrl(servicePath:string):string{
     return this.protocol + this.host + servicePath;
   }
 
-
-  public getLinkedInApi():string{
-    return this.protocol + 'social-ordineo.cfapps.io/api/linkedin';
+  public static getLinkedInApi():string{
+    return this.buildApiUrl(this.SOCIAL_API) + 'api/linkedin';
   }
 
-  public getLinkedInAuthUrl():string{
-    return this.protocol + 'social-ordineo.cfapps.io/connect/linkedin';
+  public static getLinkedInAuthUrl():string{
+    return this.buildApiUrl(this.SOCIAL_API) + 'connect/linkedin';
   }
 
-  static getImagesEmployeeApi():string{
-    return 'https://image-ordineo.cfapps.io/api/images/';
+  public static getImagesEmployeeApi():string{
+    return this.IMAGE_API + 'images/';
   }
 
-  public getSearchEmployeeApi():string{
-    return this.getEmployeesApi() + 'employees/search/';
-  }
-
-  public getEmployeesApi():string{
+  public static getEmployeesApi():string{
     return this.buildApiUrl(this.EMPLOYEES_API);
   }
 
-  public getMilestonesApi():string {
+  public static getSearchEmployeeApi():string{
+    return this.getEmployeesApi() + 'employees/search/';
+  }
+
+  public static getMilestonesApi():string {
     return this.buildApiUrl(this.MILESTONES_API);
   }
 
-  public getCreateMilestonesApi():string {
+  public static getCreateMilestonesApi():string {
     return this.getMilestonesApi() + 'milestones/';
   }
 
-  public getAuthApi():string {
+  public static getAuthApi():string {
     return this.buildApiUrl(this.AUTH_API);
   }
 }

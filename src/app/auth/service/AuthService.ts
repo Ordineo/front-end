@@ -10,13 +10,12 @@ import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 export class AuthService implements IAuthService {
   static NAME:string = 'authService';
 
-  static $inject = ['$rootRouter', '$http', '$q', SessionService.NAME, GatewayApiService.SERVICE_NAME];
+  static $inject = ['$rootRouter', '$http', '$q', SessionService.NAME];
 
   constructor(private $rootRouter:Router,
               private $http:IHttpService,
               private $q:IQService,
-              private sessionService:ISessionService,
-              private gateway:GatewayApiService) {
+              private sessionService:ISessionService) {
   }
 
   /*todo refactor code to make http authentication request*/
@@ -32,10 +31,10 @@ export class AuthService implements IAuthService {
   }
 
   logIn(credentials:ICredentials):IPromise<any> {
-    return this.$http.post(this.gateway.getAuthApi(), credentials);
+    return this.$http.post(GatewayApiService.getAuthApi(), credentials);
   }
 
-  authenticate(routeNames:string[], callBack:Function):void {
+  authenticate(routeNames:any[], callBack:Function):void {
     if (this.isAuthorized()) {
       if (routeNames !== null) {
         this.$rootRouter.navigate(routeNames);
@@ -53,7 +52,7 @@ export class AuthService implements IAuthService {
   }
 }
 export interface IAuthService {
-  authenticate(routeNames:string[], callBack:Function):void;
+  authenticate(routeNames:any[], callBack:Function):void;
   logIn(credentials:ICredentials):IPromise<any>;
   logOut():IPromise<any>;
   isAuthorized():boolean;

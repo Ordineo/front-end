@@ -1,7 +1,10 @@
-Feature('Timeline directive');
+Feature('Timeline section');
 
-/*Before((I) => {
-  I.amOnPage('/#/profile');
+Before((I) => {
+  I.amOnPage('/#/login');
+  I.fillField({model: '$ctrl.user.username'}, 'Nivek');
+  I.fillField({model: '$ctrl.user.password'}, 'password');
+  I.click('#login-btn');
 });
 
 Scenario('Show the timeline and click on a card', (I) => {
@@ -34,7 +37,7 @@ Scenario('Show the timeline and create a milestone', (I) => {
   I.see('You must select an objective', '#milestone-container');
   I.click('.btnCancel', '#milestone-container');
   I.see('Timeline', '#milestone-container');
-});*/
+});
 
 
 

@@ -1,3 +1,4 @@
+$red: #dd0000;
 $border-radius: 3px;
 
 html, body {
@@ -19,7 +20,14 @@ html, body {
   width: 400px;
 
   #login-form {
-
+    #login-error {
+      border: solid 1px $red;
+      border-radius: 3px;
+      color: $red;
+      margin-left: 8px;
+      margin-right: 8px;
+      padding: 3px;
+    }
   }
 
   button {

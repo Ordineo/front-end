@@ -18,6 +18,7 @@ import 'angular-jwt';
 import {TRAVERSON} from "../traverson/TraversonModule";
 import {AppComponent} from "../app.component";
 import {SessionService} from "../auth/service/SessionService";
+import {ProfileSearchComponent} from "./components/profile-search/ProfileSearchComponent";
 
 export const ORDINEO_CORE = 'ordineo.core';
 
@@ -35,6 +36,7 @@ angular.module(ORDINEO_CORE, deps)
   .value('$routerRootComponent', AppComponent.NAME)
   .component(CardHeaderComponent.NAME, new CardHeaderComponent())
   .component(ActionButtonComponent.NAME, new ActionButtonComponent())
+  .component(ProfileSearchComponent.NAME, new ProfileSearchComponent())
   .service(SessionService.NAME, SessionService)
   .directive(FileUploadDirective.NAME, FileUploadDirective.instance())
   .directive('customOnChange', function () {

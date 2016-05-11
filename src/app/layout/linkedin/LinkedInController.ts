@@ -17,18 +17,16 @@ export class LinkedInController {
   static $inject:Array<string> = [
     '$sce',
     LinkedInService.SERVICE_NAME,
-    '$rootScope',
-    GatewayApiService.SERVICE_NAME
+    '$rootScope'
   ];
 
   constructor(
     private $sce:ISCEService,
     private service:LinkedInService,
-    private scope:IRootScopeService,
-    private gateway:GatewayApiService
+    private scope:IRootScopeService
   ) {
     this.linkedinIcon = {title: 'linkedin-box', icon: 'mdi:linkedin-box'};
-    this.action = $sce.trustAsResourceUrl(gateway.getLinkedInAuthUrl());
+    this.action = $sce.trustAsResourceUrl(GatewayApiService.getLinkedInAuthUrl());
   }
 
   onClick():void{

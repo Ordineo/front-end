@@ -1,4 +1,4 @@
-<md-toolbar id="toolbar">
+<md-toolbar id="toolbar" md-whiteframe="1">
   <div layout="row">
     <div class="logo" layout-align="start center"></div>
     <div id="welcome" layout="row" layout-align="start center">
@@ -20,7 +20,7 @@
           </md-button>
         </div>
 -->
-        <md-menu>
+        <md-menu id="user-menu">
           <md-button aria-label="Open account menu" ng-click="$ctrl.openMenu($mdOpenMenu, $event)">
             <md-icon md-menu-origin md-svg-icon="{{$ctrl.buttons[0].icon}}"></md-icon>
             <span id="profileMenu">{{$ctrl.employeeName.first}} {{$ctrl.employeeName.last}}</span>
@@ -40,7 +40,7 @@
             </md-menu-item>
             <md-menu-divider></md-menu-divider>
             <md-menu-item>
-              <md-button aria-label="Logout" ng-click="$root.authService.logOut()">
+              <md-button id="logout-btn" aria-label="Logout" ng-click="$root.authService.logOut()">
                 <md-icon md-svg-icon="{{$ctrl.buttons[2].icon}}" md-menu-align-target></md-icon>
                 Logout
               </md-button>

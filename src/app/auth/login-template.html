@@ -3,7 +3,7 @@
     <form id="login-form" name="loginForm" novalidate>
       <div layout="column">
         <md-content>
-          <img ng-src="../../assets/images/jworks-logo-nomargin.png" alt="JWorks">
+          <img ng-src="images/jworks-logo-nomargin.png" alt="JWorks">
           <md-input-container>
             <label>Username</label>
             <input required
@@ -36,9 +36,13 @@
           <div layout="row">
             <md-button ng-click="$ctrl.logIn($ctrl.user)"
                        ng-disabled="loginForm.$invalid"
-                       class="md-primary md-raised">
+                       class="md-primary md-raised"
+                       id="login-btn">
               Login
             </md-button>
+          </div>
+          <div id="login-error">
+            {{$ctrl.errorMessage}}
           </div>
         </md-content>
       </div>

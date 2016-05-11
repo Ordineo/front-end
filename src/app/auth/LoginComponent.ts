@@ -10,8 +10,11 @@ import IRootScopeService = angular.IRootScopeService;
 import {AuthService, IAuthService} from "./service/AuthService";
 import {DashboardRoute} from "../app.routes";
 import {ISessionService, SessionService} from "./service/SessionService";
+import {DashboardRoutes} from "../layout/DashboardComponent";
+require('../../assets/images/jworks-logo-nomargin.png');
 
 require('./login.scss');
+var $ = require('jquery');
 
 export class LoginComponent implements IComponentOptions {
   static NAME:string = 'login';
@@ -26,27 +29,48 @@ export class LoginController {
     password: 'password'
   };
 
+  public errorMessage;
+
   /*
    * Controller Dependencies
    * */
   static $inject = [AuthService.NAME, SessionService.NAME];
 
   constructor(private authService:IAuthService, private sessionService:ISessionService) {
+    $('#login-error').hide();
   }
 
   $onInit():void {
-    this.authService.authenticate([DashboardRoute.NAME], null);
+    this.authService.authenticate([
+      DashboardRoute.NAME,
+      DashboardRoutes.USER_PROFILE,
+      {username: this.sessionService.getUsername()}
+    ], null);
   }
 
-  logIn(user:ICredentials):void {
+  logIn(user):void {
     this.authService.logIn(user).then(
-      (res:any)=> {
+      (res)=> {
         this.sessionService.setAuthData(res.data['token']);
-        this.authService.authenticate([DashboardRoute.NAME], null);
+        this.authService.authenticate([
+          DashboardRoute.NAME,
+          DashboardRoutes.USER_PROFILE,
+          {username: this.sessionService.getUsername()}
+        ], null);
       },
-      (error:any) => {
-        console.log(error);
+      (error) => {
+        if (error.status === 401) {
+          this.errorMessage = "Login failed. Invalid username or password";
+          this.showErrorMessage("Login failed. Invalid username or password");
+        } else {
+          this.errorMessage = "Connection Error";
+          this.showErrorMessage("Connection Error");
+        }
       }
     )
+  }
+
+  showErrorMessage(msg:string):void {
+    $('#login-error').slideDown(50);
   }
 }
