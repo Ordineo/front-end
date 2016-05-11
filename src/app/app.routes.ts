@@ -17,7 +17,7 @@ export class LoginRoute implements RouteDefinition{
 }
 export class MainRoute implements RouteDefinition {
   static NAME:string = "App";
-  path:string = '/';
+  path:string = '/*path';
   name:string = MainRoute.NAME;
   component:string = AppComponent.NAME;
   useAsDefault:boolean = true;
