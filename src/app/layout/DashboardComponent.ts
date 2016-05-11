@@ -15,8 +15,12 @@ export class DashboardComponent implements IComponentOptions {
   };
 
   $routeConfig:RouteDefinition[] = [
-    {path: '/profile/...', name: DashboardRoutes.PROFILE, component: ProfileComponent.NAME, useAsDefault: true},
-    {path: '/profile/:username', name: DashboardRoutes.USER_PROFILE, component: ProfileComponent.NAME}
+    {
+      path: '/profile/:username/...',
+      name: DashboardRoutes.USER_PROFILE,
+      component: ProfileComponent.NAME,
+      useAsDefault: true
+    }
   ];
 
   template:string = `
@@ -37,11 +41,7 @@ export class DashboardComponentController {
   }
 
   $onInit():void {
-    this.authService.authenticate(null, ()=> {
-      this.routerOutlet.$$router.navigate([DashboardRoutes.PROFILE]);
-    });
     this.profileService.getBasicInfoByUsername(this.sessionService.getUsername()).then((data)=> {
-      this.profileService.setUsername(data.username);
       this.name = {
         first: data.firstName,
         last: data.lastName
