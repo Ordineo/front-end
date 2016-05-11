@@ -34,7 +34,7 @@ export class AuthService implements IAuthService {
     return this.$http.post(GatewayApiService.getAuthApi(), credentials);
   }
 
-  authenticate(routeNames:string[], callBack:Function):void {
+  authenticate(routeNames:any[], callBack:Function):void {
     if (this.isAuthorized()) {
       if (routeNames !== null) {
         this.$rootRouter.navigate(routeNames);
@@ -52,7 +52,7 @@ export class AuthService implements IAuthService {
   }
 }
 export interface IAuthService {
-  authenticate(routeNames:string[], callBack:Function):void;
+  authenticate(routeNames:any[], callBack:Function):void;
   logIn(credentials:ICredentials):IPromise<any>;
   logOut():IPromise<any>;
   isAuthorized():boolean;

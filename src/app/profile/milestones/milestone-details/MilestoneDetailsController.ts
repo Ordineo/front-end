@@ -29,6 +29,6 @@ export class MilestoneDetailsController {
   public timestamp:string = "09:18, 15 February";
 
   constructor() {
-    
+
   }
 }
