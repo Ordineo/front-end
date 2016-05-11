@@ -15,7 +15,8 @@ export class DashboardComponent implements IComponentOptions {
   };
 
   $routeConfig:RouteDefinition[] = [
-    {path: '/profile/...', name: DashboardRoutes.PROFILE, component: ProfileComponent.NAME, useAsDefault: true}
+    {path: '/profile/...', name: DashboardRoutes.PROFILE, component: ProfileComponent.NAME, useAsDefault: true},
+    {path: '/profile/:username', name: DashboardRoutes.USER_PROFILE, component: ProfileComponent.NAME}
   ];
 
   template:string = `
@@ -51,5 +52,6 @@ export class DashboardComponentController {
 
 export class DashboardRoutes {
   static PROFILE:string = 'Profile';
+  static USER_PROFILE:string = 'UserProfile';
 }
 
