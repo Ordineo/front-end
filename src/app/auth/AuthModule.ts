@@ -3,7 +3,7 @@ import {LoginComponent} from "./LoginComponent";
 import {SessionService, ISessionService} from "./service/SessionService";
 import IRootScopeService = angular.IRootScopeService;
 import Router = angular.Router;
-import {JWORKS360_CORE} from "../core/core.module";
+import {ORDINEO_CORE, JWORKS360_CORE} from "../core/core.module";
 export const JWORKS_AUTH = "jworksAuth";
 
 angular
