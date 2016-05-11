@@ -10,12 +10,12 @@ import {Objective} from "../../../core/models/objective";
 
 export class MilestoneDetailsController {
   public status:number = 0;
-
+  public isEmpty:boolean;
   //Objective
   public title:string;
   public description:string;
   public objectiveType:string;
-  public tags:string[] = ["Java", "Programming"];
+  public tags:string[];
 
   //Milestone
   public createDate:string;
@@ -36,8 +36,16 @@ export class MilestoneDetailsController {
 
   }
 
+  $onInit():void {
+    if (this.id === undefined) {
+      this.isEmpty = true;
+    }
+  }
+
   $onChanges():void {
+    this.isEmpty = false;
     this.milestoneService.getMilestoneById(this.id).then((milestone:Milestone)=> {
+      console.log(milestone);
       this.createDate = milestone.createDate;
       this.dueDate = milestone.dueDate;
       this.moreInformation = milestone.moreInformation;
