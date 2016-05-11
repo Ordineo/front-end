@@ -80,6 +80,9 @@ $red: #dd0000;
   }
 }
 
+p {
+  word-break: break-all;
+}
 .balloon {
   margin-left: 5px;
 }

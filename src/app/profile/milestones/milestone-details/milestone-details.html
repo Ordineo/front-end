@@ -7,7 +7,6 @@
   <div layout="row">
     <div id="milestone-details-wrap" style="width: 100%;">
       <div id="status">
-        {{milestoneDetails.userFirstName}} {{milestoneDetails.userLastName}} -
         <span ng-if="milestoneDetails.status == 0" class="inProgress">In progress</span>
         <span ng-if="milestoneDetails.status == 1" class="accomplished">Accomplished</span>
         <span ng-if="milestoneDetails.status == 2" class="notAccomplished">Not accomplished</span>
@@ -38,7 +37,7 @@
         </div>
         <div class="detail">
           <h4>More information</h4>
-          {{milestoneDetails.moreInformation}}
+          <p>{{milestoneDetails.moreInformation}}</p>
         </div>
       </div>
     </div>

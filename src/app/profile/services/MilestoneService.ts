@@ -8,6 +8,7 @@ import {Objective} from "../../core/models/objective";
 
 export interface IMilestoneService {
   getMilestonesByUsername(userName:string):IPromise<any>;
+  getMilestoneById(id:string):IPromise<any>;
   setObjective(objective:Objective):void;
   getNewMilestone():Milestone;
   searchObjectives(qry:string):IPromise<any>;
@@ -32,6 +33,15 @@ export class MilestoneService implements IMilestoneService{
 
   setObjective(objective:Objective):void{
     this.milestone.objective = objective;
+  }
+
+  public getMilestoneById(id:string):IPromise<any> {
+    return this.traverson.hal()
+      .from(GatewayApiService.getMilestonesApi() + 'milestones/' + id)
+      .useAngularHttp()
+      .jsonHal()
+      .getResource()
+      .result;
   }
 
   public getMilestonesByUsername(userName:string):IPromise<any> {

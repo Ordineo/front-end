@@ -12,6 +12,7 @@ export class MilestoneDetailsComponent implements IComponentOptions {
   controllerAs:string = MilestoneDetailsComponent.CONTROLLER_AS;
   template:string = require('./milestone-details.html');
   bindings:any = {
+    id: '<',
     onContentLoaded: '&'
   };
 }
