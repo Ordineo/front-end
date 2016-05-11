@@ -13,7 +13,7 @@ export class ProfileComponent implements IComponentOptions {
 
   template:string = `
     <!--<linkedin></linkedin>-->
-    <app-header title="hello world"></app-header>
+    <app-header title="{{$ctrl.title}}"></app-header>
     <profile-menu
       on-tab-selected="$ctrl.onTabSelected($locals)"></profile-menu>
     <ng-outlet></ng-outlet>
@@ -27,7 +27,7 @@ export class ProfileComponent implements IComponentOptions {
 }
 export class ProfileComponentController {
   public routerOutlet:any;
-
+  public title:string;
   static $inject = [ProfileService.NAME];
 
   constructor(private profileService:ProfileService) {
@@ -36,6 +36,9 @@ export class ProfileComponentController {
   $routerOnActivate(next:any, previous:any):void {
     if (next.params.username !== null) {
       this.profileService.setUsername(next.params.username);
+      this.profileService.getBasicInfoByUsername(next.params.username).then((data:any)=> {
+        this.title = data.firstName + ' ' + data.lastName;
+      });
     }
   }
 
