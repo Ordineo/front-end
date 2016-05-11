@@ -29,7 +29,7 @@ describe("Dashboard component controller", ()=> {
         $provide.service(AuthService.NAME, ()=>authService);
         $provide.service(SessionService.NAME, ()=>sessionService);
         $provide.service(ProfileService.NAME, ()=> profileService)
-      }) //is this the correct module?
+      })
   );
 
   beforeEach(inject((_$componentController_, _$rootScope_:IRootScopeService, _$q_:IQService)=> {
@@ -38,25 +38,49 @@ describe("Dashboard component controller", ()=> {
     ctrl = _$componentController_(DashboardComponent.NAME, {$scope: scope});
   }));
 
-  it("should authenticate on init", ()=>{
-    spyOn(authService, "authenticate");
-    var defer = $q.defer();
+  describe("on init", ()=>{
+    var defer;
 
-    spyOn(profileService, "getBasicInfoByUsername").and.returnValue(defer.promise);
-    ctrl.$onInit();
-    expect(authService.authenticate).toHaveBeenCalled();
-  });
+    beforeEach(function (){
+      defer = $q.defer();
+    });
 
-  it("should get basic info by username on init", ()=> {
-    var defer = $q.defer();
-    spyOn(profileService, "getBasicInfoByUsername").and.returnValue(defer.promise);
-    ctrl.$onInit();
-    expect(profileService.getBasicInfoByUsername).toHaveBeenCalled();
+    it("should authenticate", ()=>{
+      spyOn(authService, "authenticate");
+      spyOn(profileService, "getBasicInfoByUsername").and.returnValue(defer.promise);
+      ctrl.$onInit();
+      
+      expect(authService.authenticate).toHaveBeenCalled();
+    });
+
+    it("should get basic info by username", ()=> {
+      spyOn(profileService, "getBasicInfoByUsername").and.returnValue(defer.promise);
+      ctrl.$onInit();
+      expect(profileService.getBasicInfoByUsername).toHaveBeenCalled();
+      defer.resolve({username: "mike", firstName: "Michael", lastName:"Vandendriessche"});
+      scope.$apply();
+
+      expect(ctrl.name.first).toBe("Michael");
+      expect(ctrl.name.last).toBe("Vandendriessche");
+    });
   });
 
 });
 
 export class ProfileMock implements IProfileService{
+  subscribeUsernameChanged(scope:angular.IScope, callBack:any):void {
+  }
+
+  notifyUsernameChanged():void {
+  }
+
+  setProfilePicture(file:any, uploadUrl:string):angular.IPromise<any> {
+    return undefined;
+  }
+
+  setUsername(username:string) {
+  }
+
   getAboutInfoByUsername(userName:string):angular.IPromise<any> {
     return undefined;
   }
