@@ -5,7 +5,7 @@ import {LoginComponent} from "./auth/LoginComponent";
 
 export class DashboardRoute implements RouteDefinition{
   static NAME:string = "Dashboard";
-  path:string = '/dashboard';
+  path:string = '/dashboard/...';
   name:string = DashboardRoute.NAME;
   component:string = DashboardComponent.NAME;
 }
