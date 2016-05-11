@@ -1,3 +1,5 @@
+$orange: #e98300;
+
 #comments {
   padding: 15px;
 
@@ -14,6 +16,14 @@
       width: 100%;
     }
   }
+
+  hr {
+    margin-bottom: 15px;
+  }
+}
+
+.commentBox {
+  margin-bottom: 15px;
 }
 
 .profilePicture {
@@ -22,4 +32,22 @@
   height: 50px;
   margin-right: 15px;
   width: 50px;
+}
+
+.comment {
+  margin-left: 65px;
+  padding: 0 15px 0 0;
+}
+
+.commentTitle {
+  margin-bottom: 5px;
+}
+
+.commentTimestamp {
+  color: $orange;
+  font-size: 12px;
+}
+
+.clear {
+  clear: both;
 }

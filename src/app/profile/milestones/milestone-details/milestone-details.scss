@@ -79,24 +79,3 @@ $red: #dd0000;
     margin-bottom: 3px;
   }
 }
-
-.balloon {
-  margin-left: 5px;
-}
-
-.comment {
-  background-color: lightgray;
-  border-radius: 5px;
-  display: inline-block;
-  padding: 5px;
-}
-
-.spike {
-  background-color: lightgray;
-  height: 5px;
-  transform: rotate(45deg);
-  width: 5px;
-  position: relative;
-  left: -2px;
-  top: 15px;
-}

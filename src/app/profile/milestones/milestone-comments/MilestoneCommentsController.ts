@@ -7,7 +7,7 @@ export class MilestoneCommentsController {
   //Comments
   public commentFirstName:string = "Ryan";
   public commentLastName:string = "De Gruyter";
-  public content:string = "You should also go for the OCP certificate.";
+  public message:string = "You should also go for the OCP certificate.";
   public timestamp:string = "09:18, 15 February";
 
   constructor() {
