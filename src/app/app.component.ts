@@ -26,9 +26,7 @@ export class AppComponentController {
   }
 
   $routerOnActivate(next:any, previous:any):void {
-    console.log('router actiev');
     if (next.params.username !== undefined) {
-      console.log(next.params.username);
       this.profileService.setUsername(next.params.username);
     } else {
       this.profileService.setUsername(this.sessionService.getUsername());

@@ -41,7 +41,6 @@ export class ProfileComponentController {
 
   onTabSelected($locals:any):void {
     var selectedTab:ProfileMenuTab = $locals.selectedTab;
-    console.log(selectedTab);
     this.routerOutlet.$$router.navigate([selectedTab.route]);
   }
 }
