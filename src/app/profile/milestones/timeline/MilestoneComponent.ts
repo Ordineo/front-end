@@ -6,6 +6,7 @@ import {DashboardRoute} from "../../../app.routes";
 import {DashboardRoutes} from "../../../layout/DashboardComponent";
 import {ProfileRoutes} from "../../ProfileRoutes";
 import {ProfileService} from "../../services/ProfileService";
+import {UrlHelper} from "../../../util/UrlHelper";
 
 export class MilestoneComponent implements IComponentOptions {
   static NAME:string = "milestone";
@@ -45,6 +46,6 @@ export class MilestoneController {
 
   private gotoMilestoneDetail():void {
     this.$rootRouter.navigate([DashboardRoute.NAME, DashboardRoutes.USER_PROFILE, {username: this.ProfileService.username},
-      ProfileRoutes.MILESTONES_DETAILS, {id: 1}]);
+      ProfileRoutes.MILESTONES_DETAILS, {id: UrlHelper.getMilestoneIdFromUrl(this.milestone)}]);
   }
 }
