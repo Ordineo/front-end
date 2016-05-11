@@ -106,6 +106,7 @@ milestone {
       p {
         transition: 500ms ease max-height;
         max-height: 100px;
+        word-break: break-all;
       }
       .fade-text {
         display: block;
