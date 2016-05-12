@@ -7,14 +7,17 @@
   <md-card flex="40" id="milestone-list">
     <card-header
       show-btn-drag="true"
-      title="{{$ctrl.title}}">
+      title="{{($ctrl.milestones.length > 0) ? $ctrl.title : 'No milestones'}}">
     </card-header>
     <div class="loading-container" layout="row" layout-align="center center" ng-if="!$ctrl.milestonesLoaded">
       <md-progress-circular class="md-primary" md-mode="indeterminate" md-diameter="60"></md-progress-circular>
     </div>
     <md-card-content ng-if="$ctrl.milestonesLoaded">
-      <milestone-item on-selected="$ctrl.onMilestoneSelected($locals)" milestone="mile"
-                      ng-repeat="mile in $ctrl.milestones">
+      <milestone-item
+        ng-if="$ctrl.milestones.length >0"
+        on-selected="$ctrl.onMilestoneSelected($locals)"
+        milestone="mile"
+        ng-repeat="mile in $ctrl.milestones">
       </milestone-item>
     </md-card-content>
   </md-card>

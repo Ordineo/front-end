@@ -12,7 +12,7 @@ export class MilestoneDetailsPageComponent implements IComponentOptions {
 export class MilestoneDetailsPageController {
   public isEmpty:boolean;
 
-  public title:string = "Milestone list";
+  public title:string = "Milestones";
   public milestones:Milestone[];
   public username:string;
   public milestonesLoaded:boolean;
