@@ -25,8 +25,7 @@ export class TimelineController {
 
   constructor(private profileService:ProfileService,
               private $scope:IScope,
-              private timelineService:MilestoneService,
-              private sessionService:SessionService) {
+              private timelineService:MilestoneService) {
   }
 
   $onInit():void {

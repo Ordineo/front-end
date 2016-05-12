@@ -33,7 +33,9 @@ export class DashboardComponent implements IComponentOptions {
 }
 
 export class DashboardComponentController {
+
   static $inject = [AuthService.NAME, SessionService.NAME, ProfileService.NAME];
+
   public routerOutlet:any;
   public name:EmployeeName;
 
