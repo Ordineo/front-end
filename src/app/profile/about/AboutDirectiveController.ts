@@ -125,7 +125,7 @@ export class AboutDirectiveController {
   }
 
   private init():void {
-    this.username = this.sessionsService.getUsername();
+    this.username = this.profileService.username;
     this.genders = [
       "MALE",
       "FEMALE",

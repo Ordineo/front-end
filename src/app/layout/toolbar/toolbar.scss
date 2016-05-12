@@ -22,6 +22,7 @@ toolbar {
   .logo {
     background: url($logoTopLeft) no-repeat center;
     background-size: contain;
+    background-repeat: no-repeat;
     margin: 5px;
     width: $logoSize;
   }

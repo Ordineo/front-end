@@ -10,6 +10,7 @@ import IRootScopeService = angular.IRootScopeService;
 import {AuthService, IAuthService} from "./service/AuthService";
 import {DashboardRoute} from "../app.routes";
 import {ISessionService, SessionService} from "./service/SessionService";
+import {DashboardRoutes} from "../layout/DashboardComponent";
 require('../../assets/images/jworks-logo-nomargin.png');
 
 require('./login.scss');
@@ -40,14 +41,22 @@ export class LoginController {
   }
 
   $onInit():void {
-    this.authService.authenticate([DashboardRoute.NAME], null);
+    this.authService.authenticate([
+      DashboardRoute.NAME,
+      DashboardRoutes.USER_PROFILE,
+      {username: this.sessionService.getUsername()}
+    ], null);
   }
 
   logIn(user):void {
     this.authService.logIn(user).then(
       (res)=> {
         this.sessionService.setAuthData(res.data['token']);
-        this.authService.authenticate([DashboardRoute.NAME], null);
+        this.authService.authenticate([
+          DashboardRoute.NAME,
+          DashboardRoutes.USER_PROFILE,
+          {username: this.sessionService.getUsername()}
+        ], null);
       },
       (error) => {
         if (error.status === 401) {

@@ -17,8 +17,13 @@
         <p>{{$ctrl.milestone.moreInformation}}</p>
       </div>
 
-      <md-chips readonly="true" ng-model="$ctrl.milestone.objective.tags">
-      </md-chips>
+      <div layout="row" layout-align="space-between end">
+        <md-chips readonly="true" ng-model="$ctrl.milestone.objective.tags">
+        </md-chips>
+        <md-button ng-click="$ctrl.gotoMilestoneDetail()" class="btnDetail md-raised md-primary">Details</md-button>
+
+      </div>
     </md-card-content>
+
   </md-card>
 </li>

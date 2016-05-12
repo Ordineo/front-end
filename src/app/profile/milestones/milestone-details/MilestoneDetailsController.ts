@@ -23,6 +23,6 @@ export class MilestoneDetailsController {
   public moreInformation:string = "More information about this milestone.";
 
   constructor() {
-    
+
   }
 }
