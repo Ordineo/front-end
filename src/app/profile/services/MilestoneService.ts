@@ -74,4 +74,13 @@ export class MilestoneService implements IMilestoneService{
       return null;
     }
   }
+
+  public getComments():IPromise<any> {
+    return this.traverson.hal()
+      .from(GatewayApiService.getMilestonesApi() + 'comments')
+      .useAngularHttp()
+      .jsonHal()
+      .getResource()
+      .result;
+  }
 }
