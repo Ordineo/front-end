@@ -57,6 +57,32 @@ describe("Login controller", ()=> {
     expect(authService.authenticate).toHaveBeenCalled();
   }));
 
+  it('should fail login with 401 error', inject((_$q_:IQService)=> {
+    var deferred:IDeferred<any> = _$q_.defer();
+    spyOn(authService, 'logIn').and.returnValue(deferred.promise);
+    spyOn(ctrl, 'showErrorMessage');
+    ctrl.logIn({});
+    expect(authService.logIn).toHaveBeenCalled();
+    deferred.reject({status: 401});
+    scope.$digest();
+
+    expect(ctrl.showErrorMessage).toHaveBeenCalled();
+    expect(ctrl.errorMessage).toBe("Login failed. Invalid username or password");
+  }));
+
+  it('should fail login with connection error', inject((_$q_:IQService)=> {
+    var deferred:IDeferred<any> = _$q_.defer();
+    spyOn(authService, 'logIn').and.returnValue(deferred.promise);
+    spyOn(ctrl, 'showErrorMessage');
+    ctrl.logIn({});
+    expect(authService.logIn).toHaveBeenCalled();
+    deferred.reject({});
+    scope.$digest();
+
+    expect(ctrl.showErrorMessage).toHaveBeenCalled();
+    expect(ctrl.errorMessage).toBe("Connection Error");
+  }));
+
 });
 export class SessionMock implements ISessionService {
   setAuthData(authData:string):void {
