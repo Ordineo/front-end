@@ -4,7 +4,6 @@ import {MilestoneService} from "../../services/MilestoneService";
 import IScope = angular.IScope;
 import IAngularEvent = angular.IAngularEvent;
 import {ProfileService} from "../../services/ProfileService";
-import {SessionService} from "../../../auth/service/SessionService";
 
 export class TimelineComponent implements IComponentOptions {
   static NAME:string = "timeline";
@@ -21,12 +20,11 @@ export class TimelineController {
   public username:string;
   public onContentLoaded:Function;
 
-  static $inject = [ProfileService.NAME, '$scope', MilestoneService.NAME, SessionService.NAME];
+  static $inject = [ProfileService.NAME, '$scope', MilestoneService.NAME];
 
   constructor(private profileService:ProfileService,
               private $scope:IScope,
-              private timelineService:MilestoneService,
-              private sessionService:SessionService) {
+              private timelineService:MilestoneService) {
   }
 
   $onInit():void {
