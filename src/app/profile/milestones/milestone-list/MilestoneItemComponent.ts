@@ -8,40 +8,21 @@ import {ProfileRoutes} from "../../ProfileRoutes";
 import {ProfileService} from "../../services/ProfileService";
 import {UrlHelper} from "../../../util/UrlHelper";
 
-export class MilestoneComponent implements IComponentOptions {
-  static NAME:string = "milestone";
-  controller:any = MilestoneController;
-  template:string = require('./MilestoneComponent-template.html');
+export class MilestoneItemComponent implements IComponentOptions {
+  static NAME:string = "milestoneItem";
+  controller:any = MilestoneItemController;
+  template:string = require('./MilestoneItem-template.html');
   bindings:any = {
     milestone: '<'
   };
 }
 
-export class MilestoneController {
+export class MilestoneItemController {
   milestone:Milestone;
-  mileStoneBadge:string;
-  showDetail:boolean = false;
-
 
   static $inject:Array<string> = ['$rootRouter', ProfileService.NAME];
 
   constructor(private $rootRouter:Router, private ProfileService:ProfileService) {
-  }
-
-  /*devblock:start*/
-  public testSetMilestoneBadge:Function = this.setMilestoneBadge;
-  /*devblock:end*/
-
-  $onInit():void {
-    this.setMilestoneBadge();
-  }
-
-  private setMilestoneBadge():void {
-    this.mileStoneBadge = this.milestone.objective.objectiveType.charAt(0).toUpperCase();
-  }
-
-  public toggleShowDetail():void {
-    this.showDetail = !this.showDetail;
   }
 
   private gotoMilestoneDetail():void {
