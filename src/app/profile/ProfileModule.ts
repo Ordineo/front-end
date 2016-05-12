@@ -17,6 +17,7 @@ import {SummaryPageComponent} from "./summary-page/SummaryPageComponent";
 import {MilestoneDetailsPageComponent} from "./milestones-details-page/MilestoneDetailsPageComponent";
 import {MilestoneItemComponent} from "./milestones/milestone-list/MilestoneItemComponent";
 import {MilestoneCommentsComponent} from "./milestones/milestone-comments/MilestoneCommentsComponent";
+import {ProfileMenuState} from "./profile-menu/ProfileMenuState";
 
 /**
  * @ngdoc module
@@ -44,6 +45,7 @@ angular
   /* services */
   .service(ProfileService.NAME, ProfileService)
   .service(MilestoneService.NAME, MilestoneService)
+  .service(ProfileMenuState.NAME, ProfileMenuState)
 
   /* components and directives*/
   .component(MilestoneContainerComponent.NAME, new MilestoneContainerComponent())
