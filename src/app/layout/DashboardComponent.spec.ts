@@ -7,8 +7,8 @@ import {ISessionService, SessionService} from "../auth/service/SessionService";
 import {IAuthService, AuthService} from "../auth/service/AuthService";
 import {AuthMock, SessionMock} from "../auth/login/login.spec";
 import {IProfileService, ProfileService} from "../profile/services/ProfileService";
-import {Employee} from "../core/models/employee";
 import IQService = angular.IQService;
+import {MockProfileService} from "../../../test/mock/MockProfileService";
 
 describe("Dashboard component controller", ()=> {
   var scope:IScope;
@@ -24,7 +24,7 @@ describe("Dashboard component controller", ()=> {
 
         authService = new AuthMock();
         sessionService = new SessionMock();
-        profileService = new ProfileMock();
+        profileService = new MockProfileService();
 
         $provide.service(AuthService.NAME, ()=>authService);
         $provide.service(SessionService.NAME, ()=>sessionService);
@@ -38,26 +38,18 @@ describe("Dashboard component controller", ()=> {
     ctrl = _$componentController_(DashboardComponent.NAME, {$scope: scope});
   }));
 
-  describe("on init", ()=>{
+  describe("on init", ()=> {
     var defer;
 
-    beforeEach(function (){
+    beforeEach(function () {
       defer = $q.defer();
-    });
-
-    it("should authenticate", ()=>{
-      spyOn(authService, "authenticate");
-      spyOn(profileService, "getBasicInfoByUsername").and.returnValue(defer.promise);
-      ctrl.$onInit();
-      
-      expect(authService.authenticate).toHaveBeenCalled();
     });
 
     it("should get basic info by username", ()=> {
       spyOn(profileService, "getBasicInfoByUsername").and.returnValue(defer.promise);
       ctrl.$onInit();
       expect(profileService.getBasicInfoByUsername).toHaveBeenCalled();
-      defer.resolve({username: "mike", firstName: "Michael", lastName:"Vandendriessche"});
+      defer.resolve({username: "mike", firstName: "Michael", lastName: "Vandendriessche"});
       scope.$apply();
 
       expect(ctrl.name.first).toBe("Michael");
@@ -66,35 +58,3 @@ describe("Dashboard component controller", ()=> {
   });
 
 });
-
-export class ProfileMock implements IProfileService{
-  subscribeUsernameChanged(scope:angular.IScope, callBack:any):void {
-  }
-
-  notifyUsernameChanged():void {
-  }
-
-  setProfilePicture(file:any, uploadUrl:string):angular.IPromise<any> {
-    return undefined;
-  }
-
-  setUsername(username:string) {
-  }
-
-  getAboutInfoByUsername(userName:string):angular.IPromise<any> {
-    return undefined;
-  }
-
-  getAllEmployees():angular.IPromise<any> {
-    return undefined;
-  }
-
-  putEmployeeData(employee:Employee):angular.IPromise<any> {
-    return undefined;
-  }
-
-  getBasicInfoByUsername(username: String):angular.IPromise<any>{
-    return undefined;
-  }
-
-}
