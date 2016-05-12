@@ -2,6 +2,7 @@
   <div class="md-headline">No milestones</div>
 </div>
 <ul ng-if="$ctrl.milestones && $ctrl.milestones.length > 0">
-  <milestone on-details-click="onMilestoneDetailsClick($locals)" milestone="mile" ng-repeat="mile in $ctrl.milestones">
+  <milestone on-details-click="$ctrl.onMilestoneDetailsClick($locals)" milestone="mile"
+             ng-repeat="mile in $ctrl.milestones">
   </milestone>
 </ul>

@@ -6,27 +6,12 @@ require('./milestone-details-page-styles.scss');
 export class MilestoneDetailsPageComponent implements IComponentOptions {
   static NAME:string = "milestoneDetailsPage";
 
-  controller:any = MilestoneDetailsPageController;
-
   template:string = require('./milestone-details-page-template.html');
-  controller:Function = MilestoneDetailsPageComponentController;
+  controller:Function = MilestoneDetailsPageController;
 }
-export class MilestoneDetailsPageComponentController {
-  public selectedId:string;
+export class MilestoneDetailsPageController {
   public isEmpty:boolean;
 
-  $routerOnActivate(next:any):void {
-    if (next.params.id !== undefined) {
-      this.selectedId = next.params.id;
-      this.isEmpty = false;
-    } else {
-      //  empty view
-      this.isEmpty = true;
-    }
-  }
-}
-
-export class MilestoneDetailsPageController {
   public title:string = "Milestone list";
   public milestones:Milestone[];
   public username:string;
@@ -40,10 +25,15 @@ export class MilestoneDetailsPageController {
 
   $onInit():void {
     this.username = this.profileService.username;
-    this.getMilestoneDataAsync();
+    this.getListOfMilestones();
   }
 
-  getMilestoneDataAsync():void {
+  onMilestoneSelected($locals:any):void {
+    var milestone:Milestone = $locals.milestone;
+    this.milestoneService.setSelectedMilestone(milestone);
+  }
+
+  getListOfMilestones():void {
     this.milestonesLoaded = false;
     this.milestoneService.getMilestonesByUsername(this.username)
       .then((milestones:Milestone[])=> {

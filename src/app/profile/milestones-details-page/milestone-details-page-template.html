@@ -1,7 +1,7 @@
 <div layout="row" flex>
   <span flex="10"></span>
   <div layout="column" flex="60">
-    <milestone-details id="$ctrl.selectedId"></milestone-details>
+    <milestone-details></milestone-details>
     <milestone-comments></milestone-comments>
   </div>
   <md-card flex="40" id="milestone-list">
@@ -13,7 +13,8 @@
       <md-progress-circular class="md-primary" md-mode="indeterminate" md-diameter="60"></md-progress-circular>
     </div>
     <md-card-content ng-if="$ctrl.milestonesLoaded">
-      <milestone-item milestone="mile" ng-repeat="mile in $ctrl.milestones">
+      <milestone-item on-selected="$ctrl.onMilestoneSelected($locals)" milestone="mile"
+                      ng-repeat="mile in $ctrl.milestones">
       </milestone-item>
     </md-card-content>
   </md-card>

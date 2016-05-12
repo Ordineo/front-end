@@ -19,6 +19,7 @@ import {TRAVERSON} from "../traverson/TraversonModule";
 import {AppComponent} from "../app.component";
 import {SessionService} from "../auth/service/SessionService";
 import {ProfileSearchComponent} from "./components/profile-search/ProfileSearchComponent";
+import {Navigator} from "./services/Navigator";
 
 export const ORDINEO_CORE = 'ordineo.core';
 
@@ -38,6 +39,7 @@ angular.module(ORDINEO_CORE, deps)
   .component(ActionButtonComponent.NAME, new ActionButtonComponent())
   .component(ProfileSearchComponent.NAME, new ProfileSearchComponent())
   .service(SessionService.NAME, SessionService)
+  .service(Navigator.NAME, Navigator)
   .directive(FileUploadDirective.NAME, FileUploadDirective.instance())
   .directive('customOnChange', function () {
     return {

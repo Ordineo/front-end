@@ -1,6 +1,6 @@
 <md-card>
-  <h1 ng-if="milestoneDetails.isEmpty" layout="row" layout-align="center center">Please select a milestone</h1>
-  <div ng-if="!milestoneDetails.isEmpty">
+  <h1 ng-if="!milestoneDetails.milestone" layout="row" layout-align="center center">Please select a milestone</h1>
+  <div ng-if="milestoneDetails.milestone">
     <card-header class="about-header"
                  buttons="about.actionButtons"
                  show-btn-edit="true"
@@ -32,7 +32,7 @@
               <h4 class="details-title">Due date</h4>
               <span>{{milestoneDetails.dueDate}}</span>
             </div>
-            <div class="detail">
+            <div class="detail" ng-if="milestoneDetails.endDate">
               <h4 class="details-title">End date</h4>
               <span>{{milestoneDetails.endDate}}</span>
             </div>
