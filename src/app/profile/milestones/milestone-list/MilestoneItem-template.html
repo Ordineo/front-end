@@ -1,0 +1,12 @@
+<md-card flex ng-click="$ctrl.gotoMilestoneDetail()">
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">{{$ctrl.milestone.objective.title}}</span>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-content>
+    <p>{{$ctrl.milestone.objective.description}}</p>
+    <md-chips readonly="true" ng-model="$ctrl.milestone.objective.tags">
+    </md-chips>
+  </md-card-content>
+</md-card>

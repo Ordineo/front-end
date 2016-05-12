@@ -15,6 +15,7 @@ import {MilestoneDetailsComponent} from "./milestones/milestone-details/Mileston
 import {ProfileMenuComponent} from "./profile-menu/ProfileMenuComponent";
 import {SummaryPageComponent} from "./summary-page/SummaryPageComponent";
 import {MilestoneDetailsPageComponent} from "./milestones-details-page/MilestoneDetailsPageComponent";
+import {MilestoneItemComponent} from "./milestones/milestone-list/MilestoneItemComponent";
 import {MilestoneCommentsComponent} from "./milestones/milestone-comments/MilestoneCommentsComponent";
 
 /**
@@ -53,6 +54,7 @@ angular
   .component(ProfileMenuComponent.NAME, new ProfileMenuComponent())
   .component(ProfileComponent.NAME, new ProfileComponent())
   .component(MilestoneDetailsComponent.NAME, new MilestoneDetailsComponent())
+  .component(MilestoneItemComponent.NAME, new MilestoneItemComponent())
   .component(MilestoneCommentsComponent.NAME, new MilestoneCommentsComponent())
   .directive(AboutDirective.NAME, AboutDirective.instance())
 
