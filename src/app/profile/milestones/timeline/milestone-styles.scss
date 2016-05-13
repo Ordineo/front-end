@@ -65,6 +65,11 @@ milestone {
     .timeline-card {
       position: relative;
       box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.25);
+      .btnDetail {
+        font-size: 1em;
+        border-radius: 0;
+        color: white !important;
+      }
       &:before {
         left: -15px;
         right: auto;
@@ -98,11 +103,17 @@ milestone {
         box-shadow: none;
         font-size: 0.9em;
       }
+      p {
+        transition: 500ms ease max-height;
+        max-height: 100px;
+        word-break: break-all;
+      }
       .fade-text {
         display: block;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        max-height: 20px;
       }
       h4 {
         color: $lightOrange;
