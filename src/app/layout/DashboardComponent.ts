@@ -2,17 +2,12 @@ import IComponentOptions = angular.IComponentOptions;
 import {AuthService, IAuthService} from "../auth/service/AuthService";
 import RouteDefinition = angular.RouteDefinition;
 import {ProfileComponent} from "../profile/ProfileComponent";
-import RouterOutlet = angular.RouterOutlet;
 import Router = angular.Router;
 import {ProfileService} from "../profile/services/ProfileService";
 import {SessionService} from "../auth/service/SessionService";
 import {EmployeeName} from "../core/models/EmployeeName";
 export class DashboardComponent implements IComponentOptions {
   static NAME:string = 'dashboard';
-
-  require:any = {
-    routerOutlet: '^ngOutlet'
-  };
 
   $routeConfig:RouteDefinition[] = [
     {
@@ -34,12 +29,11 @@ export class DashboardComponent implements IComponentOptions {
 
 export class DashboardComponentController {
 
-  static $inject = [AuthService.NAME, SessionService.NAME, ProfileService.NAME];
-
-  public routerOutlet:any;
   public name:EmployeeName;
 
-  constructor(private authService:IAuthService, private sessionService:SessionService, private profileService:ProfileService) {
+  static $inject = [SessionService.NAME, ProfileService.NAME];
+
+  constructor(private sessionService:SessionService, private profileService:ProfileService) {
   }
 
   $onInit():void {
@@ -56,4 +50,3 @@ export class DashboardRoutes {
   static PROFILE:string = 'Profile';
   static USER_PROFILE:string = 'UserProfile';
 }
-

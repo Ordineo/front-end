@@ -8,7 +8,9 @@ import {ProfileService} from "../../profile/services/ProfileService";
 import {ProfileMenuState} from "../../profile/profile-menu/ProfileMenuState";
 import {MilestonesTab} from "../../profile/profile-menu/tabs/MilestonesTab";
 import {SummaryTab} from "../../profile/profile-menu/tabs/SummaryTab";
+import {UrlHelper} from "../../util/UrlHelper";
 export interface INavigator {
+  goToUserProfileWithLastNavigation(username:string):void;
   goToMilestoneDetails(username:string, milestone:Milestone):void;
   goToUserProfile(username:string):void;
 }
@@ -36,8 +38,20 @@ export class Navigator implements INavigator {
     ])
   }
 
+  goToUserProfileWithLastNavigation(username:string):void {
+    this.profileService.setUsername(username);
+    this.milestoneService.clearSelected();
+    var lastSegment = UrlHelper.getLastSegment(this.rootRouter.lastNavigationAttempt);
+    var url = `/dashboard/profile/${username}/${lastSegment}`;
+
+    console.log(url);
+    this.rootRouter.navigateByUrl(url).then(()=> {
+    });
+  }
+
   goToUserProfile(username:string):void {
     this.profileService.setUsername(username);
+    this.profileMenuState.notifyTabSelected(SummaryTab.NAME);
     this.milestoneService.clearSelected();
     this.rootRouter.navigate([
       DashboardRoute.NAME,
