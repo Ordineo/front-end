@@ -1,5 +1,4 @@
-$mdCardShadowColor: rgba(219,216,219,1);
-
+$mdCardShadowColor: rgba(219, 216, 219, 1);
 
 md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
   color: orange;
@@ -18,6 +17,10 @@ md-card {
   }
 }
 
+.no-height-stretch {
+  max-height: 0 !important;
+}
+
 .accent-color {
   color: #e98300;
 }
@@ -29,5 +32,3 @@ md-card {
 .text-bottom-padding {
   padding-bottom: 24px;
 }
-
-

@@ -14,6 +14,7 @@ export class MilestoneDetailsPageController {
 
   public title:string = "Milestones";
   public milestones:Milestone[];
+  public selectedMilestone:Milestone;
   public username:string;
   public milestonesLoaded:boolean;
 
@@ -23,7 +24,8 @@ export class MilestoneDetailsPageController {
               private milestoneService:MilestoneService) {
   }
 
-  $onInit():void {
+  $routerOnActivate():void {
+    this.selectedMilestone = this.milestoneService.getSelectedMilestone();
     this.username = this.profileService.username;
     this.getListOfMilestones();
   }
@@ -31,12 +33,14 @@ export class MilestoneDetailsPageController {
   onMilestoneSelected($locals:any):void {
     var milestone:Milestone = $locals.milestone;
     this.milestoneService.setSelectedMilestone(milestone);
+    this.selectedMilestone = milestone;
   }
 
   getListOfMilestones():void {
     this.milestonesLoaded = false;
     this.milestoneService.getMilestonesByUsername(this.username)
       .then((milestones:Milestone[])=> {
+        this.selectedMilestone = this.milestoneService.getSelectedMilestone();
           this.milestones = milestones;
           this.milestonesLoaded = true;
         }, (onError)=> {

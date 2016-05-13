@@ -7,14 +7,14 @@
   <md-card-title>
     <md-card-title-text>
       <div id="status" ng-if="milestoneDetails.milestone">
-        <div layout="row" layout-align="end center">
+        <p class="md-headline no-top-margin no-bottom-margin">{{milestoneDetails.title}}</p>
+        <div layout="row" layout-align="start center">
           <span ng-if="milestoneDetails.status == 0" class="inProgress md-caption">In progress</span>
           <span ng-if="milestoneDetails.status == 1" class="accomplished md-caption">Accomplished</span>
           <span ng-if="milestoneDetails.status == 2" class="notAccomplished md-caption">Not accomplished</span>
         </div>
-        <p class="md-headline no-top-margin no-bottom-margin">{{milestoneDetails.title}}</p>
       </div>
-      <span class="md-headline" ng-if="!milestoneDetails.milestone">Please select a milestone</span>
+      <span class="md-title" ng-if="!milestoneDetails.milestone">Please select a milestone</span>
     </md-card-title-text>
   </md-card-title>
   <md-card-content ng-if="milestoneDetails.milestone">

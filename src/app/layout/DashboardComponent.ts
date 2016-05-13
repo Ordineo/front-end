@@ -32,7 +32,6 @@ export class DashboardComponentController {
   public name:EmployeeName;
 
   static $inject = [SessionService.NAME, ProfileService.NAME];
-
   constructor(private sessionService:SessionService, private profileService:ProfileService) {
   }
 

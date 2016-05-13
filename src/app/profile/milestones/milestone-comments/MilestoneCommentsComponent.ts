@@ -14,4 +14,6 @@ export class MilestoneCommentsComponent implements IComponentOptions {
   bindings:any = {
     onContentLoaded: '&'
   };
+  
+
 }
