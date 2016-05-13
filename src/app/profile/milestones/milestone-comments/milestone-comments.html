@@ -1,0 +1,23 @@
+<md-card id="comments">
+  <p class="md-subhead"><strong>Comments</strong></p>
+  <div id="commentsAdd">
+    <div class="profilePicture"></div>
+    <md-input-container>
+      <input placeholder="Add a comment...">
+    </md-input-container>
+  </div>
+  <hr>
+  <div>
+    <div class="commentBox" ng-repeat="comment in milestoneComments.comments">
+      <div class="profilePicture"></div>
+      <div class="comment">
+        <div class="commentTitle">
+          <strong>{{comment.username}}</strong> - <span
+          class="commentTimestamp">{{comment.createDate}}</span>
+        </div>
+        <p>{{comment.message}}</p>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+</md-card>

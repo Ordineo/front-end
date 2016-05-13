@@ -1,46 +1,45 @@
+<!--<card-header class="about-header"-->
+<!--buttons="about.actionButtons"-->
+<!--show-btn-edit="true"-->
+<!--show-btn-drag="true">-->
+<!--</card-header>-->
 <md-card>
-  <card-header class="about-header"
-               buttons="about.actionButtons"
-               show-btn-edit="true"
-               show-btn-drag="true">
-  </card-header>
-  <div layout="row">
-    <div id="milestone-details-wrap" style="width: 100%;">
-      <div id="status">
-        {{milestoneDetails.userFirstName}} {{milestoneDetails.userLastName}} -
-        <span ng-if="milestoneDetails.status == 0" class="inProgress">In progress</span>
-        <span ng-if="milestoneDetails.status == 1" class="accomplished">Accomplished</span>
-        <span ng-if="milestoneDetails.status == 2" class="notAccomplished">Not accomplished</span>
-      </div>
-      <div id="milestone-details-header">
-        <div id="milestone-title">
-          {{milestoneDetails.title}}<br>
-          <span class="small-text">{{milestoneDetails.description}}</span>
-          <div>
-            <md-chips readonly="true" ng-model="milestoneDetails.tags"></md-chips>
-          </div>
+  <md-card-title>
+    <md-card-title-text>
+      <div id="status" ng-if="milestoneDetails.milestone">
+        <p class="md-headline no-top-margin no-bottom-margin">{{milestoneDetails.title}}</p>
+        <div layout="row" layout-align="start center">
+          <span ng-if="milestoneDetails.status == 0" class="inProgress md-caption">In progress</span>
+          <span ng-if="milestoneDetails.status == 1" class="accomplished md-caption">Accomplished</span>
+          <span ng-if="milestoneDetails.status == 2" class="notAccomplished md-caption">Not accomplished</span>
         </div>
       </div>
-      <div id="milestone-details">
-        <div id="milestone-details-dates">
-          <div class="detail">
-            <h4 class="details-title">Create date</h4>
-            <span>{{milestoneDetails.createDate}}</span>
-          </div>
-          <div class="detail">
-            <h4 class="details-title">Due date</h4>
-            <span>{{milestoneDetails.dueDate}}</span>
-          </div>
-          <div class="detail">
-            <h4 class="details-title">End date</h4>
-            <span>{{milestoneDetails.endDate}}</span>
-          </div>
-        </div>
-        <div class="detail">
-          <h4>More information</h4>
-          {{milestoneDetails.moreInformation}}
-        </div>
+      <span class="md-title" ng-if="!milestoneDetails.milestone">Please select a milestone</span>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-content ng-if="milestoneDetails.milestone">
+    <div>
+      <span class="md-subhead"><strong>Description</strong></span>
+      <p class="gray no-top-margin">{{milestoneDetails.description}}</p>
+    </div>
+    <div>
+      <span class="md-subhead"><strong>More information</strong></span>
+      <p class="gray no-top-margin">{{milestoneDetails.moreInformation}}</p>
+    </div>
+    <div layout="row">
+      <div class="detail">
+        <span class="md-body-2 accent-color"><strong>Create date</strong></span>
+        <p class="no-top-margin">{{milestoneDetails.createDate}}</p>
+      </div>
+      <div class="detail">
+        <span class="md-body-2 accent-color"><strong>Due date</strong></span>
+        <p class="no-top-margin">{{milestoneDetails.dueDate}}</p>
+      </div>
+      <div class="detail" ng-if="milestoneDetails.endDate">
+        <span class="md-body-2 accent-color"><strong>End date</strong></span>
+        <p class="no-top-margin">{{milestoneDetails.endDate}}</p>
       </div>
     </div>
-  </div>
+    <md-chips readonly="true" ng-model="milestoneDetails.tags"></md-chips>
+  </md-card-content>
 </md-card>

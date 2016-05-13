@@ -1,76 +1,24 @@
 <div layout="row" flex>
   <span flex="10"></span>
-  <div layout="column" flex="60">
+  <div layout="column" flex="60" class="no-height-stretch">
     <milestone-details></milestone-details>
-    <md-card>
-      <md-card-title>
-        Comments
-      </md-card-title>
-      <md-card-content>
-        <br/>
-        <br/>
-
-        <br/>
-
-        <br/>
-
-        <br/>
-
-        <br/>
-
-        <br/>
-        <br/>
-        <br/>
-
-        <br/>
-
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-      </md-card-content>
-    </md-card>
+    <milestone-comments></milestone-comments>
   </div>
   <md-card flex="40">
-    <md-card-title>
-      Milestone list
-    </md-card-title>
-    <md-card-content>
-      <br/>
-      <br/>
-
-      <br/>
-
-      <br/>
-
-      <br/>
-
-      <br/>
-
-      <br/>
-      <br/>
-      <br/>
-
-      <br/>
-
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+    <div class="loading-container" layout="row" layout-align="center center" ng-if="!$ctrl.milestonesLoaded">
+      <md-progress-circular class="md-primary" md-mode="indeterminate" md-diameter="60"></md-progress-circular>
+    </div>
+    <md-card-content ng-if="$ctrl.milestonesLoaded">
+      <p class="md-headline">Milestones</p>
+      <md-list>
+        <milestone-item
+          ng-class="$ctrl.selectedMilestone.objective.title === mile.objective.title ? 'milestone-selected' : ''"
+          ng-if="$ctrl.milestones.length >0"
+          on-selected="$ctrl.onMilestoneSelected($locals)"
+          milestone="mile"
+          ng-repeat="mile in $ctrl.milestones">
+        </milestone-item>
+      </md-list>
     </md-card-content>
   </md-card>
   <span flex="10"></span>
