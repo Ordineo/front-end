@@ -12,6 +12,7 @@ import Router = angular.Router;
 import {MainRoute, LoginRoute, DashboardRoute} from "../../app.routes";
 import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 import createSpy = jasmine.createSpy;
+import {ProfileRoutes} from "../../profile/ProfileRoutes";
 
 describe("Auth service", ()=> {
 
@@ -37,7 +38,7 @@ describe("Auth service", ()=> {
     authService = _authService_;
   }));
 
-  fdescribe("logout", ()=> {
+  describe("logout", ()=> {
 
     it("should log out", ()=> {
       spyOn(sessionService, "destroySession");
@@ -49,7 +50,7 @@ describe("Auth service", ()=> {
 
   });
 
-  fdescribe("login", ()=> {
+  describe("login", ()=> {
 
     it("should log in", inject(($http)=> {
       spyOn($http, "post");
@@ -60,24 +61,80 @@ describe("Auth service", ()=> {
 
   });
 
-  fdescribe("authenticate", ()=> {
+  describe("authenticate", ()=> {
 
-    it("should not call spy when route is null and should navigate to loginRoute", ()=> {
-      spyOn(routerMock, 'navigate');
-      spyOn(authService, "isAuthorized").and.returnValue(false);
-      var spy = createSpy("spy");
-      authService.authenticate(null, spy);
-      expect(routerMock.navigate).toHaveBeenCalledWith([LoginRoute.NAME]);
-      expect(spy).not.toHaveBeenCalled();
+    describe("with callback", ()=>{
+
+      it("should not call spy when route is null and should navigate to loginRoute", ()=> {
+        spyOn(routerMock, 'navigate');
+        spyOn(authService, "isAuthorized").and.returnValue(false);
+        var spy = createSpy("spy");
+        authService.authenticate(null, spy);
+        expect(routerMock.navigate).toHaveBeenCalledWith([LoginRoute.NAME]);
+        expect(spy).not.toHaveBeenCalled();
+      });
+
+      it("should route to dashboard when user is authorised and no route parameters are given", ()=> {
+        spyOn(routerMock, 'navigate');
+        spyOn(authService, "isAuthorized").and.returnValue(true);
+        var spy = createSpy("spy");
+        authService.authenticate(null, spy);
+        expect(routerMock.navigate).toHaveBeenCalledWith([DashboardRoute.NAME]);
+        expect(spy).toHaveBeenCalled();
+      });
+
+      it("should route to given routes when user is authorised", ()=> {
+        spyOn(routerMock, 'navigate');
+        spyOn(authService, "isAuthorized").and.returnValue(true);
+        var spy = createSpy("spy");
+        var routeNames = [DashboardRoute.NAME, ProfileRoutes.MILESTONES];
+        authService.authenticate(routeNames, spy);
+        expect(routerMock.navigate).toHaveBeenCalledWith(routeNames);
+        expect(spy).toHaveBeenCalled();
+      });
+
     });
 
-    it("should route to dashboard when user is authorised and no route parameters are given", ()=> {
-      spyOn(routerMock, 'navigate');
-      spyOn(authService, "isAuthorized").and.returnValue(true);
-      var spy = createSpy("spy");
-      authService.authenticate(null, spy);
-      expect(routerMock.navigate).toHaveBeenCalledWith([DashboardRoute.NAME]);
-      expect(spy).toHaveBeenCalled();
+    describe("without callback", ()=>{
+
+      it("should navigate to loginRoute", ()=> {
+        spyOn(routerMock, 'navigate');
+        spyOn(authService, "isAuthorized").and.returnValue(false);
+        authService.authenticate(null, null);
+        expect(routerMock.navigate).toHaveBeenCalledWith([LoginRoute.NAME]);
+      });
+
+      it("should route to dashboard when user is authorised and no route parameters are given", ()=> {
+        spyOn(routerMock, 'navigate');
+        spyOn(authService, "isAuthorized").and.returnValue(true);
+        authService.authenticate(null, null);
+        expect(routerMock.navigate).toHaveBeenCalledWith([DashboardRoute.NAME]);
+      });
+
+      it("should route to given routes when user is authorised", ()=> {
+        spyOn(routerMock, 'navigate');
+        spyOn(authService, "isAuthorized").and.returnValue(true);
+        var routeNames = [DashboardRoute.NAME, ProfileRoutes.MILESTONES];
+        authService.authenticate(routeNames, null);
+        expect(routerMock.navigate).toHaveBeenCalledWith(routeNames);
+      });
+
     });
+
+    describe("isAuthorized",()=>{
+
+      it("should return false when current username is null", ()=>{
+        spyOn(sessionService, "getUsername").and.returnValue(null);
+        var result = authService.isAuthorized();
+        expect(result).toBe(false);
+      });
+
+      it("should return true when current username is not null", ()=>{
+        spyOn(sessionService, "getUsername").and.returnValue("user");
+        var result = authService.isAuthorized();
+        expect(result).toBe(true);
+      });
+    });
+
   });
 });
