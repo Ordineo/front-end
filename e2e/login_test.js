@@ -6,7 +6,7 @@ Before((I) => {
 
 Scenario('Login correctly', (I) => {
   I.seeElement('#login-form');
-  I.fillField({model: '$ctrl.user.username'},'Nivek');
+  I.fillField({model: '$ctrl.user.username'},'Test');
   I.fillField({model: '$ctrl.user.password'},'password');
   I.click('#login-btn');
   I.dontSeeElement('#login-form');
@@ -23,7 +23,7 @@ Scenario('Login with wrong credentials', (I) => {
 });
 
 Scenario('Logout', (I) => {
-  I.fillField({model: '$ctrl.user.username'},'Nivek');
+  I.fillField({model: '$ctrl.user.username'},'Test');
   I.fillField({model: '$ctrl.user.password'},'password');
   I.click('#login-btn');
   I.click('#user-menu');
