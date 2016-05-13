@@ -44,6 +44,7 @@ export class AuthService implements IAuthService {
     this.$rootRouter.navigate(routes);
   }
 
+  //TODO: check authorization
   isAuthorized():boolean {
     return this.sessionService.getUsername() !== null;
   }
