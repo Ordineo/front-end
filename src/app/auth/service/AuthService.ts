@@ -10,24 +10,17 @@ import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 export class AuthService implements IAuthService {
   static NAME:string = 'authService';
 
-  static $inject = ['$rootRouter', '$http', '$q', SessionService.NAME];
+  static $inject = ['$rootRouter', '$http', SessionService.NAME];
 
   constructor(private $rootRouter:Router,
               private $http:IHttpService,
-              private $q:IQService,
               private sessionService:ISessionService) {
   }
 
   /*todo refactor code to make http authentication request*/
-  logOut():IPromise<any> {
-    var deferred:IDeferred<any> = this.$q.defer();
-
-    deferred.resolve();
-
-    return deferred.promise.then(()=> {
+  logOut():void{
       this.sessionService.destroySession();
       this.authenticate([MainRoute.NAME], null);
-    });
   }
 
   logIn(credentials:ICredentials):IPromise<any> {
@@ -35,16 +28,20 @@ export class AuthService implements IAuthService {
   }
 
   authenticate(routeNames:any[], callBack:Function):void {
+    var routes;
     if (this.isAuthorized()) {
       if (routeNames !== null) {
-        this.$rootRouter.navigate(routeNames);
+        routes = routeNames;
+      }else {
+        routes = [DashboardRoute.NAME];
       }
       if (callBack) {
         callBack();
       }
     } else {
-      this.$rootRouter.navigate([LoginRoute.NAME]);
+      routes = [LoginRoute.NAME];
     }
+    this.$rootRouter.navigate(routes);
   }
 
   isAuthorized():boolean {
@@ -54,6 +51,6 @@ export class AuthService implements IAuthService {
 export interface IAuthService {
   authenticate(routeNames:any[], callBack:Function):void;
   logIn(credentials:ICredentials):IPromise<any>;
-  logOut():IPromise<any>;
+  logOut():void;
   isAuthorized():boolean;
 }
