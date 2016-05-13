@@ -6,3 +6,28 @@ md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
   background: orange;
   height: 4px;
 }
+
+md-card {
+  .md-chips {
+    box-shadow: none;
+    font-size: 0.9em;
+  }
+  .gray {
+    color: #777777;
+    word-break: break-all;
+  }
+}
+
+.accent-color {
+  color: #e98300;
+}
+
+.text-top-padding {
+  padding-top: 16px;
+}
+
+.text-bottom-padding {
+  padding-bottom: 24px;
+}
+
+

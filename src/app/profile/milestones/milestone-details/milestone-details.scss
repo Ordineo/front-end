@@ -1,20 +1,18 @@
-$orange: #e98300;
-$lightOrange: #f9a858;
-$grey: #57595b;
-$lightGrey: #bdbcbc;
-$darkGrey: #686868;
-$mainBackground: #f4f4f4;
+//$orange: #e98300;
+//$lightOrange: #f9a858;
+//$grey: #57595b;
+//$lightGrey: #bdbcbc;
+//$darkGrey: #686868;
+//$mainBackground: #f4f4f4;
 $green: #5bb75b;
 $red: #dd0000;
 
-#milestone-details-wrap {
-  //border-bottom: solid 1px #eeeeee;
-  padding: 10px;
+milestone-details {
 
+  .detail {
+    padding-right: 1em;
+  }
   #status {
-    float: right;
-    text-align: right;
-
     .inProgress {
       color: #0e90d2;
     }
@@ -27,79 +25,4 @@ $red: #dd0000;
       color: $red;
     }
   }
-
-  #milestone-details-header {
-    margin-bottom: 10px;
-
-    #milestone-title {
-      font-size: 30px;
-    }
-  }
-
-  #milestone-details {
-    clear: both;
-
-    #milestone-details-dates {
-      & > .detail {
-        width: 125px;
-      }
-    }
-  }
-}
-
-#comments-section {
-  border-left: solid 1px #eeeeee;
-  padding: 5px 10px 0 5px;
-  position: relative;
-  width: 500px;
-
-  #comments {
-    height: 175px;
-    overflow-y: scroll;
-  }
-
-  md-input-container {
-    bottom: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    position: absolute;
-    width: 93%;
-  }
-}
-
-.small-text {
-  font-size: 20px;
-}
-
-.detail {
-  display: inline-block;
-
-  & > h4 {
-    color: $orange;
-    margin-bottom: 3px;
-  }
-}
-
-p {
-  word-break: break-all;
-}
-.balloon {
-  margin-left: 5px;
-}
-
-.comment {
-  background-color: lightgray;
-  border-radius: 5px;
-  display: inline-block;
-  padding: 5px;
-}
-
-.spike {
-  background-color: lightgray;
-  height: 5px;
-  transform: rotate(45deg);
-  width: 5px;
-  position: relative;
-  left: -2px;
-  top: 15px;
 }
