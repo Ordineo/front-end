@@ -4,7 +4,6 @@ import {SessionMock} from "../login/login.spec";
 import {IAuthService} from "./AuthService";
 import {ISessionService, SessionService} from "./SessionService";
 import IRootScopeService = angular.IRootScopeService;
-import IQService = angular.IQService;
 import IScope = angular.IScope;
 import IHttpBackendService = angular.IHttpBackendService;
 import {MockRouter} from "../../../../test/mock/MockRouter";
@@ -18,7 +17,7 @@ describe("Auth service", ()=> {
 
   var sessionService:ISessionService;
   var routerMock:Router;
-  var $q:IQService;
+
   var $httpBackend:IHttpBackendService;
   var authService:IAuthService;
 
@@ -32,8 +31,8 @@ describe("Auth service", ()=> {
     })
   );
 
-  beforeEach(inject((_$q_:IQService, _$httpBackend_:IHttpBackendService, _authService_:IAuthService)=> {
-    $q = _$q_;
+  beforeEach(inject((_$httpBackend_:IHttpBackendService, _authService_:IAuthService)=> {
+
     $httpBackend = _$httpBackend_;
     authService = _authService_;
   }));
