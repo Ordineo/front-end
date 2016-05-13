@@ -67,6 +67,26 @@ describe("Milestone Create Controller", ()=> {
 });
 export class MockMilestoneService implements IMilestoneService {
 
+  notifyMilestoneSelected():void {
+  }
+
+  subscribeOnMilestoneSelected(scope:angular.IScope, callBack:any):void {
+  }
+
+  getMilestoneById(id:string):angular.IPromise<any> {
+    return null;
+  }
+
+  clearSelected():void {
+  }
+
+  setSelectedMilestone(milestone:Milestone):void {
+  }
+
+  getSelectedMilestone():Milestone {
+    return null;
+  }
+
   setObjective(objective:Objective):void {
   }
 

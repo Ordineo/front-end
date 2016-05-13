@@ -4,7 +4,7 @@ import {MilestoneService} from "../../services/MilestoneService";
 import IScope = angular.IScope;
 import IAngularEvent = angular.IAngularEvent;
 import {ProfileService} from "../../services/ProfileService";
-import {SessionService} from "../../../auth/service/SessionService";
+import {INavigator, Navigator} from "../../../core/services/Navigator";
 
 export class TimelineComponent implements IComponentOptions {
   static NAME:string = "timeline";
@@ -21,12 +21,16 @@ export class TimelineController {
   public username:string;
   public onContentLoaded:Function;
 
-  static $inject = [ProfileService.NAME, '$scope', MilestoneService.NAME, SessionService.NAME];
+  static $inject = [
+    ProfileService.NAME,
+    '$scope',
+    MilestoneService.NAME,
+    Navigator.NAME];
 
   constructor(private profileService:ProfileService,
               private $scope:IScope,
-              private timelineService:MilestoneService,
-              private sessionService:SessionService) {
+              private milestoneService:MilestoneService,
+              private navigator:INavigator) {
   }
 
   $onInit():void {
@@ -42,9 +46,14 @@ export class TimelineController {
     }
   }
 
+  onMilestoneDetailsClick($locals:any):void {
+    var milestone:Milestone = $locals.milestone;
+    this.navigator.goToMilestoneDetails(this.username, milestone);
+  }
+
   getMilestoneDataAsync():void {
     this.onContentLoaded({isLoaded: false});
-    this.timelineService.getMilestonesByUsername(this.username)
+    this.milestoneService.getMilestonesByUsername(this.username)
       .then((milestones:Milestone[])=> {
           this.milestones = milestones;
           this.onContentLoaded({isLoaded: true});
