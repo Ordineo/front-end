@@ -8,8 +8,8 @@ export class HeaderComponent implements IComponentOptions {
     title: '@'
   };
   template:string = `
-    <div>
-      <span class="md-display-1">{{$ctrl.title}}</span>    
+    <div layout="row" layout-align="center center">
+      <span ng-if="$ctrl.title" class="bg-title-header md-display-1">{{$ctrl.title}}</span>    
     </div>
   `;
 
