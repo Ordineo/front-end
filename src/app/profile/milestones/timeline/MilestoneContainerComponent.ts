@@ -115,7 +115,7 @@ export class MilestoneContainerController {
       svgSrc: 'act:done',
       aClass: 'btnSave',
       onClick: (saveButton:ActionButton)=> {
-        var promise:IPromise<any> = this.milestoneService.createMilestoneByUsername(this.username);
+        var promise:IPromise<any> = this.milestoneService.createMilestoneByUsername(this.profileService.username);
         if (promise) {
           promise.then((success:any)=> {
             this.toggleCreateMode();

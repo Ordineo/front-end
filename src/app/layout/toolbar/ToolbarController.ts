@@ -1,5 +1,7 @@
 import IRootScopeService = angular.IRootScopeService;
 import {EmployeeName} from "../../core/models/EmployeeName";
+import {Navigator, INavigator} from "../../core/services/Navigator";
+import {SessionService, ISessionService} from "../../auth/service/SessionService";
 interface ButtonConfig {
   title:string;
   icon:string;
@@ -10,8 +12,14 @@ export class ToolbarController {
 
   originatorEv:any;
 
-  constructor() {
+  static $inject = [Navigator.NAME, SessionService.NAME];
+
+  constructor(private navigator:INavigator, private sessionService:ISessionService) {
     this.buttons = this.getButtons();
+  }
+
+  public goToProfile():void {
+    this.navigator.goToUserProfile(this.sessionService.getUsername());
   }
 
   private getButtons():Array<ButtonConfig> {

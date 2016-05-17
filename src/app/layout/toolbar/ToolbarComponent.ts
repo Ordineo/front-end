@@ -1,7 +1,7 @@
 import IComponentOptions = angular.IComponentOptions;
 import {ToolbarController} from "./ToolbarController";
-
-require('./toolbar.scss');
+import './images/jworks.png';
+import './toolbar.scss';
 
 /**
  * @ngdoc component
@@ -14,7 +14,7 @@ require('./toolbar.scss');
  * @usage
  * <toolbar employee-name='$ctrl.name'></toolbar>
  */
-export class ToolbarComponent implements IComponentOptions{
+export class ToolbarComponent implements IComponentOptions {
   static NAME:string = "toolbar";
 
   bindings:any = {

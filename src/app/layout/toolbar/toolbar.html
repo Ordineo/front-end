@@ -1,53 +1,38 @@
 <md-toolbar id="toolbar" md-whiteframe="1">
-  <div layout="row">
-    <div class="logo" layout-align="start center"></div>
-    <div id="welcome" layout="row" layout-align="start center">
-      <strong>JWorks&nbsp;360</strong>
+  <div layout="row" layout-align="start center">
+    <img src="images/jworks.png" alt="jworks logo" id="jworksLogo">
+    <div id="welcome" flex="20">
+      <p>JWorks 360</p>
     </div>
-    <div layout="row" layout-align="end center" class="md-toolbar-tools">
-      <div layout="row">
-        <profile-search></profile-search>
-<!--
-        <div>
-          <md-button class="md-icon-button" ng-repeat="btn in $ctrl.buttons">
-            &lt;!&ndash; Alert must be placed after the icon &ndash;&gt;
-            <md-icon md-svg-icon="{{btn.icon}}"></md-icon>
-            <div class="push">
-              <div>
-                <p><strong>25</strong></p>
-              </div>
-            </div>
-          </md-button>
-        </div>
--->
-        <md-menu id="user-menu">
-          <md-button aria-label="Open account menu" ng-click="$ctrl.openMenu($mdOpenMenu, $event)">
-            <md-icon md-menu-origin md-svg-icon="{{$ctrl.buttons[0].icon}}"></md-icon>
-            <span id="profileMenu">{{$ctrl.employeeName.first}} {{$ctrl.employeeName.last}}</span>
-          </md-button>
-          <md-menu-content width="3">
-            <md-menu-item>
-              <md-button aria-label="My Profile" ng-click="">
-                <md-icon md-svg-icon="{{$ctrl.buttons[0].icon}}" md-menu-align-target></md-icon>
-                My Profile
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button aria-label="Inbox" ng-click="">
-                <md-icon md-svg-icon="{{$ctrl.buttons[1].icon}}" md-menu-align-target></md-icon>
-                Inbox
-              </md-button>
-            </md-menu-item>
-            <md-menu-divider></md-menu-divider>
-            <md-menu-item>
-              <md-button id="logout-btn" aria-label="Logout" ng-click="$root.authService.logOut()">
-                <md-icon md-svg-icon="{{$ctrl.buttons[2].icon}}" md-menu-align-target></md-icon>
-                Logout
-              </md-button>
-            </md-menu-item>
-          </md-menu-content>
-        </md-menu>
-      </div>
+    <profile-search flex="60"></profile-search>
+    <div layout="row" flex="20" layout-align="end center">
+      <md-menu id="user-menu">
+        <md-button aria-label="Open account menu" ng-click="$ctrl.openMenu($mdOpenMenu, $event)">
+          <md-icon md-menu-origin md-svg-icon="{{$ctrl.buttons[0].icon}}"></md-icon>
+          <span class="profileMenu">{{$ctrl.employeeName.first}} {{$ctrl.employeeName.last}}</span>
+        </md-button>
+        <md-menu-content width="3">
+          <md-menu-item>
+            <md-button aria-label="My Profile" ng-click="$ctrl.goToProfile()">
+              <md-icon md-svg-icon="{{$ctrl.buttons[0].icon}}" md-menu-align-target></md-icon>
+              My Profile
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button aria-label="Inbox" ng-click="">
+              <md-icon md-svg-icon="{{$ctrl.buttons[1].icon}}" md-menu-align-target></md-icon>
+              Inbox
+            </md-button>
+          </md-menu-item>
+          <md-menu-divider></md-menu-divider>
+          <md-menu-item>
+            <md-button id="logout-btn" aria-label="Logout" ng-click="$root.authService.logOut()">
+              <md-icon md-svg-icon="{{$ctrl.buttons[2].icon}}" md-menu-align-target></md-icon>
+              Logout
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
     </div>
   </div>
 </md-toolbar>
