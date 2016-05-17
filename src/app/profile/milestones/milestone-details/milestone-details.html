@@ -1,8 +1,3 @@
-<!--<card-header class="about-header"-->
-<!--buttons="about.actionButtons"-->
-<!--show-btn-edit="true"-->
-<!--show-btn-drag="true">-->
-<!--</card-header>-->
 <md-card>
   <md-card-title>
     <md-card-title-text>
@@ -18,13 +13,15 @@
     </md-card-title-text>
   </md-card-title>
   <md-card-content ng-if="milestoneDetails.milestone">
-    <div>
-      <span class="md-subhead"><strong>Description</strong></span>
-      <p class="gray no-top-margin">{{milestoneDetails.description}}</p>
-    </div>
-    <div>
-      <span class="md-subhead"><strong>More information</strong></span>
-      <p class="gray no-top-margin">{{milestoneDetails.moreInformation}}</p>
+    <div layout="column" layout-gt-lg="row">
+      <div flex="50" class="detail">
+        <span class="md-subhead"><strong>Description</strong></span>
+        <p class="gray no-top-margin">{{milestoneDetails.description}}</p>
+      </div>
+      <div flex="50">
+        <span class="md-subhead"><strong>More information</strong></span>
+        <p class="gray no-top-margin">{{milestoneDetails.moreInformation}}</p>
+      </div>
     </div>
     <div layout="row">
       <div class="detail">
