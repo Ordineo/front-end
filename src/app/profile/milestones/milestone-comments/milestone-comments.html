@@ -5,7 +5,11 @@
   <div id="commentsAdd">
     <div class="profilePicture"></div>
     <md-input-container>
-      <input placeholder="Add a comment...">
+      <input id="commentField"
+             placeholder="Add a comment..."
+             ng-model="milestoneComments.commentFieldData"
+             on-enter="milestoneComments.addComment()"
+             maxlength="142">
     </md-input-container>
   </div>
   <hr>
