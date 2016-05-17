@@ -40,16 +40,14 @@ describe("Session service", ()=> {
   });
 
   describe("getUsername", ()=> {
-    
+
     it("should return null when there is no active session", ()=> {
-      spyOn(sessionService, "getUsername");
       var result = sessionService.getUsername();
       expect(result).toBe(null);
     });
 
     it("should return the username of the current user if there is an active session", ()=> {
       var validToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJUZXN0Iiwicm9sZSI6IltST0xFX1VTRVIsIFJPTEVfQURNSU5dIiwiY3JlYXRlZCI6MTQ2MzQ4NDIzNjMyNSwiZXhwIjoxNDY0MDg5MDM2fQ.4Jw7tETk8Y5YAAJZvLpSrf1HizfWAIO3FO-k6lpsStzUWp6ah66xi7IzFiLgT-IWB1pbN6bG4yWQ8HyWX1jpYg";
-      spyOn(sessionService, "getUsername");
       sessionService.setAuthData(validToken);
       var username = sessionService.getUsername();
       expect(username).toBe("Test");
