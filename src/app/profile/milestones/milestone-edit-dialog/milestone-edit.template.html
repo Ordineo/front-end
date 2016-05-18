@@ -1,0 +1,39 @@
+<md-dialog>
+  <md-dialog-content>
+    <form class="edit-milestone" name="milestoneCreateForm" novalidate>
+      <div ng-if="$ctrl.milestone.objective">
+        <span class="material-label">Objective</span>
+        <p class="material-text no-top-margin" ng-if="$ctrl.milestone.objective.description">
+          {{$ctrl.milestone.objective.description}}</p>
+        <p class="material-text no-top-margin" ng-if="!$ctrl.milestone.objective.description">No description</p>
+      </div>
+      <div class="datepicker-container">
+        <label>Due Date</label>
+        <md-datepicker
+          ng-model="$ctrl.dueDate"
+          md-placeholder="Due Date"
+          name="dueDate"
+          md-min-date="$ctrl.minDate"
+          md-is-error="$ctrl.dueDate.$invalid"
+          required></md-datepicker>
+        <div class="validation-messages" ng-messages="milestoneCreateForm.dueDate.$error">
+          <div ng-message="required">Due date is required.</div>
+          <div ng-message="mindate">Due date is in past.</div>
+          <div ng-message="valid">Date is invalid.</div>
+        </div>
+      </div>
+      <md-input-container class="md-block flex">
+        <label>More Information</label>
+        <textarea ng-model="$ctrl.milestone.moreInformation" md-select-on-focus></textarea>
+      </md-input-container>
+    </form>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="$ctrl.cancel()">
+      Cancel
+    </md-button>
+    <md-button ng-click="$ctrl.ok()">
+      OK
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>

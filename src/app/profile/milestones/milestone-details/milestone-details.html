@@ -1,13 +1,22 @@
 <md-card>
   <md-card-title>
     <md-card-title-text>
-      <div id="status" ng-if="milestoneDetails.milestone">
-        <p class="md-headline no-top-margin no-bottom-margin">{{milestoneDetails.title}}</p>
-        <div layout="row" layout-align="start center">
-          <span ng-if="milestoneDetails.status == 0" class="inProgress md-caption">In progress</span>
-          <span ng-if="milestoneDetails.status == 1" class="accomplished md-caption">Accomplished</span>
-          <span ng-if="milestoneDetails.status == 2" class="notAccomplished md-caption">Not accomplished</span>
+      <div ng-if="milestoneDetails.milestone" layout="row">
+        <div layout="column">
+          <p class="md-headline no-top-margin no-bottom-margin">{{milestoneDetails.title}}</p>
+          <div id="status" layout="row" layout-align="start center">
+            <span ng-if="milestoneDetails.status == 0" class="inProgress md-caption">In progress</span>
+            <span ng-if="milestoneDetails.status == 1" class="accomplished md-caption">Accomplished</span>
+            <span ng-if="milestoneDetails.status == 2" class="notAccomplished md-caption">Not accomplished</span>
+          </div>
         </div>
+        <span flex></span>
+        <md-button
+          aria-label="Edit"
+          ng-click="milestoneDetails.showEditDialog()"
+          class="btnSave md-icon-button md-warn">
+          <md-icon md-svg-icon="content:create"></md-icon>
+        </md-button>
       </div>
       <span class="md-title" ng-if="!milestoneDetails.milestone">Please select a milestone</span>
     </md-card-title-text>

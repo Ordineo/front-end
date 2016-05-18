@@ -8,6 +8,8 @@ import IWindowService = angular.IWindowService;
 import Router = angular.Router;
 import {Objective} from "../../../core/models/objective";
 import {Milestone} from "../../../core/models/milestone";
+import IDialogService = angular.material.IDialogService;
+import {MilestoneEditDialog} from "../milestone-edit-dialog/MilestoneEditDialog";
 
 export class MilestoneDetailsComponent implements IComponentOptions {
   static NAME:string = "milestoneDetails";
@@ -39,10 +41,11 @@ export class MilestoneDetailsController {
   static $inject = [
     MilestoneService.NAME,
     '$scope',
-    'moment'
+    'moment',
+    '$mdDialog'
   ];
 
-  constructor(private milestoneService:IMilestoneService, private scope:IScope, private moment:any) {
+  constructor(private milestoneService:IMilestoneService, private scope:IScope, private moment:any, private dialog:IDialogService) {
   }
 
   $onInit():void {
@@ -53,6 +56,10 @@ export class MilestoneDetailsController {
     }
   }
 
+  showEditDialog():void {
+    this.dialog.show(new MilestoneEditDialog());
+  }
+  
   updateViewModel():()=>any {
     return ()=> {
       this.setViewModel(this.milestoneService.getSelectedMilestone());

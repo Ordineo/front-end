@@ -20,6 +20,7 @@ export interface IMilestoneService {
   createMilestoneByUsername(username:string):IPromise<any>;
   setSelectedMilestone(milestone:Milestone):void;
   getSelectedMilestone():Milestone;
+  put(milestone:Milestone):IPromise<any>;
 }
 
 export class MilestoneService implements IMilestoneService {
@@ -119,5 +120,13 @@ export class MilestoneService implements IMilestoneService {
     } else {
       return null;
     }
+  }
+
+
+  put(milestone:Milestone):angular.IPromise<any> {
+    milestone.objective = milestone['_links'].objective.href;
+    debugger;
+    return this.$http.put(milestone['_links'].self.href,
+      milestone);
   }
 }
