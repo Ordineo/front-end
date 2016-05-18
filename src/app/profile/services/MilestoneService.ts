@@ -14,7 +14,7 @@ export interface IMilestoneService {
   createMilestoneByUsername(username:string):IPromise<any>
 }
 
-export class MilestoneService implements IMilestoneService{
+export class MilestoneService implements IMilestoneService {
   public milestone:Milestone;
   public dueDate:Date;
   static NAME:string = "MilestoneService";
@@ -30,7 +30,7 @@ export class MilestoneService implements IMilestoneService{
               private moment:any) {
   }
 
-  setObjective(objective:Objective):void{
+  setObjective(objective:Objective):void {
     this.milestone.objective = objective;
   }
 
@@ -45,7 +45,7 @@ export class MilestoneService implements IMilestoneService{
       .result;
   }
 
-  public getNewMilestone():Milestone{
+  public getNewMilestone():Milestone {
     this.milestone = <Milestone>{};
     this.milestone.dueDate = new Date();
     return this.milestone;
@@ -63,7 +63,7 @@ export class MilestoneService implements IMilestoneService{
   }
 
   public createMilestoneByUsername(username:string):IPromise<any> {
-    if(this.milestone.objective && this.milestone.objective['_links']) {
+    if (this.milestone.objective && this.milestone.objective['_links']) {
       this.milestone['username'] = username;
       this.milestone.title = this.milestone.objective.title;
       this.milestone['objective'] = this.milestone.objective['_links']['self']['href'];
@@ -75,12 +75,22 @@ export class MilestoneService implements IMilestoneService{
     }
   }
 
-  public getComments():IPromise<any> {
+  public getCommentsByMilestone():IPromise<any> {
     return this.traverson.hal()
-      .from(GatewayApiService.getMilestonesApi() + 'comments')
+      .from(GatewayApiService.getMilestonesApi() + 'comments/search/findCommentsByMilestone?milestone=' + GatewayApiService.getMilestonesApi() + '/milestones/1')
       .useAngularHttp()
       .jsonHal()
       .getResource()
       .result;
   }
+
+  public createCommentByMilestone(username:string, createDate:string, message:string):IPromise<any> {
+    return this.$http.post(GatewayApiService.getMilestonesApi() + 'comments', {
+      "username": username,
+      "createDate": createDate,
+      "message": message,
+      "milestone": GatewayApiService.getMilestonesApi() + "milestone/1"
+    });
+  }
+
 }
