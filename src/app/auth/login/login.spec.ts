@@ -39,52 +39,52 @@ describe("Login controller", ()=> {
     expect(authService.authenticate).toHaveBeenCalled();
   });
 
-describe('login', ()=>{
+  describe('login', ()=> {
 
-  it('should succeed', inject((_$q_:IQService)=> {
-    var deferred:IDeferred<any> = _$q_.defer();
-    spyOn(authService, 'logIn').and.returnValue(deferred.promise);
-    spyOn(sessionService, 'setAuthData');
-    spyOn(authService, 'authenticate');
-    ctrl.logIn({
-      email: 'ryan@mail.be',
-      password: 'hottentottentettententoonstelling',
-      username: 'Rydg'
-    });
-    expect(authService.logIn).toHaveBeenCalled();
-    deferred.resolve({data: {}});
-    scope.$digest();
-    expect(sessionService.setAuthData).toHaveBeenCalled();
-    expect(authService.authenticate).toHaveBeenCalled();
-  }));
+    it('should succeed', inject((_$q_:IQService)=> {
+      var deferred:IDeferred<any> = _$q_.defer();
+      spyOn(authService, 'logIn').and.returnValue(deferred.promise);
+      spyOn(sessionService, 'setAuthData');
+      spyOn(authService, 'authenticate');
+      ctrl.logIn({
+        email: 'ryan@mail.be',
+        password: 'hottentottentettententoonstelling',
+        username: 'Rydg'
+      });
+      expect(authService.logIn).toHaveBeenCalled();
+      deferred.resolve({data: {}});
+      scope.$digest();
+      expect(sessionService.setAuthData).toHaveBeenCalled();
+      expect(authService.authenticate).toHaveBeenCalled();
+    }));
 
-  it('should fail with 401 error', inject((_$q_:IQService)=> {
-    var deferred:IDeferred<any> = _$q_.defer();
-    spyOn(authService, 'logIn').and.returnValue(deferred.promise);
-    spyOn(ctrl, 'showErrorMessage');
-    ctrl.logIn({});
-    expect(authService.logIn).toHaveBeenCalled();
-    deferred.reject({status: 401});
-    scope.$digest();
+    it('should fail with 401 error', inject((_$q_:IQService)=> {
+      var deferred:IDeferred<any> = _$q_.defer();
+      spyOn(authService, 'logIn').and.returnValue(deferred.promise);
+      spyOn(ctrl, 'showErrorMessage');
+      ctrl.logIn({});
+      expect(authService.logIn).toHaveBeenCalled();
+      deferred.reject({status: 401});
+      scope.$digest();
 
-    expect(ctrl.showErrorMessage).toHaveBeenCalled();
-    expect(ctrl.errorMessage).toBe("Login failed. Invalid username or password");
-  }));
+      expect(ctrl.showErrorMessage).toHaveBeenCalled();
+      expect(ctrl.errorMessage).toBe("Login failed. Invalid username or password");
+    }));
 
-  it('should fail with connection error', inject((_$q_:IQService)=> {
-    var deferred:IDeferred<any> = _$q_.defer();
-    spyOn(authService, 'logIn').and.returnValue(deferred.promise);
-    spyOn(ctrl, 'showErrorMessage');
-    ctrl.logIn({});
-    expect(authService.logIn).toHaveBeenCalled();
-    deferred.reject({});
-    scope.$digest();
+    it('should fail with connection error', inject((_$q_:IQService)=> {
+      var deferred:IDeferred<any> = _$q_.defer();
+      spyOn(authService, 'logIn').and.returnValue(deferred.promise);
+      spyOn(ctrl, 'showErrorMessage');
+      ctrl.logIn({});
+      expect(authService.logIn).toHaveBeenCalled();
+      deferred.reject({});
+      scope.$digest();
 
-    expect(ctrl.showErrorMessage).toHaveBeenCalled();
-    expect(ctrl.errorMessage).toBe("Connection Error");
-  }));
+      expect(ctrl.showErrorMessage).toHaveBeenCalled();
+      expect(ctrl.errorMessage).toBe("Connection Error");
+    }));
 
-});
+  });
 
 });
 export class SessionMock implements ISessionService {

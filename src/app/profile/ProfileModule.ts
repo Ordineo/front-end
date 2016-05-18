@@ -17,7 +17,6 @@ import {SummaryPageComponent} from "./summary-page/SummaryPageComponent";
 import {MilestoneDetailsPageComponent} from "./milestones-details-page/MilestoneDetailsPageComponent";
 import {MilestoneCommentsComponent} from "./milestones/milestone-comments/MilestoneCommentsComponent";
 import {MilestoneItemComponent} from "./milestones/milestone-list/MilestoneItemComponent";
-import {MilestoneCommentsComponent} from "./milestones/milestone-comments/MilestoneCommentsComponent";
 import {ProfileMenuState} from "./profile-menu/ProfileMenuState";
 
 /**
@@ -59,7 +58,6 @@ angular
   .component(MilestoneDetailsComponent.NAME, new MilestoneDetailsComponent())
   .component(MilestoneCommentsComponent.NAME, new MilestoneCommentsComponent())
   .component(MilestoneItemComponent.NAME, new MilestoneItemComponent())
-  .component(MilestoneCommentsComponent.NAME, new MilestoneCommentsComponent())
   .directive(AboutDirective.NAME, AboutDirective.instance())
   .directive('onEnter', function () {
     return function (scope, element, attrs) {

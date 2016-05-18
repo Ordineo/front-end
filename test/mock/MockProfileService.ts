@@ -15,6 +15,7 @@ export class MockProfileService implements IProfileService {
   setProfilePicture(file:any, uploadUrl:string):angular.IPromise<any> {
     return undefined;
   }
+
   getBasicInfoByUsername(userName:string):angular.IPromise<any> {
     return undefined;
   }
