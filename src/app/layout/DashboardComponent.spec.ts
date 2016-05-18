@@ -46,14 +46,15 @@ describe("Dashboard component controller", ()=> {
     });
 
     it("should get basic info by username", ()=> {
+      var username = "test", firstName = "Fname", lastName = "Lname";
       spyOn(profileService, "getBasicInfoByUsername").and.returnValue(defer.promise);
       ctrl.$onInit();
       expect(profileService.getBasicInfoByUsername).toHaveBeenCalled();
-      defer.resolve({username: "mike", firstName: "Michael", lastName: "Vandendriessche"});
+      defer.resolve({username: username, firstName: firstName, lastName: lastName});
       scope.$apply();
 
-      expect(ctrl.name.first).toBe("Michael");
-      expect(ctrl.name.last).toBe("Vandendriessche");
+      expect(ctrl.name.first).toBe(firstName);
+      expect(ctrl.name.last).toBe(lastName);
     });
   });
 
