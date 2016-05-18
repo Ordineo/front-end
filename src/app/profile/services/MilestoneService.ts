@@ -5,33 +5,79 @@ import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 import {TraversonHalService} from "../../traverson/service/TraversonHalService";
 import {Milestone} from "../../core/models/milestone";
 import {Objective} from "../../core/models/objective";
+import IRootScopeService = angular.IRootScopeService;
+import IScope = angular.IScope;
 
 export interface IMilestoneService {
+  notifyMilestoneSelected():void;
+  subscribeOnMilestoneSelected(scope:IScope, callBack:any):void;
   getMilestonesByUsername(userName:string):IPromise<any>;
+  getMilestoneById(id:string):IPromise<any>;
+  clearSelected():void;
   setObjective(objective:Objective):void;
   getNewMilestone():Milestone;
   searchObjectives(qry:string):IPromise<any>;
-  createMilestoneByUsername(username:string):IPromise<any>
+  createMilestoneByUsername(username:string):IPromise<any>;
+  setSelectedMilestone(milestone:Milestone):void;
+  getSelectedMilestone():Milestone;
 }
 
 export class MilestoneService implements IMilestoneService {
+  static NAME:string = "MilestoneService";
+  static EVENT_MILESTONE_SELECTED:string = "milestoneSelected";
+  
   public milestone:Milestone;
   public dueDate:Date;
-  static NAME:string = "MilestoneService";
+  public selectedMilestone:Milestone;
+
   static $inject:Array<string> = [
+    '$rootScope',
     TraversonHalService.SERVICE_NAME,
     '$q',
     '$http',
     'moment'];
 
-  constructor(private traverson:TraversonHalService,
+  constructor(private $rootScope:IRootScopeService,
+              private traverson:TraversonHalService,
               private $q:IQService,
               private $http:IHttpService,
               private moment:any) {
   }
 
+  public subscribeOnMilestoneSelected(scope:IScope, callBack:any):void {
+    var handler:any = this.$rootScope.$on(MilestoneService.EVENT_MILESTONE_SELECTED, callBack);
+    scope.$on('$destroy', handler);
+  }
+
+  public notifyMilestoneSelected():void {
+    this.$rootScope.$emit(MilestoneService.EVENT_MILESTONE_SELECTED);
+  }
+
+  setSelectedMilestone(milestone:Milestone):void {
+    this.selectedMilestone = milestone;
+    this.notifyMilestoneSelected();
+  }
+
+  getSelectedMilestone():Milestone {
+    return this.selectedMilestone;
+  }
+
+  clearSelected():void {
+    this.selectedMilestone = null;
+    this.notifyMilestoneSelected();
+  }
+
   setObjective(objective:Objective):void {
     this.milestone.objective = objective;
+  }
+
+  public getMilestoneById(id:string):IPromise<any> {
+    return this.traverson.hal()
+      .from(GatewayApiService.getMilestonesApi() + 'milestones/' + id)
+      .useAngularHttp()
+      .jsonHal()
+      .getResource()
+      .result;
   }
 
   public getMilestonesByUsername(userName:string):IPromise<any> {

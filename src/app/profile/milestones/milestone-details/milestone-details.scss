@@ -7,11 +7,12 @@ $mainBackground: #f4f4f4;
 $green: #5bb75b;
 $red: #dd0000;
 
-#milestone-details-wrap {
-  #status {
-    float: right;
-    text-align: right;
+milestone-details {
 
+  .detail {
+    padding-right: 1em;
+  }
+  #status {
     .inProgress {
       color: #0e90d2;
     }

@@ -1,0 +1,38 @@
+h3 {
+  margin-left: 16px;
+  margin-bottom: 8px;
+}
+
+.milestone-selected {
+  color: #1c94c4;
+}
+#milestone-list {
+  md-card {
+    position: relative;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    p {
+      word-break: break-all;
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-bottom: 0.5em;
+    }
+    md-card-title {
+      padding-bottom: 0.5em;
+      padding-top: 1em;
+    }
+    md-chips-wrap {
+      padding: 0;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

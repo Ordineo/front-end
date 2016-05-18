@@ -2,7 +2,7 @@ Feature('Timeline section');
 
 Before((I) => {
   I.amOnPage('/#/login');
-  I.fillField({model: '$ctrl.user.username'}, 'Nivek');
+  I.fillField({model: '$ctrl.user.username'}, 'Test');
   I.fillField({model: '$ctrl.user.password'}, 'password');
   I.click('#login-btn');
 });

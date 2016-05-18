@@ -7,7 +7,7 @@ $mainBackground: #f4f4f4;
 
 $borderColor: #eeeeee;
 $accentColor: #ED9424;
-$profileContentMarginTop: 1em;
+$profileContentMarginTop: 0.5em;
 $layout-xs-max-width: 600px;
 
 profile-about {
@@ -25,7 +25,7 @@ profile-about {
     $size: 130px;
 
     margin-top: $profileContentMarginTop;
-    width: $size;
+    width: 130px;
     height: $size;
     background-size: contain;
     margin-right: 1em;
@@ -37,9 +37,10 @@ profile-about {
     @media screen and (max-width: $layout-xs-max-width){
       border-right: none;
     }
-    padding-right: 25px;
-    margin-right: 25px;
-    padding-bottom: 25px;
+    padding-right: 0.5em;
+    margin-right: 0.5em;
+    margin-left: 1em;
+    padding-bottom: 1em;
     h4 {
       font-size: 1em;
       margin-bottom: 0;

@@ -16,6 +16,9 @@ import {ProfileMenuComponent} from "./profile-menu/ProfileMenuComponent";
 import {SummaryPageComponent} from "./summary-page/SummaryPageComponent";
 import {MilestoneDetailsPageComponent} from "./milestones-details-page/MilestoneDetailsPageComponent";
 import {MilestoneCommentsComponent} from "./milestones/milestone-comments/MilestoneCommentsComponent";
+import {MilestoneItemComponent} from "./milestones/milestone-list/MilestoneItemComponent";
+import {MilestoneCommentsComponent} from "./milestones/milestone-comments/MilestoneCommentsComponent";
+import {ProfileMenuState} from "./profile-menu/ProfileMenuState";
 
 /**
  * @ngdoc module
@@ -43,6 +46,7 @@ angular
   /* services */
   .service(ProfileService.NAME, ProfileService)
   .service(MilestoneService.NAME, MilestoneService)
+  .service(ProfileMenuState.NAME, ProfileMenuState)
 
   /* components and directives*/
   .component(MilestoneContainerComponent.NAME, new MilestoneContainerComponent())
@@ -53,6 +57,8 @@ angular
   .component(ProfileMenuComponent.NAME, new ProfileMenuComponent())
   .component(ProfileComponent.NAME, new ProfileComponent())
   .component(MilestoneDetailsComponent.NAME, new MilestoneDetailsComponent())
+  .component(MilestoneCommentsComponent.NAME, new MilestoneCommentsComponent())
+  .component(MilestoneItemComponent.NAME, new MilestoneItemComponent())
   .component(MilestoneCommentsComponent.NAME, new MilestoneCommentsComponent())
   .directive(AboutDirective.NAME, AboutDirective.instance())
   .directive('onEnter', function () {

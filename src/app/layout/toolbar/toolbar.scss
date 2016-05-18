@@ -8,35 +8,37 @@ $logoTopLeft: 'images/jworks-logo-nomargin.png';
 $logoSize: 64px;
 
 toolbar {
+  img {
+    margin: 0 0.2em;
+    padding: 0.3em;
+    width: $logoSize;
+    height: $logoSize;
+  }
+  .md-menu {
+    margin: 0;
+
+  }
   #toolbar {
     background-color: white;
   }
-
+  profile-search {
+    padding: 0 3em 0 1em;
+  }
   #welcome {
-    padding-left: 15px;
-    padding-right: 15px;
     color: $orange;
     font-size: 2em;
+    p {
+      margin: 0.2em 0.1em;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 700;
+    }
   }
 
-  .logo {
-    background: url($logoTopLeft) no-repeat center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin: 5px;
-    width: $logoSize;
-  }
-
-  #profileMenu {
+  .profileMenu {
     position: relative;
     top: 2px;
     text-transform: none;
   }
-
-  md-autocomplete {
-    margin: 20px;
-  }
-
   /*.push {
     background-color: $orange;
     border-radius: 7px;

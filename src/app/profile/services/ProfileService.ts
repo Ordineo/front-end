@@ -11,6 +11,11 @@ export interface IProfileService {
   getAboutInfoByUsername(userName:string):IPromise<any>;
   getAllEmployees():IPromise<any>;
   putEmployeeData(employee:Employee):IPromise<any>;
+  getBasicInfoByUsername(userName:string):IPromise<any>;
+  setUsername(username:string):void;
+  subscribeUsernameChanged(scope:IScope, callBack:any):void;
+  notifyUsernameChanged():void;
+  setProfilePicture(file:any, uploadUrl:string):IPromise<any>;
 }
 
 export class ProfileService implements IProfileService {
@@ -36,7 +41,7 @@ export class ProfileService implements IProfileService {
     scope.$on('$destroy', handler);
   }
 
-  public setUsername(username:string) {
+  public setUsername(username:string):void {
     this.username = username;
     this.notifyUsernameChanged()
   }
