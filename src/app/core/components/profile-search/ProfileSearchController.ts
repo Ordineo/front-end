@@ -1,23 +1,20 @@
 import {ProfileService} from "../../../profile/services/ProfileService";
 import {Employee} from "../../models/employee";
 import Router = angular.Router;
-import {ProfileRoutes} from "../../../profile/ProfileRoutes";
-import {DashboardRoutes} from "../../../layout/DashboardComponent";
-import {DashboardRoute} from "../../../app.routes";
+import {Navigator, INavigator} from "../../services/Navigator";
 export class ProfileSearchController {
   public button:any;
   public users:Array<User>;
 
-  static EVENT_USER_SELECTED:string = "searchUserSelected";
-  static $inject = [ProfileService.NAME, '$rootRouter'];
+  static $inject = [ProfileService.NAME, Navigator.NAME];
 
-  constructor(private profileService:ProfileService, private rootRouter:Router) {
+  constructor(private profileService:ProfileService, private navigator:INavigator) {
     this.button = {title: 'search', icon: 'act:search'};
   }
 
   selectedItemChange(_user_:User):void {
     if (_user_) {
-      this.rootRouter.navigate([DashboardRoute.NAME, DashboardRoutes.USER_PROFILE, {username: _user_.value}])
+      this.navigator.goToUserProfile(_user_.value);
     }
   }
 

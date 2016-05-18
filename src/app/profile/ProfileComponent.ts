@@ -21,8 +21,11 @@ export class ProfileComponent implements IComponentOptions {
   controller:Function = ProfileComponentController;
   $routeConfig:RouteDefinition[] = [
     {path: '/summary', name: ProfileRoutes.SUMMARY, component: SummaryPageComponent.NAME, useAsDefault: true},
-    {path: '/milestones', name: ProfileRoutes.MILESTONES, component: MilestoneDetailsPageComponent.NAME},
-    {path: '/milestones/:id', name: ProfileRoutes.MILESTONES_DETAILS, component: MilestoneDetailsPageComponent.NAME}
+    {
+      path: '/milestones',
+      name: ProfileRoutes.MILESTONES,
+      component: MilestoneDetailsPageComponent.NAME
+    },
   ];
 }
 export class ProfileComponentController {

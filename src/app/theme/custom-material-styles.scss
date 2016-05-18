@@ -1,5 +1,4 @@
-$mdCardShadowColor: rgba(219,216,219,1);
-
+$mdCardShadowColor: rgba(219, 216, 219, 1);
 
 md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
   color: orange;
@@ -8,9 +7,28 @@ md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
 }
 
 md-card {
+  .md-chips {
+    box-shadow: none;
+    font-size: 0.9em;
+  }
+  .gray {
+    color: #777777;
+    word-break: break-all;
+  }
+}
 
-  border-radius: 0;
-  -webkit-box-shadow: 2px 3px 0px 1px $mdCardShadowColor;
-  -moz-box-shadow: 2px 3px 0px 1px $mdCardShadowColor;
-  box-shadow: 2px 3px 0px 1px $mdCardShadowColor;
+.no-height-stretch {
+  max-height: 0 !important;
+}
+
+.accent-color {
+  color: #e98300;
+}
+
+.text-top-padding {
+  padding-top: 16px;
+}
+
+.text-bottom-padding {
+  padding-bottom: 24px;
 }
