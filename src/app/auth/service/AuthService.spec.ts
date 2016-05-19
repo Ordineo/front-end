@@ -62,7 +62,7 @@ describe("Auth service", ()=> {
 
   describe("authenticate", ()=> {
 
-    describe("with callback", ()=>{
+    describe("with callback", ()=> {
 
       it("should not call spy when route is null and should navigate to loginRoute", ()=> {
         spyOn(routerMock, 'navigate');
@@ -94,7 +94,7 @@ describe("Auth service", ()=> {
 
     });
 
-    describe("without callback", ()=>{
+    describe("without callback", ()=> {
 
       it("should navigate to loginRoute", ()=> {
         spyOn(routerMock, 'navigate');
@@ -120,15 +120,15 @@ describe("Auth service", ()=> {
 
     });
 
-    describe("isAuthorized",()=>{
+    describe("isAuthorized", ()=> {
 
-      it("should return false when current username is null", ()=>{
+      it("should return false when current username is null", ()=> {
         spyOn(sessionService, "getUsername").and.returnValue(null);
         var result = authService.isAuthorized();
         expect(result).toBe(false);
       });
 
-      it("should return true when current username is not null", ()=>{
+      it("should return true when current username is not null", ()=> {
         spyOn(sessionService, "getUsername").and.returnValue("user");
         var result = authService.isAuthorized();
         expect(result).toBe(true);

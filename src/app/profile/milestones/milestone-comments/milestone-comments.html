@@ -1,9 +1,15 @@
-<md-card id="comments">
-  <p class="md-subhead"><strong>Comments</strong></p>
+<md-card id="comments" class="boxPadding">
+  <div id="commentsTitle">
+    <strong>COMMENTS</strong>
+  </div>
   <div id="commentsAdd">
     <div class="profilePicture"></div>
     <md-input-container>
-      <input placeholder="Add a comment...">
+      <input id="commentField"
+             placeholder="Add a comment..."
+             ng-model="milestoneComments.commentFieldData"
+             on-enter="milestoneComments.addComment()"
+             maxlength="142">
     </md-input-container>
   </div>
   <hr>
@@ -12,10 +18,11 @@
       <div class="profilePicture"></div>
       <div class="comment">
         <div class="commentTitle">
-          <strong>{{comment.username}}</strong> - <span
-          class="commentTimestamp">{{comment.createDate}}</span>
+          <strong>{{comment.username}}</strong> - <span class="commentTimestamp">{{comment.createDate | date : "medium"}}</span>
         </div>
-        <p>{{comment.message}}</p>
+        <div class="commentMessage">
+          {{comment.message}}
+        </div>
       </div>
       <div class="clear"></div>
     </div>

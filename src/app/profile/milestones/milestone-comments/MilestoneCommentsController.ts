@@ -2,31 +2,76 @@ import IRootScopeService = angular.IRootScopeService;
 import IAngularEvent = angular.IAngularEvent;
 import ISCEService = angular.ISCEService;
 import IScope = angular.IScope;
-import {MilestoneService, IMilestoneService} from "../../services/MilestoneService";
+import {MilestoneService} from "../../services/MilestoneService";
+import {SessionService} from "../../../auth/service/SessionService";
+var $ = require('jquery');
 
 export class MilestoneCommentsController {
-  //Comments
-  public commentFirstName:string = "Ryan";
-  public commentLastName:string = "De Gruyter";
-  public message:string = "You should also go for the OCP certificate.";
-  public timestamp:string = "09:18, 15 February";
-  public comments:any[];
+  public comments:any = [];
+  public username:string = "";
+  public commentFieldData:string = "";
+  public milestone:string = "";
 
-  static $inject = ['$scope', MilestoneService.NAME];
+  static $inject:Array<string> = [
+    MilestoneService.NAME,
+    SessionService.NAME,
+    '$scope',
+    'moment'
+  ];
 
-  constructor(private scope:IScope, private milestoneService:IMilestoneService) {
+  constructor(private milestoneService:MilestoneService,
+              private sessionService:SessionService,
+              private scope:IScope,
+              private moment:any) {
+    this.username = this.sessionService.getUsername();
   }
 
   $onInit():void {
-    var milestone:any = this.milestoneService.getSelectedMilestone();
-    if (milestone) {
-      this.comments = milestone.comments;
+    this.milestoneService.subscribeOnMilestoneSelected(this.scope, this.updateViewModel());
+    var selectedMilestone:any = this.milestoneService.getSelectedMilestone();
+    if (selectedMilestone !== undefined) {
+      this.setViewModel(selectedMilestone);
     }
-    this.milestoneService.subscribeOnMilestoneSelected(this.scope, ()=> {
-      var mile:any = this.milestoneService.getSelectedMilestone();
-      if (mile) {
-        this.comments = mile.comments;
-      }
-    });
   }
-}
+
+  updateViewModel():()=>any {
+    return ()=> {
+      this.setViewModel(this.milestoneService.getSelectedMilestone());
+    };
+  }
+
+  setViewModel(selectedMilestone:any):void {
+    if (selectedMilestone) {
+      var milestone = selectedMilestone._links.self.href;
+      var index = milestone.indexOf("milestones");
+      this.milestone = milestone.substring(index);
+      this.getComments(this.milestone);
+    }
+  }
+
+  public getComments(milestone):void {
+    this.comments = [];
+    this.milestoneService.getCommentsByMilestone(milestone)
+      .then((data:any) => {
+        for (var i = 0; i < data._embedded.comments.length; i++) {
+          this.comments.push(data._embedded.comments[i]);
+        }
+      }, (error:any) => {
+      });
+  }
+
+  public addComment():void {
+    if (this.commentFieldData.trim() !== '') {
+      this.milestoneService.createCommentByMilestone(
+        this.username,
+        this.moment().format('YYYY-MM-DDThh:mm:ss'),
+        this.commentFieldData,
+        this.milestone
+      ).then((success:any) => {
+        this.getComments(this.milestone)
+      });
+      $('#commentField').blur();
+      this.commentFieldData = "";
+    }
+  }
+} 
