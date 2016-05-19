@@ -9,25 +9,24 @@ import {MockMilestoneService} from "./MilestoneCreateComponent.spec";
 import {MilestoneContainerComponent, MilestoneContainerController} from "./MilestoneContainerComponent";
 import IRootScopeService = angular.IRootScopeService;
 import IScope = angular.IScope;
+import {ORDINEO_PROFILE} from "../../ProfileModule";
 
 describe("describe text", ()=> {
   var scope:IScope;
-  // var rootScope: IRootScopeService;
   var ctrl:MilestoneContainerController;
   var milestoneService:IMilestoneService;
   var profileService:IProfileService;
   var sessionService:ISessionService;
 
-  beforeEach(angular.mock.module(ORDINEO_CORE, ($provide:IProvideService, $rootScope:IRootScopeService)=> {
+  beforeEach(angular.mock.module(ORDINEO_PROFILE, ($provide:IProvideService)=> {
     milestoneService = new MockMilestoneService();
     profileService = new MockProfileService();
     sessionService = new SessionMock();
-    // rootScope= $rootScope;
 
     $provide.service(MilestoneService.NAME, ()=>milestoneService);
     $provide.service(ProfileService.NAME, ()=>profileService);
     $provide.service(SessionService.NAME, ()=>sessionService);
-    $provide.service('$scope', $rootScope.$new());
+    // $provide.service('$scope', $rootScope.$new);
   }));
 
   beforeEach(inject((_$componentController_, _$rootScope_:IRootScopeService)=> {
