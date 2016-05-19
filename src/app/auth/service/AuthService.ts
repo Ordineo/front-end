@@ -18,7 +18,7 @@ export class AuthService implements IAuthService {
   }
 
   /*todo refactor code to make http authentication request*/
-  logOut():void{
+  logOut():void {
       this.sessionService.destroySession();
       this.authenticate([MainRoute.NAME], null);
   }
@@ -32,7 +32,7 @@ export class AuthService implements IAuthService {
     if (this.isAuthorized()) {
       if (routeNames !== null) {
         routes = routeNames;
-      }else {
+      } else {
         routes = [DashboardRoute.NAME];
       }
       if (callBack) {

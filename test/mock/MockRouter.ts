@@ -1,7 +1,6 @@
-
 import Router = angular.Router;
-export class MockRouter implements Router{
-  
+export class MockRouter implements Router {
+
   navigating:boolean;
   lastNavigationAttempt:string;
   registry:angular.RouteRegistry;
@@ -67,5 +66,5 @@ export class MockRouter implements Router{
   generate(linkParams:any[]):angular.Instruction {
     return undefined;
   }
-  
+
 }
