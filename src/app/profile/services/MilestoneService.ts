@@ -51,7 +51,7 @@ export class MilestoneService implements IMilestoneService {
   }
 
   public notifyMilestoneSelected():void {
-    this.$rootScope.$emit(MilestoneService.EVENT_MILESTONE_SELECTED);
+    this.$rootScope.$emit(MilestoneService.EVENT_MILESTONE_SELECTED, {milestone: this.getSelectedMilestone()});
   }
 
   setSelectedMilestone(milestone:Milestone):void {
@@ -161,4 +161,7 @@ export class MilestoneService implements IMilestoneService {
       'moreInformation': milestone.moreInformation
     };
   }
+}
+export interface MilestoneSelectedData {
+  milestone:Milestone
 }
