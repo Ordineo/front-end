@@ -70,8 +70,8 @@ export class MilestoneDetailsController {
     if (selectedMilestone) {
       this.setStatus(selectedMilestone);
       this.milestone = selectedMilestone;
-      this.createDate = selectedMilestone.createDate;
-      this.dueDate = selectedMilestone.dueDate;
+      this.createDate = this.moment(selectedMilestone.createDate).format('ll');
+      this.dueDate = this.moment(selectedMilestone.dueDate).format('ll');
       this.moreInformation = selectedMilestone.moreInformation;
 
       var objective:Objective = selectedMilestone.objective;
