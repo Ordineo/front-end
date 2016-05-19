@@ -26,7 +26,6 @@ export class MilestoneCommentsController {
       var mile:any = this.milestoneService.getSelectedMilestone();
       if (mile) {
         this.comments = mile.comments;
-        console.log(this.comments);
       }
     });
   }
