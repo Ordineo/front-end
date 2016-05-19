@@ -1,4 +1,4 @@
-Feature('About section');
+Feature('About section in summary');
 
 Before((I) => {
   I.amOnPage('/#/login');

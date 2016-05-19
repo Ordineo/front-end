@@ -12,7 +12,7 @@
       <md-progress-circular class="md-primary" md-mode="indeterminate" md-diameter="60"></md-progress-circular>
     </div>
     <md-card-content ng-if="$ctrl.milestonesLoaded">
-      <md-list>
+      <md-list id="milestone-list">
         <milestone-item
           ng-class="$ctrl.selectedMilestone.objective.title === mile.objective.title ? 'milestone-selected' : ''"
           ng-if="$ctrl.milestones.length >0"

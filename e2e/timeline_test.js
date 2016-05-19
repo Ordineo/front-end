@@ -1,4 +1,4 @@
-Feature('Timeline section');
+Feature('Timeline section in summary');
 
 Before((I) => {
   I.amOnPage('/#/login');
