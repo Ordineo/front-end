@@ -18,7 +18,7 @@
       <div class="profilePicture"></div>
       <div class="comment">
         <div class="commentTitle">
-          <strong>{{comment.username}}</strong> - <span class="commentTimestamp">{{comment.createDate | date}}</span>
+          <strong>{{comment.username}}</strong> - <span class="commentTimestamp">{{comment.createDate | date : "medium"}}</span>
         </div>
         <div class="commentMessage">
           {{comment.message}}
