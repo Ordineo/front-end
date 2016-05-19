@@ -62,8 +62,6 @@ export class MilestoneCommentsController {
 
   public addComment():void {
     if (this.commentFieldData.trim() !== '') {
-      this.setTimestamp();
-
       this.milestoneService.createCommentByMilestone(
         this.username,
         this.moment().format('YYYY-MM-DDThh:mm:ss'),
