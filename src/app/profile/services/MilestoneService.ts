@@ -141,7 +141,6 @@ export class MilestoneService implements IMilestoneService {
   }
 
 
-
   put(milestone:Milestone):angular.IPromise<any> {
 
     // milestone.objective = url;
