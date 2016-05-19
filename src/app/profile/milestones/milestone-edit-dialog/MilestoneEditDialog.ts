@@ -4,6 +4,7 @@ import IScope = angular.IScope;
 import IDialogService = angular.material.IDialogService;
 import {MilestoneService, IMilestoneService} from "../../services/MilestoneService";
 import {Milestone} from "../../../core/models/milestone";
+import IToastService = angular.material.IToastService;
 
 export class MilestoneEditDialog implements IDialogOptions {
   template:string = require('./milestone-edit.template.html');
@@ -13,15 +14,17 @@ export class MilestoneEditDialog implements IDialogOptions {
 }
 
 export class MilestoneEditDialogController {
-  static $inject = ['$scope', '$mdDialog', MilestoneService.NAME, 'moment'];
+  static $inject = ['$scope', '$mdDialog', MilestoneService.NAME, 'moment', '$mdToast'];
 
   milestone:Milestone;
-  dueDate:any;
+  dueDate:Date;
+  minDate:Date;
 
   constructor(private scope:IScope,
               private dialog:IDialogService,
               private milestoneService:IMilestoneService,
-              private moment:any) {
+              private moment:any,
+              private toast:IToastService) {
     this.init();
   }
 
@@ -29,6 +32,7 @@ export class MilestoneEditDialogController {
     var selectedMilestone:Milestone = this.milestoneService.getSelectedMilestone();
     this.milestone = selectedMilestone;
     this.dueDate = this.moment(selectedMilestone.dueDate).toDate();
+    this.minDate = this.moment(selectedMilestone.createDate).toDate();
   }
 
   cancel():void {
@@ -36,7 +40,6 @@ export class MilestoneEditDialogController {
   }
 
   ok():void {
-    /*make request*/
     this.milestone.dueDate = this.moment(this.dueDate).format('YYYY-MM-DD');
     this.milestoneService.put(this.milestone)
       .then(()=> {
@@ -45,7 +48,7 @@ export class MilestoneEditDialogController {
       })
       .catch((err)=> {
         /*show error message*/
-        console.log(err);
+        this.toast.show(this.toast.simple().textContent('Could not update milestone'));
       });
   }
 }

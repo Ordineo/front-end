@@ -12,11 +12,10 @@
         <md-datepicker
           ng-model="$ctrl.dueDate"
           md-placeholder="Due Date"
-          name="dueDate"
+          name="due"
           md-min-date="$ctrl.minDate"
-          md-is-error="$ctrl.dueDate.$invalid"
           required></md-datepicker>
-        <div class="validation-messages" ng-messages="milestoneCreateForm.dueDate.$error">
+        <div class="validation-messages" ng-messages="milestoneCreateForm.due.$error">
           <div ng-message="required">Due date is required.</div>
           <div ng-message="mindate">Due date is in past.</div>
           <div ng-message="valid">Date is invalid.</div>
@@ -24,7 +23,17 @@
       </div>
       <md-input-container class="md-block flex">
         <label>More Information</label>
-        <textarea ng-model="$ctrl.milestone.moreInformation" md-select-on-focus></textarea>
+        <textarea name="moreInformation"
+                  required
+                  max="5000"
+                  ng-model="$ctrl.milestone.moreInformation"
+                  md-select-on-focus></textarea>
+        <div class="validation-messages" ng-messages="milestoneCreateForm.moreInformation.$error">
+          <div ng-message="required">More information is required.</div>
+          <div ng-message="max">
+            Max 5000 charactars
+          </div>
+        </div>
       </md-input-container>
     </form>
   </md-dialog-content>
