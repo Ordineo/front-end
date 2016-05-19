@@ -19,6 +19,8 @@ export class MilestoneEditDialogController {
   milestone:Milestone;
   dueDate:Date;
   minDate:Date;
+  endDate:Date;
+  isAccomplished:boolean;
 
   constructor(private scope:IScope,
               private dialog:IDialogService,
@@ -33,6 +35,7 @@ export class MilestoneEditDialogController {
     this.milestone = selectedMilestone;
     this.dueDate = this.moment(selectedMilestone.dueDate).toDate();
     this.minDate = this.moment(selectedMilestone.createDate).toDate();
+    this.isAccomplished = this.milestone.endDate !== null;
   }
 
   cancel():void {
@@ -40,6 +43,11 @@ export class MilestoneEditDialogController {
   }
 
   ok():void {
+    if (this.isAccomplished) {
+      this.milestone.endDate = this.moment(this.endDate).format('YYYY-MM-DD');
+    } else {
+      this.milestone.endDate = null;
+    }
     this.milestone.dueDate = this.moment(this.dueDate).format('YYYY-MM-DD');
     this.milestoneService.put(this.milestone)
       .then(()=> {

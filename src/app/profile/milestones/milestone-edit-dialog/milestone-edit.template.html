@@ -10,6 +10,7 @@
       <div class="datepicker-container">
         <label>Due Date</label>
         <md-datepicker
+          ng-change="$ctrl.onDateChanged()"
           ng-model="$ctrl.dueDate"
           md-placeholder="Due Date"
           name="due"
@@ -35,6 +36,9 @@
           </div>
         </div>
       </md-input-container>
+      <md-checkbox ng-model="$ctrl.isAccomplished" aria-label="Mark as accomplished">
+        Mark as accomplished
+      </md-checkbox>
     </form>
   </md-dialog-content>
   <md-dialog-actions>
