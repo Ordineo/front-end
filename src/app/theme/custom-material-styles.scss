@@ -17,6 +17,17 @@ md-card {
   }
 }
 
+.material-label {
+  color: rgba(0, 0, 0, 0.54);
+  margin-bottom: 4px;
+  font-size: 1em;
+}
+
+.material-text {
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 1.1em;
+}
+
 .no-height-stretch {
   max-height: 0 !important;
 }
