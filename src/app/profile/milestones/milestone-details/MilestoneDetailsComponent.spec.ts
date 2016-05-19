@@ -80,7 +80,6 @@ describe("Milestone details component", ()=> {
 
     it('should subscribe to milestone service', ()=> {
       spyOn(milestoneService, 'subscribeOnMilestoneSelected');
-      expect(milestoneService.subscribeOnMilestoneSelected).not.toHaveBeenCalled();
       ctrl.$onInit();
       expect(milestoneService.subscribeOnMilestoneSelected).toHaveBeenCalled();
     });
