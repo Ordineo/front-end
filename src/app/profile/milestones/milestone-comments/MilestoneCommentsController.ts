@@ -11,20 +11,45 @@ export class MilestoneCommentsController {
   public username:string = "";
   public timestamp:string = "";
   public commentFieldData:string = "";
+  public milestone:string = "";
 
   static $inject:Array<string> = [
     MilestoneService.NAME,
-    SessionService.NAME
+    SessionService.NAME,
+    '$scope',
+    'moment'
   ];
 
-  constructor(private milestoneService:MilestoneService, private sessionService:SessionService) {
+  constructor(private milestoneService:MilestoneService, private sessionService:SessionService, private scope:IScope, private moment:any) {
     this.username = this.sessionService.getUsername();
-    this.getComments();
   }
 
-  public getComments():void {
+  $onInit():void {
+    this.milestoneService.subscribeOnMilestoneSelected(this.scope, this.updateViewModel());
+    var selectedMilestone:any = this.milestoneService.getSelectedMilestone();
+    if (selectedMilestone !== undefined) {
+      this.setViewModel(selectedMilestone);
+    }
+  }
+
+  updateViewModel():()=>any {
+    return ()=> {
+      this.setViewModel(this.milestoneService.getSelectedMilestone());
+    };
+  }
+
+  setViewModel(selectedMilestone:any):void {
+    if (selectedMilestone) {
+      var milestone = selectedMilestone._links.self.href;
+      var index = milestone.indexOf("milestones");
+      this.milestone = milestone.substring(index);
+      this.getComments(this.milestone);
+    }
+  }
+
+  public getComments(milestone):void {
     this.comments = [];
-    this.milestoneService.getCommentsByMilestone()
+    this.milestoneService.getCommentsByMilestone(milestone)
       .then((data:any) => {
         for (var i = 0; i < data._embedded.comments.length; i++) {
           this.comments.push(data._embedded.comments[i]);
@@ -37,9 +62,9 @@ export class MilestoneCommentsController {
     if (this.commentFieldData.trim() !== '') {
       this.setTimestamp();
 
-      this.milestoneService.createCommentByMilestone(this.username, this.timestamp, this.commentFieldData)
+      this.milestoneService.createCommentByMilestone(this.username, this.timestamp, this.commentFieldData, this.milestone)
         .then((success:any) => {
-          this.getComments();
+          this.getComments(this.milestone);
         }, (error:any) => {
         });
 

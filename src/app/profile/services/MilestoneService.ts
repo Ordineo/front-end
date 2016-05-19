@@ -121,21 +121,21 @@ export class MilestoneService implements IMilestoneService {
     }
   }
 
-  public getCommentsByMilestone():IPromise<any> {
+  public getCommentsByMilestone(milestone):IPromise<any> {
     return this.traverson.hal()
-      .from(GatewayApiService.getMilestonesApi() + 'comments/search/findCommentsByMilestone?milestone=' + GatewayApiService.getMilestonesApi() + '/milestones/1')
+      .from(GatewayApiService.getMilestonesApi() + 'comments/search/findCommentsByMilestone?milestone=' + GatewayApiService.getMilestonesApi() + milestone)
       .useAngularHttp()
       .jsonHal()
       .getResource()
       .result;
   }
 
-  public createCommentByMilestone(username:string, createDate:string, message:string):IPromise<any> {
+  public createCommentByMilestone(username:string, createDate:string, message:string, milestone:string):IPromise<any> {
     return this.$http.post(GatewayApiService.getMilestonesApi() + 'comments', {
       "username": username,
       "createDate": createDate,
       "message": message,
-      "milestone": GatewayApiService.getMilestonesApi() + "milestones/1"
+      "milestone": GatewayApiService.getMilestonesApi() + milestone
     });
   }
 
