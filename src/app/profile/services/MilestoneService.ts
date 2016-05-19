@@ -25,7 +25,7 @@ export interface IMilestoneService {
 export class MilestoneService implements IMilestoneService {
   static NAME:string = "MilestoneService";
   static EVENT_MILESTONE_SELECTED:string = "milestoneSelected";
-  
+
   public milestone:Milestone;
   public dueDate:Date;
   public selectedMilestone:Milestone;
@@ -135,7 +135,7 @@ export class MilestoneService implements IMilestoneService {
       "username": username,
       "createDate": createDate,
       "message": message,
-      "milestone": GatewayApiService.getMilestonesApi() + "milestone/1"
+      "milestone": GatewayApiService.getMilestonesApi() + "milestones/1"
     });
   }
 
