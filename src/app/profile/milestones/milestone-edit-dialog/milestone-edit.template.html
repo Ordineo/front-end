@@ -2,7 +2,8 @@
   <md-dialog-content>
     <form class="edit-milestone" name="milestoneCreateForm" novalidate>
       <div ng-if="$ctrl.milestone.objective">
-        <span class="material-label">Objective</span>
+        <p md-display-3>{{$ctrl.milestone.objective.title}}</p>
+        <span class="material-label">Description</span>
         <p class="material-text no-top-margin" ng-if="$ctrl.milestone.objective.description">
           {{$ctrl.milestone.objective.description}}</p>
         <p class="material-text no-top-margin" ng-if="!$ctrl.milestone.objective.description">No description</p>
