@@ -61,11 +61,11 @@ export class MilestoneContainerController {
     this.createMode = false;
   }
 
-  public onContentLoaded(isLoaded:any):void {
+  public onContentLoaded(isLoaded:boolean):void {
     this.isContentLoaded = isLoaded;
   }
 
-  public isSaveEnabled(isEnabled:any):void {
+  public isSaveEnabled(isEnabled:boolean):void {
     this.saveButton.isDisabled = !isEnabled;
   }
 
