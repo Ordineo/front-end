@@ -135,7 +135,7 @@ export class MilestoneService implements IMilestoneService {
     let url:string = objectiveUrl.substr(0, objectiveUrl.indexOf('{'));
     let dateFormat:string = 'YYYY-MM-DD';
     return {
-      'objective': 'sdf',
+      'objective': url,
       'username': milestone['username'],
       'createDate': this.moment(milestone.createDate).format(dateFormat),
       'dueDate': this.moment(milestone.dueDate).format(dateFormat),
