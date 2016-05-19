@@ -57,11 +57,11 @@ export class MilestoneDetailsController {
       this.setViewModel(selectedMilestone);
     }
   }
-  
+
   showEditDialog():void {
     this.dialog.show(new MilestoneEditDialog());
   }
-  
+
   setViewModel(selectedMilestone:any):void {
     if (selectedMilestone) {
       this.setStatus(selectedMilestone);

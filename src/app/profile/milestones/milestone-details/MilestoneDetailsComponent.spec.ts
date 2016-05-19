@@ -4,12 +4,20 @@ import {IMilestoneService, MilestoneService} from "../../services/MilestoneServi
 import {MockMilestoneService} from "../timeline/MilestoneCreateComponent.spec";
 import IRootScopeService = angular.IRootScopeService;
 import {MilestoneDetailsController, MilestoneDetailsComponent} from "./MilestoneDetailsComponent";
+import {Milestone} from "../../../core/models/milestone";
+import {Objective} from "../../../core/models/objective";
 var moment = require('moment');
 
 describe("Milestone details component", ()=> {
 
   let milestoneService:IMilestoneService;
   let ctrl:MilestoneDetailsController;
+  let mockObjective:Objective = {
+    description: 'hello',
+    objectiveType: 'type',
+    tags: ['t', 'b'],
+    title: 'Sup'
+  };
 
   beforeEach(angular.mock.module(ORDINEO_PROFILE, ($provide:IProvideService)=> {
     milestoneService = new MockMilestoneService();
@@ -34,25 +42,35 @@ describe("Milestone details component", ()=> {
 
       it('should set 1 if enddate is set', ()=> {
         var milestone:Milestone = {
-          endDate: '2017-05-25'
+          endDate: moment('2017-05-25').toDate(),
+          objective: mockObjective,
+          createDate: moment().toDate(),
+          dueDate: moment().toDate(),
+          moreInformation: 'test'
         };
         ctrl.setStatus(milestone);
         expect(ctrl.status).toBe(1);
       });
 
       it('should set 0 if duedate is after current moment', ()=> {
-        let after:string = moment().add(1, 'days').format('YYYY-MM-DD');
+        let after:Date = moment().add(1, 'days').toDate();
         var milestone:Milestone = {
           dueDate: after,
+          createDate: moment().toDate(),
+          objective: mockObjective,
+          moreInformation: 'test'
         };
         ctrl.setStatus(milestone);
         expect(ctrl.status).toBe(0);
       });
 
-      it('should set 2 if duedate is before current moment', ()=> {
-        let after:string = moment().subtract(1, 'days').format('YYYY-MM-DD');
+      it('should set 2 if due date is before current moment', ()=> {
+        let before:Date = moment().subtract(1, 'days').toDate();
         var milestone:Milestone = {
-          dueDate: after,
+          dueDate: before,
+          objective: mockObjective,
+          createDate: moment().toDate(),
+          moreInformation: 'test'
         };
         ctrl.setStatus(milestone);
         expect(ctrl.status).toBe(2);
@@ -76,9 +94,9 @@ describe("Milestone details component", ()=> {
         createDate: new Date(),
         dueDate: new Date(),
         endDate: null,
-        moreInformation: 'test',
-        objective: null,
-        title: 'test'
+        moreInformation: 'tesst',
+        objective: mockObjective,
+        title: 'tessst'
       });
       ctrl.$onInit();
       expect(ctrl.setViewModel).toHaveBeenCalled();
@@ -98,7 +116,7 @@ describe("Milestone details component", ()=> {
         dueDate: new Date(),
         endDate: new Date(),
         moreInformation: 'Hello world',
-        objective: {},
+        objective: mockObjective,
         title: 'Hello totl'
       };
       ctrl.setViewModel(milestone);
