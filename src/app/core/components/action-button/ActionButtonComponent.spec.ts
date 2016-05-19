@@ -23,7 +23,7 @@ describe("Action bar component", ()=> {
     component = $componentController(ActionButtonComponent.NAME, {$scope: scope});
   });
 
-  it('should have a label bound',()=>{
+  it('should have a label bound', ()=> {
     // expect(component.label).toBe('test');
   })
 });
