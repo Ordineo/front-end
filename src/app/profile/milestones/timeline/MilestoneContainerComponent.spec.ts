@@ -1,5 +1,3 @@
-import {ORDINEO_CORE} from "../../../core/core.module";
-import IProvideService = angular.auto.IProvideService;
 import {MockProfileService} from "../../../../../test/mock/MockProfileService";
 import {ProfileService, IProfileService} from "../../services/ProfileService";
 import {SessionService, ISessionService} from "../../../auth/service/SessionService";
@@ -7,9 +5,10 @@ import {SessionMock} from "../../../auth/login/login.spec";
 import {IMilestoneService, MilestoneService} from "../../services/MilestoneService";
 import {MockMilestoneService} from "./MilestoneCreateComponent.spec";
 import {MilestoneContainerComponent, MilestoneContainerController} from "./MilestoneContainerComponent";
+import {ORDINEO_PROFILE} from "../../ProfileModule";
+import IProvideService = angular.auto.IProvideService;
 import IRootScopeService = angular.IRootScopeService;
 import IScope = angular.IScope;
-import {ORDINEO_PROFILE} from "../../ProfileModule";
 
 describe("describe text", ()=> {
   var scope:IScope;
@@ -26,7 +25,6 @@ describe("describe text", ()=> {
     $provide.service(MilestoneService.NAME, ()=>milestoneService);
     $provide.service(ProfileService.NAME, ()=>profileService);
     $provide.service(SessionService.NAME, ()=>sessionService);
-    // $provide.service('$scope', $rootScope.$new);
   }));
 
   beforeEach(inject((_$componentController_, _$rootScope_:IRootScopeService)=> {
@@ -36,10 +34,10 @@ describe("describe text", ()=> {
 
   describe("onContentLoaded", ()=> {
 
-  it("test", ()=> {
-    console.log("logtest");
-  });
+    it("test", ()=> {
+      console.log("logtest");
+    });
 
-});
+  });
 
 });
