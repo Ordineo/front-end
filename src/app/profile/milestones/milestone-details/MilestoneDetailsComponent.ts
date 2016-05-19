@@ -59,7 +59,7 @@ export class MilestoneDetailsController {
   showEditDialog():void {
     this.dialog.show(new MilestoneEditDialog());
   }
-  
+
   updateViewModel():()=>any {
     return ()=> {
       this.setViewModel(this.milestoneService.getSelectedMilestone());

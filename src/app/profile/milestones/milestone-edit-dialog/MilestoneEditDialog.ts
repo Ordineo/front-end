@@ -10,7 +10,6 @@ export class MilestoneEditDialog implements IDialogOptions {
   controller:Function = MilestoneEditDialogController;
   bindToController:boolean = true;
   controllerAs:string = '$ctrl';
-  fullscreen:boolean = true;
 }
 
 export class MilestoneEditDialogController {
@@ -38,21 +37,15 @@ export class MilestoneEditDialogController {
 
   ok():void {
     /*make request*/
+    this.milestone.dueDate = this.moment(this.dueDate).format('YYYY-MM-DD');
     this.milestoneService.put(this.milestone)
-      .then(this.closeDialog)
-      .catch(this.showErrorMessage);
-  }
-
-  showErrorMessage(error):()=>any {
-    return ()=> {
-      console.log(error)
-    }
-  }
-
-  closeDialog(data):()=>any {
-    return ()=> {
-      console.log(data);
-      this.dialog.hide();
-    }
+      .then(()=> {
+        this.dialog.hide();
+        this.milestoneService.notifyMilestoneSelected();
+      })
+      .catch((err)=> {
+        /*show error message*/
+        console.log(err);
+      });
   }
 }

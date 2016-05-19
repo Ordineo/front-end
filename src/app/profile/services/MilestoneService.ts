@@ -124,9 +124,23 @@ export class MilestoneService implements IMilestoneService {
 
 
   put(milestone:Milestone):angular.IPromise<any> {
-    milestone.objective = milestone['_links'].objective.href;
-    debugger;
+
+    // milestone.objective = url;
     return this.$http.put(milestone['_links'].self.href,
-      milestone);
+      this.getPutPayload(milestone));
+  }
+
+  private getPutPayload(milestone:Milestone) {
+    let objectiveUrl:string = milestone.objective['_links'].self.href;
+    let url:string = objectiveUrl.substr(0, objectiveUrl.indexOf('{'));
+    let dateFormat:string = 'YYYY-MM-DD';
+    return {
+      'objective': url,
+      'username': milestone['username'],
+      'createDate': this.moment(milestone.createDate).format(dateFormat),
+      'dueDate': this.moment(milestone.dueDate).format(dateFormat),
+      'endDate': milestone.endDate ? this.moment(milestone.endDate).format(dateFormat) : null,
+      'moreInformation': milestone.moreInformation
+    };
   }
 }
