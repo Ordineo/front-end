@@ -84,7 +84,7 @@ export class MockMilestoneService implements IMilestoneService {
   }
 
   getSelectedMilestone():Milestone {
-    return null;
+    return undefined;
   }
 
   setObjective(objective:Objective):void {
