@@ -1,4 +1,4 @@
-Feature('Timeline section');
+Feature('Timeline section in summary');
 
 Before((I) => {
   I.amOnPage('/#/login');
@@ -37,6 +37,12 @@ Scenario('Show the timeline and create a milestone', (I) => {
   I.see('You must select an objective', '#milestone-container');
   I.click('.btnCancel', '#milestone-container');
   I.see('Timeline', '#milestone-container');
+});
+
+Scenario('Go to the detail page of a milestone', (I) => {
+  I.waitForElement('#milestone-container');
+  I.click('.btnDetail', '#milestone-container');
+  I.see('Spring Boot', '#milestone-details');
 });
 
 

@@ -1,4 +1,4 @@
-<md-card>
+<md-card id="milestone-details">
   <md-card-title>
     <md-card-title-text>
       <div ng-if="milestoneDetails.milestone" layout="row">
@@ -14,7 +14,7 @@
         <md-button
           aria-label="Edit"
           ng-click="milestoneDetails.showEditDialog()"
-          class="btnSave md-icon-button md-primary">
+          class="btnEdit md-icon-button md-primary">
           <md-icon md-svg-icon="content:create"></md-icon>
         </md-button>
       </div>
@@ -46,5 +46,6 @@
         <p class="no-top-margin">{{milestoneDetails.endDate}}</p>
       </div>
     </div>
-  </div>
+    <md-chips readonly="true" ng-model="milestoneDetails.tags"></md-chips>
+  </md-card-content>
 </md-card>

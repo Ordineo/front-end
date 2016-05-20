@@ -1,7 +1,7 @@
 <md-content style="margin-bottom: 24px;" md-whiteframe="1" layout="row" layout-align="center center">
   <!-- TODO DESTROYS e2e tests why?? <md-tabs md-center-tabs="true">-->
   <span flex="5"></span>
-  <md-tabs flex>
+  <md-tabs flex id="main-menu">
     <md-tab md-active="tab.isActive" ng-repeat="tab in $ctrl.tabs" label="{{tab.label}}"
             md-on-select="$ctrl.onSelected(tab)"></md-tab>
   </md-tabs>
