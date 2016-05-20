@@ -15,6 +15,15 @@ Scenario('Show the details of a milestone', (I) => {
   I.see('Spring Boot', '#milestone-details');
 });
 
+Scenario('Edit the details of a milestone', (I) => {
+  I.click('//span[text()="Spring Boot "]', '#milestone-list');
+  I.see('Spring Boot', '#milestone-details');
+  I.click('.btnEdit', '#milestone-details');
+  I.seeElement('#edit-milestone');
+  I.fillField({model: '$ctrl.milestone.moreInformation'},'More information test');
+  I.click('.btnOk', '#edit-milestone');
+  I.see('More information test', '#milestone-details');
+});
 
 
 
