@@ -13,14 +13,14 @@ import {LoginComponent, LoginController} from "../LoginComponent";
 import {ISessionService, SessionService} from "../service/SessionService";
 
 describe("Login controller", ()=> {
-  var scope:IScope;
-  var ctrl:LoginController;
-  var authService:IAuthService;
-  var sessionService:ISessionService;
+  var scope: IScope;
+  var ctrl: LoginController;
+  var authService: IAuthService;
+  var sessionService: ISessionService;
 
   beforeEach(
     angular.mock.module(JWORKS_AUTH,
-      ($provide:IProvideService)=> {
+      ($provide: IProvideService)=> {
         authService = new AuthMock();
         sessionService = new SessionMock();
 
@@ -28,7 +28,7 @@ describe("Login controller", ()=> {
         $provide.service(SessionService.NAME, ()=>sessionService);
       }));
 
-  beforeEach(inject((_$componentController_, _$rootScope_:IRootScopeService)=> {
+  beforeEach(inject((_$componentController_, _$rootScope_: IRootScopeService)=> {
     scope = _$rootScope_.$new();
     ctrl = _$componentController_(LoginComponent.NAME, {$scope: scope});
   }));
@@ -41,13 +41,12 @@ describe("Login controller", ()=> {
 
   describe('login', ()=> {
 
-    it('should succeed', inject((_$q_:IQService)=> {
-      var deferred:IDeferred<any> = _$q_.defer();
+    it('should succeed', inject((_$q_: IQService)=> {
+      var deferred: IDeferred<any> = _$q_.defer();
       spyOn(authService, 'logIn').and.returnValue(deferred.promise);
       spyOn(sessionService, 'setAuthData');
       spyOn(authService, 'authenticate');
       ctrl.logIn({
-        email: 'ryan@mail.be',
         password: 'hottentottentettententoonstelling',
         username: 'Rydg'
       });
@@ -58,11 +57,11 @@ describe("Login controller", ()=> {
       expect(authService.authenticate).toHaveBeenCalled();
     }));
 
-    it('should fail with 401 error', inject((_$q_:IQService)=> {
-      var deferred:IDeferred<any> = _$q_.defer();
+    it('should fail with 401 error', inject((_$q_: IQService)=> {
+      var deferred: IDeferred<any> = _$q_.defer();
       spyOn(authService, 'logIn').and.returnValue(deferred.promise);
       spyOn(ctrl, 'showErrorMessage');
-      ctrl.logIn({});
+      ctrl.logIn(null);
       expect(authService.logIn).toHaveBeenCalled();
       deferred.reject({status: 401});
       scope.$digest();
@@ -71,11 +70,11 @@ describe("Login controller", ()=> {
       expect(ctrl.errorMessage).toBe("Login failed. Invalid username or password");
     }));
 
-    it('should fail with connection error', inject((_$q_:IQService)=> {
-      var deferred:IDeferred<any> = _$q_.defer();
+    it('should fail with connection error', inject((_$q_: IQService)=> {
+      var deferred: IDeferred<any> = _$q_.defer();
       spyOn(authService, 'logIn').and.returnValue(deferred.promise);
       spyOn(ctrl, 'showErrorMessage');
-      ctrl.logIn({});
+      ctrl.logIn(null);
       expect(authService.logIn).toHaveBeenCalled();
       deferred.reject({});
       scope.$digest();
@@ -88,34 +87,34 @@ describe("Login controller", ()=> {
 
 });
 export class SessionMock implements ISessionService {
-  setAuthData(authData:string):void {
+  setAuthData(authData: string): void {
   }
 
-  getAuthData():string {
+  getAuthData(): string {
     return null;
   }
 
-  getUsername():string {
+  getUsername(): string {
     return null;
   }
 
-  destroySession():void {
+  destroySession(): void {
   }
 }
 export class AuthMock implements IAuthService {
-  authenticate(routeNames:string[], callBack:Function):void {
+  authenticate(routeNames: string[], callBack: Function): void {
 
   }
 
-  logIn(credentials:ICredentials):angular.IPromise<any> {
+  logIn(credentials: ICredentials): angular.IPromise<any> {
     return null;
   }
 
-  logOut():angular.IPromise<any> {
+  logOut(): angular.IPromise<any> {
     return null;
   }
 
-  isAuthorized():boolean {
+  isAuthorized(): boolean {
     return null;
   }
 }
