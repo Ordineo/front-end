@@ -45,7 +45,10 @@ export class MilestoneDetailsController {
     '$mdDialog'
   ];
 
-  constructor(private milestoneService:IMilestoneService, private scope:IScope, private moment:any, private dialog:IDialogService) {
+  constructor(private milestoneService: IMilestoneService,
+              private scope: IScope,
+              private moment: any,
+              private dialog: IDialogService) {
   }
 
   $onInit():void {
