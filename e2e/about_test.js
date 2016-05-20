@@ -9,6 +9,7 @@ Before((I) => {
 
 Scenario('Open the profile page', (I) => {
   I.see('JWorks 360', '#toolbar');
+  I.see('Test Tester', 'app-header');
   //I.see('Sync with Linkedin', '#getDetails'); //todo show linkdin
   I.waitForElement('.about-header', 2);
   I.seeElement('.about-header');
