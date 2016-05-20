@@ -13,7 +13,7 @@ export class MilestoneEditDialog implements IDialogOptions {
 }
 
 export class MilestoneEditDialogController {
-  static $inject: string[] = ["$scope", "$mdDialog", MilestoneService.NAME, "moment", "$mdToast"];
+  static $inject: string[] = ["$mdDialog", MilestoneService.NAME, "moment", "$mdToast"];
 
   milestone: Milestone;
   dueDate: Date;
