@@ -3,7 +3,7 @@ import IAngularEvent = angular.IAngularEvent;
 import './milestone-details.scss';
 import IRootScopeService = angular.IRootScopeService;
 import IScope = angular.IScope;
-import {MilestoneService, IMilestoneService} from "../../services/MilestoneService";
+import {MilestoneService, IMilestoneService, MilestoneSelectedData} from "../../services/MilestoneService";
 import IWindowService = angular.IWindowService;
 import Router = angular.Router;
 import {Objective} from "../../../core/models/objective";
@@ -45,13 +45,18 @@ export class MilestoneDetailsController {
     '$mdDialog'
   ];
 
-  constructor(private milestoneService:IMilestoneService, private scope:IScope, private moment:any, private dialog:IDialogService) {
+  constructor(private milestoneService: IMilestoneService,
+              private scope: IScope,
+              private moment: any,
+              private dialog: IDialogService) {
   }
 
   $onInit():void {
-    this.milestoneService.subscribeOnMilestoneSelected(this.scope, this.updateViewModel());
+    this.milestoneService.subscribeOnMilestoneSelected(this.scope, ($event:IAngularEvent, args:MilestoneSelectedData)=> {
+      this.setViewModel(args.milestone);
+    });
     var selectedMilestone:any = this.milestoneService.getSelectedMilestone();
-    if (selectedMilestone !== undefined) {
+    if (selectedMilestone !== undefined && selectedMilestone !== null) {
       this.setViewModel(selectedMilestone);
     }
   }
@@ -60,18 +65,17 @@ export class MilestoneDetailsController {
     this.dialog.show(new MilestoneEditDialog());
   }
 
-  updateViewModel():()=>any {
-    return ()=> {
-      this.setViewModel(this.milestoneService.getSelectedMilestone());
-    };
-  }
-
-  setViewModel(selectedMilestone:any):void {
+  setViewModel(selectedMilestone: Milestone): void {
     if (selectedMilestone) {
       this.setStatus(selectedMilestone);
       this.milestone = selectedMilestone;
       this.createDate = this.moment(selectedMilestone.createDate).format('ll');
       this.dueDate = this.moment(selectedMilestone.dueDate).format('ll');
+      if (selectedMilestone.endDate) {
+        this.endDate = this.moment(selectedMilestone.endDate).format('ll');
+      } else {
+        this.endDate = null;
+      }
       this.moreInformation = selectedMilestone.moreInformation;
 
       var objective:Objective = selectedMilestone.objective;
@@ -83,14 +87,18 @@ export class MilestoneDetailsController {
   }
 
   setStatus(milestone:Milestone):void {
-    var currentMoment = this.moment();
-    if (currentMoment.isAfter(this.moment(milestone.dueDate))) {
-      this.status = 2;
-    } else if (currentMoment.isBefore(this.moment(milestone.dueDate))) {
-      this.status = 0;
-    }
-    if (milestone.endDate) {
-      this.status = 1;
+    if (milestone) {
+      var currentMoment = this.moment();
+      if (currentMoment.isAfter(this.moment(milestone.dueDate))) {
+        this.status = 2;
+      } else if (currentMoment.isBefore(this.moment(milestone.dueDate))) {
+        this.status = 0;
+      }
+      if (milestone.endDate) {
+        this.status = 1;
+      }
+    } else {
+      this.status = -1;
     }
   }
 }

@@ -67,6 +67,10 @@ describe("Milestone Create Controller", ()=> {
 });
 export class MockMilestoneService implements IMilestoneService {
 
+  put(milestone:Milestone):angular.IPromise<any> {
+    return null;
+  }
+
   notifyMilestoneSelected():void {
   }
 
@@ -84,7 +88,7 @@ export class MockMilestoneService implements IMilestoneService {
   }
 
   getSelectedMilestone():Milestone {
-    return null;
+    return undefined;
   }
 
   setObjective(objective:Objective):void {

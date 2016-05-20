@@ -15,8 +15,8 @@ import {MilestoneDetailsComponent} from "./milestones/milestone-details/Mileston
 import {ProfileMenuComponent} from "./profile-menu/ProfileMenuComponent";
 import {SummaryPageComponent} from "./summary-page/SummaryPageComponent";
 import {MilestoneDetailsPageComponent} from "./milestones-details-page/MilestoneDetailsPageComponent";
-import {MilestoneItemComponent} from "./milestones/milestone-list/MilestoneItemComponent";
 import {MilestoneCommentsComponent} from "./milestones/milestone-comments/MilestoneCommentsComponent";
+import {MilestoneItemComponent} from "./milestones/milestone-list/MilestoneItemComponent";
 import {ProfileMenuState} from "./profile-menu/ProfileMenuState";
 
 /**
@@ -56,8 +56,18 @@ angular
   .component(ProfileMenuComponent.NAME, new ProfileMenuComponent())
   .component(ProfileComponent.NAME, new ProfileComponent())
   .component(MilestoneDetailsComponent.NAME, new MilestoneDetailsComponent())
-  .component(MilestoneItemComponent.NAME, new MilestoneItemComponent())
   .component(MilestoneCommentsComponent.NAME, new MilestoneCommentsComponent())
+  .component(MilestoneItemComponent.NAME, new MilestoneItemComponent())
   .directive(AboutDirective.NAME, AboutDirective.instance())
-
-;
+  .directive('onEnter', function () {
+    return function (scope, element, attrs) {
+      element.bind("keydown keypress", function (event) {
+        if (event.which === 13) {
+          scope.$apply(function () {
+            scope.$eval(attrs.onEnter);
+          });
+          event.preventDefault();
+        }
+      });
+    }
+  });

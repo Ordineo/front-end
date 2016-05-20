@@ -51,7 +51,7 @@ export class MilestoneService implements IMilestoneService {
   }
 
   public notifyMilestoneSelected():void {
-    this.$rootScope.$emit(MilestoneService.EVENT_MILESTONE_SELECTED);
+    this.$rootScope.$emit(MilestoneService.EVENT_MILESTONE_SELECTED, {milestone: this.getSelectedMilestone()});
   }
 
   setSelectedMilestone(milestone:Milestone):void {
@@ -122,6 +122,24 @@ export class MilestoneService implements IMilestoneService {
     }
   }
 
+  public getCommentsByMilestone(milestone):IPromise<any> {
+    return this.traverson.hal()
+      .from(GatewayApiService.getMilestonesApi() + 'comments/search/findCommentsByMilestone?milestone=' + GatewayApiService.getMilestonesApi() + milestone)
+      .useAngularHttp()
+      .jsonHal()
+      .getResource()
+      .result;
+  }
+
+  public createCommentByMilestone(username:string, createDate:string, message:string, milestone:string):IPromise<any> {
+    return this.$http.post(GatewayApiService.getMilestonesApi() + 'comments', {
+      "username": username,
+      "createDate": createDate,
+      "message": message,
+      "milestone": GatewayApiService.getMilestonesApi() + milestone
+    });
+  }
+
 
   put(milestone:Milestone):angular.IPromise<any> {
 
@@ -143,4 +161,7 @@ export class MilestoneService implements IMilestoneService {
       'moreInformation': milestone.moreInformation
     };
   }
+}
+export interface MilestoneSelectedData {
+  milestone:Milestone
 }

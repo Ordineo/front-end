@@ -1,9 +1,9 @@
-//$orange: #e98300;
-//$lightOrange: #f9a858;
-//$grey: #57595b;
-//$lightGrey: #bdbcbc;
-//$darkGrey: #686868;
-//$mainBackground: #f4f4f4;
+$orange: #e98300;
+$lightOrange: #f9a858;
+$grey: #57595b;
+$lightGrey: #bdbcbc;
+$darkGrey: #686868;
+$mainBackground: #f4f4f4;
 $green: #5bb75b;
 $red: #dd0000;
 
@@ -24,5 +24,56 @@ milestone-details {
     .notAccomplished {
       color: $red;
     }
+  }
+
+  #milestone-details-header {
+    margin-bottom: 10px;
+
+    #milestone-title {
+      font-size: 30px;
+    }
+  }
+
+  #milestone-details {
+    clear: both;
+
+    #milestone-details-dates {
+      & > .detail {
+        width: 125px;
+      }
+    }
+  }
+}
+
+#comments-section {
+  border-left: solid 1px #eeeeee;
+  padding: 5px 10px 0 5px;
+  position: relative;
+  width: 500px;
+
+  #comments {
+    height: 175px;
+    overflow-y: scroll;
+  }
+
+  md-input-container {
+    bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    position: absolute;
+    width: 93%;
+  }
+}
+
+.small-text {
+  font-size: 20px;
+}
+
+.detail {
+  display: inline-block;
+
+  & > h4 {
+    color: $orange;
+    margin-bottom: 3px;
   }
 }
