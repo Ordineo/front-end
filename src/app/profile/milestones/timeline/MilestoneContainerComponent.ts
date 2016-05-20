@@ -34,7 +34,7 @@ export class MilestoneContainerController {
   public username: string;
   public isContentLoaded: boolean = false;
 
-  static $inject:string[] = [
+  static $inject: string[] = [
     MilestoneService.NAME,
     ProfileService.NAME,
     SessionService.NAME,
@@ -102,7 +102,7 @@ export class MilestoneContainerController {
       isActive: true,
       svgSrc: "content:add_circle",
       aClass: "btnCreate",
-      onClick: (createButton: ActionButton):void => {
+      onClick: (createButton: ActionButton): void => {
         this.toggleCreateMode();
       },
     };
@@ -114,7 +114,7 @@ export class MilestoneContainerController {
       isActive: false,
       svgSrc: "act:done",
       aClass: "btnSave",
-      onClick: (saveButton: ActionButton):void => {
+      onClick: (saveButton: ActionButton): void => {
         var promise: IPromise<any> = this.milestoneService.createMilestoneByUsername(this.profileService.username);
         if (promise) {
           promise.then((success: any) => {
@@ -145,7 +145,7 @@ export class MilestoneContainerController {
       isActive: false,
       svgSrc: "act:highlight_off",
       aClass: "btnCancel",
-      onClick: (cancelButton: ActionButton):void => {
+      onClick: (cancelButton: ActionButton): void => {
         this.toggleCreateMode();
       },
     };

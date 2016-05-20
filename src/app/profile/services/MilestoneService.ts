@@ -122,7 +122,7 @@ export class MilestoneService implements IMilestoneService {
     }
   }
 
-  public getCommentsByMilestone(milestone:Milestone): IPromise<any> {
+  public getCommentsByMilestone(milestone: Milestone): IPromise<any> {
     return this.traverson.hal()
       .from(GatewayApiService.getMilestonesApi() + "comments/search/findCommentsByMilestone?milestone=" + GatewayApiService.getMilestonesApi() + milestone)
       .useAngularHttp()
@@ -148,7 +148,7 @@ export class MilestoneService implements IMilestoneService {
       this.getPutPayload(milestone));
   }
 
-  private getPutPayload(milestone: Milestone):any {
+  private getPutPayload(milestone: Milestone): any {
     let objectiveUrl: string = milestone.objective["_links"].self.href;
     let url: string = objectiveUrl.substr(0, objectiveUrl.indexOf("{"));
     let dateFormat = "YYYY-MM-DD";

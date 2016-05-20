@@ -19,7 +19,7 @@ export class AppComponent implements IComponentOptions {
   ];
 }
 export class AppComponentController {
-  static $inject:string[] = [AuthService.NAME, ProfileService.NAME, SessionService.NAME];
+  static $inject: string[] = [AuthService.NAME, ProfileService.NAME, SessionService.NAME];
 
   constructor(private authService: IAuthService,
               private profileService: ProfileService,

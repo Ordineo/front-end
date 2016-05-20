@@ -21,7 +21,7 @@ export class ProfileSearchController {
     return query ? this.users.filter(this.filter(query)) : this.users;
   }
 
-  filter(query:string): any {
+  filter(query: string): any {
     return (user: any) => {
       var lowerCaseUserDisplay: string = user.display.toLocaleLowerCase().trim();
       return lowerCaseUserDisplay.indexOf(query) !== -1;

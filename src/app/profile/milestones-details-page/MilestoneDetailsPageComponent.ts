@@ -17,7 +17,7 @@ export class MilestoneDetailsPageController {
   public username: string;
   public milestonesLoaded: boolean;
 
-  static $inject:string[] = [ProfileService.NAME, MilestoneService.NAME];
+  static $inject: string[] = [ProfileService.NAME, MilestoneService.NAME];
 
   constructor(private profileService: ProfileService,
               private milestoneService: MilestoneService) {

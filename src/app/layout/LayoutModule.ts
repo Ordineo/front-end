@@ -5,7 +5,7 @@ import {HeaderComponent} from "./header/HeaderComponent";
 
 export const ORDINEO_LAYOUT = "ordineo.layout";
 
-var deps:Array<string> = [];
+var deps: Array<string> = [];
 
 angular
   .module(ORDINEO_LAYOUT, deps)

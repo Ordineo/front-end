@@ -28,7 +28,7 @@ export class ObjectivesSearchController {
   public onSelected: Function;
   public objectives: Objective[] = [];
 
-  static $inject:string[] = ["$q", "rx", "$scope", MilestoneService.NAME];
+  static $inject: string[] = ["$q", "rx", "$scope", MilestoneService.NAME];
 
   constructor(private $q: IQService, private rx: any, private $scope: IRxScope, private milestoneService: MilestoneService) {
     this.deferred = this.$q.defer();

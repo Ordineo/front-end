@@ -21,7 +21,7 @@ export class TimelineController {
   public username: string;
   public onContentLoaded: Function;
 
-  static $inject:string[] = [
+  static $inject: string[] = [
     ProfileService.NAME,
     "$scope",
     MilestoneService.NAME,

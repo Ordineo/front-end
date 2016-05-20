@@ -30,7 +30,7 @@ export class MilestoneCreateController implements IMilestoneCreateBindings {
   public dueDate: Date;
   private milestone: Milestone;
 
-  static $inject:string[] = [MilestoneService.NAME, "$scope"];
+  static $inject: string[] = [MilestoneService.NAME, "$scope"];
 
   constructor(private milestoneService: MilestoneService, private scope: IScope) {
     this.milestone = this.milestoneService.getNewMilestone();
