@@ -1,40 +1,36 @@
 import {LinkedInService} from "../../social/linkedin/LinkedInService";
 import {GatewayApiService} from "../../gateway/service/GatewayApiService";
 import IRootScopeService = angular.IRootScopeService;
-import IHttpService = angular.IHttpService;
-import IRequestConfig = angular.IRequestConfig;
 import ISCEService = angular.ISCEService;
 
 export class LinkedInController {
-  public linkedinIcon:any;
-  public action:string;
-  public username:string;
+  public linkedinIcon: any;
+  public action: string;
+  public username: string;
 
-  static SESSION_ITEM:string = 'fromAuth';
-  static EVENT_AUTH:string = 'goToAuth';
-  static EVENT_SYNC_EMPLOYEE:string = 'syncEmployeeData';
+  static SESSION_ITEM: string = "fromAuth";
+  static EVENT_AUTH: string = "goToAuth";
+  static EVENT_SYNC_EMPLOYEE: string = "syncEmployeeData";
 
-  static $inject:Array<string> = [
-    '$sce',
+  static $inject: Array<string> = [
+    "$sce",
     LinkedInService.SERVICE_NAME,
-    '$rootScope'
+    "$rootScope"
   ];
 
-  constructor(
-    private $sce:ISCEService,
-    private service:LinkedInService,
-    private scope:IRootScopeService
-  ) {
-    this.linkedinIcon = {title: 'linkedin-box', icon: 'mdi:linkedin-box'};
+  constructor(private $sce: ISCEService,
+              private service: LinkedInService,
+              private scope: IRootScopeService) {
+    this.linkedinIcon = {title: "linkedin-box", icon: "mdi:linkedin-box"};
     this.action = $sce.trustAsResourceUrl(GatewayApiService.getLinkedInAuthUrl());
   }
 
-  onClick():void{
+  onClick(): void {
     this.service.requestSync(this.username)
-      .then((ok)=> {
+      .then(() => {
         this.scope.$broadcast(LinkedInController.EVENT_SYNC_EMPLOYEE);
-      }, (err)=> {
-        window.sessionStorage.setItem(LinkedInController.SESSION_ITEM, 'true');
+      }, () => {
+        window.sessionStorage.setItem(LinkedInController.SESSION_ITEM, "true");
         this.scope.$broadcast(LinkedInController.EVENT_AUTH);
       });
   }

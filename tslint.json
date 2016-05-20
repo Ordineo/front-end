@@ -1,8 +1,14 @@
 {
   "rules": {
+    "no-internal-module": true,
+    "no-namespace": true,
+    "no-reference": true,
+    "typedef": [true, "call-signature", "parameter", "member-variable-declaration"],
+    "no-conditional-assignment": true,
+    "no-empty": true,
     "max-line-length": [
       true,
-      100
+      160
     ],
     "no-inferrable-types": true,
     "class-name": true,
@@ -64,8 +70,7 @@
       "check-branch",
       "check-decl",
       "check-operator",
-      "check-separator",
-      "check-type"
+      "check-separator"
     ]
   }
 }

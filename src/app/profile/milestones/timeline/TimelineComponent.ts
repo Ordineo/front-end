@@ -7,35 +7,35 @@ import {ProfileService} from "../../services/ProfileService";
 import {INavigator, Navigator} from "../../../core/services/Navigator";
 
 export class TimelineComponent implements IComponentOptions {
-  static NAME:string = "timeline";
-  controller:any = TimelineController;
-  template:string = require('./TimelineComponent-template.html');
-  bindings:any = {
-    onContentLoaded: '&'
+  static NAME: string = "timeline";
+  controller: any = TimelineController;
+  template: string = require("./TimelineComponent-template.html");
+  bindings: any = {
+    onContentLoaded: "&"
   };
 }
 
 export class TimelineController {
-  public title:string = "Timeline";
-  public milestones:Milestone[];
-  public username:string;
-  public onContentLoaded:Function;
+  public title: string = "Timeline";
+  public milestones: Milestone[];
+  public username: string;
+  public onContentLoaded: Function;
 
-  static $inject = [
+  static $inject:string[] = [
     ProfileService.NAME,
-    '$scope',
+    "$scope",
     MilestoneService.NAME,
     Navigator.NAME];
 
-  constructor(private profileService:ProfileService,
-              private $scope:IScope,
-              private milestoneService:MilestoneService,
-              private navigator:INavigator) {
+  constructor(private profileService: ProfileService,
+              private $scope: IScope,
+              private milestoneService: MilestoneService,
+              private navigator: INavigator) {
   }
 
-  $onInit():void {
+  $onInit(): void {
     this.username = this.profileService.username;
-    this.profileService.subscribeUsernameChanged(this.$scope, (evt:IAngularEvent, data:any)=> {
+    this.profileService.subscribeUsernameChanged(this.$scope, (evt: IAngularEvent, data: any) => {
       this.username = data.username;
       this.getMilestoneDataAsync();
     });
@@ -46,18 +46,18 @@ export class TimelineController {
     }
   }
 
-  onMilestoneDetailsClick($locals:any):void {
-    var milestone:Milestone = $locals.milestone;
+  onMilestoneDetailsClick($locals: any): void {
+    var milestone: Milestone = $locals.milestone;
     this.navigator.goToMilestoneDetails(this.username, milestone);
   }
 
-  getMilestoneDataAsync():void {
+  getMilestoneDataAsync(): void {
     this.onContentLoaded({isLoaded: false});
     this.milestoneService.getMilestonesByUsername(this.username)
-      .then((milestones:Milestone[])=> {
+      .then((milestones: Milestone[]) => {
           this.milestones = milestones;
           this.onContentLoaded({isLoaded: true});
-        }, (onError)=> {
+        }, (onError) => {
           console.log(onError);
         }
       );

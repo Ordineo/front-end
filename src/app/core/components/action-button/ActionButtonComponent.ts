@@ -1,5 +1,5 @@
 import IComponentOptions = angular.IComponentOptions;
-import 'angular-material';
+import "angular-material";
 
 /**
  * @ngdoc component
@@ -31,18 +31,18 @@ import 'angular-material';
  */
 
 export class ActionButtonComponent implements IComponentOptions {
-  static NAME:string = "actionButton";
+  static NAME: string = "actionButton";
 
-  bindings:any = {
-    label: '@',
-    onClick: '&',
-    isActive: '<',
-    svgSrc: '@',
-    isDisabled: '<',
-    aClass: '@'
+  bindings: any = {
+    label: "@",
+    onClick: "&",
+    isActive: "<",
+    svgSrc: "@",
+    isDisabled: "<",
+    aClass: "@"
   };
 
-  template:string = `
+  template: string = `
         <md-button
           ng-disabled="$ctrl.isDisabled"
           aria-label="{{$ctrl.label}}"
@@ -52,25 +52,25 @@ export class ActionButtonComponent implements IComponentOptions {
           <md-icon md-svg-src="{{$ctrl.svgSrc}}"></md-icon>
         </md-button>
   `;
-  controller:Function = ActionButtonController;
+  controller: Function = ActionButtonController;
 }
 export class ActionButtonController implements ActionButton {
-  label:string;
-  isActive:boolean;
-  svgSrc:string;
-  isDisabled:boolean;
-  aClass:string;
-  public onClick:Function;
+  label: string;
+  isActive: boolean;
+  svgSrc: string;
+  isDisabled: boolean;
+  aClass: string;
+  public onClick: Function;
 
-  click():void {
+  click(): void {
     this.onClick({btn: this});
   }
 }
 export interface ActionButton {
-  label?:string,
-  onClick?:Function,
-  isActive?:boolean,
-  svgSrc?:string,
-  isDisabled?:boolean,
-  aClass?:string
+  label?: string;
+  onClick?: Function;
+  isActive?: boolean;
+  svgSrc?: string;
+  isDisabled?: boolean;
+  aClass?: string;
 }

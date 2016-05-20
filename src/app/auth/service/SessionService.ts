@@ -1,31 +1,31 @@
 import IWindowService = angular.IWindowService;
 
 export class SessionService implements ISessionService {
-  static NAME:string = "sessionService";
-  static $inject = ['$window', 'jwtHelper'];
+  static NAME: string = "sessionService";
+  static $inject: Array<string> = ["$window", "jwtHelper"];
 
-  private ITEM_TOKEN:string = 'session.token';
+  private ITEM_TOKEN: string = "session.token";
 
-  private token:string;
+  private token: string;
 
-  constructor(private $window:IWindowService, private jwtHelper:any) {
+  constructor(private $window: IWindowService, private jwtHelper: any) {
     this.token = this.$window.localStorage.getItem(this.ITEM_TOKEN);
   }
-  
-  getAuthData():string {
+
+  getAuthData(): string {
     return this.$window.localStorage.getItem(this.ITEM_TOKEN);
   }
 
-  setAuthData(token:string):void {
+  setAuthData(token: string): void {
     this.token = token;
-    if(token) {
+    if (token) {
       this.$window.localStorage.setItem(this.ITEM_TOKEN, this.token);
-    }else{
+    } else {
       this.$window.localStorage.removeItem(this.ITEM_TOKEN);
     }
   }
 
-  getUsername():string {
+  getUsername(): string {
     if (this.token) {
       return this.jwtHelper.decodeToken(this.token).sub;
     } else {
@@ -33,14 +33,14 @@ export class SessionService implements ISessionService {
     }
   }
 
-  destroySession():void {
+  destroySession(): void {
     this.setAuthData(null);
   }
 }
 
 export interface ISessionService {
-  setAuthData(authData:string):void;
-  getAuthData():string;
-  getUsername():string;
-  destroySession():void;
+  setAuthData(authData: string): void;
+  getAuthData(): string;
+  getUsername(): string;
+  destroySession(): void;
 }

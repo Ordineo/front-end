@@ -1,7 +1,7 @@
 import IComponentOptions = angular.IComponentOptions;
 import {ToolbarController} from "./ToolbarController";
-import './images/jworks.png';
-import './toolbar.scss';
+import "./images/jworks.png";
+import "./toolbar.scss";
 
 /**
  * @ngdoc component
@@ -12,15 +12,15 @@ import './toolbar.scss';
  * The main toolbar for the ordineo home page
  *
  * @usage
- * <toolbar employee-name='$ctrl.name'></toolbar>
+ * <toolbar employee-name="$ctrl.name"></toolbar>
  */
 export class ToolbarComponent implements IComponentOptions {
-  static NAME:string = "toolbar";
+  static NAME: string = "toolbar";
 
-  bindings:any = {
-    employeeName: '<',
-    newMessagesCount: '<'
+  bindings: any = {
+    employeeName: "<",
+    newMessagesCount: "<"
   };
-  controller:any = ToolbarController;
-  template:string = require('./toolbar.html');
+  controller: any = ToolbarController;
+  template: string = require("./toolbar.html");
 }

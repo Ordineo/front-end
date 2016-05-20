@@ -1,46 +1,43 @@
-import IRootScopeService = angular.IRootScopeService;
-import IAngularEvent = angular.IAngularEvent;
-import ISCEService = angular.ISCEService;
 import IScope = angular.IScope;
 import {MilestoneService} from "../../services/MilestoneService";
 import {SessionService} from "../../../auth/service/SessionService";
-var $ = require('jquery');
+var $ = require("jquery");
 
 export class MilestoneCommentsController {
-  public comments:any = [];
-  public username:string = "";
-  public commentFieldData:string = "";
-  public milestone:string = "";
+  public comments: any = [];
+  public username: string = "";
+  public commentFieldData: string = "";
+  public milestone: string = "";
 
-  static $inject:Array<string> = [
+  static $inject: Array<string> = [
     MilestoneService.NAME,
     SessionService.NAME,
-    '$scope',
-    'moment'
+    "$scope",
+    "moment"
   ];
 
-  constructor(private milestoneService:MilestoneService,
-              private sessionService:SessionService,
-              private scope:IScope,
-              private moment:any) {
+  constructor(private milestoneService: MilestoneService,
+              private sessionService: SessionService,
+              private scope: IScope,
+              private moment: any) {
     this.username = this.sessionService.getUsername();
   }
 
-  $onInit():void {
+  $onInit(): void {
     this.milestoneService.subscribeOnMilestoneSelected(this.scope, this.updateViewModel());
-    var selectedMilestone:any = this.milestoneService.getSelectedMilestone();
+    var selectedMilestone: any = this.milestoneService.getSelectedMilestone();
     if (selectedMilestone !== undefined) {
       this.setViewModel(selectedMilestone);
     }
   }
 
-  updateViewModel():()=>any {
-    return ()=> {
+  updateViewModel(): () => any {
+    return () => {
       this.setViewModel(this.milestoneService.getSelectedMilestone());
     };
   }
 
-  setViewModel(selectedMilestone:any):void {
+  setViewModel(selectedMilestone: any): void {
     if (selectedMilestone) {
       var milestone = selectedMilestone._links.self.href;
       var index = milestone.indexOf("milestones");
@@ -49,28 +46,27 @@ export class MilestoneCommentsController {
     }
   }
 
-  public getComments(milestone):void {
+  public getComments(milestone: any): void {
     this.comments = [];
     this.milestoneService.getCommentsByMilestone(milestone)
-      .then((data:any) => {
+      .then((data: any) => {
         for (var i = 0; i < data._embedded.comments.length; i++) {
           this.comments.push(data._embedded.comments[i]);
         }
-      }, (error:any) => {
       });
   }
 
-  public addComment():void {
-    if (this.commentFieldData.trim() !== '') {
+  public addComment(): void {
+    if (this.commentFieldData.trim() !== "") {
       this.milestoneService.createCommentByMilestone(
         this.username,
-        this.moment().format('YYYY-MM-DDThh:mm:ss'),
+        this.moment().format("YYYY-MM-DDThh:mm:ss"),
         this.commentFieldData,
         this.milestone
-      ).then((success:any) => {
-        this.getComments(this.milestone)
+      ).then((success: any) => {
+        this.getComments(this.milestone);
       });
-      $('#commentField').blur();
+      $("#commentField").blur();
       this.commentFieldData = "";
     }
   }

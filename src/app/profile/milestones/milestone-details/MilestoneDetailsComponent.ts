@@ -1,76 +1,71 @@
 import IComponentOptions = angular.IComponentOptions;
 import IAngularEvent = angular.IAngularEvent;
-import './milestone-details.scss';
-import IRootScopeService = angular.IRootScopeService;
+import "./milestone-details.scss";
 import IScope = angular.IScope;
 import {MilestoneService, IMilestoneService, MilestoneSelectedData} from "../../services/MilestoneService";
-import IWindowService = angular.IWindowService;
-import Router = angular.Router;
 import {Objective} from "../../../core/models/objective";
 import {Milestone} from "../../../core/models/milestone";
 import IDialogService = angular.material.IDialogService;
 import {MilestoneEditDialog} from "../milestone-edit-dialog/MilestoneEditDialog";
 
 export class MilestoneDetailsComponent implements IComponentOptions {
-  static NAME:string = "milestoneDetails";
-  static CONTROLLER_AS:string = 'milestoneDetails';
+  static NAME: string = "milestoneDetails";
+  static CONTROLLER_AS: string = "milestoneDetails";
 
-  controller:Function = MilestoneDetailsController;
-  controllerAs:string = MilestoneDetailsComponent.CONTROLLER_AS;
-  template:string = require('./milestone-details.html');
-  bindings:any = {
-    onContentLoaded: '&'
+  controller: Function = MilestoneDetailsController;
+  controllerAs: string = MilestoneDetailsComponent.CONTROLLER_AS;
+  template: string = require("./milestone-details.html");
+  bindings: any = {
+    onContentLoaded: "&"
   };
 }
 export class MilestoneDetailsController {
-  public status:number = 0;
-  public milestone:Milestone;
+  public status: number = 0;
+  public milestone: Milestone;
 
-  //Objective
-  public title:string;
-  public description:string;
-  public objectiveType:string;
-  public tags:string[];
+  public title: string;
+  public description: string;
+  public objectiveType: string;
+  public tags: string[];
 
-  //Milestone
-  public createDate:string;
-  public dueDate:string;
-  public endDate:string;
-  public moreInformation:string;
+  public createDate: string;
+  public dueDate: string;
+  public endDate: string;
+  public moreInformation: string;
 
-  static $inject = [
+  static $inject: string[] = [
     MilestoneService.NAME,
-    '$scope',
-    'moment',
-    '$mdDialog'
+    "$scope",
+    "moment",
+    "$mdDialog"
   ];
 
-  constructor(private milestoneService:IMilestoneService, private scope:IScope, private moment:any, private dialog:IDialogService) {
+  constructor(private milestoneService: IMilestoneService, private scope: IScope, private moment: any, private dialog: IDialogService) {
   }
 
-  $onInit():void {
-    this.milestoneService.subscribeOnMilestoneSelected(this.scope, ($event:IAngularEvent, args:MilestoneSelectedData)=> {
+  $onInit(): void {
+    this.milestoneService.subscribeOnMilestoneSelected(this.scope, ($event: IAngularEvent, args: MilestoneSelectedData) => {
       this.setViewModel(args.milestone);
     });
-    var selectedMilestone:any = this.milestoneService.getSelectedMilestone();
+    var selectedMilestone: any = this.milestoneService.getSelectedMilestone();
     if (selectedMilestone !== undefined && selectedMilestone !== null) {
       this.setViewModel(selectedMilestone);
     }
   }
 
-  showEditDialog():void {
+  showEditDialog(): void {
     this.dialog.show(new MilestoneEditDialog());
   }
 
-  setViewModel(selectedMilestone:any):void {
+  setViewModel(selectedMilestone: any): void {
     if (selectedMilestone) {
       this.setStatus(selectedMilestone);
       this.milestone = selectedMilestone;
-      this.createDate = this.moment(selectedMilestone.createDate).format('ll');
-      this.dueDate = this.moment(selectedMilestone.dueDate).format('ll');
+      this.createDate = this.moment(selectedMilestone.createDate).format("ll");
+      this.dueDate = this.moment(selectedMilestone.dueDate).format("ll");
       this.moreInformation = selectedMilestone.moreInformation;
 
-      var objective:Objective = selectedMilestone.objective;
+      var objective: Objective = selectedMilestone.objective;
       this.description = objective.description;
       this.objectiveType = objective.objectiveType;
       this.tags = objective.tags;
@@ -78,7 +73,7 @@ export class MilestoneDetailsController {
     }
   }
 
-  setStatus(milestone:Milestone):void {
+  setStatus(milestone: Milestone): void {
     if (milestone) {
       var currentMoment = this.moment();
       if (currentMoment.isAfter(this.moment(milestone.dueDate))) {

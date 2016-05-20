@@ -2,48 +2,47 @@ import IComponentOptions = angular.IComponentOptions;
 import {Milestone} from "../../core/models/milestone";
 import {ProfileService} from "../services/ProfileService";
 import {MilestoneService} from "../services/MilestoneService";
-require('./milestone-details-page-styles.scss');
+require("./milestone-details-page-styles.scss");
 export class MilestoneDetailsPageComponent implements IComponentOptions {
-  static NAME:string = "milestoneDetailsPage";
+  static NAME: string = "milestoneDetailsPage";
 
-  template:string = require('./milestone-details-page-template.html');
-  controller:Function = MilestoneDetailsPageController;
+  template: string = require("./milestone-details-page-template.html");
+  controller: Function = MilestoneDetailsPageController;
 }
 export class MilestoneDetailsPageController {
-  public isEmpty:boolean;
 
-  public title:string = "Milestones";
-  public milestones:Milestone[];
-  public selectedMilestone:Milestone;
-  public username:string;
-  public milestonesLoaded:boolean;
+  public title: string = "Milestones";
+  public milestones: Milestone[];
+  public selectedMilestone: Milestone;
+  public username: string;
+  public milestonesLoaded: boolean;
 
-  static $inject = [ProfileService.NAME, MilestoneService.NAME];
+  static $inject:string[] = [ProfileService.NAME, MilestoneService.NAME];
 
-  constructor(private profileService:ProfileService,
-              private milestoneService:MilestoneService) {
+  constructor(private profileService: ProfileService,
+              private milestoneService: MilestoneService) {
   }
 
-  $routerOnActivate():void {
+  $routerOnActivate(): void {
     this.selectedMilestone = this.milestoneService.getSelectedMilestone();
     this.username = this.profileService.username;
     this.getListOfMilestones();
   }
 
-  onMilestoneSelected($locals:any):void {
-    var milestone:Milestone = $locals.milestone;
+  onMilestoneSelected($locals: any): void {
+    var milestone: Milestone = $locals.milestone;
     this.milestoneService.setSelectedMilestone(milestone);
     this.selectedMilestone = milestone;
   }
 
-  getListOfMilestones():void {
+  getListOfMilestones(): void {
     this.milestonesLoaded = false;
     this.milestoneService.getMilestonesByUsername(this.username)
-      .then((milestones:Milestone[])=> {
-        this.selectedMilestone = this.milestoneService.getSelectedMilestone();
+      .then((milestones: Milestone[]) => {
+          this.selectedMilestone = this.milestoneService.getSelectedMilestone();
           this.milestones = milestones;
           this.milestonesLoaded = true;
-        }, (onError)=> {
+        }, (onError) => {
           console.log(onError);
         }
       );
