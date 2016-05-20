@@ -3,10 +3,10 @@ import {ProfileSearchController} from "./ProfileSearchController";
 /**
  * @ngdoc Component
  */
-export class ProfileSearchComponent implements IComponentOptions{
+export class ProfileSearchComponent implements IComponentOptions {
 
-  static NAME:string = "profileSearch";
+  static NAME: string = "profileSearch";
 
-  controller:Function = ProfileSearchController;
-  template:string = require('./profile-search.html');
+  controller: Function = ProfileSearchController;
+  template: string = require("./profile-search.html");
 }

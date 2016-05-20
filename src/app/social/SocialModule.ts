@@ -2,7 +2,7 @@ import {LinkedInService} from "./linkedin/LinkedInService";
 import {ORDINEO_GATEWAY} from "../gateway/GatewayModule";
 export const ORDINEO_SOCIAL = "ordineo.social";
 
-var deps:Array<string> = [
+var deps: Array<string> = [
   ORDINEO_GATEWAY
 ];
 

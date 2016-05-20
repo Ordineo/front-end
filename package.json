@@ -54,6 +54,8 @@
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
     "ts-loader": "^0.8.1",
+    "tslint": "^3.10.2",
+    "tslint-loader": "^2.1.4",
     "typescript": "^1.8.2",
     "typings": "^0.7.12",
     "url-loader": "^0.5.7",
@@ -66,6 +68,7 @@
   },
   "scripts": {
     "postinstall": "typings i",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "build": "webpack --config webpack/build.config.js",
     "start": "webpack-dev-server --config webpack/dev.config.js --inline --content-base src/ &",
     "test": "npm run test:karma && npm run test:e2e",

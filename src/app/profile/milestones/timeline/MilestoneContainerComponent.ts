@@ -6,51 +6,51 @@ import IPromise = Rx.IPromise;
 import {ProfileService} from "../../services/ProfileService";
 import IScope = angular.IScope;
 import {SessionService} from "../../../auth/service/SessionService";
-require('./milestone-styles.scss');
+import "./milestone-styles.scss";
 
 export class MilestoneContainerComponent implements IComponentOptions {
-  static NAME:string = "milestoneContainer";
-  controller:any = MilestoneContainerController;
-  template:string = require('./MilestoneContainer-template.html');
+  static NAME: string = "milestoneContainer";
+  controller: any = MilestoneContainerController;
+  template: string = require("./MilestoneContainer-template.html");
 }
 
 export class MilestoneContainerController {
-  public createMode:boolean;
+  public createMode: boolean;
 
-  public actionButtons:Array<ActionButton> = [];
+  public actionButtons: Array<ActionButton> = [];
 
-  private createButton:ActionButton;
-  private saveButton:ActionButton;
-  private cancelButton:ActionButton;
+  private createButton: ActionButton;
+  private saveButton: ActionButton;
+  private cancelButton: ActionButton;
 
-  private hasError:boolean;
+  private hasError: boolean;
 
-  private errorMsg:string;
+  private errorMsg: string;
 
-  private titleTimeline:string = "Timeline";
-  private titleCreate:string = "Create milestone";
-  public title:string;
+  private titleTimeline: string = "Timeline";
+  private titleCreate: string = "Create milestone";
+  public title: string;
 
-  public username:string;
-  public isContentLoaded:boolean = false;
+  public username: string;
+  public isContentLoaded: boolean = false;
 
-  static $inject = [
+  static $inject: string[] = [
     MilestoneService.NAME,
     ProfileService.NAME,
     SessionService.NAME,
-    '$scope'
+    "$scope"
   ];
 
-  constructor(private milestoneService:MilestoneService,
-              private profileService:ProfileService,
-              private sessionService:SessionService,
-              private $scope:IScope) {
+  constructor(private milestoneService: MilestoneService,
+              private profileService: ProfileService,
+              private sessionService: SessionService,
+              private $scope: IScope) {
   }
 
-  $onInit():void {
+  $onInit(): void {
     this.hasError = false;
     this.username = this.sessionService.getUsername();
-    this.profileService.subscribeUsernameChanged(this.$scope, (evt:IAngularEvent, data:any)=> {
+    this.profileService.subscribeUsernameChanged(this.$scope, (evt: IAngularEvent, data: any) => {
       this.username = data.username;
       if (this.createMode) {
         this.toggleCreateMode();
@@ -61,15 +61,15 @@ export class MilestoneContainerController {
     this.createMode = false;
   }
 
-  public onContentLoaded(isLoaded:boolean):void {
+  public onContentLoaded(isLoaded: boolean): void {
     this.isContentLoaded = isLoaded;
   }
 
-  public isSaveEnabled(isEnabled:boolean):void {
+  public isSaveEnabled(isEnabled: boolean): void {
     this.saveButton.isDisabled = !isEnabled;
   }
 
-  private toggleCreateMode():void {
+  private toggleCreateMode(): void {
     this.createMode = !this.createMode;
     if (this.createMode) {
       this.title = this.titleCreate;
@@ -85,7 +85,7 @@ export class MilestoneContainerController {
     }
   }
 
-  private configureCardHeaderButtons():void {
+  private configureCardHeaderButtons(): void {
     this.initCreateButton();
     this.actionButtons.push(this.createButton);
 
@@ -96,36 +96,36 @@ export class MilestoneContainerController {
     this.actionButtons.push(this.cancelButton);
   }
 
-  private initCreateButton():void {
+  private initCreateButton(): void {
     this.createButton = {
-      label: 'Create milestone',
+      label: "Create milestone",
       isActive: true,
-      svgSrc: 'content:add_circle',
-      aClass: 'btnCreate',
-      onClick: (createButton:ActionButton)=> {
+      svgSrc: "content:add_circle",
+      aClass: "btnCreate",
+      onClick: (createButton: ActionButton): void => {
         this.toggleCreateMode();
       },
     };
   }
 
-  private initSaveButton():void {
+  private initSaveButton(): void {
     this.saveButton = {
-      label: 'Save milestone',
+      label: "Save milestone",
       isActive: false,
-      svgSrc: 'act:done',
-      aClass: 'btnSave',
-      onClick: (saveButton:ActionButton)=> {
-        var promise:IPromise<any> = this.milestoneService.createMilestoneByUsername(this.profileService.username);
+      svgSrc: "act:done",
+      aClass: "btnSave",
+      onClick: (saveButton: ActionButton): void => {
+        var promise: IPromise<any> = this.milestoneService.createMilestoneByUsername(this.profileService.username);
         if (promise) {
-          promise.then((success:any)=> {
+          promise.then((success: any) => {
             this.toggleCreateMode();
-          }, (error:any)=> {
+          }, (error: any) => {
             if (error.status === 409) {
               this.errorMsg = "You already have a milestone " + this.milestoneService.milestone.title;
             } else if (error.status > 500) {
               this.errorMsg = "check your connection";
             } else if (error.status >= 400 && error.status < 500) {
-              this.errorMsg = "Please select a correct objective"
+              this.errorMsg = "Please select a correct objective";
             } else {
               this.errorMsg = "Something went wrong";
             }
@@ -139,13 +139,13 @@ export class MilestoneContainerController {
     };
   }
 
-  private initCancelButton():void {
+  private initCancelButton(): void {
     this.cancelButton = {
-      label: 'Cancel milestone',
+      label: "Cancel milestone",
       isActive: false,
-      svgSrc: 'act:highlight_off',
-      aClass: 'btnCancel',
-      onClick: (cancelButton:ActionButton)=> {
+      svgSrc: "act:highlight_off",
+      aClass: "btnCancel",
+      onClick: (cancelButton: ActionButton): void => {
         this.toggleCreateMode();
       },
     };
