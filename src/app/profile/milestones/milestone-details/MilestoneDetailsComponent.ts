@@ -45,7 +45,10 @@ export class MilestoneDetailsController {
     '$mdDialog'
   ];
 
-  constructor(private milestoneService:IMilestoneService, private scope:IScope, private moment:any, private dialog:IDialogService) {
+  constructor(private milestoneService: IMilestoneService,
+              private scope: IScope,
+              private moment: any,
+              private dialog: IDialogService) {
   }
 
   $onInit():void {
@@ -62,12 +65,17 @@ export class MilestoneDetailsController {
     this.dialog.show(new MilestoneEditDialog());
   }
 
-  setViewModel(selectedMilestone:any):void {
+  setViewModel(selectedMilestone: Milestone): void {
     if (selectedMilestone) {
       this.setStatus(selectedMilestone);
       this.milestone = selectedMilestone;
       this.createDate = this.moment(selectedMilestone.createDate).format('ll');
       this.dueDate = this.moment(selectedMilestone.dueDate).format('ll');
+      if (selectedMilestone.endDate) {
+        this.endDate = this.moment(selectedMilestone.endDate).format('ll');
+      } else {
+        this.endDate = null;
+      }
       this.moreInformation = selectedMilestone.moreInformation;
 
       var objective:Objective = selectedMilestone.objective;
