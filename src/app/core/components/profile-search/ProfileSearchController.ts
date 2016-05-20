@@ -1,47 +1,46 @@
 import {ProfileService} from "../../../profile/services/ProfileService";
 import {Employee} from "../../models/employee";
-import Router = angular.Router;
 import {Navigator, INavigator} from "../../services/Navigator";
 export class ProfileSearchController {
-  public button:any;
-  public users:Array<User>;
+  public button: any;
+  public users: Array<User>;
 
-  static $inject = [ProfileService.NAME, Navigator.NAME];
+  static $inject: string[] = [ProfileService.NAME, Navigator.NAME];
 
-  constructor(private profileService:ProfileService, private navigator:INavigator) {
-    this.button = {title: 'search', icon: 'act:search'};
+  constructor(private profileService: ProfileService, private navigator: INavigator) {
+    this.button = {title: "search", icon: "act:search"};
   }
 
-  selectedItemChange(_user_:User):void {
-    if (_user_) {
-      this.navigator.goToUserProfile(_user_.value);
+  selectedItemChange(usr: User): void {
+    if (usr) {
+      this.navigator.goToUserProfile(usr.value);
     }
   }
 
-  querySearch(query:any):any {
+  querySearch(query: any): any {
     return query ? this.users.filter(this.filter(query)) : this.users;
   }
 
-  filter(query):any {
-    return (user:any)=> {
-      var lowerCaseUserDisplay:string = user.display.toLocaleLowerCase().trim();
+  filter(query:string): any {
+    return (user: any) => {
+      var lowerCaseUserDisplay: string = user.display.toLocaleLowerCase().trim();
       return lowerCaseUserDisplay.indexOf(query) !== -1;
-    }
+    };
   }
 
-  $onInit():void {
+  $onInit(): void {
     this.profileService.getAllEmployees()
-      .then((employees:Array<Employee>)=> {
+      .then((employees: Array<Employee>) => {
         this.users = this.parseEmployees(employees);
       });
   }
 
-  private parseEmployees(employees:Array<Employee>):Array<User> {
-    var users:Array<User> = [];
+  private parseEmployees(employees: Array<Employee>): Array<User> {
+    var users: Array<User> = [];
     for (var emp of employees) {
       users.push({
         value: emp.username,
-        display: emp.firstName + ' ' + emp.lastName
+        display: emp.firstName + " " + emp.lastName
       });
     }
     return users;
@@ -49,6 +48,6 @@ export class ProfileSearchController {
 }
 
 export interface User {
-  value:string;
-  display:string;
+  value: string;
+  display: string;
 }

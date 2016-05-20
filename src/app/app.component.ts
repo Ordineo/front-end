@@ -1,17 +1,17 @@
 import IComponentOptions = angular.IComponentOptions;
 import RouteDefinition = angular.RouteDefinition;
-import {MainRoute, DashboardRoute, LoginRoute} from './app.routes';
-import './app-component.scss';
-import {AuthService, IAuthService} from './auth/service/AuthService';
-import {DashboardRoutes} from './layout/DashboardComponent';
-import {SessionService} from './auth/service/SessionService';
-import {ProfileService} from './profile/services/ProfileService';
+import {MainRoute, DashboardRoute, LoginRoute} from "./app.routes";
+import "./app-component.scss";
+import {AuthService, IAuthService} from "./auth/service/AuthService";
+import {DashboardRoutes} from "./layout/DashboardComponent";
+import {SessionService} from "./auth/service/SessionService";
+import {ProfileService} from "./profile/services/ProfileService";
 
 export class AppComponent implements IComponentOptions {
-  static NAME: string = 'app';
+  static NAME: string = "app";
 
   controller: Function = AppComponentController;
-  template: string = require('./app-component.html');
+  template: string = require("./app-component.html");
   $routeConfig: RouteDefinition[] = [
     new MainRoute(),
     new DashboardRoute(),
@@ -19,7 +19,7 @@ export class AppComponent implements IComponentOptions {
   ];
 }
 export class AppComponentController {
-  static $inject = [AuthService.NAME, ProfileService.NAME, SessionService.NAME];
+  static $inject:string[] = [AuthService.NAME, ProfileService.NAME, SessionService.NAME];
 
   constructor(private authService: IAuthService,
               private profileService: ProfileService,

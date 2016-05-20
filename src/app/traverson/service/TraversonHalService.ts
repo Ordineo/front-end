@@ -1,17 +1,17 @@
-var JsonHalAdapter = require('traverson-hal');
+var jsonHalAdapter = require("traverson-hal");
 
 export class TraversonHalService {
-  static SERVICE_NAME = "TraversonHalService";
+  static SERVICE_NAME: string = "TraversonHalService";
 
-  static $inject:Array<string> = ['traverson'];
+  static $inject: Array<string> = ["traverson"];
 
-  constructor(private travs:any) {
+  constructor(private travs: any) {
   }
 
-  public hal():any {
+  public hal(): any {
     this.travs.registerMediaType(
-      JsonHalAdapter.mediaType,
-      JsonHalAdapter
+      jsonHalAdapter.mediaType,
+      jsonHalAdapter
     );
 
     return this.travs;

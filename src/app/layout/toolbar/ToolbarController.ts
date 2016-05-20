@@ -1,45 +1,43 @@
-import IRootScopeService = angular.IRootScopeService;
-import {EmployeeName} from "../../core/models/EmployeeName";
-import {Navigator, INavigator} from "../../core/services/Navigator";
+import IAngularEvent = angular.IAngularEvent;
 import {SessionService, ISessionService} from "../../auth/service/SessionService";
+import {Navigator} from "../../core/services/Navigator";
 interface ButtonConfig {
-  title:string;
-  icon:string;
+  title: string;
+  icon: string;
 }
 export class ToolbarController {
-  public buttons:Array<ButtonConfig> = [];
-  public employeeName:EmployeeName;
+  public buttons: Array<ButtonConfig> = [];
 
-  originatorEv:any;
+  originatorEv: any;
 
-  static $inject = [Navigator.NAME, SessionService.NAME];
+  static $inject: string[] = [Navigator.NAME, SessionService.NAME];
 
-  constructor(private navigator:INavigator, private sessionService:ISessionService) {
+  constructor(private navigator: Navigator, private sessionService: ISessionService) {
     this.buttons = this.getButtons();
   }
 
-  public goToProfile():void {
+  public goToProfile(): void {
     this.navigator.goToUserProfile(this.sessionService.getUsername());
   }
 
-  private getButtons():Array<ButtonConfig> {
-    var btns:Array<ButtonConfig> = [];
+  private getButtons(): Array<ButtonConfig> {
+    var btns: Array<ButtonConfig> = [];
 
-    btns.push(this.createButtonConfig('person', 'social:person'));
-    btns.push(this.createButtonConfig('email', 'com:email'));
-    btns.push(this.createButtonConfig('logout', 'mdi:logout'));
+    btns.push(this.createButtonConfig("person", "social:person"));
+    btns.push(this.createButtonConfig("email", "com:email"));
+    btns.push(this.createButtonConfig("logout", "mdi:logout"));
 
     return btns;
   }
 
-  private createButtonConfig(_title:string, _icon:string):ButtonConfig {
+  private createButtonConfig(_title: string, _icon: string): ButtonConfig {
     return {
       title: _title,
       icon: _icon
     };
   }
 
-  public openMenu($mdOpenMenu, ev) {
+  public openMenu($mdOpenMenu: any, ev: IAngularEvent): void {
     this.originatorEv = ev;
     $mdOpenMenu(ev);
   }

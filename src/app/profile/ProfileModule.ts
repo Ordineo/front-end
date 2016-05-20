@@ -18,6 +18,8 @@ import {MilestoneDetailsPageComponent} from "./milestones-details-page/Milestone
 import {MilestoneCommentsComponent} from "./milestones/milestone-comments/MilestoneCommentsComponent";
 import {MilestoneItemComponent} from "./milestones/milestone-list/MilestoneItemComponent";
 import {ProfileMenuState} from "./profile-menu/ProfileMenuState";
+import IScope = angular.IScope;
+import IAugmentedJQuery = angular.IAugmentedJQuery;
 
 /**
  * @ngdoc module
@@ -28,7 +30,7 @@ import {ProfileMenuState} from "./profile-menu/ProfileMenuState";
  */
 export const ORDINEO_PROFILE = "ordineo.profile";
 
-var deps:Array<string> = [
+var deps: Array<string> = [
   THEME_MODULE,
   ORDINEO_CORE,
   TRAVERSON,
@@ -59,15 +61,15 @@ angular
   .component(MilestoneCommentsComponent.NAME, new MilestoneCommentsComponent())
   .component(MilestoneItemComponent.NAME, new MilestoneItemComponent())
   .directive(AboutDirective.NAME, AboutDirective.instance())
-  .directive('onEnter', function () {
-    return function (scope, element, attrs) {
-      element.bind("keydown keypress", function (event) {
+  .directive("onEnter", () => {
+    return (scope: IScope, element: IAugmentedJQuery, attrs: any) => {
+      element.bind("keydown keypress", (event: any) => {
         if (event.which === 13) {
-          scope.$apply(function () {
+          scope.$apply(() => {
             scope.$eval(attrs.onEnter);
           });
           event.preventDefault();
         }
       });
-    }
+    };
   });

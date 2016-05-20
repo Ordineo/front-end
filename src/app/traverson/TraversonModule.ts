@@ -1,6 +1,6 @@
 
 import {TraversonHalService} from "./service/TraversonHalService";
-var traverson = require('traverson-angular');
+var traverson = require("traverson-angular");
 
 export const TRAVERSON = "traversonModule";
 
