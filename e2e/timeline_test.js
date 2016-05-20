@@ -39,5 +39,11 @@ Scenario('Show the timeline and create a milestone', (I) => {
   I.see('Timeline', '#milestone-container');
 });
 
+Scenario('Go to the detail page of a milestone', (I) => {
+  I.waitForElement('#milestone-container');
+  I.click('.btnDetail', '#milestone-container');
+  I.see('Spring Boot', '#milestone-details');
+});
+
 
 
