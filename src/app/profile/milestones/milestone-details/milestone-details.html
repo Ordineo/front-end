@@ -37,7 +37,7 @@
         <span class="md-body-2 accent-color"><strong>Create date</strong></span>
         <p class="no-top-margin">{{milestoneDetails.createDate}}</p>
       </div>
-      <div class="detail">
+      <div class="detail" ng-if="!milestoneDetails.endDate">
         <span class="md-body-2 accent-color"><strong>Due date</strong></span>
         <p class="no-top-margin">{{milestoneDetails.dueDate}}</p>
       </div>
