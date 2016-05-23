@@ -1,3 +1,14 @@
 <div>
-  BUTTON
+  <md-menu id="user-menu">
+    <md-button aria-label="Open notifications menu" ng-click="notifications.openMenu($mdOpenMenu, $event)">
+      <md-icon md-menu-origin md-svg-icon="{{notifications.buttons[0].icon}}"></md-icon>
+    </md-button>
+    <md-menu-content width="3">
+      <md-menu-item>
+        <md-button aria-label="Notification" ng-click="notifications.goToNotification()">
+          Notification
+        </md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
 </div>
