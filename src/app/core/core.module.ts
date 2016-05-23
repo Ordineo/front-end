@@ -18,6 +18,7 @@ import {NotificationsComponent} from "./components/notifications/NotificationsCo
 import {Navigator} from "./services/Navigator";
 import IScope = angular.IScope;
 import IAugmentedJQuery = angular.IAugmentedJQuery;
+import {NotificationService} from "./services/NotificationService";
 
 export const ORDINEO_CORE = "ordineo.core";
 
@@ -39,6 +40,7 @@ angular.module(ORDINEO_CORE, deps)
   .component(NotificationsComponent.NAME, new NotificationsComponent())
   .service(SessionService.NAME, SessionService)
   .service(Navigator.NAME, Navigator)
+  .service(NotificationService.NAME, NotificationService)
   .directive(FileUploadDirective.NAME, FileUploadDirective.instance())
   .directive("customOnChange", () => {
     return {
