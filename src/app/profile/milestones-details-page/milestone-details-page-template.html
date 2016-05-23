@@ -2,7 +2,7 @@
   <span flex="10"></span>
   <div layout="column" flex="60" class="no-height-stretch">
     <milestone-details></milestone-details>
-    <milestone-comments></milestone-comments>
+    <milestone-comments ng-if="$ctrl.selectedMilestone"></milestone-comments>
   </div>
   <md-card flex="40">
     <md-card-title>
