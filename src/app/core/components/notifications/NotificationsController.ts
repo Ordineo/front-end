@@ -1,47 +1,41 @@
-import IRootScopeService = angular.IRootScopeService;
-import IAngularEvent = angular.IAngularEvent;
-import ISCEService = angular.ISCEService;
-import IScope = angular.IScope;
-var $ = require('jquery');
+// var $ = require("jquery");
 
 interface ButtonConfig {
-  title:string;
-  icon:string;
+  title: string;
+  icon: string;
 }
 
 export class NotificationsController {
-  public buttons:Array<ButtonConfig> = [];
-  originatorEv:any;
+  public buttons: Array<ButtonConfig> = [];
+  originatorEv: any;
 
-  static $inject:Array<string> = [
-
-  ];
+  static $inject: Array<string> = [];
 
   constructor() {
     this.buttons = this.getButtons();
   }
 
-  private getButtons():Array<ButtonConfig> {
-    var btns:Array<ButtonConfig> = [];
+  private getButtons(): Array<ButtonConfig> {
+    var btns: Array<ButtonConfig> = [];
 
-    btns.push(this.createButtonConfig('notifications', 'social:notifications'));
+    btns.push(this.createButtonConfig("notifications", "social:notifications"));
 
     return btns;
   }
 
-  private createButtonConfig(_title:string, _icon:string):ButtonConfig {
+  private createButtonConfig(_title: string, _icon: string): ButtonConfig {
     return {
       title: _title,
       icon: _icon
     };
   }
 
-  public openMenu($mdOpenMenu, ev) {
+  public openMenu($mdOpenMenu: any, ev: any): void {
     this.originatorEv = ev;
     $mdOpenMenu(ev);
   }
 
-  private goToNotification():void {
-    
-  }
+  // private goToNotification(): void {
+  //
+  // }
 } 
