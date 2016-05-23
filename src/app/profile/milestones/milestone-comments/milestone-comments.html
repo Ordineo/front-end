@@ -13,7 +13,10 @@
     </md-input-container>
   </div>
   <hr>
-  <div>
+  <div class="loading-container" layout="row" layout-align="center center" ng-if="!milestoneComments.commentsLoaded">
+    <md-progress-circular class="md-primary" md-mode="indeterminate" md-diameter="60"></md-progress-circular>
+  </div>
+  <div ng-show="milestoneComments.commentsLoaded">
     <div class="commentBox" ng-repeat="comment in milestoneComments.comments">
       <div class="profilePicture"></div>
       <div class="comment">

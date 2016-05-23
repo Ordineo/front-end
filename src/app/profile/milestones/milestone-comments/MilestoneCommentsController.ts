@@ -5,6 +5,7 @@ var $ = require("jquery");
 
 export class MilestoneCommentsController {
   public comments: any = [];
+  public commentsLoaded: boolean = false;
   public username: string = "";
   public commentFieldData: string = "";
   public milestone: string = "";
@@ -48,11 +49,13 @@ export class MilestoneCommentsController {
 
   public getComments(milestone: any): void {
     this.comments = [];
+    this.commentsLoaded = false;
     this.milestoneService.getCommentsByMilestone(milestone)
       .then((data: any) => {
         for (var i = 0; i < data._embedded.comments.length; i++) {
           this.comments.push(data._embedded.comments[i]);
         }
+        this.commentsLoaded = true;
       });
   }
 
