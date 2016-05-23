@@ -12,6 +12,7 @@ export class GatewayApiService {
   private static EMPLOYEES_API: string = "/employee-ordineo/api/";
   private static MILESTONES_API: string = "/milestone-ordineo/api/";
   private static AUTH_API: string = "/auth/";
+  private static NOTIFICATION_API: string = "/notification-ordineo/api/";
 
 
   constructor(private $window: IWindowService) {
@@ -51,5 +52,9 @@ export class GatewayApiService {
 
   public static getAuthApi(): string {
     return this.buildApiUrl(this.AUTH_API);
+  }
+
+  public static getNotificationApi(): string {
+    return this.buildApiUrl(this.NOTIFICATION_API);
   }
 }
