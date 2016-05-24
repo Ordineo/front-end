@@ -4,6 +4,7 @@ dist
 .sass-cache
 bower_components
 .idea
+.vscode
 typings
 build
 public
@@ -20,3 +21,4 @@ out
 front-end.iml
 webdriver-output
 npm-debug.log
+webdriver-output
