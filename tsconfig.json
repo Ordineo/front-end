@@ -8,11 +8,5 @@
     "experimentalDecorators": true,
     "outDir": "out"
   },
-  "exclude": [
-    "src",
-    "node_modules",
-    "typings/main.d.ts",
-    "typings/main"
-  ],
   "version": "1.7.5"
 }
