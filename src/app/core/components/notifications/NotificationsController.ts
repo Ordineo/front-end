@@ -1,6 +1,6 @@
+import {NotificationService} from "../../services/NotificationService";
 // var $ = require("jquery");
 
-import {NotificationService} from "../../services/NotificationService";
 interface ButtonConfig {
   title: string;
   icon: string;
@@ -9,6 +9,7 @@ interface ButtonConfig {
 export class NotificationsController {
   public buttons: Array<ButtonConfig> = [];
   originatorEv: any;
+  public notifications: any = [];
 
   static $inject: Array<string> = [
     NotificationService.NAME
@@ -40,11 +41,12 @@ export class NotificationsController {
   }
 
   private getNotifications(): void {
+    this.notifications = [];
     this.notificationService.getNotifications()
-      .then((success: any) => {
-        console.log(success);
-      }, (error) => {
-        console.log(error);
+      .then((data: any) => {
+        for (var i = 0; i < data.data._embedded.messages.length; i++) {
+          this.notifications.push(data.data._embedded.messages[i]);
+        }
       });
   }
 
