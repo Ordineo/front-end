@@ -11,6 +11,7 @@ import IRootScopeService = angular.IRootScopeService;
 import IScope = angular.IScope;
 import IAngularEvent = angular.IAngularEvent;
 import {ActionButton} from "../../../core/components/action-button/ActionButtonComponent";
+import IQService = angular.IQService;
 
 describe("MilestoneContainerController", ()=> {
   var scope:IScope;
@@ -18,6 +19,8 @@ describe("MilestoneContainerController", ()=> {
   var milestoneService:IMilestoneService;
   var profileService:IProfileService;
   var sessionService:ISessionService;
+  var $q:IQService;
+
 
   beforeEach(angular.mock.module(ORDINEO_PROFILE, ($provide:IProvideService)=> {
     milestoneService = new MockMilestoneService();
@@ -29,9 +32,10 @@ describe("MilestoneContainerController", ()=> {
     $provide.service(SessionService.NAME, ()=>sessionService);
   }));
 
-  beforeEach(inject((_$componentController_, _$rootScope_:IRootScopeService)=> {
+  beforeEach(inject((_$componentController_, _$rootScope_:IRootScopeService, _$q_:IQService)=> {
     scope = _$rootScope_.$new();
     ctrl = _$componentController_(MilestoneContainerComponent.NAME, {$scope: scope});
+    $q = _$q_;
   }));
 
   describe("on init", ()=> {
@@ -81,6 +85,38 @@ describe("MilestoneContainerController", ()=> {
       expect(profileService.subscribeUsernameChanged).toHaveBeenCalled();
     });
 
+  });
+
+  describe("clicking the save button", ()=> {
+    var deferred;
+
+    beforeEach(()=>{
+      ctrl.$onInit();
+      deferred = $q.defer();
+    });
+
+
+    it("should toggle create mode when a milestone is successfully created", ()=> {
+      spyOn(milestoneService, "createMilestoneByUsername").and.returnValue(deferred.promise);
+      spyOn(ctrl, "toggleCreateMode");
+      var button:ActionButton = (ctrl as any).saveButton;
+      button.onClick();
+      deferred.resolve({});
+      scope.$digest();
+      expect((ctrl as any).toggleCreateMode).toHaveBeenCalled();
+    });
+    
+  });
+
+  describe("cancel button", ()=> {
+    it("onclick", ()=> {
+      spyOn(ctrl, "toggleCreateMode");
+      ctrl.$onInit();
+      (ctrl as any).initCancelButton();
+      var button:ActionButton = (ctrl as any).cancelButton;
+      button.onClick();
+      expect((ctrl as any).toggleCreateMode).toHaveBeenCalled();
+    });
   });
 
   describe("onUserChanged", ()=> {
