@@ -11,7 +11,7 @@ import "./objectives-search.scss";
 export class ObjectivesSearch implements IComponentOptions {
   static NAME: string = "objectivesSearch";
 
-  require: Object = {
+  require: string | string[] | {[controller: string]: string} = {
     formCtrl: "^form"
   };
 
