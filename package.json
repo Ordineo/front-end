@@ -57,7 +57,6 @@
     "tslint": "^3.10.2",
     "tslint-loader": "^2.1.4",
     "typescript": "^1.8.2",
-    "typings": "^0.7.12",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1",
