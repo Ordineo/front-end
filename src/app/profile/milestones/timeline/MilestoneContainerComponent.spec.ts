@@ -90,13 +90,13 @@ describe("MilestoneContainerController", ()=> {
     var callback: any;
 
     beforeEach(()=> {
-      evt = new (class event implements IAngularEvent{ // how to write this?
+      evt = new class event implements IAngularEvent{
         targetScope:angular.IScope;
         currentScope:angular.IScope;
         name:string;
         preventDefault:Function;
         defaultPrevented:boolean;
-      });
+      };
       username = "test";
       data = {username: username};
       callback = ctrl.onUserChanged();
