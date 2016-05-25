@@ -99,14 +99,8 @@ export class MilestoneService implements IMilestoneService {
   }
 
   public searchObjectives(qry: string): IPromise<any> {
-    return this.traverson.hal()
-      .from(GatewayApiService.getMilestonesApi() + "objectives/search")
-      .useAngularHttp()
-      .jsonHal()
-      .follow("findByTitleOrTags", "objectives[$all]")
-      .withTemplateParameters({text: qry})
-      .getResource()
-      .result;
+    return this.$http
+      .get(GatewayApiService.getMilestonesApi() + `objectives/search/findByTitleOrTags?text=${qry}`);
   }
 
   public createMilestoneByUsername(username: string): IPromise<any> {

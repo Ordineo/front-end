@@ -34,7 +34,6 @@ export class ProfileSearchController {
               private profileService: ProfileService,
               private navigator: INavigator,
               private $q: IQService) {
-    this.button = {title: "search", icon: "act:search"};
   }
 
   selectedItemChange(usr: User): void {
@@ -44,6 +43,7 @@ export class ProfileSearchController {
   }
 
   $onInit(): void {
+    this.button = {title: "search", icon: "act:search"};
     this.searchStream = this.scopeObserver
       .watch(this.scope, "$ctrl.searchText")
       .filter((qry: string) => {
