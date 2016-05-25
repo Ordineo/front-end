@@ -155,8 +155,6 @@ describe("MilestoneContainerController", ()=> {
         spyOn(milestoneService, "createMilestoneByUsername");
         var button:ActionButton = (ctrl as any).saveButton;
         button.onClick();
-        // deferred.reject({status:500, errorMsg:""});
-        // scope.$digest();
 
         expect((ctrl as any).errorMsg).toEqual("Please select a correct objective");
       });
