@@ -56,13 +56,13 @@ export class MilestoneContainerController {
     this.createMode = false;
   }
 
-  onUserChanged():(evt, data) => void {
+  onUserChanged(): (evt: IAngularEvent, data: any) => void {
     return (evt, data) => {
       this.username = data.username;
       if (this.createMode) {
         this.toggleCreateMode();
       }
-    }
+    };
   }
 
 
