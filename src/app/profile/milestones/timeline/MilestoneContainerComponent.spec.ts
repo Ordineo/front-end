@@ -6,23 +6,23 @@ import {IMilestoneService, MilestoneService} from "../../services/MilestoneServi
 import {MockMilestoneService} from "./MilestoneCreateComponent.spec";
 import {MilestoneContainerComponent, MilestoneContainerController} from "./MilestoneContainerComponent";
 import {ORDINEO_PROFILE} from "../../ProfileModule";
+import {ActionButton} from "../../../core/components/action-button/ActionButtonComponent";
 import IProvideService = angular.auto.IProvideService;
 import IRootScopeService = angular.IRootScopeService;
 import IScope = angular.IScope;
 import IAngularEvent = angular.IAngularEvent;
-import {ActionButton} from "../../../core/components/action-button/ActionButtonComponent";
 import IQService = angular.IQService;
 
 describe("MilestoneContainerController", ()=> {
-  var scope:IScope;
-  var ctrl:MilestoneContainerController;
-  var milestoneService:IMilestoneService;
-  var profileService:IProfileService;
-  var sessionService:ISessionService;
-  var $q:IQService;
+  var scope: IScope;
+  var ctrl: MilestoneContainerController;
+  var milestoneService: IMilestoneService;
+  var profileService: IProfileService;
+  var sessionService: ISessionService;
+  var $q: IQService;
 
 
-  beforeEach(angular.mock.module(ORDINEO_PROFILE, ($provide:IProvideService)=> {
+  beforeEach(angular.mock.module(ORDINEO_PROFILE, ($provide: IProvideService)=> {
     milestoneService = new MockMilestoneService();
     profileService = new MockProfileService();
     sessionService = new SessionMock();
@@ -32,7 +32,7 @@ describe("MilestoneContainerController", ()=> {
     $provide.service(SessionService.NAME, ()=>sessionService);
   }));
 
-  beforeEach(inject((_$componentController_, _$rootScope_:IRootScopeService, _$q_:IQService)=> {
+  beforeEach(inject((_$componentController_, _$rootScope_: IRootScopeService, _$q_: IQService)=> {
     scope = _$rootScope_.$new();
     ctrl = _$componentController_(MilestoneContainerComponent.NAME, {$scope: scope});
     $q = _$q_;
@@ -61,14 +61,14 @@ describe("MilestoneContainerController", ()=> {
     it("initialises save button", ()=> {
       ctrl.$onInit();
       var btnSave = 'btnSave';
-      var button:any = ctrl.actionButtons.find(obj => obj.aClass === btnSave);
+      var button: any = ctrl.actionButtons.find(obj => obj.aClass === btnSave);
       expect(button.aClass).toEqual(btnSave);
     });
 
     it("initialises cancel button", ()=> {
       ctrl.$onInit();
       var btnCancel = 'btnCancel';
-      var button:any = ctrl.actionButtons.find(obj => obj.aClass === btnCancel);
+      var button: any = ctrl.actionButtons.find(obj => obj.aClass === btnCancel);
       expect(button.aClass).toEqual(btnCancel);
     });
 
@@ -90,7 +90,7 @@ describe("MilestoneContainerController", ()=> {
   describe("clicking the save button", ()=> {
     var deferred;
 
-    beforeEach(()=>{
+    beforeEach(()=> {
       ctrl.$onInit();
       deferred = $q.defer();
     });
@@ -99,7 +99,7 @@ describe("MilestoneContainerController", ()=> {
     it("should toggle create mode when a milestone is successfully created", ()=> {
       spyOn(milestoneService, "createMilestoneByUsername").and.returnValue(deferred.promise);
       spyOn(ctrl, "toggleCreateMode");
-      var button:ActionButton = (ctrl as any).saveButton;
+      var button: ActionButton = (ctrl as any).saveButton;
       button.onClick();
       deferred.resolve({});
       scope.$digest();
@@ -113,9 +113,9 @@ describe("MilestoneContainerController", ()=> {
         (milestoneService as any).milestone = {
           title: "title"
         };
-        var button:ActionButton = (ctrl as any).saveButton;
+        var button: ActionButton = (ctrl as any).saveButton;
         button.onClick();
-        deferred.reject({status:409, errorMsg:""});
+        deferred.reject({status: 409, errorMsg: ""});
         scope.$digest();
 
         expect((ctrl as any).errorMsg).toEqual("You already have a milestone " + (milestoneService as any).milestone.title);
@@ -123,9 +123,9 @@ describe("MilestoneContainerController", ()=> {
 
       it(": >500 (tested with 501):  check your connection", ()=> {
         spyOn(milestoneService, "createMilestoneByUsername").and.returnValue(deferred.promise);
-        var button:ActionButton = (ctrl as any).saveButton;
+        var button: ActionButton = (ctrl as any).saveButton;
         button.onClick();
-        deferred.reject({status:501, errorMsg:""});
+        deferred.reject({status: 501, errorMsg: ""});
         scope.$digest();
 
         expect((ctrl as any).errorMsg).toEqual("check your connection");
@@ -133,9 +133,9 @@ describe("MilestoneContainerController", ()=> {
 
       it(": >=400 && <500 (tested with 404): Please select a correct objective", ()=> {
         spyOn(milestoneService, "createMilestoneByUsername").and.returnValue(deferred.promise);
-        var button:ActionButton = (ctrl as any).saveButton;
+        var button: ActionButton = (ctrl as any).saveButton;
         button.onClick();
-        deferred.reject({status:404, errorMsg:""});
+        deferred.reject({status: 404, errorMsg: ""});
         scope.$digest();
 
         expect((ctrl as any).errorMsg).toEqual("Please select a correct objective");
@@ -143,9 +143,9 @@ describe("MilestoneContainerController", ()=> {
 
       it(": anything else (tested with 500): Something went wrong", ()=> {
         spyOn(milestoneService, "createMilestoneByUsername").and.returnValue(deferred.promise);
-        var button:ActionButton = (ctrl as any).saveButton;
+        var button: ActionButton = (ctrl as any).saveButton;
         button.onClick();
-        deferred.reject({status:500, errorMsg:""});
+        deferred.reject({status: 500, errorMsg: ""});
         scope.$digest();
 
         expect((ctrl as any).errorMsg).toEqual("Something went wrong");
@@ -153,7 +153,7 @@ describe("MilestoneContainerController", ()=> {
 
       it("error message should be \"Please select a correct objective\" when no promise is returned", ()=> {
         spyOn(milestoneService, "createMilestoneByUsername");
-        var button:ActionButton = (ctrl as any).saveButton;
+        var button: ActionButton = (ctrl as any).saveButton;
         button.onClick();
 
         expect((ctrl as any).errorMsg).toEqual("Please select a correct objective");
@@ -167,25 +167,25 @@ describe("MilestoneContainerController", ()=> {
       spyOn(ctrl, "toggleCreateMode");
       ctrl.$onInit();
       (ctrl as any).initCancelButton();
-      var button:ActionButton = (ctrl as any).cancelButton;
+      var button: ActionButton = (ctrl as any).cancelButton;
       button.onClick();
       expect((ctrl as any).toggleCreateMode).toHaveBeenCalled();
     });
   });
 
   describe("onUserChanged", ()=> {
-    var evt:IAngularEvent;
+    var evt: IAngularEvent;
     var username: string;
     var data: any;
     var callback: any;
 
     beforeEach(()=> {
-      evt = new class event implements IAngularEvent{
-        targetScope:angular.IScope;
-        currentScope:angular.IScope;
-        name:string;
-        preventDefault:Function;
-        defaultPrevented:boolean;
+      evt = new class event implements IAngularEvent {
+        targetScope: angular.IScope;
+        currentScope: angular.IScope;
+        name: string;
+        preventDefault: Function;
+        defaultPrevented: boolean;
       };
       username = "test";
       data = {username: username};
@@ -216,7 +216,6 @@ describe("MilestoneContainerController", ()=> {
     });
 
     it("should toggle create mode to true when false", ()=> {
-      // ctrl.$onInit();
       ctrl.createMode = false;
       button.onClick();
       expect(ctrl.createMode).toBeTruthy();
