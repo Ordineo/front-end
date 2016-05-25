@@ -5,6 +5,10 @@ import IQService = angular.IQService;
 import IDeferred = angular.IDeferred;
 import IFormController = angular.IFormController;
 import "./objectives-search.scss";
+import {ScopeObserver} from "../../../core/services/ScopeObserver";
+import {fromPromise} from "rxjs/observable/fromPromise";
+import {Observable, Subscription} from "rxjs/Rx";
+import IPromise = angular.IPromise;
 
 export class ObjectivesSearch implements IComponentOptions {
   static NAME: string = "objectivesSearch";
@@ -26,42 +30,50 @@ export class ObjectivesSearchController {
   public onSelected: Function;
   public objectives: Objective[] = [];
 
-  static $inject: string[] = ["$q", "$scope", MilestoneService.NAME];
+  public searchStream: Observable<any>;
+  public subscription: Subscription;
 
-  constructor(private $q: IQService, private $scope: angular.IScope, private milestoneService: MilestoneService) {
-    this.deferred = this.$q.defer();
-  }
+  static $inject: string[] = [
+    "$q",
+    "$scope",
+    MilestoneService.NAME,
+    ScopeObserver.NAME,
+  ];
 
-  getObjectives(): angular.IPromise<any> {
-    this.deferred = this.$q.defer();
-    return this.deferred.promise.then((data) => {
-      return data;
-    });
+  constructor(private $q: IQService,
+              private $scope: angular.IScope,
+              private milestoneService: MilestoneService,
+              private scopeObserver: ScopeObserver) {
   }
 
   selectedItemChange(selectedObjective: Objective): void {
     this.onSelected({objective: selectedObjective});
   }
 
+  searchObjectives(): IPromise<any> {
+    this.deferred = this.$q.defer();
+    this.subscription = this.searchStream
+      .flatMap((qry: string) => {
+        return fromPromise(this.milestoneService.searchObjectives(qry));
+      })
+      .map((response: any) => {
+        let objectives: Objective[] = response.data["_embedded"].objectives;
+        this.deferred.resolve(objectives);
+      })
+      .subscribe();
+    return this.deferred.promise;
+  }
+
   $onInit(): void {
-    // this.$scope
-    //   .$toObservable("$ctrl.searchText")
-    //   .debounce(400)
-    //   .map((data: any) => {
-    //     return data.newValue;
-    //   })
-    //   .distinctUntilChanged()
-    //   .flatMapLatest((qry: string) => {
-    //     if (qry !== "") {
-    //       return this.rx.Observable
-    //         .fromPromise(this.milestoneService.searchObjectives(qry));
-    //     } else {
-    //       return Rx.Observable.empty<Objective>();
-    //     }
-    //   })
-    //   .subscribe((objectives: Objective[]) => {
-    //     this.objectives = objectives;
-    //     this.deferred.resolve(objectives);
-    //   });
+    this.searchStream = this.scopeObserver
+      .watch(this.$scope, "$ctrl.searchText")
+      .debounceTime(750)
+      .distinctUntilChanged();
+  }
+
+  $onDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
