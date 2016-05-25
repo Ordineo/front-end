@@ -2,11 +2,11 @@ import IComponentOptions = angular.IComponentOptions;
 import IAngularEvent = angular.IAngularEvent;
 import {ActionButton} from "../../../core/components/action-button/ActionButtonComponent";
 import {MilestoneService} from "../../services/MilestoneService";
-import IPromise = Rx.IPromise;
 import {ProfileService} from "../../services/ProfileService";
-import IScope = angular.IScope;
 import {SessionService} from "../../../auth/service/SessionService";
 import "./milestone-styles.scss";
+import IPromise = Rx.IPromise;
+import IScope = angular.IScope;
 
 export class MilestoneContainerComponent implements IComponentOptions {
   static NAME: string = "milestoneContainer";
@@ -50,16 +50,21 @@ export class MilestoneContainerController {
   $onInit(): void {
     this.hasError = false;
     this.username = this.sessionService.getUsername();
-    this.profileService.subscribeUsernameChanged(this.$scope, (evt: IAngularEvent, data: any) => {
-      this.username = data.username;
-      if (this.createMode) {
-        this.toggleCreateMode();
-      }
-    });
+    this.profileService.subscribeUsernameChanged(this.$scope, this.onUserChanged());
     this.title = this.titleTimeline;
     this.configureCardHeaderButtons();
     this.createMode = false;
   }
+
+  onUserChanged(): (evt: IAngularEvent, data: any) => void {
+    return (evt, data) => {
+      this.username = data.username;
+      if (this.createMode) {
+        this.toggleCreateMode();
+      }
+    };
+  }
+
 
   public onContentLoaded(isLoaded: boolean): void {
     this.isContentLoaded = isLoaded;
