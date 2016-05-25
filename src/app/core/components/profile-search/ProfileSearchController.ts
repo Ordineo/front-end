@@ -53,7 +53,7 @@ export class ProfileSearchController {
       .distinctUntilChanged();
   }
 
-  searchEmployees(): IPromise<any> {
+  searchEmployees(): IPromise<User[]> {
     let deferred: IDeferred<any> = this.$q.defer();
     this.searchStream
       .mergeMap((qry: string) => {
@@ -62,7 +62,7 @@ export class ProfileSearchController {
       .map((response: any) => {
         return this.parseEmployees(response.data["_embedded"].employees);
       })
-      .subscribe((x) => deferred.resolve(x));
+      .subscribe((employees: User[]) => deferred.resolve(employees));
     return deferred.promise;
   }
 
@@ -77,7 +77,6 @@ export class ProfileSearchController {
     return users;
   }
 }
-
 export interface User {
   value: string;
   display: string;
