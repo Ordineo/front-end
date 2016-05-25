@@ -3,10 +3,10 @@ import IAngularEvent = angular.IAngularEvent;
 import {ActionButton} from "../../../core/components/action-button/ActionButtonComponent";
 import {MilestoneService} from "../../services/MilestoneService";
 import {ProfileService} from "../../services/ProfileService";
+import IScope = angular.IScope;
 import {SessionService} from "../../../auth/service/SessionService";
 import "./milestone-styles.scss";
-import IPromise = Rx.IPromise;
-import IScope = angular.IScope;
+import IPromise = angular.IPromise;
 
 export class MilestoneContainerComponent implements IComponentOptions {
   static NAME: string = "milestoneContainer";

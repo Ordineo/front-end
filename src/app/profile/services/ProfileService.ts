@@ -71,6 +71,14 @@ export class ProfileService implements IProfileService {
     // return test;
   }
 
+  getEmployees(): IPromise<any> {
+    return this.$http.get(GatewayApiService.getEmployeesApi() + "sdf");
+  }
+
+  public searchEmployee(qry: string): IPromise<any> {
+    return this.$http.get(GatewayApiService.getSearchEmployeeApi() + `employeeName?name=${qry}`);
+  }
+
   public getAllEmployees(): IPromise<any> {
     return this.traverson.hal()
       .from(GatewayApiService.getEmployeesApi())
