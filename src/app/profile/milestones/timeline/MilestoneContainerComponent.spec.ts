@@ -54,21 +54,21 @@ describe("MilestoneContainerController", ()=> {
     it("initialises create button", ()=> {
       ctrl.$onInit();
       var btnCreate = 'btnCreate';
-      var button = ctrl.actionButtons.find(obj => obj.aClass === btnCreate);
+      var button = ctrl.actionButtons.filter(obj => obj.aClass === btnCreate)[0];
       expect(button.aClass).toEqual(btnCreate);
     });
 
     it("initialises save button", ()=> {
       ctrl.$onInit();
       var btnSave = 'btnSave';
-      var button: any = ctrl.actionButtons.find(obj => obj.aClass === btnSave);
+      var button: any = ctrl.actionButtons.filter(obj => obj.aClass === btnSave)[0];
       expect(button.aClass).toEqual(btnSave);
     });
 
     it("initialises cancel button", ()=> {
       ctrl.$onInit();
       var btnCancel = 'btnCancel';
-      var button: any = ctrl.actionButtons.find(obj => obj.aClass === btnCancel);
+      var button: any = ctrl.actionButtons.filter(obj => obj.aClass === btnCancel)[0];
       expect(button.aClass).toEqual(btnCancel);
     });
 
@@ -212,7 +212,7 @@ describe("MilestoneContainerController", ()=> {
     beforeEach(()=> {
       ctrl.$onInit();
       btnCreate = 'btnCreate';
-      button = ctrl.actionButtons.find(obj => obj.aClass === btnCreate);
+      button = ctrl.actionButtons.filter(obj => obj.aClass === btnCreate)[0];
     });
 
     it("should toggle create mode to true when false", ()=> {

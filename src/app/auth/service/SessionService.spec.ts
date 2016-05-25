@@ -2,7 +2,6 @@ import IProvideService = angular.auto.IProvideService;
 import {ORDINEO_CORE} from "../../core/core.module";
 import IWindowService = angular.IWindowService;
 import {ISessionService} from "./SessionService";
-import UndefinedLiteral = hbs.AST.UndefinedLiteral;
 
 describe("Session service", ()=> {
 

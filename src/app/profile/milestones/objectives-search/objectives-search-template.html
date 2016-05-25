@@ -10,7 +10,7 @@
                    md-selected-item-change="$ctrl.selectedItemChange(obj)"
                    md-search-text="$ctrl.searchText"
                    md-floating-label="Objective"
-                   md-items="obj in $ctrl.getObjectives()"
+                   md-items="obj in $ctrl.searchObjectives()"
                    md-menu-class="autocomplete-custom-template">
     <md-item-template>
       <div class="item-title">
@@ -21,7 +21,7 @@
       </div>
     </md-item-template>
     <md-not-found>
-      "Could not find objective {{$ctrl.searchText}}"
+      "Your search for <strong>"{{$ctrl.searchText}}"</strong> did not deliver any results."
     </md-not-found>
     <div ng-messages="$ctrl.formCtrl.autocompleteField.$error" ng-if="$ctrl.formCtrl.autocompleteField.$touched">
       <div ng-message="required">You <b>must</b> select an objective</div>

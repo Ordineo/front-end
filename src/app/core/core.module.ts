@@ -4,7 +4,6 @@ import "angular-messages";
 import {CardHeaderComponent} from "./components/card-header/CardHeaderComponent";
 import {FileUploadDirective} from "./components/FileUploadDirective";
 import {ActionButtonComponent} from "./components/action-button/ActionButtonComponent";
-import "rx-angular";
 import "../gsap/TweenMax.js";
 import "angular-moment";
 import "moment";
@@ -17,6 +16,7 @@ import {ProfileSearchComponent} from "./components/profile-search/ProfileSearchC
 import {Navigator} from "./services/Navigator";
 import IScope = angular.IScope;
 import IAugmentedJQuery = angular.IAugmentedJQuery;
+import {ScopeObserver} from "./services/ScopeObserver";
 
 export const ORDINEO_CORE = "ordineo.core";
 
@@ -25,7 +25,6 @@ var deps: Array<string> = [
   "angularMoment",
   "ngAnimate",
   "ngMessages",
-  "rx",
   "ngComponentRouter",
   "angular-jwt"
 ];
@@ -37,6 +36,7 @@ angular.module(ORDINEO_CORE, deps)
   .component(ProfileSearchComponent.NAME, new ProfileSearchComponent())
   .service(SessionService.NAME, SessionService)
   .service(Navigator.NAME, Navigator)
+  .service(ScopeObserver.NAME, ScopeObserver)
   .directive(FileUploadDirective.NAME, FileUploadDirective.instance())
   .directive("customOnChange", () => {
     return {
