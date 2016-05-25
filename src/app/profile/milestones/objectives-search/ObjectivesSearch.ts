@@ -67,6 +67,9 @@ export class ObjectivesSearchController {
   $onInit(): void {
     this.searchStream = this.scopeObserver
       .watch(this.$scope, "$ctrl.searchText")
+      .filter((qry: string) => {
+        return qry !== undefined && qry !== null && qry !== "";
+      })
       .debounceTime(750)
       .distinctUntilChanged();
   }
