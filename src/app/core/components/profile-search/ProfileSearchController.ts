@@ -10,7 +10,7 @@ import "rxjs/add/operator/filter";
 import "rxjs/add/operator/map";
 import IScope = angular.IScope;
 import {ScopeObserver} from "../../services/ScopeObserver";
-import {Observable} from "rxjs/Rx";
+import {Observable, Subscription} from "rxjs/Rx";
 import {fromPromise} from "rxjs/observable/fromPromise";
 import IQService = angular.IQService;
 import IDeferred = angular.IDeferred;
@@ -21,6 +21,7 @@ export class ProfileSearchController {
   public button: any;
   public users: any;
   private searchStream: Observable<any>;
+  private subscription: Subscription;
 
   static $inject: string[] = [
     ScopeObserver.NAME,
@@ -42,6 +43,12 @@ export class ProfileSearchController {
     }
   }
 
+  $onDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
   $onInit(): void {
     this.button = {title: "search", icon: "act:search"};
     this.searchStream = this.scopeObserver
@@ -55,7 +62,7 @@ export class ProfileSearchController {
 
   searchEmployees(): IPromise<User[]> {
     let deferred: IDeferred<any> = this.$q.defer();
-    this.searchStream
+    this.subscription = this.searchStream
       .mergeMap((qry: string) => {
         return fromPromise(this.profileService.searchEmployee(qry));
       })
