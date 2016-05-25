@@ -105,7 +105,63 @@ describe("MilestoneContainerController", ()=> {
       scope.$digest();
       expect((ctrl as any).toggleCreateMode).toHaveBeenCalled();
     });
-    
+
+    describe("should throw an error when a milestone is not successfully created", ()=> {
+
+      it(": 409: You already have a milestone", ()=> {
+        spyOn(milestoneService, "createMilestoneByUsername").and.returnValue(deferred.promise);
+        (milestoneService as any).milestone = {
+          title: "title"
+        };
+        var button:ActionButton = (ctrl as any).saveButton;
+        button.onClick();
+        deferred.reject({status:409, errorMsg:""});
+        scope.$digest();
+
+        expect((ctrl as any).errorMsg).toEqual("You already have a milestone " + (milestoneService as any).milestone.title);
+      });
+
+      it(": >500 (tested with 501):  check your connection", ()=> {
+        spyOn(milestoneService, "createMilestoneByUsername").and.returnValue(deferred.promise);
+        var button:ActionButton = (ctrl as any).saveButton;
+        button.onClick();
+        deferred.reject({status:501, errorMsg:""});
+        scope.$digest();
+
+        expect((ctrl as any).errorMsg).toEqual("check your connection");
+      });
+
+      it(": >=400 && <500 (tested with 404): Please select a correct objective", ()=> {
+        spyOn(milestoneService, "createMilestoneByUsername").and.returnValue(deferred.promise);
+        var button:ActionButton = (ctrl as any).saveButton;
+        button.onClick();
+        deferred.reject({status:404, errorMsg:""});
+        scope.$digest();
+
+        expect((ctrl as any).errorMsg).toEqual("Please select a correct objective");
+      });
+
+      it(": anything else (tested with 500): Something went wrong", ()=> {
+        spyOn(milestoneService, "createMilestoneByUsername").and.returnValue(deferred.promise);
+        var button:ActionButton = (ctrl as any).saveButton;
+        button.onClick();
+        deferred.reject({status:500, errorMsg:""});
+        scope.$digest();
+
+        expect((ctrl as any).errorMsg).toEqual("Something went wrong");
+      });
+
+      it("error message should be \"Please select a correct objective\" when no promise is returned", ()=> {
+        spyOn(milestoneService, "createMilestoneByUsername");
+        var button:ActionButton = (ctrl as any).saveButton;
+        button.onClick();
+        // deferred.reject({status:500, errorMsg:""});
+        // scope.$digest();
+
+        expect((ctrl as any).errorMsg).toEqual("Please select a correct objective");
+      });
+    });
+
   });
 
   describe("cancel button", ()=> {
