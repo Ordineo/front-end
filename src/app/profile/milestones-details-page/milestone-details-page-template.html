@@ -1,4 +1,4 @@
-<div layout="row" flex>
+<div layout="row" flex ng-if="$ctrl.milestones.length > 0 && $ctrl.milestonesLoaded">
   <span flex="10"></span>
   <div layout="column" flex="60" class="no-height-stretch">
     <milestone-details></milestone-details>
@@ -15,7 +15,6 @@
       <md-list id="milestone-list">
         <milestone-item
           ng-class="$ctrl.selectedMilestone.objective.title === mile.objective.title ? 'milestone-selected' : ''"
-          ng-if="$ctrl.milestones.length >0"
           on-selected="$ctrl.onMilestoneSelected($locals)"
           milestone="mile"
           ng-repeat="mile in $ctrl.milestones">
@@ -24,4 +23,9 @@
     </md-card-content>
   </md-card>
   <span flex="10"></span>
+</div>
+<div flex ng-if="!$ctrl.milestones.length > 0 && $ctrl.milestonesLoaded" layout-align="center center" layout="row">
+  <md-card layout-align="center center" flex="80" flex-gt-md="50">
+    <h3 class="md-subhead">Unfortunately this employee has <strong>no</strong> milestones</h3>
+  </md-card>
 </div>
