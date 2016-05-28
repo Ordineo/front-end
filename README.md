@@ -2,7 +2,8 @@
 
 # Front-end
 Front end project for the Jworks 360 tool.
-[The app is located at http://ordineo.cfapps.io/](http://frontend-ordineo.cfapps.io/).
+
+The application is hosted at [https://frontend-ordineo.cfapps.io](http://frontend-ordineo.cfapps.io/).
 
 ## Table of contents
 * [Getting Started](#getting-started)
@@ -15,12 +16,12 @@ Front end project for the Jworks 360 tool.
 ## Getting started
 ### Install
 
-Install cli tools
+Install global cli tools
 ```
 npm i -g webpack typings protractor codeceptjs
 ```
   
-Install dependencies
+Install npm modules
 ```
 npm i
 ```
@@ -67,8 +68,8 @@ Autowatch tests
 npm run watch:test
 ```
 
-- Filenames are required to end with .spec.ts
-- Tests should be located inside of ordineo/src or subfolders
+- Test filenames are required to end with .spec.ts
+- tests should be located inside src/ or subfolders
 
 #### Code coverage
 
@@ -78,22 +79,22 @@ Reports are located inside reports/ folder
 
 
 ### Structure
-
-
 ```
 /
- ├──src/                       * our configuration
- |   ├──bootstrap.ts           * we use manual initialization instead of ng-app
- |   ├──index.html             * webpack uses this file as a template, here we declare our root component <app>
- │   ├──webpack.test.js        * our testing webpack config
+ ├──src/                       * app source files
+ |   ├──bootstrap.ts           * we use instatiate AngularJS manually.
+ |   ├──index.html             * webpack is configured to use this file as a template, here we declare our root component <app>
  │   │
- │   ├──app/                   * our webapp folder
- │   │
- │   │
- ├──src/                       * our source files that will be compiled to javascript
- |   ├──main.browser.ts        * our entry file for our browser environment
- │   │
- |   ├──index.html             * Index.html: where we generate our index page
+ │   ├──app/                   * main app source folder
+ │   │    ├──app.module.ts     * main module, this will get bootstrapped on start-up
+ │   │    │
+ │   │    ├──auth/             * Contains everything related to authorization
+ │   │    │                      Here you will also find the login page (LoginComponent.ts)  
+ │   │    │
+ │   │    ├──core/             * Core module, contains reusable components and core services
+ │   │    │                      such as Navigator.ts wich is responsible for app routing.
+ │   │    │
+ │   │    ├──gateway/             * Core module, contains reusable components and core services
  │   │
  |   ├──polyfills.ts           * our polyfills file
  │   │
