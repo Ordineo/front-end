@@ -3,11 +3,24 @@
 # Jworks 360 tool front-end
 View the deployed app at: [https://frontend-ordineo.cfapps.io](http://frontend-ordineo.cfapps.io/)
 
+
+## Table of contents
+* [Introduction](#introduction)
+* [Getting Started](#getting-started)
+    * [Install](#install)
+    * [Build](#build)
+    * [Tests](#tests)
+* [Folder Structure](#Folder-structure)
+* [Notes](#notes)
+
+##Introduction
 To future proof our application we took a lot design decisions to make migration towards Angular 2 easier.
 We use AngularJS 1.5, the official angular component router and TypeScript. 
 With AngularJS 1.5 we can structure our application primarily with components and services.
 
 [Read our more in depth article on component based application architecture in AngularJS](https://ordina-jworks.github.io/angularjs-typescript/2016/04/25/component-based-application-architecture-with-angularjs-and-typescript.html)
+
+To Summarize:
 
 Build your UI elements with [components](https://docs.angularjs.org/guide/component). Try to make your component controllers as lean as possible. 
 This will make unit testing easier(less mocking). 
@@ -18,15 +31,6 @@ So where do I define business logic?
 Use [services](https://docs.angularjs.org/guide/services).
 
 We use services primarily to manage application state and supplying data to controllers or other services.
-
-
-## Table of contents
-* [Getting Started](#getting-started)
-    * [Install](#install)
-    * [Build](#build)
-    * [Tests](#tests)
-* [Folder Structure](#Folder-structure)
-* [Notes](#notes)
 
 ## Getting started
 ### Install
