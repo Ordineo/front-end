@@ -1,16 +1,15 @@
 [![Build Status](https://travis-ci.org/Ordineo/front-end.svg?branch=master)](https://travis-ci.org/Ordineo/front-end)
 
-# Front-end
-Front end project for the Jworks 360 tool.
+# Jworks 360 tool front-end
+The application is deployed at: [https://frontend-ordineo.cfapps.io](http://frontend-ordineo.cfapps.io/)
 
-The application is hosted at [https://frontend-ordineo.cfapps.io](http://frontend-ordineo.cfapps.io/).
 
 ## Table of contents
 * [Getting Started](#getting-started)
     * [Install](#install)
     * [Build](#build)
     * [Tests](#tests)
-* [File Structure](#file-structure)
+* [Folder Structure](#Folder-structure)
 * [Notes](#notes)
 
 ## Getting started
@@ -82,7 +81,7 @@ Reports are located inside reports/ folder
 ```
 /
  ├──src/                       * app source files
- |   ├──bootstrap.ts           * we use instatiate AngularJS manually.
+ |   ├──bootstrap.ts           * we instantiate AngularJS manually.
  |   ├──index.html             * webpack is configured to use this file as a template, here we declare our root component <app>
  │   │
  │   ├──app/                   * main app source folder
@@ -90,33 +89,18 @@ Reports are located inside reports/ folder
  │   │    │
  │   │    ├──auth/             * Contains everything related to authorization
  │   │    │                      Here you will also find the login page (LoginComponent.ts)  
- │   │    │
  │   │    ├──core/             * Core module, contains reusable components and core services
  │   │    │                      such as Navigator.ts wich is responsible for app routing.
- │   │    │
- │   │    ├──gateway/             * Core module, contains reusable components and core services
- │   │
- |   ├──polyfills.ts           * our polyfills file
- │   │
- |   ├──vendor.ts              * our vendor file
- │   │
- │   ├──app/                   * WebApp: folder
- │   │   ├──app.spec.ts        * a simple test of components in app.ts
- │   │   ├──app.e2e.ts         * a simple end-to-end test for /
- │   │   └──app.ts             * App.ts: a simple version of our App component components
+ │   │    ├──gateway/          * Rest Api endpoints
+ │   │    ├──layout/           * Layout components to compose our dashboard page
+ │   │    ├──profile/          * Everything related to the profile page
+ │   │    ├──social/           * Everything related to social rest apis
+ │   │    ├──theme/            * Material design module and custom shared styles
+ │   │    ├──traverson/        * http library for traverson a HATEOS REST Api
+ │   │    └──util/             * Helper classes/methods
  │   │
  │   └──assets/                * static assets are served here
- │       ├──icon/              * our list of icons from www.favicon-generator.org
- │       ├──service-worker.js  * ignore this. Web App service worker that's not complete yet
- │       ├──robots.txt         * for search engines to crawl your website
- │       └──human.txt          * for humans to know who the developers are
- │
- │
- ├──tslint.json                * typescript lint config
- ├──typedoc.json               * typescript documentation generator
- ├──tsconfig.json              * config that webpack uses for typescript
- ├──typings.json               * our typings manager
- └──package.json               * what npm uses to manage it's dependencies
+ └──test/                      * Contains our mocks/stubs/doubles/etc ...
 ```
 
 ### Notes
