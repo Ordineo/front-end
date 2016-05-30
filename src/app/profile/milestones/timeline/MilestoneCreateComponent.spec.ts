@@ -66,6 +66,13 @@ describe("Milestone Create Controller", ()=> {
   });
 });
 export class MockMilestoneService implements IMilestoneService {
+  getCommentsByMilestone(commentsLink: string): angular.IPromise<any> {
+    return undefined;
+  }
+
+  createCommentByMilestone(username: string, createDate: string, message: string, milestone: string): angular.IPromise<any> {
+    return undefined;
+  }
 
   put(milestone:Milestone):angular.IPromise<any> {
     return null;
