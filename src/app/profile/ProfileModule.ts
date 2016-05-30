@@ -1,5 +1,4 @@
 import {THEME_MODULE} from "../theme/ThemeModule";
-import {AboutDirective} from "./about/AboutDirective";
 import {ORDINEO_CORE} from "../core/core.module.ts";
 import {ProfileService} from "./services/ProfileService";
 import {TRAVERSON} from "../traverson/TraversonModule";
@@ -20,6 +19,7 @@ import {MilestoneItemComponent} from "./milestones/milestone-list/MilestoneItemC
 import {ProfileMenuState} from "./profile-menu/ProfileMenuState";
 import IScope = angular.IScope;
 import IAugmentedJQuery = angular.IAugmentedJQuery;
+import {AboutComponent} from "./about/AboutComponent";
 
 /**
  * @ngdoc module
@@ -50,6 +50,7 @@ angular
   .service(ProfileMenuState.NAME, ProfileMenuState)
 
   /* components and directives*/
+  .component(AboutComponent.NAME, new AboutComponent())
   .component(MilestoneContainerComponent.NAME, new MilestoneContainerComponent())
   .component(TimelineComponent.NAME, new TimelineComponent())
   .component(MilestoneComponent.NAME, new MilestoneComponent())
@@ -60,7 +61,6 @@ angular
   .component(MilestoneDetailsComponent.NAME, new MilestoneDetailsComponent())
   .component(MilestoneCommentsComponent.NAME, new MilestoneCommentsComponent())
   .component(MilestoneItemComponent.NAME, new MilestoneItemComponent())
-  .directive(AboutDirective.NAME, AboutDirective.instance())
   .directive("onEnter", () => {
     return (scope: IScope, element: IAugmentedJQuery, attrs: any) => {
       element.bind("keydown keypress", (event: any) => {
