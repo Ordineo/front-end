@@ -15,7 +15,6 @@ import {fromPromise} from "rxjs/observable/fromPromise";
 import IQService = angular.IQService;
 import IDeferred = angular.IDeferred;
 import IPromise = angular.IPromise;
-var _ = require("lodash");
 
 export class ProfileSearchController {
   public button: any;
