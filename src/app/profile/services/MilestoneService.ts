@@ -116,9 +116,9 @@ export class MilestoneService implements IMilestoneService {
     }
   }
 
-  public getCommentsByMilestone(milestone: Milestone): IPromise<any> {
+  public getCommentsByMilestone(commentsLink: string): IPromise<any> {
     return this.traverson.hal()
-      .from(GatewayApiService.getMilestonesApi() + "comments/search/findCommentsByMilestone?milestone=" + GatewayApiService.getMilestonesApi() + milestone)
+      .from(commentsLink)
       .useAngularHttp()
       .jsonHal()
       .getResource()
