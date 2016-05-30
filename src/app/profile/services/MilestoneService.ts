@@ -18,6 +18,8 @@ export interface IMilestoneService {
   getNewMilestone(): Milestone;
   searchObjectives(qry: string): IPromise<any>;
   createMilestoneByUsername(username: string): IPromise<any>;
+  getCommentsByMilestone(commentsLink: string): IPromise<any>;
+  createCommentByMilestone(username: string, createDate: string, message: string, milestone: string): IPromise<any>;
   setSelectedMilestone(milestone: Milestone): void;
   getSelectedMilestone(): Milestone;
   put(milestone: Milestone): IPromise<any>;
