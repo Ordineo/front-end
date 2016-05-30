@@ -1,6 +1,7 @@
 import IScope = angular.IScope;
 import {MilestoneService} from "../../services/MilestoneService";
 import {SessionService} from "../../../auth/service/SessionService";
+import {Milestone} from "../../../core/models/milestone";
 var $ = require("jquery");
 
 export class MilestoneCommentsController {
@@ -8,7 +9,8 @@ export class MilestoneCommentsController {
   public commentsLoaded: boolean = false;
   public username: string = "";
   public commentFieldData: string = "";
-  public milestone: string = "";
+  private milestoneLink: string = "";
+  private commentsLink: string = "";
 
   static $inject: Array<string> = [
     MilestoneService.NAME,
@@ -26,7 +28,7 @@ export class MilestoneCommentsController {
 
   $onInit(): void {
     this.milestoneService.subscribeOnMilestoneSelected(this.scope, this.updateViewModel());
-    var selectedMilestone: any = this.milestoneService.getSelectedMilestone();
+    var selectedMilestone: Milestone = this.milestoneService.getSelectedMilestone();
     if (selectedMilestone !== undefined) {
       this.setViewModel(selectedMilestone);
     }
@@ -38,19 +40,18 @@ export class MilestoneCommentsController {
     };
   }
 
-  setViewModel(selectedMilestone: any): void {
+  setViewModel(selectedMilestone: Milestone): void {
     if (selectedMilestone) {
-      var milestone = selectedMilestone._links.self.href;
-      var index = milestone.indexOf("milestones");
-      this.milestone = milestone.substring(index);
-      this.getComments(this.milestone);
+      this.milestoneLink = selectedMilestone["_links"].self.href;
+      this.commentsLink = selectedMilestone["_links"].comments.href;
+      this.getComments(this.commentsLink);
     }
   }
 
-  public getComments(milestone: any): void {
+  public getComments(commentsLink: string): void {
     this.comments = [];
     this.commentsLoaded = false;
-    this.milestoneService.getCommentsByMilestone(milestone)
+    this.milestoneService.getCommentsByMilestone(commentsLink)
       .then((data: any) => {
         for (var i = 0; i < data._embedded.comments.length; i++) {
           this.comments.push(data._embedded.comments[i]);
@@ -65,9 +66,9 @@ export class MilestoneCommentsController {
         this.username,
         this.moment().format("YYYY-MM-DDThh:mm:ss"),
         this.commentFieldData,
-        this.milestone
+        this.milestoneLink
       ).then((success: any) => {
-        this.getComments(this.milestone);
+        this.getComments(this.commentsLink);
       });
       $("#commentField").blur();
       this.commentFieldData = "";
