@@ -6,11 +6,13 @@ View the deployed app at: [https://frontend-ordineo.cfapps.io](http://frontend-o
 
 ## Table of contents
 * [Introduction](#introduction)
-* [Getting Started](#getting-started)
+    * [A sample component structure](#a-sample-component-structure)
+    * [High level component map](#high-level-component-map)
+* [Folder Structure](#Folder-structure)
+* [Developer guide](#developer-guide)
     * [Install](#install)
     * [Build](#build)
     * [Tests](#tests)
-* [Folder Structure](#Folder-structure)
 * [Notes](#notes)
 
 ##Introduction
@@ -26,13 +28,83 @@ Build your UI elements with [components](https://docs.angularjs.org/guide/compon
 This will make unit testing easier(less mocking). 
 The primary responsibility of a component controller is defining the view model.
  
-So where do I define business logic?
+Where do I define business logic?
 
 Use [services](https://docs.angularjs.org/guide/services).
 
 We use services primarily to manage application state and supplying data to controllers or other services.
 
-## Getting started
+### A sample component structure
+```
+                  HTML template
+                       +
+                       |
+                +-------------+
+.scss styles+---+  Component  |       class that implements IComponentOptions
+                +-------------+
+                       |
+                       |
+                       |
+                       |
+                       v
+            +---------------------+   - standard class
+            | ComponentController |   - publics fields are the template's viewmodel
+            +---------------------+
+                       |
+                       |
+                       |
+                       |
+                       |
+                       |              +-----------------------+
+                       |              |                       |
+                       |              |                       |
+                       +-------------->      DataService      |
+                                      |                       |
+                                      |                       |
+                                      +-----------^-----------+
+                                                  |
+                                                  |
+                                                  |
+                                                  |
+                                                  |
+                                                  |
+                                     +--------------------------+
+                                     | OtherComponentController |
+                                     +--------------------------+
+```
+### A sample component structure
+
+
+### Folder Structure
+```
+/
+ ├──src/                       * app source files
+ |   ├──bootstrap.ts           * we instantiate AngularJS manually.
+ |   ├──index.html             * webpack is configured to use this file as a template, here we declare our root component <app>
+ │   │
+ │   ├──app/                   * main app source folder
+ │   │    ├──app.module.ts     * main module, this will get bootstrapped on start-up
+ │   │    │
+ │   │    ├──auth/             * Contains everything related to authorization
+ │   │    │                      Here you will also find the login page (LoginComponent.ts)  
+ │   │    ├──core/             * Core module, contains reusable components and core services
+ │   │    │                      such as Navigator.ts wich is responsible for app routing.
+ │   │    ├──gateway/          * Rest Api endpoints
+ │   │    ├──layout/           * Layout components to compose our dashboard page
+ │   │    ├──profile/          * Everything related to the profile page
+ │   │    ├──social/           * Everything related to social rest apis
+ │   │    ├──theme/            * Material design module and custom shared styles
+ │   │    ├──traverson/        * http library for traverson a HATEOS REST Api
+ │   │    └──util/             * Helper classes/methods
+ │   │
+ │   └──assets/                * static assets are served here
+ └──test/                      * Contains our mocks/stubs/doubles/etc ...
+```
+
+
+## Developer guide
+Make sure you have `node` installed
+
 ### Install
 
 Install global cli tools
@@ -66,6 +138,12 @@ First update and start webdriver
 npm run webdriver:update
 npm run webdriver:start
 ```
+If this does not work make sure to install protractor globally,
+and use the global command to run the webdriver.
+```
+webdriver-manager update
+webdriver-manager start
+```
 
 Run all tests
 ```
@@ -77,7 +155,7 @@ Run unit tests
 npm run test:karma
 ```
 
-Run end-to-end tests
+To run end-to-end tests the dev server has to be running: ``npm start``
 ```
 npm run test:e2e
 ```
@@ -87,41 +165,14 @@ Autowatch tests
 npm run watch:test
 ```
 
-- Test filenames are required to end with .spec.ts
-- tests should be located inside src/ or subfolders
+- Test filenames are required to end with ``.spec.ts``
+- tests should be located inside ``src/`` or subfolders
 
 #### Code coverage
 
 Run tests to generate reports
 
-Reports are located inside reports/ folder
-
-
-### Structure
-```
-/
- ├──src/                       * app source files
- |   ├──bootstrap.ts           * we instantiate AngularJS manually.
- |   ├──index.html             * webpack is configured to use this file as a template, here we declare our root component <app>
- │   │
- │   ├──app/                   * main app source folder
- │   │    ├──app.module.ts     * main module, this will get bootstrapped on start-up
- │   │    │
- │   │    ├──auth/             * Contains everything related to authorization
- │   │    │                      Here you will also find the login page (LoginComponent.ts)  
- │   │    ├──core/             * Core module, contains reusable components and core services
- │   │    │                      such as Navigator.ts wich is responsible for app routing.
- │   │    ├──gateway/          * Rest Api endpoints
- │   │    ├──layout/           * Layout components to compose our dashboard page
- │   │    ├──profile/          * Everything related to the profile page
- │   │    ├──social/           * Everything related to social rest apis
- │   │    ├──theme/            * Material design module and custom shared styles
- │   │    ├──traverson/        * http library for traverson a HATEOS REST Api
- │   │    └──util/             * Helper classes/methods
- │   │
- │   └──assets/                * static assets are served here
- └──test/                      * Contains our mocks/stubs/doubles/etc ...
-```
+Reports are located inside ``reports/`` folder
 
 ### Notes
 
