@@ -26,7 +26,7 @@ To Summarize:
 
 Build your UI elements with [components](https://docs.angularjs.org/guide/component). Try to make your component controllers as lean as possible. 
 This will make unit testing easier(less mocking). 
-The primary responsibility of a component controller is defining the view model.
+The primary responsibility of a component controller is defining the template's view model.
  
 Where do I define business logic?
 
