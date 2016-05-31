@@ -72,8 +72,8 @@ We use services primarily to manage application state and supplying data to cont
                                      | OtherComponentController |
                                      +--------------------------+
 ```
-### A sample component structure
-
+### High level component map
+![Component map](https://github.com/Ordineo/front-end/blob/feat/docs/assets/component-diagram.png)
 
 ### Folder Structure
 ```
