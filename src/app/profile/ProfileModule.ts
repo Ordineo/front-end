@@ -72,4 +72,20 @@ angular
         }
       });
     };
+  })
+  .directive("errSrc", function(): any {
+    return {
+      link: function(scope: any, element: any, attrs: any): any {
+        element.bind("error", function(): any {
+          if (attrs.src != attrs.errSrc) {
+            attrs.$set("src", attrs.errSrc);
+          }
+        });
+        attrs.$observe("ngSrc", function(value: any): any {
+          if (!value && attrs.errSrc) {
+            attrs.$set("src", attrs.errSrc);
+          }
+        });
+      }
+    };
   });
