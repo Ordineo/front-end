@@ -101,6 +101,11 @@ We use services primarily to manage application state and supplying data to cont
  └──test/                      * Contains our mocks/stubs/doubles/etc ...
 ```
 
+### Unit testing
+[Jasmine](http://jasmine.github.io/2.4/introduction.html)helps us write concise unit tests for the front-end.  
+[Karma](http://karma-runner.github.io/0.13/index.html)is used to run these unit tests written with Jasmine in a browser.
+We generate coverage of these unit tests using [Istanbul](https://github.com/gotwarlost/istanbul). 
+
 
 ## Developer guide
 Make sure you have `node` installed
